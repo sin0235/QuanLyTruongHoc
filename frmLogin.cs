@@ -50,5 +50,10 @@ namespace QuanLyTruongHoc
                 this.lblError.Visible = true;
             }    
         }
+
+        private void guna2CircleButtonCloseLogin_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
