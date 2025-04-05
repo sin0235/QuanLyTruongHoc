@@ -1,9 +1,9 @@
-﻿using System;
+﻿using QuanLyTruongHoc.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace QuanLyTruongHoc
 {
     internal static class Program
@@ -15,8 +15,10 @@ namespace QuanLyTruongHoc
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new frmLogin());
+            var test = new DatabaseHelper();
+            test.GetConnectionString();
         }
     }
 }
