@@ -24,7 +24,10 @@ namespace QuanLyTruongHoc
 
         private void txtUserName_TextChanged(object sender, EventArgs e)
         {
-
+            if(lblError.Visible)
+            {
+                lblError.Visible = false;
+            }
         }
 
         private void chbShowPw_CheckedChanged(object sender, EventArgs e)
@@ -54,6 +57,14 @@ namespace QuanLyTruongHoc
         private void guna2CircleButtonCloseLogin_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtPW_TextChanged(object sender, EventArgs e)
+        {
+            if (lblError.Visible)
+            {
+                lblError.Visible = false;
+            }
         }
     }
 }
