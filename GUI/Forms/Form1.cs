@@ -23,9 +23,9 @@ namespace QuanLyTruongHoc
             InitializeComponent();
 
             // Đảm bảo các nút nằm trong Guna2Panel
-            guna2CircleButtonClose.Parent = guna2PanelTitleBar;
-            guna2CircleButtonMinimize.Parent = guna2PanelTitleBar;
-            guna2CircleButtonMaximize.Parent = guna2PanelTitleBar;
+            guna2CircleButtonClose.Parent = pnlTitleBar;
+            guna2CircleButtonMinimize.Parent = pnlTitleBar;
+            guna2CircleButtonMaximize.Parent = pnlTitleBar;
 
             // Gán màu ban đầu cho các nút
             guna2CircleButtonClose.FillColor = closeButtonColor;
@@ -47,9 +47,9 @@ namespace QuanLyTruongHoc
         // Hàm cập nhật vị trí nút
         private void UpdateButtonPositions()
         {
-            guna2CircleButtonMinimize.Location = new Point(guna2PanelTitleBar.Width - 90, 5);
-            guna2CircleButtonMaximize.Location = new Point(guna2PanelTitleBar.Width - 60, 5);
-            guna2CircleButtonClose.Location = new Point(guna2PanelTitleBar.Width - 30, 5);
+            guna2CircleButtonMinimize.Location = new Point(pnlTitleBar.Width - 90, 5);
+            guna2CircleButtonMaximize.Location = new Point(pnlTitleBar.Width - 60, 5);
+            guna2CircleButtonClose.Location = new Point(pnlTitleBar.Width - 30, 5);
         }
 
         // Sự kiện Resize

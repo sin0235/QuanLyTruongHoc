@@ -15,10 +15,8 @@ namespace QuanLyTruongHoc
         static void Main()
         {
             Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLogin());
-            var test = new DatabaseHelper();
-            test.GetConnectionString();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
         }
     }
 }
