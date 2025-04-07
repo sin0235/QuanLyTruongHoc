@@ -112,6 +112,9 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="assets\images\bg.png" />
+    <Content Include="assets\images\facebook.png" />
+    <Content Include="assets\images\instagram.png" />
+    <Content Include="assets\images\twitter.png" />
     <None Include="assets\images\school.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
