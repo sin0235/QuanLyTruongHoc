@@ -62,6 +62,12 @@
     <Compile Include="GUI\Controls\ViDu.Designer.cs">
       <DependentUpon>ViDu.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\frmGiaoVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGiaoVien.Designer.cs">
+      <DependentUpon>frmGiaoVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Controls\ViDu.resx">
       <DependentUpon>ViDu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmGiaoVien.resx">
+      <DependentUpon>frmGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
