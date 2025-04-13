@@ -1,7 +1,12 @@
-﻿namespace QuanLyTruongHoc.GUI.Controls
+﻿using System.Windows.Forms;
+
+namespace QuanLyTruongHoc.GUI.Controls
 {
-    partial class ViDu
+    partial class ViDu2
     {
+        private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.Button btnClose;
+
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -28,31 +33,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // guna2GradientPanel1
+            // lblMessage
             // 
-            this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(38)))), ((int)(((byte)(179)))));
-            this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(140)))), ((int)(((byte)(217)))));
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(118, 80);
-            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(200, 100);
-            this.guna2GradientPanel1.TabIndex = 0;
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblMessage.ForeColor = System.Drawing.Color.Black;
+            this.lblMessage.Location = new System.Drawing.Point(20, 20);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(190, 28);
+            this.lblMessage.TabIndex = 0;
+            this.lblMessage.Text = "This is a notification!";
             // 
-            // ViDu
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Red;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(400, 15);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(40, 40);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "X";
+            this.btnClose.UseVisualStyleBackColor = false;
+            // 
+            // ViDu2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.guna2GradientPanel1);
-            this.Name = "ViDu";
-            this.Size = new System.Drawing.Size(466, 291);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.btnClose);
+            this.Name = "ViDu2";
+            this.Size = new System.Drawing.Size(1640, 960);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
     }
 }

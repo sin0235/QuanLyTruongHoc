@@ -1,6 +1,6 @@
 ﻿namespace QuanLyTruongHoc
 {
-    partial class Form1
+    partial class frmHS
     {
         /// <summary>
         /// Required designer variable.

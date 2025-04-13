@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QuanLyTruongHoc.GUI.Controls
 {
-    public partial class ViDu2 : UserControl
+    public partial class newControlcs : UserControl
     {
-        public ViDu2()
+        public newControlcs()
         {
             InitializeComponent();
         }

@@ -397,7 +397,7 @@ namespace QuanLyTruongHoc
             this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
             this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.lblCopyright.Location = new System.Drawing.Point(420, 740);
+            this.lblCopyright.Location = new System.Drawing.Point(50, 775);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new System.Drawing.Size(262, 22);
             this.lblCopyright.TabIndex = 14;
