@@ -224,7 +224,7 @@ namespace QuanLyTruongHoc
             this.btnLogin.Size = new System.Drawing.Size(374, 52);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
-            this.btnLogin.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // chkShowPw
             // 
