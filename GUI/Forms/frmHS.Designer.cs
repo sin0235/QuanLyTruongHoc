@@ -60,8 +60,7 @@
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.newControlcs1 = new QuanLyTruongHoc.GUI.Controls.newControlcs();
-            this.viDu21 = new QuanLyTruongHoc.GUI.Controls.ViDu2();
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -495,8 +494,7 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
-            this.pnlContent.Controls.Add(this.newControlcs1);
-            this.pnlContent.Controls.Add(this.viDu21);
+            this.pnlContent.Controls.Add(this.ucThongBao1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
@@ -529,7 +527,7 @@
             this.lblPageTitle.Name = "lblPageTitle";
             this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
             this.lblPageTitle.TabIndex = 2;
-            this.lblPageTitle.Text = "Tổng quan";
+            this.lblPageTitle.Text = "Thông báo";
             // 
             // lblUserName
             // 
@@ -560,26 +558,16 @@
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
-            // newControlcs1
+            // ucThongBao1
             // 
-            this.newControlcs1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newControlcs1.Location = new System.Drawing.Point(20, 20);
-            this.newControlcs1.Margin = new System.Windows.Forms.Padding(11, 28, 11, 28);
-            this.newControlcs1.Name = "newControlcs1";
-            this.newControlcs1.Size = new System.Drawing.Size(1600, 920);
-            this.newControlcs1.TabIndex = 1;
-            this.newControlcs1.Visible = false;
-            // 
-            // viDu21
-            // 
-            this.viDu21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.viDu21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.viDu21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viDu21.Location = new System.Drawing.Point(20, 20);
-            this.viDu21.Margin = new System.Windows.Forms.Padding(11, 28, 11, 28);
-            this.viDu21.Name = "viDu21";
-            this.viDu21.Size = new System.Drawing.Size(1600, 920);
-            this.viDu21.TabIndex = 0;
+            this.ucThongBao1.BackColor = System.Drawing.Color.White;
+            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
+            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBao1.Name = "ucThongBao1";
+            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
+            this.ucThongBao1.TabIndex = 0;
             // 
             // frmHS
             // 
@@ -643,12 +631,11 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-        private GUI.Controls.ViDu2 viDu21;
-        private GUI.Controls.newControlcs newControlcs1;
         private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
         private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnChangePassword;
         private Guna.UI2.WinForms.Guna2Button btnProfile;
+        private GUI.Controls.ucThongBao ucThongBao1;
     }
 }
 

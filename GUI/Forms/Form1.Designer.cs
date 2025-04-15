@@ -50,8 +50,6 @@
             this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.newControlcs1 = new QuanLyTruongHoc.GUI.Controls.newControlcs();
-            this.viDu21 = new QuanLyTruongHoc.GUI.Controls.ViDu2();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -417,35 +415,12 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
-            this.pnlContent.Controls.Add(this.newControlcs1);
-            this.pnlContent.Controls.Add(this.viDu21);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
-            // 
-            // newControlcs1
-            // 
-            this.newControlcs1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newControlcs1.Location = new System.Drawing.Point(20, 20);
-            this.newControlcs1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.newControlcs1.Name = "newControlcs1";
-            this.newControlcs1.Size = new System.Drawing.Size(1600, 920);
-            this.newControlcs1.TabIndex = 1;
-            this.newControlcs1.Visible = false;
-            // 
-            // viDu21
-            // 
-            this.viDu21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.viDu21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.viDu21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viDu21.Location = new System.Drawing.Point(20, 20);
-            this.viDu21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.viDu21.Name = "viDu21";
-            this.viDu21.Size = new System.Drawing.Size(1600, 920);
-            this.viDu21.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -564,8 +539,7 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-        private GUI.Controls.ViDu2 viDu21;
-        private GUI.Controls.newControlcs newControlcs1;
+
     }
 }
 

@@ -152,14 +152,12 @@ namespace QuanLyTruongHoc
 
         private void btnStudents_Click(object sender, EventArgs e)
         {
-            viDu21.Visible = false;
-            newControlcs1.Visible = true;
+
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            viDu21.Visible = true;
-            newControlcs1.Visible = false;
+
         }
     }
 }

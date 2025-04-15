@@ -155,15 +155,13 @@ namespace QuanLyTruongHoc
 
         private void btnStudents_Click(object sender, EventArgs e)
         {
-            viDu21.Visible = false;
-            newControlcs1.Visible = true;
+
             btnInfo.FillColor = highlightColor;
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            viDu21.Visible = true;
-            newControlcs1.Visible = false;
+
         }
 
         private void unLightButton()
@@ -192,10 +190,7 @@ namespace QuanLyTruongHoc
             // Xử lý xem hồ sơ học sinh
             pnlSubSettings.Visible = false;
             btnSettings.FillColor = Color.Transparent;
-
-            // Hiển thị giao diện hồ sơ học sinh
-            viDu21.Visible = false;
-            newControlcs1.Visible = true;
+            
             lblPageTitle.Text = "Hồ sơ học sinh";
         }
 
@@ -206,8 +201,7 @@ namespace QuanLyTruongHoc
             btnSettings.FillColor = Color.Transparent;
 
             // Hiển thị giao diện đổi mật khẩu (tạm thời hiển thị control có sẵn)
-            viDu21.Visible = true;
-            newControlcs1.Visible = false;
+            
             lblPageTitle.Text = "Đổi mật khẩu";
         }
 
@@ -234,6 +228,11 @@ namespace QuanLyTruongHoc
                     this.Close();
                 };
             }
+        }
+
+        private void newControlcs1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
