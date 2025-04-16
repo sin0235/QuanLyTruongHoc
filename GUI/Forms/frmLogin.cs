@@ -100,7 +100,8 @@ namespace QuanLyTruongHoc
 
         private void guna2CircleButtonCloseLogin_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            this.Close();
         }
 
         private void txtPW_TextChanged(object sender, EventArgs e)

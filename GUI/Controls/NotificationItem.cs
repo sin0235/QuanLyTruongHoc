@@ -7,31 +7,44 @@ namespace QuanLyTruongHoc.GUI.Controls
 {
     public class NotificationItem : Guna.UI2.WinForms.Guna2Panel
     {
+        // Ảnh đại diện của người gửi thông báo
         private Guna.UI2.WinForms.Guna2CirclePictureBox picAvatar;
+        // Tiêu đề của thông báo
         private Label lblTitle;
+        // Tên người gửi thông báo
         private Label lblSender;
+        // Ngày gửi thông báo
         private Label lblDate;
+        // Nội dung của thông báo
         private Label lblContent;
+        // Đường phân cách giữa các thông báo
         private Guna.UI2.WinForms.Guna2Separator separator;
+        // Nút để xem chi tiết thông báo
         private Guna.UI2.WinForms.Guna2Button btnView;
+        // Trạng thái đã đọc của thông báo
         private bool isRead = false;
 
+        // ID của thông báo
         public int NotificationId { get; set; }
+
+        // Thuộc tính để kiểm tra và cập nhật trạng thái đã đọc
         public bool IsRead
         {
             get { return isRead; }
             set
             {
                 isRead = value;
-                UpdateReadStatus();
+                UpdateReadStatus(); // Cập nhật giao diện khi trạng thái thay đổi
             }
         }
 
+        // Constructor để khởi tạo thông báo
         public NotificationItem(int id, string title, string sender, DateTime date, string content, string avatarPath = null, bool read = false)
         {
             NotificationId = id;
             isRead = read;
 
+            // Thiết lập giao diện của thông báo
             this.Size = new Size(1550, 130);
             this.BorderRadius = 10;
             this.FillColor = isRead ? Color.White : Color.FromArgb(240, 249, 255);
@@ -44,6 +57,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.ShadowDecoration.Enabled = true;
             this.ShadowDecoration.Color = Color.FromArgb(200, 200, 200);
 
+            // Khởi tạo ảnh đại diện
             picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox
             {
                 Size = new Size(60, 60),
@@ -51,16 +65,18 @@ namespace QuanLyTruongHoc.GUI.Controls
                 SizeMode = PictureBoxSizeMode.Zoom
             };
 
+            // Kiểm tra và tải ảnh đại diện nếu có
             if (!string.IsNullOrEmpty(avatarPath) && System.IO.File.Exists(avatarPath))
             {
                 picAvatar.Image = Image.FromFile(avatarPath);
             }
             else
             {
-                // Default avatar
+                // Ảnh đại diện mặc định
                 //picAvatar.Image = Properties.Resources.default_avatar;
             }
 
+            // Khởi tạo tiêu đề thông báo
             lblTitle = new Label
             {
                 AutoSize = false,
@@ -71,6 +87,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 ForeColor = isRead ? Color.FromArgb(70, 70, 70) : Color.FromArgb(0, 120, 215)
             };
 
+            // Khởi tạo tên người gửi
             lblSender = new Label
             {
                 AutoSize = true,
@@ -80,16 +97,18 @@ namespace QuanLyTruongHoc.GUI.Controls
                 ForeColor = Color.FromArgb(100, 100, 100)
             };
 
+            // Khởi tạo ngày gửi
             lblDate = new Label
             {
                 AutoSize = true,
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
                 Location = new Point(1380, 15),
-                Text = FormatDate(date),
+                Text = FormatDate(date), // Định dạng ngày gửi
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
                 ForeColor = Color.FromArgb(150, 150, 150)
             };
 
+            // Khởi tạo nội dung thông báo
             lblContent = new Label
             {
                 AutoSize = false,
@@ -100,6 +119,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 ForeColor = Color.FromArgb(90, 90, 90)
             };
 
+            // Khởi tạo nút xem chi tiết
             btnView = new Guna.UI2.WinForms.Guna2Button
             {
                 Size = new Size(100, 30),
@@ -112,6 +132,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Cursor = Cursors.Hand
             };
 
+            // Khởi tạo đường phân cách
             separator = new Guna.UI2.WinForms.Guna2Separator
             {
                 Size = new Size(1520, 1),
@@ -119,6 +140,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 FillColor = Color.FromArgb(230, 230, 230)
             };
 
+            // Thêm các thành phần vào thông báo
             this.Controls.Add(picAvatar);
             this.Controls.Add(lblTitle);
             this.Controls.Add(lblSender);
@@ -127,6 +149,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.Controls.Add(btnView);
             this.Controls.Add(separator);
 
+            // Gán sự kiện click cho thông báo và các thành phần
             this.Click += NotificationItem_Click;
             btnView.Click += BtnView_Click;
 
@@ -139,18 +162,20 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
+        // Cập nhật giao diện khi trạng thái đã đọc thay đổi
         private void UpdateReadStatus()
         {
             this.FillColor = isRead ? Color.White : Color.FromArgb(240, 249, 255);
             lblTitle.ForeColor = isRead ? Color.FromArgb(70, 70, 70) : Color.FromArgb(0, 120, 215);
         }
 
+        // Xử lý sự kiện khi người dùng nhấp vào thông báo
         private void NotificationItem_Click(object sender, EventArgs e)
         {
             if (!isRead)
             {
                 IsRead = true;
-                // Cập nhật trạng thái đã đọc trong database
+                // Cập nhật trạng thái đã đọc trong cơ sở dữ liệu
                 // UpdateNotificationStatusInDatabase(NotificationId);
             }
 
@@ -158,12 +183,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             OpenNotificationDetails();
         }
 
+        // Xử lý sự kiện khi người dùng nhấp vào nút "Xem"
         private void BtnView_Click(object sender, EventArgs e)
         {
             if (!isRead)
             {
                 IsRead = true;
-                // Cập nhật trạng thái đã đọc trong database
+                // Cập nhật trạng thái đã đọc trong cơ sở dữ liệu
                 // UpdateNotificationStatusInDatabase(NotificationId);
             }
 
@@ -171,14 +197,14 @@ namespace QuanLyTruongHoc.GUI.Controls
             OpenNotificationDetails();
         }
 
-        // Update the OpenNotificationDetails method to call the parent's ShowNotificationDetails method
+        // Mở chi tiết thông báo bằng cách gọi phương thức của control cha
         private void OpenNotificationDetails()
         {
-            // Get the parent ucThongBao control
+            // Tìm control cha là ucThongBao
             ucThongBao parentThongBao = this.FindForm()?.Controls.Find("ucThongBao1", true).FirstOrDefault() as ucThongBao;
             if (parentThongBao == null)
             {
-                // Try to find parent in a different way - walking up the control hierarchy
+                // Tìm control cha theo cách khác nếu không tìm thấy
                 Control parent = this.Parent;
                 while (parent != null && !(parent is ucThongBao))
                 {
@@ -189,7 +215,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             if (parentThongBao != null)
             {
-                // Call the parent's ShowNotificationDetails method
+                // Gọi phương thức ShowNotificationDetails của control cha
                 parentThongBao.ShowNotificationDetails(
                     NotificationId,
                     lblTitle.Text,
@@ -200,38 +226,37 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             else
             {
-                // Fallback if parent not found
+                // Hiển thị thông báo nếu không tìm thấy control cha
                 MessageBox.Show($"Xem chi tiết thông báo: {lblTitle.Text}", "Chi tiết thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        // Helper method to parse the date from the formatted string
+        // Phương thức hỗ trợ để phân tích ngày từ chuỗi định dạng
         private DateTime ParseDateFromText(string dateText)
         {
             try
             {
-                // Handle "Hôm nay, HH:mm" format
+                // Xử lý định dạng "Hôm nay, HH:mm"
                 if (dateText.StartsWith("Hôm nay"))
                 {
                     string timeStr = dateText.Substring(dateText.IndexOf(',') + 1).Trim();
                     TimeSpan time = TimeSpan.Parse(timeStr);
                     return DateTime.Today.Add(time);
                 }
-                // Handle "Hôm qua, HH:mm" format
+                // Xử lý định dạng "Hôm qua, HH:mm"
                 else if (dateText.StartsWith("Hôm qua"))
                 {
                     string timeStr = dateText.Substring(dateText.IndexOf(',') + 1).Trim();
                     TimeSpan time = TimeSpan.Parse(timeStr);
                     return DateTime.Today.AddDays(-1).Add(time);
                 }
-                // Handle "Thứ ..., HH:mm" format
+                // Xử lý định dạng "Thứ ..., HH:mm"
                 else if (dateText.StartsWith("Thứ") || dateText.StartsWith("Chủ nhật"))
                 {
                     string timeStr = dateText.Substring(dateText.IndexOf(',') + 1).Trim();
                     TimeSpan time = TimeSpan.Parse(timeStr);
 
-                    // Approximate the date as we don't have exact date information
-                    // We know it's within the last week
+                    // Ước lượng ngày dựa trên tuần trước
                     DateTime today = DateTime.Today;
                     for (int i = 1; i <= 7; i++)
                     {
@@ -241,10 +266,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                             return checkDate.Add(time);
                         }
                     }
-                    // Default to today if day of week not found
+                    // Mặc định là hôm nay nếu không tìm thấy
                     return today.Add(time);
                 }
-                // Handle "dd/MM/yyyy HH:mm" format
+                // Xử lý định dạng "dd/MM/yyyy HH:mm"
                 else
                 {
                     return DateTime.ParseExact(dateText, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.InvariantCulture);
@@ -252,11 +277,12 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             catch
             {
-                // If parsing fails, return current date/time as fallback
+                // Trả về ngày giờ hiện tại nếu phân tích thất bại
                 return DateTime.Now;
             }
         }
 
+        // Định dạng ngày thành chuỗi hiển thị
         private string FormatDate(DateTime date)
         {
             if (date.Date == DateTime.Today)
@@ -277,6 +303,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
+        // Lấy tên ngày trong tuần bằng tiếng Việt
         private string GetDayOfWeek(DateTime date)
         {
             string[] daysOfWeek = { "Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy" };

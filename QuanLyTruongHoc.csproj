@@ -56,8 +56,15 @@
     <Compile Include="BLL\ViDu.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
+    <Compile Include="DTO\StudentInfo.cs" />
     <Compile Include="GUI\Controls\NotificationItem.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucInfoHS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucInfoHS.Designer.cs">
+      <DependentUpon>ucInfoHS.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucTBChiTiet.cs">
       <SubType>UserControl</SubType>
@@ -109,6 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
+      <DependentUpon>ucInfoHS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,19 +145,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -159,7 +169,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="assets\images\bg.png" />
+    <None Include="assets\images\defautImage.PNG" />
+    <None Include="assets\images\defautAvatar.PNG" />
     <Content Include="assets\images\facebook.png" />
     <Content Include="assets\images\instagram.png" />
     <Content Include="assets\images\twitter.png" />

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucTBChiTiet));
             this.pnlMain = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
             this.rtbContent = new System.Windows.Forms.RichTextBox();
@@ -37,7 +36,6 @@
             this.flpAttachments = new System.Windows.Forms.FlowLayoutPanel();
             this.btnDownloadAll = new Guna.UI2.WinForms.Guna2Button();
             this.pnlHeader = new Guna.UI2.WinForms.Guna2Panel();
-            this.picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNguoiGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNgayGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,16 +46,18 @@
             this.btnPrint = new Guna.UI2.WinForms.Guna2Button();
             this.btnForward = new Guna.UI2.WinForms.Guna2Button();
             this.btnClose = new Guna.UI2.WinForms.Guna2Button();
+            this.picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlAttachment.SuspendLayout();
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             this.pnlFooter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
+            this.pnlMain.BackColor = System.Drawing.Color.Transparent;
             this.pnlMain.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.pnlMain.BorderRadius = 15;
             this.pnlMain.BorderThickness = 1;
@@ -129,13 +129,13 @@
             this.lblAttachmentTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAttachmentTitle.Location = new System.Drawing.Point(15, 10);
             this.lblAttachmentTitle.Name = "lblAttachmentTitle";
-            this.lblAttachmentTitle.Size = new System.Drawing.Size(131, 25);
+            this.lblAttachmentTitle.Size = new System.Drawing.Size(134, 25);
             this.lblAttachmentTitle.TabIndex = 6;
             this.lblAttachmentTitle.Text = "Tệp đính kèm (0)";
             // 
             // flpAttachments
             // 
-            this.flpAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.flpAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpAttachments.Location = new System.Drawing.Point(15, 40);
             this.flpAttachments.Name = "flpAttachments";
@@ -155,7 +155,6 @@
             this.btnDownloadAll.FillColor = System.Drawing.Color.White;
             this.btnDownloadAll.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDownloadAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.btnDownloadAll.Image = ((System.Drawing.Image)(resources.GetObject("btnDownloadAll.Image")));
             this.btnDownloadAll.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDownloadAll.ImageSize = new System.Drawing.Size(16, 16);
             this.btnDownloadAll.Location = new System.Drawing.Point(749, 40);
@@ -180,30 +179,16 @@
             this.pnlHeader.Size = new System.Drawing.Size(870, 170);
             this.pnlHeader.TabIndex = 1;
             // 
-            // picAvatar
-            // 
-            this.picAvatar.BackColor = System.Drawing.Color.Transparent;
-            this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.picAvatar.Image = ((System.Drawing.Image)(resources.GetObject("picAvatar.Image")));
-            this.picAvatar.ImageRotate = 0F;
-            this.picAvatar.Location = new System.Drawing.Point(15, 15);
-            this.picAvatar.Name = "picAvatar";
-            this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAvatar.Size = new System.Drawing.Size(60, 60);
-            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAvatar.TabIndex = 0;
-            this.picAvatar.TabStop = false;
-            // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(180)))));
             this.lblTitle.Location = new System.Drawing.Point(90, 15);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(776, 40);
+            this.lblTitle.Size = new System.Drawing.Size(237, 39);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Tiêu đề thông báo";
             // 
@@ -225,7 +210,7 @@
             this.lblNgayGui.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.lblNgayGui.Location = new System.Drawing.Point(90, 85);
             this.lblNgayGui.Name = "lblNgayGui";
-            this.lblNgayGui.Size = new System.Drawing.Size(194, 22);
+            this.lblNgayGui.Size = new System.Drawing.Size(186, 22);
             this.lblNgayGui.TabIndex = 3;
             this.lblNgayGui.Text = "Ngày gửi: 15/04/2025 15:30";
             // 
@@ -236,13 +221,13 @@
             this.lblNguoiNhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
             this.lblNguoiNhan.Location = new System.Drawing.Point(90, 115);
             this.lblNguoiNhan.Name = "lblNguoiNhan";
-            this.lblNguoiNhan.Size = new System.Drawing.Size(267, 22);
+            this.lblNguoiNhan.Size = new System.Drawing.Size(284, 22);
             this.lblNguoiNhan.TabIndex = 4;
             this.lblNguoiNhan.Text = "Người nhận: Tất cả học sinh khối 10, 11, 12";
             // 
             // guna2Separator1
             // 
-            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.guna2Separator1.Location = new System.Drawing.Point(15, 155);
@@ -273,7 +258,6 @@
             this.btnReply.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnReply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReply.ForeColor = System.Drawing.Color.White;
-            this.btnReply.Image = ((System.Drawing.Image)(resources.GetObject("btnReply.Image")));
             this.btnReply.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnReply.ImageSize = new System.Drawing.Size(18, 18);
             this.btnReply.Location = new System.Drawing.Point(15, 10);
@@ -281,7 +265,6 @@
             this.btnReply.Size = new System.Drawing.Size(130, 36);
             this.btnReply.TabIndex = 0;
             this.btnReply.Text = "Trả lời";
-            this.btnReply.TextOffset = new System.Drawing.Point(8, 0);
             // 
             // btnPrint
             // 
@@ -295,7 +278,6 @@
             this.btnPrint.FillColor = System.Drawing.Color.White;
             this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
             this.btnPrint.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnPrint.ImageSize = new System.Drawing.Size(18, 18);
             this.btnPrint.Location = new System.Drawing.Point(160, 10);
@@ -303,7 +285,6 @@
             this.btnPrint.Size = new System.Drawing.Size(110, 36);
             this.btnPrint.TabIndex = 1;
             this.btnPrint.Text = "In";
-            this.btnPrint.TextOffset = new System.Drawing.Point(8, 0);
             // 
             // btnForward
             // 
@@ -317,7 +298,6 @@
             this.btnForward.FillColor = System.Drawing.Color.White;
             this.btnForward.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnForward.Image = ((System.Drawing.Image)(resources.GetObject("btnForward.Image")));
             this.btnForward.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnForward.ImageSize = new System.Drawing.Size(18, 18);
             this.btnForward.Location = new System.Drawing.Point(285, 10);
@@ -325,7 +305,6 @@
             this.btnForward.Size = new System.Drawing.Size(160, 36);
             this.btnForward.TabIndex = 2;
             this.btnForward.Text = "Chuyển tiếp";
-            this.btnForward.TextOffset = new System.Drawing.Point(8, 0);
             // 
             // btnClose
             // 
@@ -346,6 +325,19 @@
             this.btnClose.TabIndex = 3;
             this.btnClose.Text = "Đóng";
             // 
+            // picAvatar
+            // 
+            this.picAvatar.BackColor = System.Drawing.Color.Transparent;
+            this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.picAvatar.ImageRotate = 0F;
+            this.picAvatar.Location = new System.Drawing.Point(15, 15);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picAvatar.Size = new System.Drawing.Size(60, 60);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAvatar.TabIndex = 0;
+            this.picAvatar.TabStop = false;
+            // 
             // ucTBChiTiet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -360,8 +352,8 @@
             this.pnlAttachment.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.pnlFooter.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.ResumeLayout(false);
 
         }

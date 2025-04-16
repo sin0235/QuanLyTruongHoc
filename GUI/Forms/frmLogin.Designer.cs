@@ -74,7 +74,6 @@ namespace QuanLyTruongHoc
             // pnlMainScreen
             // 
             this.pnlMainScreen.BackColor = System.Drawing.Color.Transparent;
-            this.pnlMainScreen.BackgroundImage = global::QuanLyTruongHoc.Properties.Resources.bg;
             this.pnlMainScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlMainScreen.BorderRadius = 15;
             this.pnlMainScreen.Controls.Add(this.lblSchoolName);

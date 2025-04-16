@@ -61,6 +61,7 @@
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
+            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -494,6 +495,7 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
+            this.pnlContent.Controls.Add(this.ucInfoHS1);
             this.pnlContent.Controls.Add(this.ucThongBao1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
@@ -569,6 +571,16 @@
             this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
             this.ucThongBao1.TabIndex = 0;
             // 
+            // ucInfoHS1
+            // 
+            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
+            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
+            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.ucInfoHS1.Name = "ucInfoHS1";
+            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
+            this.ucInfoHS1.TabIndex = 1;
+            // 
             // frmHS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -636,6 +648,7 @@
         private Guna.UI2.WinForms.Guna2Button btnChangePassword;
         private Guna.UI2.WinForms.Guna2Button btnProfile;
         private GUI.Controls.ucThongBao ucThongBao1;
+        private GUI.Controls.ucInfoHS ucInfoHS1;
     }
 }
 
