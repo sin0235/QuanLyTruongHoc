@@ -41,7 +41,7 @@ namespace QuanLyTruongHoc
             UpdateButtonPositions();
 
             // Đăng ký sự kiện Resize
-            this.Resize += new EventHandler(Form1_Resize);
+            this.Resize += new EventHandler(frmGiaoVien_Resize);
         }
 
         // Hàm cập nhật vị trí nút
@@ -133,6 +133,15 @@ namespace QuanLyTruongHoc
             {
                 isDragging = true;
                 startPoint = new Point(e.X, e.Y);
+
+                // Nếu form đang ở trạng thái Maximized, chuyển về Normal
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    this.WindowState = FormWindowState.Normal;
+
+                    // Điều chỉnh vị trí form để con trỏ chuột nằm đúng vị trí
+                    this.Location = new Point(Cursor.Position.X - this.Width / 2, Cursor.Position.Y - startPoint.Y);
+                }
             }
         }
 
@@ -145,9 +154,10 @@ namespace QuanLyTruongHoc
             }
         }
 
-        private void guna2PanelTitleBar_MouseUp(object sender, EventArgs e)
+        private void guna2PanelTitleBar_MouseUp(object sender, MouseEventArgs e)
         {
             isDragging = false;
         }
+
     }
 }
