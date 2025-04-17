@@ -55,7 +55,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 tbChiTiet.OnClose += (s, e) => {
                     // When detail view is closed, restore the original notification panel
                     tbChiTiet.Visible = false;
-                    
+
                     // Restore all notification list controls to their previous state
                     flowLayoutPanel.Visible = currentVisibilityOfFlowPanel;
                     btnTBChung.Visible = true;
@@ -114,24 +114,24 @@ namespace QuanLyTruongHoc.GUI.Controls
             // This would fetch actual attachments from database
             // For demo purposes, we'll create sample attachments for certain notifications
             List<ucTBChiTiet.AttachmentInfo> attachments = new List<ucTBChiTiet.AttachmentInfo>();
-            
+
             if (notificationId == 2) // Example: notification with ID 2 has attachments
             {
-                attachments.Add(new ucTBChiTiet.AttachmentInfo 
-                { 
-                    FileName = "ke-hoach-thi-hk1.pdf", 
-                    FilePath = @"C:\sample\ke-hoach-thi-hk1.pdf", 
-                    FileSize = 1024 * 1024 
+                attachments.Add(new ucTBChiTiet.AttachmentInfo
+                {
+                    FileName = "ke-hoach-thi-hk1.pdf",
+                    FilePath = @"C:\sample\ke-hoach-thi-hk1.pdf",
+                    FileSize = 1024 * 1024
                 });
-                
-                attachments.Add(new ucTBChiTiet.AttachmentInfo 
-                { 
-                    FileName = "lich-thi-chi-tiet.xlsx", 
-                    FilePath = @"C:\sample\lich-thi-chi-tiet.xlsx", 
-                    FileSize = 512 * 1024 
+
+                attachments.Add(new ucTBChiTiet.AttachmentInfo
+                {
+                    FileName = "lich-thi-chi-tiet.xlsx",
+                    FilePath = @"C:\sample\lich-thi-chi-tiet.xlsx",
+                    FileSize = 512 * 1024
                 });
             }
-            
+
             return attachments;
         }
 

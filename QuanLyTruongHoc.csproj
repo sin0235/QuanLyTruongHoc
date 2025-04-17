@@ -71,6 +71,12 @@
     <Compile Include="GUI\Controls\ucThongBao.Designer.cs">
       <DependentUpon>ucThongBao.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmNoiVu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
       <DependentUpon>ucThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmNoiVu.resx">
       <DependentUpon>frmNoiVu.cs</DependentUpon>
@@ -163,6 +172,7 @@
     <Content Include="assets\images\facebook.png" />
     <Content Include="assets\images\instagram.png" />
     <Content Include="assets\images\twitter.png" />
+    <None Include="Resources\loading.png" />
     <None Include="assets\images\school.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

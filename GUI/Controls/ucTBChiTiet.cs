@@ -43,14 +43,14 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
 
         public void LoadThongBao(int thongBaoId, string title, string sender, string receiver,
-                               DateTime date, string content, Image senderAvatar = null,
-                               List<AttachmentInfo> attachmentList = null)
+                         DateTime date, string content, Image senderAvatar = null,
+                         List<AttachmentInfo> attachmentList = null)
         {
             // Set the notification details
             lblTitle.Text = title;
             lblNguoiGui.Text = $"Người gửi: {sender}";
             lblNgayGui.Text = $"Ngày gửi: {FormatDate(date)}";
-            lblNguoiNhan.Text = $"Người nhận: {receiver}";
+            lblNguoiNhan.Text = $"Người nhận: {receiver}"; // Hiển thị người nhận
             rtbContent.Text = content;
 
             // Set avatar
@@ -62,6 +62,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Load attachments if any
             LoadAttachments(attachmentList);
         }
+
 
         private void LoadAttachments(List<AttachmentInfo> attachmentList)
         {
@@ -277,7 +278,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             return $"{size:0.##} {suffixes[counter]}";
         }
-
         private Image GetFileIcon(string extension)
         {
             // This would be replaced with actual file icons based on extension
