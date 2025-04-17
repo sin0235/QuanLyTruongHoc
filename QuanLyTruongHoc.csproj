@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="BLL\ViDu.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
+    <Compile Include="DTO\GiaoVien.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="GUI\Controls\NotificationItem.cs">
       <SubType>Component</SubType>
@@ -64,6 +65,12 @@
     </Compile>
     <Compile Include="GUI\Controls\ucTBChiTiet.Designer.cs">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThoiKhoaBieu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThoiKhoaBieu.Designer.cs">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucThongBao.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +124,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucThoiKhoaBieu.resx">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
       <DependentUpon>ucThongBao.cs</DependentUpon>

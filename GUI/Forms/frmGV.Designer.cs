@@ -43,31 +43,31 @@
             this.btnPlans = new Guna.UI2.WinForms.Guna2Button();
             this.btnApproveAbsent = new Guna.UI2.WinForms.Guna2Button();
             this.btnEnterScores = new Guna.UI2.WinForms.Guna2Button();
-            this.btnTeacherSchedule = new Guna.UI2.WinForms.Guna2Button();
+            this.btnViewTimetable = new Guna.UI2.WinForms.Guna2Button();
             this.btnDashboard = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.ucThongBaoGiaoVien1 = new QuanLyTruongHoc.GUI.Controls.ucThongBaoGiaoVien();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.guna2AnimateWindow2 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2AnimateWindow3 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.ucThongBaoGiaoVien1 = new QuanLyTruongHoc.GUI.Controls.ucThongBaoGiaoVien();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -186,7 +186,7 @@
             this.pnlMenu.Controls.Add(this.btnPlans);
             this.pnlMenu.Controls.Add(this.btnApproveAbsent);
             this.pnlMenu.Controls.Add(this.btnEnterScores);
-            this.pnlMenu.Controls.Add(this.btnTeacherSchedule);
+            this.pnlMenu.Controls.Add(this.btnViewTimetable);
             this.pnlMenu.Controls.Add(this.btnDashboard);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
@@ -317,30 +317,30 @@
             this.btnEnterScores.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnEnterScores.TextOffset = new System.Drawing.Point(15, 0);
             // 
-            // btnTeacherSchedule
+            // btnViewTimetable
             // 
-            this.btnTeacherSchedule.BackColor = System.Drawing.Color.Transparent;
-            this.btnTeacherSchedule.BorderRadius = 10;
-            this.btnTeacherSchedule.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTeacherSchedule.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTeacherSchedule.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTeacherSchedule.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTeacherSchedule.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTeacherSchedule.FillColor = System.Drawing.Color.Transparent;
-            this.btnTeacherSchedule.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTeacherSchedule.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnTeacherSchedule.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTeacherSchedule.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnTeacherSchedule.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnTeacherSchedule.Location = new System.Drawing.Point(10, 55);
-            this.btnTeacherSchedule.Name = "btnTeacherSchedule";
-            this.btnTeacherSchedule.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnTeacherSchedule.Size = new System.Drawing.Size(260, 55);
-            this.btnTeacherSchedule.TabIndex = 1;
-            this.btnTeacherSchedule.Text = "Thời khóa biểu";
-            this.btnTeacherSchedule.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTeacherSchedule.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnTeacherSchedule.Click += new System.EventHandler(this.btnStudents_Click);
+            this.btnViewTimetable.BackColor = System.Drawing.Color.Transparent;
+            this.btnViewTimetable.BorderRadius = 10;
+            this.btnViewTimetable.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnViewTimetable.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnViewTimetable.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnViewTimetable.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnViewTimetable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnViewTimetable.FillColor = System.Drawing.Color.Transparent;
+            this.btnViewTimetable.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewTimetable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnViewTimetable.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnViewTimetable.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnViewTimetable.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnViewTimetable.Location = new System.Drawing.Point(10, 55);
+            this.btnViewTimetable.Name = "btnViewTimetable";
+            this.btnViewTimetable.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnViewTimetable.Size = new System.Drawing.Size(260, 55);
+            this.btnViewTimetable.TabIndex = 1;
+            this.btnViewTimetable.Text = "Thời khóa biểu";
+            this.btnViewTimetable.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnViewTimetable.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnViewTimetable.Click += new System.EventHandler(this.btnViewTimetable_Click);
             // 
             // btnDashboard
             // 
@@ -394,6 +394,17 @@
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Location = new System.Drawing.Point(90, 15);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(100, 90);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
+            // 
             // pnlMainScreen
             // 
             this.pnlMainScreen.Controls.Add(this.pnlContent);
@@ -414,6 +425,16 @@
             this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
+            // 
+            // ucThongBaoGiaoVien1
+            // 
+            this.ucThongBaoGiaoVien1.BackColor = System.Drawing.Color.White;
+            this.ucThongBaoGiaoVien1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBaoGiaoVien1.Location = new System.Drawing.Point(0, 0);
+            this.ucThongBaoGiaoVien1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBaoGiaoVien1.Name = "ucThongBaoGiaoVien1";
+            this.ucThongBaoGiaoVien1.Size = new System.Drawing.Size(1640, 960);
+            this.ucThongBaoGiaoVien1.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -448,15 +469,11 @@
             this.lblUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lblUserName.Location = new System.Drawing.Point(1486, 28);
+            this.lblUserName.Location = new System.Drawing.Point(1477, 22);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(135, 30);
+            this.lblUserName.Size = new System.Drawing.Size(113, 30);
             this.lblUserName.TabIndex = 1;
-            this.lblUserName.Text = "Nguyễn Văn A";
-            // 
-            // guna2Elipse2
-            // 
-            this.guna2Elipse2.BorderRadius = 18;
+            this.lblUserName.Text = "Người dùng";
             // 
             // picUserAvatar
             // 
@@ -471,26 +488,9 @@
             this.picUserAvatar.TabIndex = 0;
             this.picUserAvatar.TabStop = false;
             // 
-            // picLogo
+            // guna2Elipse2
             // 
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(90, 15);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(100, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
-            // 
-            // ucThongBaoGiaoVien1
-            // 
-            this.ucThongBaoGiaoVien1.BackColor = System.Drawing.Color.White;
-            this.ucThongBaoGiaoVien1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ucThongBaoGiaoVien1.Location = new System.Drawing.Point(0, 0);
-            this.ucThongBaoGiaoVien1.Margin = new System.Windows.Forms.Padding(4);
-            this.ucThongBaoGiaoVien1.Name = "ucThongBaoGiaoVien1";
-            this.ucThongBaoGiaoVien1.Size = new System.Drawing.Size(1640, 960);
-            this.ucThongBaoGiaoVien1.TabIndex = 0;
+            this.guna2Elipse2.BorderRadius = 18;
             // 
             // frmGV
             // 
@@ -514,12 +514,12 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlMainScreen.ResumeLayout(false);
             this.pnlContent.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -548,7 +548,7 @@
         private Guna.UI2.WinForms.Guna2Button btnPlans;
         private Guna.UI2.WinForms.Guna2Button btnApproveAbsent;
         private Guna.UI2.WinForms.Guna2Button btnEnterScores;
-        private Guna.UI2.WinForms.Guna2Button btnTeacherSchedule;
+        private Guna.UI2.WinForms.Guna2Button btnViewTimetable;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
@@ -556,6 +556,7 @@
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow2;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow3;
         private GUI.Controls.ucThongBaoGiaoVien ucThongBaoGiaoVien1;
+
     }
 }
 
