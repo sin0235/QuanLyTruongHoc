@@ -56,17 +56,44 @@
     <Compile Include="BLL\ViDu.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
-    <Compile Include="GUI\Controls\ViDu.cs">
+    <Compile Include="GUI\Controls\NotificationItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucTBChiTiet.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ViDu.Designer.cs">
-      <DependentUpon>ViDu.cs</DependentUpon>
+    <Compile Include="GUI\Controls\ucTBChiTiet.Designer.cs">
+      <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmGiaoVien.cs">
+    <Compile Include="GUI\Controls\ucThongBao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThongBao.Designer.cs">
+      <DependentUpon>ucThongBao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmNoiVu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\frmGiaoVien.Designer.cs">
-      <DependentUpon>frmGiaoVien.cs</DependentUpon>
+    <Compile Include="GUI\Forms\frmNoiVu.Designer.cs">
+      <DependentUpon>frmNoiVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmBGH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmBGH.Designer.cs">
+      <DependentUpon>frmBGH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmHS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmHS.Designer.cs">
+      <DependentUpon>frmHS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.Designer.cs">
+      <DependentUpon>frmGV.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -82,11 +109,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GUI\Controls\ViDu.resx">
-      <DependentUpon>ViDu.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
+      <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmGiaoVien.resx">
-      <DependentUpon>frmGiaoVien.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
+      <DependentUpon>ucThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmNoiVu.resx">
+      <DependentUpon>frmNoiVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmBGH.resx">
+      <DependentUpon>frmBGH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmHS.resx">
+      <DependentUpon>frmHS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmGV.resx">
+      <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -11,14 +11,14 @@ using Guna.UI2.WinForms;
 
 namespace QuanLyTruongHoc
 {
-    public partial class Form1 : Form
+    public partial class frmBGH : Form
     {
         // Lưu trữ màu gốc của các nút
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
 
-        public Form1()
+        public frmBGH()
         {
             InitializeComponent();
 

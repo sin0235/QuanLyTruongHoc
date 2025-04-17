@@ -1,6 +1,6 @@
 ﻿namespace QuanLyTruongHoc
 {
-    partial class Form1
+    partial class frmHS
     {
         /// <summary>
         /// Required designer variable.
@@ -38,13 +38,17 @@
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.pnlSubSettings = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
+            this.btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
+            this.btnProfile = new Guna.UI2.WinForms.Guna2Button();
             this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
             this.btnReports = new Guna.UI2.WinForms.Guna2Button();
-            this.btnSchedule = new Guna.UI2.WinForms.Guna2Button();
-            this.btnClasses = new Guna.UI2.WinForms.Guna2Button();
-            this.btnTeachers = new Guna.UI2.WinForms.Guna2Button();
-            this.btnStudents = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDashboard = new Guna.UI2.WinForms.Guna2Button();
+            this.btnKQHT = new Guna.UI2.WinForms.Guna2Button();
+            this.btnTKB = new Guna.UI2.WinForms.Guna2Button();
+            this.btnBT = new Guna.UI2.WinForms.Guna2Button();
+            this.btnInfo = new Guna.UI2.WinForms.Guna2Button();
+            this.btnThongBao = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -56,9 +60,11 @@
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            this.pnlSubSettings.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
@@ -178,13 +184,14 @@
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
+            this.pnlMenu.Controls.Add(this.pnlSubSettings);
             this.pnlMenu.Controls.Add(this.btnSettings);
             this.pnlMenu.Controls.Add(this.btnReports);
-            this.pnlMenu.Controls.Add(this.btnSchedule);
-            this.pnlMenu.Controls.Add(this.btnClasses);
-            this.pnlMenu.Controls.Add(this.btnTeachers);
-            this.pnlMenu.Controls.Add(this.btnStudents);
-            this.pnlMenu.Controls.Add(this.btnDashboard);
+            this.pnlMenu.Controls.Add(this.btnKQHT);
+            this.pnlMenu.Controls.Add(this.btnTKB);
+            this.pnlMenu.Controls.Add(this.btnBT);
+            this.pnlMenu.Controls.Add(this.btnInfo);
+            this.pnlMenu.Controls.Add(this.btnThongBao);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
@@ -193,6 +200,77 @@
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlMenu.Size = new System.Drawing.Size(280, 880);
             this.pnlMenu.TabIndex = 1;
+            // 
+            // pnlSubSettings
+            // 
+            this.pnlSubSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
+            this.pnlSubSettings.BorderRadius = 10;
+            this.pnlSubSettings.Controls.Add(this.btnLogout);
+            this.pnlSubSettings.Controls.Add(this.btnChangePassword);
+            this.pnlSubSettings.Controls.Add(this.btnProfile);
+            this.pnlSubSettings.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(175)))), ((int)(((byte)(235)))));
+            this.pnlSubSettings.ForeColor = System.Drawing.Color.Black;
+            this.pnlSubSettings.Location = new System.Drawing.Point(12, 664);
+            this.pnlSubSettings.Name = "pnlSubSettings";
+            this.pnlSubSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlSubSettings.Size = new System.Drawing.Size(260, 155);
+            this.pnlSubSettings.TabIndex = 8;
+            this.pnlSubSettings.Visible = false;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BorderRadius = 8;
+            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLogout.FillColor = System.Drawing.Color.Transparent;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnLogout.Location = new System.Drawing.Point(5, 95);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(250, 45);
+            this.btnLogout.TabIndex = 2;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.BackColor = System.Drawing.Color.Transparent;
+            this.btnChangePassword.BorderRadius = 8;
+            this.btnChangePassword.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnChangePassword.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnChangePassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnChangePassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnChangePassword.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnChangePassword.FillColor = System.Drawing.Color.Transparent;
+            this.btnChangePassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnChangePassword.Location = new System.Drawing.Point(5, 50);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(250, 45);
+            this.btnChangePassword.TabIndex = 1;
+            this.btnChangePassword.Text = "Đổi mật khẩu";
+            // 
+            // btnProfile
+            // 
+            this.btnProfile.BackColor = System.Drawing.Color.Transparent;
+            this.btnProfile.BorderRadius = 8;
+            this.btnProfile.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnProfile.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnProfile.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnProfile.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnProfile.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProfile.FillColor = System.Drawing.Color.Transparent;
+            this.btnProfile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnProfile.Location = new System.Drawing.Point(5, 5);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(250, 45);
+            this.btnProfile.TabIndex = 0;
+            this.btnProfile.Text = "Hồ sơ học sinh";
             // 
             // btnSettings
             // 
@@ -217,6 +295,7 @@
             this.btnSettings.Text = "Cài đặt";
             this.btnSettings.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSettings.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnReports
             // 
@@ -238,131 +317,131 @@
             this.btnReports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnReports.Size = new System.Drawing.Size(260, 55);
             this.btnReports.TabIndex = 5;
-            this.btnReports.Text = "Báo cáo";
+            this.btnReports.Text = "Đơn xin phép";
             this.btnReports.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnReports.TextOffset = new System.Drawing.Point(15, 0);
             // 
-            // btnSchedule
+            // btnKQHT
             // 
-            this.btnSchedule.BackColor = System.Drawing.Color.Transparent;
-            this.btnSchedule.BorderRadius = 10;
-            this.btnSchedule.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSchedule.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSchedule.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSchedule.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSchedule.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSchedule.FillColor = System.Drawing.Color.Transparent;
-            this.btnSchedule.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSchedule.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnSchedule.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSchedule.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnSchedule.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnSchedule.Location = new System.Drawing.Point(10, 220);
-            this.btnSchedule.Name = "btnSchedule";
-            this.btnSchedule.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSchedule.Size = new System.Drawing.Size(260, 55);
-            this.btnSchedule.TabIndex = 4;
-            this.btnSchedule.Text = "Thời khóa biểu";
-            this.btnSchedule.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnSchedule.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnKQHT.BackColor = System.Drawing.Color.Transparent;
+            this.btnKQHT.BorderRadius = 10;
+            this.btnKQHT.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnKQHT.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnKQHT.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnKQHT.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnKQHT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnKQHT.FillColor = System.Drawing.Color.Transparent;
+            this.btnKQHT.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKQHT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnKQHT.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnKQHT.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnKQHT.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnKQHT.Location = new System.Drawing.Point(10, 220);
+            this.btnKQHT.Name = "btnKQHT";
+            this.btnKQHT.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnKQHT.Size = new System.Drawing.Size(260, 55);
+            this.btnKQHT.TabIndex = 4;
+            this.btnKQHT.Text = "Kết quả học tập";
+            this.btnKQHT.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnKQHT.TextOffset = new System.Drawing.Point(15, 0);
             // 
-            // btnClasses
+            // btnTKB
             // 
-            this.btnClasses.BackColor = System.Drawing.Color.Transparent;
-            this.btnClasses.BorderRadius = 10;
-            this.btnClasses.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnClasses.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnClasses.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnClasses.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnClasses.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnClasses.FillColor = System.Drawing.Color.Transparent;
-            this.btnClasses.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClasses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnClasses.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnClasses.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnClasses.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnClasses.Location = new System.Drawing.Point(10, 165);
-            this.btnClasses.Name = "btnClasses";
-            this.btnClasses.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnClasses.Size = new System.Drawing.Size(260, 55);
-            this.btnClasses.TabIndex = 3;
-            this.btnClasses.Text = "Lớp học";
-            this.btnClasses.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnClasses.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnTKB.BackColor = System.Drawing.Color.Transparent;
+            this.btnTKB.BorderRadius = 10;
+            this.btnTKB.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTKB.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTKB.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTKB.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTKB.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTKB.FillColor = System.Drawing.Color.Transparent;
+            this.btnTKB.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTKB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnTKB.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnTKB.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnTKB.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnTKB.Location = new System.Drawing.Point(10, 165);
+            this.btnTKB.Name = "btnTKB";
+            this.btnTKB.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnTKB.Size = new System.Drawing.Size(260, 55);
+            this.btnTKB.TabIndex = 3;
+            this.btnTKB.Text = "Thời khóa biểu";
+            this.btnTKB.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnTKB.TextOffset = new System.Drawing.Point(15, 0);
             // 
-            // btnTeachers
+            // btnBT
             // 
-            this.btnTeachers.BackColor = System.Drawing.Color.Transparent;
-            this.btnTeachers.BorderRadius = 10;
-            this.btnTeachers.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTeachers.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTeachers.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTeachers.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTeachers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTeachers.FillColor = System.Drawing.Color.Transparent;
-            this.btnTeachers.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTeachers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnTeachers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTeachers.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnTeachers.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnTeachers.Location = new System.Drawing.Point(10, 110);
-            this.btnTeachers.Name = "btnTeachers";
-            this.btnTeachers.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnTeachers.Size = new System.Drawing.Size(260, 55);
-            this.btnTeachers.TabIndex = 2;
-            this.btnTeachers.Text = "Giáo viên";
-            this.btnTeachers.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTeachers.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnBT.BackColor = System.Drawing.Color.Transparent;
+            this.btnBT.BorderRadius = 10;
+            this.btnBT.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnBT.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnBT.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnBT.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnBT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBT.FillColor = System.Drawing.Color.Transparent;
+            this.btnBT.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnBT.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnBT.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnBT.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnBT.Location = new System.Drawing.Point(10, 110);
+            this.btnBT.Name = "btnBT";
+            this.btnBT.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnBT.Size = new System.Drawing.Size(260, 55);
+            this.btnBT.TabIndex = 2;
+            this.btnBT.Text = "Kiểm tra - đánh giá";
+            this.btnBT.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnBT.TextOffset = new System.Drawing.Point(15, 0);
             // 
-            // btnStudents
+            // btnInfo
             // 
-            this.btnStudents.BackColor = System.Drawing.Color.Transparent;
-            this.btnStudents.BorderRadius = 10;
-            this.btnStudents.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnStudents.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnStudents.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnStudents.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnStudents.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStudents.FillColor = System.Drawing.Color.Transparent;
-            this.btnStudents.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnStudents.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnStudents.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnStudents.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnStudents.Location = new System.Drawing.Point(10, 55);
-            this.btnStudents.Name = "btnStudents";
-            this.btnStudents.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnStudents.Size = new System.Drawing.Size(260, 55);
-            this.btnStudents.TabIndex = 1;
-            this.btnStudents.Text = "Học sinh";
-            this.btnStudents.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnStudents.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnStudents.Click += new System.EventHandler(this.btnStudents_Click);
+            this.btnInfo.BackColor = System.Drawing.Color.Transparent;
+            this.btnInfo.BorderRadius = 10;
+            this.btnInfo.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnInfo.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnInfo.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnInfo.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnInfo.FillColor = System.Drawing.Color.Transparent;
+            this.btnInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnInfo.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnInfo.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnInfo.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnInfo.Location = new System.Drawing.Point(10, 55);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnInfo.Size = new System.Drawing.Size(260, 55);
+            this.btnInfo.TabIndex = 1;
+            this.btnInfo.Text = "Thông tin cá nhân";
+            this.btnInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnInfo.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnInfo.Click += new System.EventHandler(this.btnStudents_Click);
             // 
-            // btnDashboard
+            // btnThongBao
             // 
-            this.btnDashboard.BackColor = System.Drawing.Color.Transparent;
-            this.btnDashboard.BorderRadius = 10;
-            this.btnDashboard.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDashboard.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDashboard.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDashboard.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDashboard.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDashboard.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
-            this.btnDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDashboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnDashboard.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnDashboard.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnDashboard.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnDashboard.Location = new System.Drawing.Point(10, 0);
-            this.btnDashboard.Name = "btnDashboard";
-            this.btnDashboard.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDashboard.Size = new System.Drawing.Size(260, 55);
-            this.btnDashboard.TabIndex = 0;
-            this.btnDashboard.Text = "Tổng quan";
-            this.btnDashboard.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnDashboard.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+            this.btnThongBao.BackColor = System.Drawing.Color.Transparent;
+            this.btnThongBao.BorderRadius = 10;
+            this.btnThongBao.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongBao.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongBao.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThongBao.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThongBao.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnThongBao.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.btnThongBao.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnThongBao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnThongBao.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnThongBao.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnThongBao.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnThongBao.Location = new System.Drawing.Point(10, 0);
+            this.btnThongBao.Name = "btnThongBao";
+            this.btnThongBao.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnThongBao.Size = new System.Drawing.Size(260, 55);
+            this.btnThongBao.TabIndex = 0;
+            this.btnThongBao.Text = "Thông báo";
+            this.btnThongBao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnThongBao.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnThongBao.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // pnlLogo
             // 
@@ -415,6 +494,7 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
+            this.pnlContent.Controls.Add(this.ucThongBao1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
@@ -447,7 +527,7 @@
             this.lblPageTitle.Name = "lblPageTitle";
             this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
             this.lblPageTitle.TabIndex = 2;
-            this.lblPageTitle.Text = "Tổng quan";
+            this.lblPageTitle.Text = "Thông báo";
             // 
             // lblUserName
             // 
@@ -478,7 +558,18 @@
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
-            // Form1
+            // ucThongBao1
+            // 
+            this.ucThongBao1.BackColor = System.Drawing.Color.White;
+            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
+            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBao1.Name = "ucThongBao1";
+            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
+            this.ucThongBao1.TabIndex = 0;
+            // 
+            // frmHS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -490,7 +581,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "frmHS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trường Học";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -498,6 +589,7 @@
             this.pnlTitleBar.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
+            this.pnlSubSettings.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
@@ -528,18 +620,22 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblFormTitle;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSchoolName;
         private Guna.UI2.WinForms.Guna2PictureBox picLogo;
-        private Guna.UI2.WinForms.Guna2Button btnDashboard;
+        private Guna.UI2.WinForms.Guna2Button btnThongBao;
         private Guna.UI2.WinForms.Guna2Button btnSettings;
         private Guna.UI2.WinForms.Guna2Button btnReports;
-        private Guna.UI2.WinForms.Guna2Button btnSchedule;
-        private Guna.UI2.WinForms.Guna2Button btnClasses;
-        private Guna.UI2.WinForms.Guna2Button btnTeachers;
-        private Guna.UI2.WinForms.Guna2Button btnStudents;
+        private Guna.UI2.WinForms.Guna2Button btnKQHT;
+        private Guna.UI2.WinForms.Guna2Button btnTKB;
+        private Guna.UI2.WinForms.Guna2Button btnBT;
+        private Guna.UI2.WinForms.Guna2Button btnInfo;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
-
+        private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
+        private Guna.UI2.WinForms.Guna2Button btnLogout;
+        private Guna.UI2.WinForms.Guna2Button btnChangePassword;
+        private Guna.UI2.WinForms.Guna2Button btnProfile;
+        private GUI.Controls.ucThongBao ucThongBao1;
     }
 }
 

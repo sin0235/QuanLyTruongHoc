@@ -5,20 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 
 namespace QuanLyTruongHoc
 {
-    public partial class Form1 : Form
+    public partial class frmHS : Form
     {
         // Lưu trữ màu gốc của các nút
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
+        private Color highlightColor  = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
 
-        public Form1()
+
+        public frmHS()
         {
             InitializeComponent();
 
@@ -153,9 +156,81 @@ namespace QuanLyTruongHoc
         private void btnStudents_Click(object sender, EventArgs e)
         {
 
+            btnInfo.FillColor = highlightColor;
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void unLightButton()
+        {
+
+
+        }
+        // Sửa phương thức btnSettings_Click
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            pnlSubSettings.Visible = !pnlSubSettings.Visible;
+
+            // Cập nhật vị trí của panel tương đối so với nút btnSettings
+            pnlSubSettings.Location = new Point(btnSettings.Location.X, btnSettings.Location.Y - pnlSubSettings.Height);
+
+            // Thay đổi màu nút "Cài đặt" khi panel hiển thị
+            btnSettings.FillColor = pnlSubSettings.Visible ? highlightColor : Color.Transparent;
+
+            // Đảm bảo panel hiển thị trên cùng
+            pnlSubSettings.BringToFront();
+        }
+
+        // Xử lý các nút trong menu cài đặt
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            // Xử lý xem hồ sơ học sinh
+            pnlSubSettings.Visible = false;
+            btnSettings.FillColor = Color.Transparent;
+            
+            lblPageTitle.Text = "Hồ sơ học sinh";
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            // Xử lý đổi mật khẩu
+            pnlSubSettings.Visible = false;
+            btnSettings.FillColor = Color.Transparent;
+
+            // Hiển thị giao diện đổi mật khẩu (tạm thời hiển thị control có sẵn)
+            
+            lblPageTitle.Text = "Đổi mật khẩu";
+        }
+
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                                                 "Xác nhận đăng xuất",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Tạo và hiển thị form đăng nhập
+                frmLogin loginForm = new frmLogin();
+                loginForm.Show();
+                // Đóng form hiện tại
+                this.Hide(); // Ẩn form hiện tại thay vì đóng để tránh đóng ứng dụng
+
+                // Đăng ký sự kiện FormClosed cho form đăng nhập
+                loginForm.FormClosed += (s, args) =>
+                {
+                    // Nếu form đăng nhập đóng (không đăng nhập thành công), thoát ứng dụng
+                    this.Close();
+                };
+            }
+        }
+
+        private void newControlcs1_Load(object sender, EventArgs e)
         {
 
         }

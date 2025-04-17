@@ -11,14 +11,14 @@ using Guna.UI2.WinForms;
 
 namespace QuanLyTruongHoc
 {
-    public partial class Form1 : Form
+    public partial class frmGV : Form
     {
         // Lưu trữ màu gốc của các nút
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
 
-        public Form1()
+        public frmGV()
         {
             InitializeComponent();
 
@@ -41,7 +41,7 @@ namespace QuanLyTruongHoc
             UpdateButtonPositions();
 
             // Đăng ký sự kiện Resize
-            this.Resize += new EventHandler(Form1_Resize);
+            this.Resize += new EventHandler(Form2_Resize);
         }
 
         // Hàm cập nhật vị trí nút
@@ -53,7 +53,7 @@ namespace QuanLyTruongHoc
         }
 
         // Sự kiện Resize
-        private void Form1_Resize(object sender, EventArgs e)
+        private void Form2_Resize(object sender, EventArgs e)
         {
             UpdateButtonPositions();
         }
