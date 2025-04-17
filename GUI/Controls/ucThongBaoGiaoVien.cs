@@ -10,17 +10,17 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucThongBaoGiaoVien : UserControl
     {
         private readonly DatabaseHelper dbHelper;
-        private ucThongBao ucThongBaoInstance;
+        private Guna.UI2.WinForms.Guna2Panel pnlDetails;
 
         public ucThongBaoGiaoVien()
         {
             InitializeComponent();
-            dbHelper = new DatabaseHelper(); // Khởi tạo DatabaseHelper
+            dbHelper = new DatabaseHelper();
+
         }
 
         private void ucThongBaoGiaoVien_Load(object sender, EventArgs e)
         {
-            // Mặc định hiển thị thông báo chung khi User Control được load
             LoadThongBaoChung();
         }
 
@@ -41,7 +41,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             FROM ThongBao tb
             INNER JOIN NguoiDung nd ON tb.MaNguoiGui = nd.MaNguoiDung
             WHERE (tb.MaVaiTroNhan IS NULL AND tb.MaNguoiNhan IS NULL)
-                  OR nd.MaVaiTro = 1"; // Thông báo từ BGH cũng được xem là thông báo chung
+                  OR nd.MaVaiTro = 1";
 
             DataTable dataTable = dbHelper.ExecuteQuery(query);
             DisplayThongBao(dataTable);
@@ -50,11 +50,11 @@ namespace QuanLyTruongHoc.GUI.Controls
         private void LoadThongBaoCaNhan()
         {
             string query = @"
-                SELECT tb.MaTB, tb.TieuDe, tb.NoiDung, tb.NgayGui, nd.TenDangNhap AS NguoiGui
-                FROM ThongBao tb
-                INNER JOIN NguoiDung nd ON tb.MaNguoiGui = nd.MaNguoiDung
-                WHERE (tb.MaVaiTroNhan = 2 OR tb.MaVaiTroNhan = 3 OR tb.MaNguoiNhan IS NOT NULL)
-                      AND nd.MaVaiTro != 1"; // Loại bỏ thông báo từ BGH
+            SELECT tb.MaTB, tb.TieuDe, tb.NoiDung, tb.NgayGui, nd.TenDangNhap AS NguoiGui
+            FROM ThongBao tb
+            INNER JOIN NguoiDung nd ON tb.MaNguoiGui = nd.MaNguoiDung
+            WHERE (tb.MaVaiTroNhan = 2 OR tb.MaVaiTroNhan = 3 OR tb.MaNguoiNhan IS NOT NULL)
+                  AND nd.MaVaiTro != 1";
 
             DataTable dataTable = dbHelper.ExecuteQuery(query);
             DisplayThongBao(dataTable);
@@ -78,26 +78,93 @@ namespace QuanLyTruongHoc.GUI.Controls
                 int maTB = Convert.ToInt32(row["MaTB"]);
                 string tieuDe = row["TieuDe"].ToString();
                 string noiDung = row["NoiDung"].ToString();
-                string ngayGui = Convert.ToDateTime(row["NgayGui"]).ToString("dd/MM/yyyy HH:mm");
+                DateTime ngayGui = Convert.ToDateTime(row["NgayGui"]);
                 string nguoiGui = row["NguoiGui"].ToString();
 
-                // Tạo một NotificationItem
                 NotificationItem notificationItem = new NotificationItem(
                     maTB,
                     tieuDe,
                     nguoiGui,
-                    Convert.ToDateTime(row["NgayGui"]),
+                    ngayGui,
                     noiDung
                 );
 
-                // Gán sự kiện click để hiển thị chi tiết thông báo
-                notificationItem.Click += (s, e) => ShowNotificationDetails(maTB, tieuDe, nguoiGui, Convert.ToDateTime(row["NgayGui"]), noiDung);
+                notificationItem.Click += (s, e) =>
+                {
+                    ShowNotificationDetails(maTB, tieuDe, nguoiGui, ngayGui, noiDung);
+                };
 
-                // Thêm NotificationItem vào flowLayoutPanel
                 flowLayoutPanel.Controls.Add(notificationItem);
             }
         }
 
+        private void ShowNotificationDetails(int notificationId, string title, string sender, DateTime date, string content)
+        {
+            // Clear the details panel
+            pnlDetails.Controls.Clear();
+
+            // Create and load ucTBChiTiet
+            var chiTiet = new ucTBChiTiet
+            {
+                Dock = DockStyle.Fill
+            };
+
+            string receiver = GetReceiverForNotification(notificationId);
+            chiTiet.LoadThongBao(notificationId, title, sender, receiver, date, content);
+
+            // Add ucTBChiTiet to pnlDetails
+            pnlDetails.Controls.Add(chiTiet);
+
+            // Show the details panel and hide the main list
+            pnlDetails.Visible = true;
+            flowLayoutPanel.Visible = false;
+
+            // Add a "Back" button to return to the notification list
+            var btnBack = new Button
+            {
+                Text = "Quay lại",
+                Dock = DockStyle.Top,
+                Height = 40,
+                BackColor = Color.LightGray
+            };
+
+            btnBack.Click += (s, e) =>
+            {
+                pnlDetails.Visible = false;
+                flowLayoutPanel.Visible = true;
+            };
+
+            pnlDetails.Controls.Add(btnBack);
+            btnBack.BringToFront();
+        }
+
+        private string GetReceiverForNotification(int notificationId)
+        {
+            string query = $@"
+            SELECT 
+                CASE 
+                    WHEN tb.MaNguoiNhan IS NOT NULL THEN nd.TenDangNhap
+                    WHEN tb.MaVaiTroNhan = 2 THEN N'Tất cả giáo viên'
+                    WHEN tb.MaVaiTroNhan = 3 THEN N'Tất cả học sinh'
+                    ELSE N'Tất cả'
+                END AS Receiver
+            FROM ThongBao tb
+            LEFT JOIN NguoiDung nd ON tb.MaNguoiNhan = nd.MaNguoiDung
+            WHERE tb.MaTB = {notificationId}";
+
+            DataTable result = dbHelper.ExecuteQuery(query);
+            if (result.Rows.Count > 0)
+            {
+                return result.Rows[0]["Receiver"].ToString();
+            }
+
+            return "Không xác định";
+        }
+        private void ucThongBao_Load(object sender, EventArgs e)
+        {
+            // Mặc định hiển thị thông báo chung khi User Control được load
+            LoadThongBaoChung();
+        }
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
@@ -111,74 +178,15 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             // Tìm kiếm thông báo theo tiêu đề hoặc nội dung
             string query = $@"
-                SELECT tb.MaTB, tb.TieuDe, tb.NoiDung, tb.NgayGui, nd.TenDangNhap AS NguoiGui
-                FROM ThongBao tb
-                INNER JOIN NguoiDung nd ON tb.MaNguoiGui = nd.MaNguoiDung
-                WHERE tb.TieuDe LIKE N'%{searchText}%' OR tb.NoiDung LIKE N'%{searchText}%'";
+                        SELECT tb.MaTB, tb.TieuDe, tb.NoiDung, tb.NgayGui, nd.TenDangNhap AS NguoiGui
+                        FROM ThongBao tb
+                        INNER JOIN NguoiDung nd ON tb.MaNguoiGui = nd.MaNguoiDung
+                        WHERE tb.TieuDe LIKE N'%{searchText}%' OR tb.NoiDung LIKE N'%{searchText}%'";
 
             DataTable dataTable = dbHelper.ExecuteQuery(query);
             DisplayThongBao(dataTable);
         }
-
-        private void ucThongBao_Load(object sender, EventArgs e)
-        {
-            // Mặc định hiển thị thông báo chung khi User Control được load
-            LoadThongBaoChung();
-        }
-        private string GetReceiverForNotification(int notificationId)
-        {
-            // Logic để lấy thông tin người nhận từ cơ sở dữ liệu
-            // Ví dụ: Nếu thông báo là chung, trả về "Tất cả"; nếu là cá nhân, trả về tên người nhận
-            string query = $@"
-                SELECT 
-                    CASE 
-                        WHEN tb.MaNguoiNhan IS NOT NULL THEN nd.TenDangNhap
-                        WHEN tb.MaVaiTroNhan = 2 THEN N'Tất cả giáo viên'
-                        WHEN tb.MaVaiTroNhan = 3 THEN N'Tất cả học sinh'
-                        ELSE N'Tất cả'
-                    END AS Receiver
-                FROM ThongBao tb
-                LEFT JOIN NguoiDung nd ON tb.MaNguoiNhan = nd.MaNguoiDung
-                WHERE tb.MaTB = {notificationId}";
-
-            DataTable result = dbHelper.ExecuteQuery(query);
-            if (result.Rows.Count > 0)
-            {
-                return result.Rows[0]["Receiver"].ToString();
-            }
-
-            return "Không xác định";
-        }
-
-        private void ShowNotificationDetails(int notificationId, string title, string sender, DateTime date, string content)
-        {
-            var chiTiet = new ucTBChiTiet();
-
-            var form = new Form
-            {
-                Text = "Chi tiết thông báo",
-                Size = new Size(800, 600),
-                StartPosition = FormStartPosition.CenterScreen,
-                FormBorderStyle = FormBorderStyle.FixedDialog
-            };
-
-            chiTiet.Dock = DockStyle.Fill;
-            form.Controls.Add(chiTiet);
-
-            // Load dữ liệu ngay sau khi control đã được add
-            string receiver = GetReceiverForNotification(notificationId); // Giả sử bạn đã có hàm này
-            chiTiet.LoadThongBao(notificationId, title, sender, receiver, date, content);
-
-            // Ép render UI
-            Application.DoEvents();
-
-            // Gán nút đóng
-            chiTiet.OnClose += (s, e) => form.Close();
-
-            form.ShowDialog();
-        }
-
-
     }
 }
+
 

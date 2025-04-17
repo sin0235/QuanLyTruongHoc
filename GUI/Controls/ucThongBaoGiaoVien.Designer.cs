@@ -240,7 +240,16 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
+            //
+            // pnlDetails
+            //
+            this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlDetails.Location = new System.Drawing.Point(15, 15);
+            this.pnlDetails.Name = "pnlDetails";
+            this.pnlDetails.Size = new System.Drawing.Size(1583, 845);
+            this.pnlDetails.TabIndex = 1;
+            this.pnlContent.Controls.Add(this.pnlDetails);
+            //
             // ucThongBaoGiaoVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -260,6 +269,7 @@
             this.pnlNoData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+
 
         }
 
