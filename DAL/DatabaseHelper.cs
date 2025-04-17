@@ -17,7 +17,7 @@ namespace QuanLyTruongHoc.DAL
         private DataSet ds;
 
 
-        private string strCnn = "Data Source=localhost;Database=QuanLyTruongHoc;user id = sa; password=123;MultipleActiveResultSets=True";
+        private string strCnn = "Data Source=JOHNNYBUIII;Database=QuanLyTruongHoc;user id = sa; password=1;MultipleActiveResultSets=True";
 
         public SqlConnection GetConnection()
         {

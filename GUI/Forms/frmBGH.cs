@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QuanLyTruongHoc.GUI.Controls;
 
 namespace QuanLyTruongHoc
 {
@@ -42,6 +43,12 @@ namespace QuanLyTruongHoc
 
             // Đăng ký sự kiện Resize
             this.Resize += new EventHandler(Form1_Resize);
+
+            // Mặc định hiện lên usercontrol QuanLyHeThong đầu tiên
+            pnlContent.Controls.Clear();
+            ucQuanLyHeThong uc = new ucQuanLyHeThong();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
         }
 
         // Hàm cập nhật vị trí nút
@@ -155,7 +162,15 @@ namespace QuanLyTruongHoc
 
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e)
+        private void btnQuanLyHeThong_Click(object sender, EventArgs e)
+        {
+            pnlContent.Controls.Clear();
+            ucQuanLyHeThong uc = new ucQuanLyHeThong();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+        }
+
+        private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
 
         }

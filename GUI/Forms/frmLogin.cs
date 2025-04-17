@@ -109,6 +109,7 @@ private Form OpenFormByRole(int maVaiTro, string tenVaiTro, int maNguoiDung)
     {
         case 1: // Ban giám hiệu
             nextForm = new frmBGH();
+            ((frmBGH)nextForm).lblUserName.Text = "Ban giám hiệu";
             break;
         case 2: // Giáo viên
             nextForm = new frmGV(maNguoiDung); // Truyền MaNguoiDung sang frmGV
@@ -161,6 +162,11 @@ private Form OpenFormByRole(int maVaiTro, string tenVaiTro, int maNguoiDung)
         private void guna2CircleButtonCloseLogin_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pnlMainScreen_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
