@@ -60,6 +60,12 @@
     <Compile Include="GUI\Controls\NotificationItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GUI\Controls\ucGuiThu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGuiThu.Designer.cs">
+      <DependentUpon>ucGuiThu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucQuanLyHeThong.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Controls\ucGuiThu.resx">
+      <DependentUpon>ucGuiThu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucQuanLyHeThong.resx">
       <DependentUpon>ucQuanLyHeThong.cs</DependentUpon>
     </EmbeddedResource>

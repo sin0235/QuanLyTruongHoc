@@ -49,6 +49,8 @@ namespace QuanLyTruongHoc
             ucQuanLyHeThong uc = new ucQuanLyHeThong();
             uc.Dock = DockStyle.Fill;
             pnlContent.Controls.Add(uc);
+            btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
+            btnGuiThu.FillColor = Color.Transparent;
         }
 
         // Hàm cập nhật vị trí nút
@@ -157,9 +159,14 @@ namespace QuanLyTruongHoc
             isDragging = false;
         }
 
-        private void btnStudents_Click(object sender, EventArgs e)
+        private void btnGuiThu_Click(object sender, EventArgs e)
         {
-
+            pnlContent.Controls.Clear();
+            ucGuiThu uc = new ucGuiThu();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnGuiThu.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyHeThong.FillColor = Color.Transparent;
         }
 
         private void btnQuanLyHeThong_Click(object sender, EventArgs e)
@@ -168,6 +175,8 @@ namespace QuanLyTruongHoc
             ucQuanLyHeThong uc = new ucQuanLyHeThong();
             uc.Dock = DockStyle.Fill;
             pnlContent.Controls.Add(uc);
+            btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
+            btnGuiThu.FillColor = Color.Transparent;
         }
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
