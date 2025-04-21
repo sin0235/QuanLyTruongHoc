@@ -21,7 +21,9 @@ namespace QuanLyTruongHoc
         private Color highlightColor  = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
 
 
-        public frmHS()
+
+
+        public frmHS(int maNguoiDung)
         {
             InitializeComponent();
 

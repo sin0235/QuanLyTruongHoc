@@ -70,6 +70,12 @@
     <Compile Include="GUI\Controls\ucGuiThu.Designer.cs">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\ucTKB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucTKB.Designer.cs">
+      <DependentUpon>ucTKB.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ucInfoHS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -147,6 +153,10 @@
     <EmbeddedResource Include="GUI\Controls\ucGuiThu.resx">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucTKB.resx">
+      <DependentUpon>ucTKB.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ucInfoHS.resx">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,7 +219,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="assets\images\bg.png" />
     <Content Include="assets\images\defautAvatar.PNG" />
     <None Include="assets\images\defautAvatar_Boy.png" />
     <None Include="assets\images\defautImage.PNG" />

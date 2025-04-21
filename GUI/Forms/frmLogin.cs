@@ -9,6 +9,7 @@ namespace QuanLyTruongHoc
     public partial class frmLogin : Form
     {
         public static int LoggedInTeacherId { get; private set; }
+        public static int LoggedInStudentId { get; private set; }
         private readonly DatabaseHelper db;
 
         public frmLogin()
@@ -116,10 +117,12 @@ namespace QuanLyTruongHoc
                     LoggedInTeacherId = maNguoiDung; // Lưu mã giáo viên đã đăng nhập
                     break;
                 case 3: // Học sinh
-                    nextForm = new frmHS();
+                    nextForm = new frmHS(maNguoiDung);
+                    LoggedInStudentId = maNguoiDung; // Lưu mã học sinh đã đăng nhập
                     break;
                 case 4: // Nhân viên phòng nội vụ
                     nextForm = new frmNoiVu();
+                    
                     break;
                 default:
                     MessageBox.Show($"Vai trò '{tenVaiTro}' chưa được hỗ trợ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
