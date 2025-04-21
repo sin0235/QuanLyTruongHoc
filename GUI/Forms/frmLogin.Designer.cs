@@ -93,6 +93,7 @@ namespace QuanLyTruongHoc
             this.pnlMainScreen.Name = "pnlMainScreen";
             this.pnlMainScreen.Size = new System.Drawing.Size(1200, 800);
             this.pnlMainScreen.TabIndex = 0;
+            this.pnlMainScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainScreen_Paint);
             // 
             // lblSchoolName
             // 

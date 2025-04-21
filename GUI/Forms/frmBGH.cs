@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QuanLyTruongHoc.GUI.Controls;
 
 namespace QuanLyTruongHoc
 {
@@ -42,6 +43,14 @@ namespace QuanLyTruongHoc
 
             // Đăng ký sự kiện Resize
             this.Resize += new EventHandler(Form1_Resize);
+
+            // Mặc định hiện lên usercontrol QuanLyHeThong đầu tiên
+            pnlContent.Controls.Clear();
+            ucQuanLyHeThong uc = new ucQuanLyHeThong();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
+            btnGuiThu.FillColor = Color.Transparent;
         }
 
         // Hàm cập nhật vị trí nút
@@ -150,12 +159,27 @@ namespace QuanLyTruongHoc
             isDragging = false;
         }
 
-        private void btnStudents_Click(object sender, EventArgs e)
+        private void btnGuiThu_Click(object sender, EventArgs e)
         {
-
+            pnlContent.Controls.Clear();
+            ucGuiThu uc = new ucGuiThu();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnGuiThu.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyHeThong.FillColor = Color.Transparent;
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e)
+        private void btnQuanLyHeThong_Click(object sender, EventArgs e)
+        {
+            pnlContent.Controls.Clear();
+            ucQuanLyHeThong uc = new ucQuanLyHeThong();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
+            btnGuiThu.FillColor = Color.Transparent;
+        }
+
+        private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
 
         }

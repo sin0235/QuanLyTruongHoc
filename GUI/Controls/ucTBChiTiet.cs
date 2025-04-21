@@ -69,14 +69,14 @@ namespace QuanLyTruongHoc.GUI.Controls
         /// <param name="senderAvatar">Ảnh đại diện người gửi (tùy chọn)</param>
         /// <param name="attachmentList">Danh sách tệp đính kèm (tùy chọn)</param>
         public void LoadThongBao(int thongBaoId, string title, string sender, string receiver,
-                               DateTime date, string content, Image senderAvatar = null,
-                               List<AttachmentInfo> attachmentList = null)
+                         DateTime date, string content, Image senderAvatar = null,
+                         List<AttachmentInfo> attachmentList = null)
         {
             // Gán các thông tin cơ bản của thông báo vào các điều khiển tương ứng
             lblTitle.Text = title;
             lblNguoiGui.Text = $"Người gửi: {sender}";
             lblNgayGui.Text = $"Ngày gửi: {FormatDate(date)}";
-            lblNguoiNhan.Text = $"Người nhận: {receiver}";
+            lblNguoiNhan.Text = $"Người nhận: {receiver}"; // Hiển thị người nhận
             rtbContent.Text = content;
 
             // Gán ảnh đại diện nếu có
@@ -89,10 +89,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             LoadAttachments(attachmentList);
         }
 
-        /// <summary>
-        /// Tải danh sách tệp đính kèm vào giao diện
-        /// </summary>
-        /// <param name="attachmentList">Danh sách tệp đính kèm</param>
         private void LoadAttachments(List<AttachmentInfo> attachmentList)
         {
             // Xóa các tệp đính kèm cũ
@@ -356,11 +352,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             return $"{size:0.##} {suffixes[counter]}";
         }
 
-        /// <summary>
-        /// Lấy biểu tượng tương ứng với loại tệp dựa vào phần mở rộng
-        /// </summary>
-        /// <param name="extension">Phần mở rộng của tệp (ví dụ: .pdf, .docx)</param>
-        /// <returns>Đối tượng Image chứa biểu tượng của loại tệp</returns>
         private Image GetFileIcon(string extension)
         {
             // Phương thức này cần được thay thế bằng mã thực tế để lấy biểu tượng phù hợp

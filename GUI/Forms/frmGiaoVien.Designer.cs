@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGiaoVien));
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -87,7 +86,7 @@
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(186, 23);
+            this.lblFormTitle.Size = new System.Drawing.Size(172, 30);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Giáo Viên";
             // 
@@ -188,9 +187,6 @@
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlMenu.Size = new System.Drawing.Size(280, 880);
             this.pnlMenu.TabIndex = 1;
-
-
-
             // 
             // btnSettings
             // 
@@ -204,7 +200,6 @@
             this.btnSettings.FillColor = System.Drawing.Color.Transparent;
             this.btnSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
             this.btnSettings.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSettings.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnSettings.ImageSize = new System.Drawing.Size(24, 24);
@@ -229,7 +224,6 @@
             this.btnReports.FillColor = System.Drawing.Color.Transparent;
             this.btnReports.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReports.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnReports.Image = ((System.Drawing.Image)(resources.GetObject("btnReports.Image")));
             this.btnReports.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnReports.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnReports.ImageSize = new System.Drawing.Size(24, 24);
@@ -254,7 +248,6 @@
             this.btnSchedule.FillColor = System.Drawing.Color.Transparent;
             this.btnSchedule.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSchedule.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnSchedule.Image = ((System.Drawing.Image)(resources.GetObject("btnSchedule.Image")));
             this.btnSchedule.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSchedule.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnSchedule.ImageSize = new System.Drawing.Size(24, 24);
@@ -279,7 +272,6 @@
             this.btnClasses.FillColor = System.Drawing.Color.Transparent;
             this.btnClasses.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClasses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnClasses.Image = ((System.Drawing.Image)(resources.GetObject("btnClasses.Image")));
             this.btnClasses.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnClasses.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnClasses.ImageSize = new System.Drawing.Size(24, 24);
@@ -304,7 +296,6 @@
             this.btnTeachers.FillColor = System.Drawing.Color.Transparent;
             this.btnTeachers.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTeachers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnTeachers.Image = ((System.Drawing.Image)(resources.GetObject("btnTeachers.Image")));
             this.btnTeachers.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnTeachers.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnTeachers.ImageSize = new System.Drawing.Size(24, 24);
@@ -329,7 +320,6 @@
             this.btnStudents.FillColor = System.Drawing.Color.Transparent;
             this.btnStudents.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnStudents.Image = ((System.Drawing.Image)(resources.GetObject("btnStudents.Image")));
             this.btnStudents.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnStudents.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnStudents.ImageSize = new System.Drawing.Size(24, 24);
@@ -354,7 +344,6 @@
             this.btnDashboard.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.btnDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDashboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnDashboard.Image = ((System.Drawing.Image)(resources.GetObject("btnDashboard.Image")));
             this.btnDashboard.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDashboard.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnDashboard.ImageSize = new System.Drawing.Size(24, 24);
@@ -389,7 +378,7 @@
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(224, 27);
+            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -397,7 +386,6 @@
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.ImageRotate = 0F;
             this.picLogo.Location = new System.Drawing.Point(90, 15);
             this.picLogo.Name = "picLogo";
@@ -449,7 +437,7 @@
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(132, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Tổng quan";
             // 
@@ -459,9 +447,9 @@
             this.lblUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lblUserName.Location = new System.Drawing.Point(1486, 28);
+            this.lblUserName.Location = new System.Drawing.Point(1456, 22);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(104, 23);
+            this.lblUserName.Size = new System.Drawing.Size(135, 30);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -469,7 +457,6 @@
             // 
             this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
-            this.picUserAvatar.Image = ((System.Drawing.Image)(resources.GetObject("picUserAvatar.Image")));
             this.picUserAvatar.ImageRotate = 0F;
             this.picUserAvatar.Location = new System.Drawing.Point(1596, 20);
             this.picUserAvatar.Name = "picUserAvatar";
@@ -483,7 +470,7 @@
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
-            // Form1
+            // frmGiaoVien
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -495,7 +482,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "frmGiaoVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trường Học";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

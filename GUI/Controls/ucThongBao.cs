@@ -71,7 +71,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                     // Khi đóng chi tiết, ẩn control chi tiết
                     tbChiTiet.Visible = false;
                     
-                    // Khôi phục lại trạng thái hiển thị ban đầu của các điều khiển
+                    // Restore all notification list controls to their previous state
                     flowLayoutPanel.Visible = currentVisibilityOfFlowPanel;
                     btnTBChung.Visible = true;
                     btnTBCaNhan.Visible = true;
@@ -145,23 +145,23 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Hiện tại, tạo dữ liệu mẫu cho một số thông báo cụ thể
             List<ucTBChiTiet.AttachmentInfo> attachments = new List<ucTBChiTiet.AttachmentInfo>();
             
-            if (notificationId == 2) // Ví dụ: thông báo có ID = 2 có file đính kèm
+            if (notificationId == 2) // Example: notification with ID 2 has attachments
             {
                 attachments.Add(new ucTBChiTiet.AttachmentInfo 
                 { 
                     FileName = "ke-hoach-thi-hk1.pdf", 
                     FilePath = @"C:\sample\ke-hoach-thi-hk1.pdf", 
-                    FileSize = 1024 * 1024 // Kích thước 1MB
+                    FileSize = 1024 * 1024 
                 });
                 
                 attachments.Add(new ucTBChiTiet.AttachmentInfo 
                 { 
                     FileName = "lich-thi-chi-tiet.xlsx", 
                     FilePath = @"C:\sample\lich-thi-chi-tiet.xlsx", 
-                    FileSize = 512 * 1024 // Kích thước 512KB
+                    FileSize = 512 * 1024 
                 });
             }
-            
+
             return attachments;
         }
 
@@ -350,4 +350,5 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
     }
+
 }
