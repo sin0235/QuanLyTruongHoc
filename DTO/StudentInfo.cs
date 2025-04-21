@@ -32,13 +32,7 @@ public class StudentInfo
     public string MotherName { get; set; }       // Họ tên mẹ
     public string MotherPhone { get; set; }      // Điện thoại mẹ
     public string ParentName { get; set; }       // Họ tên phụ huynh (người đại diện)
-    public string ParentPhone { get; set; }      // Số điện thoại phụ huynh
-    public string ParentEmail { get; set; }      // Email phụ huynh
 
-    // Thông tin người liên hệ khẩn cấp
-    public string EmergencyName { get; set; }     // Họ tên người liên hệ khẩn cấp
-    public string EmergencyRelation { get; set; } // Mối quan hệ với người liên hệ
-    public string EmergencyPhone { get; set; }    // Số điện thoại người liên hệ
 
     public Image Avatar { get; set; }            // Ảnh đại diện
 }

@@ -310,7 +310,7 @@ namespace QuanLyTruongHoc
             this.txtUserName.Size = new System.Drawing.Size(374, 52);
             this.txtUserName.TabIndex = 1;
             this.txtUserName.TextOffset = new System.Drawing.Point(14, 0);
-            this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
+            //this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
             // 
             // lblLogin
             // 

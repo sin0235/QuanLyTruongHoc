@@ -59,27 +59,18 @@ namespace QuanLyTruongHoc.Properties {
                 resourceCulture = value;
             }
         }
-        
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Anh dai dien mac dinhB
         /// </summary>
-        internal static System.Drawing.Bitmap defautAavatar {
-            get {
-                object obj = ResourceManager.GetObject("defautAavatar", resourceCulture);
+        internal static System.Drawing.Bitmap defautAvatar
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("defautAvatar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap defautImage {
-            get {
-                object obj = ResourceManager.GetObject("defautImage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -109,7 +100,8 @@ namespace QuanLyTruongHoc.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>

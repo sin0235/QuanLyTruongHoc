@@ -18,123 +18,123 @@ namespace QuanLyTruongHoc
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
-{
-    string username = txtUserName.Text.Trim();
-    string password = txtPW.Text.Trim();
+        {
+            string username = txtUserName.Text.Trim();
+            string password = txtPW.Text.Trim();
 
-    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-    {
-        lblError.Text = "Username và Password không được để trống.";
-        lblError.Visible = true;
-        return;
-    }
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                lblError.Text = "Username và Password không được để trống.";
+                lblError.Visible = true;
+                return;
+            }
 
-    try
-    {
-        string query = $@"
+            try
+            {
+                string query = $@"
             SELECT NguoiDung.MaNguoiDung, NguoiDung.MaVaiTro, VaiTro.TenVaiTro
             FROM NguoiDung
             INNER JOIN VaiTro ON NguoiDung.MaVaiTro = VaiTro.MaVaiTro
             WHERE NguoiDung.TenDangNhap = '{username}' AND NguoiDung.MatKhau = '{password}'";
 
-        DataTable dt = db.ExecuteQuery(query);
+                DataTable dt = db.ExecuteQuery(query);
 
-        if (dt.Rows.Count > 0)
-        {
-            int maNguoiDung = Convert.ToInt32(dt.Rows[0]["MaNguoiDung"]);
-            int maVaiTro = Convert.ToInt32(dt.Rows[0]["MaVaiTro"]);
-            string tenVaiTro = dt.Rows[0]["TenVaiTro"].ToString();
-
-            // Tạo hiệu ứng mờ dần cho form hiện tại
-            System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer
-            {
-                Interval = 10
-            };
-            double opacity = 1.0;
-
-            fadeTimer.Tick += (s, args) =>
-            {
-                opacity -= 0.05;
-                if (opacity <= 0)
+                if (dt.Rows.Count > 0)
                 {
-                    fadeTimer.Stop();
-                    this.Hide();
+                    int maNguoiDung = Convert.ToInt32(dt.Rows[0]["MaNguoiDung"]);
+                    int maVaiTro = Convert.ToInt32(dt.Rows[0]["MaVaiTro"]);
+                    string tenVaiTro = dt.Rows[0]["TenVaiTro"].ToString();
 
-                    var newForm = OpenFormByRole(maVaiTro, tenVaiTro, maNguoiDung);
-
-                    // Hiệu ứng hiện dần form mới
-                    System.Windows.Forms.Timer fadeInTimer = new System.Windows.Forms.Timer
+                    // Tạo hiệu ứng mờ dần cho form hiện tại
+                    System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer
                     {
                         Interval = 10
                     };
-                    double newOpacity = 0;
+                    double opacity = 1.0;
 
-                    fadeInTimer.Tick += (s2, args2) =>
+                    fadeTimer.Tick += (s, args) =>
                     {
-                        newOpacity += 0.05;
-                        newForm.Opacity = newOpacity;
-                        if (newOpacity >= 1)
+                        opacity -= 0.05;
+                        if (opacity <= 0)
                         {
-                            fadeInTimer.Stop();
+                            fadeTimer.Stop();
+                            this.Hide();
+
+                            var newForm = OpenFormByRole(maVaiTro, tenVaiTro, maNguoiDung);
+
+                            // Hiệu ứng hiện dần form mới
+                            System.Windows.Forms.Timer fadeInTimer = new System.Windows.Forms.Timer
+                            {
+                                Interval = 10
+                            };
+                            double newOpacity = 0;
+
+                            fadeInTimer.Tick += (s2, args2) =>
+                            {
+                                newOpacity += 0.05;
+                                newForm.Opacity = newOpacity;
+                                if (newOpacity >= 1)
+                                {
+                                    fadeInTimer.Stop();
+                                }
+                            };
+
+                            fadeInTimer.Start();
+                        }
+                        else
+                        {
+                            this.Opacity = opacity;
                         }
                     };
 
-                    fadeInTimer.Start();
+                    fadeTimer.Start();
                 }
                 else
                 {
-                    this.Opacity = opacity;
+                    lblError.Text = "Username hoặc Password không đúng.";
+                    lblError.Visible = true;
                 }
-            };
-
-            fadeTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        else
+
+        private Form OpenFormByRole(int maVaiTro, string tenVaiTro, int maNguoiDung)
         {
-            lblError.Text = "Username hoặc Password không đúng.";
-            lblError.Visible = true;
-        }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
+            Form nextForm = null;
 
-private Form OpenFormByRole(int maVaiTro, string tenVaiTro, int maNguoiDung)
-{
-    Form nextForm = null;
-
-    switch (maVaiTro)
-    {
-        case 1: // Ban giám hiệu
-            nextForm = new frmBGH();
-            ((frmBGH)nextForm).lblUserName.Text = "Ban giám hiệu";
-            break;
-        case 2: // Giáo viên
-            nextForm = new frmGV(maNguoiDung); // Truyền MaNguoiDung sang frmGV
-            LoggedInTeacherId = maNguoiDung; // Lưu mã giáo viên đã đăng nhập
+            switch (maVaiTro)
+            {
+                case 1: // Ban giám hiệu
+                    nextForm = new frmBGH();
+                    ((frmBGH)nextForm).lblUserName.Text = "Ban giám hiệu";
                     break;
-        case 3: // Học sinh
-            nextForm = new frmHS();
-            break;
-        case 4: // Nhân viên phòng nội vụ
-            nextForm = new frmNoiVu();
-            break;
-        default:
-            MessageBox.Show($"Vai trò '{tenVaiTro}' chưa được hỗ trợ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Show();
-            return null;
-    }
+                case 2: // Giáo viên
+                    nextForm = new frmGV(maNguoiDung); // Truyền MaNguoiDung sang frmGV
+                    LoggedInTeacherId = maNguoiDung; // Lưu mã giáo viên đã đăng nhập
+                    break;
+                case 3: // Học sinh
+                    nextForm = new frmHS();
+                    break;
+                case 4: // Nhân viên phòng nội vụ
+                    nextForm = new frmNoiVu();
+                    break;
+                default:
+                    MessageBox.Show($"Vai trò '{tenVaiTro}' chưa được hỗ trợ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Show();
+                    return null;
+            }
 
-    if (nextForm != null)
-    {
-        nextForm.Opacity = 0;
-        nextForm.Show();
-    }
+            if (nextForm != null)
+            {
+                nextForm.Opacity = 0;
+                nextForm.Show();
+            }
 
-    return nextForm;
-}
+            return nextForm;
+        }
 
 
         // Các phương thức khác giữ nguyên
@@ -143,9 +143,12 @@ private Form OpenFormByRole(int maVaiTro, string tenVaiTro, int maNguoiDung)
             txtPW.UseSystemPasswordChar = !chkShowPw.Checked;
         }
 
-        private void guna2CircleButtonCloseLogin_Click(object sender, EventArgs e)
+        private void txtUserName_TextChanged(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (lblError.Visible)
+            {
+                lblError.Visible = false;
+            }
         }
 
         private void txtPW_TextChanged(object sender, EventArgs e)

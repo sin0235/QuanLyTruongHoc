@@ -54,14 +54,14 @@
             this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
-            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -97,7 +97,7 @@
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(192, 30);
+            this.lblFormTitle.Size = new System.Drawing.Size(153, 23);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Trường Học";
             // 
@@ -466,7 +466,7 @@
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
+            this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -504,6 +504,28 @@
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
             // 
+            // ucInfoHS1
+            // 
+            this.ucInfoHS1.AutoScroll = true;
+            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
+            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
+            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.ucInfoHS1.Name = "ucInfoHS1";
+            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
+            this.ucInfoHS1.TabIndex = 1;
+            // 
+            // ucThongBao1
+            // 
+            this.ucThongBao1.BackColor = System.Drawing.Color.White;
+            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
+            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBao1.Name = "ucThongBao1";
+            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
+            this.ucThongBao1.TabIndex = 0;
+            // 
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.Color.White;
@@ -527,7 +549,7 @@
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
+            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Thông báo";
             // 
@@ -539,7 +561,7 @@
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblUserName.Location = new System.Drawing.Point(1486, 28);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(135, 30);
+            this.lblUserName.Size = new System.Drawing.Size(106, 23);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -560,27 +582,6 @@
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
-            // ucThongBao1
-            // 
-            this.ucThongBao1.BackColor = System.Drawing.Color.White;
-            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
-            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
-            this.ucThongBao1.Name = "ucThongBao1";
-            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
-            this.ucThongBao1.TabIndex = 0;
-            // 
-            // ucInfoHS1
-            // 
-            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
-            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
-            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.ucInfoHS1.Name = "ucInfoHS1";
-            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
-            this.ucInfoHS1.TabIndex = 1;
-            // 
             // frmHS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -596,7 +597,6 @@
             this.Name = "frmHS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trường Học";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlTitleBar.ResumeLayout(false);
             this.pnlTitleBar.PerformLayout();
             this.pnlLeft.ResumeLayout(false);

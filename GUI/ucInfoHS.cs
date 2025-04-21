@@ -24,18 +24,13 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             InitializeComponent();
 
-            // Đăng ký sự kiện cho các nút
-            btnEdit.Click += btnEdit_Click;
-            btnSave.Click += btnSave_Click;
-            btnCancel.Click += btnCancel_Click;
-            lblChangeAvatar.Click += lblChangeAvatar_Click;
+
 
         }
 
         private void ucInfoHS_Load(object sender, EventArgs e)
         {
-            // Mặc định load dữ liệu mẫu khi control được khởi tạo
-            // Trong thực tế, dữ liệu sẽ được lấy từ database
+
             LoadSampleData();
         }
 
@@ -63,22 +58,23 @@ namespace QuanLyTruongHoc.GUI.Controls
             lblEthnicity.Text = $"Dân tộc: {student.Ethnicity}";
             lblReligion.Text = $"Tôn giáo: {student.Religion}";
 
-            // Hiển thị thông tin liên hệ (có thể chỉnh sửa)
+            // Hiển thị thông tin liên hệ (có thể chỉnh sửa)B
             txtAddress.Text = student.Address;
             txtPhone.Text = student.Phone;
             txtEmail.Text = student.Email;
 
 
             // Hiển thị thông tin người liên hệ khẩn cấp
-            txtHoTenCha.Text = student.EmergencyName ?? "";
-            txtSoDienThoaiCha.Text = student.EmergencyRelation ?? "";
-            txtHoTenMe.Text = student.EmergencyPhone ?? "";
+            txtHoTenCha.Text = student.FatherName ?? "";
+            txtSoDienThoaiCha.Text = student.FatherPhone ?? "";
+            txtHoTenMe.Text = student.MotherName ?? "";
+            txtSDTMe.Text = student.MotherPhone ?? "";
 
             // Hiển thị ảnh đại diện nếu có
             if (student.Avatar != null)
                 picAvatar.Image = student.Avatar;
-            //else
-            //    picAvatar.Image = Properties.Resources.defaultAvatar; // Cần thêm ảnh mặc định vào Resources
+            else
+                picAvatar.Image = Properties.Resources.defautAvatar; // Cần thêm ảnh mặc định vào Resources
         }
 
         /// <summary>
@@ -96,9 +92,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Address = "123 Đường Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM",
                 Phone = "0987654321",
                 Email = "nguyenvana@example.com",
-                ParentName = "Nguyễn Văn B",
-                ParentPhone = "0912345678",
-                Avatar = null // Sử dụng ảnh mặc định
+
             };
 
             LoadStudentInfo(student);
@@ -109,13 +103,17 @@ namespace QuanLyTruongHoc.GUI.Controls
         /// </summary>
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            pnlEdit.Controls.Add(btnSave);
+            pnlEdit.Controls.Add(btnCancel);
             // Cho phép chỉnh sửa các trường thông tin liên hệ
             txtAddress.Enabled = true;
             txtPhone.Enabled = true;
             txtEmail.Enabled = true;
+            txtSoDienThoaiCha.Enabled = true;
+            txtSDTMe.Enabled = true;
 
             // Hiển thị nút lưu và hủy
-            btnEdit.Visible = false;
+            this.pnlEdit.Controls.Remove(btnEdit);
             btnSave.Visible = true;
             btnCancel.Visible = true;
         }
@@ -141,7 +139,8 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Phát sinh sự kiện thông tin học sinh đã được cập nhật
             StudentInfoUpdated?.Invoke(this, _currentStudent);
 
-            // Trở về trạng thái chỉ đọc
+
+
             ExitEditMode();
         }
 
@@ -154,8 +153,8 @@ namespace QuanLyTruongHoc.GUI.Controls
             txtAddress.Text = _currentStudent.Address;
             txtPhone.Text = _currentStudent.Phone;
             txtEmail.Text = _currentStudent.Email;
-
-            // Trở về trạng thái chỉ đọc
+            txtSDTMe.Text = _currentStudent.MotherPhone;
+            txtSoDienThoaiCha.Text = _currentStudent.FatherPhone;
             ExitEditMode();
         }
 
@@ -168,11 +167,14 @@ namespace QuanLyTruongHoc.GUI.Controls
             txtAddress.Enabled = false;
             txtPhone.Enabled = false;
             txtEmail.Enabled = false;
+            txtSoDienThoaiCha.Enabled = false;
+            txtSDTMe.Enabled = false;
 
-            // Hiển thị lại nút chỉnh sửa
-            btnSave.Visible = false;
-            btnCancel.Visible = false;
-            btnEdit.Visible = true;
+            // Ẩn nút lưu và hủy
+
+            pnlEdit.Controls.Remove(btnSave);
+            pnlEdit.Controls.Remove(btnCancel);
+            pnlEdit.Controls.Add(btnEdit);
         }
 
         /// <summary>
@@ -251,10 +253,5 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        private void btnEdit_Click_1(object sender, EventArgs e)
-        {
-            pnlEdit.Controls.Add(btnSave);
-            pnlEdit.Controls.Add(btnCancel);
-        }
     }
 }
