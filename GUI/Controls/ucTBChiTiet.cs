@@ -84,9 +84,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 picAvatar.Image = senderAvatar;
             }
+            else
+            {
+                senderAvatar =  Properties.Resources.defautAvatar;
+            }
 
-            // Tải các tệp đính kèm nếu có
-            LoadAttachments(attachmentList);
+                // Tải các tệp đính kèm nếu có
+                LoadAttachments(attachmentList);
         }
 
         private void LoadAttachments(List<AttachmentInfo> attachmentList)

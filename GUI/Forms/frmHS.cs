@@ -106,7 +106,7 @@ namespace QuanLyTruongHoc
         // Các sự kiện điều khiển nút
         private void guna2CircleButtonClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
 
         private void guna2CircleButtonMinimize_Click(object sender, EventArgs e)

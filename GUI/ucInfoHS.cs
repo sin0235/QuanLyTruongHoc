@@ -73,8 +73,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Hiển thị ảnh đại diện nếu có
             if (student.Avatar != null)
                 picAvatar.Image = student.Avatar;
-            else
-                picAvatar.Image = Properties.Resources.defautAvatar; // Cần thêm ảnh mặc định vào Resources
+            
+
+            picAvatar.Image = student.Avatar ?? Properties.Resources.defautAvatar;
         }
 
         /// <summary>
@@ -116,7 +117,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlEdit.Controls.Remove(btnEdit);
             btnSave.Visible = true;
             btnCancel.Visible = true;
+            btnSave.Click += btnSave_Click;
+            btnCancel.Click += btnCancel_Click;
         }
+
+
 
         /// <summary>
         /// Xử lý sự kiện khi nhấn nút lưu
@@ -131,6 +136,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             _currentStudent.Address = txtAddress.Text.Trim();
             _currentStudent.Phone = txtPhone.Text.Trim();
             _currentStudent.Email = txtEmail.Text.Trim();
+            _currentStudent.MotherPhone = txtSDTMe.Text.Trim();
+            _currentStudent.FatherPhone = txtSoDienThoaiCha.Text.Trim();
+
 
             // Thông báo đã cập nhật thành công
             MessageBox.Show("Cập nhật thông tin liên hệ thành công!", "Thông báo",
@@ -225,7 +233,8 @@ namespace QuanLyTruongHoc.GUI.Controls
         /// <summary>
         /// Xử lý sự kiện khi nhấn đổi ảnh đại diện
         /// </summary>
-        private void lblChangeAvatar_Click(object sender, EventArgs e)
+
+        private void lblChangeAvatar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -253,5 +262,19 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
+        private void txtSDTMe_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlInfo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlContact_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

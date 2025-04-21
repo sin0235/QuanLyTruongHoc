@@ -72,8 +72,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             else
             {
-                // Ảnh đại diện mặc định
-                //picAvatar.Image = Properties.Resources.default_avatar;
+                picAvatar.Image = Properties.Resources.defautAvatar;
             }
 
             // Khởi tạo tiêu đề thông báo
