@@ -28,20 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.lamMoiTBBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.tbChungPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.tbChungPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(255, 44);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "THÔNG BÁO";
             // 
             // lamMoiTBBtn
             // 
@@ -53,39 +42,42 @@
             this.lamMoiTBBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
             this.lamMoiTBBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lamMoiTBBtn.ForeColor = System.Drawing.Color.White;
-            this.lamMoiTBBtn.Location = new System.Drawing.Point(1768, 18);
+            this.lamMoiTBBtn.Location = new System.Drawing.Point(1326, 15);
+            this.lamMoiTBBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lamMoiTBBtn.Name = "lamMoiTBBtn";
-            this.lamMoiTBBtn.Size = new System.Drawing.Size(180, 45);
+            this.lamMoiTBBtn.Size = new System.Drawing.Size(135, 37);
             this.lamMoiTBBtn.TabIndex = 5;
             this.lamMoiTBBtn.Text = "Làm mới";
             this.lamMoiTBBtn.Click += new System.EventHandler(this.lamMoiTBBtn_Click);
             // 
             // tbChungPanel
             // 
-            this.tbChungPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.tbChungPanel.Location = new System.Drawing.Point(27, 89);
+            this.tbChungPanel.AutoScroll = true;
+            this.tbChungPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
+            this.tbChungPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.tbChungPanel.Location = new System.Drawing.Point(22, 62);
             this.tbChungPanel.Name = "tbChungPanel";
-            this.tbChungPanel.Size = new System.Drawing.Size(1934, 952);
+            this.tbChungPanel.Size = new System.Drawing.Size(1439, 774);
             this.tbChungPanel.TabIndex = 6;
+            this.tbChungPanel.WrapContents = false;
             // 
             // ucThongBaoGiaoVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.Controls.Add(this.tbChungPanel);
             this.Controls.Add(this.lamMoiTBBtn);
-            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ucThongBaoGiaoVien";
-            this.Size = new System.Drawing.Size(1985, 1060);
+            this.Size = new System.Drawing.Size(1489, 861);
             this.Load += new System.EventHandler(this.ucThongBaoGiaoVien_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Button lamMoiTBBtn;
-        private Guna.UI2.WinForms.Guna2Panel tbChungPanel;
+        private System.Windows.Forms.FlowLayoutPanel tbChungPanel;
     }
 }

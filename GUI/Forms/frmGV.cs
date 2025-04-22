@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using QuanLyTruongHoc.DAL;
@@ -47,11 +48,11 @@ namespace QuanLyTruongHoc
             // Update button positions when the form is initialized
             UpdateButtonPositions();
 
+            OpenUcThongBaoGiaoVien();
+
             // Register Resize event
             this.Resize += new EventHandler(Form1_Resize);
 
-            // Open ucThongBaoGiaoVien when the form is initialized
-            OpenUcThongBaoGiaoVien();
         }
 
         private void LoadUserName(int maNguoiDung)
@@ -83,31 +84,35 @@ namespace QuanLyTruongHoc
                 MessageBox.Show($"Error loading user name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        // Hàm mở ucThongBaoGiaoVien
         private void OpenUcThongBaoGiaoVien()
         {
-            // Create an instance of ucThongBaoGiaoVien with the required parameter
+            // Kiểm tra nếu ucThongBaoGiaoVien đã tồn tại trong pnlContent
+            var existingControl = pnlMainScreen.Controls.OfType<ucThongBaoGiaoVien>().FirstOrDefault();
+            if (existingControl != null)
+            {
+                // Nếu đã tồn tại, chỉ cần hiển thị lại
+                existingControl.BringToFront();
+                return;
+            }
+
+            // Tạo một instance mới của ucThongBaoGiaoVien nếu chưa tồn tại
             var ucThongBaoGiaoVien = new ucThongBaoGiaoVien(maNguoiDung) // Pass maNguoiDung as maNguoiNhan
             {
                 Dock = DockStyle.Fill // Set Dock to fill the panel
             };
 
             // Clear old controls in pnlContent (if any)
-            pnlContent.Controls.Clear();
+            pnlMainScreen.Controls.Clear();
 
             // Add ucThongBaoGiaoVien to pnlContent
-            pnlContent.Controls.Add(ucThongBaoGiaoVien);
+            pnlMainScreen.Controls.Add(ucThongBaoGiaoVien);
         }
-
-
 
         private void thongBaoBtn_Click(object sender, EventArgs e)
         {
-            // Logic to handle the "Thông Báo" button click
             OpenUcThongBaoGiaoVien();
         }
+
 
         // Hàm cập nhật vị trí nút
         private void UpdateButtonPositions()
@@ -220,5 +225,11 @@ namespace QuanLyTruongHoc
         {
             isDragging = false;
         }
+
+        private void ucThongBaoGiaoVien1_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
