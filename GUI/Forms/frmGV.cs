@@ -1,59 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.GUI.Controls;
 
 namespace QuanLyTruongHoc
 {
     public partial class frmGV : Form
     {
-        // Lưu trữ màu gốc của các nút
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
 
-        private int maNguoiDung; // Biến lưu trữ mã người dùng
+        private int maNguoiDung; // Lưu mã người dùng
+        private string hoTen; // Lưu họ tên giáo viên
+        private readonly DatabaseHelper db; // Đối tượng truy cập cơ sở dữ liệu
 
         public frmGV(int maNguoiDung)
         {
             InitializeComponent();
-            this.maNguoiDung = maNguoiDung; // Lưu mã người dùng
-            LoadUserName(); // Gọi phương thức để tải tên giáo viên
-        }
 
-        public frmGV()
-        {
-            InitializeComponent();
+            this.maNguoiDung = maNguoiDung;
+            db = new DatabaseHelper();
 
+            // Load and display the teacher's name
+            LoadUserName(maNguoiDung);
 
-            // Đảm bảo các nút nằm trong Guna2Panel
+            // Ensure buttons are within the Guna2Panel
             guna2CircleButtonClose.Parent = pnlTitleBar;
             guna2CircleButtonMinimize.Parent = pnlTitleBar;
             guna2CircleButtonMaximize.Parent = pnlTitleBar;
 
-            // Gán màu ban đầu cho các nút
+            // Assign initial colors to buttons
             guna2CircleButtonClose.FillColor = closeButtonColor;
             guna2CircleButtonMinimize.FillColor = minimizeButtonColor;
             guna2CircleButtonMaximize.FillColor = maximizeButtonColor;
 
-            // Đảm bảo các nút hiển thị
+            // Ensure buttons are visible
             guna2CircleButtonClose.Visible = true;
             guna2CircleButtonMinimize.Visible = true;
             guna2CircleButtonMaximize.Visible = true;
 
-            // Cập nhật vị trí nút ngay khi Form khởi tạo
+            // Update button positions when the form is initialized
             UpdateButtonPositions();
 
-            // Đăng ký sự kiện Resize
-            this.Resize += new EventHandler(Form2_Resize);
-            LoadUserName();
+            // Register Resize event
+            this.Resize += new EventHandler(Form1_Resize);
+
+            // Open ucThongBaoGiaoVien when the form is initialized
+            OpenUcThongBaoGiaoVien();
+        }
+
+        private void LoadUserName(int maNguoiDung)
+        {
+            try
+            {
+                // Query to get the user's name
+                string query = $@"
+            SELECT GiaoVien.HoTen
+            FROM GiaoVien
+            WHERE GiaoVien.MaNguoiDung = {maNguoiDung}"; // Directly inject maNguoiDung
+
+                // Execute the query using DatabaseHelper
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    // Retrieve and display the user's name
+                    hoTen = dt.Rows[0]["HoTen"].ToString();
+                    lblUserName.Text = $"{hoTen}";
+                }
+                else
+                {
+                    lblUserName.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading user name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        // Hàm mở ucThongBaoGiaoVien
+        private void OpenUcThongBaoGiaoVien()
+        {
+            // Create an instance of ucThongBaoGiaoVien with the required parameter
+            var ucThongBaoGiaoVien = new ucThongBaoGiaoVien(maNguoiDung) // Pass maNguoiDung as maNguoiNhan
+            {
+                Dock = DockStyle.Fill // Set Dock to fill the panel
+            };
+
+            // Clear old controls in pnlContent (if any)
+            pnlContent.Controls.Clear();
+
+            // Add ucThongBaoGiaoVien to pnlContent
+            pnlContent.Controls.Add(ucThongBaoGiaoVien);
+        }
+
+
+
+        private void thongBaoBtn_Click(object sender, EventArgs e)
+        {
+            // Logic to handle the "Thông Báo" button click
+            OpenUcThongBaoGiaoVien();
         }
 
         // Hàm cập nhật vị trí nút
@@ -65,7 +118,7 @@ namespace QuanLyTruongHoc
         }
 
         // Sự kiện Resize
-        private void Form2_Resize(object sender, EventArgs e)
+        private void Form1_Resize(object sender, EventArgs e)
         {
             UpdateButtonPositions();
         }
@@ -157,98 +210,15 @@ namespace QuanLyTruongHoc
             }
         }
 
+        private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
+        {
+            // Optional: Add custom painting logic here if needed
+            // For now, this method can remain empty if no custom painting is required
+        }
+
         private void guna2PanelTitleBar_MouseUp(object sender, EventArgs e)
         {
             isDragging = false;
         }
-
-        private void btnViewTimetable_Click(object sender, EventArgs e)
-        {
-            // Đặt trạng thái cho nút "Thời khóa biểu"
-            SetActiveButton(btnViewTimetable);
-
-            // Xóa các control hiện tại trong pnlContent
-            pnlContent.Controls.Clear();
-
-            // Tạo một instance của ucThoiKhoaBieu
-            var timetableControl = new QuanLyTruongHoc.GUI.Controls.ucThoiKhoaBieu();
-
-            // Đặt Dock để control chiếm toàn bộ panel
-            timetableControl.Dock = DockStyle.Fill;
-
-            // Thêm ucThoiKhoaBieu vào pnlContent
-            pnlContent.Controls.Add(timetableControl);
-        }
-
-
-
-        private void btnDashboard_Click(object sender, EventArgs e)
-        {
-            // Đặt trạng thái cho nút "Thông báo"
-            SetActiveButton(btnDashboard);
-
-            // Xóa các control hiện tại trong pnlContent
-            pnlContent.Controls.Clear();
-
-            // Tạo một instance của ucThongBaoGiaoVien
-            var notificationControl = new QuanLyTruongHoc.GUI.Controls.ucThongBaoGiaoVien();
-
-            // Đặt Dock để control chiếm toàn bộ panel
-            notificationControl.Dock = DockStyle.Fill;
-
-            // Thêm ucThongBaoGiaoVien vào pnlContent
-            pnlContent.Controls.Add(notificationControl);
-        }
-
-        private void SetActiveButton(Guna2Button activeButton)
-        {
-            // Đặt màu nền mặc định cho tất cả các nút
-            foreach (Control control in pnlMenu.Controls)
-            {
-                if (control is Guna2Button button)
-                {
-                    button.FillColor = Color.Transparent; // Màu nền mặc định
-                    button.ForeColor = Color.FromArgb(30, 55, 98); // Màu chữ mặc định
-                }
-            }
-
-            // Đặt màu nền và màu chữ cho nút được chọn
-            activeButton.FillColor = Color.FromArgb(157, 192, 239); // Màu nền khi được chọn
-            activeButton.ForeColor = Color.White; // Màu chữ khi được chọn
-        }
-        private void LoadUserName()
-        {
-            try
-            {
-                // Tạo một instance của DatabaseHelper
-                var dbHelper = new QuanLyTruongHoc.DAL.DatabaseHelper();
-
-                // Truy vấn tên giáo viên
-                string query = $@"
-                    SELECT GiaoVien.HoTen
-                    FROM GiaoVien
-                    INNER JOIN NguoiDung ON GiaoVien.MaNguoiDung = NguoiDung.MaNguoiDung
-                    WHERE NguoiDung.MaNguoiDung = {maNguoiDung}";
-
-                // Thực hiện truy vấn
-                DataTable result = dbHelper.ExecuteQuery(query);
-
-                // Kiểm tra kết quả và gán tên giáo viên vào lblUserName
-                if (result.Rows.Count > 0)
-                {
-                    lblUserName.Text = result.Rows[0]["HoTen"].ToString(); // Gán tên giáo viên
-                }
-                else
-                {
-                    lblUserName.Text = "Không tìm thấy tên giáo viên"; // Thông báo nếu không tìm thấy
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải tên giáo viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
     }
 }

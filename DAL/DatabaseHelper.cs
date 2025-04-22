@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTruongHoc.DTO;
 
 namespace QuanLyTruongHoc.DAL
 {
@@ -17,7 +18,7 @@ namespace QuanLyTruongHoc.DAL
         private DataSet ds;
 
 
-        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
+        private string strCnn = "Data Source=localhost;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=123";
 
         public SqlConnection GetConnection()
         {
@@ -81,5 +82,51 @@ namespace QuanLyTruongHoc.DAL
             }
             return result;
         }
+        //Lấy thông báo
+        public List<Notification> GetNotifications(int maNguoiNhan, int maVaiTroNhan)
+        {
+            var notifications = new List<Notification>();
+            string query = @"
+        SELECT MaTB, TieuDe, NoiDung, NgayGui
+        FROM ThongBao
+        WHERE MaNguoiNhan = @MaNguoiNhan OR MaVaiTroNhan = @MaVaiTroNhan
+        ORDER BY NgayGui DESC";
+
+            try
+            {
+                OpenConnection();
+                using (SqlCommand cmd = new SqlCommand(query, sqlConn))
+                {
+                    cmd.Parameters.AddWithValue("@MaNguoiNhan", maNguoiNhan);
+                    cmd.Parameters.AddWithValue("@MaVaiTroNhan", maVaiTroNhan);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            notifications.Add(new Notification
+                            {
+                                MaTB = reader.GetInt32(0),
+                                Title = reader.GetString(1),
+                                Content = reader.GetString(2),
+                                Date = reader.GetDateTime(3)
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lấy thông báo: " + ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return notifications;
+        }
+
+
     }
 }

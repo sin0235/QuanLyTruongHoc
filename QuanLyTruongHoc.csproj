@@ -55,8 +55,8 @@
   <ItemGroup>
     <Compile Include="BLL\ViDu.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
-    <Compile Include="DTO\GiaoVien.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
+    <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
     <Compile Include="GUI\Controls\NotificationItem.cs">
       <SubType>Component</SubType>
@@ -66,6 +66,18 @@
     </Compile>
     <Compile Include="GUI\Controls\ucGuiThu.Designer.cs">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.Designer.cs">
+      <DependentUpon>frmGV.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ucInfoHS.cs">
       <SubType>UserControl</SubType>
@@ -85,23 +97,11 @@
     <Compile Include="GUI\Controls\ucTBChiTiet.Designer.cs">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucThoiKhoaBieu.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThoiKhoaBieu.Designer.cs">
-      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Controls\ucThongBao.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\Controls\ucThongBao.Designer.cs">
       <DependentUpon>ucThongBao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmNoiVu.cs">
       <SubType>Form</SubType>
@@ -121,12 +121,6 @@
     <Compile Include="GUI\Forms\frmHS.Designer.cs">
       <DependentUpon>frmHS.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmGV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\frmGV.Designer.cs">
-      <DependentUpon>frmGV.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +138,12 @@
     <EmbeddedResource Include="GUI\Controls\ucGuiThu.resx">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmGV.resx">
+      <DependentUpon>frmGV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\ucInfoHS.resx">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,14 +153,8 @@
     <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThoiKhoaBieu.resx">
-      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
       <DependentUpon>ucThongBao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmNoiVu.resx">
       <DependentUpon>frmNoiVu.cs</DependentUpon>
@@ -170,9 +164,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmHS.resx">
       <DependentUpon>frmHS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmGV.resx">
-      <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
