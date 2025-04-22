@@ -86,27 +86,33 @@ namespace QuanLyTruongHoc
         }
         private void OpenUcThongBaoGiaoVien()
         {
-            // Kiểm tra nếu ucThongBaoGiaoVien đã tồn tại trong pnlContent
-            var existingControl = pnlMainScreen.Controls.OfType<ucThongBaoGiaoVien>().FirstOrDefault();
-            if (existingControl != null)
+            // Xóa tất cả các control trong pnlMainScreen, ngoại trừ pnlTop
+            foreach (Control control in pnlMainScreen.Controls.OfType<Control>().ToList())
             {
-                // Nếu đã tồn tại, chỉ cần hiển thị lại
-                existingControl.BringToFront();
-                return;
+                if (control != pnlTop)
+                {
+                    pnlMainScreen.Controls.Remove(control);
+                }
             }
 
-            // Tạo một instance mới của ucThongBaoGiaoVien nếu chưa tồn tại
-            var ucThongBaoGiaoVien = new ucThongBaoGiaoVien(maNguoiDung) // Pass maNguoiDung as maNguoiNhan
+            // Tạo một instance mới của ucThongBaoGiaoVien
+            var ucThongBaoGiaoVien = new ucThongBaoGiaoVien(maNguoiDung)
             {
-                Dock = DockStyle.Fill // Set Dock to fill the panel
+
+                //đặt kích thước là 1640, 1040
+                Size = new Size(1640, 1040),
+                //vị trí là 280, 120
+                Location = new Point(0, 60),
             };
 
-            // Clear old controls in pnlContent (if any)
-            pnlMainScreen.Controls.Clear();
-
-            // Add ucThongBaoGiaoVien to pnlContent
+            // Thêm ucThongBaoGiaoVien vào pnlMainScreen
             pnlMainScreen.Controls.Add(ucThongBaoGiaoVien);
+            ucThongBaoGiaoVien.BringToFront();
         }
+
+
+
+
 
         private void thongBaoBtn_Click(object sender, EventArgs e)
         {

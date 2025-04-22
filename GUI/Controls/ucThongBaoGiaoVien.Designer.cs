@@ -34,7 +34,7 @@
             // 
             // lamMoiTBBtn
             // 
-            this.lamMoiTBBtn.BorderRadius = 20;
+            this.lamMoiTBBtn.BorderRadius = 25;
             this.lamMoiTBBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.lamMoiTBBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.lamMoiTBBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -42,10 +42,10 @@
             this.lamMoiTBBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(150)))), ((int)(((byte)(250)))));
             this.lamMoiTBBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lamMoiTBBtn.ForeColor = System.Drawing.Color.White;
-            this.lamMoiTBBtn.Location = new System.Drawing.Point(1326, 15);
-            this.lamMoiTBBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lamMoiTBBtn.Location = new System.Drawing.Point(8, 20);
+            this.lamMoiTBBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lamMoiTBBtn.Name = "lamMoiTBBtn";
-            this.lamMoiTBBtn.Size = new System.Drawing.Size(135, 37);
+            this.lamMoiTBBtn.Size = new System.Drawing.Size(191, 52);
             this.lamMoiTBBtn.TabIndex = 5;
             this.lamMoiTBBtn.Text = "Làm mới";
             this.lamMoiTBBtn.Click += new System.EventHandler(this.lamMoiTBBtn_Click);
@@ -55,22 +55,22 @@
             this.tbChungPanel.AutoScroll = true;
             this.tbChungPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.tbChungPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.tbChungPanel.Location = new System.Drawing.Point(22, 62);
+            this.tbChungPanel.Location = new System.Drawing.Point(8, 87);
+            this.tbChungPanel.Margin = new System.Windows.Forms.Padding(4);
             this.tbChungPanel.Name = "tbChungPanel";
-            this.tbChungPanel.Size = new System.Drawing.Size(1439, 774);
+            this.tbChungPanel.Size = new System.Drawing.Size(1588, 698);
             this.tbChungPanel.TabIndex = 6;
             this.tbChungPanel.WrapContents = false;
             // 
             // ucThongBaoGiaoVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.Controls.Add(this.tbChungPanel);
             this.Controls.Add(this.lamMoiTBBtn);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.tbChungPanel);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucThongBaoGiaoVien";
-            this.Size = new System.Drawing.Size(1489, 861);
+            this.Size = new System.Drawing.Size(1600, 800);
             this.Load += new System.EventHandler(this.ucThongBaoGiaoVien_Load);
             this.ResumeLayout(false);
 

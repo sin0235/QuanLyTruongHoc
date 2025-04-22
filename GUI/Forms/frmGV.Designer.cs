@@ -1,4 +1,6 @@
-﻿namespace QuanLyTruongHoc
+﻿using System.Windows.Forms;
+
+namespace QuanLyTruongHoc
 {
     partial class frmGV
     {
@@ -38,9 +40,9 @@
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
+            this.lichDayBtn = new Guna.UI2.WinForms.Guna2Button();
             this.thongBaoBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.homThuBtn = new Guna.UI2.WinForms.Guna2Button();
             this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,7 +50,6 @@
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
@@ -60,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
-            this.pnlMainScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -87,7 +87,7 @@
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(153, 23);
+            this.lblFormTitle.Size = new System.Drawing.Size(192, 30);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Trường Học";
             // 
@@ -175,9 +175,9 @@
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
-            this.pnlMenu.Controls.Add(this.guna2Button3);
+            this.pnlMenu.Controls.Add(this.lichDayBtn);
             this.pnlMenu.Controls.Add(this.thongBaoBtn);
-            this.pnlMenu.Controls.Add(this.guna2Button2);
+            this.pnlMenu.Controls.Add(this.homThuBtn);
             this.pnlMenu.Controls.Add(this.btnSettings);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
@@ -188,20 +188,20 @@
             this.pnlMenu.Size = new System.Drawing.Size(280, 880);
             this.pnlMenu.TabIndex = 1;
             // 
-            // guna2Button3
+            // lichDayBtn
             // 
-            this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
-            this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(0, 142);
-            this.guna2Button3.Name = "guna2Button3";
-            this.guna2Button3.Size = new System.Drawing.Size(280, 45);
-            this.guna2Button3.TabIndex = 8;
-            this.guna2Button3.Text = "guna2Button3";
+            this.lichDayBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.lichDayBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.lichDayBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.lichDayBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.lichDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
+            this.lichDayBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lichDayBtn.ForeColor = System.Drawing.Color.White;
+            this.lichDayBtn.Location = new System.Drawing.Point(0, 142);
+            this.lichDayBtn.Name = "lichDayBtn";
+            this.lichDayBtn.Size = new System.Drawing.Size(280, 45);
+            this.lichDayBtn.TabIndex = 8;
+            this.lichDayBtn.Text = "Lịch Dạy";
             // 
             // thongBaoBtn
             // 
@@ -219,20 +219,20 @@
             this.thongBaoBtn.Text = "Thông Báo";
             this.thongBaoBtn.Click += new System.EventHandler(this.thongBaoBtn_Click);
             // 
-            // guna2Button2
+            // homThuBtn
             // 
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(0, 78);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(280, 45);
-            this.guna2Button2.TabIndex = 7;
-            this.guna2Button2.Text = "guna2Button2";
+            this.homThuBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.homThuBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.homThuBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.homThuBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.homThuBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
+            this.homThuBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homThuBtn.ForeColor = System.Drawing.Color.White;
+            this.homThuBtn.Location = new System.Drawing.Point(0, 78);
+            this.homThuBtn.Name = "homThuBtn";
+            this.homThuBtn.Size = new System.Drawing.Size(280, 45);
+            this.homThuBtn.TabIndex = 7;
+            this.homThuBtn.Text = "Hòm Thư";
             // 
             // btnSettings
             // 
@@ -280,7 +280,7 @@
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
+            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -305,24 +305,16 @@
             this.pnlTop.BackColor = System.Drawing.Color.White;
             this.pnlTop.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(251)))));
             this.pnlTop.BorderThickness = 1;
-            this.pnlTop.Controls.Add(this.guna2Panel1);
             this.pnlTop.Controls.Add(this.lblPageTitle);
             this.pnlTop.Controls.Add(this.lblUserName);
             this.pnlTop.Controls.Add(this.picUserAvatar);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.pnlTop.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
-            this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Location = new System.Drawing.Point(280, 40);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1640, 80);
+            this.pnlTop.Size = new System.Drawing.Size(1640, 79);
             this.pnlTop.TabIndex = 0;
-            // 
-            // guna2Panel1
-            // 
-            this.guna2Panel1.Location = new System.Drawing.Point(6, 86);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1630, 942);
-            this.guna2Panel1.TabIndex = 1;
             // 
             // lblPageTitle
             // 
@@ -331,7 +323,7 @@
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Thông báo";
             // 
@@ -341,9 +333,9 @@
             this.lblUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lblUserName.Location = new System.Drawing.Point(1486, 28);
+            this.lblUserName.Location = new System.Drawing.Point(1206, 28);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(106, 23);
+            this.lblUserName.Size = new System.Drawing.Size(135, 30);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -352,7 +344,7 @@
             this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
             this.picUserAvatar.ImageRotate = 0F;
-            this.picUserAvatar.Location = new System.Drawing.Point(1596, 20);
+            this.picUserAvatar.Location = new System.Drawing.Point(1316, 20);
             this.picUserAvatar.Name = "picUserAvatar";
             this.picUserAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.picUserAvatar.Size = new System.Drawing.Size(40, 40);
@@ -362,7 +354,6 @@
             // 
             // pnlMainScreen
             // 
-            this.pnlMainScreen.Controls.Add(this.pnlTop);
             this.pnlMainScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainScreen.Location = new System.Drawing.Point(280, 40);
             this.pnlMainScreen.Name = "pnlMainScreen";
@@ -375,6 +366,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMainScreen);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.pnlTitleBar);
@@ -395,7 +387,6 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
-            this.pnlMainScreen.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -418,11 +409,10 @@
         private Guna.UI2.WinForms.Guna2Button btnSettings;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Button thongBaoBtn;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button lichDayBtn;
+        private Guna.UI2.WinForms.Guna2Button homThuBtn;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlMainScreen;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlTop;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         public Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
