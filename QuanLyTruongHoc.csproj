@@ -54,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\ViDu.cs" />
-    <Compile Include="D:/My Project/QuanLyTruongHoc/New ver/GUI/Controls/\ucInfoHS.Designer.cs">
-      <Link>ucInfoHS.Designer.cs</Link>
-    </Compile>
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DTO\GiaoVien.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
@@ -209,7 +206,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="assets\images\bg.png" />
     <Content Include="assets\images\defautAvatar.PNG" />
     <Content Include="assets\images\facebook.png" />
     <Content Include="assets\images\instagram.png" />
