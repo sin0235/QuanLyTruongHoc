@@ -207,6 +207,10 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="assets\images\defautAvatar.PNG" />
+    <None Include="assets\images\defautAvatar_Boy.png" />
+    <None Include="assets\images\defautImage.PNG" />
+    <None Include="assets\images\defautAvatar_Teacher_Female.png" />
+    <None Include="assets\images\defautAvatar_Teacher_Male.png" />
     <Content Include="assets\images\facebook.png" />
     <Content Include="assets\images\instagram.png" />
     <Content Include="assets\images\twitter.png" />

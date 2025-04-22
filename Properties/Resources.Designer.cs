@@ -59,18 +59,67 @@ namespace QuanLyTruongHoc.Properties {
                 resourceCulture = value;
             }
         }
+        
         /// <summary>
-        ///   Anh dai dien mac dinhB
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap defautAvatar
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap defautAvatar {
+            get {
                 object obj = ResourceManager.GetObject("defautAvatar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defautAvatar_Boy {
+            get {
+                object obj = ResourceManager.GetObject("defautAvatar_Boy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defautAvatar_Boy1 {
+            get {
+                object obj = ResourceManager.GetObject("defautAvatar_Boy1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defautAvatar_Teacher_Female {
+            get {
+                object obj = ResourceManager.GetObject("defautAvatar_Teacher_Female", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defautAvatar_Teacher_Male {
+            get {
+                object obj = ResourceManager.GetObject("defautAvatar_Teacher_Male", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defautImage {
+            get {
+                object obj = ResourceManager.GetObject("defautImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -100,8 +149,7 @@ namespace QuanLyTruongHoc.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>

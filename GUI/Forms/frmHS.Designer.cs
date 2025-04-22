@@ -474,6 +474,7 @@
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautImage;
             this.picLogo.ImageRotate = 0F;
             this.picLogo.Location = new System.Drawing.Point(90, 15);
             this.picLogo.Name = "picLogo";
@@ -514,6 +515,7 @@
             this.ucInfoHS1.Name = "ucInfoHS1";
             this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
             this.ucInfoHS1.TabIndex = 1;
+            this.ucInfoHS1.Visible = false;
             // 
             // ucThongBao1
             // 
@@ -597,6 +599,7 @@
             this.Name = "frmHS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trường Học";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlTitleBar.ResumeLayout(false);
             this.pnlTitleBar.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
