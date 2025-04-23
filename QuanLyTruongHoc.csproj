@@ -75,20 +75,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\ViDu.cs" />
-    <Compile Include="D:/My Project/QuanLyTruongHoc/New ver/GUI/Controls/\ucInfoHS.Designer.cs">
-      <Link>ucInfoHS.Designer.cs</Link>
-    </Compile>
     <Compile Include="DAL\DatabaseHelper.cs" />
-    <Compile Include="DTO\GiaoVien.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
+    <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
+    <Compile Include="GUI\Controls\ucInfoHS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="GUI\Controls\ucKiemTra.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\Controls\ucKiemTra.Designer.cs">
       <DependentUpon>ucKiemTra.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucNotificationItem.cs">
+    <Compile Include="GUI\Controls\NotificationItem.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\Controls\ucDonXinNghiItem.cs">
@@ -145,8 +145,17 @@
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucInfoHS.cs">
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmGV.Designer.cs">
+      <DependentUpon>frmGV.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucInfoHS.Designer.cs">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
@@ -163,23 +172,11 @@
     <Compile Include="GUI\Controls\ucTBChiTiet.Designer.cs">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucThoiKhoaBieu.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThoiKhoaBieu.Designer.cs">
-      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Controls\ucThongBao.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GUI\Controls\ucThongBao.Designer.cs">
       <DependentUpon>ucThongBao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucTestItem.cs">
       <SubType>UserControl</SubType>
@@ -211,12 +208,6 @@
     <Compile Include="GUI\Forms\frmHS.Designer.cs">
       <DependentUpon>frmHS.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmGV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\frmGV.Designer.cs">
-      <DependentUpon>frmGV.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +230,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Controls\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
+      <DependentUpon>ucInfoHS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucKiemTra.resx">
       <DependentUpon>ucKiemTra.cs</DependentUpon>
@@ -271,8 +265,12 @@
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
-      <DependentUpon>ucInfoHS.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
+      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmGV.resx">
+      <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucQuanLyHeThong.resx">
       <DependentUpon>ucQuanLyHeThong.cs</DependentUpon>
@@ -280,14 +278,8 @@
     <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThoiKhoaBieu.resx">
-      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
       <DependentUpon>ucThongBao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChiTietDonXinNghi.resx">
       <DependentUpon>frmChiTietDonXinNghi.cs</DependentUpon>
@@ -303,9 +295,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmHS.resx">
       <DependentUpon>frmHS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmGV.resx">
-      <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -351,6 +340,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\images\question_icon.png" />
+    <None Include="assets\images\search.png" />
     <Content Include="logo.ico" />
     <None Include="assets\images\book.jpg" />
     <Content Include="assets\images\defautAvatar.PNG" />

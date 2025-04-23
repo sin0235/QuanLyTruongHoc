@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTruongHoc.DTO;
 
 namespace QuanLyTruongHoc.DAL
 {
@@ -15,6 +16,7 @@ namespace QuanLyTruongHoc.DAL
         private SqlConnection sqlConn;
         private SqlDataAdapter da;
         private DataSet ds;
+
 
         private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
 
@@ -573,67 +575,10 @@ namespace QuanLyTruongHoc.DAL
             }
             return result;
         }
-
-        /// <summary>
-        /// Tải về tệp nhị phân (binary) từ cơ sở dữ liệu
-        /// </summary>
-        /// <param name="sqlStr">Câu lệnh SQL SELECT để lấy dữ liệu tệp</param>
-        /// <param name="parameters">Dictionary chứa các tham số và giá trị</param>
-        /// <returns>Dữ liệu tệp dạng byte[] hoặc null nếu thất bại</returns>
-        public byte[] DownloadFile(string sqlStr, Dictionary<string, object> parameters = null)
-        {
-            byte[] fileData = null;
-            try
-            {
-                OpenConnection();
-                using (SqlCommand cmd = new SqlCommand(sqlStr, sqlConn))
-                {
-                    // Thêm các tham số
-                    if (parameters != null)
-                    {
-                        foreach (var param in parameters)
-                        {
-                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
-                        }
-                    }
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            // Lấy giá trị từ cột đầu tiên (hoặc chỉ định cột cụ thể nếu cần)
-                            if (!reader.IsDBNull(0))
-                            {
-                                fileData = (byte[])reader[0];
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải về tệp: " + ex.Message);
-            }
-            finally
-            {
-                CloseConnection();
-            }
-            return fileData;
-        }
     }
-
-    /// <summary>
-    /// Lớp lưu trữ thông tin câu lệnh SQL và tham số cho transaction
-    /// </summary>
     public class SqlCommandData
     {
         public string CommandText { get; set; }
         public Dictionary<string, object> Parameters { get; set; }
-
-        public SqlCommandData(string commandText, Dictionary<string, object> parameters = null)
-        {
-            CommandText = commandText;
-            Parameters = parameters;
-        }
     }
 }

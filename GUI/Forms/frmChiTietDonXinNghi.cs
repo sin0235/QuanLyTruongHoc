@@ -273,41 +273,41 @@ namespace QuanLyTruongHoc.GUI.Forms
         /// </summary>
         private void DownloadAttachment(int maDinhKem, string tenFile)
         {
-            try
-            {
-                // Tạo SaveFileDialog để chọn nơi lưu
-                using (SaveFileDialog saveDialog = new SaveFileDialog())
-                {
-                    saveDialog.FileName = tenFile;
-                    saveDialog.Filter = "All Files|*.*";
-                    saveDialog.Title = "Lưu tệp đính kèm";
+            //try
+            //{
+            //    // Tạo SaveFileDialog để chọn nơi lưu
+            //    using (SaveFileDialog saveDialog = new SaveFileDialog())
+            //    {
+            //        saveDialog.FileName = tenFile;
+            //        saveDialog.Filter = "All Files|*.*";
+            //        saveDialog.Title = "Lưu tệp đính kèm";
 
-                    if (saveDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        // Truy vấn lấy nội dung tệp
-                        string query = $"SELECT NoiDung FROM DinhKem WHERE MaDinhKem = {maDinhKem}";
-                        byte[] fileData = _dbHelper.DownloadFile(query);
+            //        if (saveDialog.ShowDialog() == DialogResult.OK)
+            //        {
+            //            // Truy vấn lấy nội dung tệp
+            //            string query = $"SELECT NoiDung FROM DinhKem WHERE MaDinhKem = {maDinhKem}";
+            //            byte[] fileData = _dbHelper.DownloadFile(query);
 
-                        if (fileData != null && fileData.Length > 0)
-                        {
-                            // Lưu tệp xuống ổ đĩa
-                            File.WriteAllBytes(saveDialog.FileName, fileData);
-                            MessageBox.Show("Tải xuống tệp thành công!", "Thông báo",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Không thể tải xuống tệp. Tệp không tồn tại hoặc đã bị xóa.",
-                                "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải xuống tệp: {ex.Message}",
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //            if (fileData != null && fileData.Length > 0)
+            //            {
+            //                // Lưu tệp xuống ổ đĩa
+            //                File.WriteAllBytes(saveDialog.FileName, fileData);
+            //                MessageBox.Show("Tải xuống tệp thành công!", "Thông báo",
+            //                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Không thể tải xuống tệp. Tệp không tồn tại hoặc đã bị xóa.",
+            //                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Lỗi khi tải xuống tệp: {ex.Message}",
+            //        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         /// <summary>

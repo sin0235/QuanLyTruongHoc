@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace QuanLyTruongHoc.GUI.Controls
 {
-    public class ucNotificationItem : Guna.UI2.WinForms.Guna2Panel
+    public class NotificationItem : Guna.UI2.WinForms.Guna2Panel
     {
         // Ảnh đại diện của người gửi thông báo
         private Guna.UI2.WinForms.Guna2CirclePictureBox picAvatar;
@@ -39,7 +39,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
 
         // Constructor để khởi tạo thông báo
-        public ucNotificationItem(int id, string title, string sender, DateTime date, string content, string avatarPath = null, bool read = false)
+        public NotificationItem(int id, string title, string sender, DateTime date, string content, string avatarPath = null, bool read = false)
         {
             NotificationId = id;
             isRead = read;

@@ -72,7 +72,6 @@
             this.btnSearch.Animated = true;
             this.btnSearch.BackColor = System.Drawing.Color.Transparent;
             this.btnSearch.BorderRadius = 8;
-            this.btnSearch.BorderThickness = 1;
             this.btnSearch.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSearch.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
