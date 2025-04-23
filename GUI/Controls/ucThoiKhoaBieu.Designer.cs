@@ -59,12 +59,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DgvTKB.DefaultCellStyle = dataGridViewCellStyle3;
             this.guna2DgvTKB.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DgvTKB.Location = new System.Drawing.Point(10, 50);
+            this.guna2DgvTKB.Location = new System.Drawing.Point(8, 41);
+            this.guna2DgvTKB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.guna2DgvTKB.Name = "guna2DgvTKB";
             this.guna2DgvTKB.RowHeadersVisible = false;
             this.guna2DgvTKB.RowHeadersWidth = 51;
             this.guna2DgvTKB.RowTemplate.Height = 24;
-            this.guna2DgvTKB.Size = new System.Drawing.Size(1620, 800);
+            this.guna2DgvTKB.Size = new System.Drawing.Size(1215, 650);
             this.guna2DgvTKB.TabIndex = 1;
             this.guna2DgvTKB.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.guna2DgvTKB.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -95,20 +96,21 @@
             this.cboTimetableType.Items.AddRange(new object[] {
             "Lớp mình dạy",
             "Lớp mình chủ nhiệm"});
-            this.cboTimetableType.Location = new System.Drawing.Point(10, 10);
+            this.cboTimetableType.Location = new System.Drawing.Point(8, 8);
+            this.cboTimetableType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cboTimetableType.Name = "cboTimetableType";
-            this.cboTimetableType.Size = new System.Drawing.Size(200, 24);
+            this.cboTimetableType.Size = new System.Drawing.Size(151, 21);
             this.cboTimetableType.TabIndex = 0;
             this.cboTimetableType.SelectedIndexChanged += new System.EventHandler(this.cboTimetableType_SelectedIndexChanged);
             // 
             // ucThoiKhoaBieu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Controls.Add(this.guna2DgvTKB);
             this.Controls.Add(this.cboTimetableType);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ucThoiKhoaBieu";
-            this.Size = new System.Drawing.Size(1640, 878);
+            this.Size = new System.Drawing.Size(1230, 713);
             ((System.ComponentModel.ISupportInitialize)(this.guna2DgvTKB)).EndInit();
             this.ResumeLayout(false);
 

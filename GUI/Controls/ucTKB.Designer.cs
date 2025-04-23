@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Guna.UI2.WinForms;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QuanLyTruongHoc.GUI.Controls
@@ -24,7 +25,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
         private void InitializeTimetableLayout()
         {
-            // Clear any existing controls
             tableLayoutPanel1.Controls.Clear();
 
             // Define day names
@@ -48,9 +48,20 @@ namespace QuanLyTruongHoc.GUI.Controls
                     Font = new Font("Segoe UI", 10, FontStyle.Bold),
                     BackColor = Color.Transparent,
                     TextAlignment = ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill,
                     AutoSize = false,
+                    Dock = DockStyle.Fill,
+                };
 
+                // Add a resize event to ensure the label stays centered
+                headerPanel.Resize += (sender, e) => {
+                    if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
+                    {
+                        var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
+                        if (lbl != null)
+                        {
+                            lbl.TextAlignment = ContentAlignment.MiddleCenter;
+                        }
+                    }
                 };
 
                 headerPanel.Controls.Add(dayLabel);
@@ -74,13 +85,23 @@ namespace QuanLyTruongHoc.GUI.Controls
                     {
                         Text = "Nghỉ trưa",
                         ForeColor = Color.FromArgb(80, 80, 80),
-                        Font = new Font("Segoe UI", 9, FontStyle.Italic),
+                        Font = new Font("Segoe UI ", 9, FontStyle.Italic ^ FontStyle.Bold),
                         TextAlignment = ContentAlignment.MiddleCenter,
                         BackColor = Color.Transparent,
                         Dock = DockStyle.Fill,
                         AutoSize = false
                     };
 
+                    breakPanel.Resize += (sender, e) => {
+                        if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
+                        {
+                            var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
+                            if (lbl != null)
+                            {
+                                lbl.TextAlignment = ContentAlignment.MiddleCenter;
+                            }
+                        }
+                    };
                     breakPanel.Controls.Add(breakLabel);
                     tableLayoutPanel1.Controls.Add(breakPanel, 0, row);
 
@@ -121,6 +142,18 @@ namespace QuanLyTruongHoc.GUI.Controls
                     TextAlignment = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
                     AutoSize = false
+                };
+
+                periodPanel.Resize += (sender, e) =>
+                {
+                    if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
+                    {
+                        var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
+                        if (lbl != null)
+                        {
+                            lbl.TextAlignment = ContentAlignment.MiddleCenter;
+                        }
+                    }
                 };
 
                 periodPanel.Controls.Add(periodLabel);
@@ -194,7 +227,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanHienTai.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnTuanHienTai.ForeColor = System.Drawing.Color.White;
             this.btnTuanHienTai.IndicateFocus = true;
-            this.btnTuanHienTai.Location = new System.Drawing.Point(758, 4);
+            this.btnTuanHienTai.Location = new System.Drawing.Point(1196, 1);
             this.btnTuanHienTai.Name = "btnTuanHienTai";
             this.btnTuanHienTai.Size = new System.Drawing.Size(81, 29);
             this.btnTuanHienTai.TabIndex = 9;
@@ -217,7 +250,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTruoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnTuanTruoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTruoc.IndicateFocus = true;
-            this.btnTuanTruoc.Location = new System.Drawing.Point(611, 4);
+            this.btnTuanTruoc.Location = new System.Drawing.Point(1049, 1);
             this.btnTuanTruoc.Name = "btnTuanTruoc";
             this.btnTuanTruoc.Size = new System.Drawing.Size(111, 29);
             this.btnTuanTruoc.TabIndex = 8;
@@ -240,7 +273,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTiepTheo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnTuanTiepTheo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTiepTheo.IndicateFocus = true;
-            this.btnTuanTiepTheo.Location = new System.Drawing.Point(875, 4);
+            this.btnTuanTiepTheo.Location = new System.Drawing.Point(1313, 1);
             this.btnTuanTiepTheo.Name = "btnTuanTiepTheo";
             this.btnTuanTiepTheo.Size = new System.Drawing.Size(103, 29);
             this.btnTuanTiepTheo.TabIndex = 7;
@@ -391,6 +424,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1510, 980);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // pnlNoData
             // 
@@ -444,7 +478,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlNoData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picNoData)).EndInit();
             this.ResumeLayout(false);
-            this.InitializeTimetableLayout();
 
         }
 
@@ -465,6 +498,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         private System.Windows.Forms.Label lblNoData;
         private System.Windows.Forms.PictureBox picNoData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        
 
 
     }

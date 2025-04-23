@@ -40,21 +40,21 @@ namespace QuanLyTruongHoc
             this.guna2CircleButtonCloseLogin = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnlLogin = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblForgotAcc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblError = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.chkShowPw = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.txtPW = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblLogin = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblWelcomeText = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblSystemName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblCopyright = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.txtPW = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnFacebook = new Guna.UI2.WinForms.Guna2ImageButton();
             this.btnTwitter = new Guna.UI2.WinForms.Guna2ImageButton();
             this.btnInstagram = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.lblCopyright = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.pnlMainScreen.SuspendLayout();
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -102,7 +102,7 @@ namespace QuanLyTruongHoc
             this.lblSchoolName.ForeColor = System.Drawing.Color.White;
             this.lblSchoolName.Location = new System.Drawing.Point(50, 360);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(472, 69);
+            this.lblSchoolName.Size = new System.Drawing.Size(377, 56);
             this.lblSchoolName.TabIndex = 8;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -160,24 +160,6 @@ namespace QuanLyTruongHoc
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(374, 10);
             this.guna2Separator1.TabIndex = 8;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.school;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(195, 30);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.ShadowDecoration.BorderRadius = 50;
-            this.picLogo.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(219)))));
-            this.picLogo.ShadowDecoration.Depth = 15;
-            this.picLogo.ShadowDecoration.Enabled = true;
-            this.picLogo.Size = new System.Drawing.Size(90, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 7;
-            this.picLogo.TabStop = false;
-            this.picLogo.UseTransparentBackground = true;
             // 
             // lblForgotAcc
             // 
@@ -237,7 +219,7 @@ namespace QuanLyTruongHoc
             this.chkShowPw.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(100)))), ((int)(((byte)(120)))));
             this.chkShowPw.Location = new System.Drawing.Point(51, 348);
             this.chkShowPw.Name = "chkShowPw";
-            this.chkShowPw.Size = new System.Drawing.Size(149, 27);
+            this.chkShowPw.Size = new System.Drawing.Size(123, 23);
             this.chkShowPw.TabIndex = 3;
             this.chkShowPw.Text = "Show password";
             this.chkShowPw.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
@@ -245,6 +227,74 @@ namespace QuanLyTruongHoc
             this.chkShowPw.UncheckedState.BorderThickness = 1;
             this.chkShowPw.UncheckedState.FillColor = System.Drawing.Color.White;
             this.chkShowPw.CheckedChanged += new System.EventHandler(this.chbShowPw_CheckedChanged);
+            // 
+            // lblLogin
+            // 
+            this.lblLogin.BackColor = System.Drawing.Color.Transparent;
+            this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
+            this.lblLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
+            this.lblLogin.Location = new System.Drawing.Point(190, 126);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(93, 42);
+            this.lblLogin.TabIndex = 0;
+            this.lblLogin.Text = "LOGIN";
+            // 
+            // lblWelcomeText
+            // 
+            this.lblWelcomeText.BackColor = System.Drawing.Color.Transparent;
+            this.lblWelcomeText.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblWelcomeText.ForeColor = System.Drawing.Color.White;
+            this.lblWelcomeText.Location = new System.Drawing.Point(50, 320);
+            this.lblWelcomeText.Name = "lblWelcomeText";
+            this.lblWelcomeText.Size = new System.Drawing.Size(115, 32);
+            this.lblWelcomeText.TabIndex = 9;
+            this.lblWelcomeText.Text = "Welcome to";
+            this.lblWelcomeText.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.BackColor = System.Drawing.Color.Transparent;
+            this.lblSystemName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Italic);
+            this.lblSystemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.lblSystemName.Location = new System.Drawing.Point(50, 430);
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.Size = new System.Drawing.Size(231, 27);
+            this.lblSystemName.TabIndex = 10;
+            this.lblSystemName.Text = "School Management System";
+            this.lblSystemName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
+            this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.lblCopyright.Location = new System.Drawing.Point(50, 775);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(209, 17);
+            this.lblCopyright.TabIndex = 14;
+            this.lblCopyright.Text = "© 2025 ABC School. All rights reserved.";
+            // 
+            // guna2ShadowForm1
+            // 
+            this.guna2ShadowForm1.TargetForm = this;
+            // 
+            // picLogo
+            // 
+            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.school;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Location = new System.Drawing.Point(195, 30);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.ShadowDecoration.BorderRadius = 50;
+            this.picLogo.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(219)))));
+            this.picLogo.ShadowDecoration.Depth = 15;
+            this.picLogo.ShadowDecoration.Enabled = true;
+            this.picLogo.Size = new System.Drawing.Size(90, 90);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 7;
+            this.picLogo.TabStop = false;
+            this.picLogo.UseTransparentBackground = true;
             // 
             // txtPW
             // 
@@ -310,42 +360,6 @@ namespace QuanLyTruongHoc
             this.txtUserName.Size = new System.Drawing.Size(374, 52);
             this.txtUserName.TabIndex = 1;
             this.txtUserName.TextOffset = new System.Drawing.Point(14, 0);
-            //this.txtUserName.TextChanged += new System.EventHandler(this.txtUserName_TextChanged);
-            // 
-            // lblLogin
-            // 
-            this.lblLogin.BackColor = System.Drawing.Color.Transparent;
-            this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.lblLogin.Location = new System.Drawing.Point(190, 126);
-            this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(117, 52);
-            this.lblLogin.TabIndex = 0;
-            this.lblLogin.Text = "LOGIN";
-            // 
-            // lblWelcomeText
-            // 
-            this.lblWelcomeText.BackColor = System.Drawing.Color.Transparent;
-            this.lblWelcomeText.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblWelcomeText.ForeColor = System.Drawing.Color.White;
-            this.lblWelcomeText.Location = new System.Drawing.Point(50, 320);
-            this.lblWelcomeText.Name = "lblWelcomeText";
-            this.lblWelcomeText.Size = new System.Drawing.Size(146, 39);
-            this.lblWelcomeText.TabIndex = 9;
-            this.lblWelcomeText.Text = "Welcome to";
-            this.lblWelcomeText.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.BackColor = System.Drawing.Color.Transparent;
-            this.lblSystemName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Italic);
-            this.lblSystemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.lblSystemName.Location = new System.Drawing.Point(50, 430);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(278, 33);
-            this.lblSystemName.TabIndex = 10;
-            this.lblSystemName.Text = "School Management System";
-            this.lblSystemName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnFacebook
             // 
@@ -392,29 +406,15 @@ namespace QuanLyTruongHoc
             this.btnInstagram.Size = new System.Drawing.Size(40, 40);
             this.btnInstagram.TabIndex = 13;
             // 
-            // lblCopyright
-            // 
-            this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
-            this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.lblCopyright.Location = new System.Drawing.Point(50, 775);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(262, 22);
-            this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text = "© 2025 ABC School. All rights reserved.";
-            // 
-            // guna2ShadowForm1
-            // 
-            this.guna2ShadowForm1.TargetForm = this;
-            // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 800);
             this.Controls.Add(this.pnlMainScreen);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "School Management System";

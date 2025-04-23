@@ -13,11 +13,11 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucThongBao : UserControl
     {
         // Danh sách lưu trữ tất cả các thông báo
-        private List<NotificationItem> allNotifications = new List<NotificationItem>();
+        private List<ucNotificationItem> allNotifications = new List<ucNotificationItem>();
         // Danh sách lưu trữ các thông báo chung
-        private List<NotificationItem> commonNotifications = new List<NotificationItem>();
+        private List<ucNotificationItem> commonNotifications = new List<ucNotificationItem>();
         // Danh sách lưu trữ các thông báo cá nhân
-        private List<NotificationItem> personalNotifications = new List<NotificationItem>();
+        private List<ucNotificationItem> personalNotifications = new List<ucNotificationItem>();
         // Biến đánh dấu đang hiển thị thông báo chung hay cá nhân
         private bool isShowingCommonNotifications = true;
         // Control hiển thị chi tiết thông báo
@@ -171,7 +171,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         private void CreateSampleData()
         {
             // Thông báo chung
-            commonNotifications.Add(new NotificationItem(
+            commonNotifications.Add(new ucNotificationItem(
                 1,
                 "Thông báo lịch nghỉ Tết Nguyên Đán năm 2023",
                 "Ban Giám Hiệu",
@@ -181,7 +181,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 false
             ));
 
-            commonNotifications.Add(new NotificationItem(
+            commonNotifications.Add(new ucNotificationItem(
                 2,
                 "Thông báo về kế hoạch thi học kỳ 1 năm học 2022-2023",
                 "Phòng Đào Tạo",
@@ -191,7 +191,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 true
             ));
 
-            commonNotifications.Add(new NotificationItem(
+            commonNotifications.Add(new ucNotificationItem(
                 3,
                 "Thông báo về việc tổ chức hội khỏe Phù Đổng cấp trường năm học 2022-2023",
                 "Ban Thể Dục Thể Thao",
@@ -202,7 +202,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             ));
 
             // Thông báo cá nhân
-            personalNotifications.Add(new NotificationItem(
+            personalNotifications.Add(new ucNotificationItem(
                 4,
                 "Thông báo điểm kiểm tra môn Toán",
                 "Thầy Nguyễn Văn A",
@@ -212,7 +212,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 false
             ));
 
-            personalNotifications.Add(new NotificationItem(
+            personalNotifications.Add(new ucNotificationItem(
                 5,
                 "Thông báo về việc họp phụ huynh học sinh",
                 "GVCN Nguyễn Thị B",
@@ -321,7 +321,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             flowLayoutPanel.Controls.Clear();
 
             // Xác định danh sách thông báo cần tìm kiếm (chung hoặc cá nhân)
-            List<NotificationItem> notificationsToSearch = isShowingCommonNotifications ?
+            List<ucNotificationItem> notificationsToSearch = isShowingCommonNotifications ?
                                                         commonNotifications :
                                                         personalNotifications;
 

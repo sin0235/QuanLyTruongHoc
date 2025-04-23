@@ -1,6 +1,6 @@
 ﻿namespace QuanLyTruongHoc.GUI.Controls
 {
-    partial class ucKQHT
+    partial class ucKQHT 
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,80 +28,517 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
+            this.panSemesterSelector = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnCaNam = new Guna.UI2.WinForms.Guna2Button();
+            this.btnHK2 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnHK1 = new Guna.UI2.WinForms.Guna2Button();
+            this.lblNamHoc = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.cboNamHoc = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            this.pnlMain = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlSummary = new Guna.UI2.WinForms.Guna2Panel();
+            this.cardSummary = new Guna.UI2.WinForms.Guna2ShadowPanel();
+            this.tlpSummary = new System.Windows.Forms.TableLayoutPanel();
+            this.txtTeacherComment = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblTeacherComment = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAbsentValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAbsent = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblRankValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblRank = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAwardsValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAwards = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblGPAValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblGPA = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblConductValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblConduct = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAcademicPerformanceValue = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblAcademicPerformance = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblSummaryTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.pnlSubjects = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlFilter.SuspendLayout();
+            this.panSemesterSelector.SuspendLayout();
+            this.pnlMain.SuspendLayout();
+            this.pnlSummary.SuspendLayout();
+            this.cardSummary.SuspendLayout();
+            this.tlpSummary.SuspendLayout();
             this.SuspendLayout();
             // 
-            // guna2ComboBox1
+            // pnlFilter
             // 
-            this.guna2ComboBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox1.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.guna2ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.guna2ComboBox1.ItemHeight = 30;
-            this.guna2ComboBox1.Location = new System.Drawing.Point(143, 26);
-            this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.Size = new System.Drawing.Size(140, 36);
-            this.guna2ComboBox1.TabIndex = 0;
+            this.pnlFilter.Controls.Add(this.panSemesterSelector);
+            this.pnlFilter.Controls.Add(this.lblNamHoc);
+            this.pnlFilter.Controls.Add(this.cboNamHoc);
+            this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFilter.Location = new System.Drawing.Point(0, 0);
+            this.pnlFilter.Name = "pnlFilter";
+            this.pnlFilter.ShadowDecoration.BorderRadius = 8;
+            this.pnlFilter.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
+            this.pnlFilter.ShadowDecoration.Enabled = true;
+            this.pnlFilter.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 2, 0, 6);
+            this.pnlFilter.Size = new System.Drawing.Size(1640, 40);
+            this.pnlFilter.TabIndex = 1;
+            this.pnlFilter.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFilter_Paint);
             // 
-            // guna2HtmlLabel1
+            // panSemesterSelector
             // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(34, 35);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(86, 15);
-            this.guna2HtmlLabel1.TabIndex = 1;
-            this.guna2HtmlLabel1.Text = "guna2HtmlLabel1";
+            this.panSemesterSelector.AutoSize = true;
+            this.panSemesterSelector.Controls.Add(this.btnCaNam);
+            this.panSemesterSelector.Controls.Add(this.btnHK2);
+            this.panSemesterSelector.Controls.Add(this.btnHK1);
+            this.panSemesterSelector.Location = new System.Drawing.Point(297, 5);
+            this.panSemesterSelector.Name = "panSemesterSelector";
+            this.panSemesterSelector.Size = new System.Drawing.Size(281, 35);
+            this.panSemesterSelector.TabIndex = 8;
             // 
-            // guna2HtmlLabel2
+            // btnCaNam
             // 
-            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(313, 47);
-            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(86, 15);
-            this.guna2HtmlLabel2.TabIndex = 2;
-            this.guna2HtmlLabel2.Text = "guna2HtmlLabel2";
+            this.btnCaNam.Animated = true;
+            this.btnCaNam.BorderRadius = 6;
+            this.btnCaNam.DefaultAutoSize = true;
+            this.btnCaNam.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCaNam.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCaNam.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCaNam.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCaNam.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnCaNam.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnCaNam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnCaNam.IndicateFocus = true;
+            this.btnCaNam.Location = new System.Drawing.Point(196, 1);
+            this.btnCaNam.Name = "btnCaNam";
+            this.btnCaNam.Size = new System.Drawing.Size(82, 31);
+            this.btnCaNam.TabIndex = 2;
+            this.btnCaNam.Text = "Cả năm";
             // 
-            // guna2ComboBox2
+            // btnHK2
             // 
-            this.guna2ComboBox2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2ComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.guna2ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.guna2ComboBox2.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2ComboBox2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.guna2ComboBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.guna2ComboBox2.ItemHeight = 30;
-            this.guna2ComboBox2.Location = new System.Drawing.Point(458, 26);
-            this.guna2ComboBox2.Name = "guna2ComboBox2";
-            this.guna2ComboBox2.Size = new System.Drawing.Size(140, 36);
-            this.guna2ComboBox2.TabIndex = 3;
+            this.btnHK2.Animated = true;
+            this.btnHK2.BorderRadius = 6;
+            this.btnHK2.DefaultAutoSize = true;
+            this.btnHK2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHK2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHK2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHK2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHK2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnHK2.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnHK2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.btnHK2.IndicateFocus = true;
+            this.btnHK2.Location = new System.Drawing.Point(94, 0);
+            this.btnHK2.Name = "btnHK2";
+            this.btnHK2.Size = new System.Drawing.Size(90, 31);
+            this.btnHK2.TabIndex = 1;
+            this.btnHK2.Text = "Học kỳ 2";
+            // 
+            // btnHK1
+            // 
+            this.btnHK1.Animated = true;
+            this.btnHK1.BorderRadius = 6;
+            this.btnHK1.DefaultAutoSize = true;
+            this.btnHK1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHK1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHK1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHK1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHK1.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnHK1.ForeColor = System.Drawing.Color.White;
+            this.btnHK1.IndicateFocus = true;
+            this.btnHK1.Location = new System.Drawing.Point(0, 0);
+            this.btnHK1.Name = "btnHK1";
+            this.btnHK1.Size = new System.Drawing.Size(88, 31);
+            this.btnHK1.TabIndex = 0;
+            this.btnHK1.Text = "Học kỳ 1";
+            this.btnHK1.Click += new System.EventHandler(this.btnHK1_Click);
+            // 
+            // lblNamHoc
+            // 
+            this.lblNamHoc.BackColor = System.Drawing.Color.Transparent;
+            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblNamHoc.Location = new System.Drawing.Point(21, 13);
+            this.lblNamHoc.Name = "lblNamHoc";
+            this.lblNamHoc.Size = new System.Drawing.Size(58, 19);
+            this.lblNamHoc.TabIndex = 4;
+            this.lblNamHoc.Text = "Năm học";
+            // 
+            // cboNamHoc
+            // 
+            this.cboNamHoc.BackColor = System.Drawing.Color.Transparent;
+            this.cboNamHoc.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
+            this.cboNamHoc.BorderRadius = 18;
+            this.cboNamHoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboNamHoc.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboNamHoc.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboNamHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.cboNamHoc.ItemHeight = 30;
+            this.cboNamHoc.Location = new System.Drawing.Point(91, 5);
+            this.cboNamHoc.Name = "cboNamHoc";
+            this.cboNamHoc.Size = new System.Drawing.Size(180, 36);
+            this.cboNamHoc.TabIndex = 3;
+            this.cboNamHoc.TextOffset = new System.Drawing.Point(5, 0);
+            // 
+            // guna2Separator1
+            // 
+            this.guna2Separator1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
+            this.guna2Separator1.FillThickness = 2;
+            this.guna2Separator1.Location = new System.Drawing.Point(0, 40);
+            this.guna2Separator1.Name = "guna2Separator1";
+            this.guna2Separator1.Size = new System.Drawing.Size(1640, 2);
+            this.guna2Separator1.TabIndex = 2;
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.pnlSummary);
+            this.pnlMain.Controls.Add(this.pnlSubjects);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 42);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlMain.Size = new System.Drawing.Size(1640, 918);
+            this.pnlMain.TabIndex = 3;
+            // 
+            // pnlSummary
+            // 
+            this.pnlSummary.Controls.Add(this.cardSummary);
+            this.pnlSummary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSummary.Location = new System.Drawing.Point(20, 20);
+            this.pnlSummary.Name = "pnlSummary";
+            this.pnlSummary.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
+            this.pnlSummary.Size = new System.Drawing.Size(504, 878);
+            this.pnlSummary.TabIndex = 1;
+            // 
+            // cardSummary
+            // 
+            this.cardSummary.AutoScroll = true;
+            this.cardSummary.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cardSummary.BackColor = System.Drawing.Color.Transparent;
+            this.cardSummary.Controls.Add(this.tlpSummary);
+            this.cardSummary.Controls.Add(this.lblSummaryTitle);
+            this.cardSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardSummary.FillColor = System.Drawing.Color.White;
+            this.cardSummary.Location = new System.Drawing.Point(20, 20);
+            this.cardSummary.Name = "cardSummary";
+            this.cardSummary.Radius = 10;
+            this.cardSummary.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.cardSummary.ShadowDepth = 80;
+            this.cardSummary.ShadowShift = 3;
+            this.cardSummary.Size = new System.Drawing.Size(464, 858);
+            this.cardSummary.TabIndex = 0;
+            this.cardSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.cardSummary_Paint);
+            // 
+            // tlpSummary
+            // 
+            this.tlpSummary.ColumnCount = 2;
+            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tlpSummary.Controls.Add(this.txtTeacherComment, 1, 6);
+            this.tlpSummary.Controls.Add(this.lblTeacherComment, 0, 6);
+            this.tlpSummary.Controls.Add(this.lblAbsentValue, 1, 5);
+            this.tlpSummary.Controls.Add(this.lblAbsent, 0, 5);
+            this.tlpSummary.Controls.Add(this.lblRankValue, 1, 4);
+            this.tlpSummary.Controls.Add(this.lblRank, 0, 4);
+            this.tlpSummary.Controls.Add(this.lblAwardsValue, 1, 3);
+            this.tlpSummary.Controls.Add(this.lblAwards, 0, 3);
+            this.tlpSummary.Controls.Add(this.lblGPAValue, 1, 2);
+            this.tlpSummary.Controls.Add(this.lblGPA, 0, 2);
+            this.tlpSummary.Controls.Add(this.lblConductValue, 1, 1);
+            this.tlpSummary.Controls.Add(this.lblConduct, 0, 1);
+            this.tlpSummary.Controls.Add(this.lblAcademicPerformanceValue, 1, 0);
+            this.tlpSummary.Controls.Add(this.lblAcademicPerformance, 0, 0);
+            this.tlpSummary.Location = new System.Drawing.Point(20, 60);
+            this.tlpSummary.Name = "tlpSummary";
+            this.tlpSummary.RowCount = 7;
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpSummary.Size = new System.Drawing.Size(410, 519);
+            this.tlpSummary.TabIndex = 1;
+            // 
+            // txtTeacherComment
+            // 
+            this.txtTeacherComment.BorderRadius = 8;
+            this.txtTeacherComment.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTeacherComment.DefaultText = "Học sinh có nhiều nỗ lực trong học tập. Cần cải thiện thêm về môn Toán và tiếng A" +
+    "nh.";
+            this.txtTeacherComment.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtTeacherComment.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+            this.txtTeacherComment.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
+            this.txtTeacherComment.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtTeacherComment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTeacherComment.Enabled = false;
+            this.txtTeacherComment.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
+            this.txtTeacherComment.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTeacherComment.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
+            this.txtTeacherComment.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtTeacherComment.Location = new System.Drawing.Point(146, 303);
+            this.txtTeacherComment.Multiline = true;
+            this.txtTeacherComment.Name = "txtTeacherComment";
+            this.txtTeacherComment.Padding = new System.Windows.Forms.Padding(10);
+            this.txtTeacherComment.PlaceholderText = "";
+            this.txtTeacherComment.ReadOnly = true;
+            this.txtTeacherComment.SelectedText = "";
+            this.txtTeacherComment.Size = new System.Drawing.Size(261, 213);
+            this.txtTeacherComment.TabIndex = 13;
+            // 
+            // lblTeacherComment
+            // 
+            this.lblTeacherComment.AutoSize = false;
+            this.lblTeacherComment.BackColor = System.Drawing.Color.Transparent;
+            this.lblTeacherComment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTeacherComment.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblTeacherComment.Location = new System.Drawing.Point(3, 303);
+            this.lblTeacherComment.Name = "lblTeacherComment";
+            this.lblTeacherComment.Size = new System.Drawing.Size(137, 213);
+            this.lblTeacherComment.TabIndex = 12;
+            this.lblTeacherComment.Text = "Nhận xét của giáo viên";
+            // 
+            // lblAbsentValue
+            // 
+            this.lblAbsentValue.AutoSize = false;
+            this.lblAbsentValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblAbsentValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAbsentValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAbsentValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblAbsentValue.Location = new System.Drawing.Point(146, 253);
+            this.lblAbsentValue.Name = "lblAbsentValue";
+            this.lblAbsentValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAbsentValue.TabIndex = 11;
+            this.lblAbsentValue.Text = "2 buổi (có phép)";
+            this.lblAbsentValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAbsent
+            // 
+            this.lblAbsent.AutoSize = false;
+            this.lblAbsent.BackColor = System.Drawing.Color.Transparent;
+            this.lblAbsent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAbsent.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAbsent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblAbsent.Location = new System.Drawing.Point(3, 253);
+            this.lblAbsent.Name = "lblAbsent";
+            this.lblAbsent.Size = new System.Drawing.Size(137, 44);
+            this.lblAbsent.TabIndex = 10;
+            this.lblAbsent.Text = "Số buổi nghỉ";
+            this.lblAbsent.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRankValue
+            // 
+            this.lblRankValue.AutoSize = false;
+            this.lblRankValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblRankValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRankValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRankValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
+            this.lblRankValue.Location = new System.Drawing.Point(146, 203);
+            this.lblRankValue.Name = "lblRankValue";
+            this.lblRankValue.Size = new System.Drawing.Size(261, 44);
+            this.lblRankValue.TabIndex = 9;
+            this.lblRankValue.Text = "5 / 40";
+            this.lblRankValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRank
+            // 
+            this.lblRank.AutoSize = false;
+            this.lblRank.BackColor = System.Drawing.Color.Transparent;
+            this.lblRank.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRank.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRank.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblRank.Location = new System.Drawing.Point(3, 203);
+            this.lblRank.Name = "lblRank";
+            this.lblRank.Size = new System.Drawing.Size(137, 44);
+            this.lblRank.TabIndex = 8;
+            this.lblRank.Text = "Xếp hạng lớp";
+            this.lblRank.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAwardsValue
+            // 
+            this.lblAwardsValue.AutoSize = false;
+            this.lblAwardsValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblAwardsValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAwardsValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAwardsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(180)))), ((int)(((byte)(0)))));
+            this.lblAwardsValue.Location = new System.Drawing.Point(146, 153);
+            this.lblAwardsValue.Name = "lblAwardsValue";
+            this.lblAwardsValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAwardsValue.TabIndex = 7;
+            this.lblAwardsValue.Text = "Học sinh Giỏi";
+            this.lblAwardsValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAwards
+            // 
+            this.lblAwards.AutoSize = false;
+            this.lblAwards.BackColor = System.Drawing.Color.Transparent;
+            this.lblAwards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAwards.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAwards.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblAwards.Location = new System.Drawing.Point(3, 153);
+            this.lblAwards.Name = "lblAwards";
+            this.lblAwards.Size = new System.Drawing.Size(137, 44);
+            this.lblAwards.TabIndex = 6;
+            this.lblAwards.Text = "Danh hiệu";
+            this.lblAwards.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblGPAValue
+            // 
+            this.lblGPAValue.AutoSize = false;
+            this.lblGPAValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblGPAValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGPAValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblGPAValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.lblGPAValue.Location = new System.Drawing.Point(146, 103);
+            this.lblGPAValue.Name = "lblGPAValue";
+            this.lblGPAValue.Size = new System.Drawing.Size(261, 44);
+            this.lblGPAValue.TabIndex = 5;
+            this.lblGPAValue.Text = "8.5";
+            this.lblGPAValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblGPA
+            // 
+            this.lblGPA.AutoSize = false;
+            this.lblGPA.BackColor = System.Drawing.Color.Transparent;
+            this.lblGPA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGPA.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblGPA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblGPA.Location = new System.Drawing.Point(3, 103);
+            this.lblGPA.Name = "lblGPA";
+            this.lblGPA.Size = new System.Drawing.Size(137, 44);
+            this.lblGPA.TabIndex = 4;
+            this.lblGPA.Text = "Điểm trung bình";
+            this.lblGPA.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblConductValue
+            // 
+            this.lblConductValue.AutoSize = false;
+            this.lblConductValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblConductValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConductValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblConductValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblConductValue.Location = new System.Drawing.Point(146, 53);
+            this.lblConductValue.Name = "lblConductValue";
+            this.lblConductValue.Size = new System.Drawing.Size(261, 44);
+            this.lblConductValue.TabIndex = 3;
+            this.lblConductValue.Text = "Tốt";
+            this.lblConductValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblConduct
+            // 
+            this.lblConduct.AutoSize = false;
+            this.lblConduct.BackColor = System.Drawing.Color.Transparent;
+            this.lblConduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConduct.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblConduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblConduct.Location = new System.Drawing.Point(3, 53);
+            this.lblConduct.Name = "lblConduct";
+            this.lblConduct.Size = new System.Drawing.Size(137, 44);
+            this.lblConduct.TabIndex = 2;
+            this.lblConduct.Text = "Hạnh kiểm";
+            this.lblConduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAcademicPerformanceValue
+            // 
+            this.lblAcademicPerformanceValue.AutoSize = false;
+            this.lblAcademicPerformanceValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblAcademicPerformanceValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAcademicPerformanceValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAcademicPerformanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblAcademicPerformanceValue.Location = new System.Drawing.Point(146, 3);
+            this.lblAcademicPerformanceValue.Name = "lblAcademicPerformanceValue";
+            this.lblAcademicPerformanceValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAcademicPerformanceValue.TabIndex = 1;
+            this.lblAcademicPerformanceValue.Text = "Giỏi";
+            this.lblAcademicPerformanceValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAcademicPerformance
+            // 
+            this.lblAcademicPerformance.AutoSize = false;
+            this.lblAcademicPerformance.BackColor = System.Drawing.Color.Transparent;
+            this.lblAcademicPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAcademicPerformance.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAcademicPerformance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblAcademicPerformance.Location = new System.Drawing.Point(3, 3);
+            this.lblAcademicPerformance.Name = "lblAcademicPerformance";
+            this.lblAcademicPerformance.Size = new System.Drawing.Size(137, 44);
+            this.lblAcademicPerformance.TabIndex = 0;
+            this.lblAcademicPerformance.Text = "Học lực";
+            this.lblAcademicPerformance.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSummaryTitle
+            // 
+            this.lblSummaryTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblSummaryTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblSummaryTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
+            this.lblSummaryTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblSummaryTitle.Name = "lblSummaryTitle";
+            this.lblSummaryTitle.Size = new System.Drawing.Size(129, 23);
+            this.lblSummaryTitle.TabIndex = 0;
+            this.lblSummaryTitle.Text = "Tổng kết học kỳ 1";
+            // 
+            // pnlSubjects
+            // 
+            this.pnlSubjects.AutoScroll = true;
+            this.pnlSubjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSubjects.Location = new System.Drawing.Point(20, 20);
+            this.pnlSubjects.Name = "pnlSubjects";
+            this.pnlSubjects.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
+            this.pnlSubjects.Size = new System.Drawing.Size(1600, 878);
+            this.pnlSubjects.TabIndex = 0;
             // 
             // ucKQHT
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.guna2ComboBox2);
-            this.Controls.Add(this.guna2HtmlLabel2);
-            this.Controls.Add(this.guna2HtmlLabel1);
-            this.Controls.Add(this.guna2ComboBox1);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.guna2Separator1);
+            this.Controls.Add(this.pnlFilter);
             this.Name = "ucKQHT";
-            this.Size = new System.Drawing.Size(638, 626);
+            this.Size = new System.Drawing.Size(1640, 960);
+            this.Load += new System.EventHandler(this.ucKQHT_Load);
+            this.pnlFilter.ResumeLayout(false);
+            this.pnlFilter.PerformLayout();
+            this.panSemesterSelector.ResumeLayout(false);
+            this.panSemesterSelector.PerformLayout();
+            this.pnlMain.ResumeLayout(false);
+            this.pnlSummary.ResumeLayout(false);
+            this.cardSummary.ResumeLayout(false);
+            this.cardSummary.PerformLayout();
+            this.tlpSummary.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox2;
+        private Guna.UI2.WinForms.Guna2Panel pnlFilter;
+        private Guna.UI2.WinForms.Guna2Panel panSemesterSelector;
+        private Guna.UI2.WinForms.Guna2Button btnCaNam;
+        private Guna.UI2.WinForms.Guna2Button btnHK2;
+        private Guna.UI2.WinForms.Guna2Button btnHK1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNamHoc;
+        private Guna.UI2.WinForms.Guna2ComboBox cboNamHoc;
+        private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
+        private Guna.UI2.WinForms.Guna2Panel pnlMain;
+        private Guna.UI2.WinForms.Guna2Panel pnlSummary;
+        private Guna.UI2.WinForms.Guna2Panel pnlSubjects;
+        private Guna.UI2.WinForms.Guna2ShadowPanel cardSummary;
+        private System.Windows.Forms.TableLayoutPanel tlpSummary;
+        private Guna.UI2.WinForms.Guna2TextBox txtTeacherComment;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTeacherComment;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAbsentValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAbsent;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblRankValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblRank;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAwardsValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAwards;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGPAValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblGPA;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblConductValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblConduct;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformanceValue;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformance;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblSummaryTitle;
     }
 }

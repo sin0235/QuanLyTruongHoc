@@ -81,7 +81,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 DateTime ngayGui = Convert.ToDateTime(row["NgayGui"]);
                 string nguoiGui = row["NguoiGui"].ToString();
 
-                NotificationItem notificationItem = new NotificationItem(
+                ucNotificationItem notificationItem = new ucNotificationItem(
                     maTB,
                     tieuDe,
                     nguoiGui,
@@ -185,6 +185,11 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             DataTable dataTable = dbHelper.ExecuteQuery(query);
             DisplayThongBao(dataTable);
+        }
+
+        private void guna2VScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }

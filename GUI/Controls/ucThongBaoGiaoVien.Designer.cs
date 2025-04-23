@@ -42,6 +42,7 @@
             this.pnlNoData = new Guna.UI2.WinForms.Guna2Panel();
             this.lblNoData = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2NotificationPaint1 = new Guna.UI2.WinForms.Guna2NotificationPaint(this.components);
             this.pnlHeader.SuspendLayout();
             this.pnlContent.SuspendLayout();
@@ -166,6 +167,7 @@
             this.pnlContent.Controls.Add(this.guna2VScrollBar1);
             this.pnlContent.Controls.Add(this.flowLayoutPanel);
             this.pnlContent.Controls.Add(this.pnlNoData);
+            this.pnlContent.Controls.Add(this.pnlDetails);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 82);
             this.pnlContent.Name = "pnlContent";
@@ -188,6 +190,7 @@
             this.guna2VScrollBar1.Size = new System.Drawing.Size(21, 848);
             this.guna2VScrollBar1.TabIndex = 1;
             this.guna2VScrollBar1.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(190)))), ((int)(((byte)(200)))));
+            this.guna2VScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.guna2VScrollBar1_Scroll);
             // 
             // flowLayoutPanel
             // 
@@ -240,19 +243,17 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            //
+            // 
             // pnlDetails
-            //
-            this.pnlDetails = new Guna.UI2.WinForms.Guna2Panel();
+            // 
             this.pnlDetails.Location = new System.Drawing.Point(15, 15);
             this.pnlDetails.Name = "pnlDetails";
             this.pnlDetails.Size = new System.Drawing.Size(1583, 845);
             this.pnlDetails.TabIndex = 1;
-            this.pnlContent.Controls.Add(this.pnlDetails);
-            //
+            // 
             // ucThongBaoGiaoVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pnlContent);
@@ -269,7 +270,6 @@
             this.pnlNoData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
 
         }
 

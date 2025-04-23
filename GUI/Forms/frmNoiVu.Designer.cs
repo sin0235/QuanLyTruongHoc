@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNoiVu));
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -49,7 +50,6 @@
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
-   
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -62,7 +62,6 @@
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
-            this.pnlContent.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +89,7 @@
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(192, 30);
+            this.lblFormTitle.Size = new System.Drawing.Size(153, 23);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Trường Học";
             // 
@@ -386,7 +385,7 @@
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
+            this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -404,25 +403,12 @@
             // 
             // pnlMainScreen
             // 
-            this.pnlMainScreen.Controls.Add(this.pnlContent);
             this.pnlMainScreen.Controls.Add(this.pnlTop);
             this.pnlMainScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainScreen.Location = new System.Drawing.Point(280, 40);
             this.pnlMainScreen.Name = "pnlMainScreen";
             this.pnlMainScreen.Size = new System.Drawing.Size(1640, 1040);
             this.pnlMainScreen.TabIndex = 2;
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
-
-            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(0, 80);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlContent.Size = new System.Drawing.Size(1640, 960);
-            this.pnlContent.TabIndex = 1;
-           
             // 
             // pnlTop
             // 
@@ -447,7 +433,7 @@
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
+            this.lblPageTitle.Size = new System.Drawing.Size(127, 34);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Tổng quan";
             // 
@@ -459,7 +445,7 @@
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblUserName.Location = new System.Drawing.Point(1486, 28);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(135, 30);
+            this.lblUserName.Size = new System.Drawing.Size(106, 23);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -480,7 +466,7 @@
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
-            // Form1
+            // frmNoiVu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -491,8 +477,9 @@
             this.Controls.Add(this.pnlTitleBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "frmNoiVu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Trường Học";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -504,7 +491,6 @@
             this.pnlLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlMainScreen.ResumeLayout(false);
-            this.pnlContent.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
