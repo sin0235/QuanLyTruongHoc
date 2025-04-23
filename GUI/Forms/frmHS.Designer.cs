@@ -51,27 +51,28 @@
             this.btnThongBao = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
-            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB();
+            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
+            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlSubSettings.SuspendLayout();
             this.pnlLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -471,18 +472,6 @@
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // picLogo
-            // 
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautImage;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(90, 15);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(100, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
-            // 
             // pnlMainScreen
             // 
             this.pnlMainScreen.Controls.Add(this.pnlContent);
@@ -496,6 +485,7 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
+            this.pnlContent.Controls.Add(this.ucTKB1);
             this.pnlContent.Controls.Add(this.ucInfoHS1);
             this.pnlContent.Controls.Add(this.ucThongBao1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -504,29 +494,6 @@
             this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
-            // 
-            // ucInfoHS1
-            // 
-            this.ucInfoHS1.AutoScroll = true;
-            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
-            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
-            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.ucInfoHS1.Name = "ucInfoHS1";
-            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
-            this.ucInfoHS1.TabIndex = 1;
-            this.ucInfoHS1.Visible = false;
-            // 
-            // ucThongBao1
-            // 
-            this.ucThongBao1.BackColor = System.Drawing.Color.White;
-            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
-            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
-            this.ucThongBao1.Name = "ucThongBao1";
-            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
-            this.ucThongBao1.TabIndex = 0;
             // 
             // pnlTop
             // 
@@ -567,10 +534,49 @@
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
+            // guna2Elipse2
+            // 
+            this.guna2Elipse2.BorderRadius = 18;
+            // 
+            // ucTKB1
+            // 
+            this.ucTKB1.BackColor = System.Drawing.Color.White;
+            this.ucTKB1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTKB1.Location = new System.Drawing.Point(20, 20);
+            this.ucTKB1.Margin = new System.Windows.Forms.Padding(162, 321, 162, 321);
+            this.ucTKB1.Name = "ucTKB1";
+            this.ucTKB1.Size = new System.Drawing.Size(1600, 920);
+            this.ucTKB1.TabIndex = 0;
+            this.ucTKB1.Visible = false;
+            // 
+            // ucInfoHS1
+            // 
+            this.ucInfoHS1.AutoScroll = true;
+            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
+            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
+            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.ucInfoHS1.Name = "ucInfoHS1";
+            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
+            this.ucInfoHS1.TabIndex = 1;
+            this.ucInfoHS1.Visible = false;
+            // 
+            // ucThongBao1
+            // 
+            this.ucThongBao1.BackColor = System.Drawing.Color.White;
+            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
+            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBao1.Name = "ucThongBao1";
+            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
+            this.ucThongBao1.TabIndex = 0;
+            // 
             // picUserAvatar
             // 
             this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
+            this.picUserAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Boy;
             this.picUserAvatar.ImageRotate = 0F;
             this.picUserAvatar.Location = new System.Drawing.Point(1596, 20);
             this.picUserAvatar.Name = "picUserAvatar";
@@ -580,9 +586,17 @@
             this.picUserAvatar.TabIndex = 0;
             this.picUserAvatar.TabStop = false;
             // 
-            // guna2Elipse2
+            // picLogo
             // 
-            this.guna2Elipse2.BorderRadius = 18;
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautImage;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Location = new System.Drawing.Point(90, 15);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(100, 90);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
             // 
             // frmHS
             // 
@@ -607,12 +621,12 @@
             this.pnlSubSettings.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlMainScreen.ResumeLayout(false);
             this.pnlContent.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -652,6 +666,7 @@
         private Guna.UI2.WinForms.Guna2Button btnProfile;
         private GUI.Controls.ucThongBao ucThongBao1;
         private GUI.Controls.ucInfoHS ucInfoHS1;
+        private GUI.Controls.ucTKB ucTKB1;
     }
 }
 
