@@ -113,8 +113,8 @@ namespace QuanLyTruongHoc
                     ((frmBGH)nextForm).lblUserName.Text = "Ban giám hiệu";
                     break;
                 case 2: // Giáo viên
-                    nextForm = new frmGV(maNguoiDung); // Truyền MaNguoiDung sang frmGV
-                    LoggedInTeacherId = maNguoiDung; // Lưu mã giáo viên đã đăng nhập
+                    nextForm = new frmGV(maNguoiDung); // Pass maNguoiDung to frmGV
+                    LoggedInTeacherId = maNguoiDung; // Save the logged-in teacher's ID
                     break;
                 case 3: // Học sinh
                     nextForm = new frmHS(maNguoiDung);
