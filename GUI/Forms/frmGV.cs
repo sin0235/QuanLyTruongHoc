@@ -48,7 +48,6 @@ namespace QuanLyTruongHoc
             // Update button positions when the form is initialized
             UpdateButtonPositions();
 
-            OpenUcThongBaoGiaoVien();
 
             // Register Resize event
             this.Resize += new EventHandler(Form1_Resize);
@@ -84,39 +83,10 @@ namespace QuanLyTruongHoc
                 MessageBox.Show($"Error loading user name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void OpenUcThongBaoGiaoVien()
-        {
-            // Xóa tất cả các control trong pnlMainScreen, ngoại trừ pnlTop
-            foreach (Control control in pnlMainScreen.Controls.OfType<Control>().ToList())
-            {
-                if (control != pnlTop)
-                {
-                    pnlMainScreen.Controls.Remove(control);
-                }
-            }
-
-            // Tạo một instance mới của ucThongBaoGiaoVien
-            var ucThongBaoGiaoVien = new ucThongBaoGiaoVien(maNguoiDung)
-            {
-
-                //đặt kích thước là 1640, 1040
-                Size = new Size(1640, 1040),
-                //vị trí là 280, 120
-                Location = new Point(0, 60),
-            };
-
-            // Thêm ucThongBaoGiaoVien vào pnlMainScreen
-            pnlMainScreen.Controls.Add(ucThongBaoGiaoVien);
-            ucThongBaoGiaoVien.BringToFront();
-        }
-
-
-
-
 
         private void thongBaoBtn_Click(object sender, EventArgs e)
         {
-            OpenUcThongBaoGiaoVien();
+
         }
 
 
@@ -237,5 +207,9 @@ namespace QuanLyTruongHoc
 
         }
 
+        private void pnlContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

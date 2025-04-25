@@ -80,6 +80,42 @@
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.Designer.cs">
+      <DependentUpon>ucQuanLyDiemSo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.Designer.cs">
+      <DependentUpon>ucQuanLyKeHoachGiangDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.Designer.cs">
+      <DependentUpon>ucQuanLyLop_GVCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.Designer.cs">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.Designer.cs">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.Designer.cs">
+      <DependentUpon>ucXemThongBao.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucInfoHS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +188,7 @@
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,6 +201,8 @@
     <Compile Include="GUI\Forms\frmChangePW.Designer.cs">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> 4ca73166d0dacb5b32be008e6d55d80c6e225637
     <Compile Include="GUI\Forms\frmGV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +283,24 @@
     <EmbeddedResource Include="GUI\Controls\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.resx">
+      <DependentUpon>ucQuanLyDiemSo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.resx">
+      <DependentUpon>ucQuanLyKeHoachGiangDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.resx">
+      <DependentUpon>ucQuanLyLop_GVCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.resx">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.resx">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucXemThongBao.resx">
+      <DependentUpon>ucXemThongBao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +338,7 @@
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
       <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -288,6 +346,8 @@
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </EmbeddedResource>
+=======
+>>>>>>> 4ca73166d0dacb5b32be008e6d55d80c6e225637
     <EmbeddedResource Include="GUI\Forms\frmGV.resx">
       <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>

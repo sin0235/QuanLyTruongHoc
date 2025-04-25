@@ -31,7 +31,6 @@ namespace QuanLyTruongHoc
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGV));
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -55,6 +54,7 @@ namespace QuanLyTruongHoc
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -62,6 +62,7 @@ namespace QuanLyTruongHoc
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
+            this.pnlMainScreen.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -74,7 +75,7 @@ namespace QuanLyTruongHoc
             this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
             this.pnlTitleBar.Name = "pnlTitleBar";
-            this.pnlTitleBar.Size = new System.Drawing.Size(1920, 40);
+            this.pnlTitleBar.Size = new System.Drawing.Size(1920, 50);
             this.pnlTitleBar.TabIndex = 0;
             this.pnlTitleBar.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTitleBar_Paint);
             this.pnlTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.guna2PanelTitleBar_MouseDown);
@@ -167,9 +168,9 @@ namespace QuanLyTruongHoc
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlLeft.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlLeft.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
-            this.pnlLeft.Location = new System.Drawing.Point(0, 40);
+            this.pnlLeft.Location = new System.Drawing.Point(0, 50);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Size = new System.Drawing.Size(280, 1040);
+            this.pnlLeft.Size = new System.Drawing.Size(350, 1030);
             this.pnlLeft.TabIndex = 1;
             // 
             // pnlMenu
@@ -186,7 +187,7 @@ namespace QuanLyTruongHoc
             this.pnlMenu.Location = new System.Drawing.Point(0, 160);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.pnlMenu.Size = new System.Drawing.Size(280, 880);
+            this.pnlMenu.Size = new System.Drawing.Size(350, 870);
             this.pnlMenu.TabIndex = 1;
             // 
             // lichDayBtn
@@ -250,10 +251,10 @@ namespace QuanLyTruongHoc
             this.btnSettings.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSettings.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnSettings.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnSettings.Location = new System.Drawing.Point(10, 825);
+            this.btnSettings.Location = new System.Drawing.Point(10, 815);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSettings.Size = new System.Drawing.Size(260, 55);
+            this.btnSettings.Size = new System.Drawing.Size(330, 55);
             this.btnSettings.TabIndex = 6;
             this.btnSettings.Text = "Cài đặt";
             this.btnSettings.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -271,7 +272,7 @@ namespace QuanLyTruongHoc
             this.pnlLogo.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(134)))), ((int)(((byte)(207)))));
             this.pnlLogo.Location = new System.Drawing.Point(0, 0);
             this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(280, 160);
+            this.pnlLogo.Size = new System.Drawing.Size(350, 160);
             this.pnlLogo.TabIndex = 0;
             // 
             // lblSchoolName
@@ -312,9 +313,9 @@ namespace QuanLyTruongHoc
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.pnlTop.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
-            this.pnlTop.Location = new System.Drawing.Point(280, 40);
+            this.pnlTop.Location = new System.Drawing.Point(350, 50);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1640, 79);
+            this.pnlTop.Size = new System.Drawing.Size(1570, 99);
             this.pnlTop.TabIndex = 0;
             // 
             // lblPageTitle
@@ -324,7 +325,7 @@ namespace QuanLyTruongHoc
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(127, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Thông báo";
             // 
@@ -334,10 +335,9 @@ namespace QuanLyTruongHoc
             this.lblUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lblUserName.Location = new System.Drawing.Point(1206, 28);
+            this.lblUserName.Location = new System.Drawing.Point(1380, 33);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(91, 23);
-            this.lblUserName.Size = new System.Drawing.Size(135, 30);
+            this.lblUserName.Size = new System.Drawing.Size(106, 23);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -346,7 +346,7 @@ namespace QuanLyTruongHoc
             this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
             this.picUserAvatar.ImageRotate = 0F;
-            this.picUserAvatar.Location = new System.Drawing.Point(1316, 20);
+            this.picUserAvatar.Location = new System.Drawing.Point(1503, 22);
             this.picUserAvatar.Name = "picUserAvatar";
             this.picUserAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.picUserAvatar.Size = new System.Drawing.Size(40, 40);
@@ -356,11 +356,20 @@ namespace QuanLyTruongHoc
             // 
             // pnlMainScreen
             // 
+            this.pnlMainScreen.Controls.Add(this.pnlContent);
             this.pnlMainScreen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMainScreen.Location = new System.Drawing.Point(280, 40);
+            this.pnlMainScreen.Location = new System.Drawing.Point(350, 50);
             this.pnlMainScreen.Name = "pnlMainScreen";
-            this.pnlMainScreen.Size = new System.Drawing.Size(1640, 1040);
+            this.pnlMainScreen.Size = new System.Drawing.Size(1570, 1030);
             this.pnlMainScreen.TabIndex = 2;
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.Location = new System.Drawing.Point(6, 105);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(1561, 922);
+            this.pnlContent.TabIndex = 0;
+            this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
             // frmGV
             // 
@@ -374,7 +383,6 @@ namespace QuanLyTruongHoc
             this.Controls.Add(this.pnlTitleBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmGV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -390,6 +398,7 @@ namespace QuanLyTruongHoc
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
+            this.pnlMainScreen.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -419,6 +428,7 @@ namespace QuanLyTruongHoc
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         public Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
+        private Guna.UI2.WinForms.Guna2Panel pnlContent;
     }
 }
 

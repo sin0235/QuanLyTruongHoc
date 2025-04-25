@@ -17,9 +17,10 @@ namespace QuanLyTruongHoc.DAL
         private SqlDataAdapter da;
         private DataSet ds;
 
-
-        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
-
+        //Phúc toàn
+        //private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
+        //Tuấn
+        private string strCnn = "Data Source=localhost;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=123";
         public SqlConnection GetConnection()
         {
             return sqlConn;
