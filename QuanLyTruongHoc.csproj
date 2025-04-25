@@ -79,6 +79,60 @@
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
+    <Compile Include="GUI\Controls\ucGiaoVien\ucDiemDanh_GVCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucDiemDanh_GVCN.Designer.cs">
+      <DependentUpon>ucDiemDanh_GVCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucDuyetDonNghi_GVCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucDuyetDonNghi_GVCN.Designer.cs">
+      <DependentUpon>ucDuyetDonNghi_GVCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.Designer.cs">
+      <DependentUpon>ucQuanLyDiemSo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.Designer.cs">
+      <DependentUpon>ucQuanLyKeHoachGiangDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop.Designer.cs">
+      <DependentUpon>ucQuanLyLop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.Designer.cs">
+      <DependentUpon>ucQuanLyLop_GVCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.Designer.cs">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.Designer.cs">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.Designer.cs">
+      <DependentUpon>ucXemThongBao.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucInfoHS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,12 +198,6 @@
     </Compile>
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmGV.cs">
       <SubType>Form</SubType>
@@ -264,10 +312,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmGV.resx">
       <DependentUpon>frmGV.cs</DependentUpon>
