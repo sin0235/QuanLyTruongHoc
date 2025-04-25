@@ -38,8 +38,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             InitializeComponent();
 
-            // Setup events
-            //Load += UcKiemTra_Load;
+            Load += UcKiemTra_Load;
             btnTests.Click += BtnTests_Click;
             btnHomework.Click += BtnHomework_Click;
             btnComingSoon.Click += BtnComingSoon_Click;

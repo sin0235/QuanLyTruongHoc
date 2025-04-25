@@ -202,8 +202,13 @@ namespace QuanLyTruongHoc
             pnlSubSettings.Visible = false;
             btnSettings.FillColor = Color.Transparent;
 
-            // Hiển thị giao diện đổi mật khẩu (tạm thời hiển thị control có sẵn)
-            
+            // Hiển thị form đổi mật khẩu
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            {
+                // Hiển thị form dạng dialog
+                changePwForm.ShowDialog();
+            }
+
             lblPageTitle.Text = "Đổi mật khẩu";
         }
 
@@ -232,5 +237,20 @@ namespace QuanLyTruongHoc
             }
         }
 
+        private void btnChangePassword_Click_1(object sender, EventArgs e)
+        {
+            // Xử lý đổi mật khẩu
+            pnlSubSettings.Visible = false;
+            btnSettings.FillColor = Color.Transparent;
+
+            // Hiển thị form đổi mật khẩu
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            {
+                // Hiển thị form dạng dialog
+                changePwForm.ShowDialog();
+            }
+
+            lblPageTitle.Text = "Đổi mật khẩu";
+        }
     }
 }

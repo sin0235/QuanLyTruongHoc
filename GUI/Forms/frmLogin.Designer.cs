@@ -40,21 +40,21 @@ namespace QuanLyTruongHoc
             this.guna2CircleButtonCloseLogin = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnlLogin = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblForgotAcc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblError = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.chkShowPw = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.txtPW = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblLogin = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblWelcomeText = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblSystemName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblCopyright = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.txtPW = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtUserName = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnFacebook = new Guna.UI2.WinForms.Guna2ImageButton();
             this.btnTwitter = new Guna.UI2.WinForms.Guna2ImageButton();
             this.btnInstagram = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.lblCopyright = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.pnlMainScreen.SuspendLayout();
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -74,7 +74,7 @@ namespace QuanLyTruongHoc
             // pnlMainScreen
             // 
             this.pnlMainScreen.BackColor = System.Drawing.Color.Transparent;
-            this.pnlMainScreen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            resources.ApplyResources(this.pnlMainScreen, "pnlMainScreen");
             this.pnlMainScreen.BorderRadius = 15;
             this.pnlMainScreen.Controls.Add(this.lblSchoolName);
             this.pnlMainScreen.Controls.Add(this.guna2CircleButtonCloseLogin);
@@ -85,26 +85,18 @@ namespace QuanLyTruongHoc
             this.pnlMainScreen.Controls.Add(this.btnTwitter);
             this.pnlMainScreen.Controls.Add(this.btnInstagram);
             this.pnlMainScreen.Controls.Add(this.lblCopyright);
-            this.pnlMainScreen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainScreen.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(219)))));
             this.pnlMainScreen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(235)))));
             this.pnlMainScreen.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
-            this.pnlMainScreen.Location = new System.Drawing.Point(0, 0);
             this.pnlMainScreen.Name = "pnlMainScreen";
-            this.pnlMainScreen.Size = new System.Drawing.Size(1200, 800);
-            this.pnlMainScreen.TabIndex = 0;
             this.pnlMainScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMainScreen_Paint);
             // 
             // lblSchoolName
             // 
             this.lblSchoolName.BackColor = System.Drawing.Color.Transparent;
-            this.lblSchoolName.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.lblSchoolName, "lblSchoolName");
             this.lblSchoolName.ForeColor = System.Drawing.Color.White;
-            this.lblSchoolName.Location = new System.Drawing.Point(50, 360);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(377, 56);
-            this.lblSchoolName.TabIndex = 8;
-            this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // guna2CircleButtonCloseLogin
@@ -116,18 +108,15 @@ namespace QuanLyTruongHoc
             this.guna2CircleButtonCloseLogin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2CircleButtonCloseLogin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.guna2CircleButtonCloseLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(96)))), ((int)(((byte)(92)))));
-            this.guna2CircleButtonCloseLogin.Font = new System.Drawing.Font("Segoe UI", 9F);
+            resources.ApplyResources(this.guna2CircleButtonCloseLogin, "guna2CircleButtonCloseLogin");
             this.guna2CircleButtonCloseLogin.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButtonCloseLogin.Location = new System.Drawing.Point(1158, 15);
             this.guna2CircleButtonCloseLogin.Name = "guna2CircleButtonCloseLogin";
             this.guna2CircleButtonCloseLogin.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButtonCloseLogin.Size = new System.Drawing.Size(25, 25);
-            this.guna2CircleButtonCloseLogin.TabIndex = 4;
             this.guna2CircleButtonCloseLogin.Click += new System.EventHandler(this.guna2CircleButtonCloseLogin_Click);
             // 
             // pnlLogin
             // 
-            this.pnlLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.pnlLogin, "pnlLogin");
             this.pnlLogin.BackColor = System.Drawing.Color.Transparent;
             this.pnlLogin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.pnlLogin.BorderRadius = 30;
@@ -142,51 +131,49 @@ namespace QuanLyTruongHoc
             this.pnlLogin.Controls.Add(this.lblLogin);
             this.pnlLogin.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.pnlLogin.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
-            this.pnlLogin.Location = new System.Drawing.Point(660, 100);
             this.pnlLogin.Name = "pnlLogin";
             this.pnlLogin.ShadowDecoration.BorderRadius = 30;
             this.pnlLogin.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.pnlLogin.ShadowDecoration.Depth = 50;
             this.pnlLogin.ShadowDecoration.Enabled = true;
             this.pnlLogin.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(8, 8, 16, 16);
-            this.pnlLogin.Size = new System.Drawing.Size(480, 600);
-            this.pnlLogin.TabIndex = 0;
             // 
             // guna2Separator1
             // 
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(220)))), ((int)(((byte)(230)))));
             this.guna2Separator1.FillThickness = 2;
-            this.guna2Separator1.Location = new System.Drawing.Point(48, 164);
+            resources.ApplyResources(this.guna2Separator1, "guna2Separator1");
             this.guna2Separator1.Name = "guna2Separator1";
-            this.guna2Separator1.Size = new System.Drawing.Size(374, 10);
-            this.guna2Separator1.TabIndex = 8;
+            // 
+            // picLogo
+            // 
+            resources.ApplyResources(this.picLogo, "picLogo");
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.school;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Name = "picLogo";
+            this.picLogo.ShadowDecoration.BorderRadius = 50;
+            this.picLogo.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(219)))));
+            this.picLogo.ShadowDecoration.Depth = 15;
+            this.picLogo.ShadowDecoration.Enabled = true;
+            this.picLogo.TabStop = false;
+            this.picLogo.UseTransparentBackground = true;
             // 
             // lblForgotAcc
             // 
-            this.lblForgotAcc.AutoSize = false;
+            resources.ApplyResources(this.lblForgotAcc, "lblForgotAcc");
             this.lblForgotAcc.BackColor = System.Drawing.Color.Transparent;
             this.lblForgotAcc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblForgotAcc.Font = new System.Drawing.Font("Segoe UI", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))));
             this.lblForgotAcc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.lblForgotAcc.Location = new System.Drawing.Point(317, 381);
             this.lblForgotAcc.Name = "lblForgotAcc";
-            this.lblForgotAcc.Size = new System.Drawing.Size(142, 30);
-            this.lblForgotAcc.TabIndex = 6;
-            this.lblForgotAcc.Text = "Forgot account?";
             // 
             // lblError
             // 
-            this.lblError.AutoSize = false;
+            resources.ApplyResources(this.lblError, "lblError");
             this.lblError.BackColor = System.Drawing.Color.Transparent;
-            this.lblError.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic);
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(48, 505);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(374, 75);
-            this.lblError.TabIndex = 5;
-            this.lblError.Text = "** The username or password is incorrect, please try again.";
             this.lblError.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
-            this.lblError.Visible = false;
             // 
             // btnLogin
             // 
@@ -198,103 +185,26 @@ namespace QuanLyTruongHoc
             this.btnLogin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnLogin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.btnLogin, "btnLogin");
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(170)))), ((int)(((byte)(220)))));
-            this.btnLogin.Location = new System.Drawing.Point(48, 440);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(374, 52);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // chkShowPw
             // 
-            this.chkShowPw.AutoSize = true;
+            resources.ApplyResources(this.chkShowPw, "chkShowPw");
             this.chkShowPw.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
             this.chkShowPw.CheckedState.BorderRadius = 2;
             this.chkShowPw.CheckedState.BorderThickness = 0;
             this.chkShowPw.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.chkShowPw.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.chkShowPw.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(100)))), ((int)(((byte)(120)))));
-            this.chkShowPw.Location = new System.Drawing.Point(51, 348);
             this.chkShowPw.Name = "chkShowPw";
-            this.chkShowPw.Size = new System.Drawing.Size(123, 23);
-            this.chkShowPw.TabIndex = 3;
-            this.chkShowPw.Text = "Show password";
             this.chkShowPw.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.chkShowPw.UncheckedState.BorderRadius = 2;
             this.chkShowPw.UncheckedState.BorderThickness = 1;
             this.chkShowPw.UncheckedState.FillColor = System.Drawing.Color.White;
             this.chkShowPw.CheckedChanged += new System.EventHandler(this.chbShowPw_CheckedChanged);
-            // 
-            // lblLogin
-            // 
-            this.lblLogin.BackColor = System.Drawing.Color.Transparent;
-            this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.lblLogin.Location = new System.Drawing.Point(190, 126);
-            this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(93, 42);
-            this.lblLogin.TabIndex = 0;
-            this.lblLogin.Text = "LOGIN";
-            // 
-            // lblWelcomeText
-            // 
-            this.lblWelcomeText.BackColor = System.Drawing.Color.Transparent;
-            this.lblWelcomeText.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblWelcomeText.ForeColor = System.Drawing.Color.White;
-            this.lblWelcomeText.Location = new System.Drawing.Point(50, 320);
-            this.lblWelcomeText.Name = "lblWelcomeText";
-            this.lblWelcomeText.Size = new System.Drawing.Size(115, 32);
-            this.lblWelcomeText.TabIndex = 9;
-            this.lblWelcomeText.Text = "Welcome to";
-            this.lblWelcomeText.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSystemName
-            // 
-            this.lblSystemName.BackColor = System.Drawing.Color.Transparent;
-            this.lblSystemName.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Italic);
-            this.lblSystemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.lblSystemName.Location = new System.Drawing.Point(50, 430);
-            this.lblSystemName.Name = "lblSystemName";
-            this.lblSystemName.Size = new System.Drawing.Size(231, 27);
-            this.lblSystemName.TabIndex = 10;
-            this.lblSystemName.Text = "School Management System";
-            this.lblSystemName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblCopyright
-            // 
-            this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
-            this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.lblCopyright.Location = new System.Drawing.Point(50, 775);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(209, 17);
-            this.lblCopyright.TabIndex = 14;
-            this.lblCopyright.Text = "© 2025 ABC School. All rights reserved.";
-            // 
-            // guna2ShadowForm1
-            // 
-            this.guna2ShadowForm1.TargetForm = this;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.school;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(195, 30);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.ShadowDecoration.BorderRadius = 50;
-            this.picLogo.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(188)))), ((int)(((byte)(219)))));
-            this.picLogo.ShadowDecoration.Depth = 15;
-            this.picLogo.ShadowDecoration.Enabled = true;
-            this.picLogo.Size = new System.Drawing.Size(90, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 7;
-            this.picLogo.TabStop = false;
-            this.picLogo.UseTransparentBackground = true;
             // 
             // txtPW
             // 
@@ -312,20 +222,16 @@ namespace QuanLyTruongHoc
             this.txtPW.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtPW.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
             this.txtPW.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.txtPW.Font = new System.Drawing.Font("Segoe UI", 12F);
+            resources.ApplyResources(this.txtPW, "txtPW");
             this.txtPW.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtPW.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
             this.txtPW.IconRight = ((System.Drawing.Image)(resources.GetObject("txtPW.IconRight")));
             this.txtPW.IconRightOffset = new System.Drawing.Point(7, 0);
             this.txtPW.IconRightSize = new System.Drawing.Size(28, 28);
-            this.txtPW.Location = new System.Drawing.Point(48, 260);
-            this.txtPW.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtPW.Name = "txtPW";
             this.txtPW.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.txtPW.PlaceholderText = "Password";
             this.txtPW.SelectedText = "";
-            this.txtPW.Size = new System.Drawing.Size(374, 52);
-            this.txtPW.TabIndex = 2;
             this.txtPW.TextOffset = new System.Drawing.Point(14, 0);
             this.txtPW.UseSystemPasswordChar = true;
             this.txtPW.TextChanged += new System.EventHandler(this.txtPW_TextChanged);
@@ -345,21 +251,40 @@ namespace QuanLyTruongHoc
             this.txtUserName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtUserName.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
             this.txtUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            resources.ApplyResources(this.txtUserName, "txtUserName");
             this.txtUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.txtUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
             this.txtUserName.IconRight = ((System.Drawing.Image)(resources.GetObject("txtUserName.IconRight")));
             this.txtUserName.IconRightOffset = new System.Drawing.Point(7, 0);
             this.txtUserName.IconRightSize = new System.Drawing.Size(28, 28);
-            this.txtUserName.Location = new System.Drawing.Point(48, 190);
-            this.txtUserName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
             this.txtUserName.PlaceholderText = "Username";
             this.txtUserName.SelectedText = "";
-            this.txtUserName.Size = new System.Drawing.Size(374, 52);
-            this.txtUserName.TabIndex = 1;
             this.txtUserName.TextOffset = new System.Drawing.Point(14, 0);
+            // 
+            // lblLogin
+            // 
+            this.lblLogin.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.lblLogin, "lblLogin");
+            this.lblLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
+            this.lblLogin.Name = "lblLogin";
+            // 
+            // lblWelcomeText
+            // 
+            this.lblWelcomeText.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.lblWelcomeText, "lblWelcomeText");
+            this.lblWelcomeText.ForeColor = System.Drawing.Color.White;
+            this.lblWelcomeText.Name = "lblWelcomeText";
+            this.lblWelcomeText.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSystemName
+            // 
+            this.lblSystemName.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.lblSystemName, "lblSystemName");
+            this.lblSystemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.lblSystemName.Name = "lblSystemName";
+            this.lblSystemName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnFacebook
             // 
@@ -370,11 +295,9 @@ namespace QuanLyTruongHoc
             this.btnFacebook.ImageOffset = new System.Drawing.Point(0, 0);
             this.btnFacebook.ImageRotate = 0F;
             this.btnFacebook.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnFacebook.Location = new System.Drawing.Point(50, 730);
+            resources.ApplyResources(this.btnFacebook, "btnFacebook");
             this.btnFacebook.Name = "btnFacebook";
             this.btnFacebook.PressedState.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnFacebook.Size = new System.Drawing.Size(40, 40);
-            this.btnFacebook.TabIndex = 11;
             // 
             // btnTwitter
             // 
@@ -385,11 +308,9 @@ namespace QuanLyTruongHoc
             this.btnTwitter.ImageOffset = new System.Drawing.Point(0, 0);
             this.btnTwitter.ImageRotate = 0F;
             this.btnTwitter.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnTwitter.Location = new System.Drawing.Point(100, 730);
+            resources.ApplyResources(this.btnTwitter, "btnTwitter");
             this.btnTwitter.Name = "btnTwitter";
             this.btnTwitter.PressedState.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnTwitter.Size = new System.Drawing.Size(40, 40);
-            this.btnTwitter.TabIndex = 12;
             // 
             // btnInstagram
             // 
@@ -400,24 +321,28 @@ namespace QuanLyTruongHoc
             this.btnInstagram.ImageOffset = new System.Drawing.Point(0, 0);
             this.btnInstagram.ImageRotate = 0F;
             this.btnInstagram.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnInstagram.Location = new System.Drawing.Point(150, 730);
+            resources.ApplyResources(this.btnInstagram, "btnInstagram");
             this.btnInstagram.Name = "btnInstagram";
             this.btnInstagram.PressedState.ImageSize = new System.Drawing.Size(28, 28);
-            this.btnInstagram.Size = new System.Drawing.Size(40, 40);
-            this.btnInstagram.TabIndex = 13;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.lblCopyright, "lblCopyright");
+            this.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.lblCopyright.Name = "lblCopyright";
+            // 
+            // guna2ShadowForm1
+            // 
+            this.guna2ShadowForm1.TargetForm = this;
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 800);
             this.Controls.Add(this.pnlMainScreen);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "School Management System";
             this.pnlMainScreen.ResumeLayout(false);
             this.pnlMainScreen.PerformLayout();
             this.pnlLogin.ResumeLayout(false);

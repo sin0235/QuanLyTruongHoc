@@ -43,7 +43,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             guna2Panel1.BorderRadius = 10;
 
             // Set up start button click event
-            guna2Button1.Click += Guna2Button1_Click;
+            btnBegin.Click += Guna2Button1_Click;
         }
 
         // Load test data into the control
@@ -77,21 +77,21 @@ namespace QuanLyTruongHoc.GUI.Controls
             guna2TextBox1.Text = Notes ?? "";
 
             // Change button text based on whether it's a test or homework
-            guna2Button1.Text = IsHomework ? "Bắt đầu làm bài tập" : "Bắt đầu làm bài kiểm tra";
+            btnBegin.Text = IsHomework ? "Bắt đầu làm bài tập" : "Bắt đầu làm bài kiểm tra";
 
             // Adjust button visibility based on availability
             bool isAvailable = DateTime.Now >= StartTime && DateTime.Now <= EndTime && AttemptsUsed < AttemptsAllowed;
-            guna2Button1.Enabled = isAvailable;
+            btnBegin.Enabled = isAvailable;
 
             // Update color scheme based on status
             if (!isAvailable)
             {
-                guna2Button1.FillColor = Color.Gray;
+                btnBegin.FillColor = Color.Gray;
                 guna2Panel1.FillColor = Color.FromArgb(245, 245, 245);
             }
             else
             {
-                guna2Button1.FillColor = Color.FromArgb(0, 120, 215);
+                btnBegin.FillColor = Color.FromArgb(0, 120, 215);
                 guna2Panel1.FillColor = Color.FromArgb(248, 250, 255);
             }
         }
@@ -124,7 +124,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             ShowTestForm();
         }
 
-        // Show the test form
         private void ShowTestForm()
         {
             try
@@ -132,16 +131,16 @@ namespace QuanLyTruongHoc.GUI.Controls
                 // Notify listeners that the test has started
                 TestStarted?.Invoke(this, EventArgs.Empty);
 
-                // Here you would open your test form
-                // For example:
-                // frmLamBaiKiemTra testForm = new frmLamBaiKiemTra(TestId, TestName, Duration);
-                // testForm.ShowDialog();
+                // Open the test form with the appropriate information
+                var testForm = new Forms.frmKiemTra();
 
-                // Since we don't have the actual test form, just show a message
-                MessageBox.Show($"Bắt đầu {(IsHomework ? "bài tập" : "bài kiểm tra")}: {TestName}\nThời gian: {Duration} phút",
-                    "Mở form làm bài", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Set form properties if needed (you might need to add these properties to frmKiemTra)
+                testForm.Text = $"{(IsHomework ? "Bài tập" : "Bài kiểm tra")}: {TestName}";
 
-                // Increment attempts used
+                // Show the form
+                testForm.ShowDialog();
+
+                // Increment attempts used after test completion
                 AttemptsUsed++;
                 UpdateDisplay();
             }
@@ -156,11 +155,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             // This can be used if you want to update the Notes property
             Notes = guna2TextBox1.Text;
-        }
-
-        private void guna2Button1_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

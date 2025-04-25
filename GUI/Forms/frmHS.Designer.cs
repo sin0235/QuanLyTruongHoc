@@ -259,6 +259,7 @@
             this.btnChangePassword.Size = new System.Drawing.Size(250, 45);
             this.btnChangePassword.TabIndex = 1;
             this.btnChangePassword.Text = "Đổi mật khẩu";
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click_1);
             // 
             // btnProfile
             // 
@@ -469,7 +470,7 @@
             this.lblSchoolName.BackColor = System.Drawing.Color.Transparent;
             this.lblSchoolName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
+            this.lblSchoolName.Location = new System.Drawing.Point(50, 111);
             this.lblSchoolName.Name = "lblSchoolName";
             this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
             this.lblSchoolName.TabIndex = 1;

@@ -34,8 +34,8 @@
             this.pnlQuestionContent = new Guna.UI2.WinForms.Guna2Panel();
             this.lblQuestionText = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlQuestionHeader = new Guna.UI2.WinForms.Guna2Panel();
-            this.imgQuestion = new Guna.UI2.WinForms.Guna2PictureBox();
             this.lblQuestionNumber = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.imgQuestion = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMain.SuspendLayout();
             this.pnlQuestionContent.SuspendLayout();
             this.pnlQuestionHeader.SuspendLayout();
@@ -120,17 +120,6 @@
             this.pnlQuestionHeader.Size = new System.Drawing.Size(650, 40);
             this.pnlQuestionHeader.TabIndex = 0;
             // 
-            // imgQuestion
-            // 
-            this.imgQuestion.Image = global::QuanLyTruongHoc.Properties.Resources.question_icon;
-            this.imgQuestion.ImageRotate = 0F;
-            this.imgQuestion.Location = new System.Drawing.Point(3, 3);
-            this.imgQuestion.Name = "imgQuestion";
-            this.imgQuestion.Size = new System.Drawing.Size(32, 32);
-            this.imgQuestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgQuestion.TabIndex = 1;
-            this.imgQuestion.TabStop = false;
-            // 
             // lblQuestionNumber
             // 
             this.lblQuestionNumber.BackColor = System.Drawing.Color.Transparent;
@@ -142,10 +131,20 @@
             this.lblQuestionNumber.TabIndex = 0;
             this.lblQuestionNumber.Text = "Câu 1/20";
             // 
+            // imgQuestion
+            // 
+            this.imgQuestion.Image = global::QuanLyTruongHoc.Properties.Resources.question_icon;
+            this.imgQuestion.ImageRotate = 0F;
+            this.imgQuestion.Location = new System.Drawing.Point(3, 3);
+            this.imgQuestion.Name = "imgQuestion";
+            this.imgQuestion.Size = new System.Drawing.Size(32, 32);
+            this.imgQuestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgQuestion.TabIndex = 1;
+            this.imgQuestion.TabStop = false;
+            // 
             // ucTNItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnlMain);
             this.Name = "ucTNItem";

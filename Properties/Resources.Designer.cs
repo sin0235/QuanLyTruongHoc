@@ -63,9 +63,49 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap attach {
+            get {
+                object obj = ResourceManager.GetObject("attach", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap book {
             get {
                 object obj = ResourceManager.GetObject("book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clock_icon {
+            get {
+                object obj = ResourceManager.GetObject("clock_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap confirm_icon {
+            get {
+                object obj = ResourceManager.GetObject("confirm_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap confirm_icon1 {
+            get {
+                object obj = ResourceManager.GetObject("confirm_icon1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,6 +173,36 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap eye_closed {
+            get {
+                object obj = ResourceManager.GetObject("eye_closed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye_closed1 {
+            get {
+                object obj = ResourceManager.GetObject("eye_closed1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye_open {
+            get {
+                object obj = ResourceManager.GetObject("eye_open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap facebook {
             get {
                 object obj = ResourceManager.GetObject("facebook", resourceCulture);
@@ -153,6 +223,16 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap key_icon {
+            get {
+                object obj = ResourceManager.GetObject("key_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loading {
             get {
                 object obj = ResourceManager.GetObject("loading", resourceCulture);
@@ -163,9 +243,29 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lock_icon {
+            get {
+                object obj = ResourceManager.GetObject("lock_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap question_icon {
             get {
                 object obj = ResourceManager.GetObject("question_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap remove {
+            get {
+                object obj = ResourceManager.GetObject("remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

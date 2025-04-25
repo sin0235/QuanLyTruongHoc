@@ -30,7 +30,7 @@
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.lblAttemptsRemaining = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnBegin = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,7 +48,7 @@
             this.guna2Panel1.BorderRadius = 10;
             this.guna2Panel1.BorderThickness = 1;
             this.guna2Panel1.Controls.Add(this.lblAttemptsRemaining);
-            this.guna2Panel1.Controls.Add(this.guna2Button1);
+            this.guna2Panel1.Controls.Add(this.btnBegin);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel7);
             this.guna2Panel1.Controls.Add(this.guna2TextBox1);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel6);
@@ -75,21 +75,20 @@
             this.lblAttemptsRemaining.TabIndex = 9;
             this.lblAttemptsRemaining.Text = null;
             // 
-            // guna2Button1
+            // btnBegin
             // 
-            this.guna2Button1.BorderRadius = 8;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(273, 295);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button1.TabIndex = 8;
-            this.guna2Button1.Text = "Bắt đầu làm bài";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click_1);
+            this.btnBegin.BorderRadius = 8;
+            this.btnBegin.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnBegin.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnBegin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnBegin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnBegin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnBegin.ForeColor = System.Drawing.Color.White;
+            this.btnBegin.Location = new System.Drawing.Point(273, 259);
+            this.btnBegin.Name = "btnBegin";
+            this.btnBegin.Size = new System.Drawing.Size(180, 45);
+            this.btnBegin.TabIndex = 8;
+            this.btnBegin.Text = "Bắt đầu làm bài";
             // 
             // guna2HtmlLabel7
             // 
@@ -120,7 +119,7 @@
             this.guna2TextBox1.PlaceholderText = "Các lưu ý cho bài kiểm tra...";
             this.guna2TextBox1.ReadOnly = true;
             this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(432, 125);
+            this.guna2TextBox1.Size = new System.Drawing.Size(432, 94);
             this.guna2TextBox1.TabIndex = 6;
             this.guna2TextBox1.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
             // 
@@ -187,8 +186,7 @@
             // 
             // ucTestItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.guna2Panel1);
             this.Name = "ucTestItem";
@@ -208,7 +206,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnBegin;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAttemptsRemaining;

@@ -120,7 +120,249 @@
   <metadata name="guna2Elipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>396, 17</value>
   </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>vi-VN</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>9, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 800</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pnlMainScreen.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="lblSchoolName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 30pt, style=Bold</value>
+  </data>
+  <data name="lblSchoolName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 360</value>
+  </data>
+  <data name="lblSchoolName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 56</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSchoolName.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblSchoolName.Text" xml:space="preserve">
+    <value>TRƯỜNG THPT ABC</value>
+  </data>
+  <data name="&gt;&gt;lblSchoolName.Name" xml:space="preserve">
+    <value>lblSchoolName</value>
+  </data>
+  <data name="&gt;&gt;lblSchoolName.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblSchoolName.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;lblSchoolName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="guna2CircleButtonCloseLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="guna2CircleButtonCloseLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1158, 15</value>
+  </data>
+  <data name="guna2CircleButtonCloseLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 25</value>
+  </data>
+  <data name="guna2CircleButtonCloseLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonCloseLogin.Name" xml:space="preserve">
+    <value>guna2CircleButtonCloseLogin</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonCloseLogin.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CircleButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonCloseLogin.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonCloseLogin.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pnlLogin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="guna2Separator1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 164</value>
+  </data>
+  <data name="guna2Separator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 10</value>
+  </data>
+  <data name="guna2Separator1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;guna2Separator1.Name" xml:space="preserve">
+    <value>guna2Separator1</value>
+  </data>
+  <data name="&gt;&gt;guna2Separator1.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Separator, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2Separator1.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;guna2Separator1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="picLogo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="picLogo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 30</value>
+  </data>
+  <data name="picLogo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 90</value>
+  </data>
+  <data name="picLogo.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="picLogo.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;picLogo.Name" xml:space="preserve">
+    <value>picLogo</value>
+  </data>
+  <data name="&gt;&gt;picLogo.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2PictureBox, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;picLogo.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;picLogo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblForgotAcc.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblForgotAcc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt, style=Italic, Underline</value>
+  </data>
+  <data name="lblForgotAcc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 381</value>
+  </data>
+  <data name="lblForgotAcc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="lblForgotAcc.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblForgotAcc.Text" xml:space="preserve">
+    <value>Forgot account?</value>
+  </data>
+  <data name="&gt;&gt;lblForgotAcc.Name" xml:space="preserve">
+    <value>lblForgotAcc</value>
+  </data>
+  <data name="&gt;&gt;lblForgotAcc.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblForgotAcc.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;lblForgotAcc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblError.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblError.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Italic</value>
+  </data>
+  <data name="lblError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 505</value>
+  </data>
+  <data name="lblError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 75</value>
+  </data>
+  <data name="lblError.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblError.Text" xml:space="preserve">
+    <value>** The username or password is incorrect, please try again.</value>
+  </data>
+  <data name="lblError.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblError.Name" xml:space="preserve">
+    <value>lblError</value>
+  </data>
+  <data name="&gt;&gt;lblError.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblError.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;lblError.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 16.2pt, style=Bold</value>
+  </data>
+  <data name="btnLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 440</value>
+  </data>
+  <data name="btnLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 52</value>
+  </data>
+  <data name="btnLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnLogin.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="&gt;&gt;btnLogin.Name" xml:space="preserve">
+    <value>btnLogin</value>
+  </data>
+  <data name="&gt;&gt;btnLogin.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;btnLogin.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;btnLogin.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="chkShowPw.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowPw.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="chkShowPw.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 348</value>
+  </data>
+  <data name="chkShowPw.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 23</value>
+  </data>
+  <data name="chkShowPw.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="chkShowPw.Text" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="&gt;&gt;chkShowPw.Name" xml:space="preserve">
+    <value>chkShowPw</value>
+  </data>
+  <data name="&gt;&gt;chkShowPw.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CheckBox, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;chkShowPw.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;chkShowPw.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="txtPW.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
   <data name="txtPW.IconRight" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -135,6 +377,33 @@
         3eCNcSnSMLUu+qYp2QM8jzRNpWfuo3Aj7AceAD8jA2xVqjURftiycSB80zzzj1IN1SoUCoUdyB9W8Eb/
         P2a1gAAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="txtPW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 260</value>
+  </data>
+  <data name="txtPW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 6, 4, 6</value>
+  </data>
+  <data name="txtPW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 52</value>
+  </data>
+  <data name="txtPW.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtPW.Name" xml:space="preserve">
+    <value>txtPW</value>
+  </data>
+  <data name="&gt;&gt;txtPW.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2TextBox, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;txtPW.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;txtPW.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txtUserName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
   <data name="txtUserName.IconRight" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -161,6 +430,249 @@
         8wsLEPr/aNyUeB9ZeLCybuT8r8AiuMnZtSlt9gc03xVG+9n/2XZNSql7fi2xnv8EfwMcc4TR12hosgAA
         AABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 190</value>
+  </data>
+  <data name="txtUserName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 52</value>
+  </data>
+  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
+    <value>txtUserName</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2TextBox, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 22pt, style=Bold</value>
+  </data>
+  <data name="lblLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 126</value>
+  </data>
+  <data name="lblLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 42</value>
+  </data>
+  <data name="lblLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblLogin.Text" xml:space="preserve">
+    <value>LOGIN</value>
+  </data>
+  <data name="&gt;&gt;lblLogin.Name" xml:space="preserve">
+    <value>lblLogin</value>
+  </data>
+  <data name="&gt;&gt;lblLogin.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblLogin.Parent" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;lblLogin.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="pnlLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>660, 100</value>
+  </data>
+  <data name="pnlLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 600</value>
+  </data>
+  <data name="pnlLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlLogin.Name" xml:space="preserve">
+    <value>pnlLogin</value>
+  </data>
+  <data name="&gt;&gt;pnlLogin.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CustomGradientPanel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;pnlLogin.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;pnlLogin.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblWelcomeText.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 16pt</value>
+  </data>
+  <data name="lblWelcomeText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 320</value>
+  </data>
+  <data name="lblWelcomeText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="lblWelcomeText.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblWelcomeText.Text" xml:space="preserve">
+    <value>Welcome to</value>
+  </data>
+  <data name="&gt;&gt;lblWelcomeText.Name" xml:space="preserve">
+    <value>lblWelcomeText</value>
+  </data>
+  <data name="&gt;&gt;lblWelcomeText.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblWelcomeText.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;lblWelcomeText.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSystemName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 14pt, style=Italic</value>
+  </data>
+  <data name="lblSystemName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 430</value>
+  </data>
+  <data name="lblSystemName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 27</value>
+  </data>
+  <data name="lblSystemName.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblSystemName.Text" xml:space="preserve">
+    <value>School Management System</value>
+  </data>
+  <data name="&gt;&gt;lblSystemName.Name" xml:space="preserve">
+    <value>lblSystemName</value>
+  </data>
+  <data name="&gt;&gt;lblSystemName.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblSystemName.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;lblSystemName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnFacebook.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 730</value>
+  </data>
+  <data name="btnFacebook.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnFacebook.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;btnFacebook.Name" xml:space="preserve">
+    <value>btnFacebook</value>
+  </data>
+  <data name="&gt;&gt;btnFacebook.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2ImageButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;btnFacebook.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;btnFacebook.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnTwitter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 730</value>
+  </data>
+  <data name="btnTwitter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnTwitter.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;btnTwitter.Name" xml:space="preserve">
+    <value>btnTwitter</value>
+  </data>
+  <data name="&gt;&gt;btnTwitter.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2ImageButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;btnTwitter.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;btnTwitter.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="btnInstagram.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 730</value>
+  </data>
+  <data name="btnInstagram.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 40</value>
+  </data>
+  <data name="btnInstagram.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;btnInstagram.Name" xml:space="preserve">
+    <value>btnInstagram</value>
+  </data>
+  <data name="&gt;&gt;btnInstagram.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2ImageButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;btnInstagram.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;btnInstagram.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblCopyright.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="lblCopyright.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 775</value>
+  </data>
+  <data name="lblCopyright.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="lblCopyright.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblCopyright.Text" xml:space="preserve">
+    <value>© 2025 ABC School. All rights reserved.</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Name" xml:space="preserve">
+    <value>lblCopyright</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.Parent" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;lblCopyright.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="pnlMainScreen.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlMainScreen.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlMainScreen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 800</value>
+  </data>
+  <data name="pnlMainScreen.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;pnlMainScreen.Name" xml:space="preserve">
+    <value>pnlMainScreen</value>
+  </data>
+  <data name="&gt;&gt;pnlMainScreen.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2GradientPanel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;pnlMainScreen.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlMainScreen.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -18189,6 +18701,36 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////8=
 </value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>School Management System</value>
+  </data>
+  <data name="&gt;&gt;guna2Elipse1.Name" xml:space="preserve">
+    <value>guna2Elipse1</value>
+  </data>
+  <data name="&gt;&gt;guna2Elipse1.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2Elipse, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2DragControl1.Name" xml:space="preserve">
+    <value>guna2DragControl1</value>
+  </data>
+  <data name="&gt;&gt;guna2DragControl1.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2DragControl, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2ShadowForm1.Name" xml:space="preserve">
+    <value>guna2ShadowForm1</value>
+  </data>
+  <data name="&gt;&gt;guna2ShadowForm1.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2ShadowForm, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmLogin</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="guna2DragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 21</value>
