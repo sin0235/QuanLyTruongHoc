@@ -188,7 +188,6 @@
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,8 +200,6 @@
     <Compile Include="GUI\Forms\frmChangePW.Designer.cs">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> 4ca73166d0dacb5b32be008e6d55d80c6e225637
     <Compile Include="GUI\Forms\frmGV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,7 +335,6 @@
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
       <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -346,8 +342,6 @@
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </EmbeddedResource>
-=======
->>>>>>> 4ca73166d0dacb5b32be008e6d55d80c6e225637
     <EmbeddedResource Include="GUI\Forms\frmGV.resx">
       <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
