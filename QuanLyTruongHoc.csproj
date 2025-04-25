@@ -79,18 +79,6 @@
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
-    <Compile Include="GUI\Controls\ucGiaoVien\ucDiemDanh_GVCN.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucGiaoVien\ucDiemDanh_GVCN.Designer.cs">
-      <DependentUpon>ucDiemDanh_GVCN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Controls\ucGiaoVien\ucDuyetDonNghi_GVCN.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucGiaoVien\ucDuyetDonNghi_GVCN.Designer.cs">
-      <DependentUpon>ucDuyetDonNghi_GVCN.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,12 +90,6 @@
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.Designer.cs">
       <DependentUpon>ucQuanLyKeHoachGiangDay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop.Designer.cs">
-      <DependentUpon>ucQuanLyLop.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.cs">
       <SubType>UserControl</SubType>
@@ -278,6 +260,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Controls\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.resx">
+      <DependentUpon>ucQuanLyDiemSo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyKeHoachGiangDay.resx">
+      <DependentUpon>ucQuanLyKeHoachGiangDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.resx">
+      <DependentUpon>ucQuanLyLop_GVCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.resx">
+      <DependentUpon>ucThoiKhoaBieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.resx">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucXemThongBao.resx">
+      <DependentUpon>ucXemThongBao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
