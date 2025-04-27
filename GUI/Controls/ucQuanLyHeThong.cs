@@ -20,19 +20,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             ConfigureDataGridView();
             LoadData();
             this.Load += ucQuanLyHeThong_Load;
+            this.VisibleChanged += UcQuanLyHeThong_VisibleChanged;
         }
         private void ConfigureDataGridView()
         {
-            dgvQuanLyHeThong.AllowUserToAddRows = false;
-            dgvQuanLyHeThong.ReadOnly = true;
-            dgvQuanLyHeThong.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvQuanLyHeThong.EnableHeadersVisualStyles = false;
+            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
 
-            dgvQuanLyHeThong.ColumnHeadersHeight = 40;
-            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            dgvQuanLyHeThong.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            dgvQuanLyHeThong.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgvQuanLyHeThong.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells; 
-            dgvQuanLyHeThong.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             if (dgvQuanLyHeThong.Columns.Contains("MaNguoiDung"))
                 dgvQuanLyHeThong.Columns["MaNguoiDung"].Visible = false;
 
@@ -50,42 +44,80 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
 
         }
-        private void LoadData()
+        private bool LoadData()
         {
-            string query = @"
-            SELECT NK.MaNguoiDung, 
-            CASE 
+            try
+            {
+                string query = @"
+                SELECT NK.MaNguoiDung, 
+                CASE 
                 WHEN ND.MaVaiTro = 1 THEN N'Ban giám hiệu'
                 WHEN ND.MaVaiTro = 2 THEN GV.HoTen
                 WHEN ND.MaVaiTro = 3 THEN HS.HoTen
                 ELSE N'Không xác định'
-            END AS NguoiHanhDong,
-            NK.HanhDong,
+                END AS NguoiHanhDong,
+                    NK.HanhDong,
                 FORMAT(NK.ThoiGian, 'yyyy-MM-dd HH:mm:ss') AS ThoiGian
-            FROM NhatKyHeThong NK
-            LEFT JOIN NguoiDung ND ON NK.MaNguoiDung = ND.MaNguoiDung
-            LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
-            LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung";
+                FROM NhatKyHeThong NK
+                LEFT JOIN NguoiDung ND ON NK.MaNguoiDung = ND.MaNguoiDung
+                LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
+                LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung";
 
-            DatabaseHelper db = new DatabaseHelper();
-            DataTable dt = db.ExecuteQuery(query);
-            dgvQuanLyHeThong.DataSource = dt;
-            dgvQuanLyHeThong.Columns["MaNguoiDung"].Visible = false;
-            dgvQuanLyHeThong.Columns["NguoiHanhDong"].HeaderText = "Người hành động";
-            dgvQuanLyHeThong.Columns["HanhDong"].HeaderText = "Hành động";
-            dgvQuanLyHeThong.Columns["ThoiGian"].HeaderText = "Thời gian";
+                DatabaseHelper db = new DatabaseHelper();
+                DataTable dt = db.ExecuteQuery(query);
 
-            ConfigureDataGridView();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    dgvQuanLyHeThong.DataSource = dt;
+                    dgvQuanLyHeThong.Columns["MaNguoiDung"].Visible = false;
+                    dgvQuanLyHeThong.Columns["NguoiHanhDong"].HeaderText = "Người hành động";
+                    dgvQuanLyHeThong.Columns["HanhDong"].HeaderText = "Hành động";
+                    dgvQuanLyHeThong.Columns["ThoiGian"].HeaderText = "Thời gian";
+                    dgvQuanLyHeThong.ClearSelection();
+                    ConfigureDataGridView();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            LoadData();
+            if (LoadData())
+            {
+                MessageBox.Show("Đã lấy dữ liệu mới nhất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Làm mới không thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void CenterControls()
+        {
+            btnLamMoi.Left = (this.Width - btnLamMoi.Width) / 2;
+            dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
+            dgvQuanLyHeThong.ClearSelection();
+        }
+
+        private void UcQuanLyHeThong_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                CenterControls();
+            }
         }
 
         private void ucQuanLyHeThong_Load(object sender, EventArgs e)
         {
-            btnLamMoi.Left = (this.Width - btnLamMoi.Width) / 2;
+            CenterControls();
         }
     }
 }

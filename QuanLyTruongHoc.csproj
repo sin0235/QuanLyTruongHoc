@@ -188,12 +188,6 @@
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GUI\Controls\ucThongBaoGiaoVien.Designer.cs">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Forms\frmChangePW.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,10 +328,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThongBaoGiaoVien.resx">
-      <DependentUpon>ucThongBaoGiaoVien.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>

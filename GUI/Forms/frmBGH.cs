@@ -181,8 +181,6 @@ namespace QuanLyTruongHoc
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
-            // Optional: Add custom painting logic here if needed
-            // For now, this method can remain empty if no custom painting is required
         }
 
     }
