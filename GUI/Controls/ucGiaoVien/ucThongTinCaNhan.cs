@@ -16,5 +16,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             InitializeComponent();
         }
+
     }
 }
