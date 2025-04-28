@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using QuanLyTruongHoc.DAL;
@@ -17,6 +18,12 @@ namespace QuanLyTruongHoc
             InitializeComponent();
             db = new DatabaseHelper();
         }
+        private int GetNextMaNK()
+        {
+            string query = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+            DataTable result = db.ExecuteQuery(query);
+            return result.Rows.Count > 0 ? Convert.ToInt32(result.Rows[0][0]) : 1;
+        }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -33,10 +40,10 @@ namespace QuanLyTruongHoc
             try
             {
                 string query = $@"
-            SELECT NguoiDung.MaNguoiDung, NguoiDung.MaVaiTro, VaiTro.TenVaiTro
-            FROM NguoiDung
-            INNER JOIN VaiTro ON NguoiDung.MaVaiTro = VaiTro.MaVaiTro
-            WHERE NguoiDung.TenDangNhap = '{username}' AND NguoiDung.MatKhau = '{password}'";
+                SELECT NguoiDung.MaNguoiDung, NguoiDung.MaVaiTro, VaiTro.TenVaiTro
+                FROM NguoiDung
+                INNER JOIN VaiTro ON NguoiDung.MaVaiTro = VaiTro.MaVaiTro
+                WHERE NguoiDung.TenDangNhap = '{username}' AND NguoiDung.MatKhau = '{password}'";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -45,6 +52,19 @@ namespace QuanLyTruongHoc
                     int maNguoiDung = Convert.ToInt32(dt.Rows[0]["MaNguoiDung"]);
                     int maVaiTro = Convert.ToInt32(dt.Rows[0]["MaVaiTro"]);
                     string tenVaiTro = dt.Rows[0]["TenVaiTro"].ToString();
+                    int newMaNK = GetNextMaNK();
+
+                    // Ghi nhật ký đăng nhập
+                    string insertLogQuery = @"
+                    INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                    VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)";
+                    db.ExecuteNonQuery(insertLogQuery, new Dictionary<string, object>
+                    {
+                        { "@MaNK", newMaNK },
+                        { "@MaNguoiDung", maNguoiDung },
+                        { "@HanhDong", "Đăng nhập" },
+                        { "@ThoiGian", DateTime.Now }
+                    });
 
                     // Tạo hiệu ứng mờ dần cho form hiện tại
                     System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer

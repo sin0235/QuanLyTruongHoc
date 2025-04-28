@@ -314,9 +314,9 @@
             this.pnlContent.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlContent.BorderRadius = 15;
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.FillColor = System.Drawing.Color.AliceBlue;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
             // 
