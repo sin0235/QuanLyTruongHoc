@@ -205,7 +205,7 @@ namespace QuanLyTruongHoc
             this.thongTinCaNhanBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.thongTinCaNhanBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thongTinCaNhanBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.thongTinCaNhanBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thongTinCaNhanBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.thongTinCaNhanBtn.Location = new System.Drawing.Point(0, 78);
             this.thongTinCaNhanBtn.Name = "thongTinCaNhanBtn";
             this.thongTinCaNhanBtn.Size = new System.Drawing.Size(350, 72);
@@ -222,7 +222,7 @@ namespace QuanLyTruongHoc
             this.quanLyLopBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.quanLyLopBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quanLyLopBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.quanLyLopBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.quanLyLopBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.quanLyLopBtn.Location = new System.Drawing.Point(0, 390);
             this.quanLyLopBtn.Name = "quanLyLopBtn";
             this.quanLyLopBtn.Size = new System.Drawing.Size(350, 72);
@@ -239,7 +239,7 @@ namespace QuanLyTruongHoc
             this.quanLyDiemSoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.quanLyDiemSoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quanLyDiemSoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.quanLyDiemSoBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.quanLyDiemSoBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.quanLyDiemSoBtn.Location = new System.Drawing.Point(3, 312);
             this.quanLyDiemSoBtn.Name = "quanLyDiemSoBtn";
             this.quanLyDiemSoBtn.Size = new System.Drawing.Size(350, 72);
@@ -256,7 +256,7 @@ namespace QuanLyTruongHoc
             this.keHoachGiangDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.keHoachGiangDayBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.keHoachGiangDayBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.keHoachGiangDayBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.keHoachGiangDayBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.keHoachGiangDayBtn.Location = new System.Drawing.Point(0, 234);
             this.keHoachGiangDayBtn.Name = "keHoachGiangDayBtn";
             this.keHoachGiangDayBtn.Size = new System.Drawing.Size(350, 72);
@@ -273,7 +273,7 @@ namespace QuanLyTruongHoc
             this.lichDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.lichDayBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lichDayBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lichDayBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lichDayBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.lichDayBtn.Location = new System.Drawing.Point(0, 156);
             this.lichDayBtn.Name = "lichDayBtn";
             this.lichDayBtn.Size = new System.Drawing.Size(350, 72);
@@ -290,7 +290,7 @@ namespace QuanLyTruongHoc
             this.thongBaoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.thongBaoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thongBaoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.thongBaoBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thongBaoBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
             this.thongBaoBtn.Location = new System.Drawing.Point(0, 0);
             this.thongBaoBtn.Name = "thongBaoBtn";
             this.thongBaoBtn.Size = new System.Drawing.Size(350, 72);
