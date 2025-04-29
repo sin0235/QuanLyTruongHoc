@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using QuanLyTruongHoc.DAL;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace QuanLyTruongHoc.GUI.Controls
 {
@@ -33,24 +34,25 @@ namespace QuanLyTruongHoc.GUI.Controls
                 string query = @"
                 SELECT NK.MaNguoiDung, 
                 CASE 
-                WHEN ND.MaVaiTro = 1 THEN N'Ban giám hiệu'
-                WHEN ND.MaVaiTro = 2 THEN GV.HoTen
-                WHEN ND.MaVaiTro = 3 THEN HS.HoTen
-                ELSE N'Không xác định'
+                    WHEN ND.MaVaiTro = 1 THEN N'Ban giám hiệu'
+                    WHEN ND.MaVaiTro = 2 THEN GV.HoTen
+                    WHEN ND.MaVaiTro = 3 THEN HS.HoTen
+                    ELSE N'Không xác định'
                 END AS NguoiHanhDong,
-                    NK.HanhDong,
+                VT.TenVaiTro AS VaiTro, -- Lấy tên vai trò từ bảng VaiTro
+                NK.HanhDong,
                 FORMAT(NK.ThoiGian, 'yyyy-MM-dd HH:mm:ss') AS ThoiGian
                 FROM NhatKyHeThong NK
                 LEFT JOIN NguoiDung ND ON NK.MaNguoiDung = ND.MaNguoiDung
+                LEFT JOIN VaiTro VT ON ND.MaVaiTro = VT.MaVaiTro -- Thêm JOIN với bảng VaiTro
                 LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
-                LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung";
-
+                LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung
+                ORDER BY NK.ThoiGian DESC";
                 DatabaseHelper db = new DatabaseHelper();
                 DataTable dt = db.ExecuteQuery(query);
-
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    dgvQuanLyHeThong.AutoGenerateColumns = false; 
+                    dgvQuanLyHeThong.AutoGenerateColumns = false;
                     dgvQuanLyHeThong.DataSource = dt;
                     dgvQuanLyHeThong.ClearSelection();
                     return true;

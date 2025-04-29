@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using QuanLyTruongHoc.GUI.Controls;
-
+using QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu;
 namespace QuanLyTruongHoc
 {
     public partial class frmBGH : Form
@@ -167,6 +167,8 @@ namespace QuanLyTruongHoc
             pnlContent.Controls.Add(uc);
             btnGuiThu.FillColor = Color.FromArgb(214, 228, 255);
             btnQuanLyHeThong.FillColor = Color.Transparent;
+            btnXemThu.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Gửi thư";
         }
 
         private void btnQuanLyHeThong_Click(object sender, EventArgs e)
@@ -177,11 +179,23 @@ namespace QuanLyTruongHoc
             pnlContent.Controls.Add(uc);
             btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
             btnGuiThu.FillColor = Color.Transparent;
+            btnXemThu.FillColor = Color.Transparent;
         }
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
         }
 
+        private void btnXemThu_Click(object sender, EventArgs e)
+        {
+            pnlContent.Controls.Clear();
+            ucXemThuDaGui uc = new ucXemThuDaGui();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnXemThu.FillColor = Color.FromArgb(214, 228, 255);
+            btnGuiThu.FillColor = Color.Transparent;
+            btnQuanLyHeThong.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Xem thư đã gửi";
+        }
     }
 }

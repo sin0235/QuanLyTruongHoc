@@ -35,6 +35,7 @@
             this.btnLamMoi = new Guna.UI2.WinForms.Guna2Button();
             this.dgvQuanLyHeThong = new Guna.UI2.WinForms.Guna2DataGridView();
             this.NguoiHanhDong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VaiTro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HanhDong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGian = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLyHeThong)).BeginInit();
@@ -50,13 +51,13 @@
             this.btnLamMoi.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnLamMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnLamMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLamMoi.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            this.btnLamMoi.FillColor = System.Drawing.Color.RoyalBlue;
             this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.btnLamMoi.ForeColor = System.Drawing.Color.White;
             this.btnLamMoi.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
-            this.btnLamMoi.Location = new System.Drawing.Point(488, 45);
+            this.btnLamMoi.Location = new System.Drawing.Point(506, 23);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(248, 48);
+            this.btnLamMoi.Size = new System.Drawing.Size(211, 42);
             this.btnLamMoi.TabIndex = 0;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseTransparentBackground = true;
@@ -75,10 +76,10 @@
             this.dgvQuanLyHeThong.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvQuanLyHeThong.BackgroundColor = System.Drawing.Color.AliceBlue;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.RoyalBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.RoyalBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -86,6 +87,7 @@
             this.dgvQuanLyHeThong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvQuanLyHeThong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NguoiHanhDong,
+            this.VaiTro,
             this.HanhDong,
             this.ThoiGian});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -97,7 +99,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvQuanLyHeThong.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvQuanLyHeThong.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvQuanLyHeThong.Location = new System.Drawing.Point(80, 120);
+            this.dgvQuanLyHeThong.Location = new System.Drawing.Point(63, 77);
             this.dgvQuanLyHeThong.MultiSelect = false;
             this.dgvQuanLyHeThong.Name = "dgvQuanLyHeThong";
             this.dgvQuanLyHeThong.ReadOnly = true;
@@ -113,7 +115,7 @@
             this.dgvQuanLyHeThong.RowHeadersWidth = 51;
             this.dgvQuanLyHeThong.RowTemplate.Height = 24;
             this.dgvQuanLyHeThong.RowTemplate.ReadOnly = true;
-            this.dgvQuanLyHeThong.Size = new System.Drawing.Size(1031, 569);
+            this.dgvQuanLyHeThong.Size = new System.Drawing.Size(1069, 601);
             this.dgvQuanLyHeThong.TabIndex = 1;
             this.dgvQuanLyHeThong.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvQuanLyHeThong.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -145,6 +147,14 @@
             this.NguoiHanhDong.MinimumWidth = 6;
             this.NguoiHanhDong.Name = "NguoiHanhDong";
             this.NguoiHanhDong.ReadOnly = true;
+            // 
+            // VaiTro
+            // 
+            this.VaiTro.DataPropertyName = "VaiTro";
+            this.VaiTro.HeaderText = "Vai trò";
+            this.VaiTro.MinimumWidth = 6;
+            this.VaiTro.Name = "VaiTro";
+            this.VaiTro.ReadOnly = true;
             // 
             // HanhDong
             // 
@@ -183,6 +193,7 @@
         private Guna.UI2.WinForms.Guna2Button btnLamMoi;
         private Guna.UI2.WinForms.Guna2DataGridView dgvQuanLyHeThong;
         private System.Windows.Forms.DataGridViewTextBoxColumn NguoiHanhDong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VaiTro;
         private System.Windows.Forms.DataGridViewTextBoxColumn HanhDong;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGian;
     }

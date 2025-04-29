@@ -55,16 +55,10 @@ namespace QuanLyTruongHoc
                     int newMaNK = GetNextMaNK();
 
                     // Ghi nhật ký đăng nhập
-                    string insertLogQuery = @"
+                    string insertLogQuery = $@"
                     INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                    VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)";
-                    db.ExecuteNonQuery(insertLogQuery, new Dictionary<string, object>
-                    {
-                        { "@MaNK", newMaNK },
-                        { "@MaNguoiDung", maNguoiDung },
-                        { "@HanhDong", "Đăng nhập" },
-                        { "@ThoiGian", DateTime.Now }
-                    });
+                    VALUES ({newMaNK}, {maNguoiDung}, N'Đăng nhập', GETDATE())";
+                    db.ExecuteNonQuery(insertLogQuery);
 
                     // Tạo hiệu ứng mờ dần cho form hiện tại
                     System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer
