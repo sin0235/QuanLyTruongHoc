@@ -40,9 +40,12 @@ namespace QuanLyTruongHoc
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.thongTinCaNhanBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.quanLyLopBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.quanLyDiemSoBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.keHoachGiangDayBtn = new Guna.UI2.WinForms.Guna2Button();
             this.lichDayBtn = new Guna.UI2.WinForms.Guna2Button();
             this.thongBaoBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.homThuBtn = new Guna.UI2.WinForms.Guna2Button();
             this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -89,7 +92,7 @@ namespace QuanLyTruongHoc
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(153, 23);
+            this.lblFormTitle.Size = new System.Drawing.Size(192, 30);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Trường Học";
             // 
@@ -177,9 +180,12 @@ namespace QuanLyTruongHoc
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
+            this.pnlMenu.Controls.Add(this.thongTinCaNhanBtn);
+            this.pnlMenu.Controls.Add(this.quanLyLopBtn);
+            this.pnlMenu.Controls.Add(this.quanLyDiemSoBtn);
+            this.pnlMenu.Controls.Add(this.keHoachGiangDayBtn);
             this.pnlMenu.Controls.Add(this.lichDayBtn);
             this.pnlMenu.Controls.Add(this.thongBaoBtn);
-            this.pnlMenu.Controls.Add(this.homThuBtn);
             this.pnlMenu.Controls.Add(this.btnSettings);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
@@ -190,20 +196,90 @@ namespace QuanLyTruongHoc
             this.pnlMenu.Size = new System.Drawing.Size(350, 870);
             this.pnlMenu.TabIndex = 1;
             // 
+            // thongTinCaNhanBtn
+            // 
+            this.thongTinCaNhanBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.thongTinCaNhanBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.thongTinCaNhanBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.thongTinCaNhanBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.thongTinCaNhanBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.thongTinCaNhanBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.thongTinCaNhanBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.thongTinCaNhanBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thongTinCaNhanBtn.Location = new System.Drawing.Point(0, 78);
+            this.thongTinCaNhanBtn.Name = "thongTinCaNhanBtn";
+            this.thongTinCaNhanBtn.Size = new System.Drawing.Size(350, 72);
+            this.thongTinCaNhanBtn.TabIndex = 13;
+            this.thongTinCaNhanBtn.Text = "Cá Nhân";
+            this.thongTinCaNhanBtn.Click += new System.EventHandler(this.thongTinCaNhanBtn_Click);
+            // 
+            // quanLyLopBtn
+            // 
+            this.quanLyLopBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.quanLyLopBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.quanLyLopBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.quanLyLopBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.quanLyLopBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.quanLyLopBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quanLyLopBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.quanLyLopBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.quanLyLopBtn.Location = new System.Drawing.Point(0, 390);
+            this.quanLyLopBtn.Name = "quanLyLopBtn";
+            this.quanLyLopBtn.Size = new System.Drawing.Size(350, 72);
+            this.quanLyLopBtn.TabIndex = 12;
+            this.quanLyLopBtn.Text = "Quản Lý Lớp";
+            this.quanLyLopBtn.Click += new System.EventHandler(this.quanLyLopBtn_Click);
+            // 
+            // quanLyDiemSoBtn
+            // 
+            this.quanLyDiemSoBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.quanLyDiemSoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.quanLyDiemSoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.quanLyDiemSoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.quanLyDiemSoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.quanLyDiemSoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quanLyDiemSoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.quanLyDiemSoBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.quanLyDiemSoBtn.Location = new System.Drawing.Point(3, 312);
+            this.quanLyDiemSoBtn.Name = "quanLyDiemSoBtn";
+            this.quanLyDiemSoBtn.Size = new System.Drawing.Size(350, 72);
+            this.quanLyDiemSoBtn.TabIndex = 10;
+            this.quanLyDiemSoBtn.Text = "Điểm Số";
+            this.quanLyDiemSoBtn.Click += new System.EventHandler(this.quanLyDiemSoBtn_Click);
+            // 
+            // keHoachGiangDayBtn
+            // 
+            this.keHoachGiangDayBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.keHoachGiangDayBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.keHoachGiangDayBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.keHoachGiangDayBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.keHoachGiangDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.keHoachGiangDayBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.keHoachGiangDayBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.keHoachGiangDayBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.keHoachGiangDayBtn.Location = new System.Drawing.Point(0, 234);
+            this.keHoachGiangDayBtn.Name = "keHoachGiangDayBtn";
+            this.keHoachGiangDayBtn.Size = new System.Drawing.Size(350, 72);
+            this.keHoachGiangDayBtn.TabIndex = 9;
+            this.keHoachGiangDayBtn.Text = "Kế Hoạch Giảng Dạy";
+            this.keHoachGiangDayBtn.Click += new System.EventHandler(this.keHoachGiangDayBtn_Click);
+            // 
             // lichDayBtn
             // 
             this.lichDayBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.lichDayBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.lichDayBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.lichDayBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.lichDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
+            this.lichDayBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.lichDayBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lichDayBtn.ForeColor = System.Drawing.Color.White;
-            this.lichDayBtn.Location = new System.Drawing.Point(0, 142);
+            this.lichDayBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.lichDayBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lichDayBtn.Location = new System.Drawing.Point(0, 156);
             this.lichDayBtn.Name = "lichDayBtn";
-            this.lichDayBtn.Size = new System.Drawing.Size(280, 45);
+            this.lichDayBtn.Size = new System.Drawing.Size(350, 72);
             this.lichDayBtn.TabIndex = 8;
-            this.lichDayBtn.Text = "Lịch Dạy";
+            this.lichDayBtn.Text = "Thời Khóa Biểu";
+            this.lichDayBtn.Click += new System.EventHandler(this.lichDayBtn_Click);
             // 
             // thongBaoBtn
             // 
@@ -211,30 +287,16 @@ namespace QuanLyTruongHoc
             this.thongBaoBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.thongBaoBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.thongBaoBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.thongBaoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
+            this.thongBaoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
             this.thongBaoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thongBaoBtn.ForeColor = System.Drawing.Color.White;
-            this.thongBaoBtn.Location = new System.Drawing.Point(3, 18);
+            this.thongBaoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.thongBaoBtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thongBaoBtn.Location = new System.Drawing.Point(0, 0);
             this.thongBaoBtn.Name = "thongBaoBtn";
-            this.thongBaoBtn.Size = new System.Drawing.Size(280, 45);
+            this.thongBaoBtn.Size = new System.Drawing.Size(350, 72);
             this.thongBaoBtn.TabIndex = 7;
             this.thongBaoBtn.Text = "Thông Báo";
             this.thongBaoBtn.Click += new System.EventHandler(this.thongBaoBtn_Click);
-            // 
-            // homThuBtn
-            // 
-            this.homThuBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.homThuBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.homThuBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.homThuBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.homThuBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(115)))), ((int)(((byte)(188)))));
-            this.homThuBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homThuBtn.ForeColor = System.Drawing.Color.White;
-            this.homThuBtn.Location = new System.Drawing.Point(0, 78);
-            this.homThuBtn.Name = "homThuBtn";
-            this.homThuBtn.Size = new System.Drawing.Size(280, 45);
-            this.homThuBtn.TabIndex = 7;
-            this.homThuBtn.Text = "Hòm Thư";
             // 
             // btnSettings
             // 
@@ -282,7 +344,7 @@ namespace QuanLyTruongHoc
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(28, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
+            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -325,9 +387,9 @@ namespace QuanLyTruongHoc
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(116, 43);
             this.lblPageTitle.TabIndex = 2;
-            this.lblPageTitle.Text = "Thông báo";
+            this.lblPageTitle.Text = "Content";
             // 
             // lblUserName
             // 
@@ -335,9 +397,9 @@ namespace QuanLyTruongHoc
             this.lblUserName.BackColor = System.Drawing.Color.Transparent;
             this.lblUserName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.lblUserName.Location = new System.Drawing.Point(1380, 33);
+            this.lblUserName.Location = new System.Drawing.Point(1360, 32);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(106, 23);
+            this.lblUserName.Size = new System.Drawing.Size(135, 30);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -358,6 +420,8 @@ namespace QuanLyTruongHoc
             // 
             this.pnlMainScreen.Controls.Add(this.pnlContent);
             this.pnlMainScreen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMainScreen.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.pnlMainScreen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(237)))), ((int)(((byte)(255)))));
             this.pnlMainScreen.Location = new System.Drawing.Point(350, 50);
             this.pnlMainScreen.Name = "pnlMainScreen";
             this.pnlMainScreen.Size = new System.Drawing.Size(1570, 1030);
@@ -365,7 +429,7 @@ namespace QuanLyTruongHoc
             // 
             // pnlContent
             // 
-            this.pnlContent.Location = new System.Drawing.Point(6, 105);
+            this.pnlContent.Location = new System.Drawing.Point(3, 105);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(1561, 922);
             this.pnlContent.TabIndex = 0;
@@ -421,14 +485,17 @@ namespace QuanLyTruongHoc
         private Guna.UI2.WinForms.Guna2Button btnSettings;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Button thongBaoBtn;
-        private Guna.UI2.WinForms.Guna2Button lichDayBtn;
-        private Guna.UI2.WinForms.Guna2Button homThuBtn;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlMainScreen;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlTop;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         public Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picUserAvatar;
         private Guna.UI2.WinForms.Guna2Panel pnlContent;
+        private Guna.UI2.WinForms.Guna2Button lichDayBtn;
+        private Guna.UI2.WinForms.Guna2Button quanLyLopBtn;
+        private Guna.UI2.WinForms.Guna2Button quanLyDiemSoBtn;
+        private Guna.UI2.WinForms.Guna2Button keHoachGiangDayBtn;
+        private Guna.UI2.WinForms.Guna2Button thongTinCaNhanBtn;
     }
 }
 

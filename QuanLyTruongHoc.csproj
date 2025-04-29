@@ -402,6 +402,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\notification-bell.png" />
+    <None Include="Resources\bell.png" />
     <None Include="assets\images\question_icon.png" />
     <None Include="assets\images\search.png" />
     <None Include="assets\images\attach.png" />

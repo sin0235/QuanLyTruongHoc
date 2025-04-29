@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Guna.UI2.WinForms;
 using QuanLyTruongHoc.DAL;
 using QuanLyTruongHoc.GUI.Controls;
+using QuanLyTruongHoc.GUI.Controls.ucGiaoVien;
 
 namespace QuanLyTruongHoc
 {
@@ -52,6 +53,9 @@ namespace QuanLyTruongHoc
             // Register Resize event
             this.Resize += new EventHandler(Form1_Resize);
 
+            LoadThongBao();
+            lblPageTitle.Text = "Thông báo";
+
         }
 
         private void LoadUserName(int maNguoiDung)
@@ -86,7 +90,16 @@ namespace QuanLyTruongHoc
 
         private void thongBaoBtn_Click(object sender, EventArgs e)
         {
-
+            lblPageTitle.Text = "Thông báo";
+            LoadThongBao();
+        }
+        private void LoadThongBao() {
+            pnlContent.Controls.Clear();
+            // Mở ucXemThongBao ở pnlContent
+            ucXemThongBao uc = new ucXemThongBao();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc); // Thêm ucXemThongBao vào pnlContent
+            uc.BringToFront();
         }
 
 
@@ -210,6 +223,56 @@ namespace QuanLyTruongHoc
         private void pnlContent_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void thongTinCaNhanBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Thông tin cá nhân";
+            pnlContent.Controls.Clear();
+            ucThongTinCaNhan uc = new ucThongTinCaNhan();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void lichDayBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Lịch dạy";
+            pnlContent.Controls.Clear();
+            ucThoiKhoaBieu uc = new ucThoiKhoaBieu();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void keHoachGiangDayBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Kế hoạch giảng dạy";
+            pnlContent.Controls.Clear();
+            ucQuanLyKeHoachGiangDay uc = new ucQuanLyKeHoachGiangDay();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void quanLyDiemSoBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Quản lý điểm số";
+            pnlContent.Controls.Clear();
+            ucQuanLyDiemSo uc = new ucQuanLyDiemSo();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void quanLyLopBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Quản lý lớp";
+            pnlContent.Controls.Clear();
+            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
         }
     }
 }

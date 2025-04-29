@@ -73,6 +73,16 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bell {
+            get {
+                object obj = ResourceManager.GetObject("bell", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap book {
             get {
                 object obj = ResourceManager.GetObject("book", resourceCulture);
@@ -246,6 +256,16 @@ namespace QuanLyTruongHoc.Properties {
         internal static System.Drawing.Bitmap lock_icon {
             get {
                 object obj = ResourceManager.GetObject("lock_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notification_bell {
+            get {
+                object obj = ResourceManager.GetObject("notification-bell", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
