@@ -53,9 +53,11 @@
             this.cbTatCa.CheckedState.BorderRadius = 0;
             this.cbTatCa.CheckedState.BorderThickness = 0;
             this.cbTatCa.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbTatCa.Location = new System.Drawing.Point(102, 33);
+            this.cbTatCa.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbTatCa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbTatCa.Location = new System.Drawing.Point(97, 62);
             this.cbTatCa.Name = "cbTatCa";
-            this.cbTatCa.Size = new System.Drawing.Size(170, 20);
+            this.cbTatCa.Size = new System.Drawing.Size(320, 36);
             this.cbTatCa.TabIndex = 0;
             this.cbTatCa.Text = "Gửi cho tất cả mọi người";
             this.cbTatCa.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -71,9 +73,11 @@
             this.cbLopCuThe.CheckedState.BorderRadius = 0;
             this.cbLopCuThe.CheckedState.BorderThickness = 0;
             this.cbLopCuThe.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbLopCuThe.Location = new System.Drawing.Point(274, 74);
+            this.cbLopCuThe.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbLopCuThe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbLopCuThe.Location = new System.Drawing.Point(97, 114);
             this.cbLopCuThe.Name = "cbLopCuThe";
-            this.cbLopCuThe.Size = new System.Drawing.Size(134, 20);
+            this.cbLopCuThe.Size = new System.Drawing.Size(245, 36);
             this.cbLopCuThe.TabIndex = 1;
             this.cbLopCuThe.Text = "Gửi cho lớp cụ thể";
             this.cbLopCuThe.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -89,9 +93,11 @@
             this.cbGiaoVien.CheckedState.BorderRadius = 0;
             this.cbGiaoVien.CheckedState.BorderThickness = 0;
             this.cbGiaoVien.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbGiaoVien.Location = new System.Drawing.Point(421, 33);
+            this.cbGiaoVien.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbGiaoVien.Location = new System.Drawing.Point(480, 62);
             this.cbGiaoVien.Name = "cbGiaoVien";
-            this.cbGiaoVien.Size = new System.Drawing.Size(132, 20);
+            this.cbGiaoVien.Size = new System.Drawing.Size(236, 36);
             this.cbGiaoVien.TabIndex = 2;
             this.cbGiaoVien.Text = "Gửi cho giáo viên";
             this.cbGiaoVien.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -107,9 +113,11 @@
             this.cbPhongNoiVu.CheckedState.BorderRadius = 0;
             this.cbPhongNoiVu.CheckedState.BorderThickness = 0;
             this.cbPhongNoiVu.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbPhongNoiVu.Location = new System.Drawing.Point(865, 33);
+            this.cbPhongNoiVu.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbPhongNoiVu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbPhongNoiVu.Location = new System.Drawing.Point(800, 114);
             this.cbPhongNoiVu.Name = "cbPhongNoiVu";
-            this.cbPhongNoiVu.Size = new System.Drawing.Size(153, 20);
+            this.cbPhongNoiVu.Size = new System.Drawing.Size(284, 36);
             this.cbPhongNoiVu.TabIndex = 3;
             this.cbPhongNoiVu.Text = "Gửi cho phòng nội vụ";
             this.cbPhongNoiVu.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -125,9 +133,11 @@
             this.cbHocSinh.CheckedState.BorderRadius = 0;
             this.cbHocSinh.CheckedState.BorderThickness = 0;
             this.cbHocSinh.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbHocSinh.Location = new System.Drawing.Point(652, 33);
+            this.cbHocSinh.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbHocSinh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbHocSinh.Location = new System.Drawing.Point(800, 62);
             this.cbHocSinh.Name = "cbHocSinh";
-            this.cbHocSinh.Size = new System.Drawing.Size(126, 20);
+            this.cbHocSinh.Size = new System.Drawing.Size(226, 36);
             this.cbHocSinh.TabIndex = 4;
             this.cbHocSinh.Text = "Gửi cho học sinh";
             this.cbHocSinh.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -143,9 +153,11 @@
             this.cbCaNhan.CheckedState.BorderRadius = 0;
             this.cbCaNhan.CheckedState.BorderThickness = 0;
             this.cbCaNhan.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbCaNhan.Location = new System.Drawing.Point(588, 74);
+            this.cbCaNhan.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.cbCaNhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.cbCaNhan.Location = new System.Drawing.Point(480, 114);
             this.cbCaNhan.Name = "cbCaNhan";
-            this.cbCaNhan.Size = new System.Drawing.Size(124, 20);
+            this.cbCaNhan.Size = new System.Drawing.Size(220, 36);
             this.cbCaNhan.TabIndex = 5;
             this.cbCaNhan.Text = "Gửi cho cá nhân";
             this.cbCaNhan.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -157,18 +169,22 @@
             // lblGuiThu
             // 
             this.lblGuiThu.BackColor = System.Drawing.Color.Transparent;
-            this.lblGuiThu.Location = new System.Drawing.Point(28, 16);
+            this.lblGuiThu.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblGuiThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.lblGuiThu.Location = new System.Drawing.Point(19, 13);
             this.lblGuiThu.Name = "lblGuiThu";
-            this.lblGuiThu.Size = new System.Drawing.Size(43, 18);
+            this.lblGuiThu.Size = new System.Drawing.Size(111, 43);
             this.lblGuiThu.TabIndex = 6;
             this.lblGuiThu.Text = "Gửi thư";
             // 
             // lblNhapLop
             // 
             this.lblNhapLop.BackColor = System.Drawing.Color.Transparent;
-            this.lblNhapLop.Location = new System.Drawing.Point(146, 116);
+            this.lblNhapLop.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblNhapLop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.lblNhapLop.Location = new System.Drawing.Point(132, 177);
             this.lblNhapLop.Name = "lblNhapLop";
-            this.lblNhapLop.Size = new System.Drawing.Size(61, 18);
+            this.lblNhapLop.Size = new System.Drawing.Size(108, 33);
             this.lblNhapLop.TabIndex = 7;
             this.lblNhapLop.Text = "Nhập lớp: ";
             this.lblNhapLop.Visible = false;
@@ -176,15 +192,18 @@
             // lblNhapMaCaNhan
             // 
             this.lblNhapMaCaNhan.BackColor = System.Drawing.Color.Transparent;
-            this.lblNhapMaCaNhan.Location = new System.Drawing.Point(540, 116);
+            this.lblNhapMaCaNhan.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblNhapMaCaNhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.lblNhapMaCaNhan.Location = new System.Drawing.Point(573, 177);
             this.lblNhapMaCaNhan.Name = "lblNhapMaCaNhan";
-            this.lblNhapMaCaNhan.Size = new System.Drawing.Size(154, 18);
+            this.lblNhapMaCaNhan.Size = new System.Drawing.Size(266, 33);
             this.lblNhapMaCaNhan.TabIndex = 8;
             this.lblNhapMaCaNhan.Text = "Nhập MaHS hoặc MaGV:";
             this.lblNhapMaCaNhan.Visible = false;
             // 
             // txtNhapLop
             // 
+            this.txtNhapLop.BorderRadius = 10;
             this.txtNhapLop.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtNhapLop.DefaultText = "";
             this.txtNhapLop.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -192,9 +211,10 @@
             this.txtNhapLop.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNhapLop.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNhapLop.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNhapLop.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtNhapLop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNhapLop.ForeColor = System.Drawing.Color.Black;
             this.txtNhapLop.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNhapLop.Location = new System.Drawing.Point(274, 116);
+            this.txtNhapLop.Location = new System.Drawing.Point(309, 177);
             this.txtNhapLop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNhapLop.Name = "txtNhapLop";
             this.txtNhapLop.PlaceholderText = "";
@@ -205,6 +225,7 @@
             // 
             // txtNhapMaCaNhan
             // 
+            this.txtNhapMaCaNhan.BorderRadius = 10;
             this.txtNhapMaCaNhan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtNhapMaCaNhan.DefaultText = "";
             this.txtNhapMaCaNhan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -212,9 +233,10 @@
             this.txtNhapMaCaNhan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNhapMaCaNhan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNhapMaCaNhan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNhapMaCaNhan.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtNhapMaCaNhan.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNhapMaCaNhan.ForeColor = System.Drawing.Color.Black;
             this.txtNhapMaCaNhan.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNhapMaCaNhan.Location = new System.Drawing.Point(713, 116);
+            this.txtNhapMaCaNhan.Location = new System.Drawing.Point(825, 179);
             this.txtNhapMaCaNhan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNhapMaCaNhan.Name = "txtNhapMaCaNhan";
             this.txtNhapMaCaNhan.PlaceholderText = "";
@@ -225,6 +247,7 @@
             // 
             // txtTieuDe
             // 
+            this.txtTieuDe.BorderRadius = 10;
             this.txtTieuDe.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTieuDe.DefaultText = "";
             this.txtTieuDe.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -232,10 +255,10 @@
             this.txtTieuDe.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtTieuDe.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtTieuDe.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTieuDe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTieuDe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTieuDe.ForeColor = System.Drawing.Color.Black;
             this.txtTieuDe.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTieuDe.Location = new System.Drawing.Point(274, 170);
+            this.txtTieuDe.Location = new System.Drawing.Point(309, 233);
             this.txtTieuDe.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtTieuDe.Name = "txtTieuDe";
             this.txtTieuDe.Padding = new System.Windows.Forms.Padding(5);
@@ -247,23 +270,28 @@
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(146, 170);
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(132, 234);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(82, 18);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(148, 33);
             this.guna2HtmlLabel1.TabIndex = 12;
             this.guna2HtmlLabel1.Text = "Nhập tiêu đề:";
             // 
             // guna2HtmlLabel2
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(146, 227);
+            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(132, 299);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(93, 18);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(170, 33);
             this.guna2HtmlLabel2.TabIndex = 13;
             this.guna2HtmlLabel2.Text = "Nhập nội dung:";
             // 
             // txtNoiDung
             // 
+            this.txtNoiDung.BorderRadius = 10;
             this.txtNoiDung.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtNoiDung.DefaultText = "";
             this.txtNoiDung.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -271,10 +299,10 @@
             this.txtNoiDung.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNoiDung.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtNoiDung.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNoiDung.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtNoiDung.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNoiDung.ForeColor = System.Drawing.Color.Black;
             this.txtNoiDung.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNoiDung.Location = new System.Drawing.Point(274, 227);
+            this.txtNoiDung.Location = new System.Drawing.Point(309, 299);
             this.txtNoiDung.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
@@ -287,13 +315,14 @@
             // 
             // btnGuiThu
             // 
+            this.btnGuiThu.BorderRadius = 10;
             this.btnGuiThu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnGuiThu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnGuiThu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnGuiThu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnGuiThu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnGuiThu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuiThu.ForeColor = System.Drawing.Color.White;
-            this.btnGuiThu.Location = new System.Drawing.Point(434, 419);
+            this.btnGuiThu.Location = new System.Drawing.Point(480, 482);
             this.btnGuiThu.Name = "btnGuiThu";
             this.btnGuiThu.Size = new System.Drawing.Size(180, 45);
             this.btnGuiThu.TabIndex = 15;
@@ -304,6 +333,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.btnGuiThu);
             this.Controls.Add(this.txtNoiDung);
             this.Controls.Add(this.guna2HtmlLabel2);

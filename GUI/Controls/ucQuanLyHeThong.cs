@@ -17,27 +17,9 @@ namespace QuanLyTruongHoc.GUI.Controls
         public ucQuanLyHeThong()
         {
             InitializeComponent();
-            ConfigureDataGridView();
             LoadData();
             this.Load += ucQuanLyHeThong_Load;
             this.VisibleChanged += UcQuanLyHeThong_VisibleChanged;
-        }
-        private void ConfigureDataGridView()
-        {
-            dgvQuanLyHeThong.EnableHeadersVisualStyles = false;
-            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-
-            if (dgvQuanLyHeThong.Columns.Contains("MaNguoiDung"))
-                dgvQuanLyHeThong.Columns["MaNguoiDung"].Visible = false;
-
-            if (dgvQuanLyHeThong.Columns.Contains("NguoiHanhDong"))
-                dgvQuanLyHeThong.Columns["NguoiHanhDong"].HeaderText = "Người hành động";
-
-            if (dgvQuanLyHeThong.Columns.Contains("HanhDong"))
-                dgvQuanLyHeThong.Columns["HanhDong"].HeaderText = "Hành động";
-
-            if (dgvQuanLyHeThong.Columns.Contains("ThoiGian"))
-                dgvQuanLyHeThong.Columns["ThoiGian"].HeaderText = "Thời gian";
         }
 
         private void dgvQuanLyHeThong_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -68,13 +50,9 @@ namespace QuanLyTruongHoc.GUI.Controls
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
+                    dgvQuanLyHeThong.AutoGenerateColumns = false; 
                     dgvQuanLyHeThong.DataSource = dt;
-                    dgvQuanLyHeThong.Columns["MaNguoiDung"].Visible = false;
-                    dgvQuanLyHeThong.Columns["NguoiHanhDong"].HeaderText = "Người hành động";
-                    dgvQuanLyHeThong.Columns["HanhDong"].HeaderText = "Hành động";
-                    dgvQuanLyHeThong.Columns["ThoiGian"].HeaderText = "Thời gian";
                     dgvQuanLyHeThong.ClearSelection();
-                    ConfigureDataGridView();
                     return true;
                 }
                 else
@@ -118,6 +96,8 @@ namespace QuanLyTruongHoc.GUI.Controls
         private void ucQuanLyHeThong_Load(object sender, EventArgs e)
         {
             CenterControls();
+            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            dgvQuanLyHeThong.EnableHeadersVisualStyles = false;
         }
     }
 }
