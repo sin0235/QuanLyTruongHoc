@@ -11,6 +11,10 @@ using QuanLyTruongHoc.GUI.Controls.ucGiaoVien;
 
 namespace QuanLyTruongHoc
 {
+
+    //Sửa quan trọng trong database: 
+    //Thêm cho GiaoVien thuộc tính NgaySinh(DATE)
+    //Thêm DiaChi(NVARCHAR(100)) vào bảng GiaoVien
     public partial class frmGV : Form
     {
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
@@ -229,7 +233,7 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Thông tin cá nhân";
             pnlContent.Controls.Clear();
-            ucThongTinCaNhan uc = new ucThongTinCaNhan();
+            ucThongTinCaNhan uc = new ucThongTinCaNhan(maNguoiDung);
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
