@@ -80,6 +80,12 @@
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\StudentInfo.cs" />
+    <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemTBChiTiet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemTBChiTiet.Designer.cs">
+      <DependentUpon>ucXemTBChiTiet.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemThuDaGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Controls\ucBanGiamHieu\ucXemTBChiTiet.resx">
+      <DependentUpon>ucXemTBChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucBanGiamHieu\ucXemThuDaGui.resx">
       <DependentUpon>ucXemThuDaGui.cs</DependentUpon>
     </EmbeddedResource>

@@ -161,10 +161,7 @@ namespace QuanLyTruongHoc
 
         private void btnGuiThu_Click(object sender, EventArgs e)
         {
-            pnlContent.Controls.Clear();
-            ucGuiThu uc = new ucGuiThu();
-            uc.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(uc);
+            ShowUserControl(new ucGuiThu());
             btnGuiThu.FillColor = Color.FromArgb(214, 228, 255);
             btnQuanLyHeThong.FillColor = Color.Transparent;
             btnXemThu.FillColor = Color.Transparent;
@@ -173,29 +170,54 @@ namespace QuanLyTruongHoc
 
         private void btnQuanLyHeThong_Click(object sender, EventArgs e)
         {
-            pnlContent.Controls.Clear();
-            ucQuanLyHeThong uc = new ucQuanLyHeThong();
-            uc.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(uc);
+            ShowUserControl(new ucQuanLyHeThong());
             btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
             btnGuiThu.FillColor = Color.Transparent;
             btnXemThu.FillColor = Color.Transparent;
+            lblFormTitle.Text = "Quản lý hệ thống";
         }
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
         }
 
-        private void btnXemThu_Click(object sender, EventArgs e)
+        public void btnXemThu_Click(object sender, EventArgs e)
         {
-            pnlContent.Controls.Clear();
-            ucXemThuDaGui uc = new ucXemThuDaGui();
-            uc.Dock = DockStyle.Fill;
-            pnlContent.Controls.Add(uc);
+            ShowUserControl(new ucXemThuDaGui());
             btnXemThu.FillColor = Color.FromArgb(214, 228, 255);
             btnGuiThu.FillColor = Color.Transparent;
             btnQuanLyHeThong.FillColor = Color.Transparent;
             lblPageTitle.Text = "Xem thư đã gửi";
+        }
+
+        public void ShowUserControl(UserControl uc)
+        {
+            pnlContent.Controls.Clear();
+            pnlContent.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+        }
+        public void ShowUserControlCustomSize(UserControl uc, DockStyle dockStyle = DockStyle.None, int width = 0, int height = 0)
+        {
+            pnlContent.Controls.Clear();
+            if (width > 0 && height > 0)
+            {
+                uc.Size = new Size(width, height);
+            }
+            uc.Dock = dockStyle;
+            if (dockStyle == DockStyle.None)
+            {
+                uc.Location = new Point(
+                    (pnlContent.Width - uc.Width) / 2,
+                    (pnlContent.Height - uc.Height) / 2
+                );
+                pnlContent.Resize += (sender, e) => {
+                    uc.Location = new Point(
+                        (pnlContent.Width - uc.Width) / 2,
+                        (pnlContent.Height - uc.Height) / 2
+                    );
+                };
+            }
+            pnlContent.Controls.Add(uc);
         }
     }
 }

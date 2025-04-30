@@ -22,31 +22,24 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
         {
             try
             {
-                // Khởi tạo đối tượng DatabaseHelper
                 DatabaseHelper db = new DatabaseHelper();
                 db.OpenConnection();
-
-                // Truy vấn dữ liệu từ bảng ThongBao
                 string query = @"
                 SELECT MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, TieuDe, NoiDung, NgayGui
                 FROM ThongBao
                 WHERE MaNguoiGui = 1
                 ORDER BY NgayGui DESC"; 
                 DataTable thongBaoTable = db.ExecuteQuery(query);
-
-                // Xóa các hàng cũ trong DataGridView
                 dgvXemThu.Rows.Clear();
-
                 foreach (DataRow row in thongBaoTable.Rows)
                 {
-                    string nguoiGui = "Ban giám hiệu"; // Người gửi mặc định là Ban giám hiệu
-                    string nguoiNhan = GetNguoiNhan(db, row); // Xử lý thông tin người nhận
+                    string nguoiGui = "Ban giám hiệu";
+                    string nguoiNhan = GetNguoiNhan(db, row);
                     string tieuDe = row["TieuDe"].ToString();
                     string noiDung = row["NoiDung"].ToString();
                     string thoiGian = Convert.ToDateTime(row["NgayGui"]).ToString("dd/MM/yyyy HH:mm:ss");
-                    int maTB = Convert.ToInt32(row["MaTB"]); // Lấy giá trị MaTB
+                    int maTB = Convert.ToInt32(row["MaTB"]);
 
-                    // Thêm hàng vào DataGridView
                     dgvXemThu.Rows.Add(maTB, nguoiGui, nguoiNhan, tieuDe, noiDung, thoiGian);
                 }
             }
@@ -56,15 +49,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             }
         }
 
-        // Hàm xử lý thông tin người nhận
         private string GetNguoiNhan(DatabaseHelper db, DataRow row)
         {
             if (row["MaNguoiNhan"] != DBNull.Value)
             {
-                // Trường hợp gửi cho cá nhân
                 int maNguoiNhan = Convert.ToInt32(row["MaNguoiNhan"]);
-
-                // Truy vấn thông tin từ bảng GiaoVien
                 string query = $@"
                 SELECT GV.HoTen AS TenDayDu, VT.TenVaiTro
                 FROM GiaoVien GV
@@ -75,7 +64,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
 
                 if (result.Rows.Count == 0)
                 {
-                    // Nếu không tìm thấy trong bảng GiaoVien, tìm trong bảng HocSinh
                     query = $@"
                     SELECT HS.HoTen AS TenDayDu, VT.TenVaiTro
                     FROM HocSinh HS
@@ -87,7 +75,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
 
                 if (result.Rows.Count == 0)
                 {
-                    // Nếu không tìm thấy trong bảng GiaoVien và HocSinh, kiểm tra vai trò "Nhân viên phòng nội vụ"
                     query = $@"
                     SELECT ND.TenDangNhap, VT.TenVaiTro
                     FROM NguoiDung ND
@@ -98,7 +85,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                     if (result.Rows.Count > 0)
                     {
                         string vaiTro = result.Rows[0]["TenVaiTro"].ToString();
-                        // Chỉ trả về vai trò mà không thêm tên đăng nhập
                         return vaiTro;
                     }
                 }
@@ -111,13 +97,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                 }
                 else
                 {
-                    // Nếu không tìm thấy thông tin
                     return "Không xác định";
                 }
             }
             else if (row["MaVaiTroNhan"] != DBNull.Value)
             {
-                // Trường hợp gửi cho vai trò hoặc phòng ban
                 int maVaiTro = Convert.ToInt32(row["MaVaiTroNhan"]);
                 string query = $@"
                 SELECT TenVaiTro
@@ -127,12 +111,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
 
                 if (result.Rows.Count > 0)
                 {
-                    return result.Rows[0]["TenVaiTro"].ToString(); // Trả về tên vai trò hoặc phòng ban
+                    return result.Rows[0]["TenVaiTro"].ToString(); 
                 }
             }
             else if (row["MaLop"] != DBNull.Value)
             {
-                // Trường hợp gửi cho lớp
                 string query = $@"
                 SELECT TenLop
                 FROM LopHoc
@@ -144,8 +127,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                     return string.Join(", ", result.AsEnumerable().Select(r => r["TenLop"].ToString()));
                 }
             }
-
-            // Trường hợp không có thông tin người nhận
             return "Không có thông tin người nhận";
         }
         private void ucXemThuDaGui_Load(object sender, EventArgs e)
@@ -161,26 +142,18 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             {
                 if (dgvXemThu.SelectedRows.Count > 0)
                 {
-                    // Hiển thị hộp thoại xác nhận
                     DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa thư đã chọn?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         DatabaseHelper db = new DatabaseHelper();
                         db.OpenConnection();
-
-                        // Lặp qua tất cả các dòng được chọn
                         foreach (DataGridViewRow selectedRow in dgvXemThu.SelectedRows)
                         {
-                            // Lấy giá trị MaTB từ cột tương ứng
                             if (selectedRow.Cells["MaTB"].Value != null)
                             {
                                 int maTB = Convert.ToInt32(selectedRow.Cells["MaTB"].Value);
-
-                                // Xóa bản ghi trong cơ sở dữ liệu
                                 string deleteQuery = $"DELETE FROM ThongBao WHERE MaTB = {maTB}";
                                 db.ExecuteNonQuery(deleteQuery);
-
-                                // Xóa dòng khỏi DataGridView
                                 dgvXemThu.Rows.Remove(selectedRow);
                             }
                         }
@@ -211,6 +184,28 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                 MessageBox.Show("Đã xảy ra lỗi khi làm mới dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             dgvXemThu.ClearSelection();
+        }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            if (dgvXemThu.SelectedRows.Count > 0)
+            {
+                var selectedRow = dgvXemThu.SelectedRows[0];
+                string thoiGian = selectedRow.Cells["ThoiGian"].Value?.ToString() ?? "";
+                string nguoiNhan = selectedRow.Cells["NguoiNhan"].Value?.ToString() ?? "";
+                string noiDung = selectedRow.Cells["NoiDung"].Value?.ToString() ?? "";
+                string tieuDe = selectedRow.Cells["TieuDe"].Value?.ToString() ?? "";
+
+                var ucChiTiet = new ucXemTBChiTiet();
+                ucChiTiet.SetThongBaoChiTiet(thoiGian, nguoiNhan, noiDung, tieuDe);
+
+                var parentForm = this.FindForm() as frmBGH;
+                parentForm.ShowUserControlCustomSize(ucChiTiet, DockStyle.None);
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một dòng để xem chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
