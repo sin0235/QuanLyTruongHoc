@@ -14,18 +14,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
     public partial class ucThongTinCaNhan : UserControl
     {
         private readonly DatabaseHelper db;
-        private int maNguoiDung;
-        public ucThongTinCaNhan(int maNguoiDung)
+
+        public ucThongTinCaNhan()
         {
             InitializeComponent();
             db = new DatabaseHelper();
-            this.maNguoiDung = maNguoiDung;
-
-            // Load teacher information
-            LoadThongTinCaNhan();
 
         }
-        private void LoadThongTinCaNhan()
+        public void LoadThongTinCaNhan(int maNguoiDung)
         {
             try
             {

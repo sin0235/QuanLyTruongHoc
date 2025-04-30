@@ -92,21 +92,6 @@ namespace QuanLyTruongHoc
             }
         }
 
-        private void thongBaoBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Thông báo";
-            LoadThongBao();
-        }
-        private void LoadThongBao() {
-            pnlContent.Controls.Clear();
-            // Mở ucXemThongBao ở pnlContent
-            ucXemThongBao uc = new ucXemThongBao();
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc); // Thêm ucXemThongBao vào pnlContent
-            uc.BringToFront();
-        }
-
-
         // Hàm cập nhật vị trí nút
         private void UpdateButtonPositions()
         {
@@ -229,14 +214,31 @@ namespace QuanLyTruongHoc
 
         }
 
+        private void thongBaoBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Thông báo";
+            LoadThongBao();
+        }
+        private void LoadThongBao()
+        {
+            pnlContent.Controls.Clear();
+            // Mở ucXemThongBao ở pnlContent
+            ucXemThongBao uc = new ucXemThongBao();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc); // Thêm ucXemThongBao vào pnlContent
+            uc.BringToFront();
+        }
+
         private void thongTinCaNhanBtn_Click(object sender, EventArgs e)
         {
             lblPageTitle.Text = "Thông tin cá nhân";
             pnlContent.Controls.Clear();
-            ucThongTinCaNhan uc = new ucThongTinCaNhan(maNguoiDung);
+            ucThongTinCaNhan uc = new ucThongTinCaNhan();
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
+            uc.LoadThongTinCaNhan(maNguoiDung);
+
         }
 
         private void lichDayBtn_Click(object sender, EventArgs e)
@@ -247,7 +249,9 @@ namespace QuanLyTruongHoc
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
+            uc.LoadLichDay(maNguoiDung);
         }
+
 
         private void keHoachGiangDayBtn_Click(object sender, EventArgs e)
         {
