@@ -36,11 +36,13 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             {
                 // Query to get classes and subjects taught by the teacher
                 string queryLopMon = $@"
-            SELECT DISTINCT LH.MaLop, LH.TenLop, MH.MaMon, MH.TenMon
-            FROM LopHoc LH
-            INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
-            INNER JOIN MonHoc MH ON TKB.MaMon = MH.MaMon
-            WHERE TKB.MaGV = {MaGiaoVien}";
+                    SELECT DISTINCT LH.MaLop, LH.TenLop, MH.MaMon, MH.TenMon
+                    FROM LopHoc LH
+                    INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
+                    INNER JOIN MonHoc MH ON TKB.MaMon = MH.MaMon
+                    WHERE TKB.MaGV = {MaGiaoVien}";
+
+
 
                 DataTable dtLopMon = db.ExecuteQuery(queryLopMon);
 
@@ -74,15 +76,18 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                         SELECT 
                             ROW_NUMBER() OVER (ORDER BY HS.HoTen ASC) AS STT,
                             HS.HoTen AS [Họ Tên],
-                            MAX(CASE WHEN DS.LoaiDiem = N'Miệng' THEN DS.Diem END) AS [Điểm Miệng],
-                            MAX(CASE WHEN DS.LoaiDiem = N'15 phút' THEN DS.Diem END) AS [Điểm 15 Phút],
-                            MAX(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN DS.Diem END) AS [Điểm Giữa Kỳ],
-                            MAX(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN DS.Diem END) AS [Điểm Cuối Kỳ],
+                            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Miệng],
+                            STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm 15 Phút],
+                            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Giữa Kỳ],
+                            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Cuối Kỳ],
                             ROUND(AVG(DS.Diem), 2) AS [Trung Bình]
                         FROM HocSinh HS
                         LEFT JOIN DiemSo DS ON HS.MaHS = DS.MaHS AND DS.MaMon = {maMon}
                         WHERE HS.MaLop = {maLop}
                         GROUP BY HS.MaHS, HS.HoTen";
+
+
+
 
 
                 DataTable dtDiem = db.ExecuteQuery(queryDiem);
@@ -122,10 +127,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
-
-
-
-
         private void loaiDiemCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
@@ -144,6 +145,46 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         private void lamMoiBtn_Click(object sender, EventArgs e)
         {
             LoadScores();
+        }
+
+        private void locBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lọc dữ liệu cho ComboBox "Lớp"
+                string queryLop = "SELECT DISTINCT MaLop, TenLop FROM LopHoc WHERE TenLop LIKE '12%'";
+                DataTable dtLop = db.ExecuteQuery(queryLop);
+
+                if (dtLop.Rows.Count > 0)
+                {
+                    lopCmb.DataSource = dtLop;
+                    lopCmb.DisplayMember = "TenLop";
+                    lopCmb.ValueMember = "MaLop";
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy dữ liệu Lớp phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                // Lọc dữ liệu cho ComboBox "Môn"
+                string queryMon = "SELECT DISTINCT MaMon, TenMon FROM MonHoc WHERE TenMon LIKE 'Toán%'";
+                DataTable dtMon = db.ExecuteQuery(queryMon);
+
+                if (dtMon.Rows.Count > 0)
+                {
+                    monCmb.DataSource = dtMon;
+                    monCmb.DisplayMember = "TenMon";
+                    monCmb.ValueMember = "MaMon";
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy dữ liệu Môn phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lọc dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

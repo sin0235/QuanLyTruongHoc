@@ -122,24 +122,24 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             try
             {
-                // Adjusted query to group scores by subject and type
+                // Query to get all scores grouped by type for the student, filtered by the teacher's subjects
                 string query = $@"
-                SELECT 
-                    ROW_NUMBER() OVER (ORDER BY M.TenMon) AS [STT],
-                    M.TenMon AS [TenMon],
-                    MAX(CASE WHEN DS.LoaiDiem = N'Miệng' THEN DS.Diem END) AS [DiemMieng],
-                    MAX(CASE WHEN DS.LoaiDiem = N'15 phút' THEN DS.Diem END) AS [Diem15Phut],
-                    MAX(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN DS.Diem END) AS [DiemGiuaKy],
-                    MAX(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN DS.Diem END) AS [DiemCuoiKy],
-                    AVG(DS.Diem) AS [DiemTrungBinh]
-                FROM DiemSo DS
-                INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
-                WHERE DS.MaHS = {maHS}
-                GROUP BY M.TenMon";
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY M.TenMon ASC) AS [STT],
+            M.TenMon AS [Môn Học],
+            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Miệng],
+            STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm 15 Phút],
+            STRING_AGG(CASE WHEN DS.LoaiDiem = N'1 tiết' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm 1 Tiết],
+            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Cuối Kỳ],
+            ROUND(AVG(DS.Diem), 2) AS [Trung Bình]
+        FROM DiemSo DS
+        INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
+        INNER JOIN ThoiKhoaBieu TKB ON DS.MaMon = TKB.MaMon AND DS.MaGV = TKB.MaGV
+        WHERE DS.MaHS = {maHS} AND TKB.MaGV = {maGV}
+        GROUP BY M.TenMon";
 
                 DataTable dt = db.ExecuteQuery(query);
 
-                // Check if no data is returned
                 if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy thông tin điểm của học sinh.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -147,27 +147,27 @@ namespace QuanLyTruongHoc.GUI.Forms
                     return;
                 }
 
-                // Ensure AutoGenerateColumns is false
+                // Bind data to DataGridView
                 dgvDiemChiTietHocSinh.AutoGenerateColumns = false;
-
-                // Bind the data to the DataGridView
                 dgvDiemChiTietHocSinh.DataSource = dt;
 
-                // Map columns to DataGridView
+                // Map columns
                 dgvDiemChiTietHocSinh.Columns["STT"].DataPropertyName = "STT";
-                dgvDiemChiTietHocSinh.Columns["TenMon"].DataPropertyName = "TenMon";
-                dgvDiemChiTietHocSinh.Columns["DiemMieng"].DataPropertyName = "DiemMieng";
-                dgvDiemChiTietHocSinh.Columns["Diem15Phut"].DataPropertyName = "Diem15Phut";
-                dgvDiemChiTietHocSinh.Columns["DiemGiuaKy"].DataPropertyName = "DiemGiuaKy";
-                dgvDiemChiTietHocSinh.Columns["DiemCuoiKy"].DataPropertyName = "DiemCuoiKy";
-                dgvDiemChiTietHocSinh.Columns["DiemTrungBinh"].DataPropertyName = "DiemTrungBinh";
-
+                dgvDiemChiTietHocSinh.Columns["TenMon"].DataPropertyName = "Môn Học";
+                dgvDiemChiTietHocSinh.Columns["DiemMieng"].DataPropertyName = "Điểm Miệng";
+                dgvDiemChiTietHocSinh.Columns["Diem15Phut"].DataPropertyName = "Điểm 15 Phút";
+                dgvDiemChiTietHocSinh.Columns["DiemGiuaKy"].DataPropertyName = "Điểm 1 Tiết";
+                dgvDiemChiTietHocSinh.Columns["DiemCuoiKy"].DataPropertyName = "Điểm Cuối Kỳ";
+                dgvDiemChiTietHocSinh.Columns["DiemTrungBinh"].DataPropertyName = "Trung Bình";
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải thông tin điểm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
         private void addBtn_Click(object sender, EventArgs e)
         {
@@ -206,9 +206,9 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 // Lấy mã học sinh từ Họ Tên
                 string fetchMaHSQuery = $@"
-                    SELECT MaHS
-                    FROM HocSinh
-                    WHERE HoTen = N'{hoTenTxt.Text}'";
+            SELECT MaHS
+            FROM HocSinh
+            WHERE HoTen = N'{hoTenTxt.Text}'";
 
                 object maHSObj = db.ExecuteScalar(fetchMaHSQuery);
                 if (maHSObj == null)
@@ -221,9 +221,9 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 // Lấy mã môn học của giáo viên
                 string fetchMaMonQuery = $@"
-                    SELECT DISTINCT MaMon
-                    FROM ThoiKhoaBieu
-                    WHERE MaGV = {maGV}";
+            SELECT DISTINCT MaMon
+            FROM ThoiKhoaBieu
+            WHERE MaGV = {maGV}";
 
                 object maMonObj = db.ExecuteScalar(fetchMaMonQuery);
                 if (maMonObj == null)
@@ -240,8 +240,8 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 // Truy vấn thêm điểm trực tiếp
                 string query = $@"
-                    INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
-                    VALUES ({newMaDiem}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
+            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+            VALUES ({newMaDiem}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
 
                 // Thực thi truy vấn
                 bool isInserted = db.ExecuteNonQuery(query);
@@ -263,6 +263,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void exitBtn_Click(object sender, EventArgs e)
         {

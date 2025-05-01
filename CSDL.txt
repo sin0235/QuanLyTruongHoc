@@ -1,9 +1,10 @@
-﻿CODE TẠO CƠ SỞ DỮ LIỆU
+﻿--CODE TẠO CƠ SỞ DỮ LIỆU
 CREATE DATABASE QuanLyTruongHoc;
 GO
 
 USE QuanLyTruongHoc;
 GO
+
 
 CREATE TABLE VaiTro (
     MaVaiTro INT PRIMARY KEY,
@@ -145,7 +146,7 @@ CREATE TABLE NhatKyHeThong (
 	FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
 
-THÊM DỮ LIỆU CHO CSDL
+--THÊM DỮ LIỆU CHO CSDL
 
 -- Thêm dữ liệu mẫu vào bảng VaiTro
 INSERT INTO VaiTro (MaVaiTro, TenVaiTro) VALUES
@@ -213,7 +214,19 @@ INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem) VALUES
 (12, 43110555, 3, 102, 1, N'Cuối kỳ', 9.5),
 (13, 43110666, 4, 103, 1, N'Miệng', 7.5),
 (14, 43110666, 4, 103, 1, N'15 phút', 8.0),
-(15, 43110666, 4, 103, 1, N'Cuối kỳ', 8.5);
+(15, 43110666, 4, 103, 1, N'Cuối kỳ', 8.5),
+(16, 43110333, 2, 101, 1, N'Miệng', 8.0),
+(17, 43110333, 2, 101, 1, N'15 phút', 7.5),
+(18, 43110333, 2, 101, 1, N'Cuối kỳ', 9.0),
+(19, 43110444, 2, 101, 1, N'Miệng', 7.0),
+(20, 43110444, 2, 101, 1, N'15 phút', 6.5),
+(21, 43110444, 2, 101, 1, N'Cuối kỳ', 8.0),
+(22, 43110333, 2, 101, 1, N'Miệng', 8.0),
+(23, 43110333, 2, 101, 1, N'15 phút', 7.5),
+(24, 43110333, 2, 101, 1, N'Cuối kỳ', 9.0),
+(25, 43110444, 2, 101, 1, N'Miệng', 7.0),
+(26, 43110444, 2, 101, 1, N'15 phút', 6.5),
+(27, 43110444, 2, 101, 1, N'Cuối kỳ', 8.0);
 
 -- Thêm dữ liệu mẫu vào bảng ThoiKhoaBieu
 INSERT INTO ThoiKhoaBieu (MaTKB, MaLop, MaMon, MaGV, Thu, Tiet) VALUES
