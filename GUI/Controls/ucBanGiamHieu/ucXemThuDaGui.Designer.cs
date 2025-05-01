@@ -33,17 +33,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvXemThu = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-            this.btnXemChiTiet = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnLamMoi = new Guna.UI2.WinForms.Guna2Button();
             this.MaTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NguoiNhan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TieuDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThoiGian = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
+            this.btnXemChiTiet = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnLamMoi = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvXemThu)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +90,7 @@
             this.dgvXemThu.RowHeadersWidth = 51;
             this.dgvXemThu.RowTemplate.Height = 24;
             this.dgvXemThu.RowTemplate.ReadOnly = true;
-            this.dgvXemThu.Size = new System.Drawing.Size(969, 532);
+            this.dgvXemThu.Size = new System.Drawing.Size(1358, 641);
             this.dgvXemThu.TabIndex = 0;
             this.dgvXemThu.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvXemThu.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -113,66 +113,6 @@
             this.dgvXemThu.ThemeStyle.RowsStyle.Height = 24;
             this.dgvXemThu.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvXemThu.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            // 
-            // btnXoa
-            // 
-            this.btnXoa.BorderRadius = 10;
-            this.btnXoa.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoa.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnXoa.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnXoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnXoa.FillColor = System.Drawing.Color.Red;
-            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Location = new System.Drawing.Point(103, 3);
-            this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(180, 45);
-            this.btnXoa.TabIndex = 1;
-            this.btnXoa.Text = "Xóa";
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // 
-            // btnXemChiTiet
-            // 
-            this.btnXemChiTiet.BorderRadius = 10;
-            this.btnXemChiTiet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnXemChiTiet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnXemChiTiet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnXemChiTiet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnXemChiTiet.FillColor = System.Drawing.Color.Lime;
-            this.btnXemChiTiet.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemChiTiet.ForeColor = System.Drawing.Color.White;
-            this.btnXemChiTiet.Location = new System.Drawing.Point(398, 3);
-            this.btnXemChiTiet.Name = "btnXemChiTiet";
-            this.btnXemChiTiet.Size = new System.Drawing.Size(180, 45);
-            this.btnXemChiTiet.TabIndex = 3;
-            this.btnXemChiTiet.Text = "Xem chi tiết";
-            // 
-            // guna2Panel1
-            // 
-            this.guna2Panel1.Controls.Add(this.btnLamMoi);
-            this.guna2Panel1.Controls.Add(this.btnXemChiTiet);
-            this.guna2Panel1.Controls.Add(this.btnXoa);
-            this.guna2Panel1.Location = new System.Drawing.Point(78, 14);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(969, 54);
-            this.guna2Panel1.TabIndex = 4;
-            // 
-            // btnLamMoi
-            // 
-            this.btnLamMoi.BorderRadius = 10;
-            this.btnLamMoi.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLamMoi.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLamMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLamMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLamMoi.FillColor = System.Drawing.Color.RoyalBlue;
-            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.ForeColor = System.Drawing.Color.White;
-            this.btnLamMoi.Location = new System.Drawing.Point(683, 3);
-            this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(180, 45);
-            this.btnLamMoi.TabIndex = 4;
-            this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // MaTB
             // 
@@ -209,6 +149,7 @@
             this.NoiDung.HeaderText = "Nội dung";
             this.NoiDung.MinimumWidth = 6;
             this.NoiDung.Name = "NoiDung";
+            this.NoiDung.Visible = false;
             // 
             // ThoiGian
             // 
@@ -216,6 +157,68 @@
             this.ThoiGian.HeaderText = "Thời gian";
             this.ThoiGian.MinimumWidth = 6;
             this.ThoiGian.Name = "ThoiGian";
+            this.ThoiGian.Visible = false;
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.BorderRadius = 10;
+            this.btnXoa.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXoa.FillColor = System.Drawing.Color.Red;
+            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Location = new System.Drawing.Point(1027, 3);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(180, 45);
+            this.btnXoa.TabIndex = 1;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnXemChiTiet
+            // 
+            this.btnXemChiTiet.BorderRadius = 10;
+            this.btnXemChiTiet.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXemChiTiet.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXemChiTiet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXemChiTiet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXemChiTiet.FillColor = System.Drawing.Color.Lime;
+            this.btnXemChiTiet.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXemChiTiet.ForeColor = System.Drawing.Color.White;
+            this.btnXemChiTiet.Location = new System.Drawing.Point(588, 3);
+            this.btnXemChiTiet.Name = "btnXemChiTiet";
+            this.btnXemChiTiet.Size = new System.Drawing.Size(180, 45);
+            this.btnXemChiTiet.TabIndex = 3;
+            this.btnXemChiTiet.Text = "Xem chi tiết";
+            this.btnXemChiTiet.Click += new System.EventHandler(this.btnXemChiTiet_Click);
+            // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.Controls.Add(this.btnLamMoi);
+            this.guna2Panel1.Controls.Add(this.btnXemChiTiet);
+            this.guna2Panel1.Controls.Add(this.btnXoa);
+            this.guna2Panel1.Location = new System.Drawing.Point(78, 14);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(1358, 54);
+            this.guna2Panel1.TabIndex = 4;
+            // 
+            // btnLamMoi
+            // 
+            this.btnLamMoi.BorderRadius = 10;
+            this.btnLamMoi.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLamMoi.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLamMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLamMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLamMoi.FillColor = System.Drawing.Color.RoyalBlue;
+            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLamMoi.ForeColor = System.Drawing.Color.White;
+            this.btnLamMoi.Location = new System.Drawing.Point(120, 3);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(180, 45);
+            this.btnLamMoi.TabIndex = 4;
+            this.btnLamMoi.Text = "Làm mới";
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // ucXemThuDaGui
             // 
@@ -226,7 +229,7 @@
             this.Controls.Add(this.dgvXemThu);
             this.Name = "ucXemThuDaGui";
             this.Padding = new System.Windows.Forms.Padding(20);
-            this.Size = new System.Drawing.Size(1131, 685);
+            this.Size = new System.Drawing.Size(1520, 794);
             this.Load += new System.EventHandler(this.ucXemThuDaGui_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvXemThu)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
