@@ -38,8 +38,6 @@
             this.themDiemBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2HtmlLabel7 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.loaiDiemCmb = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -50,7 +48,10 @@
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiemSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemMieng = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Diem15Phut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemGiuaKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemCuoiKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiemTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachHocSinh)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
@@ -112,7 +113,10 @@
             this.dgvDanhSachHocSinh.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.STT,
             this.HoTen,
-            this.DiemSo,
+            this.DiemMieng,
+            this.Diem15Phut,
+            this.DiemGiuaKy,
+            this.DiemCuoiKy,
             this.DiemTB});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(247)))));
@@ -219,35 +223,6 @@
             this.guna2Button3.TabIndex = 8;
             this.guna2Button3.Text = "Xóa";
             // 
-            // guna2HtmlLabel7
-            // 
-            this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(1140, 163);
-            this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(134, 34);
-            this.guna2HtmlLabel7.TabIndex = 13;
-            this.guna2HtmlLabel7.Text = "LOẠI ĐIỂM:";
-            // 
-            // loaiDiemCmb
-            // 
-            this.loaiDiemCmb.BackColor = System.Drawing.Color.Transparent;
-            this.loaiDiemCmb.BorderColor = System.Drawing.Color.LightGray;
-            this.loaiDiemCmb.BorderRadius = 10;
-            this.loaiDiemCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.loaiDiemCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.loaiDiemCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.loaiDiemCmb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.loaiDiemCmb.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.loaiDiemCmb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.loaiDiemCmb.HoverState.FillColor = System.Drawing.Color.SteelBlue;
-            this.loaiDiemCmb.ItemHeight = 30;
-            this.loaiDiemCmb.Location = new System.Drawing.Point(1311, 170);
-            this.loaiDiemCmb.Name = "loaiDiemCmb";
-            this.loaiDiemCmb.Size = new System.Drawing.Size(209, 36);
-            this.loaiDiemCmb.TabIndex = 14;
-            // 
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -330,7 +305,7 @@
             this.lamMoiBtn.FillColor = System.Drawing.Color.LightGreen;
             this.lamMoiBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lamMoiBtn.ForeColor = System.Drawing.Color.White;
-            this.lamMoiBtn.Location = new System.Drawing.Point(1337, 116);
+            this.lamMoiBtn.Location = new System.Drawing.Point(437, 18);
             this.lamMoiBtn.Name = "lamMoiBtn";
             this.lamMoiBtn.Size = new System.Drawing.Size(180, 45);
             this.lamMoiBtn.TabIndex = 10;
@@ -367,24 +342,37 @@
             this.HoTen.MinimumWidth = 6;
             this.HoTen.Name = "HoTen";
             // 
-            // DiemSo
+            // DiemMieng
             // 
-            this.DiemSo.HeaderText = "Điểm Số";
-            this.DiemSo.MinimumWidth = 6;
-            this.DiemSo.Name = "DiemSo";
+            this.DiemMieng.HeaderText = "Điểm Miệng";
+            this.DiemMieng.MinimumWidth = 6;
+            this.DiemMieng.Name = "DiemMieng";
+            // 
+            // Diem15Phut
+            // 
+            this.Diem15Phut.HeaderText = "Điểm 15 Phút";
+            this.Diem15Phut.MinimumWidth = 6;
+            this.Diem15Phut.Name = "Diem15Phut";
+            // 
+            // DiemGiuaKy
+            // 
+            this.DiemGiuaKy.HeaderText = "Điểm Giữa Kỳ";
+            this.DiemGiuaKy.Name = "DiemGiuaKy";
+            // 
+            // DiemCuoiKy
+            // 
+            this.DiemCuoiKy.HeaderText = "Điểm Cuối Kỳ";
+            this.DiemCuoiKy.Name = "DiemCuoiKy";
             // 
             // DiemTB
             // 
-            this.DiemTB.HeaderText = "Trung Bình";
-            this.DiemTB.MinimumWidth = 6;
+            this.DiemTB.HeaderText = "Điểm Trung Bình";
             this.DiemTB.Name = "DiemTB";
             // 
             // ucQuanLyDiemSo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.Controls.Add(this.loaiDiemCmb);
-            this.Controls.Add(this.guna2HtmlLabel7);
             this.Controls.Add(this.guna2Button3);
             this.Controls.Add(this.guna2Button2);
             this.Controls.Add(this.themDiemBtn);
@@ -414,8 +402,6 @@
         private Guna.UI2.WinForms.Guna2Button themDiemBtn;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel7;
-        private Guna.UI2.WinForms.Guna2ComboBox loaiDiemCmb;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
@@ -426,7 +412,10 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiemSo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiemMieng;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Diem15Phut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiemGiuaKy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiemCuoiKy;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiemTB;
     }
 }
