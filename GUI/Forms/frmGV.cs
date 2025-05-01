@@ -267,7 +267,7 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Quản lý điểm số";
             pnlContent.Controls.Clear();
-            ucQuanLyDiemSo uc = new ucQuanLyDiemSo();
+            ucQuanLyDiemSo uc = new ucQuanLyDiemSo(maNguoiDung, GetMaGiaoVien(maNguoiDung));
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
@@ -282,5 +282,17 @@ namespace QuanLyTruongHoc
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
         }
+
+        private int GetMaGiaoVien(int maNguoiDung)
+        {
+            string query = $@"
+            SELECT MaGV
+            FROM GiaoVien
+            WHERE MaNguoiDung = {maNguoiDung}";
+            object result = db.ExecuteScalar(query);
+            return Convert.ToInt32(result);
+
+        }
+
     }
 }

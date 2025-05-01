@@ -200,6 +200,12 @@
     <Compile Include="GUI\Forms\frmChangePW.Designer.cs">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\frmChinhSuaDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmChinhSuaDiem.Designer.cs">
+      <DependentUpon>frmChinhSuaDiem.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmGV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +244,12 @@
     </Compile>
     <Compile Include="GUI\Forms\frmKiemTra.Designer.cs">
       <DependentUpon>frmKiemTra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmNhapDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmNhapDiem.Designer.cs">
+      <DependentUpon>frmNhapDiem.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmNoiVu.cs">
       <SubType>Form</SubType>
@@ -347,6 +359,9 @@
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmChinhSuaDiem.resx">
+      <DependentUpon>frmChinhSuaDiem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmGV.resx">
       <DependentUpon>frmGV.cs</DependentUpon>
     </EmbeddedResource>
@@ -364,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmKiemTra.resx">
       <DependentUpon>frmKiemTra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmNhapDiem.resx">
+      <DependentUpon>frmNhapDiem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmNoiVu.resx">
       <DependentUpon>frmNoiVu.cs</DependentUpon>
@@ -420,6 +438,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSDL.txt" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />
     <None Include="assets\images\question_icon.png" />
