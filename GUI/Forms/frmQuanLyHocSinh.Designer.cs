@@ -52,7 +52,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(46, 116);
-            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(66, 27);
             this.guna2HtmlLabel1.TabIndex = 0;
@@ -64,7 +64,7 @@
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(46, 174);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(93, 27);
             this.guna2HtmlLabel2.TabIndex = 1;
@@ -76,7 +76,7 @@
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(46, 232);
-            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(81, 27);
             this.guna2HtmlLabel3.TabIndex = 2;
@@ -88,7 +88,7 @@
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(46, 290);
-            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(66, 27);
             this.guna2HtmlLabel4.TabIndex = 3;
@@ -100,7 +100,7 @@
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel5.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(46, 348);
-            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(139, 27);
             this.guna2HtmlLabel5.TabIndex = 4;
@@ -112,7 +112,7 @@
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel6.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel6.Location = new System.Drawing.Point(46, 401);
-            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(39, 27);
             this.guna2HtmlLabel6.TabIndex = 5;
@@ -129,7 +129,7 @@
             this.btnXacNhan.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXacNhan.ForeColor = System.Drawing.Color.White;
             this.btnXacNhan.Location = new System.Drawing.Point(298, 461);
-            this.btnXacNhan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnXacNhan.Margin = new System.Windows.Forms.Padding(2);
             this.btnXacNhan.Name = "btnXacNhan";
             this.btnXacNhan.Size = new System.Drawing.Size(147, 51);
             this.btnXacNhan.TabIndex = 6;
@@ -143,7 +143,7 @@
             this.picAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
             this.picAvatar.ImageRotate = 0F;
             this.picAvatar.Location = new System.Drawing.Point(326, 9);
-            this.picAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
             this.picAvatar.Name = "picAvatar";
             this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.picAvatar.Size = new System.Drawing.Size(96, 88);
@@ -266,7 +266,7 @@
             this.checkNam.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkNam.ForeColor = System.Drawing.Color.RoyalBlue;
             this.checkNam.Location = new System.Drawing.Point(312, 232);
-            this.checkNam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkNam.Margin = new System.Windows.Forms.Padding(2);
             this.checkNam.Name = "checkNam";
             this.checkNam.Size = new System.Drawing.Size(73, 29);
             this.checkNam.TabIndex = 14;
@@ -286,7 +286,7 @@
             this.checkNu.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkNu.ForeColor = System.Drawing.Color.RoyalBlue;
             this.checkNu.Location = new System.Drawing.Point(464, 232);
-            this.checkNu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkNu.Margin = new System.Windows.Forms.Padding(2);
             this.checkNu.Name = "checkNu";
             this.checkNu.Size = new System.Drawing.Size(59, 29);
             this.checkNu.TabIndex = 15;
@@ -317,9 +317,9 @@
             this.Controls.Add(this.guna2HtmlLabel3);
             this.Controls.Add(this.guna2HtmlLabel2);
             this.Controls.Add(this.guna2HtmlLabel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmQuanLyHocSinh";
-            this.Text = "Thông tin học sinh";
+            this.Text = "Thêm học sinh mới";
             this.Load += new System.EventHandler(this.frmQuanLyHocSinh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.ResumeLayout(false);

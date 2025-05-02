@@ -51,6 +51,7 @@ namespace QuanLyTruongHoc
             pnlContent.Controls.Add(uc);
             btnQuanLyHocSinh.FillColor = Color.FromArgb(214, 228, 255);
             btnQuanLyThoiKhoaBieu.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Quản lý học sinh";
         }
 
         // Hàm cập nhật vị trí nút
