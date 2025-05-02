@@ -1,5 +1,6 @@
 ﻿using QuanLyTruongHoc.DAL;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -191,5 +192,60 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             LoadStudentList();
         }
+
+        private void xoaBtn_Click(object sender, EventArgs e)
+        {
+            if (dgvDiemChiTietHocSinh.SelectedRows.Count > 0)
+            {
+                // Lấy thông tin từ hàng được chọn
+                var selectedRow = dgvDiemChiTietHocSinh.SelectedRows[0];
+
+                // Lấy loại điểm và giá trị điểm
+                string loaiDiem = selectedRow.Cells["LoaiDiem"].Value?.ToString();
+                string diemValue = selectedRow.Cells["Diem"].Value?.ToString();
+                string hocKy = selectedRow.Cells["HocKy"].Value?.ToString();
+
+                if (string.IsNullOrEmpty(loaiDiem) || string.IsNullOrEmpty(diemValue) || string.IsNullOrEmpty(hocKy))
+                {
+                    MessageBox.Show("Không thể xác định điểm cần xóa. Vui lòng kiểm tra lại dữ liệu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Xác nhận xóa
+                var confirmResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa điểm {diemValue} ({loaiDiem}, Học kỳ {hocKy}) không?",
+                    "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    // Xóa điểm trong cơ sở dữ liệu
+                    string deleteQuery = @"
+                DELETE FROM DiemSo
+                WHERE MaHS = @MaHS AND MaMon = @MaMon AND LoaiDiem = @LoaiDiem AND Diem = @Diem AND HocKy = @HocKy";
+                    var parameters = new Dictionary<string, object>
+            {
+                { "@MaHS", selectedMaHS },
+                { "@MaMon", selectedMaMon },
+                { "@LoaiDiem", loaiDiem },
+                { "@Diem", diemValue },
+                { "@HocKy", hocKy }
+            };
+
+                    if (db.ExecuteNonQuery(deleteQuery, parameters))
+                    {
+                        MessageBox.Show("Xóa điểm thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadStudentScores(selectedMaHS, selectedMaMon); // Làm mới danh sách điểm
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa điểm thất bại. Vui lòng thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một hàng để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
     }
 }
