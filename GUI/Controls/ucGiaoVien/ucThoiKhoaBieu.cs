@@ -89,8 +89,26 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     }
                 }
                 // Update the total number of periods for the week
-                int totalPeriods = dt.Rows.Count;
+                // Update the total number of periods for the week
+                int totalPeriods = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    string tiet = row["Tiet"].ToString(); // Example: "1-3"
+                    if (tiet.Contains("-"))
+                    {
+                        // Extract start and end periods
+                        int startPeriod = int.Parse(tiet.Split('-')[0]);
+                        int endPeriod = int.Parse(tiet.Split('-')[1]);
+                        totalPeriods += (endPeriod - startPeriod + 1); // Calculate the number of periods
+                    }
+                    else
+                    {
+                        // Single period (e.g., "1")
+                        totalPeriods += 1;
+                    }
+                }
                 thongKeSoTietTxt.Text = $"{totalPeriods} Tiết";
+
 
                 // Highlight today's column header
                 HighlightTodayColumn();
@@ -121,14 +139,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             dgvThoiKhoaBieu.Refresh();
         }
 
-
-
-
-
-        private void lamMoiBtn_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

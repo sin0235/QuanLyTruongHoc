@@ -32,6 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvThoiKhoaBieu = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.thuHaiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thuBaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thuTuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thuNamColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thuSauColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thuBayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chuNhatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.ngayChonDTP = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -41,14 +48,6 @@
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.thongKeSoTietTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lamMoiBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.thuHaiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thuBaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thuTuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thuNamColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thuSauColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thuBayColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chuNhatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThoiKhoaBieu)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2CustomGradientPanel2.SuspendLayout();
@@ -119,11 +118,59 @@
             this.dgvThoiKhoaBieu.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvThoiKhoaBieu.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             // 
+            // thuHaiColumn
+            // 
+            this.thuHaiColumn.HeaderText = "Thứ Hai";
+            this.thuHaiColumn.MinimumWidth = 6;
+            this.thuHaiColumn.Name = "thuHaiColumn";
+            this.thuHaiColumn.ReadOnly = true;
+            // 
+            // thuBaColumn
+            // 
+            this.thuBaColumn.HeaderText = "Thứ Ba";
+            this.thuBaColumn.MinimumWidth = 6;
+            this.thuBaColumn.Name = "thuBaColumn";
+            this.thuBaColumn.ReadOnly = true;
+            // 
+            // thuTuColumn
+            // 
+            this.thuTuColumn.HeaderText = "Thứ Tư";
+            this.thuTuColumn.MinimumWidth = 6;
+            this.thuTuColumn.Name = "thuTuColumn";
+            this.thuTuColumn.ReadOnly = true;
+            // 
+            // thuNamColumn
+            // 
+            this.thuNamColumn.HeaderText = "Thứ Năm";
+            this.thuNamColumn.MinimumWidth = 6;
+            this.thuNamColumn.Name = "thuNamColumn";
+            this.thuNamColumn.ReadOnly = true;
+            // 
+            // thuSauColumn
+            // 
+            this.thuSauColumn.HeaderText = "Thứ Sáu";
+            this.thuSauColumn.MinimumWidth = 6;
+            this.thuSauColumn.Name = "thuSauColumn";
+            this.thuSauColumn.ReadOnly = true;
+            // 
+            // thuBayColumn
+            // 
+            this.thuBayColumn.HeaderText = "Thứ Bảy";
+            this.thuBayColumn.MinimumWidth = 6;
+            this.thuBayColumn.Name = "thuBayColumn";
+            this.thuBayColumn.ReadOnly = true;
+            // 
+            // chuNhatColumn
+            // 
+            this.chuNhatColumn.HeaderText = "Chủ Nhật";
+            this.chuNhatColumn.MinimumWidth = 6;
+            this.chuNhatColumn.Name = "chuNhatColumn";
+            this.chuNhatColumn.ReadOnly = true;
+            // 
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel1.BorderRadius = 10;
-            this.guna2CustomGradientPanel1.Controls.Add(this.lamMoiBtn);
             this.guna2CustomGradientPanel1.Controls.Add(this.ngayChonDTP);
             this.guna2CustomGradientPanel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
@@ -249,74 +296,6 @@
             this.guna2HtmlLabel4.TabIndex = 6;
             this.guna2HtmlLabel4.Text = "Tuần này có";
             // 
-            // lamMoiBtn
-            // 
-            this.lamMoiBtn.BackColor = System.Drawing.Color.Transparent;
-            this.lamMoiBtn.BorderRadius = 10;
-            this.lamMoiBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.lamMoiBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.lamMoiBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.lamMoiBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.lamMoiBtn.FillColor = System.Drawing.Color.SteelBlue;
-            this.lamMoiBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lamMoiBtn.ForeColor = System.Drawing.Color.White;
-            this.lamMoiBtn.HoverState.FillColor = System.Drawing.Color.LightSteelBlue;
-            this.lamMoiBtn.Location = new System.Drawing.Point(24, 82);
-            this.lamMoiBtn.Name = "lamMoiBtn";
-            this.lamMoiBtn.Size = new System.Drawing.Size(180, 45);
-            this.lamMoiBtn.TabIndex = 23;
-            this.lamMoiBtn.Text = "Làm Mới";
-            this.lamMoiBtn.Click += new System.EventHandler(this.lamMoiBtn_Click);
-            // 
-            // thuHaiColumn
-            // 
-            this.thuHaiColumn.HeaderText = "Thứ Hai";
-            this.thuHaiColumn.MinimumWidth = 6;
-            this.thuHaiColumn.Name = "thuHaiColumn";
-            this.thuHaiColumn.ReadOnly = true;
-            // 
-            // thuBaColumn
-            // 
-            this.thuBaColumn.HeaderText = "Thứ Ba";
-            this.thuBaColumn.MinimumWidth = 6;
-            this.thuBaColumn.Name = "thuBaColumn";
-            this.thuBaColumn.ReadOnly = true;
-            // 
-            // thuTuColumn
-            // 
-            this.thuTuColumn.HeaderText = "Thứ Tư";
-            this.thuTuColumn.MinimumWidth = 6;
-            this.thuTuColumn.Name = "thuTuColumn";
-            this.thuTuColumn.ReadOnly = true;
-            // 
-            // thuNamColumn
-            // 
-            this.thuNamColumn.HeaderText = "Thứ Năm";
-            this.thuNamColumn.MinimumWidth = 6;
-            this.thuNamColumn.Name = "thuNamColumn";
-            this.thuNamColumn.ReadOnly = true;
-            // 
-            // thuSauColumn
-            // 
-            this.thuSauColumn.HeaderText = "Thứ Sáu";
-            this.thuSauColumn.MinimumWidth = 6;
-            this.thuSauColumn.Name = "thuSauColumn";
-            this.thuSauColumn.ReadOnly = true;
-            // 
-            // thuBayColumn
-            // 
-            this.thuBayColumn.HeaderText = "Thứ Bảy";
-            this.thuBayColumn.MinimumWidth = 6;
-            this.thuBayColumn.Name = "thuBayColumn";
-            this.thuBayColumn.ReadOnly = true;
-            // 
-            // chuNhatColumn
-            // 
-            this.chuNhatColumn.HeaderText = "Chủ Nhật";
-            this.chuNhatColumn.MinimumWidth = 6;
-            this.chuNhatColumn.Name = "chuNhatColumn";
-            this.chuNhatColumn.ReadOnly = true;
-            // 
             // ucThoiKhoaBieu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -351,7 +330,6 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2TextBox thongKeSoTietTxt;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2Button lamMoiBtn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thuHaiColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thuBaColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thuTuColumn;

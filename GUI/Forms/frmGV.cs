@@ -257,7 +257,7 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Kế hoạch giảng dạy";
             pnlContent.Controls.Clear();
-            ucQuanLyKeHoachGiangDay uc = new ucQuanLyKeHoachGiangDay();
+            ucQuanLyKeHoachGiangDay uc = new ucQuanLyKeHoachGiangDay(GetMaGiaoVien(maNguoiDung));
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();

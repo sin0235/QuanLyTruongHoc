@@ -103,6 +103,7 @@ CREATE TABLE KeHoachGiangDay (
     MaGV INT NOT NULL,
     MaMon INT NOT NULL,
     Tuan INT NOT NULL,
+    MaLop INT NOT NULL,
     NoiDungGiangDay NVARCHAR(MAX) NOT NULL,
     FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV),
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon)
@@ -145,6 +146,8 @@ CREATE TABLE NhatKyHeThong (
 	ThoiGian DATETIME NOT NULL,
 	FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
 );
+
+   
 
 --THÊM DỮ LIỆU CHO CSDL
 
@@ -237,11 +240,12 @@ INSERT INTO ThoiKhoaBieu (MaTKB, MaLop, MaMon, MaGV, Thu, Tiet) VALUES
 (5, 4, 4, 103, 5, N'3-5');
 
 -- Thêm dữ liệu mẫu vào bảng KeHoachGiangDay
-INSERT INTO KeHoachGiangDay (MaKH, MaGV, MaMon, Tuan, NoiDungGiangDay) VALUES
-(1, 100, 1, 1, N'Nhập môn đại số chương 1'),
-(2, 101, 2, 1, N'Văn bản: Làng'),
-(3, 102, 3, 1, N'Bài học về giao tiếp'),
-(4, 103, 4, 1, N'Lịch sử thế giới cổ đại');
+INSERT INTO KeHoachGiangDay (MaKH, MaGV, MaMon, Tuan, MaLop, NoiDungGiangDay) VALUES
+(1, 100, 1, 1, 1, N'Nhập môn đại số chương 1'), -- Nguyễn Văn A dạy Toán cho lớp 10A3
+(2, 101, 2, 1, 2, N'Văn bản: Làng'),           -- Trần Thị B dạy Ngữ văn cho lớp 12A3
+(3, 102, 3, 1, 3, N'Bài học về giao tiếp'),    -- Lê Văn C dạy Ngoại ngữ cho lớp 11B1
+(4, 103, 4, 1, 4, N'Lịch sử thế giới cổ đại'); -- Phạm Thị D dạy Lịch sử cho lớp 10B2
+
 
 -- Thêm dữ liệu mẫu vào bảng ThongBao
 INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui) VALUES
