@@ -135,7 +135,7 @@ namespace QuanLyTruongHoc
                     LoggedInStudentId = maNguoiDung; // Lưu mã học sinh đã đăng nhập
                     break;
                 case 4: // Nhân viên phòng nội vụ
-                    nextForm = new frmNoiVu();
+                    nextForm = new frmPhongNoiVu();
                     
                     break;
                 default:

@@ -8,17 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-
+using QuanLyTruongHoc.GUI.Controls;
+using QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu;
+using QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu;
 namespace QuanLyTruongHoc
 {
-    public partial class frmNoiVu : Form
+    public partial class frmPhongNoiVu : Form
     {
         // Lưu trữ màu gốc của các nút
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
 
-        public frmNoiVu()
+        public frmPhongNoiVu()
         {
             InitializeComponent();
 
@@ -42,6 +44,13 @@ namespace QuanLyTruongHoc
 
             // Đăng ký sự kiện Resize
             this.Resize += new EventHandler(Form1_Resize);
+
+            pnlContent.Controls.Clear();
+            ucQuanLyHocSinh uc = new ucQuanLyHocSinh();
+            uc.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(uc);
+            btnQuanLyHocSinh.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyThoiKhoaBieu.FillColor = Color.Transparent;
         }
 
         // Hàm cập nhật vị trí nút
@@ -150,14 +159,55 @@ namespace QuanLyTruongHoc
             isDragging = false;
         }
 
-        private void btnStudents_Click(object sender, EventArgs e)
+        private void btnQuanLyThoiKhoaBieu_Click(object sender, EventArgs e)
+        {
+            ShowUserControl(new ucQuanLyThoiKhoaBieu());
+            btnQuanLyThoiKhoaBieu.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyHocSinh.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Quản lý thời khóa biểu";
+        }
+
+        private void btnQuanLyHocSinh_Click(object sender, EventArgs e)
+        {
+            ShowUserControl(new ucQuanLyHocSinh());
+            btnQuanLyHocSinh.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyThoiKhoaBieu.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Quản lý học sinh";
+        }
+
+        private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e)
+        public void ShowUserControl(UserControl uc)
         {
-
+            pnlContent.Controls.Clear();
+            pnlContent.Controls.Add(uc);
+            uc.Dock = DockStyle.Fill;
+        }
+        public void ShowUserControlCustomSize(UserControl uc, DockStyle dockStyle = DockStyle.None, int width = 0, int height = 0)
+        {
+            pnlContent.Controls.Clear();
+            if (width > 0 && height > 0)
+            {
+                uc.Size = new Size(width, height);
+            }
+            uc.Dock = dockStyle;
+            if (dockStyle == DockStyle.None)
+            {
+                uc.Location = new Point(
+                    (pnlContent.Width - uc.Width) / 2,
+                    (pnlContent.Height - uc.Height) / 2
+                );
+                pnlContent.Resize += (sender, e) => {
+                    uc.Location = new Point(
+                        (pnlContent.Width - uc.Width) / 2,
+                        (pnlContent.Height - uc.Height) / 2
+                    );
+                };
+            }
+            pnlContent.Controls.Add(uc);
         }
     }
 }

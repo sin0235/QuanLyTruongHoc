@@ -146,6 +146,18 @@
     <Compile Include="GUI\Controls\ucDonXinNghiItem.Designer.cs">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.Designer.cs">
+      <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.Designer.cs">
+      <DependentUpon>ucQuanLyThoiKhoaBieu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucTaoDonXinNghi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,6 +211,12 @@
     </Compile>
     <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmPhongNoiVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmPhongNoiVu.Designer.cs">
+      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmChangePW.cs">
       <SubType>Form</SubType>
@@ -257,12 +275,6 @@
     <Compile Include="GUI\Forms\frmNhapDiem.Designer.cs">
       <DependentUpon>frmNhapDiem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmNoiVu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\frmNoiVu.Designer.cs">
-      <DependentUpon>frmNoiVu.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Forms\frmBGH.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +304,12 @@
     </Compile>
     <Compile Include="GUI\Forms\frmChiTietDonXinNghi.Designer.cs">
       <DependentUpon>frmChiTietDonXinNghi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyHocSinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyHocSinh.Designer.cs">
+      <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmThongBaoChiTiet.cs">
       <SubType>Form</SubType>
@@ -334,6 +352,9 @@
     <EmbeddedResource Include="GUI\Controls\ucKiemTra.resx">
       <DependentUpon>ucKiemTra.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.resx">
+      <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucTaoDonXinNghi.resx">
       <DependentUpon>ucTaoDonXinNghi.cs</DependentUpon>
     </EmbeddedResource>
@@ -365,6 +386,9 @@
     <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmPhongNoiVu.resx">
+      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>
     </EmbeddedResource>
@@ -392,9 +416,6 @@
     <EmbeddedResource Include="GUI\Forms\frmNhapDiem.resx">
       <DependentUpon>frmNhapDiem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmNoiVu.resx">
-      <DependentUpon>frmNoiVu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmBGH.resx">
       <DependentUpon>frmBGH.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmQuanLyHocSinh.resx">
+      <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmThongBaoChiTiet.resx">
       <DependentUpon>frmThongBaoChiTiet.cs</DependentUpon>

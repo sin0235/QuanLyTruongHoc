@@ -169,7 +169,8 @@ INSERT INTO NguoiDung (MaNguoiDung, TenDangNhap, MatKhau, MaVaiTro, NgayTao) VAL
 (7, 'hs4', 'hs4', 3, GETDATE()),
 (8, 'hs5', 'hs5', 3, GETDATE()),
 (9, 'gv3', 'gv3', 2, GETDATE()),
-(10, 'gv4', 'gv4', 2, GETDATE());
+(10, 'gv4', 'gv4', 2, GETDATE()),
+(11, 'pnv', 'pnv', 4, GETDATE());
 
 -- Thêm dữ liệu mẫu vào bảng MonHoc
 INSERT INTO MonHoc (MaMon, TenMon) VALUES
