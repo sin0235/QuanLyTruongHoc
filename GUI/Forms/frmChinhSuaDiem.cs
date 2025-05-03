@@ -19,16 +19,8 @@ namespace QuanLyTruongHoc.GUI.Forms
             selectedMaHS = maHS;
             selectedMaMon = maMon;
 
-            if (dgvDanhSachHocSinh == null)
-            {
-                MessageBox.Show("Danh sách học sinh không được truyền vào.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             this.dgvDanhSachHocSinh = dgvDanhSachHocSinh;
 
-            // Tải dữ liệu điểm của học sinh
-            LoadStudentScores(selectedMaHS, selectedMaMon);
         }
 
 
@@ -67,13 +59,13 @@ namespace QuanLyTruongHoc.GUI.Forms
             try
             {
                 string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
-            DS.LoaiDiem AS [Loại điểm],
-            DS.Diem AS [Điểm],
-            DS.HocKy AS [Học kỳ]
-        FROM DiemSo DS
-        WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
+         SELECT 
+             ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
+             DS.LoaiDiem AS [Loại điểm],
+             DS.Diem AS [Điểm],
+             DS.HocKy AS [Học kỳ]
+         FROM DiemSo DS
+         WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
 
                 DataTable dt = db.ExecuteQuery(query);
 

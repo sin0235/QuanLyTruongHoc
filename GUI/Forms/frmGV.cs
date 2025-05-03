@@ -35,6 +35,13 @@ namespace QuanLyTruongHoc
             // Load and display the teacher's name
             LoadUserName(maNguoiDung);
 
+            // Check if the teacher is a homeroom teacher
+            if (!IsHomeroomTeacher(maNguoiDung))
+            {
+                quanLyLopBtn.Visible = false; // Hide the "Quản lý lớp" button
+            }
+
+
             // Ensure buttons are within the Guna2Panel
             guna2CircleButtonClose.Parent = pnlTitleBar;
             guna2CircleButtonMinimize.Parent = pnlTitleBar;
@@ -61,7 +68,16 @@ namespace QuanLyTruongHoc
             lblPageTitle.Text = "Thông báo";
 
         }
+        private bool IsHomeroomTeacher(int maNguoiDung)
+        {
+            string query = $@"
+        SELECT MaLop
+        FROM LopHoc
+        WHERE MaGVChuNhiem = (SELECT MaGV FROM GiaoVien WHERE MaNguoiDung = {maNguoiDung})";
 
+            object result = db.ExecuteScalar(query);
+            return result != null && result != DBNull.Value;
+        }
         private void LoadUserName(int maNguoiDung)
         {
             try
@@ -277,7 +293,9 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Quản lý lớp";
             pnlContent.Controls.Clear();
-            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN();
+            // Retrieve the teacher's ID (MaGV)
+            int maGVChuNhiem = GetMaGiaoVien(maNguoiDung);
+            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN(maGVChuNhiem);
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();

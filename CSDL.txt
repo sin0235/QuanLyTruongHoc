@@ -62,7 +62,7 @@ CREATE TABLE HocSinh (
 );
 
 CREATE TABLE DiemDanh (
-    MaDiemDanh INT PRIMARY KEY,
+    MaDiemDanh INT IDENTITY(1,1) PRIMARY KEY,
     MaHS INT NOT NULL,
     MaLop INT NOT NULL,
     Ngay DATE NOT NULL,
@@ -131,8 +131,7 @@ CREATE TABLE DonXinNghi (
     MaDon INT PRIMARY KEY,
     MaHS INT NOT NULL,
     NgayGui DATE NOT NULL,
-    TuNgay DATE NOT NULL,
-    DenNgay DATE NOT NULL,
+    NgayNghi DATE NOT NULL,
     LyDo NVARCHAR(300) NOT NULL,
     MaGV INT NULL,
     TrangThai NVARCHAR(20) NULL,
@@ -291,10 +290,10 @@ INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon,
 (3, 3, 5, NULL, NULL, 2, N'Nhắc nhở học tập', N'Nhắc nhở bạn Hồng Ngọc chuẩn bị bài môn Văn', GETDATE());
 
 -- Thêm dữ liệu mẫu vào bảng DonXinNghi
-INSERT INTO DonXinNghi (MaDon, MaHS, NgayGui, TuNgay, DenNgay, LyDo, MaGV, TrangThai) VALUES
-(1, 43110222, '2025-04-14', '2025-04-15', '2025-04-16', N'Nghỉ ốm', 100, N'Chờ duyệt'),
-(2, 43110333, '2025-04-13', '2025-04-14', '2025-04-14', N'Gia đình có việc', 101, N'Đã duyệt'),
-(3, 43110444, '2025-04-12', '2025-04-13', '2025-04-13', N'Nghỉ ốm', 100, N'Đã duyệt');
+INSERT INTO DonXinNghi (MaDon, MaHS, NgayGui, NgayNghi, LyDo, MaGV, TrangThai) VALUES
+(1, 43110222, '2025-04-14', '2025-04-15', N'Nghỉ ốm', 100, N'Chờ duyệt'),
+(2, 43110333, '2025-04-13', '2025-04-14', N'Gia đình có việc', 101, N'Đã duyệt'),
+(3, 43110444, '2025-04-12', '2025-04-13', N'Nghỉ ốm', 100, N'Đã duyệt');
 
 -- Thêm dữ liệu mẫu vào bảng NhatKyHeThong
 INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES
