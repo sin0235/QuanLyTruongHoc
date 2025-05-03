@@ -201,10 +201,10 @@
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
-            this.pnlMenu.Location = new System.Drawing.Point(0, 160);
+            this.pnlMenu.Location = new System.Drawing.Point(0, 209);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.pnlMenu.Size = new System.Drawing.Size(280, 880);
+            this.pnlMenu.Size = new System.Drawing.Size(280, 831);
             this.pnlMenu.TabIndex = 1;
             // 
             // pnlSubSettings
@@ -294,7 +294,7 @@
             this.btnSettings.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSettings.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnSettings.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnSettings.Location = new System.Drawing.Point(10, 825);
+            this.btnSettings.Location = new System.Drawing.Point(10, 776);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnSettings.Size = new System.Drawing.Size(260, 55);
@@ -462,7 +462,7 @@
             this.pnlLogo.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(134)))), ((int)(((byte)(207)))));
             this.pnlLogo.Location = new System.Drawing.Point(0, 0);
             this.pnlLogo.Name = "pnlLogo";
-            this.pnlLogo.Size = new System.Drawing.Size(280, 160);
+            this.pnlLogo.Size = new System.Drawing.Size(280, 209);
             this.pnlLogo.TabIndex = 0;
             // 
             // lblSchoolName
@@ -470,7 +470,7 @@
             this.lblSchoolName.BackColor = System.Drawing.Color.Transparent;
             this.lblSchoolName.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.lblSchoolName.Location = new System.Drawing.Point(50, 111);
+            this.lblSchoolName.Location = new System.Drawing.Point(41, 159);
             this.lblSchoolName.Name = "lblSchoolName";
             this.lblSchoolName.Size = new System.Drawing.Size(199, 32);
             this.lblSchoolName.TabIndex = 1;
@@ -482,9 +482,9 @@
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
             this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautImage;
             this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(90, 15);
+            this.picLogo.Location = new System.Drawing.Point(66, 17);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(100, 90);
+            this.picLogo.Size = new System.Drawing.Size(149, 138);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 0;
             this.picLogo.TabStop = false;
@@ -534,11 +534,11 @@
             // lblPageTitle
             // 
             this.lblPageTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(141, 39);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Thông báo";
             // 
