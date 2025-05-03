@@ -261,7 +261,7 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Lịch dạy";
             pnlContent.Controls.Clear();
-            ucThoiKhoaBieu uc = new ucThoiKhoaBieu();
+            ucThoiKhoaBieu uc = new ucThoiKhoaBieu(maNguoiDung);
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
