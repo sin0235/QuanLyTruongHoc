@@ -1,4 +1,5 @@
 ﻿using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
     public partial class ucThoiKhoaBieu : UserControl
     {
         private readonly DatabaseHelper db;
-        public ucThoiKhoaBieu()
+        private int maNguoiDung;
+        public ucThoiKhoaBieu(int maNguoiDung)
         {
             InitializeComponent();
             db = new DatabaseHelper();
@@ -22,6 +24,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             // Set the DateTimePicker to the current date in Vietnam's timezone
             DateTime vietnamNow = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "SE Asia Standard Time");
             ngayChonDTP.Value = vietnamNow;
+            this.maNguoiDung = maNguoiDung;
         }
 
 
@@ -30,87 +33,94 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             try
             {
-                // SQL query to fetch the teaching schedule for the teacher
-                string query = $@"
-            SELECT 
-                ThoiKhoaBieu.Thu,
-                ThoiKhoaBieu.Tiet,
-                MonHoc.TenMon,
-                LopHoc.TenLop
-            FROM ThoiKhoaBieu
-            INNER JOIN GiaoVien ON ThoiKhoaBieu.MaGV = GiaoVien.MaGV
-            INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
-            INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
-            WHERE GiaoVien.MaNguoiDung = {maNguoiDung}
-            ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
+                // Lấy ngày được chọn từ DateTimePicker
+                DateTime selectedDate = ngayChonDTP.Value;
 
+                // Tính ngày bắt đầu tuần (Thứ Hai) và ngày kết thúc tuần (Chủ Nhật)
+                DateTime startOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek + 1); // Thứ Hai
+                DateTime endOfWeek = startOfWeek.AddDays(6); // Chủ Nhật
+
+                // SQL query để lấy thời khóa biểu trong tuần
+                string query = $@"
+        SELECT 
+            ThoiKhoaBieu.Ngay,
+            ThoiKhoaBieu.Thu,
+            ThoiKhoaBieu.Tiet,
+            MonHoc.TenMon,
+            LopHoc.TenLop
+        FROM ThoiKhoaBieu
+        INNER JOIN GiaoVien ON ThoiKhoaBieu.MaGV = GiaoVien.MaGV
+        INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
+        INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
+        WHERE GiaoVien.MaNguoiDung = {maNguoiDung}
+          AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
+        ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
 
                 DataTable dt = db.ExecuteQuery(query);
 
-                // Clear existing rows in the DataGridView
+                // Xóa các hàng cũ trong DataGridView
                 dgvThoiKhoaBieu.Rows.Clear();
 
-                // Create a dictionary to store schedule data for each day
+                // Tạo dictionary để lưu dữ liệu thời khóa biểu theo thứ
                 var scheduleData = new Dictionary<int, List<string>>();
-                for (int i = 2; i <= 8; i++) // Initialize for days 2 (Monday) to 8 (Sunday)
+                for (int i = 2; i <= 8; i++) // Khởi tạo cho các ngày từ Thứ Hai (2) đến Chủ Nhật (8)
                 {
                     scheduleData[i] = new List<string>();
                 }
 
-                // Populate the dictionary with schedule data
+                // Điền dữ liệu vào dictionary
                 foreach (DataRow row in dt.Rows)
                 {
-                    int thu = Convert.ToInt32(row["Thu"]); // Day of the week
-                    string tiet = row["Tiet"].ToString(); // Time slot
-                    string tenMon = row["TenMon"].ToString(); // Subject name
-                    string tenLop = row["TenLop"].ToString(); // Class name
+                    int thu = Convert.ToInt32(row["Thu"]); // Thứ trong tuần
+                    string tiet = row["Tiet"].ToString(); // Tiết học
+                    string tenMon = row["TenMon"].ToString(); // Tên môn học
+                    string tenLop = row["TenLop"].ToString(); // Tên lớp
 
-                    // Format the schedule entry
+                    // Định dạng thông tin thời khóa biểu
                     string scheduleEntry = $"Tiết: {tiet}\nMôn: {tenMon}\nLớp: {tenLop}";
                     scheduleData[thu].Add(scheduleEntry);
                 }
 
-                // Find the maximum number of rows needed
+                // Tìm số hàng tối đa cần thiết
                 int maxRows = scheduleData.Values.Max(list => list.Count);
 
-                // Add rows to the DataGridView
+                // Thêm hàng vào DataGridView
                 for (int i = 0; i < maxRows; i++)
                 {
                     dgvThoiKhoaBieu.Rows.Add();
                 }
 
-                // Populate the DataGridView
-                for (int thu = 2; thu <= 8; thu++) // Days 2 (Monday) to 8 (Sunday)
+                // Điền dữ liệu vào DataGridView
+                for (int thu = 2; thu <= 8; thu++) // Từ Thứ Hai (2) đến Chủ Nhật (8)
                 {
-                    int columnIndex = thu - 2; // Map "2 = Monday" to column index 0
+                    int columnIndex = thu - 2; // Map "2 = Thứ Hai" thành cột 0
                     for (int rowIndex = 0; rowIndex < scheduleData[thu].Count; rowIndex++)
                     {
                         dgvThoiKhoaBieu.Rows[rowIndex].Cells[columnIndex].Value = scheduleData[thu][rowIndex];
                     }
                 }
-                // Update the total number of periods for the week
-                // Update the total number of periods for the week
+
+                // Tính tổng số tiết trong tuần
                 int totalPeriods = 0;
                 foreach (DataRow row in dt.Rows)
                 {
-                    string tiet = row["Tiet"].ToString(); // Example: "1-3"
+                    string tiet = row["Tiet"].ToString(); // Ví dụ: "1-3"
                     if (tiet.Contains("-"))
                     {
-                        // Extract start and end periods
+                        // Tách tiết bắt đầu và kết thúc
                         int startPeriod = int.Parse(tiet.Split('-')[0]);
                         int endPeriod = int.Parse(tiet.Split('-')[1]);
-                        totalPeriods += (endPeriod - startPeriod + 1); // Calculate the number of periods
+                        totalPeriods += (endPeriod - startPeriod + 1); // Tính số tiết
                     }
                     else
                     {
-                        // Single period (e.g., "1")
+                        // Tiết đơn lẻ (ví dụ: "1")
                         totalPeriods += 1;
                     }
                 }
                 thongKeSoTietTxt.Text = $"{totalPeriods} Tiết";
 
-
-                // Highlight today's column header
+                // Highlight cột của ngày hôm nay
                 HighlightTodayColumn();
             }
             catch (Exception ex)
@@ -118,6 +128,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 MessageBox.Show($"Error loading schedule: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void HighlightTodayColumn()
         {
@@ -139,6 +150,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             dgvThoiKhoaBieu.Refresh();
         }
 
+        private void ngayChonDTP_ValueChanged(object sender, EventArgs e)
+        {
+            LoadLichDay(maNguoiDung);
+        }
     }
 }
 

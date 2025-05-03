@@ -195,6 +195,7 @@
             this.ngayChonDTP.Size = new System.Drawing.Size(235, 36);
             this.ngayChonDTP.TabIndex = 11;
             this.ngayChonDTP.Value = new System.DateTime(2025, 4, 28, 19, 32, 54, 569);
+            this.ngayChonDTP.ValueChanged += new System.EventHandler(this.ngayChonDTP_ValueChanged);
             // 
             // guna2HtmlLabel1
             // 
