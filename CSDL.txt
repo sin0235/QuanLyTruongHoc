@@ -93,7 +93,6 @@ CREATE TABLE ThoiKhoaBieu (
     Ngay DATE NOT NULL,
     Thu INT NOT NULL,
     Tiet NVARCHAR(10) NOT NULL,
-    CONSTRAINT UQ_TKB_Lop_Thu_Tiet UNIQUE (MaLop,Ngay, Thu, Tiet),
     FOREIGN KEY (MaLop) REFERENCES LopHoc(MaLop),
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon),
     FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV)

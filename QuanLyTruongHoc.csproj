@@ -311,6 +311,12 @@
     <Compile Include="GUI\Forms\frmQuanLyHocSinh.Designer.cs">
       <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.Designer.cs">
+      <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmThongBaoChiTiet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -354,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.resx">
       <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.resx">
+      <DependentUpon>ucQuanLyThoiKhoaBieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucTaoDonXinNghi.resx">
       <DependentUpon>ucTaoDonXinNghi.cs</DependentUpon>
@@ -430,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyHocSinh.resx">
       <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmQuanLyThoiKhoaBieu.resx">
+      <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmThongBaoChiTiet.resx">
       <DependentUpon>frmThongBaoChiTiet.cs</DependentUpon>
