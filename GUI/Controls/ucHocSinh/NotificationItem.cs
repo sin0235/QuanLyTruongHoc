@@ -82,7 +82,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Size = new Size(1000, 30),
                 Location = new Point(100, 15),
                 Text = title,
-                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
                 ForeColor = isRead ? Color.FromArgb(70, 70, 70) : Color.FromArgb(0, 120, 215)
             };
 
@@ -92,7 +92,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 AutoSize = true,
                 Location = new Point(100, 45),
                 Text = sender,
-                Font = new Font("Segoe UI", 9.5f),
+                Font = new Font("Segoe UI",11f),
                 ForeColor = Color.FromArgb(100, 100, 100)
             };
 
@@ -103,7 +103,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
                 Location = new Point(1380, 15),
                 Text = FormatDate(date), // Định dạng ngày gửi
-                Font = new Font("Segoe UI", 9, FontStyle.Regular),
+                Font = new Font("Segoe UI", 11, FontStyle.Regular),
                 ForeColor = Color.FromArgb(150, 150, 150)
             };
 
@@ -114,7 +114,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Size = new Size(1300, 40),
                 Location = new Point(100, 70),
                 Text = content,
-                Font = new Font("Segoe UI", 9.5f),
+                Font = new Font("Segoe UI",11),
                 ForeColor = Color.FromArgb(90, 90, 90)
             };
 
@@ -127,7 +127,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Text = "Xem",
                 BorderRadius = 15,
                 FillColor = Color.FromArgb(0, 120, 215),
-                Font = new Font("Segoe UI", 9, FontStyle.Regular),
+                Font = new Font("Segoe UI",11, FontStyle.Regular),
                 Cursor = Cursors.Hand
             };
 

@@ -134,7 +134,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 BorderRadius = 5,
                 FillColor = Color.FromArgb(245, 248, 250),
                 ForeColor = Color.FromArgb(0, 120, 215),
-                Font = new Font("Segoe UI", 9),
+                Font = new Font("Segoe UI", 11),
                 TextAlign = HorizontalAlignment.Left,
                 Margin = new Padding(5, 0, 5, 0),
                 Cursor = Cursors.Hand,

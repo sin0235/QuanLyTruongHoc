@@ -8,14 +8,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyTruongHoc.DAL;
 
 namespace QuanLyTruongHoc.GUI.Forms
 {
     public partial class frmChangePW : Form
     {
-        public frmChangePW()
+        private readonly DatabaseHelper db;
+        private int currentUserId;
+
+        public frmChangePW(int userId = -1)
         {
             InitializeComponent();
+
+            db = new DatabaseHelper();
+
+            // Lấy userId từ tham số hoặc từ Form đang login
+            if (userId != -1)
+                currentUserId = userId;
+            else if (frmLogin.LoggedInStudentId > 0)
+                currentUserId = frmLogin.LoggedInStudentId;
+            else if (frmLogin.LoggedInTeacherId > 0)
+                currentUserId = frmLogin.LoggedInTeacherId;
+
             CustomizeDesign();
         }
 
@@ -25,29 +40,43 @@ namespace QuanLyTruongHoc.GUI.Forms
             pnlTitleBar.MouseDown += PnlTitleBar_MouseDown;
             lblFormTitle.MouseDown += PnlTitleBar_MouseDown;
 
-            // Gán sự kiện cho các nút
+            // Gán sự kiện cho các nút điều khiển
             guna2CircleButtonClose.Click += (s, e) => this.Close();
             guna2CircleButtonMinimize.Click += (s, e) => this.WindowState = FormWindowState.Minimized;
+
+            // Gán sự kiện cho nút đổi mật khẩu
+            btnChangePassword.Click += btnChangePassword_Click;
 
             // Hiệu ứng hover cho nút đổi mật khẩu
             btnChangePassword.MouseEnter += (s, e) =>
             {
-                btnChangePassword.FillColor = System.Drawing.Color.FromArgb(124, 168, 255);
+                btnChangePassword.FillColor = System.Drawing.Color.FromArgb(69, 130, 222);
+                btnChangePassword.FillColor2 = System.Drawing.Color.FromArgb(110, 158, 255);
             };
 
             btnChangePassword.MouseLeave += (s, e) =>
             {
-                btnChangePassword.FillColor = System.Drawing.Color.FromArgb(94, 148, 255);
+                btnChangePassword.FillColor = System.Drawing.Color.FromArgb(58, 123, 213);
+                btnChangePassword.FillColor2 = System.Drawing.Color.FromArgb(94, 148, 255);
             };
 
-            // Tạo hiệu ứng hiển thị/ẩn mật khẩu
-            AddPasswordToggle(txtCurrentPassword);
-            AddPasswordToggle(txtNewPassword);
-            AddPasswordToggle(txtConfirmPassword);
+            // Thiết lập sự kiện cho các nút hiển thị/ẩn mật khẩu
+            SetupPasswordToggle();
 
-            // Kiểm tra khớp mật khẩu khi nhập
-            txtConfirmPassword.TextChanged += TxtConfirmPassword_TextChanged;
+            // Thiết lập sự kiện khi người dùng nhập liệu
             txtNewPassword.TextChanged += TxtNewPassword_TextChanged;
+            txtConfirmPassword.TextChanged += TxtConfirmPassword_TextChanged;
+            txtCurrentPassword.TextChanged += TxtCurrentPassword_TextChanged;
+
+            // Thiết lập thông tin ban đầu
+            lblPasswordHint.Text = "Mật khẩu phải có ít nhất 8 ký tự bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt";
+            passwordStrengthBar.Value = 0;
+        }
+
+        private void TxtCurrentPassword_TextChanged(object sender, EventArgs e)
+        {
+            // Xóa dấu hiệu lỗi khi người dùng nhập lại
+            txtCurrentPassword.BorderColor = Color.FromArgb(210, 218, 226);
         }
 
         private void PnlTitleBar_MouseDown(object sender, MouseEventArgs e)
@@ -66,29 +95,35 @@ namespace QuanLyTruongHoc.GUI.Forms
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
 
-        private void AddPasswordToggle(Guna2TextBox textBox)
+        private void SetupPasswordToggle()
         {
-            // Tạo nút hiển thị/ẩn mật khẩu
-            Guna2Button toggleButton = new Guna2Button();
-            toggleButton.Size = new Size(30, 30);
-            toggleButton.FillColor = Color.Transparent;
-            toggleButton.Image = Properties.Resources.eye_closed; // Thêm hình ảnh vào Resources
-            toggleButton.ImageSize = new Size(20, 20);
-            toggleButton.Cursor = Cursors.Hand;
-
-            // Đặt nút vào bên phải textBox
-            toggleButton.Location = new Point(textBox.Width - 35, (textBox.Height - 30) / 2);
-            toggleButton.Anchor = AnchorStyles.Right;
-
-            textBox.Controls.Add(toggleButton);
-
-            // Xử lý sự kiện click để hiển thị/ẩn mật khẩu
-            bool passwordVisible = false;
-            toggleButton.Click += (s, e) =>
+            // Thiết lập sự kiện hiển thị/ẩn mật khẩu hiện tại
+            bool currentPasswordVisible = false;
+            btnShowCurrentPassword.Click += (s, e) =>
             {
-                passwordVisible = !passwordVisible;
-                textBox.PasswordChar = passwordVisible ? '\0' : '●';
-                toggleButton.Image = passwordVisible ?
+                currentPasswordVisible = !currentPasswordVisible;
+                txtCurrentPassword.PasswordChar = currentPasswordVisible ? '\0' : '●';
+                btnShowCurrentPassword.Image = currentPasswordVisible ?
+                    Properties.Resources.eye_open : Properties.Resources.eye_closed;
+            };
+
+            // Thiết lập sự kiện hiển thị/ẩn mật khẩu mới
+            bool newPasswordVisible = false;
+            btnShowNewPassword.Click += (s, e) =>
+            {
+                newPasswordVisible = !newPasswordVisible;
+                txtNewPassword.PasswordChar = newPasswordVisible ? '\0' : '●';
+                btnShowNewPassword.Image = newPasswordVisible ?
+                    Properties.Resources.eye_open : Properties.Resources.eye_closed;
+            };
+
+            // Thiết lập sự kiện hiển thị/ẩn xác nhận mật khẩu
+            bool confirmPasswordVisible = false;
+            btnShowConfirmPassword.Click += (s, e) =>
+            {
+                confirmPasswordVisible = !confirmPasswordVisible;
+                txtConfirmPassword.PasswordChar = confirmPasswordVisible ? '\0' : '●';
+                btnShowConfirmPassword.Image = confirmPasswordVisible ?
                     Properties.Resources.eye_open : Properties.Resources.eye_closed;
             };
         }
@@ -102,12 +137,18 @@ namespace QuanLyTruongHoc.GUI.Forms
                 {
                     lblPasswordHint.Text = "Mật khẩu xác nhận không khớp";
                     lblPasswordHint.ForeColor = Color.Red;
+                    txtConfirmPassword.BorderColor = Color.Red;
                 }
                 else
                 {
                     lblPasswordHint.Text = "Mật khẩu xác nhận khớp";
                     lblPasswordHint.ForeColor = Color.Green;
+                    txtConfirmPassword.BorderColor = Color.Green;
                 }
+            }
+            else
+            {
+                txtConfirmPassword.BorderColor = Color.FromArgb(210, 218, 226);
             }
         }
 
@@ -120,6 +161,9 @@ namespace QuanLyTruongHoc.GUI.Forms
             {
                 lblPasswordHint.Text = "Mật khẩu phải có ít nhất 8 ký tự bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt";
                 lblPasswordHint.ForeColor = Color.Gray;
+                passwordStrengthBar.Value = 0;
+                passwordStrengthBar.ProgressColor = passwordStrengthBar.ProgressColor2 = Color.Red;
+                txtNewPassword.BorderColor = Color.FromArgb(210, 218, 226);
                 return;
             }
 
@@ -127,21 +171,46 @@ namespace QuanLyTruongHoc.GUI.Forms
             bool hasLowerCase = password.Any(char.IsLower);
             bool hasDigit = password.Any(char.IsDigit);
             bool hasSpecialChar = password.Any(c => !char.IsLetterOrDigit(c));
+            bool hasMinLength = password.Length >= 8;
 
-            if (password.Length < 8)
+            int strength = 0;
+            if (hasUpperCase) strength++;
+            if (hasLowerCase) strength++;
+            if (hasDigit) strength++;
+            if (hasSpecialChar) strength++;
+            if (hasMinLength) strength++;
+
+            // Cập nhật thanh đo độ mạnh mật khẩu
+            passwordStrengthBar.Value = strength * 20; // 5 tiêu chí, mỗi tiêu chí 20%
+
+            // Đổi màu theo độ mạnh
+            if (strength <= 2)
             {
-                lblPasswordHint.Text = "Mật khẩu quá ngắn (tối thiểu 8 ký tự)";
+                passwordStrengthBar.ProgressColor = passwordStrengthBar.ProgressColor2 = Color.Red;
+                lblPasswordHint.Text = "Mật khẩu yếu";
                 lblPasswordHint.ForeColor = Color.Red;
+                txtNewPassword.BorderColor = Color.Red;
             }
-            else if (!hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialChar)
+            else if (strength <= 3)
             {
-                lblPasswordHint.Text = "Mật khẩu phải có chữ hoa, chữ thường, số và ký tự đặc biệt";
+                passwordStrengthBar.ProgressColor = passwordStrengthBar.ProgressColor2 = Color.Orange;
+                lblPasswordHint.Text = "Mật khẩu trung bình";
                 lblPasswordHint.ForeColor = Color.Orange;
+                txtNewPassword.BorderColor = Color.Orange;
+            }
+            else if (strength <= 4)
+            {
+                passwordStrengthBar.ProgressColor = passwordStrengthBar.ProgressColor2 = Color.YellowGreen;
+                lblPasswordHint.Text = "Mật khẩu khá mạnh";
+                lblPasswordHint.ForeColor = Color.YellowGreen;
+                txtNewPassword.BorderColor = Color.YellowGreen;
             }
             else
             {
+                passwordStrengthBar.ProgressColor = passwordStrengthBar.ProgressColor2 = Color.Green;
                 lblPasswordHint.Text = "Mật khẩu mạnh";
                 lblPasswordHint.ForeColor = Color.Green;
+                txtNewPassword.BorderColor = Color.Green;
             }
 
             // Kiểm tra lại với xác nhận mật khẩu
@@ -151,6 +220,11 @@ namespace QuanLyTruongHoc.GUI.Forms
                 {
                     lblPasswordHint.Text = "Mật khẩu xác nhận không khớp";
                     lblPasswordHint.ForeColor = Color.Red;
+                    txtConfirmPassword.BorderColor = Color.Red;
+                }
+                else
+                {
+                    txtConfirmPassword.BorderColor = Color.Green;
                 }
             }
         }
@@ -174,7 +248,20 @@ namespace QuanLyTruongHoc.GUI.Forms
                 return;
             }
 
-            // Kiểm tra mật khẩu cũ trước khi đổi (Logic thực tế sẽ kiểm tra với CSDL)
+            // Kiểm tra độ mạnh mật khẩu
+            if (passwordStrengthBar.Value < 60) // Ít nhất là mức trung bình
+            {
+                DialogResult result = MessageBox.Show(
+                    "Mật khẩu mới khá yếu. Bạn có chắc chắn muốn sử dụng mật khẩu này?",
+                    "Cảnh báo",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No)
+                    return;
+            }
+
+            // Kiểm tra mật khẩu cũ trước khi đổi
             if (CheckOldPassword(txtCurrentPassword.Text))
             {
                 // Thực hiện đổi mật khẩu
@@ -194,21 +281,79 @@ namespace QuanLyTruongHoc.GUI.Forms
             {
                 MessageBox.Show("Mật khẩu hiện tại không đúng", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCurrentPassword.BorderColor = Color.Red;
+                txtCurrentPassword.Focus();
             }
         }
 
-        // Phương thức kiểm tra mật khẩu cũ (Cần thay thế bằng logic thực tế)
+        // Phương thức kiểm tra mật khẩu cũ
         private bool CheckOldPassword(string password)
         {
-            // TO-DO: Kiểm tra mật khẩu cũ với CSDL
-            return true; // Tạm thời cho kết quả true
+            try
+            {
+                // Chuẩn bị truy vấn
+                string query = "SELECT COUNT(*) FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND MatKhau = @MatKhau";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@MaNguoiDung", currentUserId },
+                    { "@MatKhau", password }
+                };
+
+                // Thực thi truy vấn
+                object result = db.ExecuteScalar(query, parameters);
+
+                if (result != null)
+                {
+                    return Convert.ToInt32(result) > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi kiểm tra mật khẩu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
-        // Phương thức thay đổi mật khẩu (Cần thay thế bằng logic thực tế)
+        // Phương thức thay đổi mật khẩu
         private bool ChangePassword(string newPassword)
         {
-            // TO-DO: Cập nhật mật khẩu mới vào CSDL
-            return true; // Tạm thời cho kết quả true
+            try
+            {
+                // Chuẩn bị truy vấn cập nhật
+                string query = "UPDATE NguoiDung SET MatKhau = @MatKhau WHERE MaNguoiDung = @MaNguoiDung";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@MaNguoiDung", currentUserId },
+                    { "@MatKhau", newPassword }
+                };
+
+                // Thực thi truy vấn
+                return db.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi cập nhật mật khẩu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void btnShowCurrentPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShowConfirmPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmChangePW_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

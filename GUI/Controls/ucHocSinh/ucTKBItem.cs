@@ -119,5 +119,20 @@ namespace QuanLyTruongHoc.GUI.Controls
                     break;
             }
         }
+
+        private void lblPhong_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNoidung_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblThoigian_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

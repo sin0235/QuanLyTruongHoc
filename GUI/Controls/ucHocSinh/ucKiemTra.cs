@@ -216,7 +216,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Label lblNoItems = new Label
                 {
                     Text = "Không tìm thấy dữ liệu phù hợp",
-                    Font = new Font("Segoe UI", 12),
+                    Font = new Font("Segoe UI", 14),
                     ForeColor = Color.Gray,
                     AutoSize = true,
                     TextAlign = ContentAlignment.MiddleCenter

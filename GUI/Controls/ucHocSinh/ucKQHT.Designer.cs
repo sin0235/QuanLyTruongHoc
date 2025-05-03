@@ -76,9 +76,8 @@
             this.pnlFilter.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
             this.pnlFilter.ShadowDecoration.Enabled = true;
             this.pnlFilter.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 2, 0, 6);
-            this.pnlFilter.Size = new System.Drawing.Size(1640, 40);
+            this.pnlFilter.Size = new System.Drawing.Size(1640, 76);
             this.pnlFilter.TabIndex = 1;
-            this.pnlFilter.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFilter_Paint);
             // 
             // panSemesterSelector
             // 
@@ -86,9 +85,9 @@
             this.panSemesterSelector.Controls.Add(this.btnCaNam);
             this.panSemesterSelector.Controls.Add(this.btnHK2);
             this.panSemesterSelector.Controls.Add(this.btnHK1);
-            this.panSemesterSelector.Location = new System.Drawing.Point(297, 5);
+            this.panSemesterSelector.Location = new System.Drawing.Point(1243, 15);
             this.panSemesterSelector.Name = "panSemesterSelector";
-            this.panSemesterSelector.Size = new System.Drawing.Size(281, 35);
+            this.panSemesterSelector.Size = new System.Drawing.Size(358, 46);
             this.panSemesterSelector.TabIndex = 8;
             // 
             // btnCaNam
@@ -101,12 +100,12 @@
             this.btnCaNam.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnCaNam.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnCaNam.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnCaNam.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnCaNam.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnCaNam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btnCaNam.IndicateFocus = true;
-            this.btnCaNam.Location = new System.Drawing.Point(196, 1);
+            this.btnCaNam.Location = new System.Drawing.Point(204, 5);
             this.btnCaNam.Name = "btnCaNam";
-            this.btnCaNam.Size = new System.Drawing.Size(82, 31);
+            this.btnCaNam.Size = new System.Drawing.Size(87, 33);
             this.btnCaNam.TabIndex = 2;
             this.btnCaNam.Text = "Cả năm";
             // 
@@ -120,12 +119,12 @@
             this.btnHK2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnHK2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnHK2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnHK2.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnHK2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHK2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.btnHK2.IndicateFocus = true;
-            this.btnHK2.Location = new System.Drawing.Point(94, 0);
+            this.btnHK2.Location = new System.Drawing.Point(102, 5);
             this.btnHK2.Name = "btnHK2";
-            this.btnHK2.Size = new System.Drawing.Size(90, 31);
+            this.btnHK2.Size = new System.Drawing.Size(96, 33);
             this.btnHK2.TabIndex = 1;
             this.btnHK2.Text = "Học kỳ 2";
             // 
@@ -138,24 +137,23 @@
             this.btnHK1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnHK1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnHK1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnHK1.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
+            this.btnHK1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnHK1.ForeColor = System.Drawing.Color.White;
             this.btnHK1.IndicateFocus = true;
-            this.btnHK1.Location = new System.Drawing.Point(0, 0);
+            this.btnHK1.Location = new System.Drawing.Point(3, 3);
             this.btnHK1.Name = "btnHK1";
-            this.btnHK1.Size = new System.Drawing.Size(88, 31);
+            this.btnHK1.Size = new System.Drawing.Size(93, 33);
             this.btnHK1.TabIndex = 0;
             this.btnHK1.Text = "Học kỳ 1";
-            this.btnHK1.Click += new System.EventHandler(this.btnHK1_Click);
             // 
             // lblNamHoc
             // 
             this.lblNamHoc.BackColor = System.Drawing.Color.Transparent;
-            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblNamHoc.Location = new System.Drawing.Point(21, 13);
+            this.lblNamHoc.Location = new System.Drawing.Point(28, 30);
             this.lblNamHoc.Name = "lblNamHoc";
-            this.lblNamHoc.Size = new System.Drawing.Size(58, 19);
+            this.lblNamHoc.Size = new System.Drawing.Size(68, 23);
             this.lblNamHoc.TabIndex = 4;
             this.lblNamHoc.Text = "Năm học";
             // 
@@ -168,12 +166,12 @@
             this.cboNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboNamHoc.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.cboNamHoc.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboNamHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboNamHoc.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboNamHoc.ItemHeight = 30;
-            this.cboNamHoc.Location = new System.Drawing.Point(91, 5);
+            this.cboNamHoc.Location = new System.Drawing.Point(159, 25);
             this.cboNamHoc.Name = "cboNamHoc";
-            this.cboNamHoc.Size = new System.Drawing.Size(180, 36);
+            this.cboNamHoc.Size = new System.Drawing.Size(281, 36);
             this.cboNamHoc.TabIndex = 3;
             this.cboNamHoc.TextOffset = new System.Drawing.Point(5, 0);
             // 
@@ -182,7 +180,7 @@
             this.guna2Separator1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
             this.guna2Separator1.FillThickness = 2;
-            this.guna2Separator1.Location = new System.Drawing.Point(0, 40);
+            this.guna2Separator1.Location = new System.Drawing.Point(0, 76);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(1640, 2);
             this.guna2Separator1.TabIndex = 2;
@@ -192,10 +190,10 @@
             this.pnlMain.Controls.Add(this.pnlSummary);
             this.pnlMain.Controls.Add(this.pnlSubjects);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 42);
+            this.pnlMain.Location = new System.Drawing.Point(0, 78);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlMain.Size = new System.Drawing.Size(1640, 918);
+            this.pnlMain.Size = new System.Drawing.Size(1640, 882);
             this.pnlMain.TabIndex = 3;
             // 
             // pnlSummary
@@ -205,7 +203,7 @@
             this.pnlSummary.Location = new System.Drawing.Point(20, 20);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.pnlSummary.Size = new System.Drawing.Size(504, 878);
+            this.pnlSummary.Size = new System.Drawing.Size(652, 842);
             this.pnlSummary.TabIndex = 1;
             // 
             // cardSummary
@@ -217,21 +215,21 @@
             this.cardSummary.Controls.Add(this.lblSummaryTitle);
             this.cardSummary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cardSummary.FillColor = System.Drawing.Color.White;
+            this.cardSummary.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cardSummary.Location = new System.Drawing.Point(20, 20);
             this.cardSummary.Name = "cardSummary";
             this.cardSummary.Radius = 10;
             this.cardSummary.ShadowColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.cardSummary.ShadowDepth = 80;
             this.cardSummary.ShadowShift = 3;
-            this.cardSummary.Size = new System.Drawing.Size(464, 858);
+            this.cardSummary.Size = new System.Drawing.Size(612, 822);
             this.cardSummary.TabIndex = 0;
-            this.cardSummary.Paint += new System.Windows.Forms.PaintEventHandler(this.cardSummary_Paint);
             // 
             // tlpSummary
             // 
             this.tlpSummary.ColumnCount = 2;
-            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.29391F));
+            this.tlpSummary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.70609F));
             this.tlpSummary.Controls.Add(this.txtTeacherComment, 1, 6);
             this.tlpSummary.Controls.Add(this.lblTeacherComment, 0, 6);
             this.tlpSummary.Controls.Add(this.lblAbsentValue, 1, 5);
@@ -257,7 +255,7 @@
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpSummary.Size = new System.Drawing.Size(410, 519);
+            this.tlpSummary.Size = new System.Drawing.Size(592, 641);
             this.tlpSummary.TabIndex = 1;
             // 
             // txtTeacherComment
@@ -274,17 +272,18 @@
             this.txtTeacherComment.Enabled = false;
             this.txtTeacherComment.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
             this.txtTeacherComment.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTeacherComment.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtTeacherComment.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
             this.txtTeacherComment.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTeacherComment.Location = new System.Drawing.Point(146, 303);
+            this.txtTeacherComment.Location = new System.Drawing.Point(253, 305);
+            this.txtTeacherComment.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtTeacherComment.Multiline = true;
             this.txtTeacherComment.Name = "txtTeacherComment";
             this.txtTeacherComment.Padding = new System.Windows.Forms.Padding(10);
             this.txtTeacherComment.PlaceholderText = "";
             this.txtTeacherComment.ReadOnly = true;
             this.txtTeacherComment.SelectedText = "";
-            this.txtTeacherComment.Size = new System.Drawing.Size(261, 213);
+            this.txtTeacherComment.Size = new System.Drawing.Size(336, 331);
             this.txtTeacherComment.TabIndex = 13;
             // 
             // lblTeacherComment
@@ -292,11 +291,11 @@
             this.lblTeacherComment.AutoSize = false;
             this.lblTeacherComment.BackColor = System.Drawing.Color.Transparent;
             this.lblTeacherComment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTeacherComment.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTeacherComment.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblTeacherComment.Location = new System.Drawing.Point(3, 303);
             this.lblTeacherComment.Name = "lblTeacherComment";
-            this.lblTeacherComment.Size = new System.Drawing.Size(137, 213);
+            this.lblTeacherComment.Size = new System.Drawing.Size(244, 335);
             this.lblTeacherComment.TabIndex = 12;
             this.lblTeacherComment.Text = "Nhận xét của giáo viên";
             // 
@@ -305,11 +304,11 @@
             this.lblAbsentValue.AutoSize = false;
             this.lblAbsentValue.BackColor = System.Drawing.Color.Transparent;
             this.lblAbsentValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAbsentValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAbsentValue.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblAbsentValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblAbsentValue.Location = new System.Drawing.Point(146, 253);
+            this.lblAbsentValue.Location = new System.Drawing.Point(253, 253);
             this.lblAbsentValue.Name = "lblAbsentValue";
-            this.lblAbsentValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAbsentValue.Size = new System.Drawing.Size(336, 44);
             this.lblAbsentValue.TabIndex = 11;
             this.lblAbsentValue.Text = "2 buổi (có phép)";
             this.lblAbsentValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -319,25 +318,26 @@
             this.lblAbsent.AutoSize = false;
             this.lblAbsent.BackColor = System.Drawing.Color.Transparent;
             this.lblAbsent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAbsent.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAbsent.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblAbsent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAbsent.Location = new System.Drawing.Point(3, 253);
             this.lblAbsent.Name = "lblAbsent";
-            this.lblAbsent.Size = new System.Drawing.Size(137, 44);
+            this.lblAbsent.Size = new System.Drawing.Size(244, 44);
             this.lblAbsent.TabIndex = 10;
             this.lblAbsent.Text = "Số buổi nghỉ";
             this.lblAbsent.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblAbsent.Click += new System.EventHandler(this.lblAbsent_Click);
             // 
             // lblRankValue
             // 
             this.lblRankValue.AutoSize = false;
             this.lblRankValue.BackColor = System.Drawing.Color.Transparent;
             this.lblRankValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRankValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRankValue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblRankValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
-            this.lblRankValue.Location = new System.Drawing.Point(146, 203);
+            this.lblRankValue.Location = new System.Drawing.Point(253, 203);
             this.lblRankValue.Name = "lblRankValue";
-            this.lblRankValue.Size = new System.Drawing.Size(261, 44);
+            this.lblRankValue.Size = new System.Drawing.Size(336, 44);
             this.lblRankValue.TabIndex = 9;
             this.lblRankValue.Text = "5 / 40";
             this.lblRankValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -347,11 +347,11 @@
             this.lblRank.AutoSize = false;
             this.lblRank.BackColor = System.Drawing.Color.Transparent;
             this.lblRank.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRank.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblRank.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblRank.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblRank.Location = new System.Drawing.Point(3, 203);
             this.lblRank.Name = "lblRank";
-            this.lblRank.Size = new System.Drawing.Size(137, 44);
+            this.lblRank.Size = new System.Drawing.Size(244, 44);
             this.lblRank.TabIndex = 8;
             this.lblRank.Text = "Xếp hạng lớp";
             this.lblRank.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -361,11 +361,11 @@
             this.lblAwardsValue.AutoSize = false;
             this.lblAwardsValue.BackColor = System.Drawing.Color.Transparent;
             this.lblAwardsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAwardsValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAwardsValue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblAwardsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(180)))), ((int)(((byte)(0)))));
-            this.lblAwardsValue.Location = new System.Drawing.Point(146, 153);
+            this.lblAwardsValue.Location = new System.Drawing.Point(253, 153);
             this.lblAwardsValue.Name = "lblAwardsValue";
-            this.lblAwardsValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAwardsValue.Size = new System.Drawing.Size(336, 44);
             this.lblAwardsValue.TabIndex = 7;
             this.lblAwardsValue.Text = "Học sinh Giỏi";
             this.lblAwardsValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -375,11 +375,11 @@
             this.lblAwards.AutoSize = false;
             this.lblAwards.BackColor = System.Drawing.Color.Transparent;
             this.lblAwards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAwards.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAwards.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblAwards.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAwards.Location = new System.Drawing.Point(3, 153);
             this.lblAwards.Name = "lblAwards";
-            this.lblAwards.Size = new System.Drawing.Size(137, 44);
+            this.lblAwards.Size = new System.Drawing.Size(244, 44);
             this.lblAwards.TabIndex = 6;
             this.lblAwards.Text = "Danh hiệu";
             this.lblAwards.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -389,11 +389,11 @@
             this.lblGPAValue.AutoSize = false;
             this.lblGPAValue.BackColor = System.Drawing.Color.Transparent;
             this.lblGPAValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGPAValue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblGPAValue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblGPAValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.lblGPAValue.Location = new System.Drawing.Point(146, 103);
+            this.lblGPAValue.Location = new System.Drawing.Point(253, 103);
             this.lblGPAValue.Name = "lblGPAValue";
-            this.lblGPAValue.Size = new System.Drawing.Size(261, 44);
+            this.lblGPAValue.Size = new System.Drawing.Size(336, 44);
             this.lblGPAValue.TabIndex = 5;
             this.lblGPAValue.Text = "8.5";
             this.lblGPAValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -403,11 +403,11 @@
             this.lblGPA.AutoSize = false;
             this.lblGPA.BackColor = System.Drawing.Color.Transparent;
             this.lblGPA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblGPA.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblGPA.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblGPA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblGPA.Location = new System.Drawing.Point(3, 103);
             this.lblGPA.Name = "lblGPA";
-            this.lblGPA.Size = new System.Drawing.Size(137, 44);
+            this.lblGPA.Size = new System.Drawing.Size(244, 44);
             this.lblGPA.TabIndex = 4;
             this.lblGPA.Text = "Điểm trung bình";
             this.lblGPA.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -417,11 +417,11 @@
             this.lblConductValue.AutoSize = false;
             this.lblConductValue.BackColor = System.Drawing.Color.Transparent;
             this.lblConductValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConductValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblConductValue.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblConductValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblConductValue.Location = new System.Drawing.Point(146, 53);
+            this.lblConductValue.Location = new System.Drawing.Point(253, 53);
             this.lblConductValue.Name = "lblConductValue";
-            this.lblConductValue.Size = new System.Drawing.Size(261, 44);
+            this.lblConductValue.Size = new System.Drawing.Size(336, 44);
             this.lblConductValue.TabIndex = 3;
             this.lblConductValue.Text = "Tốt";
             this.lblConductValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -431,25 +431,26 @@
             this.lblConduct.AutoSize = false;
             this.lblConduct.BackColor = System.Drawing.Color.Transparent;
             this.lblConduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConduct.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblConduct.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblConduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblConduct.Location = new System.Drawing.Point(3, 53);
             this.lblConduct.Name = "lblConduct";
-            this.lblConduct.Size = new System.Drawing.Size(137, 44);
+            this.lblConduct.Size = new System.Drawing.Size(244, 44);
             this.lblConduct.TabIndex = 2;
             this.lblConduct.Text = "Hạnh kiểm";
             this.lblConduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblConduct.Click += new System.EventHandler(this.lblConduct_Click);
             // 
             // lblAcademicPerformanceValue
             // 
             this.lblAcademicPerformanceValue.AutoSize = false;
             this.lblAcademicPerformanceValue.BackColor = System.Drawing.Color.Transparent;
             this.lblAcademicPerformanceValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAcademicPerformanceValue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblAcademicPerformanceValue.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.lblAcademicPerformanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblAcademicPerformanceValue.Location = new System.Drawing.Point(146, 3);
+            this.lblAcademicPerformanceValue.Location = new System.Drawing.Point(253, 3);
             this.lblAcademicPerformanceValue.Name = "lblAcademicPerformanceValue";
-            this.lblAcademicPerformanceValue.Size = new System.Drawing.Size(261, 44);
+            this.lblAcademicPerformanceValue.Size = new System.Drawing.Size(336, 44);
             this.lblAcademicPerformanceValue.TabIndex = 1;
             this.lblAcademicPerformanceValue.Text = "Giỏi";
             this.lblAcademicPerformanceValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -459,11 +460,11 @@
             this.lblAcademicPerformance.AutoSize = false;
             this.lblAcademicPerformance.BackColor = System.Drawing.Color.Transparent;
             this.lblAcademicPerformance.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAcademicPerformance.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblAcademicPerformance.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblAcademicPerformance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAcademicPerformance.Location = new System.Drawing.Point(3, 3);
             this.lblAcademicPerformance.Name = "lblAcademicPerformance";
-            this.lblAcademicPerformance.Size = new System.Drawing.Size(137, 44);
+            this.lblAcademicPerformance.Size = new System.Drawing.Size(244, 44);
             this.lblAcademicPerformance.TabIndex = 0;
             this.lblAcademicPerformance.Text = "Học lực";
             this.lblAcademicPerformance.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -471,11 +472,11 @@
             // lblSummaryTitle
             // 
             this.lblSummaryTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblSummaryTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblSummaryTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.lblSummaryTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
-            this.lblSummaryTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblSummaryTitle.Location = new System.Drawing.Point(23, 12);
             this.lblSummaryTitle.Name = "lblSummaryTitle";
-            this.lblSummaryTitle.Size = new System.Drawing.Size(129, 23);
+            this.lblSummaryTitle.Size = new System.Drawing.Size(152, 27);
             this.lblSummaryTitle.TabIndex = 0;
             this.lblSummaryTitle.Text = "Tổng kết học kỳ 1";
             // 
@@ -486,7 +487,7 @@
             this.pnlSubjects.Location = new System.Drawing.Point(20, 20);
             this.pnlSubjects.Name = "pnlSubjects";
             this.pnlSubjects.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.pnlSubjects.Size = new System.Drawing.Size(1600, 878);
+            this.pnlSubjects.Size = new System.Drawing.Size(1600, 842);
             this.pnlSubjects.TabIndex = 0;
             // 
             // ucKQHT

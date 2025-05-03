@@ -34,8 +34,8 @@
             this.pnlQuestionContent = new Guna.UI2.WinForms.Guna2Panel();
             this.lblQuestionText = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlQuestionHeader = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblQuestionNumber = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.imgQuestion = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.lblQuestionNumber = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlMain.SuspendLayout();
             this.pnlQuestionContent.SuspendLayout();
             this.pnlQuestionHeader.SuspendLayout();
@@ -101,10 +101,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblQuestionText.BackColor = System.Drawing.Color.Transparent;
-            this.lblQuestionText.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuestionText.Location = new System.Drawing.Point(3, 3);
             this.lblQuestionText.Name = "lblQuestionText";
-            this.lblQuestionText.Size = new System.Drawing.Size(117, 21);
+            this.lblQuestionText.Size = new System.Drawing.Size(131, 23);
             this.lblQuestionText.TabIndex = 0;
             this.lblQuestionText.Text = "Nội dung câu hỏi...";
             // 
@@ -120,17 +120,6 @@
             this.pnlQuestionHeader.Size = new System.Drawing.Size(650, 40);
             this.pnlQuestionHeader.TabIndex = 0;
             // 
-            // lblQuestionNumber
-            // 
-            this.lblQuestionNumber.BackColor = System.Drawing.Color.Transparent;
-            this.lblQuestionNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuestionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
-            this.lblQuestionNumber.Location = new System.Drawing.Point(41, 8);
-            this.lblQuestionNumber.Name = "lblQuestionNumber";
-            this.lblQuestionNumber.Size = new System.Drawing.Size(61, 22);
-            this.lblQuestionNumber.TabIndex = 0;
-            this.lblQuestionNumber.Text = "Câu 1/20";
-            // 
             // imgQuestion
             // 
             this.imgQuestion.Image = global::QuanLyTruongHoc.Properties.Resources.question_icon;
@@ -141,6 +130,17 @@
             this.imgQuestion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgQuestion.TabIndex = 1;
             this.imgQuestion.TabStop = false;
+            // 
+            // lblQuestionNumber
+            // 
+            this.lblQuestionNumber.BackColor = System.Drawing.Color.Transparent;
+            this.lblQuestionNumber.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
+            this.lblQuestionNumber.Location = new System.Drawing.Point(41, 8);
+            this.lblQuestionNumber.Name = "lblQuestionNumber";
+            this.lblQuestionNumber.Size = new System.Drawing.Size(61, 22);
+            this.lblQuestionNumber.TabIndex = 0;
+            this.lblQuestionNumber.Text = "Câu 1/20";
             // 
             // ucTNItem
             // 

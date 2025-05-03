@@ -100,7 +100,7 @@
             this.rtbContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(254)))));
             this.rtbContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbContent.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbContent.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbContent.Location = new System.Drawing.Point(11, 12);
             this.rtbContent.Margin = new System.Windows.Forms.Padding(2);
             this.rtbContent.Name = "rtbContent";
@@ -129,18 +129,18 @@
             // lblAttachmentTitle
             // 
             this.lblAttachmentTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblAttachmentTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAttachmentTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAttachmentTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAttachmentTitle.Location = new System.Drawing.Point(11, 8);
             this.lblAttachmentTitle.Margin = new System.Windows.Forms.Padding(2);
             this.lblAttachmentTitle.Name = "lblAttachmentTitle";
-            this.lblAttachmentTitle.Size = new System.Drawing.Size(111, 21);
+            this.lblAttachmentTitle.Size = new System.Drawing.Size(125, 23);
             this.lblAttachmentTitle.TabIndex = 6;
             this.lblAttachmentTitle.Text = "Tệp đính kèm (0)";
             // 
             // flpAttachments
             // 
-            this.flpAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.flpAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpAttachments.Location = new System.Drawing.Point(11, 32);
             this.flpAttachments.Margin = new System.Windows.Forms.Padding(2);
@@ -159,7 +159,7 @@
             this.btnDownloadAll.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnDownloadAll.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnDownloadAll.FillColor = System.Drawing.Color.White;
-            this.btnDownloadAll.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDownloadAll.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnDownloadAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnDownloadAll.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnDownloadAll.ImageSize = new System.Drawing.Size(16, 16);
@@ -204,7 +204,7 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -219,42 +219,42 @@
             // lblNguoiGui
             // 
             this.lblNguoiGui.BackColor = System.Drawing.Color.Transparent;
-            this.lblNguoiGui.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNguoiGui.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNguoiGui.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblNguoiGui.Location = new System.Drawing.Point(68, 45);
             this.lblNguoiGui.Margin = new System.Windows.Forms.Padding(2);
             this.lblNguoiGui.Name = "lblNguoiGui";
-            this.lblNguoiGui.Size = new System.Drawing.Size(72, 21);
+            this.lblNguoiGui.Size = new System.Drawing.Size(81, 23);
             this.lblNguoiGui.TabIndex = 2;
             this.lblNguoiGui.Text = "Người gửi:";
             // 
             // lblNgayGui
             // 
             this.lblNgayGui.BackColor = System.Drawing.Color.Transparent;
-            this.lblNgayGui.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayGui.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgayGui.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.lblNgayGui.Location = new System.Drawing.Point(68, 69);
+            this.lblNgayGui.Location = new System.Drawing.Point(68, 79);
             this.lblNgayGui.Margin = new System.Windows.Forms.Padding(2);
             this.lblNgayGui.Name = "lblNgayGui";
-            this.lblNgayGui.Size = new System.Drawing.Size(145, 17);
+            this.lblNgayGui.Size = new System.Drawing.Size(186, 22);
             this.lblNgayGui.TabIndex = 3;
             this.lblNgayGui.Text = "Ngày gửi: 15/04/2025 15:30";
             // 
             // lblNguoiNhan
             // 
             this.lblNguoiNhan.BackColor = System.Drawing.Color.Transparent;
-            this.lblNguoiNhan.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNguoiNhan.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNguoiNhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
-            this.lblNguoiNhan.Location = new System.Drawing.Point(68, 93);
+            this.lblNguoiNhan.Location = new System.Drawing.Point(68, 103);
             this.lblNguoiNhan.Margin = new System.Windows.Forms.Padding(2);
             this.lblNguoiNhan.Name = "lblNguoiNhan";
-            this.lblNguoiNhan.Size = new System.Drawing.Size(229, 17);
+            this.lblNguoiNhan.Size = new System.Drawing.Size(284, 22);
             this.lblNguoiNhan.TabIndex = 4;
             this.lblNguoiNhan.Text = "Người nhận: Tất cả học sinh khối 10, 11, 12";
             // 
             // guna2Separator1
             // 
-            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.guna2Separator1.Location = new System.Drawing.Point(11, 126);
@@ -285,7 +285,7 @@
             this.btnReply.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnReply.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnReply.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.btnReply.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReply.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReply.ForeColor = System.Drawing.Color.White;
             this.btnReply.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnReply.ImageSize = new System.Drawing.Size(18, 18);
@@ -306,7 +306,7 @@
             this.btnPrint.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnPrint.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnPrint.FillColor = System.Drawing.Color.White;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnPrint.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnPrint.ImageSize = new System.Drawing.Size(18, 18);
@@ -327,7 +327,7 @@
             this.btnForward.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnForward.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnForward.FillColor = System.Drawing.Color.White;
-            this.btnForward.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnForward.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnForward.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnForward.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnForward.ImageSize = new System.Drawing.Size(18, 18);
@@ -349,7 +349,7 @@
             this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnClose.FillColor = System.Drawing.Color.White;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnClose.Location = new System.Drawing.Point(571, 8);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);

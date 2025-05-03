@@ -65,69 +65,72 @@
             this.pnlMain.ShadowDecoration.Depth = 10;
             this.pnlMain.ShadowDecoration.Enabled = true;
             this.pnlMain.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(3, 3, 5, 5);
-            this.pnlMain.Size = new System.Drawing.Size(350, 150);
+            this.pnlMain.Size = new System.Drawing.Size(365, 188);
             this.pnlMain.TabIndex = 0;
             // 
             // lblNoidung
             // 
             this.lblNoidung.BackColor = System.Drawing.Color.Transparent;
-            this.lblNoidung.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblNoidung.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoidung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.lblNoidung.Location = new System.Drawing.Point(80, 115);
+            this.lblNoidung.Location = new System.Drawing.Point(80, 147);
             this.lblNoidung.Name = "lblNoidung";
-            this.lblNoidung.Size = new System.Drawing.Size(151, 17);
+            this.lblNoidung.Size = new System.Drawing.Size(190, 22);
             this.lblNoidung.TabIndex = 3;
             this.lblNoidung.Text = "Ôn tập cho bài kiểm tra số 2";
+            this.lblNoidung.Click += new System.EventHandler(this.lblNoidung_Click);
             // 
             // lblThoigian
             // 
             this.lblThoigian.BackColor = System.Drawing.Color.Transparent;
-            this.lblThoigian.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.lblThoigian.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblThoigian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(130)))));
-            this.lblThoigian.Location = new System.Drawing.Point(80, 90);
+            this.lblThoigian.Location = new System.Drawing.Point(80, 114);
             this.lblThoigian.Name = "lblThoigian";
-            this.lblThoigian.Size = new System.Drawing.Size(101, 17);
+            this.lblThoigian.Size = new System.Drawing.Size(123, 22);
             this.lblThoigian.TabIndex = 2;
             this.lblThoigian.Text = "07:30 - 08:15 sáng";
+            this.lblThoigian.Click += new System.EventHandler(this.lblThoigian_Click);
             // 
             // lblGiaoVien
             // 
             this.lblGiaoVien.BackColor = System.Drawing.Color.Transparent;
-            this.lblGiaoVien.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.lblGiaoVien.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblGiaoVien.Location = new System.Drawing.Point(80, 65);
+            this.lblGiaoVien.Location = new System.Drawing.Point(80, 81);
             this.lblGiaoVien.Name = "lblGiaoVien";
-            this.lblGiaoVien.Size = new System.Drawing.Size(110, 17);
+            this.lblGiaoVien.Size = new System.Drawing.Size(141, 22);
             this.lblGiaoVien.TabIndex = 1;
             this.lblGiaoVien.Text = "Cô Nguyễn Thị Hiền";
             // 
             // lblMonHoc
             // 
             this.lblMonHoc.BackColor = System.Drawing.Color.Transparent;
-            this.lblMonHoc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblMonHoc.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMonHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(70)))));
             this.lblMonHoc.Location = new System.Drawing.Point(80, 15);
             this.lblMonHoc.Name = "lblMonHoc";
-            this.lblMonHoc.Size = new System.Drawing.Size(116, 23);
+            this.lblMonHoc.Size = new System.Drawing.Size(124, 25);
             this.lblMonHoc.TabIndex = 0;
             this.lblMonHoc.Text = "Toán Đại Số 10";
             // 
             // lblPhong
             // 
             this.lblPhong.BackColor = System.Drawing.Color.Transparent;
-            this.lblPhong.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPhong.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.lblPhong.Location = new System.Drawing.Point(80, 40);
+            this.lblPhong.Location = new System.Drawing.Point(80, 48);
             this.lblPhong.Name = "lblPhong";
-            this.lblPhong.Size = new System.Drawing.Size(70, 17);
+            this.lblPhong.Size = new System.Drawing.Size(86, 22);
             this.lblPhong.TabIndex = 4;
             this.lblPhong.Text = "Phòng A2.01";
+            this.lblPhong.Click += new System.EventHandler(this.lblPhong_Click);
             // 
             // iconSubject
             // 
             this.iconSubject.BackColor = System.Drawing.Color.Transparent;
             this.iconSubject.Image = global::QuanLyTruongHoc.Properties.Resources.book;
-            this.iconSubject.Location = new System.Drawing.Point(280, 15);
+            this.iconSubject.Location = new System.Drawing.Point(300, 15);
             this.iconSubject.Name = "iconSubject";
             this.iconSubject.Size = new System.Drawing.Size(50, 50);
             this.iconSubject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -139,6 +142,7 @@
             this.pnlColor.BorderRadius = 8;
             this.pnlColor.Controls.Add(this.lblTiet);
             this.pnlColor.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.pnlColor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlColor.Location = new System.Drawing.Point(15, 15);
             this.pnlColor.Name = "pnlColor";
             this.pnlColor.Size = new System.Drawing.Size(50, 50);
@@ -162,7 +166,7 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnlMain);
             this.Name = "ucTKBItem";
-            this.Size = new System.Drawing.Size(350, 150);
+            this.Size = new System.Drawing.Size(365, 188);
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconSubject)).EndInit();

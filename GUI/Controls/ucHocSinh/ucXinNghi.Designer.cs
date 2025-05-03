@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlHeader = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlNghi = new Guna.UI2.WinForms.Guna2Panel();
             this.btnTaoMoi = new Guna.UI2.WinForms.Guna2Button();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
@@ -43,9 +41,8 @@
             this.pnlDonXinNghi = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlNoData = new Guna.UI2.WinForms.Guna2Panel();
             this.lblNoData = new System.Windows.Forms.Label();
-            this.pnlTaoDonMoi = new Guna.UI2.WinForms.Guna2Panel();
             this.picNoData = new System.Windows.Forms.PictureBox();
-            this.pnlHeader.SuspendLayout();
+            this.pnlTaoDonMoi = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlNghi.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.pnlDonXinNghi.SuspendLayout();
@@ -53,36 +50,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.picNoData)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlHeader
-            // 
-            this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pnlHeader.BorderRadius = 8;
-            this.pnlHeader.Controls.Add(this.lblTitle);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.pnlHeader.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1640, 60);
-            this.pnlHeader.TabIndex = 0;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
-            this.lblTitle.Location = new System.Drawing.Point(20, 15);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(120, 27);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Đơn Xin Nghỉ";
-            // 
             // pnlNghi
             // 
             this.pnlNghi.Controls.Add(this.btnTaoMoi);
             this.pnlNghi.Controls.Add(this.pnlFilter);
             this.pnlNghi.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlNghi.Location = new System.Drawing.Point(0, 60);
+            this.pnlNghi.Location = new System.Drawing.Point(0, 0);
             this.pnlNghi.Name = "pnlNghi";
             this.pnlNghi.ShadowDecoration.BorderRadius = 8;
             this.pnlNghi.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
@@ -101,7 +74,7 @@
             this.btnTaoMoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnTaoMoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTaoMoi.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(120)))), ((int)(((byte)(230)))));
-            this.btnTaoMoi.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTaoMoi.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaoMoi.ForeColor = System.Drawing.Color.White;
             this.btnTaoMoi.ImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.btnTaoMoi.ImageOffset = new System.Drawing.Point(-5, 0);
@@ -136,7 +109,7 @@
             this.cboThoiGian.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboThoiGian.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.cboThoiGian.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboThoiGian.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboThoiGian.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.cboThoiGian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboThoiGian.ItemHeight = 30;
             this.cboThoiGian.Items.AddRange(new object[] {
@@ -146,7 +119,7 @@
             "1 năm gần đây"});
             this.cboThoiGian.Location = new System.Drawing.Point(101, 4);
             this.cboThoiGian.Name = "cboThoiGian";
-            this.cboThoiGian.Size = new System.Drawing.Size(160, 36);
+            this.cboThoiGian.Size = new System.Drawing.Size(248, 36);
             this.cboThoiGian.StartIndex = 0;
             this.cboThoiGian.TabIndex = 7;
             this.cboThoiGian.TextOffset = new System.Drawing.Point(5, 0);
@@ -155,11 +128,11 @@
             // lblThoiGian
             // 
             this.lblThoiGian.BackColor = System.Drawing.Color.Transparent;
-            this.lblThoiGian.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblThoiGian.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblThoiGian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblThoiGian.Location = new System.Drawing.Point(16, 13);
             this.lblThoiGian.Name = "lblThoiGian";
-            this.lblThoiGian.Size = new System.Drawing.Size(62, 19);
+            this.lblThoiGian.Size = new System.Drawing.Size(74, 23);
             this.lblThoiGian.TabIndex = 6;
             this.lblThoiGian.Text = "Thời gian:";
             // 
@@ -173,9 +146,9 @@
             this.btnAll.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnAll.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnAll.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(184)))));
-            this.btnAll.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnAll.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAll.ForeColor = System.Drawing.Color.White;
-            this.btnAll.Location = new System.Drawing.Point(288, 5);
+            this.btnAll.Location = new System.Drawing.Point(371, 5);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(148, 36);
             this.btnAll.TabIndex = 4;
@@ -192,9 +165,9 @@
             this.btnTuChoi.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnTuChoi.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTuChoi.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
-            this.btnTuChoi.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnTuChoi.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuChoi.ForeColor = System.Drawing.Color.White;
-            this.btnTuChoi.Location = new System.Drawing.Point(755, 5);
+            this.btnTuChoi.Location = new System.Drawing.Point(838, 5);
             this.btnTuChoi.Name = "btnTuChoi";
             this.btnTuChoi.Size = new System.Drawing.Size(148, 36);
             this.btnTuChoi.TabIndex = 3;
@@ -211,9 +184,9 @@
             this.btnDangCho.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnDangCho.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnDangCho.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(171)))), ((int)(((byte)(64)))));
-            this.btnDangCho.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDangCho.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangCho.ForeColor = System.Drawing.Color.White;
-            this.btnDangCho.Location = new System.Drawing.Point(599, 5);
+            this.btnDangCho.Location = new System.Drawing.Point(682, 5);
             this.btnDangCho.Name = "btnDangCho";
             this.btnDangCho.Size = new System.Drawing.Size(148, 36);
             this.btnDangCho.TabIndex = 2;
@@ -230,9 +203,9 @@
             this.btnDaDuyet.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnDaDuyet.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnDaDuyet.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(180)))), ((int)(((byte)(100)))));
-            this.btnDaDuyet.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnDaDuyet.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDaDuyet.ForeColor = System.Drawing.Color.White;
-            this.btnDaDuyet.Location = new System.Drawing.Point(443, 5);
+            this.btnDaDuyet.Location = new System.Drawing.Point(526, 5);
             this.btnDaDuyet.Name = "btnDaDuyet";
             this.btnDaDuyet.Size = new System.Drawing.Size(148, 36);
             this.btnDaDuyet.TabIndex = 1;
@@ -244,7 +217,7 @@
             this.guna2Separator1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
             this.guna2Separator1.FillThickness = 2;
-            this.guna2Separator1.Location = new System.Drawing.Point(0, 130);
+            this.guna2Separator1.Location = new System.Drawing.Point(0, 70);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(1640, 2);
             this.guna2Separator1.TabIndex = 2;
@@ -255,10 +228,10 @@
             this.pnlDonXinNghi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.pnlDonXinNghi.Controls.Add(this.pnlNoData);
             this.pnlDonXinNghi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDonXinNghi.Location = new System.Drawing.Point(0, 132);
+            this.pnlDonXinNghi.Location = new System.Drawing.Point(0, 72);
             this.pnlDonXinNghi.Name = "pnlDonXinNghi";
             this.pnlDonXinNghi.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlDonXinNghi.Size = new System.Drawing.Size(1640, 828);
+            this.pnlDonXinNghi.Size = new System.Drawing.Size(1640, 888);
             this.pnlDonXinNghi.TabIndex = 3;
             // 
             // pnlNoData
@@ -270,7 +243,7 @@
             this.pnlNoData.BorderThickness = 1;
             this.pnlNoData.Controls.Add(this.lblNoData);
             this.pnlNoData.Controls.Add(this.picNoData);
-            this.pnlNoData.Location = new System.Drawing.Point(570, 264);
+            this.pnlNoData.Location = new System.Drawing.Point(570, 294);
             this.pnlNoData.Name = "pnlNoData";
             this.pnlNoData.Size = new System.Drawing.Size(500, 300);
             this.pnlNoData.TabIndex = 0;
@@ -287,19 +260,6 @@
             this.lblNoData.Text = "Không có đơn xin nghỉ học nào";
             this.lblNoData.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // pnlTaoDonMoi
-            // 
-            this.pnlTaoDonMoi.AutoScroll = true;
-            this.pnlTaoDonMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.pnlTaoDonMoi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTaoDonMoi.Location = new System.Drawing.Point(0, 132);
-            this.pnlTaoDonMoi.Name = "pnlTaoDonMoi";
-            this.pnlTaoDonMoi.Padding = new System.Windows.Forms.Padding(20);
-            this.pnlTaoDonMoi.Size = new System.Drawing.Size(1640, 828);
-            this.pnlTaoDonMoi.TabIndex = 4;
-            this.pnlTaoDonMoi.Visible = false;
-            this.pnlTaoDonMoi.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaoDonMoi_Paint);
-            // 
             // picNoData
             // 
             this.picNoData.Location = new System.Drawing.Point(175, 40);
@@ -308,6 +268,19 @@
             this.picNoData.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picNoData.TabIndex = 0;
             this.picNoData.TabStop = false;
+            // 
+            // pnlTaoDonMoi
+            // 
+            this.pnlTaoDonMoi.AutoScroll = true;
+            this.pnlTaoDonMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.pnlTaoDonMoi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTaoDonMoi.Location = new System.Drawing.Point(0, 72);
+            this.pnlTaoDonMoi.Name = "pnlTaoDonMoi";
+            this.pnlTaoDonMoi.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlTaoDonMoi.Size = new System.Drawing.Size(1640, 888);
+            this.pnlTaoDonMoi.TabIndex = 4;
+            this.pnlTaoDonMoi.Visible = false;
+            this.pnlTaoDonMoi.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTaoDonMoi_Paint);
             // 
             // ucXinNghi
             // 
@@ -318,12 +291,9 @@
             this.Controls.Add(this.pnlDonXinNghi);
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.pnlNghi);
-            this.Controls.Add(this.pnlHeader);
             this.Name = "ucXinNghi";
             this.Size = new System.Drawing.Size(1640, 960);
             this.Load += new System.EventHandler(this.ucXinNghi_Load);
-            this.pnlHeader.ResumeLayout(false);
-            this.pnlHeader.PerformLayout();
             this.pnlNghi.ResumeLayout(false);
             this.pnlFilter.ResumeLayout(false);
             this.pnlFilter.PerformLayout();
@@ -335,9 +305,6 @@
         }
 
         #endregion
-
-        private Guna.UI2.WinForms.Guna2GradientPanel pnlHeader;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
         private Guna.UI2.WinForms.Guna2Panel pnlNghi;
         private Guna.UI2.WinForms.Guna2Panel pnlFilter;
         private Guna.UI2.WinForms.Guna2Button btnAll;

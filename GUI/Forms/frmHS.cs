@@ -18,10 +18,7 @@ namespace QuanLyTruongHoc
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
-        private Color highlightColor  = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
-
-
-
+        private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
 
         public frmHS(int maNguoiDung)
         {
@@ -47,6 +44,23 @@ namespace QuanLyTruongHoc
 
             // Đăng ký sự kiện Resize
             this.Resize += new EventHandler(Form1_Resize);
+
+            // Đăng ký sự kiện click cho các nút menu
+            RegisterMenuButtonEvents();
+
+            // Mặc định hiển thị ucThongBao khi khởi động
+            btnThongBao_Click(btnThongBao, EventArgs.Empty);
+        }
+
+        // Đăng ký sự kiện cho các nút menu
+        private void RegisterMenuButtonEvents()
+        {
+            btnThongBao.Click += btnThongBao_Click;
+            btnInfo.Click += btnInfo_Click;
+            btnTKB.Click += btnTKB_Click;
+            btnKQHT.Click += btnKQHT_Click;
+            btnReports.Click += btnReports_Click;
+            btnBT.Click += btnBT_Click;
         }
 
         // Hàm cập nhật vị trí nút
@@ -155,22 +169,92 @@ namespace QuanLyTruongHoc
             isDragging = false;
         }
 
+        // Phương thức để ẩn tất cả các user control
+        private void HideAllUserControls()
+        {
+            // Ẩn tất cả các user control
+            ucThongBao1.Visible = false;
+            ucInfoHS1.Visible = false;
+            ucTKB1.Visible = false;
+            ucKQHT1.Visible = false;
+            ucXinNghi1.Visible = false;
+            ucKiemTra1.Visible = false;
+
+            // Đặt lại màu của tất cả các nút
+            btnThongBao.FillColor = Color.Transparent;
+            btnInfo.FillColor = Color.Transparent;
+            btnTKB.FillColor = Color.Transparent;
+            btnKQHT.FillColor = Color.Transparent;
+            btnReports.FillColor = Color.Transparent;
+            btnBT.FillColor = Color.Transparent;
+        }
+
+        // Phương thức unLightButton được cập nhật
+        private void unLightButton()
+        {
+            HideAllUserControls();
+        }
+
+        // Xử lý sự kiện click cho các nút menu
+        private void btnThongBao_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucThongBao1.Visible = true;
+            btnThongBao.FillColor = highlightColor;
+            lblPageTitle.Text = "Thông báo";
+        }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucInfoHS1.Visible = true;
+            btnInfo.FillColor = highlightColor;
+            lblPageTitle.Text = "Thông tin cá nhân";
+        }
+
+        private void btnTKB_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucTKB1.Visible = true;
+            btnTKB.FillColor = highlightColor;
+            lblPageTitle.Text = "Thời khóa biểu";
+        }
+
+        private void btnKQHT_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucKQHT1.Visible = true;
+            btnKQHT.FillColor = highlightColor;
+            lblPageTitle.Text = "Kết quả học tập";
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucXinNghi1.Visible = true;
+            btnReports.FillColor = highlightColor;
+            lblPageTitle.Text = "Đơn xin phép";
+        }
+
+        private void btnBT_Click(object sender, EventArgs e)
+        {
+            HideAllUserControls();
+            ucKiemTra1.Visible = true;
+            btnBT.FillColor = highlightColor;
+            lblPageTitle.Text = "Kiểm tra - đánh giá";
+        }
+
         private void btnStudents_Click(object sender, EventArgs e)
         {
-
+            // Phương thức này được thay thế bởi btnInfo_Click
             btnInfo.FillColor = highlightColor;
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-
+            // Phương thức này được thay thế bởi btnThongBao_Click
         }
 
-        private void unLightButton()
-        {
-
-
-        }
         // Sửa phương thức btnSettings_Click
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -192,7 +276,11 @@ namespace QuanLyTruongHoc
             // Xử lý xem hồ sơ học sinh
             pnlSubSettings.Visible = false;
             btnSettings.FillColor = Color.Transparent;
-            
+
+            // Chuyển đổi sang user control thông tin học sinh
+            HideAllUserControls();
+            ucInfoHS1.Visible = true;
+            btnInfo.FillColor = highlightColor;
             lblPageTitle.Text = "Hồ sơ học sinh";
         }
 
@@ -211,7 +299,6 @@ namespace QuanLyTruongHoc
 
             lblPageTitle.Text = "Đổi mật khẩu";
         }
-
 
         private void btnLogout_Click(object sender, EventArgs e)
         {

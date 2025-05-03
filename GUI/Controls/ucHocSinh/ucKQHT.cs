@@ -149,17 +149,12 @@ namespace QuanLyTruongHoc.GUI.Controls
             public string TeacherComment { get; set; } // Nhận xét của giáo viên
         }
 
-        private void btnHK1_Click(object sender, EventArgs e)
+        private void lblConduct_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void cardSummary_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pnlFilter_Paint(object sender, PaintEventArgs e)
+        private void lblAbsent_Click(object sender, EventArgs e)
         {
 
         }

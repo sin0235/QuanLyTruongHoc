@@ -118,7 +118,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             Label lblFileName = new Label
             {
                 Text = ShortenFileName(attachment.FileName, 15),
-                Font = new Font("Segoe UI", 9),
+                Font = new Font("Segoe UI", 11),
                 Size = new Size(120, 20),
                 Location = new Point(5, 5),
                 AutoEllipsis = true
@@ -133,7 +133,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Location = new Point(125, 5),
                 FillColor = Color.FromArgb(250, 100, 100),
                 Text = "×",
-                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.White,
                 BorderRadius = 10,
                 Tag = attachment
@@ -330,6 +330,21 @@ namespace QuanLyTruongHoc.GUI.Controls
                 // Kích hoạt sự kiện hủy
                 OnCancel?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private void lblLoaiDon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTuNgay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNoiDung_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

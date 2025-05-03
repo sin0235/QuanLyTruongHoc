@@ -210,26 +210,25 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlFilters.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
             this.pnlFilters.ShadowDecoration.Enabled = true;
             this.pnlFilters.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 2, 0, 6);
-            this.pnlFilters.Size = new System.Drawing.Size(1550, 30);
+            this.pnlFilters.Size = new System.Drawing.Size(1550, 59);
             this.pnlFilters.TabIndex = 1;
             // 
             // btnTuanHienTai
             // 
             this.btnTuanHienTai.Animated = true;
             this.btnTuanHienTai.AutoRoundedCorners = true;
-            this.btnTuanHienTai.BorderRadius = 13;
-            this.btnTuanHienTai.DefaultAutoSize = true;
+            this.btnTuanHienTai.BorderRadius = 19;
             this.btnTuanHienTai.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanHienTai.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanHienTai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnTuanHienTai.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTuanHienTai.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(180)))), ((int)(((byte)(100)))));
-            this.btnTuanHienTai.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnTuanHienTai.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanHienTai.ForeColor = System.Drawing.Color.White;
             this.btnTuanHienTai.IndicateFocus = true;
-            this.btnTuanHienTai.Location = new System.Drawing.Point(1196, 1);
+            this.btnTuanHienTai.Location = new System.Drawing.Point(1200, 9);
             this.btnTuanHienTai.Name = "btnTuanHienTai";
-            this.btnTuanHienTai.Size = new System.Drawing.Size(81, 29);
+            this.btnTuanHienTai.Size = new System.Drawing.Size(135, 41);
             this.btnTuanHienTai.TabIndex = 9;
             this.btnTuanHienTai.Text = "Hiện tại";
             this.btnTuanHienTai.Click += new System.EventHandler(this.btnTuanHienTai_Click);
@@ -239,20 +238,19 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTruoc.Animated = true;
             this.btnTuanTruoc.AutoRoundedCorners = true;
             this.btnTuanTruoc.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.btnTuanTruoc.BorderRadius = 13;
+            this.btnTuanTruoc.BorderRadius = 17;
             this.btnTuanTruoc.BorderThickness = 1;
-            this.btnTuanTruoc.DefaultAutoSize = true;
             this.btnTuanTruoc.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanTruoc.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanTruoc.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnTuanTruoc.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTuanTruoc.FillColor = System.Drawing.Color.White;
-            this.btnTuanTruoc.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnTuanTruoc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanTruoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTruoc.IndicateFocus = true;
-            this.btnTuanTruoc.Location = new System.Drawing.Point(1049, 1);
+            this.btnTuanTruoc.Location = new System.Drawing.Point(1039, 11);
             this.btnTuanTruoc.Name = "btnTuanTruoc";
-            this.btnTuanTruoc.Size = new System.Drawing.Size(111, 29);
+            this.btnTuanTruoc.Size = new System.Drawing.Size(128, 36);
             this.btnTuanTruoc.TabIndex = 8;
             this.btnTuanTruoc.Text = "← Tuần trước";
             this.btnTuanTruoc.Click += new System.EventHandler(this.btnTuanTruoc_Click);
@@ -262,20 +260,19 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTiepTheo.Animated = true;
             this.btnTuanTiepTheo.AutoRoundedCorners = true;
             this.btnTuanTiepTheo.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.btnTuanTiepTheo.BorderRadius = 13;
+            this.btnTuanTiepTheo.BorderRadius = 17;
             this.btnTuanTiepTheo.BorderThickness = 1;
-            this.btnTuanTiepTheo.DefaultAutoSize = true;
             this.btnTuanTiepTheo.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanTiepTheo.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanTiepTheo.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnTuanTiepTheo.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btnTuanTiepTheo.FillColor = System.Drawing.Color.White;
-            this.btnTuanTiepTheo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnTuanTiepTheo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanTiepTheo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTiepTheo.IndicateFocus = true;
-            this.btnTuanTiepTheo.Location = new System.Drawing.Point(1313, 1);
+            this.btnTuanTiepTheo.Location = new System.Drawing.Point(1377, 11);
             this.btnTuanTiepTheo.Name = "btnTuanTiepTheo";
-            this.btnTuanTiepTheo.Size = new System.Drawing.Size(103, 29);
+            this.btnTuanTiepTheo.Size = new System.Drawing.Size(128, 36);
             this.btnTuanTiepTheo.TabIndex = 7;
             this.btnTuanTiepTheo.Text = "Tiếp theo →";
             this.btnTuanTiepTheo.Click += new System.EventHandler(this.btnTuanTiepTheo_Click);
@@ -283,11 +280,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             // lblTuan
             // 
             this.lblTuan.BackColor = System.Drawing.Color.Transparent;
-            this.lblTuan.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTuan.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblTuan.Location = new System.Drawing.Point(396, 12);
+            this.lblTuan.Location = new System.Drawing.Point(570, 17);
             this.lblTuan.Name = "lblTuan";
-            this.lblTuan.Size = new System.Drawing.Size(33, 19);
+            this.lblTuan.Size = new System.Drawing.Size(38, 23);
             this.lblTuan.TabIndex = 6;
             this.lblTuan.Text = "Tuần";
             // 
@@ -304,9 +301,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboTuan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboTuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboTuan.ItemHeight = 30;
-            this.cboTuan.Location = new System.Drawing.Point(440, 4);
+            this.cboTuan.Location = new System.Drawing.Point(624, 14);
             this.cboTuan.Name = "cboTuan";
-            this.cboTuan.Size = new System.Drawing.Size(124, 36);
+            this.cboTuan.Size = new System.Drawing.Size(190, 36);
             this.cboTuan.TabIndex = 5;
             this.cboTuan.TextOffset = new System.Drawing.Point(5, 0);
             this.cboTuan.SelectedIndexChanged += new System.EventHandler(this.cboTuan_SelectedIndexChanged);
@@ -314,11 +311,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             // lblHocKy
             // 
             this.lblHocKy.BackColor = System.Drawing.Color.Transparent;
-            this.lblHocKy.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblHocKy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblHocKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblHocKy.Location = new System.Drawing.Point(214, 12);
+            this.lblHocKy.Location = new System.Drawing.Point(310, 17);
             this.lblHocKy.Name = "lblHocKy";
-            this.lblHocKy.Size = new System.Drawing.Size(45, 19);
+            this.lblHocKy.Size = new System.Drawing.Size(53, 23);
             this.lblHocKy.TabIndex = 4;
             this.lblHocKy.Text = "Học kỳ";
             // 
@@ -334,9 +331,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboHocKy.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboHocKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboHocKy.ItemHeight = 30;
-            this.cboHocKy.Location = new System.Drawing.Point(269, 4);
+            this.cboHocKy.Location = new System.Drawing.Point(382, 12);
             this.cboHocKy.Name = "cboHocKy";
-            this.cboHocKy.Size = new System.Drawing.Size(91, 36);
+            this.cboHocKy.Size = new System.Drawing.Size(157, 36);
             this.cboHocKy.TabIndex = 3;
             this.cboHocKy.TextOffset = new System.Drawing.Point(5, 0);
             this.cboHocKy.SelectedIndexChanged += new System.EventHandler(this.cboHocKy_SelectedIndexChanged);
@@ -344,11 +341,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             // lblNamHoc
             // 
             this.lblNamHoc.BackColor = System.Drawing.Color.Transparent;
-            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblNamHoc.Location = new System.Drawing.Point(20, 12);
+            this.lblNamHoc.Location = new System.Drawing.Point(20, 17);
             this.lblNamHoc.Name = "lblNamHoc";
-            this.lblNamHoc.Size = new System.Drawing.Size(58, 19);
+            this.lblNamHoc.Size = new System.Drawing.Size(68, 23);
             this.lblNamHoc.TabIndex = 2;
             this.lblNamHoc.Text = "Năm học";
             // 
@@ -364,9 +361,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboNamHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboNamHoc.ItemHeight = 30;
-            this.cboNamHoc.Location = new System.Drawing.Point(88, 4);
+            this.cboNamHoc.Location = new System.Drawing.Point(104, 12);
             this.cboNamHoc.Name = "cboNamHoc";
-            this.cboNamHoc.Size = new System.Drawing.Size(91, 36);
+            this.cboNamHoc.Size = new System.Drawing.Size(192, 36);
             this.cboNamHoc.TabIndex = 0;
             this.cboNamHoc.TextOffset = new System.Drawing.Point(5, 0);
             this.cboNamHoc.SelectedIndexChanged += new System.EventHandler(this.cboNamHoc_SelectedIndexChanged);
@@ -385,10 +382,10 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlContent.Controls.Add(this.tableLayoutPanel1);
             this.pnlContent.Controls.Add(this.pnlNoData);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(0, 30);
+            this.pnlContent.Location = new System.Drawing.Point(0, 59);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(20, 10, 20, 20);
-            this.pnlContent.Size = new System.Drawing.Size(1550, 1010);
+            this.pnlContent.Size = new System.Drawing.Size(1550, 981);
             this.pnlContent.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -422,7 +419,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1510, 980);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1510, 951);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -435,7 +432,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlNoData.BorderThickness = 1;
             this.pnlNoData.Controls.Add(this.lblNoData);
             this.pnlNoData.Controls.Add(this.picNoData);
-            this.pnlNoData.Location = new System.Drawing.Point(526, 355);
+            this.pnlNoData.Location = new System.Drawing.Point(526, 340);
             this.pnlNoData.Name = "pnlNoData";
             this.pnlNoData.Size = new System.Drawing.Size(500, 300);
             this.pnlNoData.TabIndex = 2;

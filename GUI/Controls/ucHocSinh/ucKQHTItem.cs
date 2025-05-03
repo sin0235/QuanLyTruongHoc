@@ -219,5 +219,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                 Math.Abs((hash >> 16) % 156) + 100  // B component (100-255)
             );
         }
+
+        private void pnlTeacherComment_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

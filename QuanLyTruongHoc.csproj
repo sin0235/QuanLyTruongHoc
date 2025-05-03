@@ -92,6 +92,12 @@
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemThuDaGui.Designer.cs">
       <DependentUpon>ucXemThuDaGui.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\ucControlBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucControlBar.Designer.cs">
+      <DependentUpon>ucControlBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,22 +134,22 @@
     <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.Designer.cs">
       <DependentUpon>ucXemThongBao.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucInfoHS.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucInfoHS.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucKiemTra.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKiemTra.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucKiemTra.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKiemTra.Designer.cs">
       <DependentUpon>ucKiemTra.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\NotificationItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\NotificationItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucDonXinNghiItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucDonXinNghiItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucDonXinNghiItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucDonXinNghiItem.Designer.cs">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.cs">
@@ -158,28 +164,28 @@
     <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.Designer.cs">
       <DependentUpon>ucQuanLyThoiKhoaBieu.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTaoDonXinNghi.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTaoDonXinNghi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTaoDonXinNghi.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTaoDonXinNghi.Designer.cs">
       <DependentUpon>ucTaoDonXinNghi.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTLItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTLItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTLItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTLItem.Designer.cs">
       <DependentUpon>ucTLItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTNItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTNItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTNItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTNItem.Designer.cs">
       <DependentUpon>ucTNItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucXinNghi.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucXinNghi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucXinNghi.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucXinNghi.Designer.cs">
       <DependentUpon>ucXinNghi.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucGuiThu.cs">
@@ -188,41 +194,41 @@
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucGuiThu.Designer.cs">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucKQHT.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKQHT.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucKQHT.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKQHT.Designer.cs">
       <DependentUpon>ucKQHT.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucKQHTItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKQHTItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucKQHTItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucKQHTItem.Designer.cs">
       <DependentUpon>ucKQHTItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTKB.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTKB.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTKB.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTKB.Designer.cs">
       <DependentUpon>ucTKB.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTKBItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTKBItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTKBItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTKBItem.Designer.cs">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\frmPhongNoiVu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\frmPhongNoiVu.Designer.cs">
-      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmChangePW.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\Forms\frmChangePW.Designer.cs">
       <DependentUpon>frmChangePW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Forms\frmPhongNoiVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmPhongNoiVu.Designer.cs">
+      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmChinhSuaDiem.cs">
       <SubType>Form</SubType>
@@ -236,7 +242,7 @@
     <Compile Include="GUI\Forms\frmGV.Designer.cs">
       <DependentUpon>frmGV.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucInfoHS.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucInfoHS.Designer.cs">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucQuanLyHeThong.cs">
@@ -245,22 +251,22 @@
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucQuanLyHeThong.Designer.cs">
       <DependentUpon>ucQuanLyHeThong.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTBChiTiet.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTBChiTiet.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTBChiTiet.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTBChiTiet.Designer.cs">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucThongBao.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucThongBao.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucThongBao.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucThongBao.Designer.cs">
       <DependentUpon>ucThongBao.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Controls\ucTestItem.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTestItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Controls\ucTestItem.Designer.cs">
+    <Compile Include="GUI\Controls\ucHocSinh\ucTestItem.Designer.cs">
       <DependentUpon>ucTestItem.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmKiemTra.cs">
@@ -325,7 +331,10 @@
     <EmbeddedResource Include="GUI\Controls\ucBanGiamHieu\ucXemThuDaGui.resx">
       <DependentUpon>ucXemThuDaGui.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucDonXinNghiItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucControlBar.resx">
+      <DependentUpon>ucControlBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.resx">
@@ -346,51 +355,51 @@
     <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucXemThongBao.resx">
       <DependentUpon>ucXemThongBao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucInfoHS.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucInfoHS.resx">
       <DependentUpon>ucInfoHS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucKiemTra.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucKiemTra.resx">
       <DependentUpon>ucKiemTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.resx">
       <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTaoDonXinNghi.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTaoDonXinNghi.resx">
       <DependentUpon>ucTaoDonXinNghi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTestItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTestItem.resx">
       <DependentUpon>ucTestItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTLItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTLItem.resx">
       <DependentUpon>ucTLItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTNItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTNItem.resx">
       <DependentUpon>ucTNItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucXinNghi.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucXinNghi.resx">
       <DependentUpon>ucXinNghi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucBanGiamHieu\ucGuiThu.resx">
       <DependentUpon>ucGuiThu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucKQHT.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucKQHT.resx">
       <DependentUpon>ucKQHT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucKQHTItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucKQHTItem.resx">
       <DependentUpon>ucKQHTItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTKB.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTKB.resx">
       <DependentUpon>ucTKB.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTKBItem.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTKBItem.resx">
       <DependentUpon>ucTKBItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmPhongNoiVu.resx">
-      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChangePW.resx">
       <DependentUpon>frmChangePW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmPhongNoiVu.resx">
+      <DependentUpon>frmPhongNoiVu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChinhSuaDiem.resx">
       <DependentUpon>frmChinhSuaDiem.cs</DependentUpon>
@@ -401,10 +410,10 @@
     <EmbeddedResource Include="GUI\Controls\ucBanGiamHieu\ucQuanLyHeThong.resx">
       <DependentUpon>ucQuanLyHeThong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTBChiTiet.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTBChiTiet.resx">
       <DependentUpon>ucTBChiTiet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucThongBao.resx">
+    <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucThongBao.resx">
       <DependentUpon>ucThongBao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmChiTietDonXinNghi.resx">

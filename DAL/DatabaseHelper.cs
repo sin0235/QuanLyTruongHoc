@@ -20,7 +20,7 @@ namespace QuanLyTruongHoc.DAL
         //Phúc toàn
         //private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
         //Tuấn
-        private string strCnn = "Data Source=localhost;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=123";
+        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
         //Nhân
         //string strCnn = "Data Source=JOHNNYBUIII; Database=QuanLyTruongHoc; " + "user id=sa;password=1;MultipleActiveResultSets=True;";
         public SqlConnection GetConnection()
