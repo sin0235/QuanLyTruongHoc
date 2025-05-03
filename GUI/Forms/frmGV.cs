@@ -277,7 +277,9 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Quản lý lớp";
             pnlContent.Controls.Clear();
-            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN();
+            // Retrieve the teacher's ID (MaGV)
+            int maGVChuNhiem = GetMaGiaoVien(maNguoiDung);
+            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN(maGVChuNhiem);
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
