@@ -199,6 +199,7 @@
             this.Controls.Add(this.picAvatar);
             this.Controls.Add(this.btnXacNhan);
             this.Name = "frmQuanLyThoiKhoaBieu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý thời khóa biểu";
             this.Load += new System.EventHandler(this.frmQuanLyThoiKhoaBieu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();

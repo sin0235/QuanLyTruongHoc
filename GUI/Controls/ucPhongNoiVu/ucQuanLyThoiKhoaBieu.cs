@@ -30,7 +30,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         private void ucQuanLyThoiKhoaBieu_Load(object sender, EventArgs e)
         {
             LoadDanhSachLop();
-            dtpNgay.ValueChanged += DtpNgay_ValueChanged;
+
+            // Không chọn lớp nào khi mới tải
+            cmbChonLop.SelectedIndex = -1;
+
+            // Đặt giá trị mặc định cho dtpNgay là ngày hôm nay
+            dtpNgay.Value = DateTime.Today;
+
+            // Tùy chỉnh DataGridView
             dgvThoiKhoaBieu.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             dgvThoiKhoaBieu.ClearSelection();
         }
@@ -47,7 +54,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
         private void LoadThoiKhoaBieu()
         {
-            if (cmbChonLop.SelectedValue == null) return;
+            if (cmbChonLop.SelectedValue == null)
+            {
+                // Xóa dữ liệu trong DataGridView nếu không có lớp nào được chọn
+                dgvThoiKhoaBieu.Rows.Clear();
+                return;
+            }
 
             int maLop;
             if (cmbChonLop.SelectedValue is DataRowView rowView)
@@ -63,14 +75,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
             // Tính ngày bắt đầu tuần (thứ 2) và ngày kết thúc tuần (chủ nhật)
             DateTime startOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek + 1);
+            if (selectedDate.DayOfWeek == DayOfWeek.Sunday)
+                startOfWeek = selectedDate.AddDays(-6); // Đảm bảo chủ nhật thuộc về tuần hiện tại
             DateTime endOfWeek = startOfWeek.AddDays(6);
-
-            // Tùy chỉnh cấu hình của DataGridView để hiển thị tiêu đề nhiều dòng
-            dgvThoiKhoaBieu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dgvThoiKhoaBieu.ColumnHeadersHeight = 60; // Đặt chiều cao cho tiêu đề
-            dgvThoiKhoaBieu.EnableHeadersVisualStyles = false;
-            dgvThoiKhoaBieu.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgvThoiKhoaBieu.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             // Cập nhật tiêu đề cột với ngày tương ứng
             for (int i = 0; i < dgvThoiKhoaBieu.Columns.Count; i++)
@@ -78,15 +85,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 DateTime currentDay = startOfWeek.AddDays(i);
                 string thu = i == 6 ? "Chủ nhật" : $"Thứ {i + 2}";
                 dgvThoiKhoaBieu.Columns[i].HeaderText = $"{thu}\r\n{currentDay:dd/MM/yyyy}";
+                dgvThoiKhoaBieu.Columns[i].Tag = currentDay;  // Lưu ngày vào Tag để tham chiếu sau này
             }
 
+            // Truy vấn lấy dữ liệu thời khóa biểu
             string query = @"
-            SELECT Thu, Tiet, TenMon, HoTen AS TenGiaoVien
+            SELECT Ngay, Thu, Tiet, TenMon, HoTen AS TenGiaoVien
             FROM ThoiKhoaBieu
             INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
             INNER JOIN GiaoVien ON ThoiKhoaBieu.MaGV = GiaoVien.MaGV
             WHERE ThoiKhoaBieu.MaLop = @MaLop AND Ngay BETWEEN @StartOfWeek AND @EndOfWeek
-            ORDER BY Thu, Tiet";
+            ORDER BY Ngay, Thu, Tiet";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -100,30 +109,34 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             // Xóa dữ liệu cũ trong DataGridView
             dgvThoiKhoaBieu.Rows.Clear();
 
-            // Tổ chức dữ liệu theo thứ và tiết học
-            Dictionary<int, Dictionary<string, string>> organizedData = new Dictionary<int, Dictionary<string, string>>();
+            // Tổ chức dữ liệu theo ngày và tiết học
+            Dictionary<DateTime, Dictionary<string, string>> organizedData = new Dictionary<DateTime, Dictionary<string, string>>();
 
-            // Thu từ 2-8 (2=Thứ 2, ..., 8=Chủ nhật)
-            for (int thu = 2; thu <= 8; thu++)
+            // Khởi tạo dictionary cho mỗi ngày trong tuần
+            for (int i = 0; i < 7; i++)
             {
-                organizedData[thu] = new Dictionary<string, string>();
+                DateTime day = startOfWeek.AddDays(i);
+                organizedData[day.Date] = new Dictionary<string, string>();
             }
 
-            // Gom nhóm dữ liệu theo thứ và tiết
+            // Gom nhóm dữ liệu theo ngày và tiết
             foreach (DataRow row in dt.Rows)
             {
-                int thu = Convert.ToInt32(row["Thu"]);
+                DateTime ngay = Convert.ToDateTime(row["Ngay"]).Date;
                 string tiet = row["Tiet"].ToString();
                 string monGV = $"Môn: {row["TenMon"]}\nGV: {row["TenGiaoVien"]}";
 
-                organizedData[thu][tiet] = monGV;
+                if (organizedData.ContainsKey(ngay))
+                {
+                    organizedData[ngay][tiet] = monGV;
+                }
             }
 
             // Xác định số dòng cần thiết
             int maxRowsNeeded = 0;
-            foreach (var thuData in organizedData.Values)
+            foreach (var dayData in organizedData.Values)
             {
-                maxRowsNeeded = Math.Max(maxRowsNeeded, thuData.Count);
+                maxRowsNeeded = Math.Max(maxRowsNeeded, dayData.Count);
             }
 
             // Thêm đủ số dòng cần thiết
@@ -133,16 +146,16 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             }
 
             // Điền dữ liệu vào DataGridView
-            foreach (var thuPair in organizedData)
+            for (int columnIndex = 0; columnIndex < dgvThoiKhoaBieu.Columns.Count; columnIndex++)
             {
-                int thu = thuPair.Key;
-                var tietData = thuPair.Value;
-                int columnIndex = thu - 2; // Thứ 2 tương ứng với cột đầu tiên
+                DateTime currentDay = (DateTime)dgvThoiKhoaBieu.Columns[columnIndex].Tag;
 
-                if (columnIndex >= 0 && columnIndex < dgvThoiKhoaBieu.Columns.Count)
+                if (organizedData.ContainsKey(currentDay.Date))
                 {
+                    var dayData = organizedData[currentDay.Date];
                     int rowIndex = 0;
-                    foreach (var tietPair in tietData)
+
+                    foreach (var tietPair in dayData)
                     {
                         string tiet = tietPair.Key;
                         string monGV = tietPair.Value;
@@ -189,8 +202,38 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
             string tenLop = cmbChonLop.Text;
 
-            // Hiển thị form thêm lịch học
-            frmQuanLyThoiKhoaBieu frm = new frmQuanLyThoiKhoaBieu(maLop, tenLop, dtpNgay.Value);
+            // Xác định ngày từ ô được chọn (nếu có)
+            DateTime selectedDate = dtpNgay.Value;
+
+            // Nếu có ô được chọn trong DataGridView
+            if (dgvThoiKhoaBieu.SelectedCells.Count > 0)
+            {
+                int columnIndex = dgvThoiKhoaBieu.SelectedCells[0].ColumnIndex;
+
+                // Lấy ngày từ tiêu đề cột
+                string headerText = dgvThoiKhoaBieu.Columns[columnIndex].HeaderText;
+                string[] headerParts = headerText.Split(new[] { "\r\n" }, StringSplitOptions.None);
+
+                if (headerParts.Length > 1)
+                {
+                    if (DateTime.TryParseExact(headerParts[1], "dd/MM/yyyy",
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None, out DateTime date))
+                    {
+                        selectedDate = date;
+                    }
+                }
+
+                // Hoặc lấy từ Tag của cột nếu đã thiết lập (nếu bạn đã lưu ngày vào Tag)
+                if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
+                    dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
+                {
+                    selectedDate = (DateTime)dgvThoiKhoaBieu.Columns[columnIndex].Tag;
+                }
+            }
+
+            // Hiển thị form thêm lịch học với ngày được chọn
+            frmQuanLyThoiKhoaBieu frm = new frmQuanLyThoiKhoaBieu(maLop, tenLop, selectedDate);
             frm.Text = "Thêm lịch học";
 
             if (frm.ShowDialog() == DialogResult.OK)
@@ -198,6 +241,130 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 // Reload thời khóa biểu sau khi thêm
                 LoadThoiKhoaBieu();
             }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            cmbChonLop.SelectedIndex = -1;
+            dtpNgay.Value = DateTime.Today;
+            dgvThoiKhoaBieu.Rows.Clear();
+            MessageBox.Show("Đã làm mới cửa sổ thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private int GetMaTKBFromDatabase(int maLop, DateTime ngay, string tiet)
+        {
+            string query = @"
+            SELECT MaTKB 
+            FROM ThoiKhoaBieu 
+            WHERE MaLop = @MaLop 
+              AND CONVERT(DATE, Ngay) = CONVERT(DATE, @Ngay) 
+              AND Tiet = @Tiet";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "@MaLop", maLop },
+                { "@Ngay", ngay },
+                { "@Tiet", tiet }
+            };
+
+            DataTable dt = db.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["MaTKB"]);
+            }
+
+            return -1; // Không tìm thấy
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (cmbChonLop.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp trước khi sửa thời khóa biểu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dgvThoiKhoaBieu.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn một ô trong thời khóa biểu để sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin từ ô được chọn
+            DataGridViewCell selectedCell = dgvThoiKhoaBieu.SelectedCells[0];
+            int columnIndex = selectedCell.ColumnIndex;
+            int rowIndex = selectedCell.RowIndex;
+
+            if (selectedCell.Value == null || string.IsNullOrWhiteSpace(selectedCell.Value.ToString()))
+            {
+                MessageBox.Show("Ô được chọn không có dữ liệu để sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin ngày từ tiêu đề cột
+            string headerText = dgvThoiKhoaBieu.Columns[columnIndex].HeaderText;
+            string[] headerParts = headerText.Split(new[] { "\r\n" }, StringSplitOptions.None);
+            DateTime selectedDate;
+
+            if (headerParts.Length > 1 && DateTime.TryParseExact(headerParts[1], "dd/MM/yyyy",
+                System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.None, out selectedDate))
+            {
+                // Đã lấy được ngày từ tiêu đề cột
+            }
+            else
+            {
+                // Phương pháp dự phòng nếu không thể phân tích ngày
+                selectedDate = dtpNgay.Value.AddDays(columnIndex - (int)dtpNgay.Value.DayOfWeek + 1);
+                if (dtpNgay.Value.DayOfWeek == DayOfWeek.Sunday)
+                    selectedDate = dtpNgay.Value.AddDays(columnIndex - 6);
+            }
+
+            // Phân tích dữ liệu từ ô được chọn
+            string[] cellData = selectedCell.Value.ToString().Split('\n');
+            string tiet = cellData[0].Replace("Tiết: ", "").Trim();
+            string mon = cellData[1].Replace("Môn: ", "").Trim();
+            string giaoVien = cellData[2].Replace("GV: ", "").Trim();
+
+            // Lấy MaTKB từ cơ sở dữ liệu
+            int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
+            int maTKB = GetMaTKBFromDatabase(maLop, selectedDate, tiet);
+
+            if (maTKB <= 0)
+            {
+                MessageBox.Show("Không tìm thấy dữ liệu thời khóa biểu để sửa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Hiển thị form sửa thời khóa biểu
+            frmQuanLyThoiKhoaBieu frm = new frmQuanLyThoiKhoaBieu(Convert.ToInt32(cmbChonLop.SelectedValue), cmbChonLop.Text, selectedDate)
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                Text = "Sửa thời khóa biểu"
+            };
+
+            // Truyền thông tin vào form
+            frm.Controls["cmbMonHoc"].Tag = mon;
+            frm.Controls["cmbGiaoVien"].Tag = giaoVien;
+            frm.Controls["txtTietHoc"].Text = tiet;
+
+            // Truyền MaTKB để cập nhật thay vì tạo mới
+            frm.Tag = maTKB;
+
+            // Đổi nút "Xác nhận" thành "Cập nhật"
+            frm.Controls["btnXacNhan"].Text = "Cập nhật";
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                // Reload thời khóa biểu sau khi cập nhật
+                LoadThoiKhoaBieu();
+            }
+        }
+
+        private void dgvThoiKhoaBieu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

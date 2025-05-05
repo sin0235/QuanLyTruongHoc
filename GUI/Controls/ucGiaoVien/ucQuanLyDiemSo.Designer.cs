@@ -28,24 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lopCmb = new Guna.UI2.WinForms.Guna2ComboBox();
             this.monCmb = new Guna.UI2.WinForms.Guna2ComboBox();
             this.dgvDanhSachHocSinh = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.themDiemBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.locBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.lamMoiBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.chinhSuaDiemBtn = new Guna.UI2.WinForms.Guna2Button();
             this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaHS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +42,18 @@
             this.DiemGiuaKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiemCuoiKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiemTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.themDiemBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.chinhSuaDiemBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.locBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.lamMoiBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachHocSinh)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2GradientPanel1.SuspendLayout();
@@ -97,18 +97,18 @@
             // 
             // dgvDanhSachHocSinh
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(244)))));
-            this.dgvDanhSachHocSinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(244)))));
+            this.dgvDanhSachHocSinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDanhSachHocSinh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dgvDanhSachHocSinh.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDanhSachHocSinh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDanhSachHocSinh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDanhSachHocSinh.ColumnHeadersHeight = 36;
             this.dgvDanhSachHocSinh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvDanhSachHocSinh.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -120,14 +120,14 @@
             this.DiemGiuaKy,
             this.DiemCuoiKy,
             this.DiemTB});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDanhSachHocSinh.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(234)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDanhSachHocSinh.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDanhSachHocSinh.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(220)))), ((int)(((byte)(242)))));
             this.dgvDanhSachHocSinh.Location = new System.Drawing.Point(26, 212);
             this.dgvDanhSachHocSinh.Name = "dgvDanhSachHocSinh";
@@ -158,6 +158,54 @@
             this.dgvDanhSachHocSinh.ThemeStyle.RowsStyle.Height = 24;
             this.dgvDanhSachHocSinh.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvDanhSachHocSinh.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+            // 
+            // STT
+            // 
+            this.STT.HeaderText = "STT";
+            this.STT.MinimumWidth = 6;
+            this.STT.Name = "STT";
+            // 
+            // MaHS
+            // 
+            this.MaHS.HeaderText = "Mã HS";
+            this.MaHS.Name = "MaHS";
+            this.MaHS.Visible = false;
+            // 
+            // HoTen
+            // 
+            this.HoTen.HeaderText = "Họ Tên";
+            this.HoTen.MinimumWidth = 6;
+            this.HoTen.Name = "HoTen";
+            // 
+            // DiemMieng
+            // 
+            this.DiemMieng.HeaderText = "Điểm Miệng";
+            this.DiemMieng.MinimumWidth = 6;
+            this.DiemMieng.Name = "DiemMieng";
+            // 
+            // Diem15Phut
+            // 
+            this.Diem15Phut.HeaderText = "Điểm 15 Phút";
+            this.Diem15Phut.MinimumWidth = 6;
+            this.Diem15Phut.Name = "Diem15Phut";
+            // 
+            // DiemGiuaKy
+            // 
+            this.DiemGiuaKy.HeaderText = "Điểm Giữa Kỳ";
+            this.DiemGiuaKy.MinimumWidth = 6;
+            this.DiemGiuaKy.Name = "DiemGiuaKy";
+            // 
+            // DiemCuoiKy
+            // 
+            this.DiemCuoiKy.HeaderText = "Điểm Cuối Kỳ";
+            this.DiemCuoiKy.MinimumWidth = 6;
+            this.DiemCuoiKy.Name = "DiemCuoiKy";
+            // 
+            // DiemTB
+            // 
+            this.DiemTB.HeaderText = "Điểm Trung Bình";
+            this.DiemTB.MinimumWidth = 6;
+            this.DiemTB.Name = "DiemTB";
             // 
             // guna2HtmlLabel3
             // 
@@ -241,6 +289,25 @@
             this.guna2GradientPanel1.Size = new System.Drawing.Size(691, 116);
             this.guna2GradientPanel1.TabIndex = 16;
             // 
+            // chinhSuaDiemBtn
+            // 
+            this.chinhSuaDiemBtn.BackColor = System.Drawing.Color.Transparent;
+            this.chinhSuaDiemBtn.BorderRadius = 10;
+            this.chinhSuaDiemBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.chinhSuaDiemBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.chinhSuaDiemBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.chinhSuaDiemBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.chinhSuaDiemBtn.FillColor = System.Drawing.Color.DarkOrange;
+            this.chinhSuaDiemBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chinhSuaDiemBtn.ForeColor = System.Drawing.Color.White;
+            this.chinhSuaDiemBtn.HoverState.FillColor = System.Drawing.Color.Orange;
+            this.chinhSuaDiemBtn.Location = new System.Drawing.Point(377, 54);
+            this.chinhSuaDiemBtn.Name = "chinhSuaDiemBtn";
+            this.chinhSuaDiemBtn.Size = new System.Drawing.Size(180, 45);
+            this.chinhSuaDiemBtn.TabIndex = 18;
+            this.chinhSuaDiemBtn.Text = "Sửa";
+            this.chinhSuaDiemBtn.Click += new System.EventHandler(this.chinhSuaDiemBtn_Click);
+            // 
             // guna2HtmlLabel4
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
@@ -262,6 +329,7 @@
             this.guna2GradientPanel2.Name = "guna2GradientPanel2";
             this.guna2GradientPanel2.Size = new System.Drawing.Size(1561, 922);
             this.guna2GradientPanel2.TabIndex = 17;
+            this.guna2GradientPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2GradientPanel2_Paint);
             // 
             // locBtn
             // 
@@ -316,73 +384,6 @@
             this.guna2Button1.Size = new System.Drawing.Size(180, 45);
             this.guna2Button1.TabIndex = 9;
             this.guna2Button1.Text = "Xóa";
-            // 
-            // chinhSuaDiemBtn
-            // 
-            this.chinhSuaDiemBtn.BackColor = System.Drawing.Color.Transparent;
-            this.chinhSuaDiemBtn.BorderRadius = 10;
-            this.chinhSuaDiemBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.chinhSuaDiemBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.chinhSuaDiemBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.chinhSuaDiemBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.chinhSuaDiemBtn.FillColor = System.Drawing.Color.DarkOrange;
-            this.chinhSuaDiemBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chinhSuaDiemBtn.ForeColor = System.Drawing.Color.White;
-            this.chinhSuaDiemBtn.HoverState.FillColor = System.Drawing.Color.Orange;
-            this.chinhSuaDiemBtn.Location = new System.Drawing.Point(377, 54);
-            this.chinhSuaDiemBtn.Name = "chinhSuaDiemBtn";
-            this.chinhSuaDiemBtn.Size = new System.Drawing.Size(180, 45);
-            this.chinhSuaDiemBtn.TabIndex = 18;
-            this.chinhSuaDiemBtn.Text = "Sửa";
-            this.chinhSuaDiemBtn.Click += new System.EventHandler(this.chinhSuaDiemBtn_Click);
-            // 
-            // STT
-            // 
-            this.STT.HeaderText = "STT";
-            this.STT.MinimumWidth = 6;
-            this.STT.Name = "STT";
-            // 
-            // MaHS
-            // 
-            this.MaHS.HeaderText = "Mã HS";
-            this.MaHS.Name = "MaHS";
-            this.MaHS.Visible = false;
-            // 
-            // HoTen
-            // 
-            this.HoTen.HeaderText = "Họ Tên";
-            this.HoTen.MinimumWidth = 6;
-            this.HoTen.Name = "HoTen";
-            // 
-            // DiemMieng
-            // 
-            this.DiemMieng.HeaderText = "Điểm Miệng";
-            this.DiemMieng.MinimumWidth = 6;
-            this.DiemMieng.Name = "DiemMieng";
-            // 
-            // Diem15Phut
-            // 
-            this.Diem15Phut.HeaderText = "Điểm 15 Phút";
-            this.Diem15Phut.MinimumWidth = 6;
-            this.Diem15Phut.Name = "Diem15Phut";
-            // 
-            // DiemGiuaKy
-            // 
-            this.DiemGiuaKy.HeaderText = "Điểm Giữa Kỳ";
-            this.DiemGiuaKy.MinimumWidth = 6;
-            this.DiemGiuaKy.Name = "DiemGiuaKy";
-            // 
-            // DiemCuoiKy
-            // 
-            this.DiemCuoiKy.HeaderText = "Điểm Cuối Kỳ";
-            this.DiemCuoiKy.MinimumWidth = 6;
-            this.DiemCuoiKy.Name = "DiemCuoiKy";
-            // 
-            // DiemTB
-            // 
-            this.DiemTB.HeaderText = "Điểm Trung Bình";
-            this.DiemTB.MinimumWidth = 6;
-            this.DiemTB.Name = "DiemTB";
             // 
             // ucQuanLyDiemSo
             // 

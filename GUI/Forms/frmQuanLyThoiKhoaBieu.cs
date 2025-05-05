@@ -55,6 +55,22 @@ namespace QuanLyTruongHoc.GUI.Forms
             cmbGiaoVien.DataSource = dt;
             cmbGiaoVien.DisplayMember = "HoTen";
             cmbGiaoVien.ValueMember = "MaGV";
+
+            // Nếu có thông tin giáo viên được chọn trước đó, đặt lại
+            if (!string.IsNullOrEmpty(cmbGiaoVien.Tag?.ToString()))
+            {
+                cmbGiaoVien.SelectedIndex = cmbGiaoVien.FindStringExact(cmbGiaoVien.Tag.ToString());
+            }
+        }
+
+        private bool IsValidTietHocFormat(string tietHoc)
+        {
+            // Kiểm tra định dạng của chuỗi tiết học
+            if (string.IsNullOrWhiteSpace(tietHoc))
+                return false;
+
+            string pattern = @"^(\d+(-\d+)?)(,\d+(-\d+)?)*$";
+            return System.Text.RegularExpressions.Regex.IsMatch(tietHoc, pattern);
         }
 
         private List<int> ParseTietHoc(string tietHoc)
@@ -99,33 +115,22 @@ namespace QuanLyTruongHoc.GUI.Forms
             return result;
         }
 
-        private bool IsValidTietHocFormat(string tietHoc)
-        {
-            // Kiểm tra định dạng của chuỗi tiết học
-            if (string.IsNullOrWhiteSpace(tietHoc))
-                return false;
-
-            string pattern = @"^(\d+(-\d+)?)(,\d+(-\d+)?)*$";
-            return System.Text.RegularExpressions.Regex.IsMatch(tietHoc, pattern);
-        }
-
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            if (cmbMonHoc.SelectedValue == null || cmbGiaoVien.SelectedValue == null || string.IsNullOrWhiteSpace(txtTietHoc.Text))
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             try
             {
                 int maMon = Convert.ToInt32(cmbMonHoc.SelectedValue);
                 int maGV = Convert.ToInt32(cmbGiaoVien.SelectedValue);
-                string tietHoc = txtTietHoc.Text.Trim(); // Ví dụ: "1-3"
-                DateTime ngay = dtpNgayHoc.Value;
-                int thu = (int)ngay.DayOfWeek == 0 ? 7 : (int)ngay.DayOfWeek + 1; // Chủ nhật là 7, Thứ 2 là 2, ..., Thứ 7 là 7
+                string tietHoc = txtTietHoc.Text.Trim();
 
-                // Kiểm tra định dạng tiết học hợp lệ trước khi xử lý
+                // Lấy ngày từ DateTimePicker
+                DateTime ngay = dtpNgayHoc.Value.Date;
+
+                // Xác định thứ dựa trên ngày đã lấy
+                int thu = (int)ngay.DayOfWeek;
+                thu = thu == 0 ? 8 : thu + 1; // Chuyển đổi Sunday (0) thành 8, Monday (1) thành 2, ...
+
+                // Kiểm tra định dạng tiết học
                 if (!IsValidTietHocFormat(tietHoc))
                 {
                     MessageBox.Show("Định dạng tiết học không hợp lệ! Vui lòng nhập theo định dạng: 1-3 hoặc 1,2,3",
@@ -133,73 +138,150 @@ namespace QuanLyTruongHoc.GUI.Forms
                     return;
                 }
 
-                // Lấy danh sách các tiết trong chuỗi tiết học mới
-                List<int> tietMoi = ParseTietHoc(tietHoc);
+                List<int> tietHocList = ParseTietHoc(tietHoc);
 
-                // Kiểm tra trùng lịch - chỉ kiểm tra Thu
-                string queryCheck = @"
-                SELECT Tiet
-                FROM ThoiKhoaBieu
-                WHERE MaLop = @MaLop AND Thu = @Thu";
+                // Kiểm tra xem đây là chế độ sửa hay thêm mới
+                bool isEditMode = this.Tag != null && this.Tag is int && (int)this.Tag > 0;
+                int maTKB = isEditMode ? (int)this.Tag : -1;
 
-                Dictionary<string, object> parametersCheck = new Dictionary<string, object>
+                // Nếu đang ở chế độ sửa, lấy thông tin tiết học cũ để không kiểm tra trùng với chính nó
+                List<int> oldTiets = new List<int>();
+                if (isEditMode)
                 {
-                    { "@MaLop", maLop },
-                    { "@Thu", thu }
-                };
+                    string queryOldTiet = "SELECT Tiet FROM ThoiKhoaBieu WHERE MaTKB = @MaTKB";
+                    Dictionary<string, object> paramsOldTiet = new Dictionary<string, object> { { "@MaTKB", maTKB } };
+                    DataTable dtOldTiet = db.ExecuteQuery(queryOldTiet, paramsOldTiet);
 
-                DataTable dt = db.ExecuteQuery(queryCheck, parametersCheck);
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    // Lấy danh sách các tiết đã tồn tại
-                    List<int> tietDaTonTai = ParseTietHoc(row["Tiet"].ToString());
-
-                    // Kiểm tra trùng lặp - tìm phần giao nhau giữa hai tập hợp
-                    var overlappingTiets = tietMoi.Intersect(tietDaTonTai).ToList();
-                    if (overlappingTiets.Count > 0)
+                    if (dtOldTiet.Rows.Count > 0)
                     {
-                        string tietTrung = string.Join(", ", overlappingTiets);
-                        MessageBox.Show($"Lịch học đã tồn tại cho tiết: {tietTrung}! Vui lòng chọn thời gian khác.",
-                            "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
+                        string oldTiet = dtOldTiet.Rows[0]["Tiet"].ToString();
+                        oldTiets = ParseTietHoc(oldTiet);
                     }
                 }
 
-                // Lấy MaTKB mới
-                string queryMaxMaTKB = "SELECT ISNULL(MAX(MaTKB), 0) + 1 FROM ThoiKhoaBieu";
-                int maTKB = Convert.ToInt32(db.ExecuteScalar(queryMaxMaTKB));
+                // Truy vấn tất cả các bản ghi thời khóa biểu trong cùng ngày của lớp đó
+                string queryConflict = @"
+                SELECT TKB.MaTKB, TKB.Tiet, MH.TenMon, GV.HoTen 
+                FROM ThoiKhoaBieu TKB
+                JOIN MonHoc MH ON TKB.MaMon = MH.MaMon
+                JOIN GiaoVien GV ON TKB.MaGV = GV.MaGV
+                WHERE TKB.MaLop = @MaLop 
+                  AND CONVERT(DATE, TKB.Ngay) = CONVERT(DATE, @Ngay)";
 
-                // Thêm vào bảng ThoiKhoaBieu
-                string queryInsert = @"
-                INSERT INTO ThoiKhoaBieu (MaTKB, MaLop, MaMon, MaGV, Ngay, Thu, Tiet)
-                VALUES (@MaTKB, @MaLop, @MaMon, @MaGV, @Ngay, @Thu, @Tiet)";
-
-                Dictionary<string, object> parametersInsert = new Dictionary<string, object>
+                if (isEditMode)
                 {
-                    { "@MaTKB", maTKB },
+                    // Nếu đang sửa, loại trừ bản ghi hiện tại
+                    queryConflict += " AND TKB.MaTKB <> @MaTKB";
+                }
+
+                Dictionary<string, object> parametersConflict = new Dictionary<string, object>
+                {
                     { "@MaLop", maLop },
-                    { "@MaMon", maMon },
-                    { "@MaGV", maGV },
-                    { "@Ngay", ngay },
-                    { "@Thu", thu },
-                    { "@Tiet", tietHoc }
+                    { "@Ngay", ngay }
                 };
 
-                if (db.ExecuteNonQuery(queryInsert, parametersInsert))
+                if (isEditMode)
                 {
-                    MessageBox.Show("Thêm lịch học thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    parametersConflict.Add("@MaTKB", maTKB);
+                }
+
+                DataTable dtConflict = db.ExecuteQuery(queryConflict, parametersConflict);
+
+                // Kiểm tra xung đột tiết học
+                bool hasConflict = false;
+                List<int> conflictTiets = new List<int>();
+                string conflictDetails = "";
+
+                foreach (DataRow row in dtConflict.Rows)
+                {
+                    List<int> existingTiets = ParseTietHoc(row["Tiet"].ToString());
+                    string monHoc = row["TenMon"].ToString();
+                    string giaoVien = row["HoTen"].ToString();
+                    int rowMaTKB = Convert.ToInt32(row["MaTKB"]);
+
+                    foreach (int tiet in tietHocList)
+                    {
+                        // Kiểm tra nếu tiết này không thuộc về tiết cũ của bản ghi đang sửa
+                        // và có xung đột với các tiết khác
+                        if (existingTiets.Contains(tiet) && (rowMaTKB != maTKB || !isEditMode))
+                        {
+                            hasConflict = true;
+                            if (!conflictTiets.Contains(tiet))
+                            {
+                                conflictTiets.Add(tiet);
+                                conflictDetails += $"Tiết {tiet}: Môn {monHoc}, GV {giaoVien}\n";
+                            }
+                        }
+                    }
+                }
+
+                if (hasConflict)
+                {
+                    conflictTiets.Sort();
+                    string tietTrung = string.Join(", ", conflictTiets);
+                    MessageBox.Show($"Không thể {(isEditMode ? "cập nhật" : "thêm")} thời khóa biểu vì tiết {tietTrung} đã bị trùng với lịch học hiện có!\nChi tiết:\n{conflictDetails}",
+                        "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                bool success;
+
+                if (isEditMode)
+                {
+                    // Cập nhật bản ghi hiện có
+                    string queryUpdate = @"
+                    UPDATE ThoiKhoaBieu 
+                    SET MaMon = @MaMon, MaGV = @MaGV, Ngay = @Ngay, Thu = @Thu, Tiet = @Tiet
+                    WHERE MaTKB = @MaTKB";
+
+                    Dictionary<string, object> parametersUpdate = new Dictionary<string, object>
+                    {
+                        { "@MaTKB", maTKB },
+                        { "@MaMon", maMon },
+                        { "@MaGV", maGV },
+                        { "@Ngay", ngay },
+                        { "@Thu", thu },
+                        { "@Tiet", tietHoc }
+                    };
+
+                    success = db.ExecuteNonQuery(queryUpdate, parametersUpdate);
+                }
+                else
+                {
+                    // Thêm mới bản ghi
+                    string queryInsert = @"
+                    INSERT INTO ThoiKhoaBieu (MaTKB, MaLop, MaMon, MaGV, Ngay, Thu, Tiet)
+                    VALUES ((SELECT ISNULL(MAX(MaTKB), 0) + 1 FROM ThoiKhoaBieu), @MaLop, @MaMon, @MaGV, @Ngay, @Thu, @Tiet)";
+
+                    Dictionary<string, object> parametersInsert = new Dictionary<string, object>
+                    {
+                        { "@MaLop", maLop },
+                        { "@MaMon", maMon },
+                        { "@MaGV", maGV },
+                        { "@Ngay", ngay },
+                        { "@Thu", thu },
+                        { "@Tiet", tietHoc }
+                    };
+
+                    success = db.ExecuteNonQuery(queryInsert, parametersInsert);
+                }
+
+                if (success)
+                {
+                    MessageBox.Show($"Thời khóa biểu đã được {(isEditMode ? "cập nhật" : "thêm")} thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Thêm lịch học thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{(isEditMode ? "Cập nhật" : "Thêm")} thời khóa biểu thất bại!",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi: {ex.Message}\nStack Trace: {ex.StackTrace}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -217,7 +299,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 maMon = Convert.ToInt32(cmbMonHoc.SelectedValue);
             }
 
-            // Load danh sách giáo viên dạy môn học này
+            // Tải danh sách giáo viên dạy môn học này
             LoadGiaoVien(maMon);
         }
 
@@ -225,6 +307,25 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             dtpNgayHoc.Value = ngayHoc;
             LoadMonHoc();
+
+            // Gắn sự kiện SelectedIndexChanged cho cmbMonHoc
+            cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
+
+            // Đặt giá trị mặc định cho môn học và giáo viên nếu có
+            if (!string.IsNullOrEmpty(cmbMonHoc.Tag?.ToString()))
+            {
+                cmbMonHoc.SelectedIndex = cmbMonHoc.FindStringExact(cmbMonHoc.Tag.ToString());
+            }
+
+            if (!string.IsNullOrEmpty(cmbGiaoVien.Tag?.ToString()))
+            {
+                cmbGiaoVien.SelectedIndex = cmbGiaoVien.FindStringExact(cmbGiaoVien.Tag.ToString());
+            }
+
+            if (!string.IsNullOrEmpty(txtTietHoc.Text))
+            {
+                txtTietHoc.Text = txtTietHoc.Text;
+            }
         }
     }
 }
