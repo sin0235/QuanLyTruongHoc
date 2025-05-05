@@ -543,46 +543,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-        private void FilterScores(string loaiDiem, float minScore, float maxScore)
-        {
-            try
-            {
-                string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
-            hs.MaHS,
-            hs.HoTen as HoTenDiemSo,
-            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Miệng' THEN ds.Diem ELSE 0 END), 0) AS DiemMieng,
-            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'15 phút' THEN ds.Diem ELSE 0 END), 0) AS Diem15Phut,
-            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN ds.Diem ELSE 0 END), 0) AS DiemGiuaKy,
-            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN ds.Diem ELSE 0 END), 0) AS DiemCuoiKy,
-            ISNULL(AVG(ds.Diem), 0) AS DiemTrungBinh
-        FROM DiemSo ds
-        INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
-        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
-          AND ds.LoaiDiem = N'{loaiDiem}'
-          AND ds.Diem BETWEEN {minScore} AND {maxScore}
-        GROUP BY hs.MaHS, hs.HoTen";
-
-                DataTable dt = db.ExecuteQuery(query);
-
-                dgvDiemSo.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lọc điểm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnLoc_Click(object sender, EventArgs e)
-        {
-            string loaiDiem = cmbLoaiDiem.SelectedItem.ToString();
-            float minScore = float.Parse(txtKhoangDiemMin.Text);
-            float maxScore = float.Parse(txtKhoangDiemMax.Text);
-
-            FilterScores(loaiDiem, minScore, maxScore);
-        }
 
     }
 }

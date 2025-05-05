@@ -826,25 +826,6 @@
             this.txtKhoangDiemMax.Size = new System.Drawing.Size(78, 36);
             this.txtKhoangDiemMax.TabIndex = 54;
             // 
-            // btnLoc
-            // 
-            this.btnLoc.BackColor = System.Drawing.Color.Transparent;
-            this.btnLoc.BorderRadius = 10;
-            this.btnLoc.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLoc.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLoc.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLoc.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLoc.FillColor = System.Drawing.Color.LimeGreen;
-            this.btnLoc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoc.ForeColor = System.Drawing.Color.White;
-            this.btnLoc.HoverState.FillColor = System.Drawing.Color.Chartreuse;
-            this.btnLoc.Location = new System.Drawing.Point(91, 135);
-            this.btnLoc.Name = "btnLoc";
-            this.btnLoc.Size = new System.Drawing.Size(170, 45);
-            this.btnLoc.TabIndex = 53;
-            this.btnLoc.Text = "Lọc";
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
-            // 
             // guna2HtmlLabel6
             // 
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;

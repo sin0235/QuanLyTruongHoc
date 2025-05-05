@@ -239,7 +239,7 @@ namespace QuanLyTruongHoc
         {
             pnlContent.Controls.Clear();
             // Mở ucXemThongBao ở pnlContent
-            ucXemThongBao uc = new ucXemThongBao();
+            ucXemThongBao uc = new ucXemThongBao(maNguoiDung);
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc); // Thêm ucXemThongBao vào pnlContent
             uc.BringToFront();
@@ -310,6 +310,16 @@ namespace QuanLyTruongHoc
             object result = db.ExecuteScalar(query);
             return Convert.ToInt32(result);
 
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            // Show the login form
+            frmLogin loginForm = new frmLogin();
+            loginForm.Show();
+
+            // Close the current form
+            this.Close();
         }
 
     }
