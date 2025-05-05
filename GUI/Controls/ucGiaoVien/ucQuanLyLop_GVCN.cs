@@ -21,6 +21,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             InitializeComponent();
             this.maGVChuNhiem = maGVChuNhiem;
             LoadStudentList();
+            // Mặc định hiển thị thời khóa biểu của tuần hiện tại
+            ngayChonTKBDTP.Value = DateTime.Today;
+            LoadThoiKhoaBieuLop();
             tabQuanLy.SelectedIndexChanged += tabQuanLy_SelectedIndexChanged;
         }
         private void LoadStudentList()
@@ -324,6 +327,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     chonNgayDTP.Value = DateTime.Today; // Đặt ngày mặc định là hôm nay
                     LoadAttendanceList(DateTime.Today); // Tải danh sách điểm danh của ngày hôm nay
                     break;
+                case "tabThoiKhoaBieu": // Tên tab "Thời khóa biểu"
+                    LoadThoiKhoaBieuLop();
+                    break;
+                case "tabDiemSo": // Tên tab "Điểm số"
+                    LoadStudentScores();
+                    break;
                 default:
                     break;
             }
@@ -336,5 +345,204 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             DateTime selectedDate = chonNgayDTP.Value; // Lấy ngày được chọn từ DateTimePicker
             LoadAttendanceList(selectedDate); // Gọi phương thức để tải danh sách điểm danh
         }
+
+        private void lamMoiBtn_Click(object sender, EventArgs e)
+        {
+            LoadThoiKhoaBieuLop();
+        }
+
+        private void LoadThoiKhoaBieuLop()
+        {
+            try
+            {
+                // Lấy ngày được chọn từ DateTimePicker
+                DateTime selectedDate = ngayChonTKBDTP.Value;
+
+                // Tính ngày bắt đầu tuần (Thứ Hai) và ngày kết thúc tuần (Chủ Nhật)
+                DateTime startOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek + 1); // Thứ Hai
+                DateTime endOfWeek = startOfWeek.AddDays(6); // Chủ Nhật
+
+                // Truy vấn thời khóa biểu của lớp chủ nhiệm
+                string query = $@"
+        SELECT 
+            ThoiKhoaBieu.Thu,
+            ThoiKhoaBieu.Tiet,
+            MonHoc.TenMon,
+            COUNT(ThoiKhoaBieu.Tiet) AS SoTiet
+        FROM ThoiKhoaBieu
+        INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
+        INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
+        WHERE LopHoc.MaGVChuNhiem = {maGVChuNhiem}
+          AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
+        GROUP BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet, MonHoc.TenMon
+        ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                // Xóa các hàng cũ trong DataGridView
+                dgvThoiKhoaBieu.Rows.Clear();
+
+                // Tạo dictionary để lưu dữ liệu thời khóa biểu theo thứ
+                var scheduleData = new Dictionary<int, List<string>>();
+                for (int i = 2; i <= 8; i++) // Khởi tạo cho các ngày từ Thứ Hai (2) đến Chủ Nhật (8)
+                {
+                    scheduleData[i] = new List<string>();
+                }
+
+                // Điền dữ liệu vào dictionary
+                foreach (DataRow row in dt.Rows)
+                {
+                    int thu = Convert.ToInt32(row["Thu"]); // Thứ trong tuần
+                    string tiet = row["Tiet"].ToString(); // Tiết học
+                    string tenMon = row["TenMon"].ToString(); // Tên môn học
+
+                    // Định dạng thông tin thời khóa biểu
+                    string scheduleEntry = $"Tiết: {tiet}\nMôn: {tenMon}";
+                    scheduleData[thu].Add(scheduleEntry);
+                }
+
+                // Tìm số hàng tối đa cần thiết
+                int maxRows = scheduleData.Values.Max(list => list.Count);
+
+                // Thêm hàng vào DataGridView
+                for (int i = 0; i < maxRows; i++)
+                {
+                    dgvThoiKhoaBieu.Rows.Add();
+                }
+
+                // Điền dữ liệu vào DataGridView
+                for (int thu = 2; thu <= 8; thu++) // Từ Thứ Hai (2) đến Chủ Nhật (8)
+                {
+                    int columnIndex = thu - 2; // Map "2 = Thứ Hai" thành cột 0
+                    for (int rowIndex = 0; rowIndex < scheduleData[thu].Count; rowIndex++)
+                    {
+                        dgvThoiKhoaBieu.Rows[rowIndex].Cells[columnIndex].Value = scheduleData[thu][rowIndex];
+                    }
+                }
+
+                // Tính tổng số tiết trong tuần và số tiết mỗi môn
+                var subjectSummary = dt.AsEnumerable()
+                    .GroupBy(row => row["TenMon"].ToString())
+                    .Select(group => new
+                    {
+                        TenMon = group.Key,
+                        SoTiet = group.Sum(row => Convert.ToInt32(row["SoTiet"]))
+                    });
+
+                // Hiển thị tổng số tiết trong tuần và số tiết mỗi môn
+                StringBuilder summaryText = new StringBuilder();
+                int totalPeriods = 0;
+                foreach (var subject in subjectSummary)
+                {
+                    summaryText.AppendLine($"{subject.SoTiet} Tiết {subject.TenMon}");
+                    totalPeriods += subject.SoTiet;
+                }
+                thongKeSoTietTxt.Text = summaryText.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải thời khóa biểu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void ngayChonTKBDTP_ValueChanged(object sender, EventArgs e)
+        {
+            LoadThoiKhoaBieuLop();
+        }
+
+        private void LoadStudentScores()
+        {
+            try
+            {
+                string query = $@"
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
+            hs.HoTen AS HoTenDiemSo,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
+            ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
+        FROM DiemSo ds
+        INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
+        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+        GROUP BY hs.HoTen";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    dgvDiemSo.AutoGenerateColumns = false;
+                    dgvDiemSo.DataSource = dt;
+                }
+                else
+                {
+                    MessageBox.Show("Không có điểm số nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvDiemSo.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách điểm số: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+        private void dgvDiemSo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    // Lấy hàng được chọn
+                    DataGridViewRow row = dgvDiemSo.Rows[e.RowIndex];
+
+                    // Hiển thị thông tin cơ bản
+                    txtSTTDiemSo.Text = row.Cells["STTDiemSo"].Value?.ToString();
+                    txtHoTenDiemSo.Text = row.Cells["HoTenDiemSo"].Value?.ToString();
+
+                    // Tính trung bình cho các cột nhiều điểm
+                    txtDiemMieng.Text = CalculateAverage(row.Cells["DiemMieng"].Value?.ToString());
+                    txtDiem15Phut.Text = CalculateAverage(row.Cells["Diem15Phut"].Value?.ToString());
+                    txtDiemGiuaKy.Text = CalculateAverage(row.Cells["DiemGiuaKy"].Value?.ToString());
+                    txtDiemCuoiKy.Text = CalculateAverage(row.Cells["DiemCuoiKy"].Value?.ToString());
+
+                    // Hiển thị điểm trung bình
+                    txtDiemTB.Text = row.Cells["DiemTrungBinh"].Value?.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi hiển thị thông tin: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Hàm tính trung bình từ chuỗi các điểm
+        private string CalculateAverage(string scores)
+        {
+            if (string.IsNullOrEmpty(scores)) return "0";
+
+            try
+            {
+                var scoreList = scores.Split(',')
+                                      .Select(s => float.Parse(s.Trim()))
+                                      .ToList();
+
+                if (scoreList.Count == 0) return "0";
+
+                float average = scoreList.Average();
+                return average.ToString("0.00"); // Hiển thị 2 chữ số thập phân
+            }
+            catch
+            {
+                return "0"; // Trả về 0 nếu có lỗi
+            }
+        }
+
+
     }
- }
+}

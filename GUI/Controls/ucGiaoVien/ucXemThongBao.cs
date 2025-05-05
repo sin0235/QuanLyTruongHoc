@@ -15,10 +15,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
     public partial class ucXemThongBao : UserControl
     {
         private readonly DatabaseHelper db;
-        public ucXemThongBao()
+        private int maNguoiDung;
+        public ucXemThongBao(int maNguoiDung)
         {
             InitializeComponent();
             db = new DatabaseHelper();
+            this.maNguoiDung = maNguoiDung;
             LoadThongBaoChung(); // Mặc định load tất cả thông báo
         }
 
@@ -37,7 +39,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 INNER JOIN 
                     NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
                 WHERE 
-                    ThongBao.MaNguoiNhan IS NULL
+                    ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
                 ORDER BY 
                     ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
@@ -45,10 +47,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
+
         // Hiển thị Thông Báo Cá Nhân
         private void LoadThongBaoCaNhan()
         {
-            string query = @"
+            string query = $@"
                 SELECT 
                     ThongBao.TieuDe, 
                     ThongBao.NoiDung, 
@@ -59,30 +62,53 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 INNER JOIN 
                     NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
                 WHERE 
-                    ThongBao.MaVaiTroNhan = 2
+                    ThongBao.MaNguoiNhan = {maNguoiDung}
                 ORDER BY 
                     ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
             thongBaoDgv.DataSource = dt;
+
         }
+
+
 
 
         // Tìm kiếm thông báo
         private void TimKiemThongBao()
         {
             string keyword = timKiemTBTxt.Text.Trim();
-            string selectedDate = thoiDiemDateTimePicker.Value.ToString("yyyy-MM-dd");
+            if (string.IsNullOrEmpty(keyword))
+            {
+                MessageBox.Show("Vui lòng nhập từ khóa tìm kiếm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            string query = $@"
-                SELECT TieuDe, NoiDung, NgayGui
-                FROM ThongBao
-                WHERE (TieuDe LIKE N'%{keyword}%' OR NoiDung LIKE N'%{keyword}%')
-                AND CAST(NgayGui AS DATE) = '{selectedDate}'
-                ORDER BY NgayGui DESC";
+            string query = @"
+        SELECT 
+            ThongBao.TieuDe, 
+            ThongBao.NoiDung, 
+            ThongBao.NgayGui, 
+            NguoiDung.TenDangNhap AS NguoiGui
+        FROM 
+            ThongBao
+        INNER JOIN 
+            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+        WHERE 
+            (ThongBao.TieuDe LIKE @Keyword OR ThongBao.NoiDung LIKE @Keyword)
+        ORDER BY 
+            ThongBao.NgayGui DESC";
 
-            DataTable dt = db.ExecuteQuery(query);
+            var parameters = new Dictionary<string, object>
+    {
+        { "@Keyword", $"%{keyword}%" }
+    };
+
+            DataTable dt = db.ExecuteQuery(query, parameters);
             thongBaoDgv.DataSource = dt;
         }
+
+
+
 
         private void thongBaoChungBtn_Click(object sender, EventArgs e)
         {
@@ -101,15 +127,22 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
         private void lamMoiTBBtn_Click(object sender, EventArgs e)
         {
-            if(thongBaoCaNhanBtn.Enabled)
+            // Check which tab is currently active
+            if (thongBaoCaNhanBtn.Focused) // If the "Personal Notifications" tab is active
             {
                 LoadThongBaoCaNhan();
             }
-            else
+            else if (thongBaoChungBtn.Focused) // If the "General Notifications" tab is active
             {
                 LoadThongBaoChung();
             }
+            else
+            {
+                // Default behavior: Reload general notifications
+                LoadThongBaoChung();
+            }
         }
+
         private void thongBaoDgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // Đảm bảo không click vào header

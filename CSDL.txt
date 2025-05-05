@@ -93,7 +93,6 @@ CREATE TABLE ThoiKhoaBieu (
     Ngay DATE NOT NULL,
     Thu INT NOT NULL,
     Tiet NVARCHAR(10) NOT NULL,
-    CONSTRAINT UQ_TKB_Lop_Thu_Tiet UNIQUE (MaLop,Ngay, Thu, Tiet),
     FOREIGN KEY (MaLop) REFERENCES LopHoc(MaLop),
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon),
     FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV)
@@ -301,3 +300,13 @@ INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES
 (2, 2, N'Nhập điểm môn Toán kiểm tra 15 phút học kỳ 1 cho học sinh Phạm Minh Khoa', GETDATE()),
 (3, 3, N'Nhập điểm môn Văn cuối kỳ học kỳ 1 cho học sinh Lê Hồng Ngọc', GETDATE());
 
+-- Common notification for all teachers
+INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
+VALUES (4, 1, NULL, 2, NULL, NULL, N'Thông báo họp giáo viên', N'Tất cả giáo viên tham gia họp vào ngày 10/05/2025.', GETDATE());
+
+-- Personal notification for a specific teacher (e.g., MaNguoiNhan = 2)
+INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
+VALUES (5, 1, 2, NULL, NULL, NULL, N'Nhắc nhở công việc', N'Giáo viên Nguyễn Văn A cần hoàn thành báo cáo tuần.', GETDATE());
+
+INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
+VALUES (6, 1, NULL, NULL, NULL, NULL, N'Thông báo chung', N'Thông báo dành cho tất cả mọi người.', GETDATE());

@@ -32,6 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.thongBaoDgv = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.TieuDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.lamMoiTBBtn = new Guna.UI2.WinForms.Guna2Button();
             this.thongBaoCaNhanBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -39,13 +43,8 @@
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.timKiemTBBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.thoiDiemDateTimePicker = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.timKiemTBTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
-            this.TieuDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgayGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.thongBaoDgv)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2CustomGradientPanel2.SuspendLayout();
@@ -115,6 +114,38 @@
             this.thongBaoDgv.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.thongBaoDgv.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.thongBaoDgv.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.thongBaoDgv_CellDoubleClick);
+            // 
+            // TieuDe
+            // 
+            this.TieuDe.DataPropertyName = "TieuDe";
+            this.TieuDe.HeaderText = "Tiêu đề";
+            this.TieuDe.MinimumWidth = 6;
+            this.TieuDe.Name = "TieuDe";
+            this.TieuDe.ReadOnly = true;
+            // 
+            // NoiDung
+            // 
+            this.NoiDung.DataPropertyName = "NoiDung";
+            this.NoiDung.HeaderText = "Nội Dung";
+            this.NoiDung.MinimumWidth = 6;
+            this.NoiDung.Name = "NoiDung";
+            this.NoiDung.ReadOnly = true;
+            // 
+            // NgayGui
+            // 
+            this.NgayGui.DataPropertyName = "NgayGui";
+            this.NgayGui.HeaderText = "Ngày Gửi";
+            this.NgayGui.MinimumWidth = 6;
+            this.NgayGui.Name = "NgayGui";
+            this.NgayGui.ReadOnly = true;
+            // 
+            // NguoiGui
+            // 
+            this.NguoiGui.DataPropertyName = "NguoiGui";
+            this.NguoiGui.HeaderText = "Người Gửi";
+            this.NguoiGui.MinimumWidth = 6;
+            this.NguoiGui.Name = "NguoiGui";
+            this.NguoiGui.ReadOnly = true;
             // 
             // guna2CustomGradientPanel1
             // 
@@ -208,7 +239,6 @@
             // 
             this.guna2CustomGradientPanel2.BorderRadius = 10;
             this.guna2CustomGradientPanel2.Controls.Add(this.timKiemTBBtn);
-            this.guna2CustomGradientPanel2.Controls.Add(this.thoiDiemDateTimePicker);
             this.guna2CustomGradientPanel2.Controls.Add(this.timKiemTBTxt);
             this.guna2CustomGradientPanel2.Controls.Add(this.guna2Button8);
             this.guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
@@ -236,23 +266,6 @@
             this.timKiemTBBtn.TabIndex = 20;
             this.timKiemTBBtn.Text = "Tìm Kiếm";
             this.timKiemTBBtn.Click += new System.EventHandler(this.timKiemTBBtn_Click);
-            // 
-            // thoiDiemDateTimePicker
-            // 
-            this.thoiDiemDateTimePicker.BackColor = System.Drawing.Color.Transparent;
-            this.thoiDiemDateTimePicker.BorderRadius = 10;
-            this.thoiDiemDateTimePicker.Checked = true;
-            this.thoiDiemDateTimePicker.FillColor = System.Drawing.Color.White;
-            this.thoiDiemDateTimePicker.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.thoiDiemDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.thoiDiemDateTimePicker.HoverState.FillColor = System.Drawing.Color.SteelBlue;
-            this.thoiDiemDateTimePicker.Location = new System.Drawing.Point(1273, 15);
-            this.thoiDiemDateTimePicker.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.thoiDiemDateTimePicker.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.thoiDiemDateTimePicker.Name = "thoiDiemDateTimePicker";
-            this.thoiDiemDateTimePicker.Size = new System.Drawing.Size(243, 52);
-            this.thoiDiemDateTimePicker.TabIndex = 32;
-            this.thoiDiemDateTimePicker.Value = new System.DateTime(2025, 4, 28, 19, 32, 54, 569);
             // 
             // timKiemTBTxt
             // 
@@ -293,38 +306,6 @@
             this.guna2Button8.TabIndex = 1;
             this.guna2Button8.Text = "Đổi ảnh đại diện";
             // 
-            // TieuDe
-            // 
-            this.TieuDe.DataPropertyName = "TieuDe";
-            this.TieuDe.HeaderText = "Tiêu đề";
-            this.TieuDe.MinimumWidth = 6;
-            this.TieuDe.Name = "TieuDe";
-            this.TieuDe.ReadOnly = true;
-            // 
-            // NoiDung
-            // 
-            this.NoiDung.DataPropertyName = "NoiDung";
-            this.NoiDung.HeaderText = "Nội Dung";
-            this.NoiDung.MinimumWidth = 6;
-            this.NoiDung.Name = "NoiDung";
-            this.NoiDung.ReadOnly = true;
-            // 
-            // NgayGui
-            // 
-            this.NgayGui.DataPropertyName = "NgayGui";
-            this.NgayGui.HeaderText = "Ngày Gửi";
-            this.NgayGui.MinimumWidth = 6;
-            this.NgayGui.Name = "NgayGui";
-            this.NgayGui.ReadOnly = true;
-            // 
-            // NguoiGui
-            // 
-            this.NguoiGui.DataPropertyName = "NguoiGui";
-            this.NguoiGui.HeaderText = "Người Gửi";
-            this.NguoiGui.MinimumWidth = 6;
-            this.NguoiGui.Name = "NguoiGui";
-            this.NguoiGui.ReadOnly = true;
-            // 
             // ucXemThongBao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -352,7 +333,6 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
         private Guna.UI2.WinForms.Guna2TextBox timKiemTBTxt;
         private Guna.UI2.WinForms.Guna2Button timKiemTBBtn;
-        private Guna.UI2.WinForms.Guna2DateTimePicker thoiDiemDateTimePicker;
         private System.Windows.Forms.DataGridViewTextBoxColumn TieuDe;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoiDung;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayGui;

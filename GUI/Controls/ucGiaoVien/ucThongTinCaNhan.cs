@@ -73,6 +73,5 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-
     }
 }

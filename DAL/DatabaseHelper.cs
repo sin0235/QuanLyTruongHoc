@@ -97,7 +97,17 @@ namespace QuanLyTruongHoc.DAL
                     {
                         foreach (var param in parameters)
                         {
-                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                            if (param.Value is DateTime dateValue)
+                            {
+                                // Xử lý đặc biệt cho tham số kiểu DateTime
+                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.Date);
+                                sqlParam.Value = dateValue.Date; // Chỉ lấy phần ngày
+                                cmd.Parameters.Add(sqlParam);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                            }
                         }
                     }
 
@@ -165,7 +175,17 @@ namespace QuanLyTruongHoc.DAL
                     {
                         foreach (var param in parameters)
                         {
-                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                            if (param.Value is DateTime dateValue)
+                            {
+                                // Xử lý đặc biệt cho tham số kiểu DateTime
+                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.Date);
+                                sqlParam.Value = dateValue.Date; // Chỉ lấy phần ngày
+                                cmd.Parameters.Add(sqlParam);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                            }
                         }
                     }
 
