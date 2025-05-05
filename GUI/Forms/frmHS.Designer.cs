@@ -66,7 +66,7 @@
             this.ucKQHT1 = new QuanLyTruongHoc.GUI.Controls.ucKQHT();
             this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB();
             this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
-            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao();
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao(ID);
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();

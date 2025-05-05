@@ -20,9 +20,18 @@ namespace QuanLyTruongHoc
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
         private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
 
-        public frmHS(int maNguoiDung)
+
+        private int maNguoiDung;
+
+        public int ID
+        {
+            get { return maNguoiDung; }
+        }
+        public frmHS(int ID)
         {
             InitializeComponent();
+            maNguoiDung = ID;
+
 
             // Đảm bảo các nút nằm trong Guna2Panel
             guna2CircleButtonClose.Parent = pnlTitleBar;

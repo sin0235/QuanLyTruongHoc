@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyTruongHoc.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,30 +23,102 @@ namespace QuanLyTruongHoc.GUI.Controls
         private bool isShowingCommonNotifications = true;
         // Control hiển thị chi tiết thông báo
         private ucTBChiTiet tbChiTiet;
+        // Object để gọi các phương thức thao tác với CSDL
+        private ThongBaoDAL thongBaoDAL;
+        // Thông tin người dùng hiện tại
+        private int maNguoiDung;
+        private int maVaiTro;
+        private int? maLop;
 
-        public ucThongBao()
+        public ucThongBao(int ID)
         {
             InitializeComponent();
+            thongBaoDAL = new ThongBaoDAL();
+            maNguoiDung = ID;
+
         }
+
 
         private void ucThongBao_Load(object sender, EventArgs e)
         {
-            // Tạo dữ liệu mẫu (sau này sẽ thay thế bằng dữ liệu từ CSDL)
-            CreateSampleData();
+            // Thay thế dữ liệu mẫu bằng dữ liệu từ CSDL
+            LoadDataFromDatabase();
 
             // Hiển thị thông báo chung ban đầu
             DisplayCommonNotifications();
         }
 
         /// <summary>
+        /// Tải dữ liệu thông báo từ cơ sở dữ liệu
+        /// </summary>
+        private void LoadDataFromDatabase()
+        {
+            allNotifications.Clear();
+            commonNotifications.Clear();
+            personalNotifications.Clear();
+
+            try
+            {
+                // Nếu chưa khởi tạo thông tin người dùng, không thể tải dữ liệu
+                if (maNguoiDung == 0)
+                {
+                    MessageBox.Show("Không thể tải thông báo vì chưa xác định được người dùng.");
+                    return;
+                }
+
+                // Lấy tất cả thông báo mà người dùng có thể xem
+                List<ThongBaoDTO> thongBaoList = thongBaoDAL.GetThongBaoForUser(maNguoiDung, maVaiTro, maLop);
+
+                foreach (var thongBao in thongBaoList)
+                {
+                    // Tạo một NotificationItem mới cho mỗi thông báo
+                    var notificationItem = new NotificationItem(
+                        thongBao.MaTB,
+                        thongBao.TieuDe,
+                        thongBao.NguoiGui,
+                        thongBao.Ngay,
+                        thongBao.NoiDung,
+                        null, // Hiện tại không có đường dẫn avatar
+                        thongBao.DaDoc
+                    );
+
+                    // Phân loại thông báo là chung hay cá nhân dựa vào người nhận
+                    if (thongBao.NguoiNhan.Contains("Cá nhân") || thongBao.NguoiNhan == maNguoiDung.ToString())
+                    {
+                        personalNotifications.Add(notificationItem);
+                    }
+                    else
+                    {
+                        commonNotifications.Add(notificationItem);
+                    }
+
+                    // Thêm vào danh sách tổng hợp
+                    allNotifications.Add(notificationItem);
+                }
+
+                // Nếu không có thông báo, hiển thị thông báo trống
+                if (allNotifications.Count == 0)
+                {
+                    pnlNoData.Visible = true;
+                    lblNoData.Text = "Không có thông báo nào";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi tải thông báo: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
         /// Hiển thị chi tiết thông báo khi người dùng nhấp vào một thông báo
         /// </summary>
-        /// <param name="notificationId">ID của thông báo</param>
-        /// <param name="title">Tiêu đề thông báo</param>
-        /// <param name="sender">Người gửi thông báo</param>
-        /// <param name="date">Ngày gửi thông báo</param>
-        /// <param name="content">Nội dung thông báo</param>
-        public void ShowNotificationDetails(int notificationId, string title, string sender, DateTime date, string content)
+        /// <param name="MaTB">ID của thông báo</param>
+        /// <param name="NguoiGui">Tiêu đề thông báo</param>
+        /// <param name="NguoiNhan">Người gửi thông báo</param>
+        /// <param name="NgayGui">Ngày gửi thông báo</param>
+        /// <param name="NoiDung">Nội dung thông báo</param>
+        /// <param name="TieuDe">Tiêu đề thông báo</param>
+        public void ShowNotificationDetails(int maTB, string tieuDe, string nguoiGui, DateTime date, string noiDung)
         {
             // Lưu trạng thái hiện tại của các điều khiển
             bool currentVisibilityOfFlowPanel = flowLayoutPanel.Visible;
@@ -65,13 +138,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 tbChiTiet = new ucTBChiTiet();
                 tbChiTiet.Dock = DockStyle.Fill;
-                
+
                 // Đăng ký sự kiện đóng chi tiết thông báo
-                tbChiTiet.OnClose += (s, e) => {
+                tbChiTiet.OnClose += (s, e) =>
+                {
                     // Khi đóng chi tiết, ẩn control chi tiết
                     tbChiTiet.Visible = false;
-                    
-                    // Restore all notification list controls to their previous state
+                   
                     flowLayoutPanel.Visible = currentVisibilityOfFlowPanel;
                     btnTBChung.Visible = true;
                     btnTBCaNhan.Visible = true;
@@ -80,7 +153,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                     guna2VSeparator1.Visible = true;
                     guna2VScrollBar1.Visible = true;
 
-                    // Làm mới lại danh sách thông báo nếu cần
+                    // Làm mới lại danh sách thông báo
+                    LoadDataFromDatabase();
+
+                    // Hiển thị đúng loại thông báo đang xem
                     if (isShowingCommonNotifications)
                         DisplayCommonNotifications();
                     else
@@ -91,43 +167,43 @@ namespace QuanLyTruongHoc.GUI.Controls
                 pnlContent.Controls.Add(tbChiTiet);
             }
 
-            // Lấy thông tin chi tiết về thông báo
-            // Trong ứng dụng thực tế, sẽ lấy từ cơ sở dữ liệu
-            string receiver = GetReceiverForNotification(notificationId); // Lấy thông tin người nhận
-            Image senderAvatar = GetSenderAvatar(sender); // Lấy avatar người gửi
-            List<ucTBChiTiet.AttachmentInfo> attachments = GetAttachmentsForNotification(notificationId); // Lấy danh sách file đính kèm
+            // Lấy thông tin chi tiết về thông báo từ CSDL
+            ThongBaoDTO thongBaoDetails = thongBaoDAL.GetThongBaoById(maTB);
+            string receiver = thongBaoDetails != null ? thongBaoDetails.NguoiNhan : "Không xác định";
+            Image nguoiGuiAvatar = GetnguoiGuiAvatar(nguoiGui); // Lấy avatar người gửi
+            List<ucTBChiTiet.AttachmentInfo> attachments = GetAttachmentsForNotification(maTB); // Lấy danh sách file đính kèm
 
             // Hiển thị chi tiết thông báo
-            tbChiTiet.LoadThongBao(notificationId, title, sender, receiver, date, content, senderAvatar, attachments);
+            tbChiTiet.LoadThongBao(maTB, tieuDe, nguoiGui, receiver, date, noiDung, nguoiGuiAvatar, attachments);
             tbChiTiet.Visible = true;
             tbChiTiet.BringToFront();
+
+            // Cập nhật trạng thái đã đọc trong CSDL (đây là mẫu, cần triển khai thêm)
+            // UpdateReadStatus(maTB);
         }
 
         /// <summary>
         /// Lấy thông tin người nhận của thông báo
         /// </summary>
-        /// <param name="notificationId">ID của thông báo</param>
+        /// <param name="maTB">ID của thông báo</param>
         /// <returns>Chuỗi mô tả người nhận</returns>
-        private string GetReceiverForNotification(int notificationId)
+        private string GetReceiverForNotification(int maTB)
         {
-            // Trong thực tế, sẽ truy vấn thông tin người nhận từ cơ sở dữ liệu
-            // Hiện tại, sử dụng dữ liệu mẫu
-            if (isShowingCommonNotifications)
+            // Lấy thông tin chi tiết về thông báo từ CSDL
+            ThongBaoDTO thongBao = thongBaoDAL.GetThongBaoById(maTB);
+            if (thongBao != null)
             {
-                return "Tất cả học sinh";
+                return thongBao.NguoiNhan;
             }
-            else
-            {
-                return "Nguyễn Văn A"; // Người nhận mẫu cho thông báo cá nhân
-            }
+            return "Không xác định";
         }
 
         /// <summary>
         /// Lấy ảnh đại diện của người gửi thông báo
         /// </summary>
-        /// <param name="sender">Tên người gửi</param>
+        /// <param name="nguoiGui">Tên người gửi</param>
         /// <returns>Ảnh đại diện hoặc null nếu không có</returns>
-        private Image GetSenderAvatar(string sender)
+        private Image GetnguoiGuiAvatar(string nguoiGui)
         {
             // Trong thực tế, sẽ truy vấn ảnh đại diện từ cơ sở dữ liệu
             // Hiện tại, trả về null (control có avatar mặc định)
@@ -137,94 +213,13 @@ namespace QuanLyTruongHoc.GUI.Controls
         /// <summary>
         /// Lấy danh sách file đính kèm của thông báo
         /// </summary>
-        /// <param name="notificationId">ID của thông báo</param>
+        /// <param name="maTB">ID của thông báo</param>
         /// <returns>Danh sách file đính kèm</returns>
-        private List<ucTBChiTiet.AttachmentInfo> GetAttachmentsForNotification(int notificationId)
+        private List<ucTBChiTiet.AttachmentInfo> GetAttachmentsForNotification(int maTB)
         {
             // Trong thực tế, sẽ truy vấn danh sách file đính kèm từ cơ sở dữ liệu
-            // Hiện tại, tạo dữ liệu mẫu cho một số thông báo cụ thể
-            List<ucTBChiTiet.AttachmentInfo> attachments = new List<ucTBChiTiet.AttachmentInfo>();
-            
-            if (notificationId == 2) // Example: notification with ID 2 has attachments
-            {
-                attachments.Add(new ucTBChiTiet.AttachmentInfo 
-                { 
-                    FileName = "ke-hoach-thi-hk1.pdf", 
-                    FilePath = @"C:\sample\ke-hoach-thi-hk1.pdf", 
-                    FileSize = 1024 * 1024 
-                });
-                
-                attachments.Add(new ucTBChiTiet.AttachmentInfo 
-                { 
-                    FileName = "lich-thi-chi-tiet.xlsx", 
-                    FilePath = @"C:\sample\lich-thi-chi-tiet.xlsx", 
-                    FileSize = 512 * 1024 
-                });
-            }
-
-            return attachments;
-        }
-
-        /// <summary>
-        /// Tạo dữ liệu mẫu cho các thông báo
-        /// </summary>
-        private void CreateSampleData()
-        {
-            // Thông báo chung
-            commonNotifications.Add(new NotificationItem(
-                1,
-                "Thông báo lịch nghỉ Tết Nguyên Đán năm 2023",
-                "Ban Giám Hiệu",
-                DateTime.Now.AddDays(-1),
-                "Thông báo về lịch nghỉ Tết Nguyên Đán từ ngày 20/01/2023 đến hết ngày 29/01/2023...",
-                null,
-                false
-            ));
-
-            commonNotifications.Add(new NotificationItem(
-                2,
-                "Thông báo về kế hoạch thi học kỳ 1 năm học 2022-2023",
-                "Phòng Đào Tạo",
-                DateTime.Now.AddDays(-3),
-                "Kế hoạch thi học kỳ 1 năm học 2022-2023 sẽ được tổ chức từ ngày 05/12/2022 đến ngày 15/12/2022...",
-                null,
-                true
-            ));
-
-            commonNotifications.Add(new NotificationItem(
-                3,
-                "Thông báo về việc tổ chức hội khỏe Phù Đổng cấp trường năm học 2022-2023",
-                "Ban Thể Dục Thể Thao",
-                DateTime.Now.AddDays(-5),
-                "Hội khỏe Phù Đổng cấp trường sẽ được tổ chức từ ngày 15/11/2022 đến ngày 20/11/2022...",
-                null,
-                true
-            ));
-
-            // Thông báo cá nhân
-            personalNotifications.Add(new NotificationItem(
-                4,
-                "Thông báo điểm kiểm tra môn Toán",
-                "Thầy Nguyễn Văn A",
-                DateTime.Now.AddHours(-5),
-                "Điểm kiểm tra 1 tiết môn Toán của em đã được cập nhật lên hệ thống...",
-                null,
-                false
-            ));
-
-            personalNotifications.Add(new NotificationItem(
-                5,
-                "Thông báo về việc họp phụ huynh học sinh",
-                "GVCN Nguyễn Thị B",
-                DateTime.Now.AddDays(-2),
-                "Nhà trường tổ chức họp phụ huynh học sinh vào ngày 25/11/2022...",
-                null,
-                false
-            ));
-
-            // Thêm tất cả thông báo vào danh sách chung
-            allNotifications.AddRange(commonNotifications);
-            allNotifications.AddRange(personalNotifications);
+            // Hiện tại, trả về danh sách rỗng
+            return new List<ucTBChiTiet.AttachmentInfo>();
         }
 
         /// <summary>
@@ -348,6 +343,18 @@ namespace QuanLyTruongHoc.GUI.Controls
                 pnlNoData.Visible = true;
                 lblNoData.Text = $"Không tìm thấy thông báo nào với từ khóa \"{searchText}\"";
             }
+        }
+
+        /// <summary>
+        /// Làm mới dữ liệu thông báo
+        /// </summary>
+        public void RefreshNotifications()
+        {
+            LoadDataFromDatabase();
+            if (isShowingCommonNotifications)
+                DisplayCommonNotifications();
+            else
+                DisplayPersonalNotifications();
         }
     }
 

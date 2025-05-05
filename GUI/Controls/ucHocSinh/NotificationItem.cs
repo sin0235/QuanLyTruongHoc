@@ -24,7 +24,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Trạng thái đã đọc của thông báo
         private bool isRead = false;
 
-        // ID của thông báo
+        // maTB của thông báo
         public int NotificationId { get; set; }
 
         // Thuộc tính để kiểm tra và cập nhật trạng thái đã đọc
@@ -39,10 +39,10 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
 
         // Constructor để khởi tạo thông báo
-        public NotificationItem(int id, string title, string sender, DateTime date, string content, string avatarPath = null, bool read = false)
+        public NotificationItem(int maTB, string tieuDe, string nguoiGui, DateTime date, string noiDung, string avatarPath = null, bool daDoc = false)
         {
-            NotificationId = id;
-            isRead = read;
+            NotificationId = maTB;
+            isRead = daDoc;
 
             // Thiết lập giao diện của thông báo
             this.Size = new Size(1550, 130);
@@ -81,7 +81,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 AutoSize = false,
                 Size = new Size(1000, 30),
                 Location = new Point(100, 15),
-                Text = title,
+                Text = tieuDe,
                 Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
                 ForeColor = isRead ? Color.FromArgb(70, 70, 70) : Color.FromArgb(0, 120, 215)
             };
@@ -91,7 +91,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 AutoSize = true,
                 Location = new Point(100, 45),
-                Text = sender,
+                Text = nguoiGui,
                 Font = new Font("Segoe UI",11f),
                 ForeColor = Color.FromArgb(100, 100, 100)
             };
@@ -113,7 +113,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 AutoSize = false,
                 Size = new Size(1300, 40),
                 Location = new Point(100, 70),
-                Text = content,
+                Text = noiDung,
                 Font = new Font("Segoe UI",11),
                 ForeColor = Color.FromArgb(90, 90, 90)
             };
@@ -169,7 +169,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
 
         // Xử lý sự kiện khi người dùng nhấp vào thông báo
-        private void NotificationItem_Click(object sender, EventArgs e)
+        private void NotificationItem_Click(object nguoiGui, EventArgs e)
         {
             if (!isRead)
             {
@@ -183,7 +183,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
 
         // Xử lý sự kiện khi người dùng nhấp vào nút "Xem"
-        private void BtnView_Click(object sender, EventArgs e)
+        private void BtnView_Click(object nguoiGui, EventArgs e)
         {
             if (!isRead)
             {

@@ -31,7 +31,7 @@ public class StudentInfo
     public string FatherPhone { get; set; }      // Điện thoại cha
     public string MotherName { get; set; }       // Họ tên mẹ
     public string MotherPhone { get; set; }      // Điện thoại mẹ
-    public string ParentName { get; set; }       // Họ tên phụ huynh (người đại diện)
+  
 
 
     public Image Avatar { get; set; }            // Ảnh đại diện

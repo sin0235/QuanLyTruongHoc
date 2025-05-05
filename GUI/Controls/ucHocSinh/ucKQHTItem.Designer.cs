@@ -105,7 +105,7 @@
             this.txtTeacherComment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
             this.txtTeacherComment.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTeacherComment.Location = new System.Drawing.Point(15, 22);
+            this.txtTeacherComment.Location = new System.Drawing.Point(15, 27);
             this.txtTeacherComment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTeacherComment.Multiline = true;
             this.txtTeacherComment.Name = "txtTeacherComment";
@@ -113,7 +113,7 @@
             this.txtTeacherComment.PlaceholderText = "";
             this.txtTeacherComment.ReadOnly = true;
             this.txtTeacherComment.SelectedText = "";
-            this.txtTeacherComment.Size = new System.Drawing.Size(806, 118);
+            this.txtTeacherComment.Size = new System.Drawing.Size(806, 113);
             this.txtTeacherComment.TabIndex = 1;
             // 
             // lblCommentHeader
@@ -124,7 +124,7 @@
             this.lblCommentHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblCommentHeader.Location = new System.Drawing.Point(15, 0);
             this.lblCommentHeader.Name = "lblCommentHeader";
-            this.lblCommentHeader.Size = new System.Drawing.Size(133, 22);
+            this.lblCommentHeader.Size = new System.Drawing.Size(159, 27);
             this.lblCommentHeader.TabIndex = 0;
             this.lblCommentHeader.Text = "Nhận xét giáo viên";
             // 
@@ -181,7 +181,7 @@
             this.lblAverageScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblAverageScore.Location = new System.Drawing.Point(574, 15);
             this.lblAverageScore.Name = "lblAverageScore";
-            this.lblAverageScore.Size = new System.Drawing.Size(120, 22);
+            this.lblAverageScore.Size = new System.Drawing.Size(145, 27);
             this.lblAverageScore.TabIndex = 8;
             this.lblAverageScore.Text = "Điểm trung bình: ";
             // 
@@ -207,7 +207,7 @@
             this.lblFinalExam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblFinalExam.Location = new System.Drawing.Point(18, 68);
             this.lblFinalExam.Name = "lblFinalExam";
-            this.lblFinalExam.Size = new System.Drawing.Size(89, 22);
+            this.lblFinalExam.Size = new System.Drawing.Size(111, 27);
             this.lblFinalExam.TabIndex = 6;
             this.lblFinalExam.Text = "Điểm cuối kỳ";
             // 
@@ -218,7 +218,7 @@
             this.lblFinalExamScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.lblFinalExamScore.Location = new System.Drawing.Point(162, 71);
             this.lblFinalExamScore.Name = "lblFinalExamScore";
-            this.lblFinalExamScore.Size = new System.Drawing.Size(12, 22);
+            this.lblFinalExamScore.Size = new System.Drawing.Size(14, 27);
             this.lblFinalExamScore.TabIndex = 5;
             this.lblFinalExamScore.Text = "9";
             // 
@@ -244,7 +244,7 @@
             this.lblMidtermExam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblMidtermExam.Location = new System.Drawing.Point(18, 41);
             this.lblMidtermExam.Name = "lblMidtermExam";
-            this.lblMidtermExam.Size = new System.Drawing.Size(91, 22);
+            this.lblMidtermExam.Size = new System.Drawing.Size(112, 27);
             this.lblMidtermExam.TabIndex = 3;
             this.lblMidtermExam.Text = "Điểm giữa kỳ";
             // 
@@ -255,7 +255,7 @@
             this.lblMidtermExamScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(220)))));
             this.lblMidtermExamScore.Location = new System.Drawing.Point(162, 44);
             this.lblMidtermExamScore.Name = "lblMidtermExamScore";
-            this.lblMidtermExamScore.Size = new System.Drawing.Size(12, 22);
+            this.lblMidtermExamScore.Size = new System.Drawing.Size(14, 27);
             this.lblMidtermExamScore.TabIndex = 2;
             this.lblMidtermExamScore.Text = "8";
             // 
@@ -281,7 +281,7 @@
             this.lblAssignment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblAssignment.Location = new System.Drawing.Point(18, 14);
             this.lblAssignment.Name = "lblAssignment";
-            this.lblAssignment.Size = new System.Drawing.Size(133, 22);
+            this.lblAssignment.Size = new System.Drawing.Size(168, 27);
             this.lblAssignment.TabIndex = 0;
             this.lblAssignment.Text = "Điểm thường xuyên";
             // 
@@ -292,7 +292,7 @@
             this.lblAssignmentScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(180)))), ((int)(((byte)(100)))));
             this.lblAssignmentScore.Location = new System.Drawing.Point(162, 14);
             this.lblAssignmentScore.Name = "lblAssignmentScore";
-            this.lblAssignmentScore.Size = new System.Drawing.Size(12, 22);
+            this.lblAssignmentScore.Size = new System.Drawing.Size(14, 27);
             this.lblAssignmentScore.TabIndex = 0;
             this.lblAssignmentScore.Text = "7";
             // 
@@ -320,7 +320,7 @@
             this.lblAvgScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.lblAvgScore.Location = new System.Drawing.Point(702, 18);
             this.lblAvgScore.Name = "lblAvgScore";
-            this.lblAvgScore.Size = new System.Drawing.Size(33, 32);
+            this.lblAvgScore.Size = new System.Drawing.Size(40, 38);
             this.lblAvgScore.TabIndex = 3;
             this.lblAvgScore.Text = "8.2";
             // 
@@ -352,7 +352,7 @@
             this.lblSubjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
             this.lblSubjectName.Location = new System.Drawing.Point(62, 23);
             this.lblSubjectName.Name = "lblSubjectName";
-            this.lblSubjectName.Size = new System.Drawing.Size(41, 23);
+            this.lblSubjectName.Size = new System.Drawing.Size(50, 30);
             this.lblSubjectName.TabIndex = 1;
             this.lblSubjectName.Text = "Toán";
             // 

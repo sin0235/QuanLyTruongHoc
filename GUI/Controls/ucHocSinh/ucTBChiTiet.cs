@@ -366,8 +366,5 @@ namespace QuanLyTruongHoc.GUI.Controls
             return null; // Thay thế bằng tài nguyên biểu tượng thực tế
         }
     }
-    // No changes needed to ucTBChiTiet.cs. The class already has:
-    // 1. The LoadThongBao method to display notification details
-    // 2. The OnClose event that gets triggered when the close button is clicked
-    // 3. Methods to handle file attachments
+
 }
