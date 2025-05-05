@@ -330,6 +330,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 case "tabThoiKhoaBieu": // Tên tab "Thời khóa biểu"
                     LoadThoiKhoaBieuLop();
                     break;
+                case "tabDiemSo": // Tên tab "Điểm số"
+                    LoadStudentScores();
+                    break;
                 default:
                     break;
             }
@@ -447,5 +450,139 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             LoadThoiKhoaBieuLop();
         }
+
+        private void LoadStudentScores()
+        {
+            try
+            {
+                string query = $@"
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
+            hs.HoTen AS HoTenDiemSo,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
+            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
+            ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
+        FROM DiemSo ds
+        INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
+        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+        GROUP BY hs.HoTen";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    dgvDiemSo.AutoGenerateColumns = false;
+                    dgvDiemSo.DataSource = dt;
+                }
+                else
+                {
+                    MessageBox.Show("Không có điểm số nào.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvDiemSo.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách điểm số: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+        private void dgvDiemSo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                try
+                {
+                    // Lấy hàng được chọn
+                    DataGridViewRow row = dgvDiemSo.Rows[e.RowIndex];
+
+                    // Hiển thị thông tin cơ bản
+                    txtSTTDiemSo.Text = row.Cells["STTDiemSo"].Value?.ToString();
+                    txtHoTenDiemSo.Text = row.Cells["HoTenDiemSo"].Value?.ToString();
+
+                    // Tính trung bình cho các cột nhiều điểm
+                    txtDiemMieng.Text = CalculateAverage(row.Cells["DiemMieng"].Value?.ToString());
+                    txtDiem15Phut.Text = CalculateAverage(row.Cells["Diem15Phut"].Value?.ToString());
+                    txtDiemGiuaKy.Text = CalculateAverage(row.Cells["DiemGiuaKy"].Value?.ToString());
+                    txtDiemCuoiKy.Text = CalculateAverage(row.Cells["DiemCuoiKy"].Value?.ToString());
+
+                    // Hiển thị điểm trung bình
+                    txtDiemTB.Text = row.Cells["DiemTrungBinh"].Value?.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi hiển thị thông tin: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Hàm tính trung bình từ chuỗi các điểm
+        private string CalculateAverage(string scores)
+        {
+            if (string.IsNullOrEmpty(scores)) return "0";
+
+            try
+            {
+                var scoreList = scores.Split(',')
+                                      .Select(s => float.Parse(s.Trim()))
+                                      .ToList();
+
+                if (scoreList.Count == 0) return "0";
+
+                float average = scoreList.Average();
+                return average.ToString("0.00"); // Hiển thị 2 chữ số thập phân
+            }
+            catch
+            {
+                return "0"; // Trả về 0 nếu có lỗi
+            }
+        }
+
+        private void FilterScores(string loaiDiem, float minScore, float maxScore)
+        {
+            try
+            {
+                string query = $@"
+        SELECT 
+            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
+            hs.MaHS,
+            hs.HoTen as HoTenDiemSo,
+            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Miệng' THEN ds.Diem ELSE 0 END), 0) AS DiemMieng,
+            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'15 phút' THEN ds.Diem ELSE 0 END), 0) AS Diem15Phut,
+            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN ds.Diem ELSE 0 END), 0) AS DiemGiuaKy,
+            ISNULL(SUM(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN ds.Diem ELSE 0 END), 0) AS DiemCuoiKy,
+            ISNULL(AVG(ds.Diem), 0) AS DiemTrungBinh
+        FROM DiemSo ds
+        INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
+        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+          AND ds.LoaiDiem = N'{loaiDiem}'
+          AND ds.Diem BETWEEN {minScore} AND {maxScore}
+        GROUP BY hs.MaHS, hs.HoTen";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                dgvDiemSo.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lọc điểm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLoc_Click(object sender, EventArgs e)
+        {
+            string loaiDiem = cmbLoaiDiem.SelectedItem.ToString();
+            float minScore = float.Parse(txtKhoangDiemMin.Text);
+            float maxScore = float.Parse(txtKhoangDiemMax.Text);
+
+            FilterScores(loaiDiem, minScore, maxScore);
+        }
+
     }
 }
