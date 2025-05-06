@@ -40,7 +40,6 @@
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlSubSettings = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
             this.btnProfile = new Guna.UI2.WinForms.Guna2Button();
             this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
@@ -67,6 +66,7 @@
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -102,7 +102,7 @@
             this.lblFormTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblFormTitle.Location = new System.Drawing.Point(12, 8);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(153, 23);
+            this.lblFormTitle.Size = new System.Drawing.Size(192, 30);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Quản Lý Trường Học";
             // 
@@ -222,25 +222,6 @@
             this.pnlSubSettings.Size = new System.Drawing.Size(260, 155);
             this.pnlSubSettings.TabIndex = 8;
             this.pnlSubSettings.Visible = false;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.BorderRadius = 8;
-            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnLogout.FillColor = System.Drawing.Color.Transparent;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnLogout.Location = new System.Drawing.Point(5, 95);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(250, 45);
-            this.btnLogout.TabIndex = 2;
-            this.btnLogout.Text = "Đăng xuất";
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // btnChangePassword
             // 
@@ -472,7 +453,7 @@
             this.lblSchoolName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.lblSchoolName.Location = new System.Drawing.Point(50, 111);
             this.lblSchoolName.Name = "lblSchoolName";
-            this.lblSchoolName.Size = new System.Drawing.Size(181, 27);
+            this.lblSchoolName.Size = new System.Drawing.Size(229, 34);
             this.lblSchoolName.TabIndex = 1;
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -602,7 +583,7 @@
             this.lblPageTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblPageTitle.Location = new System.Drawing.Point(25, 22);
             this.lblPageTitle.Name = "lblPageTitle";
-            this.lblPageTitle.Size = new System.Drawing.Size(126, 34);
+            this.lblPageTitle.Size = new System.Drawing.Size(155, 43);
             this.lblPageTitle.TabIndex = 2;
             this.lblPageTitle.Text = "Thông báo";
             // 
@@ -614,7 +595,7 @@
             this.lblUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.lblUserName.Location = new System.Drawing.Point(1486, 28);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(106, 23);
+            this.lblUserName.Size = new System.Drawing.Size(135, 30);
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
@@ -635,6 +616,25 @@
             // guna2Elipse2
             // 
             this.guna2Elipse2.BorderRadius = 18;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BorderRadius = 8;
+            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLogout.FillColor = System.Drawing.Color.Transparent;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnLogout.Location = new System.Drawing.Point(5, 95);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(250, 45);
+            this.btnLogout.TabIndex = 2;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // frmHS
             // 
@@ -700,7 +700,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPageTitle;
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
-        private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnChangePassword;
         private Guna.UI2.WinForms.Guna2Button btnProfile;
         private GUI.Controls.ucThongBao ucThongBao1;
@@ -709,6 +708,7 @@
         private GUI.Controls.ucKQHT ucKQHT1;
         private GUI.Controls.ucXinNghi ucXinNghi1;
         private GUI.Controls.ucKiemTra ucKiemTra1;
+        private Guna.UI2.WinForms.Guna2Button btnLogout;
     }
 }
 

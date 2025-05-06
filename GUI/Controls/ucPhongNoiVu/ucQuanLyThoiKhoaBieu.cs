@@ -366,5 +366,119 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
 
         }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra xem có lớp nào được chọn không
+            if (cmbChonLop.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp trước khi xóa thời khóa biểu!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Kiểm tra xem có ô nào được chọn không
+            if (dgvThoiKhoaBieu.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn một buổi học trong thời khóa biểu để xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin từ ô được chọn
+            DataGridViewCell selectedCell = dgvThoiKhoaBieu.SelectedCells[0];
+            int columnIndex = selectedCell.ColumnIndex;
+            int rowIndex = selectedCell.RowIndex;
+
+            // Kiểm tra xem ô có dữ liệu không
+            if (selectedCell.Value == null || string.IsNullOrWhiteSpace(selectedCell.Value.ToString()))
+            {
+                MessageBox.Show("Ô được chọn không có dữ liệu để xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Lấy thông tin ngày từ tiêu đề cột
+            DateTime selectedDate;
+
+            // Lấy ngày từ Tag của cột (cách ưu tiên)
+            if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
+                dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
+            {
+                selectedDate = (DateTime)dgvThoiKhoaBieu.Columns[columnIndex].Tag;
+            }
+            else
+            {
+                // Phương pháp dự phòng - phân tích từ HeaderText
+                string headerText = dgvThoiKhoaBieu.Columns[columnIndex].HeaderText;
+                string[] headerParts = headerText.Split(new[] { "\r\n" }, StringSplitOptions.None);
+
+                if (headerParts.Length <= 1 || !DateTime.TryParseExact(headerParts[1], "dd/MM/yyyy",
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.None, out selectedDate))
+                {
+                    MessageBox.Show("Không thể xác định ngày của buổi học!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            // Phân tích dữ liệu từ ô được chọn
+            string[] cellData = selectedCell.Value.ToString().Split('\n');
+            string tiet = cellData[0].Replace("Tiết: ", "").Trim();
+            string mon = cellData[1].Replace("Môn: ", "").Trim();
+            string giaoVien = cellData[2].Replace("GV: ", "").Trim();
+
+            // Lấy MaTKB từ cơ sở dữ liệu
+            int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
+            int maTKB = GetMaTKBFromDatabase(maLop, selectedDate, tiet);
+
+            if (maTKB <= 0)
+            {
+                MessageBox.Show("Không tìm thấy dữ liệu thời khóa biểu để xóa!", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Hiển thị hộp thoại xác nhận xóa
+            DialogResult result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa buổi học này?\nMôn: {mon}\nGiáo viên: {giaoVien}\nTiết: {tiet}\nNgày: {selectedDate:dd/MM/yyyy}",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            // Nếu người dùng xác nhận xóa
+            if (result == DialogResult.Yes)
+            {
+                // Thực hiện xóa dữ liệu
+                bool deleteSuccess = DeleteThoiKhoaBieu(maTKB);
+
+                if (deleteSuccess)
+                {
+                    MessageBox.Show("Đã xóa buổi học thành công!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Reload thời khóa biểu sau khi xóa
+                    LoadThoiKhoaBieu();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa buổi học thất bại!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            // Nếu người dùng chọn No - không làm gì
+        }
+
+        // Thêm phương thức để xóa thời khóa biểu từ cơ sở dữ liệu
+        private bool DeleteThoiKhoaBieu(int maTKB)
+        {
+            string query = "DELETE FROM ThoiKhoaBieu WHERE MaTKB = @MaTKB";
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "@MaTKB", maTKB }
+            };
+            return db.ExecuteNonQuery(query, parameters);
+        }
     }
 }

@@ -125,7 +125,7 @@
     <value>10, 8</value>
   </data>
   <data name="lblFormTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 23</value>
+    <value>164, 30</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblFormTitle.TabIndex" type="System.Int32, mscorlib">
@@ -259,7 +259,7 @@
     <value>55, 30</value>
   </data>
   <data name="lblCurrentPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 19</value>
+    <value>131, 23</value>
   </data>
   <data name="lblCurrentPassword.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -285,6 +285,9 @@
   <data name="txtCurrentPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>55, 55</value>
   </data>
+  <data name="txtCurrentPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
   <data name="txtCurrentPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 40</value>
   </data>
@@ -308,6 +311,9 @@
   </data>
   <data name="txtNewPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>55, 135</value>
+  </data>
+  <data name="txtNewPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="txtNewPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 40</value>
@@ -334,7 +340,7 @@
     <value>55, 110</value>
   </data>
   <data name="lblNewPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 19</value>
+    <value>109, 23</value>
   </data>
   <data name="lblNewPassword.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -359,6 +365,9 @@
   </data>
   <data name="txtConfirmPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>55, 215</value>
+  </data>
+  <data name="txtConfirmPassword.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="txtConfirmPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 40</value>
@@ -385,7 +394,7 @@
     <value>55, 190</value>
   </data>
   <data name="lblConfirmPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 19</value>
+    <value>135, 23</value>
   </data>
   <data name="lblConfirmPassword.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
