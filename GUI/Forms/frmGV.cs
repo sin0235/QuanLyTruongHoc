@@ -20,6 +20,8 @@ namespace QuanLyTruongHoc
         private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
+        private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+
 
         private int maNguoiDung; // Lưu mã người dùng
         private string hoTen; // Lưu họ tên giáo viên
@@ -312,15 +314,58 @@ namespace QuanLyTruongHoc
 
         }
 
-        private void btnLogOut_Click(object sender, EventArgs e)
+        private void btnSetting_Click(object sender, EventArgs e)
         {
-            // Show the login form
-            frmLogin loginForm = new frmLogin();
-            loginForm.Show();
+            pnlSubSettings.Visible = !pnlSubSettings.Visible;
 
-            // Close the current form
-            this.Close();
+            // Cập nhật vị trí của panel tương đối so với nút btnSettings
+            pnlSubSettings.Location = new Point(btnSetting.Location.X, btnSetting.Location.Y - pnlSubSettings.Height);
+
+            // Thay đổi màu nút "Cài đặt" khi panel hiển thị
+            btnSetting.FillColor = pnlSubSettings.Visible ? highlightColor : Color.Transparent;
+
+            // Đảm bảo panel hiển thị trên cùng
+            pnlSubSettings.BringToFront();
         }
 
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            // Xử lý đổi mật khẩu
+            pnlSubSettings.Visible = false;
+            btnSetting.FillColor = Color.Transparent;
+
+            // Hiển thị form đổi mật khẩu
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            {
+                // Hiển thị form dạng dialog
+                changePwForm.ShowDialog();
+            }
+
+            lblPageTitle.Text = "Đổi mật khẩu";
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                                                 "Xác nhận đăng xuất",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Tạo và hiển thị form đăng nhập
+                frmLogin loginForm = new frmLogin();
+                loginForm.Show();
+                // Đóng form hiện tại
+                this.Hide(); // Ẩn form hiện tại thay vì đóng để tránh đóng ứng dụng
+
+                // Đăng ký sự kiện FormClosed cho form đăng nhập
+                loginForm.FormClosed += (s, args) =>
+                {
+                    // Nếu form đăng nhập đóng (không đăng nhập thành công), thoát ứng dụng
+                    this.Close();
+                };
+            }
+        }
     }
 }
