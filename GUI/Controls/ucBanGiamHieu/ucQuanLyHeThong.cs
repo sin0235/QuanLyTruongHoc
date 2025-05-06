@@ -15,6 +15,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 {
     public partial class ucQuanLyHeThong : UserControl
     {
+        private DataTable originalData;
         public ucQuanLyHeThong()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                     WHEN ND.MaVaiTro = 1 THEN N'Ban giám hiệu'
                     WHEN ND.MaVaiTro = 2 THEN GV.HoTen
                     WHEN ND.MaVaiTro = 3 THEN HS.HoTen
+                    WHEN ND.MaVaiTro = 4 THEN N'Nhân viên phòng nội vụ'
                     ELSE N'Không xác định'
                 END AS NguoiHanhDong,
                 VT.TenVaiTro AS VaiTro, -- Lấy tên vai trò từ bảng VaiTro
@@ -48,10 +50,12 @@ namespace QuanLyTruongHoc.GUI.Controls
                 LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
                 LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung
                 ORDER BY NK.ThoiGian DESC";
+
                 DatabaseHelper db = new DatabaseHelper();
                 DataTable dt = db.ExecuteQuery(query);
                 if (dt != null && dt.Rows.Count > 0)
                 {
+                    originalData = dt;
                     dgvQuanLyHeThong.AutoGenerateColumns = false;
                     dgvQuanLyHeThong.DataSource = dt;
                     dgvQuanLyHeThong.ClearSelection();
@@ -69,7 +73,24 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        private void btnLamMoi_Click(object sender, EventArgs e)
+        private void UcQuanLyHeThong_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
+                dgvQuanLyHeThong.ClearSelection();
+            }
+        }
+
+        private void ucQuanLyHeThong_Load(object sender, EventArgs e)
+        {
+            dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
+            dgvQuanLyHeThong.ClearSelection();
+            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            dgvQuanLyHeThong.EnableHeadersVisualStyles = false;
+        }
+
+        private void btnLamMoi_Click_1(object sender, EventArgs e)
         {
             if (LoadData())
             {
@@ -80,26 +101,33 @@ namespace QuanLyTruongHoc.GUI.Controls
                 MessageBox.Show("Làm mới không thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void CenterControls()
+
+        private void DtpLoc_ValueChanged(object sender, EventArgs e)
         {
-            btnLamMoi.Left = (this.Width - btnLamMoi.Width) / 2;
-            dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
-            dgvQuanLyHeThong.ClearSelection();
+            if (originalData == null) return;
+            string selectedDate = dtpLoc.Value.ToString("yyyy-MM-dd");
+            DataView dv = new DataView(originalData);
+            dv.RowFilter = $"ThoiGian LIKE '{selectedDate}%'";
+            dgvQuanLyHeThong.DataSource = dv;
         }
 
-        private void UcQuanLyHeThong_VisibleChanged(object sender, EventArgs e)
+        private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            if (this.Visible)
+            if (originalData == null) return;
+
+            // Lấy từ khóa từ TextBox
+            string keyword = txtTimKiem.Text.Trim();
+            if (string.IsNullOrEmpty(keyword))
             {
-                CenterControls();
+                dgvQuanLyHeThong.DataSource = originalData; // Hiển thị lại dữ liệu gốc nếu không có từ khóa
+                return;
             }
-        }
 
-        private void ucQuanLyHeThong_Load(object sender, EventArgs e)
-        {
-            CenterControls();
-            dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            dgvQuanLyHeThong.EnableHeadersVisualStyles = false;
+            // Lọc dữ liệu theo từ khóa
+            DataView dv = new DataView(originalData);
+            dv.RowFilter = $"NguoiHanhDong LIKE '%{keyword}%'";
+            dgvQuanLyHeThong.DataSource = dv;
+            dgvQuanLyHeThong.ClearSelection();
         }
     }
 }

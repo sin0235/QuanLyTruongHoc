@@ -175,7 +175,7 @@ namespace QuanLyTruongHoc
             btnQuanLyHeThong.FillColor = Color.FromArgb(214, 228, 255);
             btnGuiThu.FillColor = Color.Transparent;
             btnXemThu.FillColor = Color.Transparent;
-            lblFormTitle.Text = "Quản lý hệ thống";
+            lblPageTitle.Text = "Quản lý hệ thống";
         }
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)

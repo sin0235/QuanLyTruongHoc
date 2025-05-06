@@ -120,7 +120,7 @@ CREATE TABLE ThongBao (
     NoiDung NVARCHAR(MAX) NOT NULL,
     NgayGui DATETIME NOT NULL,
     FOREIGN KEY (MaNguoiGui) REFERENCES NguoiDung(MaNguoiDung),
-    FOREIGN KEY (MaNguoiNhan) REFERENCES NguoiDung(MaNguoiDung),
+    FOREIGN KEY (MaNguoiNhan) REFERENCES NguoiDung(MaNguoiDung) ON DELETE CASCADE,
     FOREIGN KEY (MaVaiTroNhan) REFERENCES VaiTro(MaVaiTro),
     FOREIGN KEY (MaLop) REFERENCES LopHoc(MaLop),
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon)
