@@ -1,4 +1,5 @@
 ﻿using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -131,6 +132,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 MessageBox.Show("Đơn nghỉ đã được phê duyệt.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadAttendanceList(chonNgayDTP.Value); // Tải lại danh sách điểm danh
+                
             }
             catch (Exception ex)
             {
@@ -157,7 +159,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         WHERE MaDon = {selectedMaDon}";
 
                 db.ExecuteNonQuery(updateQuery);
-
                 MessageBox.Show("Đơn nghỉ đã bị từ chối.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadDonNghi(); // Tải lại danh sách đơn nghỉ
             }
@@ -239,7 +240,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
         private void LoadAttendanceList(DateTime selectedDate)
         {
-            MessageBox.Show($"maGVChuNhiem: {maGVChuNhiem}");
 
             try
             {
@@ -378,7 +378,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
 
                 DataTable dt = db.ExecuteQuery(query);
-
                 // Xóa các hàng cũ trong DataGridView
                 dgvThoiKhoaBieu.Rows.Clear();
 
