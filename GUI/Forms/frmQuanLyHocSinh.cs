@@ -120,6 +120,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                     if (success)
                     {
                         MessageBox.Show("Cập nhật thông tin học sinh thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
@@ -151,6 +152,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                     MessageBox.Show($"Thêm học sinh thành công!\nTên đăng nhập: {tenDangNhap}\nMật khẩu: {matKhau}",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }

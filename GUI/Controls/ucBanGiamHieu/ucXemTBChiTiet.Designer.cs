@@ -66,7 +66,7 @@
             this.lblNguoiGui.Location = new System.Drawing.Point(11, 58);
             this.lblNguoiGui.Margin = new System.Windows.Forms.Padding(2);
             this.lblNguoiGui.Name = "lblNguoiGui";
-            this.lblNguoiGui.Size = new System.Drawing.Size(72, 21);
+            this.lblNguoiGui.Size = new System.Drawing.Size(85, 25);
             this.lblNguoiGui.TabIndex = 2;
             this.lblNguoiGui.Text = "Người gửi:";
             // 
@@ -80,7 +80,7 @@
             this.lblTieuDe.Location = new System.Drawing.Point(11, 12);
             this.lblTieuDe.Margin = new System.Windows.Forms.Padding(2);
             this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(122, 32);
+            this.lblTieuDe.Size = new System.Drawing.Size(149, 39);
             this.lblTieuDe.TabIndex = 1;
             this.lblTieuDe.Text = "Tiêu đề thư";
             // 
@@ -90,7 +90,7 @@
             this.lblTenNguoiGui.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.lblTenNguoiGui.Location = new System.Drawing.Point(101, 58);
             this.lblTenNguoiGui.Name = "lblTenNguoiGui";
-            this.lblTenNguoiGui.Size = new System.Drawing.Size(92, 21);
+            this.lblTenNguoiGui.Size = new System.Drawing.Size(113, 25);
             this.lblTenNguoiGui.TabIndex = 6;
             this.lblTenNguoiGui.Text = "Ban giám hiệu";
             // 
@@ -100,7 +100,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(11, 88);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(64, 21);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(78, 25);
             this.guna2HtmlLabel1.TabIndex = 7;
             this.guna2HtmlLabel1.Text = "Ngày gửi:";
             // 
@@ -110,7 +110,7 @@
             this.lblThoiGianGui.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.lblThoiGianGui.Location = new System.Drawing.Point(101, 89);
             this.lblThoiGianGui.Name = "lblThoiGianGui";
-            this.lblThoiGianGui.Size = new System.Drawing.Size(176, 21);
+            this.lblThoiGianGui.Size = new System.Drawing.Size(211, 25);
             this.lblThoiGianGui.TabIndex = 8;
             this.lblThoiGianGui.Text = "Thời gian gửi sẽ hiện ở đây";
             // 
@@ -120,7 +120,7 @@
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(11, 120);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(82, 21);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(99, 25);
             this.guna2HtmlLabel2.TabIndex = 9;
             this.guna2HtmlLabel2.Text = "Người nhận:";
             // 
@@ -130,7 +130,7 @@
             this.lblNguoiNhan.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.lblNguoiNhan.Location = new System.Drawing.Point(116, 120);
             this.lblNguoiNhan.Name = "lblNguoiNhan";
-            this.lblNguoiNhan.Size = new System.Drawing.Size(167, 21);
+            this.lblNguoiNhan.Size = new System.Drawing.Size(202, 25);
             this.lblNguoiNhan.TabIndex = 10;
             this.lblNguoiNhan.Text = "Người nhận sẽ hiện ở đây";
             // 
@@ -144,7 +144,7 @@
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(11, 149);
             this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(2);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(142, 32);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(174, 39);
             this.guna2HtmlLabel3.TabIndex = 11;
             this.guna2HtmlLabel3.Text = "Nội dung thư";
             // 
@@ -160,10 +160,10 @@
             this.btnQuayLai.ForeColor = System.Drawing.Color.White;
             this.btnQuayLai.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnQuayLai.ImageSize = new System.Drawing.Size(18, 18);
-            this.btnQuayLai.Location = new System.Drawing.Point(408, 16);
-            this.btnQuayLai.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuayLai.Location = new System.Drawing.Point(568, 20);
+            this.btnQuayLai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuayLai.Name = "btnQuayLai";
-            this.btnQuayLai.Size = new System.Drawing.Size(74, 33);
+            this.btnQuayLai.Size = new System.Drawing.Size(99, 41);
             this.btnQuayLai.TabIndex = 0;
             this.btnQuayLai.Text = "Quay lại";
             this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
@@ -173,10 +173,10 @@
             this.pnlFooter.BackColor = System.Drawing.Color.Transparent;
             this.pnlFooter.Controls.Add(this.btnQuayLai);
             this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFooter.Location = new System.Drawing.Point(8, 490);
-            this.pnlFooter.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlFooter.Location = new System.Drawing.Point(11, 603);
+            this.pnlFooter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(528, 51);
+            this.pnlFooter.Size = new System.Drawing.Size(703, 63);
             this.pnlFooter.TabIndex = 0;
             // 
             // picAvatar
@@ -185,11 +185,11 @@
             this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.picAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
             this.picAvatar.ImageRotate = 0F;
-            this.picAvatar.Location = new System.Drawing.Point(418, 10);
-            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar.Location = new System.Drawing.Point(557, 12);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picAvatar.Name = "picAvatar";
             this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAvatar.Size = new System.Drawing.Size(96, 90);
+            this.picAvatar.Size = new System.Drawing.Size(128, 111);
             this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAvatar.TabIndex = 0;
             this.picAvatar.TabStop = false;
@@ -207,20 +207,20 @@
             this.pnlHeader.Controls.Add(this.lblTieuDeThu);
             this.pnlHeader.Controls.Add(this.guna2HtmlLabel4);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(8, 10);
-            this.pnlHeader.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlHeader.Location = new System.Drawing.Point(11, 12);
+            this.pnlHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(528, 171);
+            this.pnlHeader.Size = new System.Drawing.Size(703, 210);
             this.pnlHeader.TabIndex = 1;
             // 
             // lblNguoINhanThu
             // 
             this.lblNguoINhanThu.BackColor = System.Drawing.Color.Transparent;
             this.lblNguoINhanThu.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.lblNguoINhanThu.Location = new System.Drawing.Point(146, 111);
-            this.lblNguoINhanThu.Margin = new System.Windows.Forms.Padding(2);
+            this.lblNguoINhanThu.Location = new System.Drawing.Point(195, 137);
+            this.lblNguoINhanThu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblNguoINhanThu.Name = "lblNguoINhanThu";
-            this.lblNguoINhanThu.Size = new System.Drawing.Size(176, 21);
+            this.lblNguoINhanThu.Size = new System.Drawing.Size(213, 25);
             this.lblNguoINhanThu.TabIndex = 10;
             this.lblNguoINhanThu.Text = "Người nhận thư hiện ở đây";
             // 
@@ -228,10 +228,10 @@
             // 
             this.lblThoiGianGuiThu.BackColor = System.Drawing.Color.Transparent;
             this.lblThoiGianGuiThu.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.lblThoiGianGuiThu.Location = new System.Drawing.Point(146, 79);
-            this.lblThoiGianGuiThu.Margin = new System.Windows.Forms.Padding(2);
+            this.lblThoiGianGuiThu.Location = new System.Drawing.Point(195, 97);
+            this.lblThoiGianGuiThu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblThoiGianGuiThu.Name = "lblThoiGianGuiThu";
-            this.lblThoiGianGuiThu.Size = new System.Drawing.Size(185, 21);
+            this.lblThoiGianGuiThu.Size = new System.Drawing.Size(222, 25);
             this.lblThoiGianGuiThu.TabIndex = 9;
             this.lblThoiGianGuiThu.Text = "Thời gian gửi thư hiện ở đây";
             // 
@@ -239,10 +239,10 @@
             // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(22, 111);
-            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(29, 137);
+            this.guna2HtmlLabel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(82, 21);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(99, 25);
             this.guna2HtmlLabel5.TabIndex = 8;
             this.guna2HtmlLabel5.Text = "Người nhận: ";
             // 
@@ -250,10 +250,10 @@
             // 
             this.lblTime.BackColor = System.Drawing.Color.Transparent;
             this.lblTime.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.lblTime.Location = new System.Drawing.Point(22, 79);
-            this.lblTime.Margin = new System.Windows.Forms.Padding(2);
+            this.lblTime.Location = new System.Drawing.Point(29, 97);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(91, 21);
+            this.lblTime.Size = new System.Drawing.Size(108, 25);
             this.lblTime.TabIndex = 7;
             this.lblTime.Text = "Thời gian gửi:";
             // 
@@ -261,10 +261,10 @@
             // 
             this.guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel7.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel7.Location = new System.Drawing.Point(146, 46);
-            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2HtmlLabel7.Location = new System.Drawing.Point(195, 57);
+            this.guna2HtmlLabel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel7.Name = "guna2HtmlLabel7";
-            this.guna2HtmlLabel7.Size = new System.Drawing.Size(92, 21);
+            this.guna2HtmlLabel7.Size = new System.Drawing.Size(113, 25);
             this.guna2HtmlLabel7.TabIndex = 6;
             this.guna2HtmlLabel7.Text = "Ban giám hiệu";
             // 
@@ -275,10 +275,10 @@
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel6.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(180)))));
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(8, 136);
-            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(11, 167);
+            this.guna2HtmlLabel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            this.guna2HtmlLabel6.Size = new System.Drawing.Size(148, 32);
+            this.guna2HtmlLabel6.Size = new System.Drawing.Size(181, 39);
             this.guna2HtmlLabel6.TabIndex = 5;
             this.guna2HtmlLabel6.Text = "Nội dung thư:";
             // 
@@ -289,10 +289,10 @@
             this.lblTieuDeThu.BackColor = System.Drawing.Color.Transparent;
             this.lblTieuDeThu.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDeThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(90)))), ((int)(((byte)(180)))));
-            this.lblTieuDeThu.Location = new System.Drawing.Point(8, 10);
-            this.lblTieuDeThu.Margin = new System.Windows.Forms.Padding(2);
+            this.lblTieuDeThu.Location = new System.Drawing.Point(11, 12);
+            this.lblTieuDeThu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblTieuDeThu.Name = "lblTieuDeThu";
-            this.lblTieuDeThu.Size = new System.Drawing.Size(192, 32);
+            this.lblTieuDeThu.Size = new System.Drawing.Size(237, 39);
             this.lblTieuDeThu.TabIndex = 1;
             this.lblTieuDeThu.Text = "Tiêu đề thông báo";
             // 
@@ -301,10 +301,10 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(22, 46);
-            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(2);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(29, 57);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(72, 21);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(85, 25);
             this.guna2HtmlLabel4.TabIndex = 2;
             this.guna2HtmlLabel4.Text = "Người gửi:";
             // 
@@ -313,11 +313,11 @@
             this.rtbNoiDung.BackColor = System.Drawing.Color.AliceBlue;
             this.rtbNoiDung.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbNoiDung.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbNoiDung.Location = new System.Drawing.Point(22, 10);
-            this.rtbNoiDung.Margin = new System.Windows.Forms.Padding(2);
+            this.rtbNoiDung.Location = new System.Drawing.Point(29, 12);
+            this.rtbNoiDung.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rtbNoiDung.Name = "rtbNoiDung";
             this.rtbNoiDung.ReadOnly = true;
-            this.rtbNoiDung.Size = new System.Drawing.Size(521, 293);
+            this.rtbNoiDung.Size = new System.Drawing.Size(695, 361);
             this.rtbNoiDung.TabIndex = 0;
             this.rtbNoiDung.Text = "Nội dung thông báo sẽ hiển thị ở đây...";
             // 
@@ -330,11 +330,11 @@
             this.pnlContent.Controls.Add(this.rtbNoiDung);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.FillColor = System.Drawing.Color.AliceBlue;
-            this.pnlContent.Location = new System.Drawing.Point(8, 181);
-            this.pnlContent.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlContent.Location = new System.Drawing.Point(11, 222);
+            this.pnlContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Padding = new System.Windows.Forms.Padding(8, 10, 8, 10);
-            this.pnlContent.Size = new System.Drawing.Size(528, 309);
+            this.pnlContent.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
+            this.pnlContent.Size = new System.Drawing.Size(703, 381);
             this.pnlContent.TabIndex = 2;
             // 
             // pnlMain
@@ -348,26 +348,26 @@
             this.pnlMain.Controls.Add(this.pnlFooter);
             this.pnlMain.FillColor = System.Drawing.Color.AliceBlue;
             this.pnlMain.FillColor2 = System.Drawing.Color.White;
-            this.pnlMain.Location = new System.Drawing.Point(277, 16);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlMain.Location = new System.Drawing.Point(369, 20);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(8, 10, 8, 10);
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.pnlMain.ShadowDecoration.BorderRadius = 15;
             this.pnlMain.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.pnlMain.ShadowDecoration.Depth = 10;
             this.pnlMain.ShadowDecoration.Enabled = true;
-            this.pnlMain.Size = new System.Drawing.Size(544, 551);
+            this.pnlMain.Size = new System.Drawing.Size(725, 678);
             this.pnlMain.TabIndex = 1;
             this.pnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMain_Paint_1);
             // 
             // ucXemTBChiTiet
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlMain);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucXemTBChiTiet";
-            this.Size = new System.Drawing.Size(1640, 960);
+            this.Size = new System.Drawing.Size(2187, 1182);
             this.pnlFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.pnlHeader.ResumeLayout(false);

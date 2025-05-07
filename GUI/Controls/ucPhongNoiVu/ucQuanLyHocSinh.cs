@@ -29,17 +29,18 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             try
             {
                 string query = @"
-                    SELECT 
-                        hs.MaHS, 
-                        hs.MaNguoiDung, 
-                        hs.HoTen, 
-                        hs.NgaySinh, 
-                        hs.GioiTinh, 
-                        hs.DiaChi, 
-                        hs.SDTPhuHuynh, 
-                        lh.TenLop AS MaLop
-                    FROM HocSinh hs
-                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop";
+                SELECT 
+                    hs.MaHS, 
+                    hs.MaNguoiDung, 
+                    hs.HoTen, 
+                    CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh, 
+                    hs.GioiTinh, 
+                    hs.DiaChi, 
+                    hs.SDTPhuHuynh, 
+                    lh.TenLop AS MaLop
+                FROM HocSinh hs
+                INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop";
+
                 DataTable dataTable = db.ExecuteQuery(query);
                 dgvHocSinh.DataSource = dataTable;
             }
@@ -74,17 +75,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             try
             {
                 string query = @"
-            SELECT 
-                hs.MaHS, 
-                hs.MaNguoiDung, 
-                hs.HoTen, 
-                hs.NgaySinh, 
-                hs.GioiTinh, 
-                hs.DiaChi, 
-                hs.SDTPhuHuynh, 
-                lh.TenLop AS MaLop
-            FROM HocSinh hs
-            INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop";
+                SELECT 
+                    hs.MaHS, 
+                    hs.MaNguoiDung, 
+                    hs.HoTen, 
+                    CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh, 
+                    hs.GioiTinh, 
+                    hs.DiaChi, 
+                    hs.SDTPhuHuynh, 
+                    lh.TenLop AS MaLop
+                FROM HocSinh hs
+                INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop";
 
                 if (maLop.HasValue)
                 {
@@ -130,8 +131,58 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             frmQuanLyHocSinh frm = new frmQuanLyHocSinh();
             frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-            LoadHocSinhData();
+
+            if (frm.ShowDialog() == DialogResult.OK) // Chỉ thực hiện nếu thêm học sinh thành công
+            {
+                try
+                {
+                    // Lấy MaHS lớn nhất vừa được thêm vào
+                    string queryLatestStudent = @"
+                    SELECT TOP 1 
+                        hs.MaHS, 
+                        hs.HoTen, 
+                        lh.MaLop,
+                        lh.TenLop 
+                    FROM HocSinh hs
+                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                    ORDER BY hs.MaHS DESC";
+
+                    DataTable latestStudent = db.ExecuteQuery(queryLatestStudent);
+
+                    if (latestStudent != null && latestStudent.Rows.Count > 0)
+                    {
+                        int maHS = Convert.ToInt32(latestStudent.Rows[0]["MaHS"]);
+                        int maLop = Convert.ToInt32(latestStudent.Rows[0]["MaLop"]);
+                        string hoTenHocSinh = latestStudent.Rows[0]["HoTen"].ToString();
+                        string tenLop = latestStudent.Rows[0]["TenLop"].ToString();
+
+                        // Truy vấn để lấy MaNguoiDung của phòng nội vụ
+                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+
+                        // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
+                        string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+                        int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+
+                        // Nội dung hành động
+                        string hanhDong = $"Thêm học sinh {hoTenHocSinh} vào lớp {tenLop}";
+
+                        // Thêm vào bảng NhatKyHeThong
+                        string insertNhatKy = $@"
+                        INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                        VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
+
+                        db.ExecuteNonQuery(insertNhatKy);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi khi ghi nhật ký: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // Tải lại dữ liệu sau khi thêm
+                LoadHocSinhData();
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -142,16 +193,76 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 DataGridViewRow selectedRow = dgvHocSinh.SelectedRows[0];
                 int maHS = Convert.ToInt32(selectedRow.Cells["MaHS"].Value);
                 string hoTen = selectedRow.Cells["HoTen"].Value.ToString();
-                DateTime ngaySinh = Convert.ToDateTime(selectedRow.Cells["NgaySinh"].Value);
+
+                // Fetch the correct date from database instead of trying to convert from display format
+                string queryGetDate = $"SELECT NgaySinh FROM HocSinh WHERE MaHS = {maHS}";
+                DateTime ngaySinh;
+
+                try
+                {
+                    object dateResult = db.ExecuteScalar(queryGetDate);
+                    ngaySinh = Convert.ToDateTime(dateResult);
+                }
+                catch
+                {
+                    MessageBox.Show("Không thể lấy ngày sinh chính xác từ cơ sở dữ liệu. Sử dụng ngày mặc định.",
+                        "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ngaySinh = DateTime.Now;
+                }
+
                 string gioiTinh = selectedRow.Cells["GioiTinh"].Value.ToString();
-                string diaChi = selectedRow.Cells["DiaChi"].Value.ToString();
-                string sdtPhuHuynh = selectedRow.Cells["SDTPhuHuynh"].Value.ToString();
-                string tenLop = selectedRow.Cells["MaLop"].Value.ToString();
+                string diaChi = selectedRow.Cells["DiaChi"].Value?.ToString() ?? "";
+                string sdtPhuHuynh = selectedRow.Cells["SDTPhuHuynh"].Value?.ToString() ?? "";
+                string tenLopCu = selectedRow.Cells["MaLop"].Value.ToString();
 
                 // Hiển thị form sửa thông tin
-                frmQuanLyHocSinh frm = new frmQuanLyHocSinh(maHS, hoTen, ngaySinh, gioiTinh, diaChi, sdtPhuHuynh, tenLop);
+                frmQuanLyHocSinh frm = new frmQuanLyHocSinh(maHS, hoTen, ngaySinh, gioiTinh, diaChi, sdtPhuHuynh, tenLopCu);
                 frm.StartPosition = FormStartPosition.CenterScreen;
-                frm.ShowDialog();
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Lấy thông tin học sinh sau khi sửa
+                        string queryUpdatedStudent = $@"
+                        SELECT 
+                            hs.HoTen, 
+                            lh.TenLop 
+                        FROM HocSinh hs
+                        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                        WHERE hs.MaHS = {maHS}";
+
+                        DataTable updatedStudent = db.ExecuteQuery(queryUpdatedStudent);
+
+                        if (updatedStudent != null && updatedStudent.Rows.Count > 0)
+                        {
+                            string hoTenHocSinh = updatedStudent.Rows[0]["HoTen"].ToString();
+                            string tenLopMoi = updatedStudent.Rows[0]["TenLop"].ToString();
+
+                            // Truy vấn để lấy MaNguoiDung của phòng nội vụ
+                            string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                            int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+
+                            // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
+                            string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+                            int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+
+                            // Nội dung hành động
+                            string hanhDong = $"Sửa thông tin học sinh {hoTenHocSinh} của lớp {tenLopMoi}";
+
+                            // Thêm vào bảng NhatKyHeThong
+                            string insertNhatKy = $@"
+                            INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                            VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
+
+                            db.ExecuteNonQuery(insertNhatKy);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Đã xảy ra lỗi khi ghi nhật ký: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
 
                 // Tải lại dữ liệu sau khi sửa
                 LoadHocSinhData();
@@ -178,6 +289,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 int maHS = Convert.ToInt32(selectedRow.Cells["MaHS"].Value);
                 int maNguoiDung = Convert.ToInt32(selectedRow.Cells["MaNguoiDung"].Value);
                 string hoTen = selectedRow.Cells["HoTen"].Value.ToString();
+                string tenLop = selectedRow.Cells["MaLop"].Value.ToString(); // Lấy tên lớp để ghi nhật ký
 
                 // Hiển thị hộp thoại xác nhận
                 DialogResult result = MessageBox.Show(
@@ -193,16 +305,43 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     // Sử dụng transaction để đảm bảo hoặc cả hai bảng đều được xóa hoặc không bảng nào bị xóa
                     List<string> deleteCommands = new List<string>
                     {
-                    // Xóa học sinh trước vì có khóa ngoại tham chiếu đến NguoiDung
-                    $"DELETE FROM HocSinh WHERE MaHS = {maHS}",
-                    // Sau đó xóa người dùng
-                    $"DELETE FROM NguoiDung WHERE MaNguoiDung = {maNguoiDung}"
+                        // Xóa học sinh trước vì có khóa ngoại tham chiếu đến NguoiDung
+                        $"DELETE FROM HocSinh WHERE MaHS = {maHS}",
+                        // Sau đó xóa người dùng
+                        $"DELETE FROM NguoiDung WHERE MaNguoiDung = {maNguoiDung}"
                     };
 
                     bool success = db.ExecuteTransaction(deleteCommands);
 
                     if (success)
                     {
+                        try
+                        {
+                            // Ghi nhật ký xóa học sinh
+                            // Truy vấn để lấy MaNguoiDung của phòng nội vụ
+                            string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                            int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+
+                            // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
+                            string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+                            int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+
+                            // Nội dung hành động
+                            string hanhDong = $"Xóa học sinh {hoTen} ra khỏi lớp {tenLop}";
+
+                            // Thêm vào bảng NhatKyHeThong
+                            string insertNhatKy = $@"
+                            INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                            VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
+
+                            db.ExecuteNonQuery(insertNhatKy);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Đã xóa học sinh thành công nhưng xảy ra lỗi khi ghi nhật ký: " + ex.Message,
+                                "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
                         MessageBox.Show($"Đã xóa học sinh {hoTen} và tài khoản liên kết thành công!",
                             "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -255,7 +394,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     hs.MaHS, 
                     hs.MaNguoiDung, 
                     hs.HoTen, 
-                    hs.NgaySinh, 
+                    CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh, 
                     hs.GioiTinh, 
                     hs.DiaChi, 
                     hs.SDTPhuHuynh, 

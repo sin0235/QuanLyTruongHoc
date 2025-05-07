@@ -207,5 +207,42 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                 MessageBox.Show("Vui lòng chọn một dòng để xem chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lấy từ khóa từ txtTimKiem
+                string keyword = txtTimKiem.Text.Trim();
+
+                if (string.IsNullOrEmpty(keyword))
+                {
+                    // Nếu không có từ khóa, tải lại toàn bộ dữ liệu
+                    LoadData();
+                    return;
+                }
+
+                // Tách từ khóa thành danh sách các từ
+                string[] keywords = keyword.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                // Lọc dữ liệu trong DataGridView
+                foreach (DataGridViewRow row in dgvXemThu.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    string nguoiNhan = row.Cells["NguoiNhan"].Value?.ToString() ?? "";
+
+                    // Kiểm tra nếu "Người nhận" chứa bất kỳ từ khóa nào
+                    bool isMatch = keywords.Any(k => nguoiNhan.IndexOf(k, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                    // Hiển thị hoặc ẩn dòng dựa trên kết quả tìm kiếm
+                    row.Visible = isMatch;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi khi tìm kiếm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

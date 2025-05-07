@@ -39,29 +39,33 @@
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.pnlSubSettings = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
+            this.btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
+            this.btnXemThu = new Guna.UI2.WinForms.Guna2Button();
             this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
             this.btnGuiThu = new Guna.UI2.WinForms.Guna2Button();
             this.btnQuanLyHeThong = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
-            this.btnXemThu = new Guna.UI2.WinForms.Guna2Button();
-            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            this.pnlSubSettings.SuspendLayout();
             this.pnlLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -176,6 +180,7 @@
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
+            this.pnlMenu.Controls.Add(this.pnlSubSettings);
             this.pnlMenu.Controls.Add(this.btnXemThu);
             this.pnlMenu.Controls.Add(this.btnSettings);
             this.pnlMenu.Controls.Add(this.btnGuiThu);
@@ -188,6 +193,84 @@
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlMenu.Size = new System.Drawing.Size(280, 880);
             this.pnlMenu.TabIndex = 1;
+            // 
+            // pnlSubSettings
+            // 
+            this.pnlSubSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
+            this.pnlSubSettings.BorderRadius = 10;
+            this.pnlSubSettings.Controls.Add(this.btnLogout);
+            this.pnlSubSettings.Controls.Add(this.btnChangePassword);
+            this.pnlSubSettings.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(175)))), ((int)(((byte)(235)))));
+            this.pnlSubSettings.ForeColor = System.Drawing.Color.Black;
+            this.pnlSubSettings.Location = new System.Drawing.Point(12, 725);
+            this.pnlSubSettings.Name = "pnlSubSettings";
+            this.pnlSubSettings.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlSubSettings.Size = new System.Drawing.Size(260, 104);
+            this.pnlSubSettings.TabIndex = 9;
+            this.pnlSubSettings.Visible = false;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BorderRadius = 8;
+            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnLogout.FillColor = System.Drawing.Color.Transparent;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnLogout.Location = new System.Drawing.Point(5, 50);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(250, 45);
+            this.btnLogout.TabIndex = 2;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.BackColor = System.Drawing.Color.Transparent;
+            this.btnChangePassword.BorderRadius = 8;
+            this.btnChangePassword.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnChangePassword.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnChangePassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnChangePassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnChangePassword.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnChangePassword.FillColor = System.Drawing.Color.Transparent;
+            this.btnChangePassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnChangePassword.Location = new System.Drawing.Point(5, 5);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(250, 45);
+            this.btnChangePassword.TabIndex = 1;
+            this.btnChangePassword.Text = "Đổi mật khẩu";
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
+            // btnXemThu
+            // 
+            this.btnXemThu.BackColor = System.Drawing.Color.Transparent;
+            this.btnXemThu.BorderRadius = 10;
+            this.btnXemThu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXemThu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXemThu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXemThu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXemThu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnXemThu.FillColor = System.Drawing.Color.Transparent;
+            this.btnXemThu.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXemThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnXemThu.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnXemThu.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnXemThu.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnXemThu.Location = new System.Drawing.Point(10, 110);
+            this.btnXemThu.Name = "btnXemThu";
+            this.btnXemThu.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnXemThu.Size = new System.Drawing.Size(260, 55);
+            this.btnXemThu.TabIndex = 7;
+            this.btnXemThu.Text = "Xem thư đã gửi";
+            this.btnXemThu.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnXemThu.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnXemThu.Click += new System.EventHandler(this.btnXemThu_Click);
             // 
             // btnSettings
             // 
@@ -212,6 +295,7 @@
             this.btnSettings.Text = "Cài đặt";
             this.btnSettings.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnSettings.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // btnGuiThu
             // 
@@ -290,6 +374,17 @@
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Location = new System.Drawing.Point(90, 15);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(100, 90);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
+            // 
             // pnlMainScreen
             // 
             this.pnlMainScreen.Controls.Add(this.pnlContent);
@@ -312,6 +407,7 @@
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
+            this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
             // pnlTop
             // 
@@ -352,35 +448,6 @@
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
-            // guna2Elipse2
-            // 
-            this.guna2Elipse2.BorderRadius = 18;
-            // 
-            // btnXemThu
-            // 
-            this.btnXemThu.BackColor = System.Drawing.Color.Transparent;
-            this.btnXemThu.BorderRadius = 10;
-            this.btnXemThu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnXemThu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnXemThu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnXemThu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnXemThu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnXemThu.FillColor = System.Drawing.Color.Transparent;
-            this.btnXemThu.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemThu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnXemThu.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnXemThu.ImageOffset = new System.Drawing.Point(15, 0);
-            this.btnXemThu.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnXemThu.Location = new System.Drawing.Point(10, 110);
-            this.btnXemThu.Name = "btnXemThu";
-            this.btnXemThu.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnXemThu.Size = new System.Drawing.Size(260, 55);
-            this.btnXemThu.TabIndex = 7;
-            this.btnXemThu.Text = "Xem thư đã gửi";
-            this.btnXemThu.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnXemThu.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnXemThu.Click += new System.EventHandler(this.btnXemThu_Click);
-            // 
             // picUserAvatar
             // 
             this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -394,16 +461,9 @@
             this.picUserAvatar.TabIndex = 0;
             this.picUserAvatar.TabStop = false;
             // 
-            // picLogo
+            // guna2Elipse2
             // 
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(90, 15);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(100, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
+            this.guna2Elipse2.BorderRadius = 18;
             // 
             // frmBGH
             // 
@@ -426,13 +486,14 @@
             this.pnlTitleBar.PerformLayout();
             this.pnlLeft.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
+            this.pnlSubSettings.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlMainScreen.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -463,6 +524,9 @@
         private Guna.UI2.WinForms.Guna2ShadowForm guna2ShadowForm1;
         public Guna.UI2.WinForms.Guna2HtmlLabel lblUserName;
         private Guna.UI2.WinForms.Guna2Button btnXemThu;
+        private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
+        private Guna.UI2.WinForms.Guna2Button btnLogout;
+        private Guna.UI2.WinForms.Guna2Button btnChangePassword;
     }
 }
 
