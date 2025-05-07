@@ -131,8 +131,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 }
 
                 MessageBox.Show("Đơn nghỉ đã được phê duyệt.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadAttendanceList(chonNgayDTP.Value); // Tải lại danh sách điểm danh
-                
+                LoadDonNghi(); // Tải lại danh sách đơn nghỉ
+
             }
             catch (Exception ex)
             {

@@ -61,6 +61,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     DateTime ngayTao = Convert.ToDateTime(row["NgayTao"]);
                     int soNgayCongTac = (DateTime.Now - ngayTao).Days;
                     congTacTxt.Text = $"{soNgayCongTac} ngày";
+
+                    // Set profile picture based on gender
+                    string gioiTinh = row["GioiTinh"].ToString();
+                    if (gioiTinh == "Nam")
+                    {
+                        anhDaiDienPictureBox.Image = Properties.Resources.defautAvatar_Teacher_Male; // Replace with your male image resource
+                    }
+                    else
+                    {
+                        anhDaiDienPictureBox.Image = Properties.Resources.defautAvatar_Teacher_Female; // Replace with your female image resource
+                    }
                 }
                 else
                 {
