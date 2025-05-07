@@ -4,34 +4,69 @@ using System.Drawing;
 
 public class ThongTinHSDTO
 {
-    // Thông tin học sinh
-    public string StudentId { get; set; }        // Mã học sinh
-    public string FullName { get; set; }         // Họ tên
-    public DateTime DateOfBirth { get; set; }    // Ngày sinh
-    public string PlaceOfBirth { get; set; }     // Nơi sinh
-    public string Gender { get; set; }           // Giới tính
-    public string IdentityCode { get; set; }     // Mã định danh
-    public string Ethnicity { get; set; }        // Dân tộc
-    public string Religion { get; set; }         // Tôn giáo
-    public string ClassName { get; set; }        // Lớp
+    // Thông tin cá nhân cơ bản
+    public string StudentId { get; set; }
+    public string FullName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string Gender { get; set; }
+    public string IdentityCode { get; set; }
+    public string PlaceOfBirth { get; set; }
+    public string Ethnicity { get; set; }
+    public string Religion { get; set; }
 
-    // Thông tin liên lạc
-    public string Country { get; set; }          // Quốc gia
-    public string Province { get; set; }         // Tỉnh thành
-    public string District { get; set; }         // Quận huyện
-    public string Ward { get; set; }             // Phường/xã
-    public string Address { get; set; }          // Địa chỉ
-    public string PermanentAddress { get; set; } // Địa chỉ thường trú
-    public string Phone { get; set; }            // Số điện thoại
-    public string Mobile { get; set; }           // Di động
-    public string Email { get; set; }            // Email cá nhân
+    // Thông tin liên hệ và địa chỉ
+    public string Country { get; set; }
+    public string Province { get; set; }
+    public string District { get; set; }
+    public string Ward { get; set; }
+    public string Address { get; set; }
+    public string PermanentAddress { get; set; }
+    public string Phone { get; set; }
+    public string Mobile { get; set; }
+    public string Email { get; set; }
 
-    // Thông tin gia đình
-    public string FatherName { get; set; }       // Họ tên cha
-    public string FatherPhone { get; set; }      // Điện thoại cha
-    public string MotherName { get; set; }       // Họ tên mẹ
-    public string MotherPhone { get; set; }      // Điện thoại mẹ
-  
+    // Thông tin học tập
+    public int ClassId { get; set; }
+    public string ClassName { get; set; }
+    public Image Avatar { get; set; }
 
-    public Image Avatar { get; set; }            // Ảnh đại diện
+    // Thông tin phụ huynh
+    public string FatherName { get; set; }
+    public string FatherPhone { get; set; }
+    public string FatherOccupation { get; set; }
+    public string MotherName { get; set; }
+    public string MotherPhone { get; set; }
+    public string MotherOccupation { get; set; }
+    public string ParentEmail { get; set; }
+    public string ParentContactAddress { get; set; }
+
+    // Constructor mặc định
+    public ThongTinHSDTO()
+    {
+        StudentId = string.Empty;
+        FullName = string.Empty;
+        Gender = string.Empty;
+        IdentityCode = string.Empty;
+        PlaceOfBirth = string.Empty;
+        Ethnicity = string.Empty;
+        Religion = string.Empty;
+        Country = "Việt Nam";
+        Province = string.Empty;
+        District = string.Empty;
+        Ward = string.Empty;
+        Address = string.Empty;
+        PermanentAddress = string.Empty;
+        Phone = string.Empty;
+        Mobile = string.Empty;
+        Email = string.Empty;
+        ClassName = string.Empty;
+        FatherName = string.Empty;
+        FatherPhone = string.Empty;
+        FatherOccupation = string.Empty;
+        MotherName = string.Empty;
+        MotherPhone = string.Empty;
+        MotherOccupation = string.Empty;
+        ParentEmail = string.Empty;
+        ParentContactAddress = string.Empty;
+    }
 }

@@ -316,3 +316,26 @@ BEGIN
     ALTER TABLE ThongBao ADD isActive BIT DEFAULT 1;
     UPDATE ThongBao SET isActive = 1;
 END
+
+ALTER TABLE HocSinh
+ADD MaDinhDanh NVARCHAR(20) NULL,
+    NoiSinh NVARCHAR(100) NULL,
+    DanToc NVARCHAR(50) NULL,
+    TonGiao NVARCHAR(50) NULL,
+    QuocGia NVARCHAR(50) DEFAULT N'Việt Nam',
+    TinhThanh NVARCHAR(50) NULL,
+    QuanHuyen NVARCHAR(50) NULL,
+    XaPhuong NVARCHAR(50) NULL,
+    DiaChiThuongTru NVARCHAR(200) NULL,
+    SoDienThoai NVARCHAR(15) NULL,
+    Email NVARCHAR(100) NULL;
+
+    CREATE TABLE PhuHuynh (
+        MaPH INT IDENTITY(1,1) PRIMARY KEY,
+        MaHS INT NOT NULL,
+        HoTenCha NVARCHAR(100) NULL,
+        SoDienThoaiCha NVARCHAR(15) NULL,
+        HoTenMe NVARCHAR(100) NULL,
+        SoDienThoaiMe NVARCHAR(15) NULL,
+        FOREIGN KEY (MaHS) REFERENCES HocSinh(MaHS)
+    );

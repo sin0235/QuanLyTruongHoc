@@ -175,9 +175,11 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             txtAddress.Enabled = isEditable;
             txtPhone.Enabled = isEditable;
-            //txtEmail.Enabled = isEditable;
-            //txtSoDienThoaiCha.Enabled = isEditable;
-            //txtSDTMe.Enabled = isEditable;
+            txtEmail.Enabled = isEditable;
+            txtHoTenCha.Enabled = isEditable;
+            txtSoDienThoaiCha.Enabled = isEditable;
+            txtHoTenMe.Enabled = isEditable;
+            txtSDTMe.Enabled = isEditable;
         }
 
         /// <summary>
@@ -213,59 +215,85 @@ namespace QuanLyTruongHoc.GUI.Controls
                 // Lưu lại giá trị cũ để khôi phục nếu cập nhật thất bại
                 string oldAddress = _currentStudent.Address;
                 string oldPhone = _currentStudent.Phone;
-                //string oldEmail = _currentStudent.Email;
-                //string oldMotherPhone = _currentStudent.MotherPhone;
-                //string oldFatherPhone = _currentStudent.FatherPhone;
+                string oldEmail = _currentStudent.Email;
+                string oldFatherName = _currentStudent.FatherName;
+                string oldFatherPhone = _currentStudent.FatherPhone;
+                string oldMotherName = _currentStudent.MotherName;
+                string oldMotherPhone = _currentStudent.MotherPhone;
 
-                // Cập nhật dữ liệu
+                // Cập nhật dữ liệu thông tin liên lạc
                 _currentStudent.Address = txtAddress.Text.Trim() == "-----" ? null : txtAddress.Text.Trim();
                 _currentStudent.Phone = txtPhone.Text.Trim() == "-----" ? null : txtPhone.Text.Trim();
-                //_currentStudent.Email = txtEmail.Text.Trim() == "-----" ? null : txtEmail.Text.Trim();
-                //_currentStudent.MotherPhone = txtSDTMe.Text.Trim() == "-----" ? null : txtSDTMe.Text.Trim();
-                //_currentStudent.FatherPhone = txtSoDienThoaiCha.Text.Trim() == "-----" ? null : txtSoDienThoaiCha.Text.Trim();
+                _currentStudent.Email = txtEmail.Text.Trim() == "-----" ? null : txtEmail.Text.Trim();
+
+                // Cập nhật thông tin phụ huynh
+                _currentStudent.FatherName = txtHoTenCha.Text.Trim() == "-----" ? null : txtHoTenCha.Text.Trim();
+                _currentStudent.FatherPhone = txtSoDienThoaiCha.Text.Trim() == "-----" ? null : txtSoDienThoaiCha.Text.Trim();
+                _currentStudent.MotherName = txtHoTenMe.Text.Trim() == "-----" ? null : txtHoTenMe.Text.Trim();
+                _currentStudent.MotherPhone = txtSDTMe.Text.Trim() == "-----" ? null : txtSDTMe.Text.Trim();
 
                 // Thực hiện cập nhật thông tin học sinh trong Task riêng
-                Task.Run(() => _hocSinhDAL.UpdateStudentBasicInfo(_currentStudent))
-                    .ContinueWith(task =>
+                Task.Run(() =>
+                {
+                    // Cập nhật thông tin cơ bản
+                    bool basicInfoResult = _hocSinhDAL.UpdateStudentBasicInfo(_currentStudent);
+
+                    // Cập nhật thông tin phụ huynh
+                    bool parentInfoResult = _hocSinhDAL.UpdateParentInfo(
+                        Convert.ToInt32(_currentStudent.StudentId),
+                        _currentStudent.FatherName,
+                        _currentStudent.FatherPhone,
+                        _currentStudent.MotherName,
+                        _currentStudent.MotherPhone
+                    );
+
+                    // Trả về kết quả chung
+                    return basicInfoResult && parentInfoResult;
+                })
+                .ContinueWith(task =>
+                {
+                    if (this.IsDisposed || !this.IsHandleCreated) return;
+
+                    this.Invoke(new Action(() =>
                     {
-                        if (this.IsDisposed || !this.IsHandleCreated) return;
+                        bool updateResult = task.Result;
 
-                        this.Invoke(new Action(() =>
+                        if (updateResult)
                         {
-                            bool updateResult = task.Result;
+                            // Thông báo đã cập nhật thành công
+                            MessageBox.Show("Cập nhật thông tin liên hệ và phụ huynh thành công!", "Thông báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            if (updateResult)
-                            {
-                                // Thông báo đã cập nhật thành công
-                                MessageBox.Show("Cập nhật thông tin liên hệ thành công!", "Thông báo",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Phát sinh sự kiện thông tin học sinh đã được cập nhật
+                            StudentInfoUpdated?.Invoke(this, _currentStudent);
+                        }
+                        else
+                        {
+                            // Khôi phục dữ liệu cũ nếu cập nhật thất bại
+                            _currentStudent.Address = oldAddress;
+                            _currentStudent.Phone = oldPhone;
+                            _currentStudent.Email = oldEmail;
+                            _currentStudent.FatherName = oldFatherName;
+                            _currentStudent.FatherPhone = oldFatherPhone;
+                            _currentStudent.MotherName = oldMotherName;
+                            _currentStudent.MotherPhone = oldMotherPhone;
 
-                                // Phát sinh sự kiện thông tin học sinh đã được cập nhật
-                                StudentInfoUpdated?.Invoke(this, _currentStudent);
-                            }
-                            else
-                            {
-                                // Khôi phục dữ liệu cũ nếu cập nhật thất bại
-                                _currentStudent.Address = oldAddress;
-                                _currentStudent.Phone = oldPhone;
-                                //_currentStudent.Email = oldEmail;
-                                //_currentStudent.MotherPhone = oldMotherPhone;
-                                //_currentStudent.FatherPhone = oldFatherPhone;
+                            // Hiển thị lại các giá trị cũ trên giao diện
+                            txtAddress.Text = oldAddress ?? "-----";
+                            txtPhone.Text = oldPhone ?? "-----";
+                            txtEmail.Text = oldEmail ?? "-----";
+                            txtHoTenCha.Text = oldFatherName ?? "-----";
+                            txtSoDienThoaiCha.Text = oldFatherPhone ?? "-----";
+                            txtHoTenMe.Text = oldMotherName ?? "-----";
+                            txtSDTMe.Text = oldMotherPhone ?? "-----";
 
-                                // Hiển thị lại các giá trị cũ trên giao diện
-                                txtAddress.Text = oldAddress ?? "-----";
-                                txtPhone.Text = oldPhone ?? "-----";
-                                //txtEmail.Text = oldEmail ?? "-----";
-                                //txtSDTMe.Text = oldMotherPhone ?? "-----";
-                                //txtSoDienThoaiCha.Text = oldFatherPhone ?? "-----";
+                            MessageBox.Show("Không thể cập nhật thông tin vào cơ sở dữ liệu!", "Lỗi",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
-                                MessageBox.Show("Không thể cập nhật thông tin vào cơ sở dữ liệu!", "Lỗi",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-
-                            ExitEditMode();
-                        }));
-                    });
+                        ExitEditMode();
+                    }));
+                });
             }
             catch (Exception ex)
             {
@@ -283,9 +311,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Khôi phục dữ liệu ban đầu
             txtAddress.Text = _currentStudent.Address ?? "-----";
             txtPhone.Text = _currentStudent.Phone ?? "-----";
-            //txtEmail.Text = _currentStudent.Email ?? "-----";
-            //txtSDTMe.Text = _currentStudent.MotherPhone ?? "-----";
-            //txtSoDienThoaiCha.Text = _currentStudent.FatherPhone ?? "-----";
+            txtEmail.Text = _currentStudent.Email ?? "-----";
+            txtHoTenCha.Text = _currentStudent.FatherName ?? "-----";
+            txtSoDienThoaiCha.Text = _currentStudent.FatherPhone ?? "-----";
+            txtHoTenMe.Text = _currentStudent.MotherName ?? "-----";
+            txtSDTMe.Text = _currentStudent.MotherPhone ?? "-----";
             ExitEditMode();
         }
 
@@ -307,9 +337,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             btnCancel.Click -= btnCancel_Click;
         }
 
-        /// <summary>
-        /// Xác thực dữ liệu nhập vào
-        /// </summary>
         /// <summary>
         /// Xác thực dữ liệu nhập vào
         /// </summary>
@@ -381,63 +408,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         /// </summary>
         private void lblChangeAvatar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Title = "Chọn ảnh đại diện";
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
-                openFileDialog.Multiselect = false;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        // Đọc ảnh từ file đã chọn
-                        Image newImage = Image.FromFile(openFileDialog.FileName);
-
-                        // Cập nhật ảnh đại diện cho học sinh
-                        if (_currentStudent != null)
-                        {
-                            // Thực hiện lưu ảnh đại diện trong Task riêng
-                            this.Cursor = Cursors.WaitCursor;
-
-                            Task.Run(() => _hocSinhDAL.SaveStudentAvatar(Convert.ToInt32(_currentStudent.StudentId), newImage))
-                                .ContinueWith(task =>
-                                {
-                                    if (this.IsDisposed || !this.IsHandleCreated) return;
-
-                                    this.Invoke(new Action(() =>
-                                    {
-                                        this.Cursor = Cursors.Default;
-
-                                        if (task.Result)
-                                        {
-                                            // Cập nhật ảnh trong object và hiển thị
-                                            _currentStudent.Avatar = newImage;
-                                            picAvatar.Image = newImage;
-
-                                            MessageBox.Show("Cập nhật ảnh đại diện thành công!", "Thông báo",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                                            // Phát sinh sự kiện thông tin học sinh đã được cập nhật
-                                            StudentInfoUpdated?.Invoke(this, _currentStudent);
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("Không thể lưu ảnh đại diện vào cơ sở dữ liệu!", "Lỗi",
-                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                    }));
-                                });
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Cursor = Cursors.Default;
-                        MessageBox.Show($"Lỗi khi tải ảnh: {ex.Message}", "Lỗi",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
         }
 
         /// <summary>
