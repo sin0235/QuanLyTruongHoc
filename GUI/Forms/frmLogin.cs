@@ -11,6 +11,7 @@ namespace QuanLyTruongHoc
     {
         public static int LoggedInTeacherId { get; private set; }
         public static int LoggedInStudentId { get; private set; }
+
         private readonly DatabaseHelper db;
 
         public frmLogin()
@@ -123,7 +124,7 @@ namespace QuanLyTruongHoc
             switch (maVaiTro)
             {
                 case 1: // Ban giám hiệu
-                    nextForm = new frmBGH();
+                    nextForm = new frmBGH(maNguoiDung);
                     ((frmBGH)nextForm).lblUserName.Text = "Ban giám hiệu";
                     break;
                 case 2: // Giáo viên
@@ -135,7 +136,7 @@ namespace QuanLyTruongHoc
                     LoggedInStudentId = maNguoiDung; // Lưu mã học sinh đã đăng nhập
                     break;
                 case 4: // Nhân viên phòng nội vụ
-                    nextForm = new frmPhongNoiVu();
+                    nextForm = new frmPhongNoiVu(maNguoiDung);
                     
                     break;
                 default:

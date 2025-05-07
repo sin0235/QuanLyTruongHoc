@@ -19,7 +19,6 @@ public class ThongTinHSDTO
     public string Province { get; set; }
     public string District { get; set; }
     public string Ward { get; set; }
-    public string Address { get; set; }
     public string PermanentAddress { get; set; }
     public string Phone { get; set; }
     public string Mobile { get; set; }
@@ -33,12 +32,8 @@ public class ThongTinHSDTO
     // Thông tin phụ huynh
     public string FatherName { get; set; }
     public string FatherPhone { get; set; }
-    public string FatherOccupation { get; set; }
     public string MotherName { get; set; }
     public string MotherPhone { get; set; }
-    public string MotherOccupation { get; set; }
-    public string ParentEmail { get; set; }
-    public string ParentContactAddress { get; set; }
 
     // Constructor mặc định
     public ThongTinHSDTO()
@@ -54,7 +49,6 @@ public class ThongTinHSDTO
         Province = string.Empty;
         District = string.Empty;
         Ward = string.Empty;
-        Address = string.Empty;
         PermanentAddress = string.Empty;
         Phone = string.Empty;
         Mobile = string.Empty;
@@ -62,11 +56,8 @@ public class ThongTinHSDTO
         ClassName = string.Empty;
         FatherName = string.Empty;
         FatherPhone = string.Empty;
-        FatherOccupation = string.Empty;
         MotherName = string.Empty;
         MotherPhone = string.Empty;
-        MotherOccupation = string.Empty;
-        ParentEmail = string.Empty;
-        ParentContactAddress = string.Empty;
+
     }
 }

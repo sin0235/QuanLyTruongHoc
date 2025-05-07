@@ -20,10 +20,11 @@ namespace QuanLyTruongHoc
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
         private Color highlightColor = Color.FromArgb(214, 228, 255);
-
-        public frmPhongNoiVu()
+        private int id;
+        public frmPhongNoiVu(int maNguoiDung)
         {
             InitializeComponent();
+            id = maNguoiDung;
 
             // Đảm bảo các nút nằm trong Guna2Panel
             guna2CircleButtonClose.Parent = pnlTitleBar;
@@ -233,7 +234,7 @@ namespace QuanLyTruongHoc
             btnSettings.FillColor = Color.Transparent;
 
             // Hiển thị form đổi mật khẩu
-            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(id))
             {
                 // Hiển thị form dạng dialog
                 changePwForm.ShowDialog();

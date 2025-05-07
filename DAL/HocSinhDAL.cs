@@ -37,7 +37,6 @@ namespace QuanLyTruongHoc.DAL
                     HS.NgaySinh AS DateOfBirth,
                     HS.GioiTinh AS Gender,
                     L.TenLop AS ClassName,
-                    HS.DiaChi AS Address,
                     HS.MaDinhDanh AS IdentityCode,
                     HS.NoiSinh AS PlaceOfBirth,
                     HS.DanToc AS Ethnicity,
@@ -47,7 +46,7 @@ namespace QuanLyTruongHoc.DAL
                     HS.QuanHuyen AS District,
                     HS.XaPhuong AS Ward,
                     HS.DiaChiThuongTru AS PermanentAddress,
-                    HS.SoDienThoai AS Mobile,
+                    HS.SDT AS Mobile,
                     HS.Email AS Email,
                     PH.HoTenCha AS FatherName,
                     PH.SoDienThoaiCha AS FatherPhone,
@@ -83,7 +82,7 @@ namespace QuanLyTruongHoc.DAL
                     student.FullName = GetValueOrDefault(row, "FullName", "-----");
                     student.Gender = GetValueOrDefault(row, "Gender", "-----");
                     student.ClassName = GetValueOrDefault(row, "ClassName", "-----");
-                    student.Address = GetValueOrDefault(row, "Address", "-----");
+                    student.PermanentAddress = GetValueOrDefault(row, "Address", "-----");
 
                     // Map các trường thông tin cá nhân mở rộng
                     student.IdentityCode = GetValueOrDefault(row, "IdentityCode", "-----");
@@ -193,18 +192,55 @@ namespace QuanLyTruongHoc.DAL
                 // Cập nhật thông tin trong bảng HocSinh
                 string query = @"
                                 UPDATE HocSinh SET
-                                    DiaChi = @Address,
-                                    SDTPhuHuynh = @Phone
+                                    HoTen = @HoTen,
+                                    NgaySinh = @NgaySinh,
+                                    GioiTinh = @GioiTinh,
+                                    MaDinhDanh = @MaDinhDanh,
+                                    NoiSinh = @NoiSinh,
+                                    DanToc = @DanToc,
+                                    TonGiao = @TonGiao,
+                                    QuocGia = @QuocGia,
+                                    TinhThanh = @TinhThanh,
+                                    QuanHuyen = @QuanHuyen,
+                                    XaPhuong = @XaPhuong,
+                                    DiaChiThuongTru = @DiaChi,
+                                    SDT = @SDT,
+                                    Email = @Email
                                 WHERE MaHS = @StudentId";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                                 {
-                                    { "@Address", string.IsNullOrEmpty(student.Address) || student.Address == "-----" ? DBNull.Value : (object)student.Address },
-                                    { "@Phone", string.IsNullOrEmpty(student.Phone) || student.Phone == "-----" ? DBNull.Value : (object)student.Phone },
-                                    { "@StudentId", student.StudentId }
+                                    { "@HoTen", string.IsNullOrEmpty(student.FullName) || student.FullName == "-----" ? DBNull.Value : (object)student.FullName },
+                                    { "@NgaySinh", student.DateOfBirth },
+                                    { "@GioiTinh", string.IsNullOrEmpty(student.Gender) || student.Gender == "-----" ? DBNull.Value : (object)student.Gender },
+                                    { "@MaDinhDanh", string.IsNullOrEmpty(student.IdentityCode) || student.IdentityCode == "-----" ? DBNull.Value : (object)student.IdentityCode },
+                                    { "@NoiSinh", string.IsNullOrEmpty(student.PlaceOfBirth) || student.PlaceOfBirth == "-----" ? DBNull.Value : (object)student.PlaceOfBirth },
+                                    { "@DanToc", string.IsNullOrEmpty(student.Ethnicity) || student.Ethnicity == "-----" ? DBNull.Value : (object)student.Ethnicity },
+                                    { "@TonGiao", string.IsNullOrEmpty(student.Religion) || student.Religion == "-----" ? DBNull.Value : (object)student.Religion },
+                                    { "@QuocGia", string.IsNullOrEmpty(student.Country) || student.Country == "-----" ? DBNull.Value : (object)student.Country },
+                                    { "@TinhThanh", string.IsNullOrEmpty(student.Province) || student.Province == "-----" ? DBNull.Value : (object)student.Province },
+                                    { "@QuanHuyen", string.IsNullOrEmpty(student.District) || student.District == "-----" ? DBNull.Value : (object)student.District },
+                                    { "@XaPhuong", string.IsNullOrEmpty(student.Ward) || student.Ward == "-----" ? DBNull.Value : (object)student.Ward },
+                                    { "@DiaChi", string.IsNullOrEmpty(student.PermanentAddress) || student.PermanentAddress == "-----" ? DBNull.Value : (object)student.PermanentAddress },
+                                    { "@SDT", string.IsNullOrEmpty(student.Mobile) || student.Mobile == "-----" ? DBNull.Value : (object)student.Mobile },
+                                    { "@Email", string.IsNullOrEmpty(student.Email) || student.Email == "-----" ? DBNull.Value : (object)student.Email },
+                                    { "@StudentId", Convert.ToInt32(student.StudentId) }
                                 };
 
                 bool result = db.ExecuteNonQuery(query, parameters);
+
+                // Cập nhật thông tin phụ huynh
+                if (result)
+                {
+                    UpdateParentInfo(
+                        Convert.ToInt32(student.StudentId),
+                        student.FatherName,
+                        student.FatherPhone,
+                        student.MotherName,
+                        student.MotherPhone
+                    );
+                }
+
                 return result;
             }
             catch (Exception ex)
@@ -301,9 +337,19 @@ namespace QuanLyTruongHoc.DAL
                     HS.HoTen AS FullName,
                     HS.NgaySinh AS DateOfBirth,
                     HS.GioiTinh AS Gender,
+                    HS.MaDinhDanh AS IdentityCode,
+                    HS.NoiSinh AS PlaceOfBirth,
+                    HS.DanToc AS Ethnicity,
+                    HS.TonGiao AS Religion,
+                    HS.QuocGia AS Country, 
+                    HS.TinhThanh AS Province,
+                    HS.QuanHuyen AS District,
+                    HS.XaPhuong AS Ward,
+                    HS.DiaChiThuongTru AS PermanentAddress,
+                    HS.SDT AS Mobile,
+                    HS.Email AS Email,
+                    L.MaLop AS ClassId,
                     L.TenLop AS ClassName,
-                    HS.DiaChi AS Address,
-                    HS.SoDienThoai AS Mobile,
                     PH.HoTenCha AS FatherName,
                     PH.SoDienThoaiCha AS FatherPhone,
                     PH.HoTenMe AS MotherName,
@@ -323,22 +369,35 @@ namespace QuanLyTruongHoc.DAL
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        // Tạo đối tượng StudentInfo với thông tin cơ bản
                         ThongTinHSDTO student = new ThongTinHSDTO
                         {
                             StudentId = GetValueOrDefault(row, "StudentId", ""),
                             FullName = GetValueOrDefault(row, "FullName", ""),
                             Gender = GetValueOrDefault(row, "Gender", ""),
-                            ClassName = GetValueOrDefault(row, "ClassName", ""),
-                            Address = GetValueOrDefault(row, "Address", ""),
+                            IdentityCode = GetValueOrDefault(row, "IdentityCode", ""),
+                            PlaceOfBirth = GetValueOrDefault(row, "PlaceOfBirth", ""),
+                            Ethnicity = GetValueOrDefault(row, "Ethnicity", ""),
+                            Religion = GetValueOrDefault(row, "Religion", ""),
+                            Country = GetValueOrDefault(row, "Country", "Việt Nam"),
+                            Province = GetValueOrDefault(row, "Province", ""),
+                            District = GetValueOrDefault(row, "District", ""),
+                            Ward = GetValueOrDefault(row, "Ward", ""),
+                            PermanentAddress = GetValueOrDefault(row, "PermanentAddress", ""),
                             Mobile = GetValueOrDefault(row, "Mobile", ""),
-                            FatherName = GetValueOrDefault(row, "FatherName", "-----"),
-                            FatherPhone = GetValueOrDefault(row, "FatherPhone", "-----"),
-                            MotherName = GetValueOrDefault(row, "MotherName", "-----"),
-                            MotherPhone = GetValueOrDefault(row, "MotherPhone", "-----"),
+                            Email = GetValueOrDefault(row, "Email", ""),
+                            ClassName = GetValueOrDefault(row, "ClassName", ""),
+                            FatherName = GetValueOrDefault(row, "FatherName", ""),
+                            FatherPhone = GetValueOrDefault(row, "FatherPhone", ""),
+                            MotherName = GetValueOrDefault(row, "MotherName", ""),
+                            MotherPhone = GetValueOrDefault(row, "MotherPhone", ""),
                             DateOfBirth = row["DateOfBirth"] != DBNull.Value ?
                                 Convert.ToDateTime(row["DateOfBirth"]) : DateTime.Now
                         };
+
+                        if (row["ClassId"] != DBNull.Value)
+                        {
+                            student.ClassId = Convert.ToInt32(row["ClassId"]);
+                        }
 
                         students.Add(student);
                     }
@@ -364,27 +423,43 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                                SELECT 
-                                    HS.MaHS AS StudentId,
-                                    HS.HoTen AS FullName,
-                                    HS.NgaySinh AS DateOfBirth,
-                                    HS.GioiTinh AS Gender,
-                                    L.TenLop AS ClassName,
-                                    HS.DiaChi AS Address,
-                                    HS.SDTPhuHuynh AS Phone
-                                FROM 
-                                    HocSinh HS
-                                LEFT JOIN 
-                                    LopHoc L ON HS.MaLop = L.MaLop
-                                WHERE 
-                                    HS.MaLop = @MaLop
-                                ORDER BY 
-                                    HS.HoTen";
+                SELECT 
+                    HS.MaHS AS StudentId,
+                    HS.HoTen AS FullName,
+                    HS.NgaySinh AS DateOfBirth,
+                    HS.GioiTinh AS Gender,
+                    HS.MaDinhDanh AS IdentityCode,
+                    HS.NoiSinh AS PlaceOfBirth,
+                    HS.DanToc AS Ethnicity,
+                    HS.TonGiao AS Religion,
+                    HS.QuocGia AS Country, 
+                    HS.TinhThanh AS Province,
+                    HS.QuanHuyen AS District,
+                    HS.XaPhuong AS Ward,
+                    HS.DiaChiThuongTru AS PermanentAddress,
+                    HS.SDT AS Mobile,
+                    HS.Email AS Email,
+                    L.MaLop AS ClassId,
+                    L.TenLop AS ClassName,
+                    PH.HoTenCha AS FatherName,
+                    PH.SoDienThoaiCha AS FatherPhone,
+                    PH.HoTenMe AS MotherName,
+                    PH.SoDienThoaiMe AS MotherPhone
+                FROM 
+                    HocSinh HS
+                LEFT JOIN 
+                    LopHoc L ON HS.MaLop = L.MaLop
+                LEFT JOIN
+                    PhuHuynh PH ON HS.MaHS = PH.MaHS
+                WHERE 
+                    HS.MaLop = @MaLop
+                ORDER BY 
+                    HS.HoTen";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                                {
-                                    { "@MaLop", maLop }
-                                };
+                {
+                    { "@MaLop", maLop }
+                };
 
                 DataTable dt = db.ExecuteQuery(query, parameters);
 
@@ -392,18 +467,35 @@ namespace QuanLyTruongHoc.DAL
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        // Tạo đối tượng StudentInfo với thông tin cơ bản
                         ThongTinHSDTO student = new ThongTinHSDTO
                         {
                             StudentId = GetValueOrDefault(row, "StudentId", ""),
                             FullName = GetValueOrDefault(row, "FullName", ""),
                             Gender = GetValueOrDefault(row, "Gender", ""),
+                            IdentityCode = GetValueOrDefault(row, "IdentityCode", ""),
+                            PlaceOfBirth = GetValueOrDefault(row, "PlaceOfBirth", ""),
+                            Ethnicity = GetValueOrDefault(row, "Ethnicity", ""),
+                            Religion = GetValueOrDefault(row, "Religion", ""),
+                            Country = GetValueOrDefault(row, "Country", "Việt Nam"),
+                            Province = GetValueOrDefault(row, "Province", ""),
+                            District = GetValueOrDefault(row, "District", ""),
+                            Ward = GetValueOrDefault(row, "Ward", ""),
+                            PermanentAddress = GetValueOrDefault(row, "PermanentAddress", ""),
+                            Mobile = GetValueOrDefault(row, "Mobile", ""),
+                            Email = GetValueOrDefault(row, "Email", ""),
                             ClassName = GetValueOrDefault(row, "ClassName", ""),
-                            Address = GetValueOrDefault(row, "Address", ""),
-                            Phone = GetValueOrDefault(row, "Phone", ""),
+                            FatherName = GetValueOrDefault(row, "FatherName", ""),
+                            FatherPhone = GetValueOrDefault(row, "FatherPhone", ""),
+                            MotherName = GetValueOrDefault(row, "MotherName", ""),
+                            MotherPhone = GetValueOrDefault(row, "MotherPhone", ""),
                             DateOfBirth = row["DateOfBirth"] != DBNull.Value ?
                                 Convert.ToDateTime(row["DateOfBirth"]) : DateTime.Now
                         };
+
+                        if (row["ClassId"] != DBNull.Value)
+                        {
+                            student.ClassId = Convert.ToInt32(row["ClassId"]);
+                        }
 
                         students.Add(student);
                     }
@@ -418,7 +510,7 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
-        /// Tìm kiếm học sinh theo từ khóa (tên hoặc mã)
+        /// Tìm kiếm học sinh theo từ khóa (tên, mã hoặc lớp)
         /// </summary>
         /// <param name="keyword">Từ khóa tìm kiếm</param>
         /// <returns>Danh sách học sinh thỏa điều kiện tìm kiếm</returns>
@@ -429,29 +521,46 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                                SELECT 
-                                    HS.MaHS AS StudentId,
-                                    HS.HoTen AS FullName,
-                                    HS.NgaySinh AS DateOfBirth,
-                                    HS.GioiTinh AS Gender,
-                                    L.TenLop AS ClassName,
-                                    HS.DiaChi AS Address,
-                                    HS.SDTPhuHuynh AS Phone
-                                FROM 
-                                    HocSinh HS
-                                LEFT JOIN 
-                                    LopHoc L ON HS.MaLop = L.MaLop
-                                WHERE 
-                                    HS.HoTen LIKE @Keyword 
-                                    OR CAST(HS.MaHS AS VARCHAR) LIKE @Keyword
-                                    OR L.TenLop LIKE @Keyword
-                                ORDER BY 
-                                    L.TenLop, HS.HoTen";
+                SELECT 
+                    HS.MaHS AS StudentId,
+                    HS.HoTen AS FullName,
+                    HS.NgaySinh AS DateOfBirth,
+                    HS.GioiTinh AS Gender,
+                    HS.MaDinhDanh AS IdentityCode,
+                    HS.NoiSinh AS PlaceOfBirth,
+                    HS.DanToc AS Ethnicity,
+                    HS.TonGiao AS Religion,
+                    HS.QuocGia AS Country, 
+                    HS.TinhThanh AS Province,
+                    HS.QuanHuyen AS District,
+                    HS.XaPhuong AS Ward,
+                    HS.DiaChiThuongTru AS PermanentAddress,
+                    HS.SDT AS Mobile,
+                    HS.Email AS Email,
+                    L.MaLop AS ClassId,
+                    L.TenLop AS ClassName,
+                    PH.HoTenCha AS FatherName,
+                    PH.SoDienThoaiCha AS FatherPhone,
+                    PH.HoTenMe AS MotherName,
+                    PH.SoDienThoaiMe AS MotherPhone
+                FROM 
+                    HocSinh HS
+                LEFT JOIN 
+                    LopHoc L ON HS.MaLop = L.MaLop
+                LEFT JOIN
+                    PhuHuynh PH ON HS.MaHS = PH.MaHS
+                WHERE 
+                    HS.HoTen LIKE @Keyword 
+                    OR CAST(HS.MaHS AS VARCHAR) LIKE @Keyword
+                    OR L.TenLop LIKE @Keyword
+                    OR HS.MaDinhDanh LIKE @Keyword
+                ORDER BY 
+                    L.TenLop, HS.HoTen";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                                {
-                                    { "@Keyword", $"%{keyword}%" }
-                                };
+                {
+                    { "@Keyword", $"%{keyword}%" }
+                };
 
                 DataTable dt = db.ExecuteQuery(query, parameters);
 
@@ -459,18 +568,35 @@ namespace QuanLyTruongHoc.DAL
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        // Tạo đối tượng StudentInfo với thông tin cơ bản
                         ThongTinHSDTO student = new ThongTinHSDTO
                         {
                             StudentId = GetValueOrDefault(row, "StudentId", ""),
                             FullName = GetValueOrDefault(row, "FullName", ""),
                             Gender = GetValueOrDefault(row, "Gender", ""),
+                            IdentityCode = GetValueOrDefault(row, "IdentityCode", ""),
+                            PlaceOfBirth = GetValueOrDefault(row, "PlaceOfBirth", ""),
+                            Ethnicity = GetValueOrDefault(row, "Ethnicity", ""),
+                            Religion = GetValueOrDefault(row, "Religion", ""),
+                            Country = GetValueOrDefault(row, "Country", "Việt Nam"),
+                            Province = GetValueOrDefault(row, "Province", ""),
+                            District = GetValueOrDefault(row, "District", ""),
+                            Ward = GetValueOrDefault(row, "Ward", ""),
+                            PermanentAddress = GetValueOrDefault(row, "PermanentAddress", ""),
+                            Mobile = GetValueOrDefault(row, "Mobile", ""),
+                            Email = GetValueOrDefault(row, "Email", ""),
                             ClassName = GetValueOrDefault(row, "ClassName", ""),
-                            Address = GetValueOrDefault(row, "Address", ""),
-                            Phone = GetValueOrDefault(row, "Phone", ""),
+                            FatherName = GetValueOrDefault(row, "FatherName", ""),
+                            FatherPhone = GetValueOrDefault(row, "FatherPhone", ""),
+                            MotherName = GetValueOrDefault(row, "MotherName", ""),
+                            MotherPhone = GetValueOrDefault(row, "MotherPhone", ""),
                             DateOfBirth = row["DateOfBirth"] != DBNull.Value ?
                                 Convert.ToDateTime(row["DateOfBirth"]) : DateTime.Now
                         };
+
+                        if (row["ClassId"] != DBNull.Value)
+                        {
+                            student.ClassId = Convert.ToInt32(row["ClassId"]);
+                        }
 
                         students.Add(student);
                     }
@@ -551,6 +677,331 @@ namespace QuanLyTruongHoc.DAL
                 Console.WriteLine($"Lỗi khi cập nhật thông tin phụ huynh: {ex.Message}");
                 return false;
             }
+        }
+        /// <summary>
+        /// Thêm học sinh mới vào hệ thống kèm thông tin tài khoản
+        /// </summary>
+        /// <param name="student">Thông tin học sinh</param>
+        /// <param name="maLop">Mã lớp học</param>
+        /// <param name="tenDangNhap">Tên đăng nhập được tạo</param>
+        /// <param name="matKhau">Mật khẩu được tạo</param>
+        /// <returns>Mã học sinh nếu thành công, -1 nếu thất bại</returns>
+        public int AddStudent(ThongTinHSDTO student, int maLop, out string tenDangNhap, out string matKhau)
+        {
+            tenDangNhap = string.Empty;
+            matKhau = string.Empty;
+
+            try
+            {
+                db.OpenConnection();
+
+                // Tạo tài khoản người dùng
+                string queryMaxMaNguoiDung = "SELECT ISNULL(MAX(MaNguoiDung), 0) + 1 AS NextMaNguoiDung FROM NguoiDung";
+                DataTable dtMaxMaNguoiDung = db.ExecuteQuery(queryMaxMaNguoiDung);
+                int maNguoiDung = Convert.ToInt32(dtMaxMaNguoiDung.Rows[0]["NextMaNguoiDung"]);
+
+                // Tạo tên đăng nhập và mật khẩu
+                matKhau = GenerateRandomPassword(8);
+                tenDangNhap = $"hs{maNguoiDung}";
+
+                // Thêm người dùng mới
+                string queryInsertNguoiDung = @"
+                INSERT INTO NguoiDung (MaNguoiDung, TenDangNhap, MatKhau, MaVaiTro, NgayTao)
+                VALUES (@MaNguoiDung, @TenDangNhap, @MatKhau, 3, GETDATE())";
+
+                Dictionary<string, object> userParams = new Dictionary<string, object>
+                {
+                    { "@MaNguoiDung", maNguoiDung },
+                    { "@TenDangNhap", tenDangNhap },
+                    { "@MatKhau", matKhau }
+                };
+
+                bool userInsertResult = db.ExecuteNonQuery(queryInsertNguoiDung, userParams);
+                if (!userInsertResult)
+                {
+                    Console.WriteLine("Thêm tài khoản người dùng thất bại");
+                    return -1;
+                }
+
+                // Thêm học sinh mới
+                string queryInsertHocSinh = @"
+                INSERT INTO HocSinh (
+                    MaNguoiDung, HoTen, NgaySinh, GioiTinh, 
+                    MaDinhDanh, NoiSinh, DanToc, TonGiao, 
+                    QuocGia, TinhThanh, QuanHuyen, XaPhuong, 
+                    DiaChiThuongTru, SDT, Email, MaLop
+                )
+                OUTPUT INSERTED.MaHS
+                VALUES (
+                    @MaNguoiDung, @HoTen, @NgaySinh, @GioiTinh,
+                    @MaDinhDanh, @NoiSinh, @DanToc, @TonGiao,
+                    @QuocGia, @TinhThanh, @QuanHuyen, @XaPhuong,
+                    @DiaChiThuongTru, @SDT, @Email, @MaLop
+                )";
+
+                Dictionary<string, object> studentParams = new Dictionary<string, object>
+                {
+                    { "@MaNguoiDung", maNguoiDung },
+                    { "@HoTen", string.IsNullOrEmpty(student.FullName) ? DBNull.Value : (object)student.FullName },
+                    { "@NgaySinh", student.DateOfBirth },
+                    { "@GioiTinh", string.IsNullOrEmpty(student.Gender) ? DBNull.Value : (object)student.Gender },
+                    { "@MaDinhDanh", string.IsNullOrEmpty(student.IdentityCode) ? DBNull.Value : (object)student.IdentityCode },
+                    { "@NoiSinh", string.IsNullOrEmpty(student.PlaceOfBirth) ? DBNull.Value : (object)student.PlaceOfBirth },
+                    { "@DanToc", string.IsNullOrEmpty(student.Ethnicity) ? DBNull.Value : (object)student.Ethnicity },
+                    { "@TonGiao", string.IsNullOrEmpty(student.Religion) ? DBNull.Value : (object)student.Religion },
+                    { "@QuocGia", string.IsNullOrEmpty(student.Country) ? "Việt Nam" : (object)student.Country },
+                    { "@TinhThanh", string.IsNullOrEmpty(student.Province) ? DBNull.Value : (object)student.Province },
+                    { "@QuanHuyen", string.IsNullOrEmpty(student.District) ? DBNull.Value : (object)student.District },
+                    { "@XaPhuong", string.IsNullOrEmpty(student.Ward) ? DBNull.Value : (object)student.Ward },
+                    { "@DiaChiThuongTru", string.IsNullOrEmpty(student.PermanentAddress) ? DBNull.Value : (object)student.PermanentAddress },
+                    { "@SDT", string.IsNullOrEmpty(student.Mobile) ? DBNull.Value : (object)student.Mobile },
+                    { "@Email", string.IsNullOrEmpty(student.Email) ? DBNull.Value : (object)student.Email },
+                    { "@MaLop", maLop }
+                };
+
+                // Thực hiện truy vấn và lấy mã học sinh được tạo
+                object result = db.ExecuteScalar(queryInsertHocSinh, studentParams);
+                int maHS = Convert.ToInt32(result);
+
+                // Thêm thông tin phụ huynh nếu có
+                if (!string.IsNullOrEmpty(student.FatherName) || !string.IsNullOrEmpty(student.MotherName) ||
+                    !string.IsNullOrEmpty(student.FatherPhone) || !string.IsNullOrEmpty(student.MotherPhone))
+                {
+                    UpdateParentInfo(
+                        maHS,
+                        student.FatherName,
+                        student.FatherPhone,
+                        student.MotherName,
+                        student.MotherPhone
+                    );
+                }
+
+                return maHS;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi thêm học sinh: {ex.Message}");
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin học sinh (bao gồm thông tin cơ bản và thông tin phụ huynh)
+        /// </summary>
+        /// <param name="student">Thông tin học sinh đã cập nhật</param>
+        /// <param name="maLop">Mã lớp học mới</param>
+        /// <returns>True nếu cập nhật thành công, False nếu thất bại</returns>
+        public bool UpdateStudent(ThongTinHSDTO student, int maLop)
+        {
+            try
+            {
+                // Cập nhật thông tin cơ bản
+                string query = @"
+                UPDATE HocSinh SET
+                    HoTen = @HoTen,
+                    NgaySinh = @NgaySinh,
+                    GioiTinh = @GioiTinh,
+                    MaDinhDanh = @MaDinhDanh,
+                    NoiSinh = @NoiSinh,
+                    DanToc = @DanToc,
+                    TonGiao = @TonGiao,
+                    QuocGia = @QuocGia,
+                    TinhThanh = @TinhThanh,
+                    QuanHuyen = @QuanHuyen,
+                    XaPhuong = @XaPhuong,
+                    DiaChiThuongTru = @DiaChiThuongTru,
+                    SDT = @SDT,
+                    Email = @Email,
+                    MaLop = @MaLop
+                WHERE MaHS = @MaHS";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaHS", Convert.ToInt32(student.StudentId) },
+                    { "@HoTen", string.IsNullOrEmpty(student.FullName) ? DBNull.Value : (object)student.FullName },
+                    { "@NgaySinh", student.DateOfBirth },
+                    { "@GioiTinh", string.IsNullOrEmpty(student.Gender) ? DBNull.Value : (object)student.Gender },
+                    { "@MaDinhDanh", string.IsNullOrEmpty(student.IdentityCode) ? DBNull.Value : (object)student.IdentityCode },
+                    { "@NoiSinh", string.IsNullOrEmpty(student.PlaceOfBirth) ? DBNull.Value : (object)student.PlaceOfBirth },
+                    { "@DanToc", string.IsNullOrEmpty(student.Ethnicity) ? DBNull.Value : (object)student.Ethnicity },
+                    { "@TonGiao", string.IsNullOrEmpty(student.Religion) ? DBNull.Value : (object)student.Religion },
+                    { "@QuocGia", string.IsNullOrEmpty(student.Country) ? "Việt Nam" : (object)student.Country },
+                    { "@TinhThanh", string.IsNullOrEmpty(student.Province) ? DBNull.Value : (object)student.Province },
+                    { "@QuanHuyen", string.IsNullOrEmpty(student.District) ? DBNull.Value : (object)student.District },
+                    { "@XaPhuong", string.IsNullOrEmpty(student.Ward) ? DBNull.Value : (object)student.Ward },
+                    { "@DiaChiThuongTru", string.IsNullOrEmpty(student.PermanentAddress) ? DBNull.Value : (object)student.PermanentAddress },
+                    { "@SDT", string.IsNullOrEmpty(student.Mobile) ? DBNull.Value : (object)student.Mobile },
+                    { "@Email", string.IsNullOrEmpty(student.Email) ? DBNull.Value : (object)student.Email },
+                    { "@MaLop", maLop }
+                };
+
+                bool result = db.ExecuteNonQuery(query, parameters);
+
+                // Cập nhật thông tin phụ huynh
+                if (result)
+                {
+                    UpdateParentInfo(
+                        Convert.ToInt32(student.StudentId),
+                        student.FatherName,
+                        student.FatherPhone,
+                        student.MotherName,
+                        student.MotherPhone
+                    );
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật thông tin học sinh: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Xóa học sinh và tài khoản liên kết
+        /// </summary>
+        /// <param name="maHS">Mã học sinh cần xóa</param>
+        /// <returns>True nếu xóa thành công, False nếu thất bại</returns>
+        public bool DeleteStudent(int maHS)
+        {
+            try
+            {
+                // Lấy mã người dùng liên kết với học sinh
+                string queryGetMaNguoiDung = "SELECT MaNguoiDung FROM HocSinh WHERE MaHS = @MaHS";
+                Dictionary<string, object> getParams = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+
+                object result = db.ExecuteScalar(queryGetMaNguoiDung, getParams);
+
+                if (result == null || result == DBNull.Value)
+                    return false;
+
+                int maNguoiDung = Convert.ToInt32(result);
+
+                // Thực hiện xóa các bảng liên quan trước
+                List<string> deleteQueries = new List<string>();
+
+                // Kiểm tra và xóa thông tin trong bảng PhuHuynh
+                string checkParentQuery = "SELECT COUNT(*) FROM PhuHuynh WHERE MaHS = " + maHS;
+                int parentExists = Convert.ToInt32(db.ExecuteScalar(checkParentQuery));
+                if (parentExists > 0)
+                {
+                    deleteQueries.Add("DELETE FROM PhuHuynh WHERE MaHS = " + maHS);
+                }
+
+                // Kiểm tra và xóa thông tin trong bảng HinhAnhHocSinh
+                string checkAvatarQuery = "SELECT COUNT(*) FROM HinhAnhHocSinh WHERE MaHS = " + maHS;
+                int avatarExists = Convert.ToInt32(db.ExecuteScalar(checkAvatarQuery));
+                if (avatarExists > 0)
+                {
+                    deleteQueries.Add("DELETE FROM HinhAnhHocSinh WHERE MaHS = " + maHS);
+                }
+
+                // Xóa các bảng liên quan khác nếu cần
+                // Chẳng hạn như DiemSo, DiemDanh, DonXinNghi...
+                string checkDiemSoQuery = "SELECT COUNT(*) FROM DiemSo WHERE MaHS = " + maHS;
+                int diemSoExists = Convert.ToInt32(db.ExecuteScalar(checkDiemSoQuery));
+                if (diemSoExists > 0)
+                {
+                    deleteQueries.Add("DELETE FROM DiemSo WHERE MaHS = " + maHS);
+                }
+
+                string checkDiemDanhQuery = "SELECT COUNT(*) FROM DiemDanh WHERE MaHS = " + maHS;
+                int diemDanhExists = Convert.ToInt32(db.ExecuteScalar(checkDiemDanhQuery));
+                if (diemDanhExists > 0)
+                {
+                    deleteQueries.Add("DELETE FROM DiemDanh WHERE MaHS = " + maHS);
+                }
+
+                string checkDonXinNghiQuery = "SELECT COUNT(*) FROM DonXinNghi WHERE MaHS = " + maHS;
+                int donXinNghiExists = Convert.ToInt32(db.ExecuteScalar(checkDonXinNghiQuery));
+                if (donXinNghiExists > 0)
+                {
+                    deleteQueries.Add("DELETE FROM DonXinNghi WHERE MaHS = " + maHS);
+                }
+
+                // Xóa học sinh
+                deleteQueries.Add("DELETE FROM HocSinh WHERE MaHS = " + maHS);
+
+                // Xóa người dùng liên kết
+                deleteQueries.Add("DELETE FROM NguoiDung WHERE MaNguoiDung = " + maNguoiDung);
+
+                // Thực hiện xóa trong transaction
+                bool success = db.ExecuteTransaction(deleteQueries);
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi xóa học sinh: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách lớp học
+        /// </summary>
+        /// <returns>DataTable chứa danh sách lớp</returns>
+        public DataTable GetClasses()
+        {
+            try
+            {
+                string query = "SELECT MaLop, TenLop FROM LopHoc ORDER BY TenLop";
+                return db.ExecuteQuery(query);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy danh sách lớp: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Lấy ảnh đại diện của học sinh
+        /// </summary>
+        /// <param name="maHS">Mã học sinh</param>
+        /// <returns>Ảnh đại diện dạng Image hoặc null nếu không có</returns>
+        public Image GetStudentAvatar(int maHS)
+        {
+            try
+            {
+                string query = "SELECT HinhAnh FROM HinhAnhHocSinh WHERE MaHS = @MaHS";
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt != null && dt.Rows.Count > 0 && dt.Rows[0]["HinhAnh"] != DBNull.Value)
+                {
+                    byte[] imageData = (byte[])dt.Rows[0]["HinhAnh"];
+                    using (MemoryStream ms = new MemoryStream(imageData))
+                    {
+                        return Image.FromStream(ms);
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy ảnh đại diện học sinh: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Tạo mật khẩu ngẫu nhiên
+        /// </summary>
+        private string GenerateRandomPassword(int length)
+        {
+            Random random = new Random();
+            const string chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

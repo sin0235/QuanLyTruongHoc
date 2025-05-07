@@ -136,7 +136,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         private float _finalScore = 0;
         private float _averageScore = 0;
         private string _teacherComment = "";
-        private Image _subjectIcon = null;
 
         // Public properties with getters and setters
         public string SubjectName

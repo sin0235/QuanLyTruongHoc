@@ -28,6 +28,7 @@ namespace QuanLyTruongHoc.GUI.Forms
             CustomizeDesign();
         }
 
+
         private void CustomizeDesign()
         {
             // Thiết lập khả năng di chuyển form

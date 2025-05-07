@@ -339,3 +339,6 @@ ADD MaDinhDanh NVARCHAR(20) NULL,
         SoDienThoaiMe NVARCHAR(15) NULL,
         FOREIGN KEY (MaHS) REFERENCES HocSinh(MaHS)
     );
+
+    ALTER TABLE HocSinh
+    DROP COLUMN DiaChi;
