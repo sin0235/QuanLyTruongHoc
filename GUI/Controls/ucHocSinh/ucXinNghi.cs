@@ -1,5 +1,4 @@
 ﻿using QuanLyTruongHoc.DAL;
-using QuanLyTruongHoc.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,34 +14,32 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucXinNghi : UserControl
     {
         private DatabaseHelper dbHelper;
-        private DonXinNghiDAL donXinNghiDAL;
-        private int currentStudentId = -1; // ID người dùng
-        private int maHS = -1; // Mã học sinh trong database
-        private string currentFilter = "all";
-        public string currentTimeFilter = "all"; // all, month, 6months, year
+        private int currentStudentId = -1;
+        private string currentFilter = "all"; // all, approved, pending, rejected
+        private string currentTimeFilter = "all"; // all, month, 6months, year
         private ucTaoDonXinNghi ucTaoDon;
 
-        public ucXinNghi(int ID, int M)
+        public ucXinNghi()
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
-            donXinNghiDAL = new DonXinNghiDAL();
-            currentStudentId = ID;
-            maHS = M;
         }
 
         private void ucXinNghi_Load(object sender, EventArgs e)
         {
-            // Khởi tạo user control tạo đơn xin nghỉ
-            InitializeNewRequestForm();
+            // Lấy ID học sinh hiện tại từ form đăng nhập
+            //currentStudentId = QuanLyTruongHoc.frmLogin.LoggedInStudentId;
 
-            // Mặc định hiển thị tất cả đơn xin nghỉ
-            LoadLeaveRequests();
+            //// Khởi tạo user control tạo đơn xin nghỉ
+            //InitializeNewRequestForm();
+
+            //// Mặc định hiển thị tất cả đơn xin nghỉ
+            //LoadLeaveRequests();
         }
 
         private void InitializeNewRequestForm()
         {
-            ucTaoDon = new ucTaoDonXinNghi(maHS);
+            ucTaoDon = new ucTaoDonXinNghi();
             ucTaoDon.OnSubmitSuccess += UcTaoDon_OnSubmitSuccess;
             ucTaoDon.OnCancel += UcTaoDon_OnCancel;
             ucTaoDon.Dock = DockStyle.Fill;
@@ -85,64 +82,56 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             try
             {
-                // Thực hiện truy vấn trực tiếp vì cấu trúc DonXinNghiDTO khác với cấu trúc bảng DonXinNghi
-                string query = "";
-                Dictionary<string, object> parameters = new Dictionary<string, object>();
-
-                // Điều kiện thời gian
-                string timeCondition = "";
-                switch (currentTimeFilter)
-                {
-                    case "month":
-                        timeCondition = " AND d.NgayGui >= @StartDate";
-                        parameters.Add("@StartDate", DateTime.Now.AddMonths(-1));
-                        break;
-                    case "6months":
-                        timeCondition = " AND d.NgayGui >= @StartDate";
-                        parameters.Add("@StartDate", DateTime.Now.AddMonths(-6));
-                        break;
-                    case "year":
-                        timeCondition = " AND d.NgayGui >= @StartDate";
-                        parameters.Add("@StartDate", DateTime.Now.AddYears(-1));
-                        break;
-                }
-
-                // Điều kiện trạng thái
+                // Thiết lập điều kiện lọc theo trạng thái
                 string statusCondition = "";
                 switch (currentFilter)
                 {
                     case "approved":
-                        statusCondition = " AND d.TrangThai = N'Đã duyệt'";
+                        statusCondition = "AND d.TrangThai = 1";
                         break;
                     case "pending":
-                        statusCondition = " AND d.TrangThai = N'Chờ duyệt'";
+                        statusCondition = "AND d.TrangThai = 0";
                         break;
                     case "rejected":
-                        statusCondition = " AND d.TrangThai = N'Từ chối'";
+                        statusCondition = "AND d.TrangThai = 2";
                         break;
                 }
 
-                // Xây dựng truy vấn SQL phù hợp với cấu trúc bảng
-                query = $@"
-                    SELECT 
-                        d.MaDon, 
-                        d.MaHS,
-                        d.NgayGui,
-                        d.NgayNghi, 
-                        d.LyDo, 
-                        d.TrangThai,
-                        d.MaGV,
-                        gv.HoTen as TenGiaoVien
-                    FROM DonXinNghi d
-                    LEFT JOIN GiaoVien gv ON d.MaGV = gv.MaGV
-                    WHERE d.MaHS = @MaHS
-                    {timeCondition}
-                    {statusCondition}
-                    ORDER BY d.NgayGui DESC";
+                // Thiết lập điều kiện lọc theo thời gian
+                string timeCondition = "";
+                switch (currentTimeFilter)
+                {
+                    case "month":
+                        timeCondition = "AND d.NgayTao >= DATEADD(month, -1, GETDATE())";
+                        break;
+                    case "6months":
+                        timeCondition = "AND d.NgayTao >= DATEADD(month, -6, GETDATE())";
+                        break;
+                    case "year":
+                        timeCondition = "AND d.NgayTao >= DATEADD(year, -1, GETDATE())";
+                        break;
+                }
 
-                parameters.Add("@MaHS", maHS);
+                // Truy vấn danh sách đơn xin nghỉ học
+                string query = $@"
+                        SELECT 
+                            d.MaDon, 
+                            d.TieuDe, 
+                            d.NoiDung, 
+                            d.NgayBatDau, 
+                            d.NgayKetThuc, 
+                            d.NgayTao,
+                            d.TrangThai,
+                            d.PhanHoi,
+                            gv.HoTen as NguoiDuyet
+                        FROM DonXin d
+                        LEFT JOIN GiaoVien gv ON d.MaGVDuyet = gv.MaGV
+                        WHERE d.MaHS = {currentStudentId}
+                        {statusCondition}
+                        {timeCondition}
+                        ORDER BY d.NgayTao DESC";
 
-                DataTable data = dbHelper.ExecuteQuery(query, parameters);
+                DataTable data = dbHelper.ExecuteQuery(query);
 
                 if (data != null && data.Rows.Count > 0)
                 {
@@ -156,39 +145,14 @@ namespace QuanLyTruongHoc.GUI.Controls
 
                         // Thiết lập dữ liệu
                         donItem.MaDon = Convert.ToInt32(row["MaDon"]);
-                        donItem.TieuDe = "Đơn xin nghỉ học"; // Tiêu đề mặc định vì bảng không có trường TieuDe
-                        donItem.NoiDung = row["LyDo"].ToString();
-
-                        // Ngày bắt đầu và kết thúc là cùng một ngày (NgayNghi)
-                        DateTime ngayNghi = Convert.ToDateTime(row["NgayNghi"]);
-                        donItem.NgayBatDau = ngayNghi;
-                        donItem.NgayKetThuc = ngayNghi;
-
-                        // Ngày tạo là NgayGui
-                        donItem.NgayTao = Convert.ToDateTime(row["NgayGui"]);
-
-                        // Chuyển đổi trạng thái từ chuỗi sang số
-                        string trangThaiText = row["TrangThai"] != DBNull.Value ? row["TrangThai"].ToString() : "Chờ duyệt";
-                        int trangThaiSo = 0; // Mặc định là đang chờ
-                        switch (trangThaiText)
-                        {
-                            case "Đã duyệt":
-                                trangThaiSo = 1;
-                                break;
-                            case "Từ chối":
-                                trangThaiSo = 2;
-                                break;
-                            default: // "Chờ duyệt" hoặc giá trị khác
-                                trangThaiSo = 0;
-                                break;
-                        }
-                        donItem.TrangThai = trangThaiSo;
-
-                        // Thông tin người duyệt
-                        donItem.NguoiDuyet = row["TenGiaoVien"] != DBNull.Value ? row["TenGiaoVien"].ToString() : "";
-
-                        // Phản hồi - bảng không có trường này, để trống
-                        donItem.PhanHoi = "";
+                        donItem.TieuDe = row["TieuDe"].ToString();
+                        donItem.NoiDung = row["NoiDung"].ToString();
+                        donItem.NgayBatDau = Convert.ToDateTime(row["NgayBatDau"]);
+                        donItem.NgayKetThuc = Convert.ToDateTime(row["NgayKetThuc"]);
+                        donItem.NgayTao = Convert.ToDateTime(row["NgayTao"]);
+                        donItem.TrangThai = Convert.ToInt32(row["TrangThai"]);
+                        donItem.PhanHoi = row["PhanHoi"] == DBNull.Value ? "" : row["PhanHoi"].ToString();
+                        donItem.NguoiDuyet = row["NguoiDuyet"] == DBNull.Value ? "" : row["NguoiDuyet"].ToString();
 
                         // Thiết lập vị trí và kích thước
                         donItem.Location = new Point(20, yPos);
@@ -294,7 +258,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
         private void pnlTaoDonMoi_Paint(object sender, PaintEventArgs e)
         {
-            // Để trống, chỉ sử dụng cho sự kiện Paint
+
         }
     }
 }

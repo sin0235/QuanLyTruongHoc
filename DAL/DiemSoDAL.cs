@@ -30,12 +30,12 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                            SELECT ds.MaDiem, ds.MaHS, ds.MaMon, ds.MaGV, ds.HocKy, ds.LoaiDiem, ds.Diem,
-                                   mh.TenMon, gv.HoTen as TenGV
-                            FROM DiemSo ds
-                            INNER JOIN MonHoc mh ON ds.MaMon = mh.MaMon
-                            INNER JOIN GiaoVien gv ON ds.MaGV = gv.MaGV
-                            WHERE ds.MaHS = @MaHS";
+                        SELECT ds.MaDiem, ds.MaHS, ds.MaMon, ds.MaGV, ds.HocKy, ds.LoaiDiem, ds.Diem,
+                               mh.TenMon, gv.HoTen as TenGV
+                        FROM DiemSo ds
+                        INNER JOIN MonHoc mh ON ds.MaMon = mh.MaMon
+                        INNER JOIN GiaoVien gv ON ds.MaGV = gv.MaGV
+                        WHERE ds.MaHS = @MaHS";
 
                 // Add semester filter if specified
                 if (hocKy > 0)
@@ -44,9 +44,9 @@ namespace QuanLyTruongHoc.DAL
                 }
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaHS", maHS }
-                        };
+                    {
+                        { "@MaHS", maHS }
+                    };
 
                 if (hocKy > 0)
                 {
@@ -177,32 +177,9 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Lấy số buổi nghỉ từ bảng DiemDanh thay vì tạo ngẫu nhiên
-                string query = @"
-                        SELECT COUNT(*) AS SoNgayNghi 
-                        FROM DiemDanh 
-                        WHERE MaHS = @MaHS AND TrangThai = N'Vắng'";
-
-                Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "@MaHS", maHS }
-                    };
-
-                // Nếu có năm học, thêm điều kiện lọc theo năm học
-                if (!string.IsNullOrEmpty(namHoc))
-                {
-                    query += " AND YEAR(Ngay) = @Year";
-                    int year = int.Parse(namHoc.Split('-')[0]);
-                    parameters.Add("@Year", year);
-                }
-
-                object result = db.ExecuteScalar(query, parameters);
-                if (result != null && result != DBNull.Value)
-                {
-                    return Convert.ToInt32(result);
-                }
-
-                return 0;
+                // This would require a DiemDanh table query
+                // For now, we'll return a sample value
+                return new Random().Next(0, 5);
             }
             catch (Exception ex)
             {
@@ -212,98 +189,15 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
-        /// Lấy xếp hạng của học sinh trong lớp dựa trên điểm trung bình
+        /// Lấy xếp hạng của học sinh trong lớp
         /// </summary>
-        /// <param name="maHS">Mã học sinh</param>
-        /// <param name="hocKy">Học kỳ (1 hoặc 2), 0 cho cả năm</param>
-        /// <param name="namHoc">Năm học (ví dụ: "2024-2025")</param>
-        /// <returns>Thứ hạng của học sinh trong lớp</returns>
         private int GetStudentRank(int maHS, int hocKy, string namHoc)
         {
             try
             {
-                string queryGetClass = @"
-                        SELECT hs.MaLop, lh.NamHoc
-                        FROM HocSinh hs
-                        JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-                        WHERE hs.MaHS = @MaHS";
-
-                Dictionary<string, object> paramsGetClass = new Dictionary<string, object>
-                    {
-                        { "@MaHS", maHS }
-                    };
-
-                DataTable dtClass = db.ExecuteQuery(queryGetClass, paramsGetClass);
-                if (dtClass == null || dtClass.Rows.Count == 0)
-                {
-                    return 0; // Không tìm thấy thông tin lớp học
-                }
-
-                int maLop = Convert.ToInt32(dtClass.Rows[0]["MaLop"]);
-                string namHocLop = dtClass.Rows[0]["NamHoc"].ToString();
-
-                // Sử dụng năm học từ tham số nếu được cung cấp, ngược lại dùng năm học của lớp
-                string schoolYear = !string.IsNullOrEmpty(namHoc) ? namHoc : namHocLop;
-
-              
-                // Truy vấn này sẽ tính điểm trung bình cho tất cả học sinh trong lớp và gán thứ hạng
-                string rankQuery = @"
-                        WITH StudentGPA AS (
-                            SELECT 
-                                hs.MaHS,
-                                hs.HoTen,
-                                ROUND(AVG(CAST(ds.Diem as FLOAT)), 1) as DiemTB
-                            FROM 
-                                HocSinh hs
-                            LEFT JOIN 
-                                DiemSo ds ON hs.MaHS = ds.MaHS
-                            WHERE 
-                                hs.MaLop = @MaLop";
-
-                if (hocKy > 0)
-                {
-                    rankQuery += " AND ds.HocKy = @HocKy";
-                }
-
-                rankQuery += @"
-                            GROUP BY 
-                                hs.MaHS, hs.HoTen
-                        ),
-                        RankedStudents AS (
-                            SELECT 
-                                MaHS,
-                                HoTen,
-                                DiemTB,
-                                DENSE_RANK() OVER (ORDER BY DiemTB DESC) as Rank
-                            FROM 
-                                StudentGPA
-                        )
-                        SELECT 
-                            Rank
-                        FROM 
-                            RankedStudents
-                        WHERE 
-                            MaHS = @MaHS";
-
-                Dictionary<string, object> rankParams = new Dictionary<string, object>
-                    {
-                        { "@MaLop", maLop },
-                        { "@MaHS", maHS }
-                    };
-
-                if (hocKy > 0)
-                {
-                    rankParams.Add("@HocKy", hocKy);
-                }
-
-                DataTable dtRank = db.ExecuteQuery(rankQuery, rankParams);
-
-                if (dtRank != null && dtRank.Rows.Count > 0 && dtRank.Rows[0]["Rank"] != DBNull.Value)
-                {
-                    return Convert.ToInt32(dtRank.Rows[0]["Rank"]);
-                }
-
-                return 0; // Không có dữ liệu xếp hạng
+                // This would require comparing with other students
+                // For now, we'll return a sample value
+                return new Random().Next(1, 30);
             }
             catch (Exception ex)
             {
@@ -320,19 +214,19 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
-                            VALUES (@MaDiem, @MaHS, @MaMon, @MaGV, @HocKy, @LoaiDiem, @Diem)";
+                        INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+                        VALUES (@MaDiem, @MaHS, @MaMon, @MaGV, @HocKy, @LoaiDiem, @Diem)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaDiem", score.MaDiem },
-                            { "@MaHS", score.MaHS },
-                            { "@MaMon", score.MaMon },
-                            { "@MaGV", score.MaGV },
-                            { "@HocKy", score.HocKy },
-                            { "@LoaiDiem", score.LoaiDiem },
-                            { "@Diem", score.Diem }
-                        };
+                    {
+                        { "@MaDiem", score.MaDiem },
+                        { "@MaHS", score.MaHS },
+                        { "@MaMon", score.MaMon },
+                        { "@MaGV", score.MaGV },
+                        { "@HocKy", score.HocKy },
+                        { "@LoaiDiem", score.LoaiDiem },
+                        { "@Diem", score.Diem }
+                    };
 
                 return db.ExecuteNonQuery(query, parameters);
             }
@@ -351,21 +245,21 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                            UPDATE DiemSo
-                            SET MaHS = @MaHS, MaMon = @MaMon, MaGV = @MaGV, 
-                                HocKy = @HocKy, LoaiDiem = @LoaiDiem, Diem = @Diem
-                            WHERE MaDiem = @MaDiem";
+                        UPDATE DiemSo
+                        SET MaHS = @MaHS, MaMon = @MaMon, MaGV = @MaGV, 
+                            HocKy = @HocKy, LoaiDiem = @LoaiDiem, Diem = @Diem
+                        WHERE MaDiem = @MaDiem";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaDiem", score.MaDiem },
-                            { "@MaHS", score.MaHS },
-                            { "@MaMon", score.MaMon },
-                            { "@MaGV", score.MaGV },
-                            { "@HocKy", score.HocKy },
-                            { "@LoaiDiem", score.LoaiDiem },
-                            { "@Diem", score.Diem }
-                        };
+                    {
+                        { "@MaDiem", score.MaDiem },
+                        { "@MaHS", score.MaHS },
+                        { "@MaMon", score.MaMon },
+                        { "@MaGV", score.MaGV },
+                        { "@HocKy", score.HocKy },
+                        { "@LoaiDiem", score.LoaiDiem },
+                        { "@Diem", score.Diem }
+                    };
 
                 return db.ExecuteNonQuery(query, parameters);
             }
@@ -386,9 +280,9 @@ namespace QuanLyTruongHoc.DAL
                 string query = "DELETE FROM DiemSo WHERE MaDiem = @MaDiem";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaDiem", maDiem }
-                        };
+                    {
+                        { "@MaDiem", maDiem }
+                    };
 
                 return db.ExecuteNonQuery(query, parameters);
             }

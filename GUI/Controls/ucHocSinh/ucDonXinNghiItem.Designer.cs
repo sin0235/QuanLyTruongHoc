@@ -34,11 +34,11 @@
             this.lblPhanHoiTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNoiDung = new System.Windows.Forms.Label();
             this.pnlHeader = new Guna.UI2.WinForms.Guna2Panel();
+            this.lblNgayNghi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNgayTao = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnXemChiTiet = new Guna.UI2.WinForms.Guna2Button();
-            this.lblNgayNghi = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -128,6 +128,18 @@
             this.pnlHeader.Size = new System.Drawing.Size(671, 40);
             this.pnlHeader.TabIndex = 1;
             // 
+            // lblNgayNghi
+            // 
+            this.lblNgayNghi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNgayNghi.BackColor = System.Drawing.Color.Transparent;
+            this.lblNgayNghi.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayNghi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.lblNgayNghi.Location = new System.Drawing.Point(364, 12);
+            this.lblNgayNghi.Name = "lblNgayNghi";
+            this.lblNgayNghi.Size = new System.Drawing.Size(206, 22);
+            this.lblNgayNghi.TabIndex = 2;
+            this.lblNgayNghi.Text = "Ngày nghỉ: 01/01 - 02/01/2023";
+            // 
             // lblNgayTao
             // 
             this.lblNgayTao.BackColor = System.Drawing.Color.Transparent;
@@ -184,21 +196,10 @@
             this.btnXemChiTiet.Text = "Chi tiết";
             this.btnXemChiTiet.Click += new System.EventHandler(this.btnXemChiTiet_Click);
             // 
-            // lblNgayNghi
-            // 
-            this.lblNgayNghi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNgayNghi.BackColor = System.Drawing.Color.Transparent;
-            this.lblNgayNghi.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayNghi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblNgayNghi.Location = new System.Drawing.Point(364, 12);
-            this.lblNgayNghi.Name = "lblNgayNghi";
-            this.lblNgayNghi.Size = new System.Drawing.Size(206, 22);
-            this.lblNgayNghi.TabIndex = 2;
-            this.lblNgayNghi.Text = "Ngày nghỉ: 01/01 - 02/01/2023";
-            // 
             // ucDonXinNghiItem
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnlMain);
             this.Name = "ucDonXinNghiItem";
@@ -222,8 +223,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
         private Guna.UI2.WinForms.Guna2Panel pnlContent;
         private System.Windows.Forms.Label lblNoiDung;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayNghi;
         private System.Windows.Forms.Label lblPhanHoi;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblPhanHoiTitle;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblNgayNghi;
     }
 }

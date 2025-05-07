@@ -77,12 +77,10 @@
   <ItemGroup>
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DAL\DiemSoDAL.cs" />
-    <Compile Include="DAL\DonXinNghiDAL.cs" />
     <Compile Include="DAL\HocSinhDAL.cs" />
     <Compile Include="DAL\ThongBaoDAL.cs" />
     <Compile Include="DAL\TKBDAL.cs" />
     <Compile Include="DTO\DiemSoDTO.cs" />
-    <Compile Include="DTO\DonXinNghiDTO.cs" />
     <Compile Include="DTO\ThongBaoDTO.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
@@ -331,7 +329,6 @@
     <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.Designer.cs">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.cs" />
     <Compile Include="GUI\Forms\frmThongBaoChiTiet.cs">
       <SubType>Form</SubType>
     </Compile>

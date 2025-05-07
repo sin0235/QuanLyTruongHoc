@@ -50,15 +50,15 @@ namespace QuanLyTruongHoc.DAL
             {
                 // Unchanged - this query already matches database structure well
                 string query = @"
-                            SELECT L.MaLop, L.TenLop, L.NamHoc 
-                            FROM HocSinh HS
-                            JOIN LopHoc L ON HS.MaLop = L.MaLop
-                            WHERE HS.MaHS = @MaHS";
+                        SELECT L.MaLop, L.TenLop, L.NamHoc 
+                        FROM HocSinh HS
+                        JOIN LopHoc L ON HS.MaLop = L.MaLop
+                        WHERE HS.MaHS = @MaHS";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaHS", maHS }
-                        };
+                    {
+                        { "@MaHS", maHS }
+                    };
 
                 DataTable dt = dbHelper.ExecuteQuery(query, parameters);
                 if (dt.Rows.Count > 0)
@@ -140,44 +140,44 @@ namespace QuanLyTruongHoc.DAL
             {
                 // Improved query that matches the exact table structure
                 string query = @"
-                            SELECT 
-                                tkb.MaTKB, 
-                                tkb.MaLop, 
-                                tkb.MaMon, 
-                                tkb.MaGV, 
-                                tkb.Ngay, 
-                                tkb.Thu, 
-                                tkb.Tiet,
-                                mh.TenMon, 
-                                gv.HoTen AS TenGiaoVien, 
-                                lh.TenLop
-                            FROM 
-                                ThoiKhoaBieu tkb
-                            INNER JOIN 
-                                MonHoc mh ON tkb.MaMon = mh.MaMon
-                            INNER JOIN 
-                                GiaoVien gv ON tkb.MaGV = gv.MaGV
-                            INNER JOIN 
-                                LopHoc lh ON tkb.MaLop = lh.MaLop
-                            WHERE 
-                                tkb.MaLop = @MaLop 
-                                AND tkb.Ngay >= @StartDate 
-                                AND tkb.Ngay <= @EndDate
-                            ORDER BY 
-                                tkb.Thu, 
-                                -- More robust parsing of the period format (e.g., '1-3' or '5')
-                                CASE 
-                                    WHEN CHARINDEX('-', tkb.Tiet) > 0 
-                                    THEN CONVERT(INT, LEFT(tkb.Tiet, CHARINDEX('-', tkb.Tiet) - 1)) 
-                                    ELSE CONVERT(INT, tkb.Tiet) 
-                                END";
+                        SELECT 
+                            tkb.MaTKB, 
+                            tkb.MaLop, 
+                            tkb.MaMon, 
+                            tkb.MaGV, 
+                            tkb.Ngay, 
+                            tkb.Thu, 
+                            tkb.Tiet,
+                            mh.TenMon, 
+                            gv.HoTen AS TenGiaoVien, 
+                            lh.TenLop
+                        FROM 
+                            ThoiKhoaBieu tkb
+                        INNER JOIN 
+                            MonHoc mh ON tkb.MaMon = mh.MaMon
+                        INNER JOIN 
+                            GiaoVien gv ON tkb.MaGV = gv.MaGV
+                        INNER JOIN 
+                            LopHoc lh ON tkb.MaLop = lh.MaLop
+                        WHERE 
+                            tkb.MaLop = @MaLop 
+                            AND tkb.Ngay >= @StartDate 
+                            AND tkb.Ngay <= @EndDate
+                        ORDER BY 
+                            tkb.Thu, 
+                            -- More robust parsing of the period format (e.g., '1-3' or '5')
+                            CASE 
+                                WHEN CHARINDEX('-', tkb.Tiet) > 0 
+                                THEN CONVERT(INT, LEFT(tkb.Tiet, CHARINDEX('-', tkb.Tiet) - 1)) 
+                                ELSE CONVERT(INT, tkb.Tiet) 
+                            END";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "@MaLop", maLop },
-                        { "@StartDate", startDate.Date },  // Use Date to ignore time component
-                        { "@EndDate", endDate.Date }
-                    };
+                {
+                    { "@MaLop", maLop },
+                    { "@StartDate", startDate.Date },  // Use Date to ignore time component
+                    { "@EndDate", endDate.Date }
+                };
 
                 DataTable dt = dbHelper.ExecuteQuery(query, parameters);
 
@@ -235,110 +235,5 @@ namespace QuanLyTruongHoc.DAL
             return 0;
         }
 
-        /// <summary>
-        /// Xác định năm học hiện tại
-        /// </summary>
-        public string GetCurrentSchoolYear()
-        {
-            try
-            {
-                DateTime today = DateTime.Now;
-                int currentYear = today.Year;
-                int nextYear = currentYear + 1;
-                int prevYear = currentYear - 1;
-
-                // Nếu tháng từ 9-12, năm học là năm hiện tại - năm tiếp theo
-                if (today.Month >= 9)
-                {
-                    return $"{currentYear}–{nextYear}";
-                }
-                // Nếu tháng từ 1-8, năm học là năm trước - năm hiện tại
-                else
-                {
-                    return $"{prevYear}–{currentYear}";
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi xác định năm học hiện tại: {ex.Message}");
-                return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Xác định học kỳ hiện tại dựa vào ngày hiện tại
-        /// </summary>
-        public int GetCurrentSemester()
-        {
-            try
-            {
-                DateTime today = DateTime.Now;
-
-                // Học kỳ 1: Từ tháng 9 đến tháng 12
-                if (today.Month >= 9 && today.Month <= 12)
-                {
-                    return 1;
-                }
-                // Học kỳ 2: Từ tháng 1 đến tháng 5/6
-                else if (today.Month >= 1 && today.Month <= 6)
-                {
-                    return 2;
-                }
-                // Mùa hè (tháng 6-8): mặc định trả về học kỳ 2 của năm học trước
-                else
-                {
-                    return 2;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi xác định học kỳ hiện tại: {ex.Message}");
-                return 1; // Mặc định trả về học kỳ 1
-            }
-        }
-
-        /// <summary>
-        /// Tự động thiết lập năm học và học kỳ hiện tại
-        /// </summary>
-        /// <param name="namHoc">Tham chiếu đến chuỗi năm học</param>
-        /// <param name="hocKy">Tham chiếu đến số học kỳ</param>
-        /// <returns>True nếu thiết lập thành công</returns>
-        public bool SetupCurrentSemester(out string namHoc, out int hocKy)
-        {
-            try
-            {
-                // Xác định năm học hiện tại
-                namHoc = GetCurrentSchoolYear();
-
-                // Xác định học kỳ hiện tại
-                hocKy = GetCurrentSemester();
-
-                // Kiểm tra năm học có trong danh sách các năm học không
-                List<string> availableYears = GetSchoolYears();
-                if (!availableYears.Contains(namHoc))
-                {
-                    // Nếu không có năm học hiện tại trong danh sách, lấy năm học mới nhất
-                    if (availableYears.Count > 0)
-                    {
-                        namHoc = availableYears.Last(); // Giả sử danh sách đã được sắp xếp
-                    }
-                    else
-                    {
-                        namHoc = string.Empty;
-                        hocKy = 1;
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi thiết lập học kỳ hiện tại: {ex.Message}");
-                namHoc = string.Empty;
-                hocKy = 1;
-                return false;
-            }
-        }
     }
 }

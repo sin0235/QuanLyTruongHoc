@@ -198,6 +198,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                 using (var frm = new frmChiTietDonXinNghi(_maDon))
                 {
                     frm.ShowDialog();
+
+                    // Nếu cần cập nhật lại thông tin sau khi xem chi tiết
+                    // (ví dụ: đơn đã được duyệt hoặc từ chối), có thể thêm sự kiện vào đây
+                    // Reload từ cơ sở dữ liệu
                 }
             }
             catch (Exception ex)

@@ -47,9 +47,6 @@
             this.lblLoaiDon = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.lblHeader = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblGiaoVien = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.cboGiaoVien = new Guna.UI2.WinForms.Guna2ComboBox();
-
             this.pnlMain.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlDinhKem.SuspendLayout();
@@ -79,8 +76,8 @@
             // 
             // pnlContent
             // 
-            this.pnlContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlContent.Controls.Add(this.btnHuy);
             this.pnlContent.Controls.Add(this.btnGui);
@@ -131,7 +128,7 @@
             // 
             // pnlDinhKem
             // 
-            this.pnlDinhKem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlDinhKem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDinhKem.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
             this.pnlDinhKem.BorderRadius = 10;
@@ -165,6 +162,7 @@
             this.btnDinhKem.Size = new System.Drawing.Size(96, 31);
             this.btnDinhKem.TabIndex = 3;
             this.btnDinhKem.Text = "Đính kèm";
+            this.btnDinhKem.Click += new System.EventHandler(this.btnDinhKem_Click);
             // 
             // lblDinhKem
             // 
@@ -179,8 +177,8 @@
             // 
             // flpDinhKem
             // 
-            this.flpDinhKem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.flpDinhKem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpDinhKem.AutoScroll = true;
             this.flpDinhKem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
@@ -191,14 +189,12 @@
             // 
             // pnlThongTin
             // 
-            this.pnlThongTin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlThongTin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlThongTin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
             this.pnlThongTin.BorderRadius = 10;
             this.pnlThongTin.BorderThickness = 1;
-            this.pnlThongTin.Controls.Add(this.lblGiaoVien);
-            this.pnlThongTin.Controls.Add(this.cboGiaoVien);
             this.pnlThongTin.Controls.Add(this.dtpKetThuc);
             this.pnlThongTin.Controls.Add(this.dtpBatDau);
             this.pnlThongTin.Controls.Add(this.lblDenNgay);
@@ -211,35 +207,6 @@
             this.pnlThongTin.Name = "pnlThongTin";
             this.pnlThongTin.Size = new System.Drawing.Size(734, 296);
             this.pnlThongTin.TabIndex = 0;
-            // 
-            // lblGiaoVien
-            // 
-            this.lblGiaoVien.BackColor = System.Drawing.Color.Transparent;
-            this.lblGiaoVien.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblGiaoVien.Location = new System.Drawing.Point(400, 24);
-            this.lblGiaoVien.Name = "lblGiaoVien";
-            this.lblGiaoVien.Size = new System.Drawing.Size(76, 22);
-            this.lblGiaoVien.TabIndex = 10;
-            this.lblGiaoVien.Text = "Giáo viên:";
-            // 
-            // cboGiaoVien
-            // 
-            this.cboGiaoVien.BackColor = System.Drawing.Color.Transparent;
-            this.cboGiaoVien.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.cboGiaoVien.BorderRadius = 10;
-            this.cboGiaoVien.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboGiaoVien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboGiaoVien.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboGiaoVien.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboGiaoVien.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.cboGiaoVien.ItemHeight = 30;
-            this.cboGiaoVien.Location = new System.Drawing.Point(480, 15);
-            this.cboGiaoVien.Name = "cboGiaoVien";
-            this.cboGiaoVien.Size = new System.Drawing.Size(237, 36);
-            this.cboGiaoVien.TabIndex = 11;
-            this.cboGiaoVien.TextOffset = new System.Drawing.Point(5, 0);
             // 
             // dtpKetThuc
             // 
@@ -304,8 +271,8 @@
             // 
             // txtNoiDung
             // 
-            this.txtNoiDung.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.txtNoiDung.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNoiDung.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
             this.txtNoiDung.BorderRadius = 10;
@@ -333,7 +300,7 @@
             // 
             // txtTieuDe
             // 
-            this.txtTieuDe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtTieuDe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTieuDe.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
             this.txtTieuDe.BorderRadius = 10;
@@ -370,10 +337,10 @@
             this.cboLoaiDon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboLoaiDon.ItemHeight = 30;
             this.cboLoaiDon.Items.AddRange(new object[] {
-    "Đơn xin nghỉ ốm",
-    "Đơn xin nghỉ phép",
-    "Đơn xin nghỉ việc gia đình",
-    "Đơn xin nghỉ lý do khác"});
+            "Đơn xin nghỉ ốm",
+            "Đơn xin nghỉ phép",
+            "Đơn xin nghỉ việc gia đình",
+            "Đơn xin nghỉ lý do khác"});
             this.cboLoaiDon.Location = new System.Drawing.Point(134, 15);
             this.cboLoaiDon.Name = "cboLoaiDon";
             this.cboLoaiDon.Size = new System.Drawing.Size(252, 36);
@@ -396,7 +363,7 @@
             // 
             // guna2Separator1
             // 
-            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(240)))));
             this.guna2Separator1.Location = new System.Drawing.Point(20, 60);
@@ -431,8 +398,8 @@
             this.pnlThongTin.ResumeLayout(false);
             this.pnlThongTin.PerformLayout();
             this.ResumeLayout(false);
-        }
 
+        }
 
         #endregion
 
@@ -455,7 +422,5 @@
         private Guna.UI2.WinForms.Guna2Button btnDinhKem;
         private Guna.UI2.WinForms.Guna2Button btnGui;
         private Guna.UI2.WinForms.Guna2Button btnHuy;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGiaoVien;
-        private Guna.UI2.WinForms.Guna2ComboBox cboGiaoVien;
     }
 }

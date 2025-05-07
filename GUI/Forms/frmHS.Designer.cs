@@ -64,7 +64,7 @@ namespace QuanLyTruongHoc
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.ucKiemTra1 = new QuanLyTruongHoc.GUI.Controls.ucKiemTra();
-            this.ucXinNghi1 = new QuanLyTruongHoc.GUI.Controls.ucXinNghi(ID, maHS);
+            this.ucXinNghi1 = new QuanLyTruongHoc.GUI.Controls.ucXinNghi();
             this.ucKQHT1 = new QuanLyTruongHoc.GUI.Controls.ucKQHT(maHS, ID);
             this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB(maHS, ID);
             this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS(maHS);

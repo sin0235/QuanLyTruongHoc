@@ -32,7 +32,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 maLop = Convert.ToInt32(classInfo["MaLop"]);
                 LoadSchoolYears();
-                LoadCurrentSemester(); // Thêm dòng này để tự động chọn học kỳ hiện tại
                 InitializeTimetableLayout(); // Đảm bảo bảng được khởi tạo
             }
             else
@@ -40,8 +39,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 MessageBox.Show("Không tìm thấy thông tin lớp của học sinh!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            this.BeginInvoke(new Action(() =>
-            {
+            this.BeginInvoke(new Action(() => {
                 TableLayoutPanel1_Resize(tableLayoutPanel1, EventArgs.Empty);
             }));
         }
@@ -586,50 +584,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         private void ClearTimetable()
         {
             ClearDayPanels();
-        }
-        // Thêm phương thức mới trong ucTKB.cs
-        private void LoadCurrentSemester()
-        {
-            try
-            {
-                string currentSchoolYear;
-                int currentSemester;
-
-                // Lấy năm học và học kỳ hiện tại
-                if (tkbDAL.SetupCurrentSemester(out currentSchoolYear, out currentSemester))
-                {
-                    // Chọn năm học hiện tại trong combobox
-                    int yearIndex = cboNamHoc.Items.IndexOf(currentSchoolYear);
-                    if (yearIndex >= 0)
-                    {
-                        cboNamHoc.SelectedIndex = yearIndex;
-                    }
-
-                    // Chọn học kỳ hiện tại trong combobox
-                    if (currentSemester >= 1 && currentSemester <= cboHocKy.Items.Count)
-                    {
-                        cboHocKy.SelectedIndex = currentSemester - 1;
-                    }
-                    else
-                    {
-                        // Mặc định là học kỳ 1 nếu có lỗi
-                        cboHocKy.SelectedIndex = 0;
-                    }
-                }
-                else
-                {
-                    // Nếu không xác định được học kỳ hiện tại, chọn các giá trị mặc định
-                    if (cboNamHoc.Items.Count > 0)
-                        cboNamHoc.SelectedIndex = cboNamHoc.Items.Count - 1; // Năm học mới nhất
-
-                    if (cboHocKy.Items.Count > 0)
-                        cboHocKy.SelectedIndex = 0; // Học kỳ 1
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải học kỳ hiện tại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 
