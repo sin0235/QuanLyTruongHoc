@@ -229,9 +229,9 @@ namespace QuanLyTruongHoc
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            // Xử lý đổi mật khẩu
-            pnlSubSettings.Visible = false;
-            btnSettings.FillColor = Color.Transparent;
+            //// Xử lý đổi mật khẩu
+            //pnlSubSettings.Visible = false;
+            //btnSettings.FillColor = Color.Transparent;
 
             // Hiển thị form đổi mật khẩu
             using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(id))
@@ -240,7 +240,7 @@ namespace QuanLyTruongHoc
                 changePwForm.ShowDialog();
             }
 
-            lblPageTitle.Text = "Đổi mật khẩu";
+            //lblPageTitle.Text = "Đổi mật khẩu";
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

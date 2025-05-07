@@ -14,13 +14,17 @@ namespace QuanLyTruongHoc.GUI.Forms
         private readonly int maGV;
         private DataGridView dgvDanhSachHocSinh;
 
-        public frmNhapDiem(int maGV, DataGridView dgvDanhSachHocSinh)
+        private readonly int maMon; 
+
+        public frmNhapDiem(int maGV, int maMon, DataGridView dgvDanhSachHocSinh)
         {
             InitializeComponent();
             this.maGV = maGV;
+            this.maMon = maMon; // Store the subject ID
             db = new DatabaseHelper();
             this.dgvDanhSachHocSinh = dgvDanhSachHocSinh;
         }
+
 
         private void LoadComboBoxData()
         {
@@ -122,21 +126,30 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             try
             {
-                // Query to get all scores grouped by type for the student, filtered by the teacher's subjects
+                if (cmbHocKi.SelectedValue == null)
+                {
+                    MessageBox.Show("Vui lòng chọn học kỳ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int hocKy = int.Parse(cmbHocKi.SelectedValue.ToString());
+
+                // Query to get all scores grouped by type for the student, filtered by the teacher's subjects and semester
                 string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY M.TenMon ASC) AS [STT],
-            M.TenMon AS [Môn Học],
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Miệng],
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm 15 Phút],
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'1 tiết' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm 1 Tiết],
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS [Điểm Cuối Kỳ],
-            ROUND(AVG(DS.Diem), 2) AS [Trung Bình]
-        FROM DiemSo DS
-        INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
-        INNER JOIN ThoiKhoaBieu TKB ON DS.MaMon = TKB.MaMon AND DS.MaGV = TKB.MaGV
-        WHERE DS.MaHS = {maHS} AND TKB.MaGV = {maGV}
-        GROUP BY M.TenMon";
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem ASC) AS STT,
+                        DS.HocKy AS HocKy,
+                        M.TenMon AS TenMon,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemMieng,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy,
+                        ROUND(AVG(DS.Diem), 2) AS DiemTB
+                    FROM DiemSo DS
+                    INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
+                    WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon} AND DS.MaGV = {maGV} AND DS.HocKy = {hocKy}
+                    GROUP BY DS.HocKy, M.TenMon, DS.LoaiDiem";
+
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -150,21 +163,13 @@ namespace QuanLyTruongHoc.GUI.Forms
                 // Bind data to DataGridView
                 dgvDiemChiTietHocSinh.AutoGenerateColumns = false;
                 dgvDiemChiTietHocSinh.DataSource = dt;
-
-                // Map columns
-                dgvDiemChiTietHocSinh.Columns["STT"].DataPropertyName = "STT";
-                dgvDiemChiTietHocSinh.Columns["TenMon"].DataPropertyName = "Môn Học";
-                dgvDiemChiTietHocSinh.Columns["DiemMieng"].DataPropertyName = "Điểm Miệng";
-                dgvDiemChiTietHocSinh.Columns["Diem15Phut"].DataPropertyName = "Điểm 15 Phút";
-                dgvDiemChiTietHocSinh.Columns["DiemGiuaKy"].DataPropertyName = "Điểm 1 Tiết";
-                dgvDiemChiTietHocSinh.Columns["DiemCuoiKy"].DataPropertyName = "Điểm Cuối Kỳ";
-                dgvDiemChiTietHocSinh.Columns["DiemTrungBinh"].DataPropertyName = "Trung Bình";
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải thông tin điểm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 
@@ -206,9 +211,9 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 // Lấy mã học sinh từ Họ Tên
                 string fetchMaHSQuery = $@"
-            SELECT MaHS
-            FROM HocSinh
-            WHERE HoTen = N'{hoTenTxt.Text}'";
+        SELECT MaHS
+        FROM HocSinh
+        WHERE HoTen = N'{hoTenTxt.Text}'";
 
                 object maHSObj = db.ExecuteScalar(fetchMaHSQuery);
                 if (maHSObj == null)
@@ -219,50 +224,65 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 int maHS = Convert.ToInt32(maHSObj);
 
-                // Lấy mã môn học của giáo viên
-                string fetchMaMonQuery = $@"
-            SELECT DISTINCT MaMon
-            FROM ThoiKhoaBieu
-            WHERE MaGV = {maGV}";
+                // Kiểm tra xem điểm đã tồn tại chưa
+                string checkScoreQuery = $@"
+        SELECT COUNT(*)
+        FROM DiemSo
+        WHERE MaHS = {maHS} AND MaMon = {maMon} AND LoaiDiem = N'{loaiDiem}' AND HocKy = {hocKy}";
 
-                object maMonObj = db.ExecuteScalar(fetchMaMonQuery);
-                if (maMonObj == null)
+                int existingScoreCount = Convert.ToInt32(db.ExecuteScalar(checkScoreQuery));
+
+                if (existingScoreCount > 0)
                 {
-                    MessageBox.Show("Không thể xác định môn học của giáo viên.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                    // Cập nhật điểm nếu đã tồn tại
+                    string updateScoreQuery = $@"
+            UPDATE DiemSo
+            SET Diem = {diem}
+            WHERE MaHS = {maHS} AND MaMon = {maMon} AND LoaiDiem = N'{loaiDiem}' AND HocKy = {hocKy}";
 
-                int maMon = Convert.ToInt32(maMonObj);
+                    bool isUpdated = db.ExecuteNonQuery(updateScoreQuery);
 
-                // Lấy giá trị lớn nhất của MaDiem và tăng thêm 1
-                string fetchMaxMaDiemQuery = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
-                int newMaDiem = Convert.ToInt32(db.ExecuteScalar(fetchMaxMaDiemQuery));
-
-                // Truy vấn thêm điểm trực tiếp
-                string query = $@"
-            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
-            VALUES ({newMaDiem}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
-
-                // Thực thi truy vấn
-                bool isInserted = db.ExecuteNonQuery(query);
-
-                if (isInserted)
-                {
-                    MessageBox.Show("Thêm điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Tải lại danh sách điểm chi tiết của học sinh
-                    LoadStudentScores(maHS);
+                    if (isUpdated)
+                    {
+                        MessageBox.Show("Cập nhật điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Thêm điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Thêm điểm mới nếu chưa tồn tại
+                    string fetchMaxMaDiemQuery = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
+                    int newMaDiem = Convert.ToInt32(db.ExecuteScalar(fetchMaxMaDiemQuery));
+
+                    string insertScoreQuery = $@"
+            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+            VALUES ({newMaDiem}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
+
+                    bool isInserted = db.ExecuteNonQuery(insertScoreQuery);
+
+                    if (isInserted)
+                    {
+                        MessageBox.Show("Thêm điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+
+                // Tải lại danh sách điểm chi tiết của học sinh
+                LoadStudentScores(maHS);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
 
         private void exitBtn_Click(object sender, EventArgs e)

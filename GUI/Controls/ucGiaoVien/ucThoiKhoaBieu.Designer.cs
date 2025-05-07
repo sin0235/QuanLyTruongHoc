@@ -42,12 +42,10 @@
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.ngayChonDTP = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblTuanHienThi = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.tuanSauBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.tuanTruocBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.thongKeSoTietTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lamMoiBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThoiKhoaBieu)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2CustomGradientPanel2.SuspendLayout();
@@ -175,9 +173,9 @@
             this.guna2CustomGradientPanel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
-            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(26, 15);
+            this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(26, 38);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
-            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(403, 140);
+            this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(403, 70);
             this.guna2CustomGradientPanel1.TabIndex = 16;
             // 
             // ngayChonDTP
@@ -185,14 +183,14 @@
             this.ngayChonDTP.BorderRadius = 10;
             this.ngayChonDTP.Checked = true;
             this.ngayChonDTP.FillColor = System.Drawing.Color.White;
-            this.ngayChonDTP.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ngayChonDTP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngayChonDTP.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.ngayChonDTP.HoverState.FillColor = System.Drawing.Color.SteelBlue;
-            this.ngayChonDTP.Location = new System.Drawing.Point(115, 19);
+            this.ngayChonDTP.Location = new System.Drawing.Point(103, 16);
             this.ngayChonDTP.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.ngayChonDTP.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.ngayChonDTP.Name = "ngayChonDTP";
-            this.ngayChonDTP.Size = new System.Drawing.Size(235, 36);
+            this.ngayChonDTP.Size = new System.Drawing.Size(281, 39);
             this.ngayChonDTP.TabIndex = 11;
             this.ngayChonDTP.Value = new System.DateTime(2025, 4, 28, 19, 32, 54, 569);
             this.ngayChonDTP.ValueChanged += new System.EventHandler(this.ngayChonDTP_ValueChanged);
@@ -204,54 +202,9 @@
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(24, 16);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(71, 39);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(58, 32);
             this.guna2HtmlLabel1.TabIndex = 6;
             this.guna2HtmlLabel1.Text = "Ngày";
-            // 
-            // lblTuanHienThi
-            // 
-            this.lblTuanHienThi.BackColor = System.Drawing.Color.Transparent;
-            this.lblTuanHienThi.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTuanHienThi.ForeColor = System.Drawing.Color.MediumBlue;
-            this.lblTuanHienThi.Location = new System.Drawing.Point(1349, 168);
-            this.lblTuanHienThi.Name = "lblTuanHienThi";
-            this.lblTuanHienThi.Size = new System.Drawing.Size(105, 43);
-            this.lblTuanHienThi.TabIndex = 21;
-            this.lblTuanHienThi.Text = "Tuần ...";
-            // 
-            // tuanSauBtn
-            // 
-            this.tuanSauBtn.BackColor = System.Drawing.Color.Transparent;
-            this.tuanSauBtn.BorderRadius = 20;
-            this.tuanSauBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.tuanSauBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.tuanSauBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.tuanSauBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.tuanSauBtn.FillColor = System.Drawing.Color.LightSeaGreen;
-            this.tuanSauBtn.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tuanSauBtn.ForeColor = System.Drawing.Color.White;
-            this.tuanSauBtn.Location = new System.Drawing.Point(1476, 175);
-            this.tuanSauBtn.Name = "tuanSauBtn";
-            this.tuanSauBtn.Size = new System.Drawing.Size(68, 36);
-            this.tuanSauBtn.TabIndex = 20;
-            this.tuanSauBtn.Text = ">";
-            // 
-            // tuanTruocBtn
-            // 
-            this.tuanTruocBtn.BackColor = System.Drawing.Color.Transparent;
-            this.tuanTruocBtn.BorderRadius = 20;
-            this.tuanTruocBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.tuanTruocBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.tuanTruocBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.tuanTruocBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.tuanTruocBtn.FillColor = System.Drawing.Color.LimeGreen;
-            this.tuanTruocBtn.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tuanTruocBtn.ForeColor = System.Drawing.Color.White;
-            this.tuanTruocBtn.Location = new System.Drawing.Point(1266, 175);
-            this.tuanTruocBtn.Name = "tuanTruocBtn";
-            this.tuanTruocBtn.Size = new System.Drawing.Size(68, 36);
-            this.tuanTruocBtn.TabIndex = 19;
-            this.tuanTruocBtn.Text = "<";
             // 
             // guna2CustomGradientPanel2
             // 
@@ -260,7 +213,7 @@
             this.guna2CustomGradientPanel2.Controls.Add(this.guna2HtmlLabel4);
             this.guna2CustomGradientPanel2.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.guna2CustomGradientPanel2.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
-            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(695, 15);
+            this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(695, 38);
             this.guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(849, 140);
             this.guna2CustomGradientPanel2.TabIndex = 22;
@@ -276,7 +229,7 @@
             this.thongKeSoTietTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.thongKeSoTietTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.thongKeSoTietTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.thongKeSoTietTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.thongKeSoTietTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.thongKeSoTietTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.thongKeSoTietTxt.Location = new System.Drawing.Point(22, 40);
             this.thongKeSoTietTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -293,18 +246,35 @@
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(3, 3);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(156, 39);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(127, 32);
             this.guna2HtmlLabel4.TabIndex = 6;
             this.guna2HtmlLabel4.Text = "Tuần này có";
+            // 
+            // lamMoiBtn
+            // 
+            this.lamMoiBtn.BackColor = System.Drawing.Color.Transparent;
+            this.lamMoiBtn.BorderRadius = 10;
+            this.lamMoiBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.lamMoiBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.lamMoiBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.lamMoiBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.lamMoiBtn.FillColor = System.Drawing.Color.SteelBlue;
+            this.lamMoiBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lamMoiBtn.ForeColor = System.Drawing.Color.White;
+            this.lamMoiBtn.HoverState.FillColor = System.Drawing.Color.LightSteelBlue;
+            this.lamMoiBtn.Location = new System.Drawing.Point(26, 133);
+            this.lamMoiBtn.Name = "lamMoiBtn";
+            this.lamMoiBtn.Size = new System.Drawing.Size(180, 45);
+            this.lamMoiBtn.TabIndex = 31;
+            this.lamMoiBtn.Text = "Làm Mới";
+            this.lamMoiBtn.Click += new System.EventHandler(this.lamMoiBtn_Click);
             // 
             // ucThoiKhoaBieu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.Controls.Add(this.lamMoiBtn);
             this.Controls.Add(this.guna2CustomGradientPanel2);
-            this.Controls.Add(this.lblTuanHienThi);
-            this.Controls.Add(this.tuanSauBtn);
-            this.Controls.Add(this.tuanTruocBtn);
             this.Controls.Add(this.guna2CustomGradientPanel1);
             this.Controls.Add(this.dgvThoiKhoaBieu);
             this.Name = "ucThoiKhoaBieu";
@@ -315,7 +285,6 @@
             this.guna2CustomGradientPanel2.ResumeLayout(false);
             this.guna2CustomGradientPanel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -325,9 +294,6 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2DateTimePicker ngayChonDTP;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTuanHienThi;
-        private Guna.UI2.WinForms.Guna2Button tuanSauBtn;
-        private Guna.UI2.WinForms.Guna2Button tuanTruocBtn;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2TextBox thongKeSoTietTxt;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
@@ -338,5 +304,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn thuSauColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thuBayColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn chuNhatColumn;
+        private Guna.UI2.WinForms.Guna2Button lamMoiBtn;
     }
 }

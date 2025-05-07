@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.tenUserLbl = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.anhDaiDienPictureBox = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.guna2CustomGradientPanel5 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.congTacTxt = new Guna.UI2.WinForms.Guna2TextBox();
@@ -57,49 +55,23 @@
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.tenUserLbl = new System.Windows.Forms.Label();
+            this.trangThai = new System.Windows.Forms.Label();
             this.guna2CustomGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anhDaiDienPictureBox)).BeginInit();
             this.guna2CustomGradientPanel2.SuspendLayout();
             this.guna2CustomGradientPanel5.SuspendLayout();
             this.guna2CustomGradientPanel4.SuspendLayout();
             this.guna2CustomGradientPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // guna2Button1
-            // 
-            this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2Button1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.guna2Button1.Location = new System.Drawing.Point(25, 203);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(225, 45);
-            this.guna2Button1.TabIndex = 1;
-            this.guna2Button1.Text = "Đổi ảnh đại diện";
-            // 
-            // tenUserLbl
-            // 
-            this.tenUserLbl.BackColor = System.Drawing.Color.Transparent;
-            this.tenUserLbl.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tenUserLbl.ForeColor = System.Drawing.Color.Coral;
-            this.tenUserLbl.Location = new System.Drawing.Point(45, 158);
-            this.tenUserLbl.Name = "tenUserLbl";
-            this.tenUserLbl.Size = new System.Drawing.Size(151, 32);
-            this.tenUserLbl.TabIndex = 2;
-            this.tenUserLbl.Text = "Nguyễn Văn A";
-            this.tenUserLbl.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel1.BorderRadius = 10;
-            this.guna2CustomGradientPanel1.Controls.Add(this.guna2CirclePictureBox1);
+            this.guna2CustomGradientPanel1.Controls.Add(this.trangThai);
             this.guna2CustomGradientPanel1.Controls.Add(this.tenUserLbl);
-            this.guna2CustomGradientPanel1.Controls.Add(this.guna2Button1);
+            this.guna2CustomGradientPanel1.Controls.Add(this.anhDaiDienPictureBox);
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.guna2CustomGradientPanel1.FillColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(24, 37);
@@ -107,17 +79,17 @@
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(271, 267);
             this.guna2CustomGradientPanel1.TabIndex = 17;
             // 
-            // guna2CirclePictureBox1
+            // anhDaiDienPictureBox
             // 
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(72, 25);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(125, 125);
-            this.guna2CirclePictureBox1.TabIndex = 0;
-            this.guna2CirclePictureBox1.TabStop = false;
+            this.anhDaiDienPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.anhDaiDienPictureBox.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
+            this.anhDaiDienPictureBox.ImageRotate = 0F;
+            this.anhDaiDienPictureBox.Location = new System.Drawing.Point(72, 25);
+            this.anhDaiDienPictureBox.Name = "anhDaiDienPictureBox";
+            this.anhDaiDienPictureBox.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.anhDaiDienPictureBox.Size = new System.Drawing.Size(125, 125);
+            this.anhDaiDienPictureBox.TabIndex = 0;
+            this.anhDaiDienPictureBox.TabStop = false;
             // 
             // guna2CustomGradientPanel2
             // 
@@ -163,7 +135,7 @@
             this.congTacTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.congTacTxt.FillColor = System.Drawing.Color.Azure;
             this.congTacTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.congTacTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.congTacTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.congTacTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.congTacTxt.Location = new System.Drawing.Point(153, 166);
             this.congTacTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -191,10 +163,11 @@
             this.chuNhiemCmb.BorderRadius = 10;
             this.chuNhiemCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.chuNhiemCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chuNhiemCmb.Enabled = false;
             this.chuNhiemCmb.FillColor = System.Drawing.Color.Azure;
             this.chuNhiemCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chuNhiemCmb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.chuNhiemCmb.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.chuNhiemCmb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chuNhiemCmb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.chuNhiemCmb.HoverState.FillColor = System.Drawing.Color.SteelBlue;
             this.chuNhiemCmb.ItemHeight = 30;
@@ -224,10 +197,11 @@
             this.chyenMonCmb.BorderRadius = 10;
             this.chyenMonCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.chyenMonCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.chyenMonCmb.Enabled = false;
             this.chyenMonCmb.FillColor = System.Drawing.Color.Azure;
             this.chyenMonCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chyenMonCmb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.chyenMonCmb.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.chyenMonCmb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chyenMonCmb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.chyenMonCmb.HoverState.FillColor = System.Drawing.Color.SteelBlue;
             this.chyenMonCmb.ItemHeight = 30;
@@ -293,7 +267,7 @@
             this.diaChiTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.diaChiTxt.FillColor = System.Drawing.Color.Azure;
             this.diaChiTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.diaChiTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.diaChiTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.diaChiTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.diaChiTxt.Location = new System.Drawing.Point(137, 159);
             this.diaChiTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -327,7 +301,7 @@
             this.emailTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.emailTxt.FillColor = System.Drawing.Color.Azure;
             this.emailTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emailTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.emailTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.emailTxt.Location = new System.Drawing.Point(137, 99);
             this.emailTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -361,7 +335,7 @@
             this.sdtTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.sdtTxt.FillColor = System.Drawing.Color.Azure;
             this.sdtTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.sdtTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.sdtTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sdtTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.sdtTxt.Location = new System.Drawing.Point(137, 48);
             this.sdtTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -418,10 +392,11 @@
             this.gioiTinhCmb.BorderRadius = 10;
             this.gioiTinhCmb.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.gioiTinhCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gioiTinhCmb.Enabled = false;
             this.gioiTinhCmb.FillColor = System.Drawing.Color.Azure;
             this.gioiTinhCmb.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.gioiTinhCmb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.gioiTinhCmb.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.gioiTinhCmb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gioiTinhCmb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.gioiTinhCmb.HoverState.FillColor = System.Drawing.Color.SteelBlue;
             this.gioiTinhCmb.ItemHeight = 30;
@@ -438,7 +413,7 @@
             this.ngaySinhDTP.BorderRadius = 10;
             this.ngaySinhDTP.Checked = true;
             this.ngaySinhDTP.FillColor = System.Drawing.Color.White;
-            this.ngaySinhDTP.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ngaySinhDTP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngaySinhDTP.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.ngaySinhDTP.HoverState.FillColor = System.Drawing.Color.SteelBlue;
             this.ngaySinhDTP.Location = new System.Drawing.Point(143, 162);
@@ -473,7 +448,7 @@
             this.hoTenTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.hoTenTxt.FillColor = System.Drawing.Color.Azure;
             this.hoTenTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.hoTenTxt.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.hoTenTxt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hoTenTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.hoTenTxt.Location = new System.Drawing.Point(137, 48);
             this.hoTenTxt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -516,6 +491,30 @@
             this.guna2HtmlLabel2.TabIndex = 2;
             this.guna2HtmlLabel2.Text = "Thông Tin Cá Nhân";
             // 
+            // tenUserLbl
+            // 
+            this.tenUserLbl.AutoSize = true;
+            this.tenUserLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tenUserLbl.ForeColor = System.Drawing.Color.Coral;
+            this.tenUserLbl.Location = new System.Drawing.Point(13, 163);
+            this.tenUserLbl.Name = "tenUserLbl";
+            this.tenUserLbl.Size = new System.Drawing.Size(47, 30);
+            this.tenUserLbl.TabIndex = 1;
+            this.tenUserLbl.Text = "Tên";
+            this.tenUserLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // trangThai
+            // 
+            this.trangThai.AutoSize = true;
+            this.trangThai.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trangThai.ForeColor = System.Drawing.Color.LawnGreen;
+            this.trangThai.Location = new System.Drawing.Point(13, 216);
+            this.trangThai.Name = "trangThai";
+            this.trangThai.Size = new System.Drawing.Size(95, 21);
+            this.trangThai.TabIndex = 2;
+            this.trangThai.Text = "Trạng thái: ";
+            this.trangThai.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ucThongTinCaNhan
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -526,7 +525,7 @@
             this.Size = new System.Drawing.Size(1561, 922);
             this.guna2CustomGradientPanel1.ResumeLayout(false);
             this.guna2CustomGradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anhDaiDienPictureBox)).EndInit();
             this.guna2CustomGradientPanel2.ResumeLayout(false);
             this.guna2CustomGradientPanel5.ResumeLayout(false);
             this.guna2CustomGradientPanel5.PerformLayout();
@@ -540,9 +539,7 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel tenUserLbl;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox anhDaiDienPictureBox;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel3;
@@ -569,5 +566,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
         private Guna.UI2.WinForms.Guna2TextBox diaChiTxt;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
+        private System.Windows.Forms.Label tenUserLbl;
+        private System.Windows.Forms.Label trangThai;
     }
 }

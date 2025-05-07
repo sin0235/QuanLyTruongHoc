@@ -59,32 +59,24 @@ namespace QuanLyTruongHoc.GUI.Forms
             try
             {
                 string query = $@"
-         SELECT 
-             ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
-             DS.LoaiDiem AS [Loại điểm],
-             DS.Diem AS [Điểm],
-             DS.HocKy AS [Học kỳ]
-         FROM DiemSo DS
-         WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
+                DS.LoaiDiem AS LoaiDiem,
+                DS.Diem AS Diem,
+                DS.HocKy AS HocKy
+            FROM DiemSo DS
+            WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
 
                 DataTable dt = db.ExecuteQuery(query);
 
                 if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy điểm của học sinh.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvDiemChiTietHocSinh.DataSource = null; // Xóa dữ liệu cũ
+                    dgvDiemChiTietHocSinh.DataSource = null;
                     return;
                 }
 
-                dgvDiemChiTietHocSinh.AutoGenerateColumns = false; // Ngăn tự động tạo cột
-                dgvDiemChiTietHocSinh.Columns.Clear(); // Xóa các cột cũ
-
-                // Thêm cột và ánh xạ dữ liệu
-                dgvDiemChiTietHocSinh.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "STT", DataPropertyName = "STT", Name = "STT" });
-                dgvDiemChiTietHocSinh.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Loại điểm", DataPropertyName = "Loại điểm", Name = "LoaiDiem" });
-                dgvDiemChiTietHocSinh.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Điểm", DataPropertyName = "Điểm", Name = "Diem" });
-                dgvDiemChiTietHocSinh.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Học kỳ", DataPropertyName = "Học kỳ", Name = "HocKy" });
-
+                dgvDiemChiTietHocSinh.AutoGenerateColumns = false;
                 dgvDiemChiTietHocSinh.DataSource = dt;
             }
             catch (Exception ex)
@@ -95,6 +87,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
 
 
+
         private void dgvDiemChiTietHocSinh_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -102,9 +95,14 @@ namespace QuanLyTruongHoc.GUI.Forms
                 DataGridViewRow row = dgvDiemChiTietHocSinh.Rows[e.RowIndex];
                 loaiDiemCmb.Text = row.Cells["LoaiDiem"].Value.ToString();
                 diemTxt.Text = row.Cells["Diem"].Value.ToString();
-                cmbHocKi.Text = row.Cells["HocKy"].Value.ToString();
+
+                // Chuyển đổi giá trị học kỳ thành chuỗi tương ứng
+                string hocKyValue = $"Học kỳ {row.Cells["HocKy"].Value}";
+                cmbHocKi.SelectedItem = hocKyValue;
             }
         }
+
+
 
         private void chinhSuaBtn_Click(object sender, EventArgs e)
         {
@@ -189,10 +187,8 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             if (dgvDiemChiTietHocSinh.SelectedRows.Count > 0)
             {
-                // Lấy thông tin từ hàng được chọn
                 var selectedRow = dgvDiemChiTietHocSinh.SelectedRows[0];
 
-                // Lấy loại điểm và giá trị điểm
                 string loaiDiem = selectedRow.Cells["LoaiDiem"].Value?.ToString();
                 string diemValue = selectedRow.Cells["Diem"].Value?.ToString();
                 string hocKy = selectedRow.Cells["HocKy"].Value?.ToString();
@@ -203,29 +199,20 @@ namespace QuanLyTruongHoc.GUI.Forms
                     return;
                 }
 
-                // Xác nhận xóa
                 var confirmResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa điểm {diemValue} ({loaiDiem}, Học kỳ {hocKy}) không?",
                     "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Xóa điểm trong cơ sở dữ liệu
-                    string deleteQuery = @"
+                    string deleteQuery = $@"
                 DELETE FROM DiemSo
-                WHERE MaHS = @MaHS AND MaMon = @MaMon AND LoaiDiem = @LoaiDiem AND Diem = @Diem AND HocKy = @HocKy";
-                    var parameters = new Dictionary<string, object>
-            {
-                { "@MaHS", selectedMaHS },
-                { "@MaMon", selectedMaMon },
-                { "@LoaiDiem", loaiDiem },
-                { "@Diem", diemValue },
-                { "@HocKy", hocKy }
-            };
+                WHERE MaHS = {selectedMaHS} AND MaMon = {selectedMaMon} 
+                AND LoaiDiem = N'{loaiDiem}' AND Diem = {diemValue} AND HocKy = {hocKy}";
 
-                    if (db.ExecuteNonQuery(deleteQuery, parameters))
+                    if (db.ExecuteNonQuery(deleteQuery))
                     {
                         MessageBox.Show("Xóa điểm thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadStudentScores(selectedMaHS, selectedMaMon); // Làm mới danh sách điểm
+                        LoadStudentScores(selectedMaHS, selectedMaMon);
                     }
                     else
                     {
@@ -238,6 +225,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show("Vui lòng chọn một hàng để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
     }
 }

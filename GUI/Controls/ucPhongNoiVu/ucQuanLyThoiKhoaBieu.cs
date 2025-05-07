@@ -279,7 +279,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
 
                         // Nội dung hành động
-                        string hanhDong = $"Thêm thời khóa biểu vào thứ {thu} với môn {tenMon} của giáo viên {tenGiaoVien} từ tiết {tiet} lớp {tenLopMoi}";
+                        string hanhDong = $"Thêm thời khóa biểu của lớp {tenLopMoi} vào ngày {selectedDate:dd/MM/yyyy} với môn học {tenMon} của giáo viên {tenGiaoVien} tiết {tiet}";
 
                         // Thêm vào bảng NhatKyHeThong
                         string insertNhatKy = $@"
@@ -366,10 +366,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 return;
             }
 
-            // Lấy thông tin ngày từ tiêu đề cột - SỬA LỖI Ở ĐÂY
+            // Lấy thông tin ngày từ Tag của cột
             DateTime selectedDate;
-
-            // Lấy ngày từ Tag của cột (cách này an toàn hơn)
             if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
                 dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
             {
@@ -377,7 +375,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             }
             else
             {
-                // Nếu không có Tag, sử dụng ngày hiện tại
                 selectedDate = DateTime.Today;
                 MessageBox.Show("Không thể xác định ngày từ cột. Sử dụng ngày hiện tại thay thế.",
                     "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -399,6 +396,43 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 {
                     MessageBox.Show("Không tìm thấy dữ liệu thời khóa biểu để sửa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+                }
+
+                // Lưu thông tin ban đầu để ghi nhật ký sau khi cập nhật
+                string tenLop = cmbChonLop.Text;
+                string monHocBanDau = mon;
+                string giaoVienBanDau = giaoVien;
+
+                // Query để lấy thêm thông tin ban đầu
+                string queryOldData = @"
+                SELECT m.MaMon, m.TenMon, g.MaGV, g.HoTen, t.Ngay, t.Thu, t.Tiet
+                FROM ThoiKhoaBieu t
+                INNER JOIN MonHoc m ON t.MaMon = m.MaMon
+                INNER JOIN GiaoVien g ON t.MaGV = g.MaGV
+                WHERE t.MaTKB = @MaTKB";
+
+                Dictionary<string, object> parametersOld = new Dictionary<string, object>
+                {
+                    { "@MaTKB", maTKB }
+                };
+
+                DataTable dtOldData = db.ExecuteQuery(queryOldData, parametersOld);
+
+                int maMon = 0;
+                int maGV = 0;
+                string ngayBanDau = "";
+                string thuBanDau = "";
+                string tietBanDau = "";
+
+                if (dtOldData != null && dtOldData.Rows.Count > 0)
+                {
+                    maMon = Convert.ToInt32(dtOldData.Rows[0]["MaMon"]);
+                    maGV = Convert.ToInt32(dtOldData.Rows[0]["MaGV"]);
+                    monHocBanDau = dtOldData.Rows[0]["TenMon"].ToString();
+                    giaoVienBanDau = dtOldData.Rows[0]["HoTen"].ToString();
+                    ngayBanDau = Convert.ToDateTime(dtOldData.Rows[0]["Ngay"]).ToString("dd/MM/yyyy");
+                    thuBanDau = dtOldData.Rows[0]["Thu"].ToString();
+                    tietBanDau = dtOldData.Rows[0]["Tiet"].ToString();
                 }
 
                 // Hiển thị form sửa thời khóa biểu
@@ -434,6 +468,70 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
+                    // Lấy thông tin mới sau khi cập nhật
+                    string queryUpdatedData = @"
+                    SELECT m.TenMon, g.HoTen, t.Ngay, t.Thu, t.Tiet
+                    FROM ThoiKhoaBieu t
+                    INNER JOIN MonHoc m ON t.MaMon = m.MaMon
+                    INNER JOIN GiaoVien g ON t.MaGV = g.MaGV
+                    WHERE t.MaTKB = @MaTKB";
+
+                    Dictionary<string, object> parametersUpdated = new Dictionary<string, object>
+                    {
+                        { "@MaTKB", maTKB }
+                    };
+
+                    DataTable dtUpdatedData = db.ExecuteQuery(queryUpdatedData, parametersUpdated);
+
+                    if (dtUpdatedData != null && dtUpdatedData.Rows.Count > 0)
+                    {
+                        string monHocMoi = dtUpdatedData.Rows[0]["TenMon"].ToString();
+                        string giaoVienMoi = dtUpdatedData.Rows[0]["HoTen"].ToString();
+                        string ngayMoi = Convert.ToDateTime(dtUpdatedData.Rows[0]["Ngay"]).ToString("dd/MM/yyyy");
+                        string thuMoi = dtUpdatedData.Rows[0]["Thu"].ToString();
+                        string tietMoi = dtUpdatedData.Rows[0]["Tiet"].ToString();
+
+                        // Xác định những thay đổi
+                        List<string> changes = new List<string>();
+
+                        if (monHocBanDau != monHocMoi)
+                            changes.Add($"môn học từ {monHocBanDau} thành {monHocMoi}");
+
+                        if (giaoVienBanDau != giaoVienMoi)
+                            changes.Add($"giáo viên từ {giaoVienBanDau} thành {giaoVienMoi}");
+
+                        if (ngayBanDau != ngayMoi)
+                            changes.Add($"ngày từ {ngayBanDau} thành {ngayMoi}");
+
+                        if (tietBanDau != tietMoi)
+                            changes.Add($"tiết từ {tietBanDau} thành {tietMoi}");
+
+                        string thayDoiText = string.Join(", ", changes);
+
+                        // Truy vấn để lấy MaNguoiDung của phòng nội vụ
+                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+
+                        // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
+                        string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+                        int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+
+                        // Nội dung hành động
+                        // Nội dung hành động
+                        string hanhDong = $"Sửa thời khóa biểu của lớp {tenLop} ngày {ngayMoi} môn học {monHocMoi} tiết {tietMoi} của giáo viên {giaoVienMoi}: {thayDoiText}";
+
+                        // Thêm vào bảng NhatKyHeThong với parameterized query
+                        string insertNhatKy = "INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                        Dictionary<string, object> parameters = new Dictionary<string, object>
+                        {
+                            { "@MaNK", maNK },
+                            { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                            { "@HanhDong", hanhDong }
+                        };
+
+                        db.ExecuteNonQuery(insertNhatKy, parameters);
+                    }
+
                     // Reload thời khóa biểu sau khi cập nhật
                     LoadThoiKhoaBieu();
                 }
@@ -556,12 +654,70 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             try
             {
+                // Truy vấn thông tin thời khóa biểu trước khi xóa
+                string queryInfo = @"
+                SELECT 
+                    t.MaLop, 
+                    l.TenLop, 
+                    t.Ngay, 
+                    m.TenMon, 
+                    g.HoTen AS TenGiaoVien, 
+                    t.Tiet
+                FROM ThoiKhoaBieu t
+                INNER JOIN LopHoc l ON t.MaLop = l.MaLop
+                INNER JOIN MonHoc m ON t.MaMon = m.MaMon
+                INNER JOIN GiaoVien g ON t.MaGV = g.MaGV
+                WHERE t.MaTKB = @MaTKB";
+
+                Dictionary<string, object> infoParams = new Dictionary<string, object>
+                {
+                    { "@MaTKB", maTKB }
+                };
+
+                DataTable infoTable = db.ExecuteQuery(queryInfo, infoParams);
+
+                // Thực hiện xóa dữ liệu
                 string query = "DELETE FROM ThoiKhoaBieu WHERE MaTKB = @MaTKB";
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-        {
-            { "@MaTKB", maTKB }
-        };
-                return db.ExecuteNonQuery(query, parameters);
+                {
+                    { "@MaTKB", maTKB }
+                };
+                bool success = db.ExecuteNonQuery(query, parameters);
+
+                // Nếu xóa thành công và có thông tin, ghi nhật ký
+                if (success && infoTable != null && infoTable.Rows.Count > 0)
+                {
+                    DataRow info = infoTable.Rows[0];
+                    string tenLop = info["TenLop"].ToString();
+                    string ngay = Convert.ToDateTime(info["Ngay"]).ToString("dd/MM/yyyy");
+                    string tenMon = info["TenMon"].ToString();
+                    string tenGiaoVien = info["TenGiaoVien"].ToString();
+                    string tiet = info["Tiet"].ToString();
+
+                    // Truy vấn để lấy MaNguoiDung của phòng nội vụ
+                    string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                    int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+
+                    // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
+                    string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
+                    int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+
+                    // Nội dung hành động
+                    string hanhDong = $"Xóa thời khóa biểu của lớp {tenLop} ngày {ngay} môn học {tenMon} của giáo viên {tenGiaoVien} tiết {tiet}";
+
+                    // Thêm vào bảng NhatKyHeThong sử dụng parameterized query
+                    string insertNhatKy = "INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                    Dictionary<string, object> logParams = new Dictionary<string, object>
+                    {
+                        { "@MaNK", maNK },
+                        { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                        { "@HanhDong", hanhDong }
+                    };
+
+                    db.ExecuteNonQuery(insertNhatKy, logParams);
+                }
+
+                return success;
             }
             catch (Exception ex)
             {
