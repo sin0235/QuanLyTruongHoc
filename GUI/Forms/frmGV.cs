@@ -335,7 +335,7 @@ namespace QuanLyTruongHoc
             btnSetting.FillColor = Color.Transparent;
 
             // Hiển thị form đổi mật khẩu
-            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(maNguoiDung))
             {
                 // Hiển thị form dạng dialog
                 changePwForm.ShowDialog();
