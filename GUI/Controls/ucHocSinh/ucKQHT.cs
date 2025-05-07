@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyTruongHoc.DAL;
@@ -30,7 +27,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             dbHelper = new DatabaseHelper();
             diemSoDAL = new DiemSoDAL();
 
-            // Đăng ký sự kiện Load
             this.Load += ucKQHT_Load;
         }
 
@@ -38,7 +34,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                // Kiểm tra ID học sinh
                 if (id <= 0)
                 {
                     MessageBox.Show("Không thể tải dữ liệu vì mã học sinh không hợp lệ!",
@@ -46,13 +41,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                     return;
                 }
 
-                // Tải danh sách năm học
                 LoadSchoolYears();
-
-                // Thiết lập sự kiện cho các nút
                 SetupButtonEvents();
-
-                // Khởi tạo giao diện
                 InitializeUI();
                 SetupEvents();
             }
@@ -60,13 +50,11 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 MessageBox.Show($"Lỗi khi khởi tạo giao diện: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine($"Chi tiết lỗi: {ex.StackTrace}");
             }
         }
 
         private void InitializeUI()
         {
-            // Thiết lập giá trị mặc định cho các nút học kỳ
             btnHK1.FillColor = Color.FromArgb(94, 148, 255);
             btnHK1.ForeColor = Color.White;
             btnHK2.FillColor = Color.FromArgb(240, 240, 240);
@@ -75,7 +63,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             btnCaNam.ForeColor = Color.FromArgb(100, 100, 100);
             btnCaNam.Text = "Cả năm";
 
-            // Load dữ liệu mặc định
             if (cboNamHoc.Items.Count > 0)
                 cboNamHoc.SelectedIndex = 0;
         }
@@ -84,8 +71,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             btnHK1.Click += (sender, e) => SwitchSemester(1);
             btnHK2.Click += (sender, e) => SwitchSemester(2);
-            btnCaNam.Click += (sender, e) => SwitchSemester(0); // 0 = cả năm
-
+            btnCaNam.Click += (sender, e) => SwitchSemester(0);
             cboNamHoc.SelectedIndexChanged += CboNamHoc_SelectedIndexChanged;
         }
 
@@ -93,7 +79,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                // Lấy năm học hiện tại của học sinh từ database
                 string query = @"
                     SELECT LH.NamHoc
                     FROM HocSinh HS
@@ -113,7 +98,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                     currentYear = dtCurrentYear.Rows[0]["NamHoc"].ToString();
                 }
 
-                // Lấy tất cả các năm học có trong CSDL
                 string queryAllYears = "SELECT DISTINCT NamHoc FROM LopHoc ORDER BY NamHoc DESC";
                 DataTable dt = dbHelper.ExecuteQuery(queryAllYears);
 
@@ -127,20 +111,17 @@ namespace QuanLyTruongHoc.GUI.Controls
                 }
                 else
                 {
-                    // Nếu không có dữ liệu, dùng giá trị mặc định
                     schoolYears = new List<string> { "2024-2025", "2023-2024", "2022-2023" };
                 }
 
                 cboNamHoc.DataSource = schoolYears;
 
-                // Chọn năm học hiện tại của học sinh nếu có
                 if (!string.IsNullOrEmpty(currentYear) && schoolYears.Contains(currentYear))
                 {
                     cboNamHoc.SelectedItem = currentYear;
                 }
                 else if (schoolYears.Count > 0)
                 {
-                    // Mặc định chọn năm học đầu tiên trong danh sách
                     cboNamHoc.SelectedIndex = 0;
                 }
 
@@ -151,7 +132,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                 MessageBox.Show($"Lỗi khi tải danh sách năm học: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                // Nếu có lỗi, dùng giá trị mặc định
                 List<string> defaultYears = new List<string> { "2024-2025", "2023-2024", "2022-2023" };
                 cboNamHoc.DataSource = defaultYears;
                 currentSchoolYear = defaultYears[0];
@@ -171,7 +151,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             currentSemester = semester;
 
-            // Cập nhật UI cho các nút học kỳ
             btnHK1.FillColor = (semester == 1) ? Color.FromArgb(94, 148, 255) : Color.FromArgb(240, 240, 240);
             btnHK1.ForeColor = (semester == 1) ? Color.White : Color.FromArgb(100, 100, 100);
 
@@ -181,30 +160,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             btnCaNam.FillColor = (semester == 0) ? Color.FromArgb(94, 148, 255) : Color.FromArgb(240, 240, 240);
             btnCaNam.ForeColor = (semester == 0) ? Color.White : Color.FromArgb(100, 100, 100);
 
-            // Cập nhật tiêu đề tổng kết
-            lblSummaryTitle.Text = (semester == 0) ? $"Tổng kết năm học" : $"Tổng kết học kỳ {semester}";
+            lblSummaryTitle.Text = (semester == 0) ? "Tổng kết năm học" : $"Tổng kết học kỳ {semester}";
 
-            // Load dữ liệu học kỳ
             LoadSemesterData();
-        }
-
-        private void NavigateSemester(int direction)
-        {
-            // Chuyển đổi học kỳ theo hướng
-            if (direction > 0)
-            {
-                if (currentSemester < 2)
-                    SwitchSemester(currentSemester + 1);
-                else if (currentSemester == 2)
-                    SwitchSemester(0); // Chuyển sang cả năm
-            }
-            else
-            {
-                if (currentSemester == 0)
-                    SwitchSemester(2); // Từ cả năm về học kỳ 2
-                else if (currentSemester > 1)
-                    SwitchSemester(currentSemester - 1);
-            }
         }
 
         private void LoadSemesterData()
@@ -213,18 +171,14 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                // Xóa các control hiện tại
                 pnlSubjects.Controls.Clear();
-                pnlSubjects.AutoScroll = true; // Đảm bảo có thể cuộn khi nội dung dài
+                pnlSubjects.AutoScroll = true;
 
-                // Lấy điểm số của học sinh theo học kỳ
                 List<MonHocScoreDTO> subjectScores = diemSoDAL.GetStudentSubjectsScore(
                     id, currentSemester, currentSchoolYear);
 
-                // Kiểm tra nếu không có dữ liệu
                 if (subjectScores == null || subjectScores.Count == 0)
                 {
-                    // Hiển thị thông báo không có dữ liệu
                     Label lblNoData = new Label
                     {
                         Text = "Không có dữ liệu điểm cho học kỳ này.",
@@ -240,7 +194,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                 }
                 else
                 {
-                    // Thêm FlowLayoutPanel để tự động xếp các item
                     FlowLayoutPanel flowPanel = new FlowLayoutPanel
                     {
                         Dock = DockStyle.Fill,
@@ -251,7 +204,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                     };
                     pnlSubjects.Controls.Add(flowPanel);
 
-                    // Tạo và hiển thị các item điểm số
                     foreach (MonHocScoreDTO subject in subjectScores)
                     {
                         ucKQHTItem subjectItem = new ucKQHTItem(
@@ -262,26 +214,22 @@ namespace QuanLyTruongHoc.GUI.Controls
                             subject.NhanXet
                         );
 
-                        // Điều chỉnh kích thước phù hợp với flowPanel
                         subjectItem.AdjustToContainerWidth(flowPanel.ClientSize.Width);
                         subjectItem.AutoSetColor();
-                        subjectItem.Margin = new Padding(0, 0, 0, 10); // Tạo khoảng cách giữa các item
+                        subjectItem.Margin = new Padding(0, 0, 0, 10);
 
                         flowPanel.Controls.Add(subjectItem);
                     }
 
-                    // Đảm bảo flowPanel có chiều rộng đúng sau khi thêm các item
                     flowPanel.PerformLayout();
                 }
 
-                // Load dữ liệu tổng kết
                 LoadSummaryData();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải dữ liệu học kỳ: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine($"Chi tiết lỗi: {ex.StackTrace}");
             }
             finally
             {
@@ -293,7 +241,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                // Hiển thị trạng thái đang tải
                 lblGPAValue.Text = "...";
                 lblConductValue.Text = "...";
                 lblRankValue.Text = "...";
@@ -302,7 +249,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                 lblAwardsValue.Text = "...";
                 txtTeacherComment.Text = "Đang tải thông tin tổng kết...";
 
-                // Sử dụng Task để không block UI thread
                 Task.Run(() => diemSoDAL.GetSemesterSummary(id, currentSemester, currentSchoolYear))
                     .ContinueWith(task =>
                     {
@@ -312,12 +258,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                             {
                                 try
                                 {
-                                    // Lấy kết quả từ task
                                     HocKySummaryDTO summary = task.Result;
 
                                     if (summary != null)
                                     {
-                                        // Cập nhật UI
                                         lblGPAValue.Text = summary.DiemTrungBinh.ToString("0.0");
                                         lblConductValue.Text = summary.HanhKiem;
                                         lblRankValue.Text = summary.XepHang.ToString();
@@ -325,7 +269,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                                         lblAcademicPerformanceValue.Text = summary.XepLoai;
                                         txtTeacherComment.Text = summary.NhanXet ?? "Không có nhận xét.";
 
-                                        // Đặt danh hiệu nếu có
                                         if (!string.IsNullOrEmpty(summary.XepLoai))
                                         {
                                             if (summary.XepLoai == "Giỏi" && summary.HanhKiem == "Tốt")
@@ -336,19 +279,17 @@ namespace QuanLyTruongHoc.GUI.Controls
                                                 lblAwardsValue.Text = "Không có";
                                         }
 
-                                        // Đặt màu sắc dựa trên điểm trung bình
                                         if (summary.DiemTrungBinh >= 8.0)
-                                            lblGPAValue.ForeColor = Color.FromArgb(0, 150, 60); // Xanh đậm
+                                            lblGPAValue.ForeColor = Color.FromArgb(0, 150, 60);
                                         else if (summary.DiemTrungBinh >= 7.0)
-                                            lblGPAValue.ForeColor = Color.FromArgb(0, 180, 80); // Xanh nhạt
+                                            lblGPAValue.ForeColor = Color.FromArgb(0, 180, 80);
                                         else if (summary.DiemTrungBinh >= 5.0)
-                                            lblGPAValue.ForeColor = Color.FromArgb(230, 130, 0); // Cam
+                                            lblGPAValue.ForeColor = Color.FromArgb(230, 130, 0);
                                         else
-                                            lblGPAValue.ForeColor = Color.FromArgb(220, 53, 69); // Đỏ
+                                            lblGPAValue.ForeColor = Color.FromArgb(220, 53, 69);
                                     }
                                     else
                                     {
-                                        // Không có dữ liệu tổng kết, hiển thị thông tin mặc định
                                         lblGPAValue.Text = "---";
                                         lblConductValue.Text = "---";
                                         lblRankValue.Text = "---";
@@ -356,72 +297,55 @@ namespace QuanLyTruongHoc.GUI.Controls
                                         lblAcademicPerformanceValue.Text = "---";
                                         lblAwardsValue.Text = "---";
                                         txtTeacherComment.Text = "Chưa có thông tin tổng kết cho học kỳ này.";
-
-                                        // Đặt màu mặc định
                                         lblGPAValue.ForeColor = Color.Gray;
                                     }
                                 }
-                                catch (Exception ex)
+                                catch (Exception)
                                 {
-                                    Console.WriteLine($"Lỗi khi hiển thị dữ liệu tổng kết: {ex.Message}");
-
-                                    // Thiết lập giá trị mặc định nếu có lỗi
                                     lblGPAValue.Text = "---";
                                     lblConductValue.Text = "---";
                                     lblRankValue.Text = "---";
                                     lblAbsentValue.Text = "---";
                                     lblAcademicPerformanceValue.Text = "---";
                                     lblAwardsValue.Text = "---";
-                                    txtTeacherComment.Text = $"Lỗi khi tải dữ liệu tổng kết: {ex.Message}";
+                                    txtTeacherComment.Text = "Lỗi khi tải dữ liệu tổng kết.";
                                 }
                             }));
                         }
                     });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Lỗi khi tải dữ liệu tổng kết: {ex.Message}");
-
-                // Thiết lập giá trị mặc định nếu có lỗi
                 lblGPAValue.Text = "---";
                 lblConductValue.Text = "---";
                 lblRankValue.Text = "---";
                 lblAbsentValue.Text = "---";
                 lblAcademicPerformanceValue.Text = "---";
                 lblAwardsValue.Text = "---";
-                txtTeacherComment.Text = $"Lỗi khi tải dữ liệu tổng kết: {ex.Message}";
+                txtTeacherComment.Text = "Lỗi khi tải dữ liệu tổng kết.";
             }
         }
-       
-        /// <summary>
-        /// Làm mới dữ liệu hiện tại
-        /// </summary>
+
         public void RefreshData()
         {
             try
             {
-                // Tải lại dữ liệu học kỳ hiện tại
                 LoadSemesterData();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi làm mới dữ liệu: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Console.WriteLine($"Chi tiết lỗi: {ex.StackTrace}");
             }
         }
 
         private void SetupEvents()
         {
-
             pnlSubjects.Resize += pnlSubjects_Resize;
         }
 
-
-        // Thêm handler cho sự kiện resize của pnlSubjects
         private void pnlSubjects_Resize(object sender, EventArgs e)
         {
-            // Cập nhật lại kích thước các item nếu cần
             foreach (Control ctrl in pnlSubjects.Controls)
             {
                 if (ctrl is FlowLayoutPanel flowPanel)
@@ -430,7 +354,6 @@ namespace QuanLyTruongHoc.GUI.Controls
                     {
                         if (item is ucKQHTItem scoreItem)
                         {
-                            // Điều chỉnh lại kích thước item theo kích thước mới của panel
                             scoreItem.AdjustToContainerWidth(flowPanel.ClientSize.Width);
                         }
                     }
