@@ -356,7 +356,6 @@ namespace QuanLyTruongHoc
 
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlMainScreen;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblLogin;
         private Guna2HtmlLabel lblSchoolName;
         private Guna2DragControl guna2DragControl1;
@@ -364,7 +363,6 @@ namespace QuanLyTruongHoc
         private Guna.UI2.WinForms.Guna2TextBox txtUserName;
         private Guna.UI2.WinForms.Guna2TextBox txtPW;
         private Guna.UI2.WinForms.Guna2CheckBox chkShowPw;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblError;
         private Guna2Button btnLogin;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblForgotAcc;
@@ -372,9 +370,6 @@ namespace QuanLyTruongHoc
         private Guna2CustomGradientPanel pnlLogin;
         private Guna2Separator guna2Separator1;
         private Guna2PictureBox picLogo;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
-
-        // 2. Add these new UI components to the class
         private Guna.UI2.WinForms.Guna2HtmlLabel lblWelcomeText;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSystemName;
         private Guna.UI2.WinForms.Guna2ImageButton btnFacebook;

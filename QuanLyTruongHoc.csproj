@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -75,13 +75,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\ThongBaoDAL.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
+    <Compile Include="DAL\DiemSoDAL.cs" />
+    <Compile Include="DAL\HocSinhDAL.cs" />
     <Compile Include="DAL\ThongBaoDAL.cs" />
+    <Compile Include="DAL\TKBDAL.cs" />
+    <Compile Include="DTO\DiemSoDTO.cs" />
     <Compile Include="DTO\ThongBaoDTO.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
     <Compile Include="DTO\Notification.cs" />
-    <Compile Include="DTO\StudentInfo.cs" />
+    <Compile Include="DTO\ThongTinHSDTO.cs" />
+    <Compile Include="DTO\TKBDTO.cs" />
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemTBChiTiet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -375,9 +379,6 @@
     <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.resx">
       <DependentUpon>ucQuanLyThoiKhoaBieu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucTaoDonXinNghi.resx">
-      <DependentUpon>ucTaoDonXinNghi.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTestItem.resx">
       <DependentUpon>ucTestItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,12 +439,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmBGH.resx">
       <DependentUpon>frmBGH.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmHS.resx">
       <DependentUpon>frmHS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -494,7 +497,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CSDL.txt" />
+    <None Include="assets\images\book.png" />
+    <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />
     <None Include="assets\images\question_icon.png" />
@@ -520,6 +524,9 @@
     <Content Include="assets\images\twitter.png" />
     <None Include="Resources\loading.png" />
     <None Include="assets\images\school.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BLL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

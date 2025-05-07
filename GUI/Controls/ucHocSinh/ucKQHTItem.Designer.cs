@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             this.pnlMain = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlTeacherComment = new Guna.UI2.WinForms.Guna2Panel();
             this.txtTeacherComment = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblCommentHeader = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlScoreDetails = new Guna.UI2.WinForms.Guna2Panel();
             this.prgAverage = new Guna.UI2.WinForms.Guna2CircleProgressBar();
-            this.lblAverageScore = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.prgFinalExam = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.lblFinalExam = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblFinalExamScore = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -48,12 +48,10 @@
             this.lblAvgScore = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnDetails = new Guna.UI2.WinForms.Guna2Button();
             this.lblSubjectName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.imgSubject = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMain.SuspendLayout();
             this.pnlTeacherComment.SuspendLayout();
             this.pnlScoreDetails.SuspendLayout();
             this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSubject)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -73,20 +71,21 @@
             this.pnlMain.ShadowDecoration.Depth = 5;
             this.pnlMain.ShadowDecoration.Enabled = true;
             this.pnlMain.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 2, 5, 5);
-            this.pnlMain.Size = new System.Drawing.Size(836, 344);
+            this.pnlMain.Size = new System.Drawing.Size(493, 316);
             this.pnlMain.TabIndex = 0;
             // 
             // pnlTeacherComment
             // 
+            this.pnlTeacherComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTeacherComment.Controls.Add(this.txtTeacherComment);
             this.pnlTeacherComment.Controls.Add(this.lblCommentHeader);
-            this.pnlTeacherComment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTeacherComment.Location = new System.Drawing.Point(0, 189);
             this.pnlTeacherComment.Name = "pnlTeacherComment";
             this.pnlTeacherComment.Padding = new System.Windows.Forms.Padding(15, 0, 15, 15);
-            this.pnlTeacherComment.Size = new System.Drawing.Size(836, 155);
+            this.pnlTeacherComment.Size = new System.Drawing.Size(490, 91);
             this.pnlTeacherComment.TabIndex = 2;
-            this.pnlTeacherComment.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTeacherComment_Paint);
             // 
             // txtTeacherComment
             // 
@@ -98,14 +97,13 @@
             this.txtTeacherComment.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
             this.txtTeacherComment.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
             this.txtTeacherComment.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTeacherComment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTeacherComment.Enabled = false;
             this.txtTeacherComment.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
             this.txtTeacherComment.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTeacherComment.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTeacherComment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(100)))));
             this.txtTeacherComment.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTeacherComment.Location = new System.Drawing.Point(15, 27);
+            this.txtTeacherComment.Location = new System.Drawing.Point(15, 22);
             this.txtTeacherComment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTeacherComment.Multiline = true;
             this.txtTeacherComment.Name = "txtTeacherComment";
@@ -113,25 +111,25 @@
             this.txtTeacherComment.PlaceholderText = "";
             this.txtTeacherComment.ReadOnly = true;
             this.txtTeacherComment.SelectedText = "";
-            this.txtTeacherComment.Size = new System.Drawing.Size(806, 113);
+            this.txtTeacherComment.Size = new System.Drawing.Size(449, 54);
             this.txtTeacherComment.TabIndex = 1;
             // 
             // lblCommentHeader
             // 
             this.lblCommentHeader.BackColor = System.Drawing.Color.Transparent;
-            this.lblCommentHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCommentHeader.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCommentHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblCommentHeader.Location = new System.Drawing.Point(15, 0);
             this.lblCommentHeader.Name = "lblCommentHeader";
-            this.lblCommentHeader.Size = new System.Drawing.Size(159, 27);
+            this.lblCommentHeader.Size = new System.Drawing.Size(133, 22);
             this.lblCommentHeader.TabIndex = 0;
             this.lblCommentHeader.Text = "Nhận xét giáo viên";
             // 
             // pnlScoreDetails
             // 
+            this.pnlScoreDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlScoreDetails.Controls.Add(this.prgAverage);
-            this.pnlScoreDetails.Controls.Add(this.lblAverageScore);
             this.pnlScoreDetails.Controls.Add(this.prgFinalExam);
             this.pnlScoreDetails.Controls.Add(this.lblFinalExam);
             this.pnlScoreDetails.Controls.Add(this.lblFinalExamScore);
@@ -141,11 +139,10 @@
             this.pnlScoreDetails.Controls.Add(this.prgAssignment);
             this.pnlScoreDetails.Controls.Add(this.lblAssignment);
             this.pnlScoreDetails.Controls.Add(this.lblAssignmentScore);
-            this.pnlScoreDetails.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlScoreDetails.Location = new System.Drawing.Point(0, 70);
+            this.pnlScoreDetails.Location = new System.Drawing.Point(0, 54);
             this.pnlScoreDetails.Name = "pnlScoreDetails";
             this.pnlScoreDetails.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlScoreDetails.Size = new System.Drawing.Size(836, 119);
+            this.pnlScoreDetails.Size = new System.Drawing.Size(490, 119);
             this.pnlScoreDetails.TabIndex = 1;
             // 
             // prgAverage
@@ -157,7 +154,7 @@
             this.prgAverage.FillThickness = 12;
             this.prgAverage.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.prgAverage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.prgAverage.Location = new System.Drawing.Point(721, 15);
+            this.prgAverage.Location = new System.Drawing.Point(386, 14);
             this.prgAverage.Minimum = 0;
             this.prgAverage.Name = "prgAverage";
             this.prgAverage.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -173,18 +170,6 @@
             this.prgAverage.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Value;
             this.prgAverage.Value = 82;
             // 
-            // lblAverageScore
-            // 
-            this.lblAverageScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAverageScore.BackColor = System.Drawing.Color.Transparent;
-            this.lblAverageScore.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAverageScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
-            this.lblAverageScore.Location = new System.Drawing.Point(574, 15);
-            this.lblAverageScore.Name = "lblAverageScore";
-            this.lblAverageScore.Size = new System.Drawing.Size(145, 27);
-            this.lblAverageScore.TabIndex = 8;
-            this.lblAverageScore.Text = "Điểm trung bình: ";
-            // 
             // prgFinalExam
             // 
             this.prgFinalExam.BackColor = System.Drawing.Color.Transparent;
@@ -195,7 +180,7 @@
             this.prgFinalExam.Name = "prgFinalExam";
             this.prgFinalExam.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.prgFinalExam.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.prgFinalExam.Size = new System.Drawing.Size(225, 12);
+            this.prgFinalExam.Size = new System.Drawing.Size(165, 12);
             this.prgFinalExam.TabIndex = 7;
             this.prgFinalExam.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.prgFinalExam.Value = 9;
@@ -207,7 +192,7 @@
             this.lblFinalExam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblFinalExam.Location = new System.Drawing.Point(18, 68);
             this.lblFinalExam.Name = "lblFinalExam";
-            this.lblFinalExam.Size = new System.Drawing.Size(111, 27);
+            this.lblFinalExam.Size = new System.Drawing.Size(89, 22);
             this.lblFinalExam.TabIndex = 6;
             this.lblFinalExam.Text = "Điểm cuối kỳ";
             // 
@@ -218,7 +203,7 @@
             this.lblFinalExamScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.lblFinalExamScore.Location = new System.Drawing.Point(162, 71);
             this.lblFinalExamScore.Name = "lblFinalExamScore";
-            this.lblFinalExamScore.Size = new System.Drawing.Size(14, 27);
+            this.lblFinalExamScore.Size = new System.Drawing.Size(12, 22);
             this.lblFinalExamScore.TabIndex = 5;
             this.lblFinalExamScore.Text = "9";
             // 
@@ -232,7 +217,7 @@
             this.prgMidtermExam.Name = "prgMidtermExam";
             this.prgMidtermExam.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(190)))), ((int)(((byte)(240)))));
             this.prgMidtermExam.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(220)))));
-            this.prgMidtermExam.Size = new System.Drawing.Size(225, 12);
+            this.prgMidtermExam.Size = new System.Drawing.Size(165, 12);
             this.prgMidtermExam.TabIndex = 4;
             this.prgMidtermExam.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.prgMidtermExam.Value = 8;
@@ -244,7 +229,7 @@
             this.lblMidtermExam.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblMidtermExam.Location = new System.Drawing.Point(18, 41);
             this.lblMidtermExam.Name = "lblMidtermExam";
-            this.lblMidtermExam.Size = new System.Drawing.Size(112, 27);
+            this.lblMidtermExam.Size = new System.Drawing.Size(91, 22);
             this.lblMidtermExam.TabIndex = 3;
             this.lblMidtermExam.Text = "Điểm giữa kỳ";
             // 
@@ -255,7 +240,7 @@
             this.lblMidtermExamScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(220)))));
             this.lblMidtermExamScore.Location = new System.Drawing.Point(162, 44);
             this.lblMidtermExamScore.Name = "lblMidtermExamScore";
-            this.lblMidtermExamScore.Size = new System.Drawing.Size(14, 27);
+            this.lblMidtermExamScore.Size = new System.Drawing.Size(12, 22);
             this.lblMidtermExamScore.TabIndex = 2;
             this.lblMidtermExamScore.Text = "8";
             // 
@@ -269,7 +254,7 @@
             this.prgAssignment.Name = "prgAssignment";
             this.prgAssignment.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(207)))), ((int)(((byte)(135)))));
             this.prgAssignment.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(180)))), ((int)(((byte)(100)))));
-            this.prgAssignment.Size = new System.Drawing.Size(225, 12);
+            this.prgAssignment.Size = new System.Drawing.Size(165, 12);
             this.prgAssignment.TabIndex = 1;
             this.prgAssignment.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.prgAssignment.Value = 7;
@@ -281,7 +266,7 @@
             this.lblAssignment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(110)))));
             this.lblAssignment.Location = new System.Drawing.Point(18, 14);
             this.lblAssignment.Name = "lblAssignment";
-            this.lblAssignment.Size = new System.Drawing.Size(168, 27);
+            this.lblAssignment.Size = new System.Drawing.Size(133, 22);
             this.lblAssignment.TabIndex = 0;
             this.lblAssignment.Text = "Điểm thường xuyên";
             // 
@@ -292,24 +277,24 @@
             this.lblAssignmentScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(180)))), ((int)(((byte)(100)))));
             this.lblAssignmentScore.Location = new System.Drawing.Point(162, 14);
             this.lblAssignmentScore.Name = "lblAssignmentScore";
-            this.lblAssignmentScore.Size = new System.Drawing.Size(14, 27);
+            this.lblAssignmentScore.Size = new System.Drawing.Size(12, 22);
             this.lblAssignmentScore.TabIndex = 0;
             this.lblAssignmentScore.Text = "7";
             // 
             // pnlHeader
             // 
+            this.pnlHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHeader.BorderRadius = 15;
             this.pnlHeader.Controls.Add(this.lblAvgScore);
             this.pnlHeader.Controls.Add(this.btnDetails);
             this.pnlHeader.Controls.Add(this.lblSubjectName);
-            this.pnlHeader.Controls.Add(this.imgSubject);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.pnlHeader.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(255)))));
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlHeader.Size = new System.Drawing.Size(836, 70);
+            this.pnlHeader.Size = new System.Drawing.Size(490, 54);
             this.pnlHeader.TabIndex = 0;
             // 
             // lblAvgScore
@@ -318,9 +303,9 @@
             this.lblAvgScore.BackColor = System.Drawing.Color.Transparent;
             this.lblAvgScore.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAvgScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.lblAvgScore.Location = new System.Drawing.Point(702, 18);
+            this.lblAvgScore.Location = new System.Drawing.Point(345, 8);
             this.lblAvgScore.Name = "lblAvgScore";
-            this.lblAvgScore.Size = new System.Drawing.Size(40, 38);
+            this.lblAvgScore.Size = new System.Drawing.Size(33, 32);
             this.lblAvgScore.TabIndex = 3;
             this.lblAvgScore.Text = "8.2";
             // 
@@ -339,7 +324,7 @@
             this.btnDetails.FillColor = System.Drawing.Color.White;
             this.btnDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(130)))), ((int)(((byte)(225)))));
-            this.btnDetails.Location = new System.Drawing.Point(741, 17);
+            this.btnDetails.Location = new System.Drawing.Point(395, 8);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(80, 36);
             this.btnDetails.TabIndex = 2;
@@ -350,25 +335,11 @@
             this.lblSubjectName.BackColor = System.Drawing.Color.Transparent;
             this.lblSubjectName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
-            this.lblSubjectName.Location = new System.Drawing.Point(62, 23);
+            this.lblSubjectName.Location = new System.Drawing.Point(15, 17);
             this.lblSubjectName.Name = "lblSubjectName";
-            this.lblSubjectName.Size = new System.Drawing.Size(50, 30);
+            this.lblSubjectName.Size = new System.Drawing.Size(41, 23);
             this.lblSubjectName.TabIndex = 1;
             this.lblSubjectName.Text = "Toán";
-            // 
-            // imgSubject
-            // 
-            this.imgSubject.BackColor = System.Drawing.Color.Transparent;
-            this.imgSubject.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(230)))), ((int)(((byte)(245)))));
-            this.imgSubject.ImageRotate = 0F;
-            this.imgSubject.Location = new System.Drawing.Point(15, 15);
-            this.imgSubject.Name = "imgSubject";
-            this.imgSubject.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.imgSubject.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.imgSubject.Size = new System.Drawing.Size(40, 40);
-            this.imgSubject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgSubject.TabIndex = 0;
-            this.imgSubject.TabStop = false;
             // 
             // ucKQHTItem
             // 
@@ -377,7 +348,7 @@
             this.Controls.Add(this.pnlMain);
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Name = "ucKQHTItem";
-            this.Size = new System.Drawing.Size(836, 344);
+            this.Size = new System.Drawing.Size(493, 316);
             this.pnlMain.ResumeLayout(false);
             this.pnlTeacherComment.ResumeLayout(false);
             this.pnlTeacherComment.PerformLayout();
@@ -385,7 +356,6 @@
             this.pnlScoreDetails.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSubject)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -395,7 +365,6 @@
         private Guna.UI2.WinForms.Guna2Panel pnlMain;
         private Guna.UI2.WinForms.Guna2GradientPanel pnlHeader;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSubjectName;
-        private Guna.UI2.WinForms.Guna2PictureBox imgSubject;
         private Guna.UI2.WinForms.Guna2Button btnDetails;
         private Guna.UI2.WinForms.Guna2Panel pnlScoreDetails;
         private Guna.UI2.WinForms.Guna2ProgressBar prgAssignment;
@@ -407,7 +376,6 @@
         private Guna.UI2.WinForms.Guna2ProgressBar prgFinalExam;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblFinalExam;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblFinalExamScore;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblAverageScore;
         private Guna.UI2.WinForms.Guna2Panel pnlTeacherComment;
         private Guna.UI2.WinForms.Guna2TextBox txtTeacherComment;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblCommentHeader;

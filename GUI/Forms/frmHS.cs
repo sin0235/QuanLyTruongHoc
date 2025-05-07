@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QuanLyTruongHoc.DAL;
 
 namespace QuanLyTruongHoc
 {
@@ -23,14 +24,19 @@ namespace QuanLyTruongHoc
 
         private int maNguoiDung;
 
+        private int maHS;
+
         public int ID
         {
             get { return maNguoiDung; }
         }
         public frmHS(int ID)
         {
-            InitializeComponent();
             maNguoiDung = ID;
+            getHSInfo();
+
+            InitializeComponent();
+
 
 
             // Đảm bảo các nút nằm trong Guna2Panel
@@ -43,47 +49,13 @@ namespace QuanLyTruongHoc
             guna2CircleButtonMinimize.FillColor = minimizeButtonColor;
             guna2CircleButtonMaximize.FillColor = maximizeButtonColor;
 
-            // Đảm bảo các nút hiển thị
-            guna2CircleButtonClose.Visible = true;
-            guna2CircleButtonMinimize.Visible = true;
-            guna2CircleButtonMaximize.Visible = true;
-
-            // Cập nhật vị trí nút ngay khi Form khởi tạo
-            UpdateButtonPositions();
-
-            // Đăng ký sự kiện Resize
-            this.Resize += new EventHandler(Form1_Resize);
-
-            // Đăng ký sự kiện click cho các nút menu
-            RegisterMenuButtonEvents();
 
             // Mặc định hiển thị ucThongBao khi khởi động
             btnThongBao_Click(btnThongBao, EventArgs.Empty);
-        }
-
-        // Đăng ký sự kiện cho các nút menu
-        private void RegisterMenuButtonEvents()
-        {
-            btnThongBao.Click += btnThongBao_Click;
-            btnInfo.Click += btnInfo_Click;
-            btnTKB.Click += btnTKB_Click;
-            btnKQHT.Click += btnKQHT_Click;
-            btnReports.Click += btnReports_Click;
-            btnBT.Click += btnBT_Click;
-        }
-
-        // Hàm cập nhật vị trí nút
-        private void UpdateButtonPositions()
-        {
             guna2CircleButtonMinimize.Location = new Point(pnlTitleBar.Width - 90, 5);
             guna2CircleButtonMaximize.Location = new Point(pnlTitleBar.Width - 60, 5);
             guna2CircleButtonClose.Location = new Point(pnlTitleBar.Width - 30, 5);
-        }
 
-        // Sự kiện Resize
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            UpdateButtonPositions();
         }
 
         // Hiệu ứng hover cho nút Close
@@ -258,12 +230,6 @@ namespace QuanLyTruongHoc
             // Phương thức này được thay thế bởi btnInfo_Click
             btnInfo.FillColor = highlightColor;
         }
-
-        private void btnDashboard_Click(object sender, EventArgs e)
-        {
-            // Phương thức này được thay thế bởi btnThongBao_Click
-        }
-
         // Sửa phương thức btnSettings_Click
         private void btnSettings_Click(object sender, EventArgs e)
         {
@@ -300,13 +266,12 @@ namespace QuanLyTruongHoc
             btnSettings.FillColor = Color.Transparent;
 
             // Hiển thị form đổi mật khẩu
-            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(maNguoiDung))
             {
                 // Hiển thị form dạng dialog
                 changePwForm.ShowDialog();
             }
 
-            lblPageTitle.Text = "Đổi mật khẩu";
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -340,13 +305,29 @@ namespace QuanLyTruongHoc
             btnSettings.FillColor = Color.Transparent;
 
             // Hiển thị form đổi mật khẩu
-            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW())
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(maNguoiDung))
             {
                 // Hiển thị form dạng dialog
                 changePwForm.ShowDialog();
             }
 
             lblPageTitle.Text = "Đổi mật khẩu";
+        }
+        private void getHSInfo()
+        {
+            // Tạo một đối tượng ThongTinHSDTO mới
+            DatabaseHelper db = new DatabaseHelper();
+            string query = $@"SELECT MaHS FROM HocSinh WHERE MaNguoiDung = {this.maNguoiDung}";
+            DataTable dt = db.ExecuteQuery(query);
+            if (dt.Rows.Count > 0)
+            {
+                maHS = Convert.ToInt32(dt.Rows[0]["MaHS"]);
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy thông tin học sinh.");
+                return;
+            }
         }
     }
 }

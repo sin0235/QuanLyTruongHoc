@@ -310,3 +310,9 @@ VALUES (5, 1, 2, NULL, NULL, NULL, N'Nhắc nhở công việc', N'Giáo viên N
 
 INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
 VALUES (6, 1, NULL, NULL, NULL, NULL, N'Thông báo chung', N'Thông báo dành cho tất cả mọi người.', GETDATE());
+
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('ThongBao') AND name = 'isActive')
+BEGIN
+    ALTER TABLE ThongBao ADD isActive BIT DEFAULT 1;
+    UPDATE ThongBao SET isActive = 1;
+END

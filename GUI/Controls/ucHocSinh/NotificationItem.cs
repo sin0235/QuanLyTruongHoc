@@ -24,17 +24,20 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Trạng thái đã đọc của thông báo
         private bool isRead = false;
 
-        // maTB của thông báo
-        public int NotificationId { get; set; }
 
-        // Thuộc tính để kiểm tra và cập nhật trạng thái đã đọc
+
+        public int NotificationId { get; private set; }
+        public string Title { get; private set; }
+        public string Sender { get; private set; }
+        public DateTime Date { get; private set; }
+        public string Content { get; private set; }
         public bool IsRead
         {
-            get { return isRead; }
+            get => isRead;
             set
             {
                 isRead = value;
-                UpdateReadStatus(); // Cập nhật giao diện khi trạng thái thay đổi
+                UpdateReadStatus();
             }
         }
 

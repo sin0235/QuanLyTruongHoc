@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-public class StudentInfo
+public class ThongTinHSDTO
 {
     // Thông tin học sinh
     public string StudentId { get; set; }        // Mã học sinh
@@ -32,7 +32,6 @@ public class StudentInfo
     public string MotherName { get; set; }       // Họ tên mẹ
     public string MotherPhone { get; set; }      // Điện thoại mẹ
   
-
 
     public Image Avatar { get; set; }            // Ảnh đại diện
 }

@@ -17,19 +17,13 @@ namespace QuanLyTruongHoc.GUI.Forms
         private readonly DatabaseHelper db;
         private int currentUserId;
 
-        public frmChangePW(int userId = -1)
+        public frmChangePW(int userId)
         {
             InitializeComponent();
 
             db = new DatabaseHelper();
 
-            // Lấy userId từ tham số hoặc từ Form đang login
-            if (userId != -1)
-                currentUserId = userId;
-            else if (frmLogin.LoggedInStudentId > 0)
-                currentUserId = frmLogin.LoggedInStudentId;
-            else if (frmLogin.LoggedInTeacherId > 0)
-                currentUserId = frmLogin.LoggedInTeacherId;
+            currentUserId = userId;
 
             CustomizeDesign();
         }

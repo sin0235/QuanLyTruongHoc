@@ -14,7 +14,7 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucXinNghi : UserControl
     {
         private DatabaseHelper dbHelper;
-        private int currentStudentId;
+        private int currentStudentId = -1;
         private string currentFilter = "all"; // all, approved, pending, rejected
         private string currentTimeFilter = "all"; // all, month, 6months, year
         private ucTaoDonXinNghi ucTaoDon;

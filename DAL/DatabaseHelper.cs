@@ -18,9 +18,8 @@ namespace QuanLyTruongHoc.DAL
         private DataSet ds;
 
         //Phúc toàn
-        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
+        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.sql.login;MultipleActiveResultSets=True;";
         //Tuấn
-        //private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=SIN235.login";
         //Nhân
         //string strCnn = "Data Source=JOHNNYBUIII; Database=QuanLyTruongHoc; " + "user id=sa;password=1;MultipleActiveResultSets=True;";
         public SqlConnection GetConnection()
@@ -66,7 +65,7 @@ namespace QuanLyTruongHoc.DAL
                 ds = new DataSet();
                 da.Fill(ds);
                 dt = ds.Tables[0];
-            }
+        }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi truy vấn: " + ex.Message);
@@ -74,8 +73,8 @@ namespace QuanLyTruongHoc.DAL
             finally
             {
                 CloseConnection();
-            }
-            return dt;
+}
+return dt;
         }
 
         /// <summary>
@@ -87,21 +86,21 @@ namespace QuanLyTruongHoc.DAL
         public DataTable ExecuteQuery(string sqlStr, Dictionary<string, object> parameters)
         {
             DataTable dt = new DataTable();
-            try
+            using (SqlConnection connection = new SqlConnection(strCnn))
+            using (SqlCommand cmd = new SqlCommand(sqlStr, connection))
             {
-                OpenConnection();
-                using (SqlCommand cmd = new SqlCommand(sqlStr, sqlConn))
+                try
                 {
-                    // Thêm các tham số
+                    connection.Open();
+                    // Add parameters
                     if (parameters != null)
                     {
                         foreach (var param in parameters)
                         {
                             if (param.Value is DateTime dateValue)
                             {
-                                // Xử lý đặc biệt cho tham số kiểu DateTime
                                 SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.Date);
-                                sqlParam.Value = dateValue.Date; // Chỉ lấy phần ngày
+                                sqlParam.Value = dateValue.Date;
                                 cmd.Parameters.Add(sqlParam);
                             }
                             else
@@ -111,19 +110,15 @@ namespace QuanLyTruongHoc.DAL
                         }
                     }
 
-                    da = new SqlDataAdapter(cmd);
-                    ds = new DataSet();
-                    da.Fill(ds);
-                    dt = ds.Tables[0];
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi truy vấn: " + ex.Message);
-            }
-            finally
-            {
-                CloseConnection();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi truy vấn: " + ex.Message);
+                }
             }
             return dt;
         }

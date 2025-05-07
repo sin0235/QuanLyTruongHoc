@@ -140,7 +140,6 @@
             this.pnlInfo.Name = "pnlInfo";
             this.pnlInfo.Size = new System.Drawing.Size(1235, 273);
             this.pnlInfo.TabIndex = 2;
-            this.pnlInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlInfo_Paint);
             // 
             // guna2Separator1
             // 
@@ -591,7 +590,6 @@
             this.pnlContact.Name = "pnlContact";
             this.pnlContact.Size = new System.Drawing.Size(852, 324);
             this.pnlContact.TabIndex = 3;
-            this.pnlContact.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContact_Paint);
             // 
             // btnSave
             // 
@@ -767,7 +765,6 @@
             this.txtSDTMe.SelectedText = "";
             this.txtSDTMe.Size = new System.Drawing.Size(271, 39);
             this.txtSDTMe.TabIndex = 12;
-            this.txtSDTMe.TextChanged += new System.EventHandler(this.txtSDTMe_TextChanged);
             // 
             // ucInfoHS
             // 

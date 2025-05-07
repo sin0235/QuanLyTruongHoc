@@ -1,4 +1,6 @@
-﻿namespace QuanLyTruongHoc
+﻿using System.Drawing;
+
+namespace QuanLyTruongHoc
 {
     partial class frmHS
     {
@@ -63,10 +65,10 @@
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.ucKiemTra1 = new QuanLyTruongHoc.GUI.Controls.ucKiemTra();
             this.ucXinNghi1 = new QuanLyTruongHoc.GUI.Controls.ucXinNghi();
-            this.ucKQHT1 = new QuanLyTruongHoc.GUI.Controls.ucKQHT();
-            this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB();
-            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS();
-            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao(ID);
+            this.ucKQHT1 = new QuanLyTruongHoc.GUI.Controls.ucKQHT(maHS, ID);
+            this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB(maHS, ID);
+            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS(maHS);
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao(maHS, ID);
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -278,6 +280,7 @@
             this.btnProfile.Size = new System.Drawing.Size(250, 45);
             this.btnProfile.TabIndex = 0;
             this.btnProfile.Text = "Hồ sơ học sinh";
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // btnSettings
             // 
@@ -448,7 +451,6 @@
             this.btnThongBao.Text = "Thông báo";
             this.btnThongBao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnThongBao.TextOffset = new System.Drawing.Point(15, 0);
-            this.btnThongBao.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // pnlLogo
             // 
@@ -667,6 +669,13 @@
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
             this.ResumeLayout(false);
+            btnThongBao.Click += btnThongBao_Click;
+            btnInfo.Click += btnInfo_Click;
+            btnTKB.Click += btnTKB_Click;
+            btnKQHT.Click += btnKQHT_Click;
+            btnReports.Click += btnReports_Click;
+            btnBT.Click += btnBT_Click;
+
 
         }
 

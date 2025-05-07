@@ -23,143 +23,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             base.Dispose(disposing);
         }
-        private void InitializeTimetableLayout()
-        {
-            tableLayoutPanel1.Controls.Clear();
-
-            // Define day names
-            string[] dayNames = { "Tiết", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật" };
-
-            // Add day headers
-            for (int col = 0; col < dayNames.Length; col++)
-            {
-                Guna.UI2.WinForms.Guna2Panel headerPanel = new Guna.UI2.WinForms.Guna2Panel
-                {
-                    Dock = DockStyle.Fill,
-                    FillColor = Color.FromArgb(100, 120, 230),
-                    BorderRadius = 5,
-                    Margin = new Padding(2),
-                };
-
-                Guna.UI2.WinForms.Guna2HtmlLabel dayLabel = new Guna.UI2.WinForms.Guna2HtmlLabel
-                {
-                    Text = dayNames[col],
-                    ForeColor = Color.White,
-                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                    BackColor = Color.Transparent,
-                    TextAlignment = ContentAlignment.MiddleCenter,
-                    AutoSize = false,
-                    Dock = DockStyle.Fill,
-                };
-
-                // Add a resize event to ensure the label stays centered
-                headerPanel.Resize += (sender, e) => {
-                    if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
-                    {
-                        var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
-                        if (lbl != null)
-                        {
-                            lbl.TextAlignment = ContentAlignment.MiddleCenter;
-                        }
-                    }
-                };
-
-                headerPanel.Controls.Add(dayLabel);
-                tableLayoutPanel1.Controls.Add(headerPanel, col, 0);
-            }
-
-            // Add period numbers
-            for (int row = 1; row < 11; row++)
-            {
-                if (row == 6) // Lunch break
-                {
-                    Guna.UI2.WinForms.Guna2Panel breakPanel = new Guna.UI2.WinForms.Guna2Panel
-                    {
-                        Dock = DockStyle.Fill,
-                        FillColor = Color.FromArgb(240, 240, 240),
-                        BorderRadius = 0,
-                        Margin = new Padding(0)
-                    };
-
-                    Guna.UI2.WinForms.Guna2HtmlLabel breakLabel = new Guna.UI2.WinForms.Guna2HtmlLabel
-                    {
-                        Text = "Nghỉ trưa",
-                        ForeColor = Color.FromArgb(80, 80, 80),
-                        Font = new Font("Segoe UI ", 9, FontStyle.Italic ^ FontStyle.Bold),
-                        TextAlignment = ContentAlignment.MiddleCenter,
-                        BackColor = Color.Transparent,
-                        Dock = DockStyle.Fill,
-                        AutoSize = false
-                    };
-
-                    breakPanel.Resize += (sender, e) => {
-                        if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
-                        {
-                            var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
-                            if (lbl != null)
-                            {
-                                lbl.TextAlignment = ContentAlignment.MiddleCenter;
-                            }
-                        }
-                    };
-                    breakPanel.Controls.Add(breakLabel);
-                    tableLayoutPanel1.Controls.Add(breakPanel, 0, row);
-
-                    // Add break cells for all days
-                    for (int col = 1; col < 8; col++)
-                    {
-                        Guna.UI2.WinForms.Guna2Panel lunchPanel = new Guna.UI2.WinForms.Guna2Panel
-                        {
-                            Dock = DockStyle.Fill,
-                            FillColor = Color.FromArgb(240, 240, 240),
-                            BorderRadius = 0,
-                            Margin = new Padding(0)
-                        };
-
-                        tableLayoutPanel1.Controls.Add(lunchPanel, col, row);
-                    }
-
-                    continue;
-                }
-
-
-                int periodNumber = row < 6 ? row : row - 1;
-
-                Guna.UI2.WinForms.Guna2Panel periodPanel = new Guna.UI2.WinForms.Guna2Panel
-                {
-                    Dock = DockStyle.Fill,
-                    FillColor = Color.FromArgb(240, 245, 250),
-                    BorderRadius = 5,
-                    Margin = new Padding(2),
-                };
-
-                Guna.UI2.WinForms.Guna2HtmlLabel periodLabel = new Guna.UI2.WinForms.Guna2HtmlLabel
-                {
-                    Text = $"Tiết {periodNumber}",
-                    ForeColor = Color.FromArgb(70, 70, 70),
-                    Font = new Font("Segoe UI", 9, FontStyle.Bold),
-                    BackColor = Color.Transparent,
-                    TextAlignment = ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill,
-                    AutoSize = false
-                };
-
-                periodPanel.Resize += (sender, e) =>
-                {
-                    if (sender is Guna.UI2.WinForms.Guna2Panel panel && panel.Controls.Count > 0)
-                    {
-                        var lbl = panel.Controls[0] as Guna.UI2.WinForms.Guna2HtmlLabel;
-                        if (lbl != null)
-                        {
-                            lbl.TextAlignment = ContentAlignment.MiddleCenter;
-                        }
-                    }
-                };
-
-                periodPanel.Controls.Add(periodLabel);
-                tableLayoutPanel1.Controls.Add(periodPanel, 0, row);
-            }
-        }
         #region Component Designer generated code
 
         /// <summary> 
@@ -303,9 +166,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboTuan.ItemHeight = 30;
             this.cboTuan.Location = new System.Drawing.Point(624, 14);
             this.cboTuan.Name = "cboTuan";
-            this.cboTuan.Size = new System.Drawing.Size(190, 36);
+            this.cboTuan.Size = new System.Drawing.Size(293, 36);
             this.cboTuan.TabIndex = 5;
-            this.cboTuan.TextOffset = new System.Drawing.Point(5, 0);
+            this.cboTuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cboTuan.SelectedIndexChanged += new System.EventHandler(this.cboTuan_SelectedIndexChanged);
             // 
             // lblHocKy
@@ -335,7 +198,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboHocKy.Name = "cboHocKy";
             this.cboHocKy.Size = new System.Drawing.Size(157, 36);
             this.cboHocKy.TabIndex = 3;
-            this.cboHocKy.TextOffset = new System.Drawing.Point(5, 0);
+            this.cboHocKy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cboHocKy.SelectedIndexChanged += new System.EventHandler(this.cboHocKy_SelectedIndexChanged);
             // 
             // lblNamHoc
@@ -365,7 +228,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboNamHoc.Name = "cboNamHoc";
             this.cboNamHoc.Size = new System.Drawing.Size(192, 36);
             this.cboNamHoc.TabIndex = 0;
-            this.cboNamHoc.TextOffset = new System.Drawing.Point(5, 0);
+            this.cboNamHoc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cboNamHoc.SelectedIndexChanged += new System.EventHandler(this.cboNamHoc_SelectedIndexChanged);
             // 
             // guna2Separator1
@@ -392,36 +255,24 @@ namespace QuanLyTruongHoc.GUI.Controls
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 8;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28F));
+            this.tableLayoutPanel1.ColumnCount = 7;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1510, 951);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // pnlNoData
             // 

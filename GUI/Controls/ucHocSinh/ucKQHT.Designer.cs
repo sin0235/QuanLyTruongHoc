@@ -326,7 +326,6 @@
             this.lblAbsent.TabIndex = 10;
             this.lblAbsent.Text = "Số buổi nghỉ";
             this.lblAbsent.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblAbsent.Click += new System.EventHandler(this.lblAbsent_Click);
             // 
             // lblRankValue
             // 
@@ -439,7 +438,6 @@
             this.lblConduct.TabIndex = 2;
             this.lblConduct.Text = "Hạnh kiểm";
             this.lblConduct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblConduct.Click += new System.EventHandler(this.lblConduct_Click);
             // 
             // lblAcademicPerformanceValue
             // 
@@ -483,11 +481,10 @@
             // pnlSubjects
             // 
             this.pnlSubjects.AutoScroll = true;
-            this.pnlSubjects.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSubjects.Location = new System.Drawing.Point(20, 20);
+            this.pnlSubjects.Location = new System.Drawing.Point(678, 20);
             this.pnlSubjects.Name = "pnlSubjects";
             this.pnlSubjects.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.pnlSubjects.Size = new System.Drawing.Size(1600, 842);
+            this.pnlSubjects.Size = new System.Drawing.Size(942, 842);
             this.pnlSubjects.TabIndex = 0;
             // 
             // ucKQHT
@@ -541,5 +538,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformanceValue;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformance;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSummaryTitle;
+
     }
 }
