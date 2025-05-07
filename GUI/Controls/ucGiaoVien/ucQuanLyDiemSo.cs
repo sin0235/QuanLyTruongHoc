@@ -24,9 +24,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             db = new DatabaseHelper();
             MaNguoiDung = maNguoiDung;
             MaGiaoVien = maGiaoVien;
-
-            // Debug: Check values
-            MessageBox.Show($"MaNguoiDung: {MaNguoiDung}, MaGiaoVien: {MaGiaoVien}");
         }
 
 

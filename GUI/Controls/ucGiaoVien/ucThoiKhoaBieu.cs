@@ -154,6 +154,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             LoadLichDay(maNguoiDung);
         }
+
+        private void lamMoiBtn_Click(object sender, EventArgs e)
+        {
+            LoadLichDay(maNguoiDung);
+        }
     }
 }
 

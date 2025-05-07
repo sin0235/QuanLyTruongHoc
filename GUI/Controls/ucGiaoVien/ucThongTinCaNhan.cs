@@ -72,6 +72,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     {
                         anhDaiDienPictureBox.Image = Properties.Resources.defautAvatar_Teacher_Female; // Replace with your female image resource
                     }
+                    trangThai.Text = "Trạng thái: Đang hoạt động";
                 }
                 else
                 {
