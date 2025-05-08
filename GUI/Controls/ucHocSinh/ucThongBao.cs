@@ -455,7 +455,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                     Task.Run(() =>
                     {
                         // Pass the current user's ID when updating the read status
-                        bool success = thongBaoDAL.UpdateReadStatus(maTB, maNguoiDung);
+                        bool success = thongBaoDAL.UpdateReadStatus(maTB, id);
                         if (!success)
                         {
                             Console.WriteLine($"Không thể cập nhật trạng thái đọc cho thông báo {maTB}");

@@ -232,11 +232,10 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Check if the record already exists
-                string checkQuery = @"
+                string checkPersonalQuery = @"
                     SELECT COUNT(*) 
-                    FROM ThongBaoNguoiDoc 
-                    WHERE MaTB = @MaTB AND MaNguoiDung = @MaNguoiDung";
+                    FROM ThongBao 
+                    WHERE MaTB = @MaTB AND MaNguoiNhan = @MaNguoiDung";
 
                 Dictionary<string, object> checkParams = new Dictionary<string, object>
                 {
@@ -245,25 +244,38 @@ namespace QuanLyTruongHoc.DAL
                 };
 
                 DatabaseHelper dbHelper = new DatabaseHelper();
-                int existingCount = Convert.ToInt32(dbHelper.ExecuteScalar(checkQuery, checkParams));
+                int isPersonal = Convert.ToInt32(dbHelper.ExecuteScalar(checkPersonalQuery, checkParams));
+                if (isPersonal > 0)
+                {
+                    string updateQuery = @"
+                        UPDATE ThongBao 
+                        SET isActive = 0 
+                        WHERE MaTB = @MaTB AND MaNguoiNhan = @MaNguoiDung";
 
-                // If the record doesn't exist, insert a new one
+                    Dictionary<string, object> updateParams = new Dictionary<string, object>
+                    {
+                        { "@MaTB", maTB },
+                        { "@MaNguoiDung", maNguoiDung }
+                    };
+
+                    dbHelper.ExecuteNonQuery(updateQuery, updateParams);
+                }
+                string checkReadQuery = @"
+                    SELECT COUNT(*) 
+                    FROM ThongBaoNguoiDoc 
+                    WHERE MaTB = @MaTB AND MaNguoiDung = @MaNguoiDung";
+
+                int existingCount = Convert.ToInt32(dbHelper.ExecuteScalar(checkReadQuery, checkParams));
                 if (existingCount == 0)
                 {
                     string insertQuery = @"
                         INSERT INTO ThongBaoNguoiDoc (MaTB, MaNguoiDung, ThoiGianDoc)
                         VALUES (@MaTB, @MaNguoiDung, GETDATE())";
 
-                    Dictionary<string, object> insertParams = new Dictionary<string, object>
-                    {
-                        { "@MaTB", maTB },
-                        { "@MaNguoiDung", maNguoiDung }
-                    };
-
-                    return dbHelper.ExecuteNonQuery(insertQuery, insertParams);
+                    return dbHelper.ExecuteNonQuery(insertQuery, checkParams);
                 }
 
-                return true; // Record already exists, no need to insert
+                return true;
             }
             catch (Exception ex)
             {
