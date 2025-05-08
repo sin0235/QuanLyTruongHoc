@@ -723,17 +723,21 @@ namespace QuanLyTruongHoc.DAL
                     return -1;
                 }
 
+                // Tạo mã học sinh tự động
+                int currentYear = DateTime.Now.Year;
+                string studentIdStr = GenerateStudentId(currentYear, student.IdentityCode);
+                int studentId = Convert.ToInt32(studentIdStr);
+
                 // Thêm học sinh mới
                 string queryInsertHocSinh = @"
                 INSERT INTO HocSinh (
-                    MaNguoiDung, HoTen, NgaySinh, GioiTinh, 
+                    MaHS, MaNguoiDung, HoTen, NgaySinh, GioiTinh, 
                     MaDinhDanh, NoiSinh, DanToc, TonGiao, 
                     QuocGia, TinhThanh, QuanHuyen, XaPhuong, 
                     DiaChiThuongTru, SDT, Email, MaLop
                 )
-                OUTPUT INSERTED.MaHS
                 VALUES (
-                    @MaNguoiDung, @HoTen, @NgaySinh, @GioiTinh,
+                    @MaHS, @MaNguoiDung, @HoTen, @NgaySinh, @GioiTinh,
                     @MaDinhDanh, @NoiSinh, @DanToc, @TonGiao,
                     @QuocGia, @TinhThanh, @QuanHuyen, @XaPhuong,
                     @DiaChiThuongTru, @SDT, @Email, @MaLop
@@ -741,6 +745,7 @@ namespace QuanLyTruongHoc.DAL
 
                 Dictionary<string, object> studentParams = new Dictionary<string, object>
                 {
+                    { "@MaHS", studentId },
                     { "@MaNguoiDung", maNguoiDung },
                     { "@HoTen", string.IsNullOrEmpty(student.FullName) ? DBNull.Value : (object)student.FullName },
                     { "@NgaySinh", student.DateOfBirth },
@@ -759,16 +764,21 @@ namespace QuanLyTruongHoc.DAL
                     { "@MaLop", maLop }
                 };
 
-                // Thực hiện truy vấn và lấy mã học sinh được tạo
-                object result = db.ExecuteScalar(queryInsertHocSinh, studentParams);
-                int maHS = Convert.ToInt32(result);
+                // Thực hiện truy vấn và kiểm tra kết quả
+                bool result = db.ExecuteNonQuery(queryInsertHocSinh, studentParams);
+
+                if (!result)
+                {
+                    Console.WriteLine("Thêm học sinh thất bại");
+                    return -1;
+                }
 
                 // Thêm thông tin phụ huynh nếu có
                 if (!string.IsNullOrEmpty(student.FatherName) || !string.IsNullOrEmpty(student.MotherName) ||
                     !string.IsNullOrEmpty(student.FatherPhone) || !string.IsNullOrEmpty(student.MotherPhone))
                 {
                     UpdateParentInfo(
-                        maHS,
+                        studentId,
                         student.FatherName,
                         student.FatherPhone,
                         student.MotherName,
@@ -776,12 +786,16 @@ namespace QuanLyTruongHoc.DAL
                     );
                 }
 
-                return maHS;
+                return studentId;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Lỗi khi thêm học sinh: {ex.Message}");
                 return -1;
+            }
+            finally
+            {
+                db.CloseConnection();
             }
         }
 
@@ -1002,6 +1016,43 @@ namespace QuanLyTruongHoc.DAL
             const string chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        /// <summary>
+        /// Tạo mã học sinh duy nhất dựa trên năm hiện tại và số căn cước công dân
+        /// </summary>
+        /// <param name="currentYear">Năm hiện tại</param>
+        /// <param name="citizenId">Số căn cước công dân</param>
+        /// <returns>Mã học sinh được tạo tự động</returns>
+        private string GenerateStudentId(int currentYear, string citizenId)
+        {
+            // Kiểm tra nếu căn cước công dân là null hoặc trống
+            if (string.IsNullOrEmpty(citizenId))
+            {
+                // Tạo một ID mặc định theo năm và số ngẫu nhiên
+                Random random = new Random();
+                return $"{currentYear}{random.Next(100000, 999999)}";
+            }
+
+            // Lấy 6 ký tự cuối của CCCD
+            string lastSixDigits = citizenId.Length >= 6 ?
+                citizenId.Substring(citizenId.Length - 6) :
+                citizenId.PadLeft(6, '0');
+
+            // Tạo mã học sinh với định dạng: năm + 6 số cuối CCCD
+            string proposedId = $"{currentYear}{lastSixDigits}";
+
+            // Kiểm tra xem mã học sinh đã tồn tại chưa
+            string checkQuery = $"SELECT COUNT(*) FROM HocSinh WHERE MaHS = {proposedId}";
+
+            // Nếu đã tồn tại, thêm số ngẫu nhiên ở cuối
+            int count = Convert.ToInt32(db.ExecuteScalar(checkQuery));
+            if (count > 0)
+            {
+                Random random = new Random();
+                proposedId = $"{proposedId}{random.Next(10, 99)}";
+            }
+
+            return proposedId;
         }
     }
 }

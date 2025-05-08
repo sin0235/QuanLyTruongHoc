@@ -583,8 +583,6 @@
     <None Include="Resources\loading.png" />
     <None Include="assets\images\school.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
