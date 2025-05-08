@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cbLop = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btnThemHocSinh = new Guna.UI2.WinForms.Guna2Button();
@@ -40,20 +40,20 @@
             this.btnTimKiem = new Guna.UI2.WinForms.Guna2Button();
             this.MaNguoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvHocSinh = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.MaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SDTMe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoTenMe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SDTCha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoTenCha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SDTHocSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TinhThanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DanToc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CMND = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaHS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CMND = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DanToc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TinhThanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SDTHocSinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoTenCha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SDTCha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoTenMe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SDTMe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHocSinh)).BeginInit();
             this.SuspendLayout();
@@ -192,18 +192,18 @@
             // 
             this.dgvHocSinh.AllowUserToAddRows = false;
             this.dgvHocSinh.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvHocSinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvHocSinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHocSinh.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvHocSinh.BackgroundColor = System.Drawing.Color.AliceBlue;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHocSinh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHocSinh.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvHocSinh.ColumnHeadersHeight = 50;
             this.dgvHocSinh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvHocSinh.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -222,14 +222,14 @@
             this.HoTenMe,
             this.SDTMe,
             this.MaLop});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHocSinh.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHocSinh.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvHocSinh.GridColor = System.Drawing.Color.AliceBlue;
             this.dgvHocSinh.Location = new System.Drawing.Point(59, 124);
             this.dgvHocSinh.Margin = new System.Windows.Forms.Padding(2);
@@ -262,101 +262,13 @@
             this.dgvHocSinh.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHocSinh.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // MaLop
+            // MaHS
             // 
-            this.MaLop.DataPropertyName = "TenLop";
-            this.MaLop.HeaderText = "Lớp";
-            this.MaLop.MinimumWidth = 6;
-            this.MaLop.Name = "MaLop";
-            this.MaLop.ReadOnly = true;
-            // 
-            // SDTMe
-            // 
-            this.SDTMe.DataPropertyName = "SoDienThoaiMe";
-            this.SDTMe.HeaderText = "SĐT mẹ";
-            this.SDTMe.MinimumWidth = 6;
-            this.SDTMe.Name = "SDTMe";
-            this.SDTMe.ReadOnly = true;
-            // 
-            // HoTenMe
-            // 
-            this.HoTenMe.DataPropertyName = "HoTenMe";
-            this.HoTenMe.HeaderText = "Họ tên mẹ";
-            this.HoTenMe.MinimumWidth = 6;
-            this.HoTenMe.Name = "HoTenMe";
-            this.HoTenMe.ReadOnly = true;
-            // 
-            // SDTCha
-            // 
-            this.SDTCha.DataPropertyName = "SoDienThoaiCha";
-            this.SDTCha.HeaderText = "SĐT cha";
-            this.SDTCha.MinimumWidth = 6;
-            this.SDTCha.Name = "SDTCha";
-            this.SDTCha.ReadOnly = true;
-            // 
-            // HoTenCha
-            // 
-            this.HoTenCha.DataPropertyName = "HoTenCha";
-            this.HoTenCha.HeaderText = "Họ tên cha";
-            this.HoTenCha.MinimumWidth = 6;
-            this.HoTenCha.Name = "HoTenCha";
-            this.HoTenCha.ReadOnly = true;
-            // 
-            // SDTHocSinh
-            // 
-            this.SDTHocSinh.DataPropertyName = "SDT";
-            this.SDTHocSinh.HeaderText = "SĐT Học sinh";
-            this.SDTHocSinh.MinimumWidth = 6;
-            this.SDTHocSinh.Name = "SDTHocSinh";
-            this.SDTHocSinh.ReadOnly = true;
-            // 
-            // TinhThanh
-            // 
-            this.TinhThanh.DataPropertyName = "TinhThanh";
-            this.TinhThanh.HeaderText = "Tỉnh/Thành";
-            this.TinhThanh.MinimumWidth = 6;
-            this.TinhThanh.Name = "TinhThanh";
-            this.TinhThanh.ReadOnly = true;
-            // 
-            // DiaChi
-            // 
-            this.DiaChi.DataPropertyName = "DiaChiThuongTru";
-            this.DiaChi.HeaderText = "Địa chỉ";
-            this.DiaChi.MinimumWidth = 6;
-            this.DiaChi.Name = "DiaChi";
-            this.DiaChi.ReadOnly = true;
-            // 
-            // DanToc
-            // 
-            this.DanToc.DataPropertyName = "DanToc";
-            this.DanToc.HeaderText = "Dân tộc";
-            this.DanToc.MinimumWidth = 6;
-            this.DanToc.Name = "DanToc";
-            this.DanToc.ReadOnly = true;
-            // 
-            // CMND
-            // 
-            this.CMND.DataPropertyName = "MaDinhDanh";
-            this.CMND.HeaderText = "CMND/CCCD";
-            this.CMND.MinimumWidth = 6;
-            this.CMND.Name = "CMND";
-            this.CMND.ReadOnly = true;
-            // 
-            // GioiTinh
-            // 
-            this.GioiTinh.DataPropertyName = "GioiTinh";
-            this.GioiTinh.HeaderText = "Giới tính";
-            this.GioiTinh.MinimumWidth = 6;
-            this.GioiTinh.Name = "GioiTinh";
-            this.GioiTinh.ReadOnly = true;
-            // 
-            // NgaySinh
-            // 
-            this.NgaySinh.DataPropertyName = "NgaySinh";
-            this.NgaySinh.HeaderText = "Ngày sinh";
-            this.NgaySinh.MinimumWidth = 6;
-            this.NgaySinh.Name = "NgaySinh";
-            this.NgaySinh.ReadOnly = true;
+            this.MaHS.DataPropertyName = "MaHS";
+            this.MaHS.HeaderText = "Mã học sinh";
+            this.MaHS.MinimumWidth = 6;
+            this.MaHS.Name = "MaHS";
+            this.MaHS.ReadOnly = true;
             // 
             // HoTen
             // 
@@ -366,13 +278,101 @@
             this.HoTen.Name = "HoTen";
             this.HoTen.ReadOnly = true;
             // 
-            // MaHS
+            // NgaySinh
             // 
-            this.MaHS.DataPropertyName = "MaHS";
-            this.MaHS.HeaderText = "Mã học sinh";
-            this.MaHS.MinimumWidth = 6;
-            this.MaHS.Name = "MaHS";
-            this.MaHS.ReadOnly = true;
+            this.NgaySinh.DataPropertyName = "NgaySinh";
+            this.NgaySinh.HeaderText = "Ngày sinh";
+            this.NgaySinh.MinimumWidth = 6;
+            this.NgaySinh.Name = "NgaySinh";
+            this.NgaySinh.ReadOnly = true;
+            // 
+            // GioiTinh
+            // 
+            this.GioiTinh.DataPropertyName = "GioiTinh";
+            this.GioiTinh.HeaderText = "Giới tính";
+            this.GioiTinh.MinimumWidth = 6;
+            this.GioiTinh.Name = "GioiTinh";
+            this.GioiTinh.ReadOnly = true;
+            // 
+            // CMND
+            // 
+            this.CMND.DataPropertyName = "MaDinhDanh";
+            this.CMND.HeaderText = "CMND/CCCD";
+            this.CMND.MinimumWidth = 6;
+            this.CMND.Name = "CMND";
+            this.CMND.ReadOnly = true;
+            // 
+            // DanToc
+            // 
+            this.DanToc.DataPropertyName = "DanToc";
+            this.DanToc.HeaderText = "Dân tộc";
+            this.DanToc.MinimumWidth = 6;
+            this.DanToc.Name = "DanToc";
+            this.DanToc.ReadOnly = true;
+            // 
+            // DiaChi
+            // 
+            this.DiaChi.DataPropertyName = "DiaChiThuongTru";
+            this.DiaChi.HeaderText = "Địa chỉ";
+            this.DiaChi.MinimumWidth = 6;
+            this.DiaChi.Name = "DiaChi";
+            this.DiaChi.ReadOnly = true;
+            // 
+            // TinhThanh
+            // 
+            this.TinhThanh.DataPropertyName = "TinhThanh";
+            this.TinhThanh.HeaderText = "Tỉnh/Thành";
+            this.TinhThanh.MinimumWidth = 6;
+            this.TinhThanh.Name = "TinhThanh";
+            this.TinhThanh.ReadOnly = true;
+            // 
+            // SDTHocSinh
+            // 
+            this.SDTHocSinh.DataPropertyName = "SDT";
+            this.SDTHocSinh.HeaderText = "SĐT Học sinh";
+            this.SDTHocSinh.MinimumWidth = 6;
+            this.SDTHocSinh.Name = "SDTHocSinh";
+            this.SDTHocSinh.ReadOnly = true;
+            // 
+            // HoTenCha
+            // 
+            this.HoTenCha.DataPropertyName = "HoTenCha";
+            this.HoTenCha.HeaderText = "Họ tên cha";
+            this.HoTenCha.MinimumWidth = 6;
+            this.HoTenCha.Name = "HoTenCha";
+            this.HoTenCha.ReadOnly = true;
+            // 
+            // SDTCha
+            // 
+            this.SDTCha.DataPropertyName = "SoDienThoaiCha";
+            this.SDTCha.HeaderText = "SĐT cha";
+            this.SDTCha.MinimumWidth = 6;
+            this.SDTCha.Name = "SDTCha";
+            this.SDTCha.ReadOnly = true;
+            // 
+            // HoTenMe
+            // 
+            this.HoTenMe.DataPropertyName = "HoTenMe";
+            this.HoTenMe.HeaderText = "Họ tên mẹ";
+            this.HoTenMe.MinimumWidth = 6;
+            this.HoTenMe.Name = "HoTenMe";
+            this.HoTenMe.ReadOnly = true;
+            // 
+            // SDTMe
+            // 
+            this.SDTMe.DataPropertyName = "SoDienThoaiMe";
+            this.SDTMe.HeaderText = "SĐT mẹ";
+            this.SDTMe.MinimumWidth = 6;
+            this.SDTMe.Name = "SDTMe";
+            this.SDTMe.ReadOnly = true;
+            // 
+            // MaLop
+            // 
+            this.MaLop.DataPropertyName = "TenLop";
+            this.MaLop.HeaderText = "Lớp";
+            this.MaLop.MinimumWidth = 6;
+            this.MaLop.Name = "MaLop";
+            this.MaLop.ReadOnly = true;
             // 
             // txtTimKiem
             // 
