@@ -75,6 +75,7 @@
             this.btnHuy = new Guna.UI2.WinForms.Guna2Button();
             this.picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lblChangeAvatar = new System.Windows.Forms.LinkLabel();
+            this.ucControlBar1 = new QuanLyTruongHoc.GUI.Controls.ucControlBar();
             this.grpThongTinCoBan.SuspendLayout();
             this.grpThongTinLienHe.SuspendLayout();
             this.grpThongTinGiaDinh.SuspendLayout();
@@ -312,7 +313,7 @@
             this.grpThongTinCoBan.Controls.Add(this.txtTonGiao);
             this.grpThongTinCoBan.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.grpThongTinCoBan.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.grpThongTinCoBan.Location = new System.Drawing.Point(20, 20);
+            this.grpThongTinCoBan.Location = new System.Drawing.Point(12, 46);
             this.grpThongTinCoBan.Name = "grpThongTinCoBan";
             this.grpThongTinCoBan.Size = new System.Drawing.Size(470, 324);
             this.grpThongTinCoBan.TabIndex = 0;
@@ -522,7 +523,7 @@
             this.grpThongTinLienHe.Controls.Add(this.txtEmail);
             this.grpThongTinLienHe.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.grpThongTinLienHe.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.grpThongTinLienHe.Location = new System.Drawing.Point(20, 365);
+            this.grpThongTinLienHe.Location = new System.Drawing.Point(12, 391);
             this.grpThongTinLienHe.Name = "grpThongTinLienHe";
             this.grpThongTinLienHe.Size = new System.Drawing.Size(470, 264);
             this.grpThongTinLienHe.TabIndex = 1;
@@ -668,7 +669,7 @@
             this.grpThongTinGiaDinh.Controls.Add(this.txtHoTenCha);
             this.grpThongTinGiaDinh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.grpThongTinGiaDinh.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.grpThongTinGiaDinh.Location = new System.Drawing.Point(500, 20);
+            this.grpThongTinGiaDinh.Location = new System.Drawing.Point(492, 46);
             this.grpThongTinGiaDinh.Name = "grpThongTinGiaDinh";
             this.grpThongTinGiaDinh.Size = new System.Drawing.Size(470, 187);
             this.grpThongTinGiaDinh.TabIndex = 2;
@@ -767,7 +768,7 @@
             this.grpThongTinHocTap.Controls.Add(this.txtLop);
             this.grpThongTinHocTap.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.grpThongTinHocTap.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.grpThongTinHocTap.Location = new System.Drawing.Point(500, 217);
+            this.grpThongTinHocTap.Location = new System.Drawing.Point(492, 243);
             this.grpThongTinHocTap.Name = "grpThongTinHocTap";
             this.grpThongTinHocTap.Size = new System.Drawing.Size(470, 127);
             this.grpThongTinHocTap.TabIndex = 3;
@@ -804,7 +805,7 @@
             this.btnXacNhan.FillColor = System.Drawing.Color.RoyalBlue;
             this.btnXacNhan.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold);
             this.btnXacNhan.ForeColor = System.Drawing.Color.White;
-            this.btnXacNhan.Location = new System.Drawing.Point(593, 685);
+            this.btnXacNhan.Location = new System.Drawing.Point(585, 711);
             this.btnXacNhan.Name = "btnXacNhan";
             this.btnXacNhan.Size = new System.Drawing.Size(200, 45);
             this.btnXacNhan.TabIndex = 6;
@@ -821,7 +822,7 @@
             this.btnHuy.FillColor = System.Drawing.Color.Silver;
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold);
             this.btnHuy.ForeColor = System.Drawing.Color.White;
-            this.btnHuy.Location = new System.Drawing.Point(813, 685);
+            this.btnHuy.Location = new System.Drawing.Point(805, 711);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(200, 45);
             this.btnHuy.TabIndex = 7;
@@ -834,7 +835,7 @@
             this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.picAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
             this.picAvatar.ImageRotate = 0F;
-            this.picAvatar.Location = new System.Drawing.Point(708, 409);
+            this.picAvatar.Location = new System.Drawing.Point(700, 435);
             this.picAvatar.Name = "picAvatar";
             this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.picAvatar.Size = new System.Drawing.Size(200, 200);
@@ -846,7 +847,7 @@
             // 
             this.lblChangeAvatar.AutoSize = true;
             this.lblChangeAvatar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChangeAvatar.Location = new System.Drawing.Point(755, 629);
+            this.lblChangeAvatar.Location = new System.Drawing.Point(747, 655);
             this.lblChangeAvatar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChangeAvatar.Name = "lblChangeAvatar";
             this.lblChangeAvatar.Size = new System.Drawing.Size(100, 17);
@@ -855,12 +856,23 @@
             this.lblChangeAvatar.Text = "Đổi ảnh đại diện";
             this.lblChangeAvatar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblChangeAvatar_LinkClicked);
             // 
+            // ucControlBar1
+            // 
+            this.ucControlBar1.BackColor = System.Drawing.Color.Transparent;
+            this.ucControlBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucControlBar1.Location = new System.Drawing.Point(0, 0);
+            this.ucControlBar1.Name = "ucControlBar1";
+            this.ucControlBar1.Size = new System.Drawing.Size(1032, 40);
+            this.ucControlBar1.TabIndex = 9;
+            this.ucControlBar1.TitleText = "Content";
+            // 
             // frmQuanLyHocSinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1032, 748);
+            this.ClientSize = new System.Drawing.Size(1032, 790);
+            this.Controls.Add(this.ucControlBar1);
             this.Controls.Add(this.lblChangeAvatar);
             this.Controls.Add(this.grpThongTinCoBan);
             this.Controls.Add(this.grpThongTinLienHe);
@@ -869,7 +881,7 @@
             this.Controls.Add(this.picAvatar);
             this.Controls.Add(this.btnXacNhan);
             this.Controls.Add(this.btnHuy);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "frmQuanLyHocSinh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -943,5 +955,6 @@
         private Guna.UI2.WinForms.Guna2CheckBox checkNam;
         private Guna.UI2.WinForms.Guna2CheckBox checkNu;
         private System.Windows.Forms.LinkLabel lblChangeAvatar;
+        private Controls.ucControlBar ucControlBar1;
     }
 }

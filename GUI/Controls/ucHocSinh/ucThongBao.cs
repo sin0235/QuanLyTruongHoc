@@ -229,7 +229,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 try
                 {
                     // Sử dụng phương thức có sẵn để lấy thông báo chung
-                    thongBaoChung = thongBaoDAL.GetRoleNotifications(maVaiTro);
+                    thongBaoChung = thongBaoDAL.GetRoleNotifications(maVaiTro, id);
 
                     // Bổ sung thông báo lớp học và thông báo hệ thống chung vào danh sách thông báo chung
                     if (maLop.HasValue)
@@ -454,7 +454,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                     // Thực hiện cập nhật trạng thái đã đọc trong CSDL
                     Task.Run(() =>
                     {
-                        bool success = thongBaoDAL.UpdateReadStatus(maTB);
+                        // Pass the current user's ID when updating the read status
+                        bool success = thongBaoDAL.UpdateReadStatus(maTB, maNguoiDung);
                         if (!success)
                         {
                             Console.WriteLine($"Không thể cập nhật trạng thái đọc cho thông báo {maTB}");

@@ -367,16 +367,5 @@ namespace QuanLyTruongHoc
                 };
             }
         }
-
-        private void guiThongBaoBtn_Click(object sender, EventArgs e)
-        {
-            int maGV = GetMaGiaoVien(maNguoiDung);
-            // Mở ucGuiThongBao ở pnlContent
-            ucGuiThongBao uc = new ucGuiThongBao(maGV);
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Clear();
-            pnlContent.Controls.Add(uc); // Thêm ucGuiThongBao vào pnlContent
-            uc.BringToFront();
-        }
     }
 }

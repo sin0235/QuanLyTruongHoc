@@ -75,12 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\BaiKiemTraDAL.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DAL\DiemSoDAL.cs" />
     <Compile Include="DAL\DonXinNghiDAL.cs" />
     <Compile Include="DAL\HocSinhDAL.cs" />
     <Compile Include="DAL\ThongBaoDAL.cs" />
     <Compile Include="DAL\TKBDAL.cs" />
+    <Compile Include="DTO\BaiKiemTraDTO.cs" />
     <Compile Include="DTO\DiemSoDTO.cs" />
     <Compile Include="DTO\DonXinNghiDTO.cs" />
     <Compile Include="DTO\ThongBaoDTO.cs" />
@@ -141,6 +143,18 @@
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucThongTinCaNhan.Designer.cs">
       <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTL.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTL.Designer.cs">
+      <DependentUpon>ucTL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTN.Designer.cs">
+      <DependentUpon>ucTN.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucXemThongBao.cs">
       <SubType>UserControl</SubType>
@@ -337,7 +351,12 @@
     <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.Designer.cs">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.cs" />
+    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.Designer.cs">
+      <DependentUpon>frmTaoBaiKiemTra.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmThongBaoChiTiet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,8 +374,11 @@
     <EmbeddedResource Include="GUI\Controls\ucControlBar.resx">
       <DependentUpon>ucControlBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucGuiThongBao.resx">
-      <DependentUpon>ucGuiThongBao.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucTL.resx">
+      <DependentUpon>ucTL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucTN.resx">
+      <DependentUpon>ucTN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
@@ -468,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyThoiKhoaBieu.resx">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmTaoBaiKiemTra.resx">
+      <DependentUpon>frmTaoBaiKiemTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmThongBaoChiTiet.resx">
       <DependentUpon>frmThongBaoChiTiet.cs</DependentUpon>

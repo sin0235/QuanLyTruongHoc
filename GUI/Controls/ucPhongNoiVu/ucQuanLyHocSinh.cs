@@ -207,7 +207,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             frmQuanLyHocSinh frm = new frmQuanLyHocSinh();
             frm.StartPosition = FormStartPosition.CenterScreen;
-
+            frm.title = "Thêm học sinh mới";
             if (frm.ShowDialog() == DialogResult.OK) // Chỉ thực hiện nếu thêm học sinh thành công
             {
                 try
@@ -268,7 +268,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         !string.IsNullOrEmpty(hocSinh.FatherPhone) ? hocSinh.FatherPhone : hocSinh.MotherPhone,
                         hocSinh.ClassName
                     );
-
+                    frm.title = "Sửa thông tin học sinh";
                     frm.StartPosition = FormStartPosition.CenterScreen;
 
                     if (frm.ShowDialog() == DialogResult.OK)

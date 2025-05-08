@@ -31,19 +31,41 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             try
             {
-                // Truy vấn danh sách học sinh trong lớp của GVCN
+                // Truy vấn danh sách học sinh trong lớp của GVCN với thông tin chi tiết
                 string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STT,
-            hs.MaHS,
-            hs.HoTen,
-            hs.NgaySinh,
-            hs.GioiTinh,
-            hs.DiaChi,
-            hs.SDTPhuHuynh
-        FROM HocSinh hs
-        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}";
+                SELECT 
+                    ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STT,
+                    hs.MaHS,
+                    hs.HoTen,
+                    CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh,
+                    hs.GioiTinh,
+                    -- Ghép các thành phần địa chỉ từ bảng HocSinh
+                    CASE 
+                        WHEN hs.DiaChiThuongTru IS NOT NULL AND hs.DiaChiThuongTru <> '' THEN hs.DiaChiThuongTru
+                        ELSE CONCAT(
+                            CASE WHEN hs.XaPhuong IS NOT NULL AND hs.XaPhuong <> '' THEN CONCAT(hs.XaPhuong, ', ') ELSE '' END,
+                            CASE WHEN hs.QuanHuyen IS NOT NULL AND hs.QuanHuyen <> '' THEN CONCAT(hs.QuanHuyen, ', ') ELSE '' END,
+                            CASE WHEN hs.TinhThanh IS NOT NULL AND hs.TinhThanh <> '' THEN hs.TinhThanh ELSE '' END
+                        )
+                    END AS DiaChi,
+                    -- Lấy số điện thoại phụ huynh (ưu tiên số của cha, sau đó đến số của mẹ)
+                    COALESCE(
+                        NULLIF(ph.SoDienThoaiCha, ''), 
+                        NULLIF(ph.SoDienThoaiMe, ''),
+                        NULLIF(hs.SoDienThoai, ''), 
+                        'Chưa cập nhật'
+                    ) AS SDTPhuHuynh,
+                    -- Thêm thông tin phụ huynh để hiển thị chi tiết
+                    ph.HoTenCha,
+                    ph.SoDienThoaiCha,
+                    ph.HoTenMe,
+                    ph.SoDienThoaiMe,
+                    lh.TenLop
+                FROM HocSinh hs
+                INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                LEFT JOIN PhuHuynh ph ON hs.MaHS = ph.MaHS
+                WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+                ORDER BY hs.HoTen";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -51,6 +73,21 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 {
                     dgvHocSinh.AutoGenerateColumns = false; // Tắt tự động sinh cột
                     dgvHocSinh.DataSource = dt;
+
+                    // Đảm bảo ràng buộc dữ liệu được thiết lập đúng
+                    dgvHocSinh.Columns["STT"].DataPropertyName = "STT";
+                    dgvHocSinh.Columns["HoTen"].DataPropertyName = "HoTen";
+                    dgvHocSinh.Columns["NgaySinh"].DataPropertyName = "NgaySinh";
+                    dgvHocSinh.Columns["GioiTinh"].DataPropertyName = "GioiTinh";
+                    dgvHocSinh.Columns["DiaChi"].DataPropertyName = "DiaChi";
+                    dgvHocSinh.Columns["SDTPhuHuynh"].DataPropertyName = "SDTPhuHuynh";
+
+
+                    // Thiết lập căn lề cho các cột
+                    dgvHocSinh.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvHocSinh.Columns["NgaySinh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvHocSinh.Columns["GioiTinh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    dgvHocSinh.Columns["SDTPhuHuynh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
                 else
                 {
@@ -71,6 +108,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             {
                 // Lấy thông tin học sinh từ hàng được chọn
                 DataGridViewRow row = dgvHocSinh.Rows[e.RowIndex];
+                txtSTT.Text = row.Cells["STT"].Value.ToString();
                 txtSTT.Text = row.Cells["STT"].Value.ToString();
                 txtHoTen.Text = row.Cells["HoTen"].Value.ToString();
                 txtNgaySinh.Text = Convert.ToDateTime(row.Cells["NgaySinh"].Value).ToString("dd/MM/yyyy");
