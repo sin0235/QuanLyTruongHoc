@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace QuanLyTruongHoc.DAL
 {
-    public class ThongBaoDAL
+    public class ThongBaoDAO
 {
     private DatabaseHelper dbHelper;
 
-    public ThongBaoDAL()
+    public ThongBaoDAO()
     {
         dbHelper = new DatabaseHelper();
     }

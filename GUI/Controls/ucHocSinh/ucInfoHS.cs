@@ -22,13 +22,13 @@ namespace QuanLyTruongHoc.GUI.Controls
         private ThongTinHSDTO _currentStudent;
 
         // Đối tượng thao tác với CSDL học sinh
-        private HocSinhDAL _hocSinhDAL;
+        private HocSinhDAO _hocSinhDAL;
         private readonly int _maHS; // Mã học sinh
 
         public ucInfoHS(int maHS)
         {
             InitializeComponent();
-            _hocSinhDAL = new HocSinhDAL();
+            _hocSinhDAL = new HocSinhDAO();
             _maHS = maHS;
 
             // Đăng ký sự kiện Load

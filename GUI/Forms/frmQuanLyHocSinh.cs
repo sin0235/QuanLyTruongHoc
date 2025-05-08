@@ -16,14 +16,14 @@ namespace QuanLyTruongHoc.GUI.Forms
     {
         private int maHS;
         private bool isEditMode = false;
-        private HocSinhDAL hocSinhDAL;
+        private HocSinhDAO hocSinhDAL;
         private ThongTinHSDTO thongTinHS;
 
         public frmQuanLyHocSinh()
         {
             InitializeComponent();
             isEditMode = false;
-            hocSinhDAL = new HocSinhDAL();
+            hocSinhDAL = new HocSinhDAO();
             thongTinHS = new ThongTinHSDTO();
         }
 
@@ -37,7 +37,7 @@ namespace QuanLyTruongHoc.GUI.Forms
             InitializeComponent();
             this.maHS = maHS;
             isEditMode = true;
-            hocSinhDAL = new HocSinhDAL();
+            hocSinhDAL = new HocSinhDAO();
 
             // Sử dụng phương thức GetStudentById của HocSinhDAL để lấy đầy đủ thông tin học sinh
             thongTinHS = hocSinhDAL.GetStudentById(maHS);

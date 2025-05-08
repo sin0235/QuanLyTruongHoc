@@ -12,7 +12,7 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucKQHT : UserControl
     {
         private DatabaseHelper dbHelper;
-        private DiemSoDAL diemSoDAL;
+        private DiemSoDAO diemSoDAL;
         private int id;
         private int maNguoiDung;
         private string currentSchoolYear;
@@ -25,7 +25,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             maNguoiDung = ID;   // Mã người dùng
 
             dbHelper = new DatabaseHelper();
-            diemSoDAL = new DiemSoDAL();
+            diemSoDAL = new DiemSoDAO();
 
             this.Load += ucKQHT_Load;
         }

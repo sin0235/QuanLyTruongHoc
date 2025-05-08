@@ -12,11 +12,11 @@ namespace QuanLyTruongHoc.DAL
     /// <summary>
     /// Lớp xử lý thao tác dữ liệu học sinh với cơ sở dữ liệu
     /// </summary>
-    public class HocSinhDAL
+    public class HocSinhDAO
     {
         private DatabaseHelper db;
 
-        public HocSinhDAL()
+        public HocSinhDAO()
         {
             db = new DatabaseHelper();
         }
