@@ -25,43 +25,38 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             MaNguoiDung = maNguoiDung;
             MaGiaoVien = maGiaoVien;
         }
-
-
-        private void LoadScores()
+        private void LoadDiem()
         {
             try
             {
-                // Kiểm tra xem lớp, môn và học kỳ đã được chọn chưa
                 if (lopCmb.SelectedValue == null || monCmb.SelectedValue == null || hocKyCmb.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn lớp, môn học và học kỳ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
+                // Lấy giá trị từ các ComboBox
                 int maLop = Convert.ToInt32(lopCmb.SelectedValue);
                 int maMon = Convert.ToInt32(monCmb.SelectedValue);
-                int hocKy = ((KeyValuePair<int, string>)hocKyCmb.SelectedItem).Key; // Extract the Key
-
-                // Truy vấn để lấy danh sách học sinh và điểm
+                int hocKy = ((KeyValuePair<int, string>)hocKyCmb.SelectedItem).Key;
+                // Truy vấn để lấy danh sách học sinh và điểm số
                 string queryDiem = $@"
-        SELECT 
-            HS.MaHS, 
-            ROW_NUMBER() OVER (ORDER BY HS.HoTen ASC) AS STT,
-            HS.HoTen AS HoTen,
-            DS.HocKy AS HocKy,
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemMieng,
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
-            STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy,
-            ROUND(AVG(DS.Diem), 2) AS DiemTB
-        FROM HocSinh HS
-        LEFT JOIN DiemSo DS ON HS.MaHS = DS.MaHS AND DS.MaMon = {maMon} AND DS.HocKy = {hocKy}
-        WHERE HS.MaLop = {maLop}
-        GROUP BY HS.MaHS, HS.HoTen, DS.HocKy";
+                    SELECT 
+                        HS.MaHS, 
+                        ROW_NUMBER() OVER (ORDER BY HS.HoTen ASC) AS STT,
+                        HS.HoTen AS HoTen,
+                        DS.HocKy AS HocKy,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemMieng,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
+                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy,
+                        ROUND(AVG(DS.Diem), 2) AS DiemTB
+                    FROM HocSinh HS
+                    LEFT JOIN DiemSo DS ON HS.MaHS = DS.MaHS AND DS.MaMon = {maMon} AND DS.HocKy = {hocKy}
+                    WHERE HS.MaLop = {maLop}
+                    GROUP BY HS.MaHS, HS.HoTen, DS.HocKy";
 
                 DataTable dtDiem = db.ExecuteQuery(queryDiem);
 
-                // Kiểm tra dữ liệu trước khi gán vào DataGridView
                 if (dtDiem.Rows.Count == 0)
                 {
                     MessageBox.Show("Không có dữ liệu điểm cho lớp, môn học và học kỳ đã chọn.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -76,21 +71,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-
-
-
-
-
-
-        private void loaiDiemCmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
-        {
-            // Placeholder for event handling
-        }
-
         private void themDiemBtn_Click(object sender, EventArgs e)
         {
             if (monCmb.SelectedValue == null)
@@ -99,7 +79,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 return;
             }
 
-            int maMon = Convert.ToInt32(monCmb.SelectedValue); // Get the selected subject ID
+            int maMon = Convert.ToInt32(monCmb.SelectedValue);
             frmNhapDiem frm = new frmNhapDiem(MaGiaoVien, maMon, this.dgvDanhSachHocSinh);
             frm.ShowDialog();
         }
@@ -109,13 +89,13 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             try
             {
-                // Tải lại danh sách lớp và môn mặc định
+                // Lấy danh sách lớp và môn học từ cơ sở dữ liệu
                 string queryLopMon = $@"
-        SELECT DISTINCT LH.MaLop, LH.TenLop, MH.MaMon, MH.TenMon
-        FROM LopHoc LH
-        INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
-        INNER JOIN MonHoc MH ON TKB.MaMon = MH.MaMon
-        WHERE TKB.MaGV = {MaGiaoVien}";
+                    SELECT DISTINCT LH.MaLop, LH.TenLop, MH.MaMon, MH.TenMon
+                    FROM LopHoc LH
+                    INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
+                    INNER JOIN MonHoc MH ON TKB.MaMon = MH.MaMon
+                    WHERE TKB.MaGV = {MaGiaoVien}";
 
                 DataTable dtLopMon = db.ExecuteQuery(queryLopMon);
 
@@ -125,34 +105,33 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     return;
                 }
 
-                // Cập nhật combobox lớp
+                // Lọc danh sách lớp và môn học
                 lopCmb.DataSource = dtLopMon.DefaultView.ToTable(true, "MaLop", "TenLop");
                 lopCmb.DisplayMember = "TenLop";
                 lopCmb.ValueMember = "MaLop";
 
-                // Cập nhật combobox môn
                 monCmb.DataSource = dtLopMon.DefaultView.ToTable(true, "MaMon", "TenMon");
                 monCmb.DisplayMember = "TenMon";
                 monCmb.ValueMember = "MaMon";
 
-                // Populate the Học Kỳ ComboBox
+                // Tạo danh sách học kỳ
                 var hocKyOptions = new List<KeyValuePair<int, string>>
-        {
-            new KeyValuePair<int, string>(1, "Kỳ 1"),
-            new KeyValuePair<int, string>(2, "Kỳ 2")
-        };
+                {
+                    new KeyValuePair<int, string>(1, "Kỳ 1"),
+                    new KeyValuePair<int, string>(2, "Kỳ 2")
+                };
 
+                // Gán danh sách học kỳ vào ComboBox
                 hocKyCmb.DataSource = hocKyOptions;
                 hocKyCmb.DisplayMember = "Value";
                 hocKyCmb.ValueMember = "Key";
 
-                // Đặt giá trị mặc định cho combobox
+                // Đặt giá trị mặc định cho các ComboBox
                 if (lopCmb.Items.Count > 0) lopCmb.SelectedIndex = 0;
                 if (monCmb.Items.Count > 0) monCmb.SelectedIndex = 0;
                 if (hocKyCmb.Items.Count > 0) hocKyCmb.SelectedIndex = 0;
 
-                // Tải lại danh sách điểm
-                LoadScores();
+                LoadDiem();
             }
             catch (Exception ex)
             {
@@ -161,21 +140,19 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
-
         private void locBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                // Lưu giá trị đã chọn trước đó
                 var selectedLop = lopCmb.SelectedValue;
                 var selectedMon = monCmb.SelectedValue;
 
-                // Lọc dữ liệu cho ComboBox "Lớp" dựa trên giáo viên đăng nhập
+                // Lọc danh sách lớp và môn học
                 string queryLop = $@"
-            SELECT DISTINCT LH.MaLop, LH.TenLop
-            FROM LopHoc LH
-            INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
-            WHERE TKB.MaGV = {MaGiaoVien}";
+                    SELECT DISTINCT LH.MaLop, LH.TenLop
+                    FROM LopHoc LH
+                    INNER JOIN ThoiKhoaBieu TKB ON LH.MaLop = TKB.MaLop
+                    WHERE TKB.MaGV = {MaGiaoVien}";
                 DataTable dtLop = db.ExecuteQuery(queryLop);
 
                 if (dtLop.Rows.Count > 0)
@@ -189,12 +166,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     MessageBox.Show("Không tìm thấy dữ liệu Lớp phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // Lọc dữ liệu cho ComboBox "Môn" dựa trên giáo viên đăng nhập
+                // Lọc danh sách môn học
                 string queryMon = $@"
-            SELECT DISTINCT MH.MaMon, MH.TenMon
-            FROM MonHoc MH
-            INNER JOIN ThoiKhoaBieu TKB ON MH.MaMon = TKB.MaMon
-            WHERE TKB.MaGV = {MaGiaoVien}";
+                    SELECT DISTINCT MH.MaMon, MH.TenMon
+                    FROM MonHoc MH
+                    INNER JOIN ThoiKhoaBieu TKB ON MH.MaMon = TKB.MaMon
+                    WHERE TKB.MaGV = {MaGiaoVien}";
                 DataTable dtMon = db.ExecuteQuery(queryMon);
 
                 if (dtMon.Rows.Count > 0)
@@ -208,13 +185,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     MessageBox.Show("Không tìm thấy dữ liệu Môn phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // Khôi phục giá trị đã chọn trước đó
+                
                 if (selectedLop != null && dtLop.AsEnumerable().Any(row => row.Field<int>("MaLop") == (int)selectedLop))
                 {
+                    //  Nếu lớp đã chọn tồn tại trong danh sách lớp, chọn lớp đó
                     lopCmb.SelectedValue = selectedLop;
                 }
                 else if (lopCmb.Items.Count > 0)
                 {
+                    // Nếu lớp đã chọn không tồn tại trong danh sách lớp, chọn lớp đầu tiên
                     lopCmb.SelectedIndex = 0;
                 }
 
@@ -227,8 +206,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     monCmb.SelectedIndex = 0;
                 }
 
-                // Tải lại danh sách điểm
-                LoadScores();
+                LoadDiem();
             }
             catch (Exception ex)
             {
@@ -242,7 +220,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             if (dgvDanhSachHocSinh.SelectedRows.Count > 0)
             {
-                // Lấy mã học sinh từ cột MaHS
                 var maHSCell = dgvDanhSachHocSinh.SelectedRows[0].Cells["MaHS"];
                 if (maHSCell == null || maHSCell.Value == null)
                 {
@@ -250,9 +227,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     return;
                 }
 
+                // Lấy mã học sinh từ ô được chọn
                 int maHS = Convert.ToInt32(maHSCell.Value);
 
-                // Lấy mã môn học
                 if (monCmb.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn một môn học.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -261,7 +238,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 int maMon = Convert.ToInt32(monCmb.SelectedValue);
 
-                // Mở form chỉnh sửa điểm
                 frmChinhSuaDiem frm = new frmChinhSuaDiem(maHS, maMon, this.dgvDanhSachHocSinh);
                 frm.ShowDialog();
             }
@@ -280,7 +256,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             if (hocKyCmb.SelectedValue != null)
             {
-                LoadScores();
+                LoadDiem();
             }
         }
 
@@ -293,5 +269,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
 
         }
+
+        private void loaiDiemCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

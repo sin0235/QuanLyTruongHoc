@@ -21,73 +21,81 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         {
             InitializeComponent();
             this.maGVChuNhiem = maGVChuNhiem;
-            LoadStudentList();
+            LoadDanhSachHS();
             // Mặc định hiển thị thời khóa biểu của tuần hiện tại
             ngayChonTKBDTP.Value = DateTime.Today;
             LoadThoiKhoaBieuLop();
             tabQuanLy.SelectedIndexChanged += tabQuanLy_SelectedIndexChanged;
         }
-        private void LoadStudentList()
+
+        /// <summary>
+        /// Quản lý việc chuyển TAB
+        /// </summary>
+        private void tabQuanLy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Lấy tab hiện tại
+            var selectedTab = tabQuanLy.SelectedTab;
+
+            if (selectedTab == null) return;
+
+            switch (selectedTab.Name)
+            {
+                case "tabDanhSachHocSinh": // Tên tab "Danh sách học sinh"
+                    LoadDanhSachHS();
+                    break;
+                case "tabDonNghi": // Tên tab "Đơn nghỉ"
+                    LoadDonNghi();
+                    break;
+                case "tabDiemDanh": // Tên tab "Điểm danh"
+                    chonNgayDTP.Value = DateTime.Today; // Đặt ngày mặc định là hôm nay
+                    LoadDanhSachCoMat(DateTime.Today); // Tải danh sách điểm danh của ngày hôm nay
+                    break;
+                case "tabThoiKhoaBieu": // Tên tab "Thời khóa biểu"
+                    LoadThoiKhoaBieuLop();
+                    break;
+                case "tabDiemSo": // Tên tab "Điểm số"
+                    LoadDiemHS();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Xem Danh Sách Học Sinh Của GVCN
+        /// </summary>
+        private void LoadDanhSachHS()
         {
             try
             {
                 // Truy vấn danh sách học sinh trong lớp của GVCN với thông tin chi tiết
                 string query = $@"
-                SELECT 
-                    ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STT,
-                    hs.MaHS,
-                    hs.HoTen,
-                    CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh,
-                    hs.GioiTinh,
-                    -- Ghép các thành phần địa chỉ từ bảng HocSinh
-                    CASE 
-                        WHEN hs.DiaChiThuongTru IS NOT NULL AND hs.DiaChiThuongTru <> '' THEN hs.DiaChiThuongTru
-                        ELSE CONCAT(
-                            CASE WHEN hs.XaPhuong IS NOT NULL AND hs.XaPhuong <> '' THEN CONCAT(hs.XaPhuong, ', ') ELSE '' END,
-                            CASE WHEN hs.QuanHuyen IS NOT NULL AND hs.QuanHuyen <> '' THEN CONCAT(hs.QuanHuyen, ', ') ELSE '' END,
-                            CASE WHEN hs.TinhThanh IS NOT NULL AND hs.TinhThanh <> '' THEN hs.TinhThanh ELSE '' END
-                        )
-                    END AS DiaChi,
-                    -- Lấy số điện thoại phụ huynh (ưu tiên số của cha, sau đó đến số của mẹ)
-                    COALESCE(
-                        NULLIF(ph.SoDienThoaiCha, ''), 
-                        NULLIF(ph.SoDienThoaiMe, ''),
-                        NULLIF(hs.SoDienThoai, ''), 
-                        'Chưa cập nhật'
-                    ) AS SDTPhuHuynh,
-                    -- Thêm thông tin phụ huynh để hiển thị chi tiết
-                    ph.HoTenCha,
-                    ph.SoDienThoaiCha,
-                    ph.HoTenMe,
-                    ph.SoDienThoaiMe,
-                    lh.TenLop
-                FROM HocSinh hs
-                INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-                LEFT JOIN PhuHuynh ph ON hs.MaHS = ph.MaHS
-                WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
-                ORDER BY hs.HoTen";
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STT, -- Tự đánh số thứ tự
+                        hs.HoTen,
+                        CONVERT(NVARCHAR, hs.NgaySinh, 103) AS NgaySinh,
+                        hs.GioiTinh,
+                        hs.MaDinhDanh,
+                        hs.DanToc,
+                        hs.DiaChiThuongTru,
+                        hs.TinhThanh,
+                        hs.SoDienThoai AS SDTHocSinh,
+                        ph.HoTenCha,
+                        ph.SoDienThoaiCha,
+                        ph.HoTenMe,
+                        ph.SoDienThoaiMe
+                    FROM HocSinh hs
+                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                    LEFT JOIN PhuHuynh ph ON hs.MaHS = ph.MaHS
+                    WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+                    ORDER BY hs.HoTen";
 
                 DataTable dt = db.ExecuteQuery(query);
 
                 if (dt.Rows.Count > 0)
                 {
-                    dgvHocSinh.AutoGenerateColumns = false; // Tắt tự động sinh cột
+                    dgvHocSinh.AutoGenerateColumns = false;
                     dgvHocSinh.DataSource = dt;
-
-                    // Đảm bảo ràng buộc dữ liệu được thiết lập đúng
-                    dgvHocSinh.Columns["STT"].DataPropertyName = "STT";
-                    dgvHocSinh.Columns["HoTen"].DataPropertyName = "HoTen";
-                    dgvHocSinh.Columns["NgaySinh"].DataPropertyName = "NgaySinh";
-                    dgvHocSinh.Columns["GioiTinh"].DataPropertyName = "GioiTinh";
-                    dgvHocSinh.Columns["DiaChi"].DataPropertyName = "DiaChi";
-                    dgvHocSinh.Columns["SDTPhuHuynh"].DataPropertyName = "SDTPhuHuynh";
-
-
-                    // Thiết lập căn lề cho các cột
-                    dgvHocSinh.Columns["STT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    dgvHocSinh.Columns["NgaySinh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    dgvHocSinh.Columns["GioiTinh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    dgvHocSinh.Columns["SDTPhuHuynh"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 }
                 else
                 {
@@ -108,16 +116,62 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             {
                 // Lấy thông tin học sinh từ hàng được chọn
                 DataGridViewRow row = dgvHocSinh.Rows[e.RowIndex];
-                txtSTT.Text = row.Cells["STT"].Value.ToString();
-                txtSTT.Text = row.Cells["STT"].Value.ToString();
-                txtHoTen.Text = row.Cells["HoTen"].Value.ToString();
-                txtNgaySinh.Text = Convert.ToDateTime(row.Cells["NgaySinh"].Value).ToString("dd/MM/yyyy");
-                txtGioiTinh.Text = row.Cells["GioiTinh"].Value.ToString();
-                txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
-                txtSDTPhuHuynh.Text = row.Cells["SDTPhuHuynh"].Value.ToString();
+
+                txtSTT.Text = row.Cells["STT"].Value?.ToString();
+                txtHoTen.Text = row.Cells["HoTen"].Value?.ToString();
+                txtNgaySinh.Text = row.Cells["NgaySinh"].Value?.ToString();
+                txtGioiTinh.Text = row.Cells["GioiTinh"].Value?.ToString();
+                txtMaDinhDanh.Text = row.Cells["MaDinhDanh"].Value?.ToString();
+                txtDanToc.Text = row.Cells["DanToc"].Value?.ToString();
+                txtDiaChi.Text = row.Cells["DiaChiThuongTru"].Value?.ToString();
+                txtTinhThanh.Text = row.Cells["TinhThanh"].Value?.ToString();
+                txtSDT.Text = row.Cells["SDTHS"].Value?.ToString();
+                txtTenCha.Text = row.Cells["HoTenCha"].Value?.ToString();
+                txtSDTCha.Text = row.Cells["SoDienThoaiCha"].Value?.ToString();
+                txtTenMe.Text = row.Cells["Me"].Value?.ToString();
+                txtSDTMe.Text = row.Cells["SoDienThoaiMe"].Value?.ToString();
             }
         }
 
+        /// <summary>
+        /// Duyệt đơn nghỉ
+        /// </summary>
+        private void LoadDonNghi()
+        {
+            try
+            {
+                string query = $@"
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY dn.MaDon) AS STTDonNghi,
+                        hs.HoTen AS HoTenDonNghi,
+                        dn.LyDo,
+                        dn.NgayNghi,
+                        dn.TrangThai,
+                        dn.MaDon,
+                        hs.MaLop
+                    FROM DonXinNghi dn
+                    INNER JOIN HocSinh hs ON dn.MaHS = hs.MaHS
+                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                    WHERE dn.TrangThai = N'Chờ duyệt'
+                    AND lh.MaGVChuNhiem = {maGVChuNhiem}";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không có đơn nghỉ nào cần duyệt.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvDonNghi.DataSource = null;
+                    return;
+                }
+
+                dgvDonNghi.AutoGenerateColumns = false;
+                dgvDonNghi.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách đơn nghỉ: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnPheDuyet_Click(object sender, EventArgs e)
         {
             try
@@ -130,17 +184,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 // Cập nhật trạng thái đơn nghỉ
                 string updateQuery = $@"
-        UPDATE DonXinNghi
-        SET TrangThai = N'Đã duyệt'
-        WHERE MaDon = {selectedMaDon}";
+                    UPDATE DonXinNghi
+                    SET TrangThai = N'Đã duyệt'
+                    WHERE MaDon = {selectedMaDon}";
 
                 db.ExecuteNonQuery(updateQuery);
 
                 // Lấy thông tin học sinh và ngày nghỉ
                 string fetchQuery = $@"
-        SELECT MaHS, NgayNghi
-        FROM DonXinNghi
-        WHERE MaDon = {selectedMaDon}";
+                    SELECT MaHS, NgayNghi
+                    FROM DonXinNghi
+                    WHERE MaDon = {selectedMaDon}";
 
                 DataTable dt = db.ExecuteQuery(fetchQuery);
                 if (dt.Rows.Count > 0)
@@ -150,26 +204,25 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                     // Cập nhật trạng thái "Vắng có phép" trong bảng DiemDanh
                     string insertOrUpdateQuery = $@"
-            IF EXISTS (
-                SELECT 1 FROM DiemDanh 
-                WHERE MaHS = {maHS} AND Ngay = '{ngayNghi:yyyy-MM-dd}'
-            )
-            BEGIN
-                UPDATE DiemDanh
-                SET TrangThai = N'Vắng có phép'
-                WHERE MaHS = {maHS} AND Ngay = '{ngayNghi:yyyy-MM-dd}'
-            END
-            ELSE
-            BEGIN
-                INSERT INTO DiemDanh (MaHS, MaLop, Ngay, TrangThai, GhiChu)
-                VALUES ({maHS}, (SELECT MaLop FROM HocSinh WHERE MaHS = {maHS}), '{ngayNghi:yyyy-MM-dd}', N'Vắng có phép', N'Đơn nghỉ đã duyệt')
-            END";
+                        IF EXISTS (
+                            SELECT 1 FROM DiemDanh 
+                            WHERE MaHS = {maHS} AND Ngay = '{ngayNghi:yyyy-MM-dd}'
+                        )
+                        BEGIN
+                            UPDATE DiemDanh
+                            SET TrangThai = N'Vắng có phép'
+                            WHERE MaHS = {maHS} AND Ngay = '{ngayNghi:yyyy-MM-dd}'
+                        END
+                        ELSE
+                        BEGIN
+                            INSERT INTO DiemDanh (MaHS, MaLop, Ngay, TrangThai, GhiChu)
+                            VALUES ({maHS}, (SELECT MaLop FROM HocSinh WHERE MaHS = {maHS}), '{ngayNghi:yyyy-MM-dd}', N'Vắng có phép', N'Đơn nghỉ đã duyệt')
+                        END";
 
                     db.ExecuteNonQuery(insertOrUpdateQuery);
                 }
-
                 MessageBox.Show("Đơn nghỉ đã được phê duyệt.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadDonNghi(); // Tải lại danh sách đơn nghỉ
+                LoadDonNghi();
 
             }
             catch (Exception ex)
@@ -177,8 +230,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 MessageBox.Show($"Lỗi khi phê duyệt đơn nghỉ: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
 
         private void btnTuChoi_Click(object sender, EventArgs e)
         {
@@ -192,67 +243,19 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 // Cập nhật trạng thái đơn nghỉ
                 string updateQuery = $@"
-        UPDATE DonXinNghi
-        SET TrangThai = N'Từ chối'
-        WHERE MaDon = {selectedMaDon}";
+                    UPDATE DonXinNghi
+                    SET TrangThai = N'Từ chối'
+                    WHERE MaDon = {selectedMaDon}";
 
                 db.ExecuteNonQuery(updateQuery);
                 MessageBox.Show("Đơn nghỉ đã bị từ chối.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadDonNghi(); // Tải lại danh sách đơn nghỉ
+                LoadDonNghi();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi từ chối đơn nghỉ: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void LoadDonNghi()
-        {
-            try
-            {
-                string query = $@"
-            SELECT 
-                ROW_NUMBER() OVER (ORDER BY dn.MaDon) AS STTDonNghi,
-                hs.HoTen AS HoTenDonNghi,
-                dn.LyDo,
-                dn.NgayNghi,
-                dn.TrangThai,
-                dn.MaDon,
-                hs.MaLop
-            FROM DonXinNghi dn
-            INNER JOIN HocSinh hs ON dn.MaHS = hs.MaHS
-            INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-            WHERE dn.TrangThai = N'Chờ duyệt'
-            AND lh.MaGVChuNhiem = {maGVChuNhiem}";
-
-                DataTable dt = db.ExecuteQuery(query);
-
-                if (dt == null || dt.Rows.Count == 0)
-                {
-                    MessageBox.Show("Không có đơn nghỉ nào cần duyệt.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dgvDonNghi.DataSource = null;
-                    return;
-                }
-
-                dgvDonNghi.AutoGenerateColumns = false;
-                dgvDonNghi.DataSource = dt;
-
-                dgvDonNghi.Columns["STTDonNghi"].DataPropertyName = "STTDonNghi";
-                dgvDonNghi.Columns["HoTenDonNghi"].DataPropertyName = "HoTenDonNghi";
-                dgvDonNghi.Columns["LyDo"].DataPropertyName = "LyDo";
-                dgvDonNghi.Columns["NgayNghi"].DataPropertyName = "NgayNghi";
-                dgvDonNghi.Columns["TrangThai"].DataPropertyName = "TrangThai";
-                dgvDonNghi.Columns["MaDon"].DataPropertyName = "MaDon";
-                dgvDonNghi.Columns["MaDon"].Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải danh sách đơn nghỉ: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-
 
         private void dgvDonNghi_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -270,29 +273,30 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-
-
         private void dgvDonNghi_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-        private void LoadAttendanceList(DateTime selectedDate)
+        /// <summary>
+        /// Điểm danh học sinh
+        /// </summary>
+        private void LoadDanhSachCoMat(DateTime selectedDate)
         {
 
             try
             {
                 // Truy vấn danh sách học sinh và trạng thái điểm danh theo ngày
                 string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemDanh,
-            hs.MaHS,
-            hs.HoTen AS HoTenDiemDanh,
-            ISNULL(dd.TrangThai, N'Có mặt') AS TrangThaiDiemDanh
-        FROM HocSinh hs
-        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-        LEFT JOIN DiemDanh dd 
-            ON hs.MaHS = dd.MaHS AND dd.Ngay = '{selectedDate:yyyy-MM-dd}'
-        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}";
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemDanh,
+                        hs.MaHS,
+                        hs.HoTen AS HoTenDiemDanh,
+                        ISNULL(dd.TrangThai, N'Có mặt') AS TrangThaiDiemDanh
+                    FROM HocSinh hs
+                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                    LEFT JOIN DiemDanh dd 
+                        ON hs.MaHS = dd.MaHS AND dd.Ngay = '{selectedDate:yyyy-MM-dd}'
+                    WHERE lh.MaGVChuNhiem = {maGVChuNhiem}";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -305,14 +309,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                         {
                             int maHS = Convert.ToInt32(row["MaHS"]);
                             string insertQuery = $@"
-                        IF NOT EXISTS (
-                            SELECT 1 FROM DiemDanh 
-                            WHERE MaHS = {maHS} AND Ngay = '{selectedDate:yyyy-MM-dd}'
-                        )
-                        BEGIN
-                            INSERT INTO DiemDanh (MaHS, MaLop, Ngay, TrangThai)
-                            VALUES ({maHS}, (SELECT MaLop FROM HocSinh WHERE MaHS = {maHS}), '{selectedDate:yyyy-MM-dd}', N'Có mặt')
-                        END";
+                                IF NOT EXISTS (
+                                    SELECT 1 FROM DiemDanh 
+                                    WHERE MaHS = {maHS} AND Ngay = '{selectedDate:yyyy-MM-dd}'
+                                )
+                                BEGIN
+                                    INSERT INTO DiemDanh (MaHS, MaLop, Ngay, TrangThai)
+                                    VALUES ({maHS}, (SELECT MaLop FROM HocSinh WHERE MaHS = {maHS}), '{selectedDate:yyyy-MM-dd}', N'Có mặt')
+                                END";
                             db.ExecuteNonQuery(insertQuery);
                         }
                     }
@@ -320,8 +324,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     dgvDiemDanh.AutoGenerateColumns = false;
                     dgvDiemDanh.DataSource = dt;
 
-                    // Tính tổng sĩ số và cập nhật label
-                    UpdateAttendanceSummary(dt);
+                    DiemDanhSiSoCoMat(dt);
                 }
                 else
                 {
@@ -336,7 +339,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
-        private void UpdateAttendanceSummary(DataTable dt)
+        private void DiemDanhSiSoCoMat(DataTable dt)
         {
             int totalPresent = dt.AsEnumerable().Count(row => row["TrangThaiDiemDanh"].ToString() == "Có mặt");
             int totalAbsent = dt.AsEnumerable().Count(row => row["TrangThaiDiemDanh"].ToString() == "Vắng có phép");
@@ -344,50 +347,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             lblCoMat.Text = $"Có mặt: {totalPresent}";
             lblVang.Text = $"Vắng: {totalAbsent}";
         }
-
-
-        private void tabQuanLy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Lấy tab hiện tại
-            var selectedTab = tabQuanLy.SelectedTab;
-
-            if (selectedTab == null) return;
-
-            switch (selectedTab.Name)
-            {
-                case "tabDanhSachHocSinh": // Tên tab "Danh sách học sinh"
-                    LoadStudentList();
-                    break;
-                case "tabDonNghi": // Tên tab "Đơn nghỉ"
-                    LoadDonNghi();
-                    break;
-                case "tabDiemDanh": // Tên tab "Điểm danh"
-                    chonNgayDTP.Value = DateTime.Today; // Đặt ngày mặc định là hôm nay
-                    LoadAttendanceList(DateTime.Today); // Tải danh sách điểm danh của ngày hôm nay
-                    break;
-                case "tabThoiKhoaBieu": // Tên tab "Thời khóa biểu"
-                    LoadThoiKhoaBieuLop();
-                    break;
-                case "tabDiemSo": // Tên tab "Điểm số"
-                    LoadStudentScores();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-
         private void btnDiemDanh_Click(object sender, EventArgs e)
         {
             DateTime selectedDate = chonNgayDTP.Value; // Lấy ngày được chọn từ DateTimePicker
-            LoadAttendanceList(selectedDate); // Gọi phương thức để tải danh sách điểm danh
+            LoadDanhSachCoMat(selectedDate); // Gọi phương thức để tải danh sách điểm danh
         }
 
-        private void lamMoiBtn_Click(object sender, EventArgs e)
-        {
-            LoadThoiKhoaBieuLop();
-        }
+        /// <summary>
+        /// Thời khóa biểu của lớp chủ nhiệm
+        /// </summary>
 
         private void LoadThoiKhoaBieuLop()
         {
@@ -402,18 +370,18 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 // Truy vấn thời khóa biểu của lớp chủ nhiệm
                 string query = $@"
-        SELECT 
-            ThoiKhoaBieu.Thu,
-            ThoiKhoaBieu.Tiet,
-            MonHoc.TenMon,
-            COUNT(ThoiKhoaBieu.Tiet) AS SoTiet
-        FROM ThoiKhoaBieu
-        INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
-        INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
-        WHERE LopHoc.MaGVChuNhiem = {maGVChuNhiem}
-          AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
-        GROUP BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet, MonHoc.TenMon
-        ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
+                    SELECT 
+                        ThoiKhoaBieu.Thu,
+                        ThoiKhoaBieu.Tiet,
+                        MonHoc.TenMon,
+                        COUNT(ThoiKhoaBieu.Tiet) AS SoTiet
+                    FROM ThoiKhoaBieu
+                    INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
+                    INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
+                    WHERE LopHoc.MaGVChuNhiem = {maGVChuNhiem}
+                      AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
+                    GROUP BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet, MonHoc.TenMon
+                    ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
 
                 DataTable dt = db.ExecuteQuery(query);
                 // Xóa các hàng cũ trong DataGridView
@@ -481,31 +449,38 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 MessageBox.Show($"Lỗi khi tải thời khóa biểu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        private void lamMoiBtn_Click(object sender, EventArgs e)
+        {
+            LoadThoiKhoaBieuLop();
+        }
 
         private void ngayChonTKBDTP_ValueChanged(object sender, EventArgs e)
         {
             LoadThoiKhoaBieuLop();
         }
 
-        private void LoadStudentScores()
+        /// <summary>
+        /// Xem điểm số của học sinh
+        /// </summary>
+
+        private void LoadDiemHS()
         {
             try
             {
                 string query = $@"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
-            hs.HoTen AS HoTenDiemSo,
-            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
-            STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
-            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
-            STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
-            ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
-        FROM DiemSo ds
-        INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
-        INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-        WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
-        GROUP BY hs.HoTen";
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
+                        hs.HoTen AS HoTenDiemSo,
+                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
+                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
+                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
+                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
+                        ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
+                    FROM DiemSo ds
+                    INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
+                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+                    WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+                    GROUP BY hs.HoTen";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -526,9 +501,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-
-
-
         private void dgvDiemSo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -543,10 +515,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     txtHoTenDiemSo.Text = row.Cells["HoTenDiemSo"].Value?.ToString();
 
                     // Tính trung bình cho các cột nhiều điểm
-                    txtDiemMieng.Text = CalculateAverage(row.Cells["DiemMieng"].Value?.ToString());
-                    txtDiem15Phut.Text = CalculateAverage(row.Cells["Diem15Phut"].Value?.ToString());
-                    txtDiemGiuaKy.Text = CalculateAverage(row.Cells["DiemGiuaKy"].Value?.ToString());
-                    txtDiemCuoiKy.Text = CalculateAverage(row.Cells["DiemCuoiKy"].Value?.ToString());
+                    txtDiemMieng.Text = TinhTrungBinh(row.Cells["DiemMieng"].Value?.ToString());
+                    txtDiem15Phut.Text = TinhTrungBinh(row.Cells["Diem15Phut"].Value?.ToString());
+                    txtDiemGiuaKy.Text = TinhTrungBinh(row.Cells["DiemGiuaKy"].Value?.ToString());
+                    txtDiemCuoiKy.Text = TinhTrungBinh(row.Cells["DiemCuoiKy"].Value?.ToString());
 
                     // Hiển thị điểm trung bình
                     txtDiemTB.Text = row.Cells["DiemTrungBinh"].Value?.ToString();
@@ -559,7 +531,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
         // Hàm tính trung bình từ chuỗi các điểm
-        private string CalculateAverage(string scores)
+        private string TinhTrungBinh(string scores)
         {
             if (string.IsNullOrEmpty(scores)) return "0";
 

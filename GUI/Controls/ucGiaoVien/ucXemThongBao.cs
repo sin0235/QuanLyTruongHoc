@@ -21,68 +21,63 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             InitializeComponent();
             db = new DatabaseHelper();
             this.maNguoiDung = maNguoiDung;
-            LoadThongBaoChung(); // Mặc định load tất cả thông báo
+            LoadThongBaoChung();
         }
 
 
-        // Hiển thị Thông Báo Chung
+        // Hiển thị thông báo chung
         private void LoadThongBaoChung()
         {
+            // Lấy danh sách thông báo chung từ cơ sở dữ liệu
             string query = @"
-        SELECT 
-            ThongBao.TieuDe, 
-            ThongBao.NoiDung, 
-            ThongBao.NgayGui, 
-            CASE 
-                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                ELSE N'Ban Giám Hiệu'
-            END AS NguoiGui
-        FROM 
-            ThongBao
-        LEFT JOIN 
-            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
-        LEFT JOIN 
-            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
-        WHERE 
-            ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
-        ORDER BY 
-            ThongBao.NgayGui DESC";
+                SELECT 
+                    ThongBao.TieuDe, 
+                    ThongBao.NoiDung, 
+                    ThongBao.NgayGui, 
+                    CASE 
+                        WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                        ELSE N'Ban Giám Hiệu'
+                    END AS NguoiGui
+                FROM 
+                    ThongBao
+                LEFT JOIN 
+                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                LEFT JOIN 
+                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                WHERE 
+                    ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
+                ORDER BY 
+                    ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
             thongBaoDgv.DataSource = dt;
         }
 
-
-
-
-        // Hiển thị Thông Báo Cá Nhân
+        // Hiển thị thông báo cá nhân
         private void LoadThongBaoCaNhan()
         {
+            // Lấy danh sách thông báo cá nhân từ cơ sở dữ liệu
             string query = $@"
-        SELECT 
-            ThongBao.TieuDe, 
-            ThongBao.NoiDung, 
-            ThongBao.NgayGui, 
-            CASE 
-                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                ELSE N'Ban Giám Hiệu'
-            END AS NguoiGui
-        FROM 
-            ThongBao
-        LEFT JOIN 
-            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
-        LEFT JOIN 
-            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
-        WHERE 
-            ThongBao.MaNguoiNhan = {maNguoiDung}
-        ORDER BY 
-            ThongBao.NgayGui DESC";
+                SELECT 
+                    ThongBao.TieuDe, 
+                    ThongBao.NoiDung, 
+                    ThongBao.NgayGui, 
+                    CASE 
+                        WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                        ELSE N'Ban Giám Hiệu'
+                    END AS NguoiGui
+                FROM 
+                    ThongBao
+                LEFT JOIN 
+                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                LEFT JOIN 
+                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                WHERE 
+                    ThongBao.MaNguoiNhan = {maNguoiDung}
+                ORDER BY 
+                    ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
             thongBaoDgv.DataSource = dt;
         }
-
-
-
-
 
         // Tìm kiếm thông báo
         private void TimKiemThongBao()
@@ -94,38 +89,35 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 return;
             }
 
+            // Tìm kiếm thông báo theo tiêu đề hoặc nội dung
             string query = @"
-        SELECT 
-            ThongBao.TieuDe, 
-            ThongBao.NoiDung, 
-            ThongBao.NgayGui, 
-            CASE 
-                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                ELSE N'Ban Giám Hiệu'
-            END AS NguoiGui
-        FROM 
-            ThongBao
-        LEFT JOIN 
-            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
-        LEFT JOIN 
-            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
-        WHERE 
-            (ThongBao.TieuDe LIKE @Keyword OR ThongBao.NoiDung LIKE @Keyword)
-        ORDER BY 
-            ThongBao.NgayGui DESC";
+                SELECT 
+                    ThongBao.TieuDe, 
+                    ThongBao.NoiDung, 
+                    ThongBao.NgayGui, 
+                    CASE 
+                        WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                        ELSE N'Ban Giám Hiệu'
+                    END AS NguoiGui
+                FROM 
+                    ThongBao
+                LEFT JOIN 
+                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                LEFT JOIN 
+                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                WHERE 
+                    (ThongBao.TieuDe LIKE @Keyword OR ThongBao.NoiDung LIKE @Keyword)
+                ORDER BY 
+                    ThongBao.NgayGui DESC";
 
             var parameters = new Dictionary<string, object>
-    {
-        { "@Keyword", $"%{keyword}%" }
-    };
+            {
+                { "@Keyword", $"%{keyword}%" }
+            };
 
             DataTable dt = db.ExecuteQuery(query, parameters);
             thongBaoDgv.DataSource = dt;
         }
-
-
-
-
 
         private void thongBaoChungBtn_Click(object sender, EventArgs e)
         {
@@ -144,25 +136,23 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
         private void lamMoiTBBtn_Click(object sender, EventArgs e)
         {
-            // Check which tab is currently active
-            if (thongBaoCaNhanBtn.Focused) // If the "Personal Notifications" tab is active
+            if (thongBaoCaNhanBtn.Focused)
             {
                 LoadThongBaoCaNhan();
             }
-            else if (thongBaoChungBtn.Focused) // If the "General Notifications" tab is active
+            else if (thongBaoChungBtn.Focused)
             {
                 LoadThongBaoChung();
             }
             else
             {
-                // Default behavior: Reload general notifications
                 LoadThongBaoChung();
             }
         }
 
         private void thongBaoDgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Đảm bảo không click vào header
+            if (e.RowIndex >= 0)
             {
                 // Lấy thông tin từ dòng được chọn
                 string tieuDe = thongBaoDgv.Rows[e.RowIndex].Cells["TieuDe"].Value.ToString();
@@ -172,7 +162,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 // Tạo và hiển thị Form chi tiết
                 var frmChiTiet = new frmThongBaoChiTiet(tieuDe, noiDung, ngayGui, nguoiGui);
-                frmChiTiet.ShowDialog(); // Hiển thị dưới dạng modal
+                frmChiTiet.ShowDialog();
             }
         }
     }

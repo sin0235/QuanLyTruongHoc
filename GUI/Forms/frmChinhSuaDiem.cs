@@ -23,26 +23,19 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         }
 
-
-
-        private void LoadStudentList()
+        private void LoadDanhSachHS()
         {
-            if (dgvDanhSachHocSinh == null)
-            {
-                MessageBox.Show("Không thể tải danh sách học sinh vì DataGridView chưa được khởi tạo.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             try
             {
                 string query = @"
-        SELECT 
-            ROW_NUMBER() OVER (ORDER BY HS.MaHS) AS STT,
-            HS.MaHS,
-            HS.HoTen,
-            L.TenLop
-        FROM HocSinh HS
-        INNER JOIN LopHoc L ON HS.MaLop = L.MaLop";
+                    SELECT 
+                        ROW_NUMBER() OVER (ORDER BY HS.MaHS) AS STT,
+                        HS.MaHS,
+                        HS.HoTen,
+                        L.TenLop
+                    FROM HocSinh HS
+                    INNER JOIN LopHoc L ON HS.MaLop = L.MaLop";
 
                 DataTable dt = db.ExecuteQuery(query);
                 dgvDanhSachHocSinh.DataSource = dt;
@@ -54,18 +47,19 @@ namespace QuanLyTruongHoc.GUI.Forms
         }
 
 
-        private void LoadStudentScores(int maHS, int maMon)
+        private void LoadDiemHS(int maHS, int maMon)
         {
             try
             {
                 string query = $@"
-            SELECT 
-                ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
-                DS.LoaiDiem AS LoaiDiem,
-                DS.Diem AS Diem,
-                DS.HocKy AS HocKy
-            FROM DiemSo DS
-            WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
+                    SELECT 
+                        DS.MaDiem AS MaDiem,
+                        ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem) AS STT,
+                        DS.LoaiDiem AS LoaiDiem,
+                        DS.Diem AS Diem,
+                        DS.HocKy AS HocKy
+                    FROM DiemSo DS
+                    WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon}";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -86,8 +80,6 @@ namespace QuanLyTruongHoc.GUI.Forms
         }
 
 
-
-
         private void dgvDiemChiTietHocSinh_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -101,8 +93,6 @@ namespace QuanLyTruongHoc.GUI.Forms
                 cmbHocKi.SelectedItem = hocKyValue;
             }
         }
-
-
 
         private void chinhSuaBtn_Click(object sender, EventArgs e)
         {
@@ -122,7 +112,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 if (success)
                 {
                     MessageBox.Show("Cập nhật điểm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadStudentScores(selectedMaHS, selectedMaMon); // Tải lại danh sách điểm
+                    LoadDiemHS(selectedMaHS, selectedMaMon); // Tải lại danh sách điểm
                 }
                 else
                 {
@@ -164,7 +154,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                         selectedMaHS = Convert.ToInt32(row.Cells["MaHS"].Value);
 
                         // Tải thông tin điểm của học sinh
-                        LoadStudentScores(selectedMaHS, selectedMaMon);
+                        LoadDiemHS(selectedMaHS, selectedMaMon);
                         return;
                     }
                 }
@@ -180,7 +170,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         private void frmChinhSuaDiem_Load(object sender, EventArgs e)
         {
-            LoadStudentList();
+            LoadDanhSachHS();
         }
 
         private void xoaBtn_Click(object sender, EventArgs e)
@@ -189,30 +179,28 @@ namespace QuanLyTruongHoc.GUI.Forms
             {
                 var selectedRow = dgvDiemChiTietHocSinh.SelectedRows[0];
 
-                string loaiDiem = selectedRow.Cells["LoaiDiem"].Value?.ToString();
-                string diemValue = selectedRow.Cells["Diem"].Value?.ToString();
-                string hocKy = selectedRow.Cells["HocKy"].Value?.ToString();
-
-                if (string.IsNullOrEmpty(loaiDiem) || string.IsNullOrEmpty(diemValue) || string.IsNullOrEmpty(hocKy))
+                // Lấy MaDiem từ hàng được chọn
+                if (selectedRow.Cells["MaDiem"].Value == null)
                 {
                     MessageBox.Show("Không thể xác định điểm cần xóa. Vui lòng kiểm tra lại dữ liệu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                var confirmResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa điểm {diemValue} ({loaiDiem}, Học kỳ {hocKy}) không?",
+                int maDiem = Convert.ToInt32(selectedRow.Cells["MaDiem"].Value);
+
+                var confirmResult = MessageBox.Show($"Bạn có chắc chắn muốn xóa điểm này không?",
                     "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
                     string deleteQuery = $@"
-                DELETE FROM DiemSo
-                WHERE MaHS = {selectedMaHS} AND MaMon = {selectedMaMon} 
-                AND LoaiDiem = N'{loaiDiem}' AND Diem = {diemValue} AND HocKy = {hocKy}";
+            DELETE FROM DiemSo
+            WHERE MaDiem = {maDiem}"; // Xóa dựa trên MaDiem
 
                     if (db.ExecuteNonQuery(deleteQuery))
                     {
                         MessageBox.Show("Xóa điểm thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadStudentScores(selectedMaHS, selectedMaMon);
+                        LoadDiemHS(selectedMaHS, selectedMaMon); // Tải lại danh sách điểm
                     }
                     else
                     {
@@ -225,7 +213,5 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show("Vui lòng chọn một hàng để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-
     }
 }

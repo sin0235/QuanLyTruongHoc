@@ -11,21 +11,18 @@ using QuanLyTruongHoc.GUI.Controls.ucGiaoVien;
 
 namespace QuanLyTruongHoc
 {
-
-    //Sửa quan trọng trong database: 
-    //Thêm cho GiaoVien thuộc tính NgaySinh(DATE)
-    //Thêm DiaChi(NVARCHAR(100)) vào bảng GiaoVien
     public partial class frmGV : Form
     {
-        private Color closeButtonColor = Color.FromArgb(255, 96, 92); // #FF605C
-        private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
-        private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
+        // Các biến màu sắc cho các nút
+        private Color closeButtonColor = Color.FromArgb(255, 96, 92);
+        private Color maximizeButtonColor = Color.FromArgb(255, 189, 68);
+        private Color minimizeButtonColor = Color.FromArgb(0, 202, 78);
         private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
 
-
-        private int maNguoiDung; // Lưu mã người dùng
-        private string hoTen; // Lưu họ tên giáo viên
-        private readonly DatabaseHelper db; // Đối tượng truy cập cơ sở dữ liệu
+        // Biến lưu mã người dùng và tên giáo viên
+        private int maNguoiDung;
+        private string hoTen;
+        private readonly DatabaseHelper db;
 
         public frmGV(int maNguoiDung)
         {
@@ -34,15 +31,16 @@ namespace QuanLyTruongHoc
             this.maNguoiDung = maNguoiDung;
             db = new DatabaseHelper();
 
-            // Load and display the teacher's name
-            LoadUserName(maNguoiDung);
+            //Hiển thị tên người dùng
+            LoadTenNguoiDung(maNguoiDung);
 
-            getAvatar();
+            //Load hình đại diện
+            LoadAnhDaiDien();
 
-            // Check if the teacher is a homeroom teacher
-            if (!IsHomeroomTeacher(maNguoiDung))
+            //Kiểm tra có phải GVCN không
+            if (!KiemTraGVCN(maNguoiDung))
             {
-                quanLyLopBtn.Visible = false; // Hide the "Quản lý lớp" button
+                quanLyLopBtn.Visible = false; // Ẩn "Quản lý lớp"
             }
 
 
@@ -72,32 +70,29 @@ namespace QuanLyTruongHoc
             lblPageTitle.Text = "Thông báo";
 
         }
-        private bool IsHomeroomTeacher(int maNguoiDung)
+        private bool KiemTraGVCN(int maNguoiDung)
         {
             string query = $@"
-        SELECT MaLop
-        FROM LopHoc
-        WHERE MaGVChuNhiem = (SELECT MaGV FROM GiaoVien WHERE MaNguoiDung = {maNguoiDung})";
+                SELECT MaLop
+                FROM LopHoc
+                WHERE MaGVChuNhiem = (SELECT MaGV FROM GiaoVien WHERE MaNguoiDung = {maNguoiDung})";
 
             object result = db.ExecuteScalar(query);
             return result != null && result != DBNull.Value;
         }
-        private void LoadUserName(int maNguoiDung)
+        private void LoadTenNguoiDung(int maNguoiDung)
         {
             try
             {
-                // Query to get the user's name
                 string query = $@"
-            SELECT GiaoVien.HoTen
-            FROM GiaoVien
-            WHERE GiaoVien.MaNguoiDung = {maNguoiDung}"; // Directly inject maNguoiDung
+                    SELECT GiaoVien.HoTen
+                    FROM GiaoVien
+                    WHERE GiaoVien.MaNguoiDung = {maNguoiDung}";
 
-                // Execute the query using DatabaseHelper
                 DataTable dt = db.ExecuteQuery(query);
 
                 if (dt.Rows.Count > 0)
                 {
-                    // Retrieve and display the user's name
                     hoTen = dt.Rows[0]["HoTen"].ToString();
                     lblUserName.Text = $"{hoTen}";
                 }
@@ -108,10 +103,195 @@ namespace QuanLyTruongHoc
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading user name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi hiển thị tên người dùng: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void thongBaoBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Thông báo";
+            LoadThongBao();
+        }
+        private void LoadThongBao()
+        {
+            pnlContent.Controls.Clear();
+            ucXemThongBao uc = new ucXemThongBao(maNguoiDung);
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void thongTinCaNhanBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Thông tin cá nhân";
+            pnlContent.Controls.Clear();
+            ucThongTinCaNhan uc = new ucThongTinCaNhan();
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+            uc.LoadThongTinCaNhan(maNguoiDung);
+
+        }
+
+        private void lichDayBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Lịch dạy";
+            pnlContent.Controls.Clear();
+            ucThoiKhoaBieu uc = new ucThoiKhoaBieu(maNguoiDung);
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+            uc.LoadLichDay(maNguoiDung);
+        }
+
+
+        private void keHoachGiangDayBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Kế hoạch giảng dạy";
+            pnlContent.Controls.Clear();
+            ucQuanLyKeHoachGiangDay uc = new ucQuanLyKeHoachGiangDay(GetMaGiaoVien(maNguoiDung));
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void quanLyDiemSoBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Quản lý điểm số";
+            pnlContent.Controls.Clear();
+            ucQuanLyDiemSo uc = new ucQuanLyDiemSo(maNguoiDung, GetMaGiaoVien(maNguoiDung));
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+
+        private void quanLyLopBtn_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Quản lý lớp";
+            pnlContent.Controls.Clear();
+            int maGVChuNhiem = GetMaGiaoVien(maNguoiDung);
+            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN(maGVChuNhiem);
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+        }
+        private void guiThongBaoBtn_Click(object sender, EventArgs e)
+        {
+            int maGV = GetMaGiaoVien(maNguoiDung);
+            lblPageTitle.Text = "Gửi thông báo";
+            pnlContent.Controls.Clear();
+            ucGuiThongBao uc = new ucGuiThongBao(maNguoiDung, maGV);
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+
+        }
+
+        private int GetMaGiaoVien(int maNguoiDung)
+        {
+            string query = $@"
+            SELECT MaGV
+            FROM GiaoVien
+            WHERE MaNguoiDung = {maNguoiDung}";
+            object result = db.ExecuteScalar(query);
+            return Convert.ToInt32(result);
+
+        }
+        
+
+        private void LoadAnhDaiDien()
+        {
+            try
+            {
+                // Query to get gender from the NguoiDung table
+                string query = $@"
+                    SELECT gv.GioiTinh
+                    FROM GiaoVien gv
+                    WHERE gv.MaGV = {GetMaGiaoVien(maNguoiDung)}";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    // Retrieve the gender
+                    string gender = dt.Rows[0]["GioiTinh"].ToString();
+
+                    // Set the avatar based on gender
+                    if (gender == "Nam")
+                    {
+                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Male; // Replace with your male image resource
+                    }
+                    else
+                    {
+                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Female; // Replace with your female image resource
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy thông tin giới tính.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy ảnh đại diện: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            pnlSubSettings.Visible = !pnlSubSettings.Visible;
+
+            // Cập nhật vị trí của panel tương đối so với nút btnSettings
+            pnlSubSettings.Location = new Point(btnSetting.Location.X, btnSetting.Location.Y - pnlSubSettings.Height);
+
+            // Thay đổi màu nút "Cài đặt" khi panel hiển thị
+            btnSetting.FillColor = pnlSubSettings.Visible ? highlightColor : Color.Transparent;
+
+            // Đảm bảo panel hiển thị trên cùng
+            pnlSubSettings.BringToFront();
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            // Xử lý đổi mật khẩu
+            pnlSubSettings.Visible = false;
+            btnSetting.FillColor = Color.Transparent;
+
+            // Hiển thị form đổi mật khẩu
+            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(maNguoiDung))
+            {
+                // Hiển thị form dạng dialog
+                changePwForm.ShowDialog();
+            }
+
+            lblPageTitle.Text = "Đổi mật khẩu";
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
+                                                 "Xác nhận đăng xuất",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // Tạo và hiển thị form đăng nhập
+                frmLogin loginForm = new frmLogin();
+                loginForm.Show();
+                // Đóng form hiện tại
+                this.Hide(); // Ẩn form hiện tại thay vì đóng để tránh đóng ứng dụng
+
+                // Đăng ký sự kiện FormClosed cho form đăng nhập
+                loginForm.FormClosed += (s, args) =>
+                {
+                    // Nếu form đăng nhập đóng (không đăng nhập thành công), thoát ứng dụng
+                    this.Close();
+                };
+            }
+        }
+
+        
         // Hàm cập nhật vị trí nút
         private void UpdateButtonPositions()
         {
@@ -215,8 +395,6 @@ namespace QuanLyTruongHoc
 
         private void pnlTitleBar_Paint(object sender, PaintEventArgs e)
         {
-            // Optional: Add custom painting logic here if needed
-            // For now, this method can remain empty if no custom painting is required
         }
 
         private void guna2PanelTitleBar_MouseUp(object sender, EventArgs e)
@@ -233,193 +411,6 @@ namespace QuanLyTruongHoc
         {
 
         }
-
-        private void thongBaoBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Thông báo";
-            LoadThongBao();
-        }
-        private void LoadThongBao()
-        {
-            pnlContent.Controls.Clear();
-            // Mở ucXemThongBao ở pnlContent
-            ucXemThongBao uc = new ucXemThongBao(maNguoiDung);
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc); // Thêm ucXemThongBao vào pnlContent
-            uc.BringToFront();
-        }
-
-        private void thongTinCaNhanBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Thông tin cá nhân";
-            pnlContent.Controls.Clear();
-            ucThongTinCaNhan uc = new ucThongTinCaNhan();
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-            uc.LoadThongTinCaNhan(maNguoiDung);
-
-        }
-
-        private void lichDayBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Lịch dạy";
-            pnlContent.Controls.Clear();
-            ucThoiKhoaBieu uc = new ucThoiKhoaBieu(maNguoiDung);
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-            uc.LoadLichDay(maNguoiDung);
-        }
-
-
-        private void keHoachGiangDayBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Kế hoạch giảng dạy";
-            pnlContent.Controls.Clear();
-            ucQuanLyKeHoachGiangDay uc = new ucQuanLyKeHoachGiangDay(GetMaGiaoVien(maNguoiDung));
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-        }
-
-        private void quanLyDiemSoBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Quản lý điểm số";
-            pnlContent.Controls.Clear();
-            ucQuanLyDiemSo uc = new ucQuanLyDiemSo(maNguoiDung, GetMaGiaoVien(maNguoiDung));
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-        }
-
-        private void quanLyLopBtn_Click(object sender, EventArgs e)
-        {
-            lblPageTitle.Text = "Quản lý lớp";
-            pnlContent.Controls.Clear();
-            // Retrieve the teacher's ID (MaGV)
-            int maGVChuNhiem = GetMaGiaoVien(maNguoiDung);
-            ucQuanLyLop_GVCN uc = new ucQuanLyLop_GVCN(maGVChuNhiem);
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-        }
-
-        private int GetMaGiaoVien(int maNguoiDung)
-        {
-            string query = $@"
-            SELECT MaGV
-            FROM GiaoVien
-            WHERE MaNguoiDung = {maNguoiDung}";
-            object result = db.ExecuteScalar(query);
-            return Convert.ToInt32(result);
-
-        }
-
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-            pnlSubSettings.Visible = !pnlSubSettings.Visible;
-
-            // Cập nhật vị trí của panel tương đối so với nút btnSettings
-            pnlSubSettings.Location = new Point(btnSetting.Location.X, btnSetting.Location.Y - pnlSubSettings.Height);
-
-            // Thay đổi màu nút "Cài đặt" khi panel hiển thị
-            btnSetting.FillColor = pnlSubSettings.Visible ? highlightColor : Color.Transparent;
-
-            // Đảm bảo panel hiển thị trên cùng
-            pnlSubSettings.BringToFront();
-        }
-
-        private void btnChangePassword_Click(object sender, EventArgs e)
-        {
-            // Xử lý đổi mật khẩu
-            pnlSubSettings.Visible = false;
-            btnSetting.FillColor = Color.Transparent;
-
-            // Hiển thị form đổi mật khẩu
-            using (GUI.Forms.frmChangePW changePwForm = new GUI.Forms.frmChangePW(maNguoiDung))
-            {
-                // Hiển thị form dạng dialog
-                changePwForm.ShowDialog();
-            }
-
-            lblPageTitle.Text = "Đổi mật khẩu";
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?",
-                                                 "Xác nhận đăng xuất",
-                                                 MessageBoxButtons.YesNo,
-                                                 MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                // Tạo và hiển thị form đăng nhập
-                frmLogin loginForm = new frmLogin();
-                loginForm.Show();
-                // Đóng form hiện tại
-                this.Hide(); // Ẩn form hiện tại thay vì đóng để tránh đóng ứng dụng
-
-                // Đăng ký sự kiện FormClosed cho form đăng nhập
-                loginForm.FormClosed += (s, args) =>
-                {
-                    // Nếu form đăng nhập đóng (không đăng nhập thành công), thoát ứng dụng
-                    this.Close();
-                };
-            }
-        }
-
-        private void guiThongBaoBtn_Click(object sender, EventArgs e)
-        {
-            int maGV = GetMaGiaoVien(maNguoiDung);
-            lblPageTitle.Text = "Gửi thông báo";
-            pnlContent.Controls.Clear();
-            ucGuiThongBao uc = new ucGuiThongBao(maNguoiDung, maGV);
-            uc.Dock = DockStyle.None;
-            pnlContent.Controls.Add(uc);
-            uc.BringToFront();
-
-        }
-
-        private void getAvatar()
-        {
-            try
-            {
-                // Query to get gender from the NguoiDung table
-                string query = $@"
-                    SELECT gv.GioiTinh
-                    FROM GiaoVien gv
-                    WHERE gv.MaGV = {GetMaGiaoVien(maNguoiDung)}";
-
-                DataTable dt = db.ExecuteQuery(query);
-
-                if (dt.Rows.Count > 0)
-                {
-                    // Retrieve the gender
-                    string gender = dt.Rows[0]["GioiTinh"].ToString();
-
-                    // Set the avatar based on gender
-                    if (gender == "Nam")
-                    {
-                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Male; // Replace with your male image resource
-                    }
-                    else
-                    {
-                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Female; // Replace with your female image resource
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy thông tin giới tính.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lấy ảnh đại diện: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
 
     }
 }

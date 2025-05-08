@@ -21,13 +21,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             InitializeComponent();
             db = new DatabaseHelper();
 
-            // Set the DateTimePicker to the current date in Vietnam's timezone
+            // Đặt giá trị mặc định cho DateTimePicker là ngày hiện tại ở Việt Nam
             DateTime vietnamNow = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "SE Asia Standard Time");
             ngayChonDTP.Value = vietnamNow;
             this.maNguoiDung = maNguoiDung;
         }
-
-
 
         public void LoadLichDay(int maNguoiDung)
         {
@@ -42,19 +40,19 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 // SQL query để lấy thời khóa biểu trong tuần
                 string query = $@"
-        SELECT 
-            ThoiKhoaBieu.Ngay,
-            ThoiKhoaBieu.Thu,
-            ThoiKhoaBieu.Tiet,
-            MonHoc.TenMon,
-            LopHoc.TenLop
-        FROM ThoiKhoaBieu
-        INNER JOIN GiaoVien ON ThoiKhoaBieu.MaGV = GiaoVien.MaGV
-        INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
-        INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
-        WHERE GiaoVien.MaNguoiDung = {maNguoiDung}
-          AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
-        ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
+                    SELECT 
+                        ThoiKhoaBieu.Ngay,
+                        ThoiKhoaBieu.Thu,
+                        ThoiKhoaBieu.Tiet,
+                        MonHoc.TenMon,
+                        LopHoc.TenLop
+                    FROM ThoiKhoaBieu
+                    INNER JOIN GiaoVien ON ThoiKhoaBieu.MaGV = GiaoVien.MaGV
+                    INNER JOIN MonHoc ON ThoiKhoaBieu.MaMon = MonHoc.MaMon
+                    INNER JOIN LopHoc ON ThoiKhoaBieu.MaLop = LopHoc.MaLop
+                    WHERE GiaoVien.MaNguoiDung = {maNguoiDung}
+                      AND ThoiKhoaBieu.Ngay BETWEEN '{startOfWeek:yyyy-MM-dd}' AND '{endOfWeek:yyyy-MM-dd}'
+                    ORDER BY ThoiKhoaBieu.Thu, ThoiKhoaBieu.Tiet";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -121,7 +119,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 thongKeSoTietTxt.Text = $"{totalPeriods} Tiết";
 
                 // Highlight cột của ngày hôm nay
-                HighlightTodayColumn();
+                HightlightNgay();
             }
             catch (Exception ex)
             {
@@ -130,23 +128,22 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
-        private void HighlightTodayColumn()
+        private void HightlightNgay()
         {
-            // Get today's day of the week in Vietnam's timezone
+            // Lấy ngày hiện tại ở Việt Nam
             DateTime vietnamNow = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "SE Asia Standard Time");
-            int today = (int)vietnamNow.DayOfWeek; // Sunday = 0, Monday = 1, ..., Saturday = 6
+            int today = (int)vietnamNow.DayOfWeek; // Chủ Nhật = 0, Thứ Hai = 1, ..., Thứ Bảy = 6
 
-            // Map Sunday (0) to 6, Monday (1) to 0, ..., Saturday (6) to 5
+            // Nếu hôm nay là Chủ Nhật, thì chọn cột 6 (Chủ Nhật)
             int columnIndex = today == 0 ? 6 : today - 1;
 
-            // Highlight only today's column header if it exists
+            // Highlight cột của ngày hôm nay
             if (columnIndex >= 0 && columnIndex < dgvThoiKhoaBieu.Columns.Count)
             {
-                dgvThoiKhoaBieu.Columns[columnIndex].HeaderCell.Style.BackColor = Color.YellowGreen; // Highlight color
-                dgvThoiKhoaBieu.Columns[columnIndex].HeaderCell.Style.ForeColor = Color.White; // Highlight text color
+                dgvThoiKhoaBieu.Columns[columnIndex].HeaderCell.Style.BackColor = Color.YellowGreen; // Highlight màu
+                dgvThoiKhoaBieu.Columns[columnIndex].HeaderCell.Style.ForeColor = Color.White; // Highlight chữ
             }
 
-            // Force the DataGridView to refresh to apply the styles
             dgvThoiKhoaBieu.Refresh();
         }
 

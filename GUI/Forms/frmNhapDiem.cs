@@ -14,17 +14,16 @@ namespace QuanLyTruongHoc.GUI.Forms
         private readonly int maGV;
         private DataGridView dgvDanhSachHocSinh;
 
-        private readonly int maMon; 
+        private readonly int maMon;
 
         public frmNhapDiem(int maGV, int maMon, DataGridView dgvDanhSachHocSinh)
         {
             InitializeComponent();
             this.maGV = maGV;
-            this.maMon = maMon; // Store the subject ID
+            this.maMon = maMon;
             db = new DatabaseHelper();
             this.dgvDanhSachHocSinh = dgvDanhSachHocSinh;
         }
-
 
         private void LoadComboBoxData()
         {
@@ -66,63 +65,7 @@ namespace QuanLyTruongHoc.GUI.Forms
             }
         }
 
-        private void btnTimKiem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Lấy STT từ textbox
-                if (string.IsNullOrWhiteSpace(sttTxt.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập STT.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (!int.TryParse(sttTxt.Text, out int stt))
-                {
-                    MessageBox.Show("STT phải là số nguyên.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // Tìm kiếm trong DataGridView
-                foreach (DataGridViewRow row in dgvDanhSachHocSinh.Rows)
-                {
-                    if (row.Cells["STT"].Value != null && int.Parse(row.Cells["STT"].Value.ToString()) == stt)
-                    {
-                        // Điền tên học sinh vào textbox
-                        string hoTen = row.Cells["HoTen"].Value.ToString();
-                        hoTenTxt.Text = hoTen;
-
-                        // Truy vấn để lấy mã học sinh từ tên
-                        string query = $@"
-                        SELECT MaHS
-                        FROM HocSinh
-                        WHERE HoTen = N'{hoTen}'";
-
-                        object maHSObj = db.ExecuteScalar(query);
-
-                        if (maHSObj == null)
-                        {
-                            MessageBox.Show("Không tìm thấy học sinh với tên đã nhập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
-
-                        int maHS = Convert.ToInt32(maHSObj);
-
-                        // Tải thông tin điểm chi tiết của học sinh
-                        LoadStudentScores(maHS);
-                        return;
-                    }
-                }
-
-                MessageBox.Show("Không tìm thấy học sinh với STT đã nhập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LoadStudentScores(int maHS)
+        private void LoadDiemHS(int maHS)
         {
             try
             {
@@ -134,7 +77,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 int hocKy = int.Parse(cmbHocKi.SelectedValue.ToString());
 
-                // Query to get all scores grouped by type for the student, filtered by the teacher's subjects and semester
+                // Truy vấn để lấy thông tin điểm chi tiết của học sinh
                 string query = $@"
                     SELECT 
                         ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem ASC) AS STT,
@@ -149,7 +92,6 @@ namespace QuanLyTruongHoc.GUI.Forms
                     INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
                     WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon} AND DS.MaGV = {maGV} AND DS.HocKy = {hocKy}
                     GROUP BY DS.HocKy, M.TenMon, DS.LoaiDiem";
-
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -170,9 +112,61 @@ namespace QuanLyTruongHoc.GUI.Forms
             }
         }
 
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Lấy STT từ textbox
+                if (string.IsNullOrWhiteSpace(sttTxt.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập STT.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                if (!int.TryParse(sttTxt.Text, out int stt))
+                {
+                    MessageBox.Show("STT phải là số nguyên.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                // Tìm kiếm trong dgvDanhSachHocSinh
+                foreach (DataGridViewRow row in dgvDanhSachHocSinh.Rows)
+                {
+                    if (row.Cells["STT"].Value != null && int.Parse(row.Cells["STT"].Value.ToString()) == stt)
+                    {
+                        // Điền tên học sinh vào textbox
+                        string hoTen = row.Cells["HoTen"].Value.ToString();
+                        hoTenTxt.Text = hoTen;
 
+                        // Truy vấn để lấy mã học sinh từ tên
+                        string query = $@"
+                            SELECT MaHS
+                            FROM HocSinh
+                            WHERE HoTen = N'{hoTen}'";
+
+                        object maHSObj = db.ExecuteScalar(query);
+
+                        if (maHSObj == null)
+                        {
+                            MessageBox.Show("Không tìm thấy học sinh với tên đã nhập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+
+                        int maHS = Convert.ToInt32(maHSObj);
+
+                        // Tải thông tin điểm chi tiết của học sinh
+                        LoadDiemHS(maHS);
+                        return;
+                    }
+                }
+
+                MessageBox.Show("Không tìm thấy học sinh với STT đã nhập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
@@ -210,12 +204,12 @@ namespace QuanLyTruongHoc.GUI.Forms
                 }
 
                 // Lấy mã học sinh từ Họ Tên
-                string fetchMaHSQuery = $@"
-        SELECT MaHS
-        FROM HocSinh
-        WHERE HoTen = N'{hoTenTxt.Text}'";
+                string layMaHS = $@"
+                    SELECT MaHS
+                    FROM HocSinh
+                    WHERE HoTen = N'{hoTenTxt.Text}'";
 
-                object maHSObj = db.ExecuteScalar(fetchMaHSQuery);
+                object maHSObj = db.ExecuteScalar(layMaHS);
                 if (maHSObj == null)
                 {
                     MessageBox.Show("Không tìm thấy học sinh với STT đã nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -224,66 +218,33 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 int maHS = Convert.ToInt32(maHSObj);
 
-                // Kiểm tra xem điểm đã tồn tại chưa
-                string checkScoreQuery = $@"
-        SELECT COUNT(*)
-        FROM DiemSo
-        WHERE MaHS = {maHS} AND MaMon = {maMon} AND LoaiDiem = N'{loaiDiem}' AND HocKy = {hocKy}";
+                // Thêm điểm mới
+                string themMaxMaDiem = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
+                int maDiemMoi = Convert.ToInt32(db.ExecuteScalar(themMaxMaDiem));
 
-                int existingScoreCount = Convert.ToInt32(db.ExecuteScalar(checkScoreQuery));
+                string themDiem = $@"
+                    INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+                    VALUES ({maDiemMoi}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
 
-                if (existingScoreCount > 0)
+                bool daThem = db.ExecuteNonQuery(themDiem);
+
+                if (daThem)
                 {
-                    // Cập nhật điểm nếu đã tồn tại
-                    string updateScoreQuery = $@"
-            UPDATE DiemSo
-            SET Diem = {diem}
-            WHERE MaHS = {maHS} AND MaMon = {maMon} AND LoaiDiem = N'{loaiDiem}' AND HocKy = {hocKy}";
-
-                    bool isUpdated = db.ExecuteNonQuery(updateScoreQuery);
-
-                    if (isUpdated)
-                    {
-                        MessageBox.Show("Cập nhật điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cập nhật điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Thêm điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    // Thêm điểm mới nếu chưa tồn tại
-                    string fetchMaxMaDiemQuery = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
-                    int newMaDiem = Convert.ToInt32(db.ExecuteScalar(fetchMaxMaDiemQuery));
-
-                    string insertScoreQuery = $@"
-            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
-            VALUES ({newMaDiem}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
-
-                    bool isInserted = db.ExecuteNonQuery(insertScoreQuery);
-
-                    if (isInserted)
-                    {
-                        MessageBox.Show("Thêm điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Thêm điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Thêm điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 // Tải lại danh sách điểm chi tiết của học sinh
-                LoadStudentScores(maHS);
+                LoadDiemHS(maHS);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
 
         private void exitBtn_Click(object sender, EventArgs e)
         {

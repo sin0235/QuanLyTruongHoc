@@ -35,11 +35,6 @@
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtNoiDung = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvKeHoach = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoiDungGIangDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.btnChinhSua = new Guna.UI2.WinForms.Guna2Button();
             this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
@@ -53,6 +48,11 @@
             this.cbLopHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbMonHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoiDungGIangDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeHoach)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2GradientPanel1.SuspendLayout();
@@ -151,36 +151,6 @@
             this.dgvKeHoach.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvKeHoach.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvKeHoach.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKeHoach_CellDoubleClick);
-            // 
-            // MaKH
-            // 
-            this.MaKH.HeaderText = "Mã KH";
-            this.MaKH.MinimumWidth = 6;
-            this.MaKH.Name = "MaKH";
-            // 
-            // TenMon
-            // 
-            this.TenMon.HeaderText = "Môn";
-            this.TenMon.MinimumWidth = 6;
-            this.TenMon.Name = "TenMon";
-            // 
-            // TenLop
-            // 
-            this.TenLop.HeaderText = "Lớp";
-            this.TenLop.MinimumWidth = 6;
-            this.TenLop.Name = "TenLop";
-            // 
-            // Tuan
-            // 
-            this.Tuan.HeaderText = "Tuần";
-            this.Tuan.MinimumWidth = 6;
-            this.Tuan.Name = "Tuan";
-            // 
-            // NoiDungGIangDay
-            // 
-            this.NoiDungGIangDay.HeaderText = "Kế hoạch";
-            this.NoiDungGIangDay.MinimumWidth = 6;
-            this.NoiDungGIangDay.Name = "NoiDungGIangDay";
             // 
             // btnThem
             // 
@@ -371,6 +341,41 @@
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
             this.guna2GradientPanel1.Size = new System.Drawing.Size(1089, 205);
             this.guna2GradientPanel1.TabIndex = 17;
+            // 
+            // MaKH
+            // 
+            this.MaKH.DataPropertyName = "MaKH";
+            this.MaKH.HeaderText = "Mã KH";
+            this.MaKH.MinimumWidth = 6;
+            this.MaKH.Name = "MaKH";
+            // 
+            // TenMon
+            // 
+            this.TenMon.DataPropertyName = "TenMon";
+            this.TenMon.HeaderText = "Môn";
+            this.TenMon.MinimumWidth = 6;
+            this.TenMon.Name = "TenMon";
+            // 
+            // TenLop
+            // 
+            this.TenLop.DataPropertyName = "TenLop";
+            this.TenLop.HeaderText = "Lớp";
+            this.TenLop.MinimumWidth = 6;
+            this.TenLop.Name = "TenLop";
+            // 
+            // Tuan
+            // 
+            this.Tuan.DataPropertyName = "Tuan";
+            this.Tuan.HeaderText = "Tuần";
+            this.Tuan.MinimumWidth = 6;
+            this.Tuan.Name = "Tuan";
+            // 
+            // NoiDungGIangDay
+            // 
+            this.NoiDungGIangDay.DataPropertyName = "NoiDungGIangDay";
+            this.NoiDungGIangDay.HeaderText = "Kế hoạch";
+            this.NoiDungGIangDay.MinimumWidth = 6;
+            this.NoiDungGIangDay.Name = "NoiDungGIangDay";
             // 
             // ucQuanLyKeHoachGiangDay
             // 

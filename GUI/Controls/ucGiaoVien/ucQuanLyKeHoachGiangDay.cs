@@ -14,8 +14,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
     public partial class ucQuanLyKeHoachGiangDay : UserControl
     {
         private readonly DatabaseHelper db;
-        private int selectedMaKH = -1; // To track the selected teaching plan ID
-        private int maGV; // To track the teacher ID
+        private int selectedMaKH = -1;
+        private int maGV;
         public ucQuanLyKeHoachGiangDay(int maGV)
         {
             InitializeComponent();
@@ -27,6 +27,60 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             LoadWeeks();
         }
 
+        private void LoadMonHoc()
+        {
+            string query = "SELECT MaMon, TenMon FROM MonHoc";
+            DataTable dt = db.ExecuteQuery(query);
+            cbMonHoc.DataSource = dt;
+            cbMonHoc.DisplayMember = "TenMon";
+            cbMonHoc.ValueMember = "MaMon";
+        }
+
+        private void LoadLopHoc()
+        {
+            string query = "SELECT MaLop, TenLop FROM LopHoc";
+            DataTable dt = db.ExecuteQuery(query);
+            cbLopHoc.DataSource = dt;
+            cbLopHoc.DisplayMember = "TenLop";
+            cbLopHoc.ValueMember = "MaLop";
+        }
+        private void LoadWeeks()
+        {
+            cbTuan.Items.Clear();
+            for (int i = 1; i <= 52; i++) // Giả sử có 52 tuần trong năm
+            {
+                cbTuan.Items.Add($"Tuần {i}");
+            }
+            cbTuan.SelectedIndex = 0; // Chọn tuần đầu tiên mặc định
+        }
+
+        private void LoadKeHoachGiangDay()
+        {
+            try
+            {
+                string query = $@"
+            SELECT kh.MaKH, mh.TenMon, lh.TenLop, kh.Tuan, kh.NoiDungGiangDay
+            FROM KeHoachGiangDay kh
+            JOIN MonHoc mh ON kh.MaMon = mh.MaMon
+            JOIN LopHoc lh ON kh.MaLop = lh.MaLop
+            WHERE kh.MaGV = {maGV}";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt == null)
+                {
+                    MessageBox.Show("Lỗi: DataTable is null", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                dgvKeHoach.AutoGenerateColumns = false;
+                dgvKeHoach.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -49,14 +103,13 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 int maKH = Convert.ToInt32(db.ExecuteScalar(getMaxIDQuery));
 
                 string query = $@"
-            INSERT INTO KeHoachGiangDay (MaKH, MaGV, MaMon, MaLop, Tuan, NoiDungGiangDay)
-            VALUES ({maKH}, {maGV}, {maMon}, {maLop}, {tuan}, N'{noiDung.Replace("'", "''")}')";
+                    INSERT INTO KeHoachGiangDay (MaKH, MaGV, MaMon, MaLop, Tuan, NoiDungGiangDay)
+                    VALUES ({maKH}, {maGV}, {maMon}, {maLop}, {tuan}, N'{noiDung.Replace("'", "''")}')";
 
                 if (db.ExecuteNonQuery(query))
                 {
                     MessageBox.Show("Thêm kế hoạch thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadKeHoachGiangDay();
-                    // Clear form
                     txtNoiDung.Clear();
                     cbTuan.SelectedIndex = 0;
                 }
@@ -72,8 +125,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         }
 
 
-
-
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
             if (selectedMaKH == -1)
@@ -87,11 +138,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 int maMon = Convert.ToInt32(cbMonHoc.SelectedValue);
                 int maLop = Convert.ToInt32(cbLopHoc.SelectedValue);
                 string noiDung = txtNoiDung.Text;
-
+                
                 string query = $@"
-            UPDATE KeHoachGiangDay
-            SET MaMon = {maMon}, MaLop = {maLop}, NoiDungGiangDay = N'{noiDung.Replace("'", "''")}'
-            WHERE MaKH = {selectedMaKH}";
+                    UPDATE KeHoachGiangDay
+                    SET MaMon = {maMon}, MaLop = {maLop}, NoiDungGiangDay = N'{noiDung.Replace("'", "''")}'
+                    WHERE MaKH = {selectedMaKH}";
 
                 if (db.ExecuteNonQuery(query))
                 {
@@ -144,72 +195,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             }
         }
 
-        private void LoadMonHoc()
-        {
-            string query = "SELECT MaMon, TenMon FROM MonHoc";
-            DataTable dt = db.ExecuteQuery(query);
-            cbMonHoc.DataSource = dt;
-            cbMonHoc.DisplayMember = "TenMon";
-            cbMonHoc.ValueMember = "MaMon";
-        }
-
-        private void LoadLopHoc()
-        {
-            string query = "SELECT MaLop, TenLop FROM LopHoc";
-            DataTable dt = db.ExecuteQuery(query);
-            cbLopHoc.DataSource = dt;
-            cbLopHoc.DisplayMember = "TenLop";
-            cbLopHoc.ValueMember = "MaLop";
-        }
-        private void LoadWeeks()
-        {
-            cbTuan.Items.Clear();
-            for (int i = 1; i <= 52; i++) // Giả sử có 52 tuần trong năm
-            {
-                cbTuan.Items.Add($"Tuần {i}");
-            }
-            cbTuan.SelectedIndex = 0; // Chọn tuần đầu tiên mặc định
-        }
-
-        private void LoadKeHoachGiangDay()
-        {
-            try
-            {
-                string query = $@"
-            SELECT kh.MaKH, mh.TenMon, lh.TenLop, kh.Tuan, kh.NoiDungGiangDay
-            FROM KeHoachGiangDay kh
-            JOIN MonHoc mh ON kh.MaMon = mh.MaMon
-            JOIN LopHoc lh ON kh.MaLop = lh.MaLop
-            WHERE kh.MaGV = {maGV}";
-
-                DataTable dt = db.ExecuteQuery(query);
-
-                if (dt == null)
-                {
-                    MessageBox.Show("Lỗi: DataTable is null", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Set up DataPropertyName for each column to match the DataTable column names
-                dgvKeHoach.Columns["MaKH"].DataPropertyName = "MaKH";
-                dgvKeHoach.Columns["TenMon"].DataPropertyName = "TenMon";
-                dgvKeHoach.Columns["TenLop"].DataPropertyName = "TenLop";
-                dgvKeHoach.Columns["Tuan"].DataPropertyName = "Tuan";
-                dgvKeHoach.Columns["NoiDungGIangDay"].DataPropertyName = "NoiDungGiangDay";
-
-                dgvKeHoach.AutoGenerateColumns = false;
-                dgvKeHoach.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-
-
-
         private void dgvKeHoach_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -221,14 +206,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                     // Lấy MaMon và MaLop từ database dựa vào MaKH
                     string query = $@"
-                SELECT MaMon, MaLop, Tuan, NoiDungGiangDay 
-                FROM KeHoachGiangDay 
-                WHERE MaKH = {selectedMaKH}";
+                        SELECT MaMon, MaLop, Tuan, NoiDungGiangDay 
+                        FROM KeHoachGiangDay 
+                        WHERE MaKH = {selectedMaKH}";
 
                     DataTable dt = db.ExecuteQuery(query);
                     if (dt != null && dt.Rows.Count > 0)
                     {
-                        // Set selected values cho ComboBox
+                        // Load dữ liệu cho cho combobox
                         cbMonHoc.SelectedValue = dt.Rows[0]["MaMon"];
                         cbLopHoc.SelectedValue = dt.Rows[0]["MaLop"];
 
