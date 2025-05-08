@@ -87,7 +87,6 @@
     <Compile Include="DTO\DonXinNghiDTO.cs" />
     <Compile Include="DTO\ThongBaoDTO.cs" />
     <Compile Include="DTO\NguoiDung.cs" />
-    <Compile Include="DTO\Notification.cs" />
     <Compile Include="DTO\ThongTinHSDTO.cs" />
     <Compile Include="DTO\TKBDTO.cs" />
     <Compile Include="GUI\Controls\ucBanGiamHieu\ucXemTBChiTiet.cs">
