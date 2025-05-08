@@ -40,6 +40,7 @@ namespace QuanLyTruongHoc
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.guiThongBaoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.pnlSubSettings = new Guna.UI2.WinForms.Guna2Panel();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
@@ -61,7 +62,6 @@ namespace QuanLyTruongHoc
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
-            this.guiThongBaoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -202,6 +202,18 @@ namespace QuanLyTruongHoc
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlMenu.Size = new System.Drawing.Size(350, 870);
             this.pnlMenu.TabIndex = 1;
+            // 
+            // guiThongBaoBtn
+            // 
+            this.guiThongBaoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.guiThongBaoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guiThongBaoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.guiThongBaoBtn.Location = new System.Drawing.Point(3, 390);
+            this.guiThongBaoBtn.Name = "guiThongBaoBtn";
+            this.guiThongBaoBtn.Size = new System.Drawing.Size(350, 72);
+            this.guiThongBaoBtn.TabIndex = 0;
+            this.guiThongBaoBtn.Text = "Gửi Thông Báo";
+            this.guiThongBaoBtn.Click += new System.EventHandler(this.guiThongBaoBtn_Click);
             // 
             // pnlSubSettings
             // 
@@ -495,59 +507,6 @@ namespace QuanLyTruongHoc
             this.pnlContent.Size = new System.Drawing.Size(1561, 922);
             this.pnlContent.TabIndex = 0;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
-            // 
-            // pnlSubSettings
-            // 
-            this.pnlSubSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(165)))), ((int)(((byte)(225)))));
-            this.pnlSubSettings.BorderRadius = 10;
-            this.pnlSubSettings.Controls.Add(this.btnLogout);
-            this.pnlSubSettings.Controls.Add(this.btnChangePassword);
-            this.pnlSubSettings.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(175)))), ((int)(((byte)(235)))));
-            this.pnlSubSettings.ForeColor = System.Drawing.Color.Black;
-            this.pnlSubSettings.Location = new System.Drawing.Point(28, 713);
-            this.pnlSubSettings.Name = "pnlSubSettings";
-            this.pnlSubSettings.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlSubSettings.Size = new System.Drawing.Size(260, 96);
-            this.pnlSubSettings.TabIndex = 14;
-            this.pnlSubSettings.Visible = false;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.BorderRadius = 8;
-            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLogout.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnLogout.FillColor = System.Drawing.Color.Transparent;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnLogout.Location = new System.Drawing.Point(5, 50);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(250, 45);
-            this.btnLogout.TabIndex = 2;
-            this.btnLogout.Text = "Đăng xuất";
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // btnChangePassword
-            // 
-            this.btnChangePassword.BackColor = System.Drawing.Color.Transparent;
-            this.btnChangePassword.BorderRadius = 8;
-            this.btnChangePassword.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnChangePassword.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnChangePassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnChangePassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnChangePassword.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnChangePassword.FillColor = System.Drawing.Color.Transparent;
-            this.btnChangePassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChangePassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
-            this.btnChangePassword.Location = new System.Drawing.Point(5, 5);
-            this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(250, 45);
-            this.btnChangePassword.TabIndex = 1;
-            this.btnChangePassword.Text = "Đổi mật khẩu";
-            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // frmGV
             // 

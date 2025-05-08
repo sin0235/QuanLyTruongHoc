@@ -29,22 +29,28 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         private void LoadThongBaoChung()
         {
             string query = @"
-                SELECT 
-                    ThongBao.TieuDe, 
-                    ThongBao.NoiDung, 
-                    ThongBao.NgayGui, 
-                    NguoiDung.TenDangNhap AS NguoiGui
-                FROM 
-                    ThongBao
-                INNER JOIN 
-                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
-                WHERE 
-                    ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
-                ORDER BY 
-                    ThongBao.NgayGui DESC";
+        SELECT 
+            ThongBao.TieuDe, 
+            ThongBao.NoiDung, 
+            ThongBao.NgayGui, 
+            CASE 
+                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                ELSE N'Ban Giám Hiệu'
+            END AS NguoiGui
+        FROM 
+            ThongBao
+        LEFT JOIN 
+            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+        LEFT JOIN 
+            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+        WHERE 
+            ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
+        ORDER BY 
+            ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
             thongBaoDgv.DataSource = dt;
         }
+
 
 
 
@@ -52,23 +58,28 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         private void LoadThongBaoCaNhan()
         {
             string query = $@"
-                SELECT 
-                    ThongBao.TieuDe, 
-                    ThongBao.NoiDung, 
-                    ThongBao.NgayGui, 
-                    NguoiDung.TenDangNhap AS NguoiGui
-                FROM 
-                    ThongBao
-                INNER JOIN 
-                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
-                WHERE 
-                    ThongBao.MaNguoiNhan = {maNguoiDung}
-                ORDER BY 
-                    ThongBao.NgayGui DESC";
+        SELECT 
+            ThongBao.TieuDe, 
+            ThongBao.NoiDung, 
+            ThongBao.NgayGui, 
+            CASE 
+                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                ELSE N'Ban Giám Hiệu'
+            END AS NguoiGui
+        FROM 
+            ThongBao
+        LEFT JOIN 
+            NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+        LEFT JOIN 
+            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+        WHERE 
+            ThongBao.MaNguoiNhan = {maNguoiDung}
+        ORDER BY 
+            ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
             thongBaoDgv.DataSource = dt;
-
         }
+
 
 
 
@@ -88,11 +99,16 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             ThongBao.TieuDe, 
             ThongBao.NoiDung, 
             ThongBao.NgayGui, 
-            NguoiDung.TenDangNhap AS NguoiGui
+            CASE 
+                WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
+                ELSE N'Ban Giám Hiệu'
+            END AS NguoiGui
         FROM 
             ThongBao
-        INNER JOIN 
+        LEFT JOIN 
             NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+        LEFT JOIN 
+            GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
         WHERE 
             (ThongBao.TieuDe LIKE @Keyword OR ThongBao.NoiDung LIKE @Keyword)
         ORDER BY 
@@ -106,6 +122,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             DataTable dt = db.ExecuteQuery(query, parameters);
             thongBaoDgv.DataSource = dt;
         }
+
 
 
 
