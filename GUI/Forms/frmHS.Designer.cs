@@ -57,13 +57,18 @@ namespace QuanLyTruongHoc
             this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.ucKiemTra1 = new QuanLyTruongHoc.GUI.Controls.ucKiemTra();
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.ucKiemTra1 = new QuanLyTruongHoc.GUI.Controls.ucKiemTra();
+            this.ucXinNghi1 = new QuanLyTruongHoc.GUI.Controls.ucXinNghi(ID, maHS);
+            this.ucKQHT1 = new QuanLyTruongHoc.GUI.Controls.ucKQHT(maHS, ID);
+            this.ucTKB1 = new QuanLyTruongHoc.GUI.Controls.ucTKB(maHS, ID);
+            this.ucInfoHS1 = new QuanLyTruongHoc.GUI.Controls.ucInfoHS(maHS);
+            this.ucThongBao1 = new QuanLyTruongHoc.GUI.Controls.ucThongBao(maHS, ID);
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -189,10 +194,10 @@ namespace QuanLyTruongHoc
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
             this.pnlMenu.Controls.Add(this.pnlSubSettings);
             this.pnlMenu.Controls.Add(this.btnSettings);
-            this.pnlMenu.Controls.Add(this.btnBT);
             this.pnlMenu.Controls.Add(this.btnReports);
             this.pnlMenu.Controls.Add(this.btnKQHT);
             this.pnlMenu.Controls.Add(this.btnTKB);
+            this.pnlMenu.Controls.Add(this.btnBT);
             this.pnlMenu.Controls.Add(this.btnInfo);
             this.pnlMenu.Controls.Add(this.btnThongBao);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -317,7 +322,7 @@ namespace QuanLyTruongHoc
             this.btnReports.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnReports.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnReports.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnReports.Location = new System.Drawing.Point(10, 220);
+            this.btnReports.Location = new System.Drawing.Point(10, 275);
             this.btnReports.Name = "btnReports";
             this.btnReports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnReports.Size = new System.Drawing.Size(260, 55);
@@ -341,7 +346,7 @@ namespace QuanLyTruongHoc
             this.btnKQHT.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnKQHT.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnKQHT.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnKQHT.Location = new System.Drawing.Point(10, 165);
+            this.btnKQHT.Location = new System.Drawing.Point(10, 220);
             this.btnKQHT.Name = "btnKQHT";
             this.btnKQHT.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnKQHT.Size = new System.Drawing.Size(260, 55);
@@ -365,7 +370,7 @@ namespace QuanLyTruongHoc
             this.btnTKB.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnTKB.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnTKB.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnTKB.Location = new System.Drawing.Point(10, 110);
+            this.btnTKB.Location = new System.Drawing.Point(10, 165);
             this.btnTKB.Name = "btnTKB";
             this.btnTKB.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnTKB.Size = new System.Drawing.Size(260, 55);
@@ -389,7 +394,7 @@ namespace QuanLyTruongHoc
             this.btnBT.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnBT.ImageOffset = new System.Drawing.Point(15, 0);
             this.btnBT.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnBT.Location = new System.Drawing.Point(10, 275);
+            this.btnBT.Location = new System.Drawing.Point(10, 110);
             this.btnBT.Name = "btnBT";
             this.btnBT.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnBT.Size = new System.Drawing.Size(260, 55);
@@ -500,21 +505,17 @@ namespace QuanLyTruongHoc
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
             this.pnlContent.Controls.Add(this.ucKiemTra1);
+            this.pnlContent.Controls.Add(this.ucXinNghi1);
+            this.pnlContent.Controls.Add(this.ucKQHT1);
+            this.pnlContent.Controls.Add(this.ucTKB1);
+            this.pnlContent.Controls.Add(this.ucInfoHS1);
+            this.pnlContent.Controls.Add(this.ucThongBao1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlContent.Size = new System.Drawing.Size(1640, 960);
             this.pnlContent.TabIndex = 1;
-            // 
-            // ucKiemTra1
-            // 
-            this.ucKiemTra1.BackColor = System.Drawing.Color.White;
-            this.ucKiemTra1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucKiemTra1.Location = new System.Drawing.Point(20, 20);
-            this.ucKiemTra1.Name = "ucKiemTra1";
-            this.ucKiemTra1.Size = new System.Drawing.Size(1600, 920);
-            this.ucKiemTra1.TabIndex = 4;
             // 
             // pnlTop
             // 
@@ -573,6 +574,70 @@ namespace QuanLyTruongHoc
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
+            // ucKiemTra1
+            // 
+            this.ucKiemTra1.BackColor = System.Drawing.Color.White;
+            this.ucKiemTra1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucKiemTra1.Location = new System.Drawing.Point(20, 20);
+            this.ucKiemTra1.Name = "ucKiemTra1";
+            this.ucKiemTra1.Size = new System.Drawing.Size(1600, 920);
+            this.ucKiemTra1.TabIndex = 4;
+            // 
+            // ucXinNghi1
+            // 
+            this.ucXinNghi1.AutoScroll = true;
+            this.ucXinNghi1.BackColor = System.Drawing.Color.White;
+            this.ucXinNghi1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucXinNghi1.Location = new System.Drawing.Point(20, 20);
+            this.ucXinNghi1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ucXinNghi1.Name = "ucXinNghi1";
+            this.ucXinNghi1.Size = new System.Drawing.Size(1600, 920);
+            this.ucXinNghi1.TabIndex = 3;
+            // 
+            // ucKQHT1
+            // 
+            this.ucKQHT1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucKQHT1.Location = new System.Drawing.Point(20, 20);
+            this.ucKQHT1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ucKQHT1.Name = "ucKQHT1";
+            this.ucKQHT1.Size = new System.Drawing.Size(1600, 920);
+            this.ucKQHT1.TabIndex = 2;
+            this.ucKQHT1.Visible = false;
+            // 
+            // ucTKB1
+            // 
+            this.ucTKB1.BackColor = System.Drawing.Color.White;
+            this.ucTKB1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTKB1.Location = new System.Drawing.Point(20, 20);
+            this.ucTKB1.Margin = new System.Windows.Forms.Padding(1842, 5707, 1842, 5707);
+            this.ucTKB1.Name = "ucTKB1";
+            this.ucTKB1.Size = new System.Drawing.Size(1600, 920);
+            this.ucTKB1.TabIndex = 0;
+            this.ucTKB1.Visible = false;
+            // 
+            // ucInfoHS1
+            // 
+            this.ucInfoHS1.AutoScroll = true;
+            this.ucInfoHS1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(242)))), ((int)(((byte)(252)))));
+            this.ucInfoHS1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucInfoHS1.Location = new System.Drawing.Point(20, 20);
+            this.ucInfoHS1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.ucInfoHS1.Name = "ucInfoHS1";
+            this.ucInfoHS1.Size = new System.Drawing.Size(1600, 920);
+            this.ucInfoHS1.TabIndex = 1;
+            this.ucInfoHS1.Visible = false;
+            // 
+            // ucThongBao1
+            // 
+            this.ucThongBao1.BackColor = System.Drawing.Color.White;
+            this.ucThongBao1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThongBao1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ucThongBao1.Location = new System.Drawing.Point(20, 20);
+            this.ucThongBao1.Margin = new System.Windows.Forms.Padding(4);
+            this.ucThongBao1.Name = "ucThongBao1";
+            this.ucThongBao1.Size = new System.Drawing.Size(1600, 920);
+            this.ucThongBao1.TabIndex = 0;
+            // 
             // frmHS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -604,6 +669,13 @@ namespace QuanLyTruongHoc
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
             this.ResumeLayout(false);
+            btnThongBao.Click += btnThongBao_Click;
+            btnInfo.Click += btnInfo_Click;
+            btnTKB.Click += btnTKB_Click;
+            btnKQHT.Click += btnKQHT_Click;
+            btnReports.Click += btnReports_Click;
+            btnBT.Click += btnBT_Click;
+
 
         }
 

@@ -128,45 +128,47 @@ namespace QuanLyTruongHoc.DAL
     /// <summary>
     /// Lấy thông báo của vai trò cho người dùng
     /// </summary>
-    public List<ThongBaoDTO> GetRoleNotifications(int maVaiTro)
-    {
-        try
+        public List<ThongBaoDTO> GetRoleNotifications(int maVaiTro, int maNguoiDung)
         {
+            try
+            {
                 string query = @"
-                SELECT 
-                    TB.MaTB, TB.TieuDe, TB.NoiDung, TB.NgayGui, 
-                    CASE 
-                        WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
-                        WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                        ELSE N'Hệ thống' 
-                    END AS NguoiGui,
-                    (SELECT TenVaiTro FROM VaiTro WHERE MaVaiTro = TB.MaVaiTroNhan) AS NguoiNhan,
-                    CASE 
-                        WHEN TB.isActive = 0 THEN 1
-                        ELSE 0 
-                    END AS DaDoc
-                FROM ThongBao TB
-                LEFT JOIN NguoiDung ND ON TB.MaNguoiGui = ND.MaNguoiDung
-                LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
-                LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung
-                WHERE TB.MaVaiTroNhan = @MaVaiTro
-                ORDER BY TB.NgayGui DESC";
+                    SELECT 
+                        TB.MaTB, TB.TieuDe, TB.NoiDung, TB.NgayGui,  
+                        CASE 
+                            WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
+                            WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
+                            ELSE N'Ban giám hiệu' 
+                        END AS NguoiGui,
+                        N'Vai trò' AS NguoiNhan,
+                        CASE 
+                            WHEN EXISTS (SELECT 1 FROM ThongBaoNguoiDoc WHERE MaTB = TB.MaTB AND MaNguoiDung = @MaNguoiDung) THEN 1
+                            ELSE 0 
+                        END AS DaDoc
+                    FROM ThongBao TB
+                    LEFT JOIN NguoiDung ND ON TB.MaNguoiGui = ND.MaNguoiDung
+                    LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
+                    LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung
+                    WHERE TB.MaVaiTroNhan = @MaVaiTro
+                    ORDER BY TB.NgayGui DESC";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-            {
-                { "@MaVaiTro", maVaiTro },
-                { "@MaNguoiDung", 0 } // Tham số giả để sử dụng trong câu truy vấn EXISTS
-            };
+                {
+                    { "@MaVaiTro", maVaiTro },
+                    { "@MaNguoiDung", maNguoiDung }
+                };
 
-            DataTable dt = dbHelper.ExecuteQuery(query, parameters);
-            return ConvertDataTableToList(dt);
+                DatabaseHelper dbHelper = new DatabaseHelper();
+                DataTable dt = dbHelper.ExecuteQuery(query, parameters);
+
+                return ConvertDataTableToList(dt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy thông báo vai trò: {ex.Message}");
+                return null;
+            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Lỗi khi lấy thông báo vai trò: " + ex.Message);
-            throw new Exception("Không thể tải thông báo vai trò: " + ex.Message);
-        }
-    }
 
     /// <summary>
     /// Lấy thông tin chi tiết của một thông báo theo mã thông báo
@@ -226,22 +228,49 @@ namespace QuanLyTruongHoc.DAL
     /// <summary>
     /// Cập nhật trạng thái đã đọc của thông báo
     /// </summary>
-    public bool UpdateReadStatus(int maTB)
-    {
-        try
+        public bool UpdateReadStatus(int maTB, int maNguoiDung)
         {
-            string query = $@"UPDATE ThongBao
-                SET isActive = 0
-                WHERE MaTB = {maTB}";
-                return dbHelper.ExecuteNonQuery(query);
+            try
+            {
+                // Check if the record already exists
+                string checkQuery = @"
+                    SELECT COUNT(*) 
+                    FROM ThongBaoNguoiDoc 
+                    WHERE MaTB = @MaTB AND MaNguoiDung = @MaNguoiDung";
 
+                Dictionary<string, object> checkParams = new Dictionary<string, object>
+                {
+                    { "@MaTB", maTB },
+                    { "@MaNguoiDung", maNguoiDung }
+                };
+
+                DatabaseHelper dbHelper = new DatabaseHelper();
+                int existingCount = Convert.ToInt32(dbHelper.ExecuteScalar(checkQuery, checkParams));
+
+                // If the record doesn't exist, insert a new one
+                if (existingCount == 0)
+                {
+                    string insertQuery = @"
+                        INSERT INTO ThongBaoNguoiDoc (MaTB, MaNguoiDung, ThoiGianDoc)
+                        VALUES (@MaTB, @MaNguoiDung, GETDATE())";
+
+                    Dictionary<string, object> insertParams = new Dictionary<string, object>
+                    {
+                        { "@MaTB", maTB },
+                        { "@MaNguoiDung", maNguoiDung }
+                    };
+
+                    return dbHelper.ExecuteNonQuery(insertQuery, insertParams);
+                }
+
+                return true; // Record already exists, no need to insert
             }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Lỗi khi cập nhật trạng thái đọc: " + ex.Message);
-             return false;
-         }
-    }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật trạng thái đọc: {ex.Message}");
+                return false;
+            }
+        }
 
     /// <summary>
     /// Lấy danh sách file đính kèm cho một thông báo

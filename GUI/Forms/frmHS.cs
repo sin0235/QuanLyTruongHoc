@@ -41,12 +41,6 @@ namespace QuanLyTruongHoc
 
             InitializeComponent();
             lblUserName.Text = hoTen;
-            this.pnlContent.Controls.Add(this.ucKiemTra1);
-            this.pnlContent.Controls.Add(this.ucXinNghi1);
-            this.pnlContent.Controls.Add(this.ucKQHT1);
-            this.pnlContent.Controls.Add(this.ucTKB1);
-            this.pnlContent.Controls.Add(this.ucInfoHS1);
-            this.pnlContent.Controls.Add(this.ucThongBao1);
 
 
             // Đảm bảo các nút nằm trong Guna2Panel
