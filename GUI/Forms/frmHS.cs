@@ -20,11 +20,13 @@ namespace QuanLyTruongHoc
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
         private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+        
 
 
         private int maNguoiDung;
 
         private int maHS;
+        private string hoTen;
 
         public int ID
         {
@@ -36,6 +38,7 @@ namespace QuanLyTruongHoc
             getHSInfo();
 
             InitializeComponent();
+            lblUserName.Text = hoTen;
 
 
 
@@ -317,11 +320,12 @@ namespace QuanLyTruongHoc
         {
             // Tạo một đối tượng ThongTinHSDTO mới
             DatabaseHelper db = new DatabaseHelper();
-            string query = $@"SELECT MaHS FROM HocSinh WHERE MaNguoiDung = {this.maNguoiDung}";
+            string query = $@"SELECT MaHS, HoTen FROM HocSinh WHERE MaNguoiDung = {this.maNguoiDung}";
             DataTable dt = db.ExecuteQuery(query);
             if (dt.Rows.Count > 0)
             {
                 maHS = Convert.ToInt32(dt.Rows[0]["MaHS"]);
+                hoTen = dt.Rows[0]["HoTen"].ToString();
             }
             else
             {

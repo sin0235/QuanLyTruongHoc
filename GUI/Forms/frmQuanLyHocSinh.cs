@@ -27,6 +27,11 @@ namespace QuanLyTruongHoc.GUI.Forms
             thongTinHS = new ThongTinHSDTO();
         }
 
+        public string title
+        {
+            set { this.ucControlBar1.TitleText = value; }
+        }
+
         public frmQuanLyHocSinh(int maHS, string hoTen, DateTime ngaySinh, string gioiTinh, string diaChi, string sdtPhuHuynh, string tenLop)
         {
             InitializeComponent();

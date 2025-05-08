@@ -367,5 +367,10 @@ namespace QuanLyTruongHoc
                 };
             }
         }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            new GUI.Forms.frmTaoBaiKiemTra(maNguoiDung).ShowDialog();
+        }
     }
 }
