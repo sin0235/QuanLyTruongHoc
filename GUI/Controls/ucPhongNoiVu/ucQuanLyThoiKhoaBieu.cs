@@ -30,14 +30,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         private void ucQuanLyThoiKhoaBieu_Load(object sender, EventArgs e)
         {
             LoadDanhSachLop();
-
-            // Không chọn lớp nào khi mới tải
             cmbChonLop.SelectedIndex = -1;
-
-            // Đặt giá trị mặc định cho dtpNgay là ngày hôm nay
             dtpNgay.Value = DateTime.Today;
-
-            // Tùy chỉnh DataGridView
             dgvThoiKhoaBieu.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             dgvThoiKhoaBieu.ClearSelection();
         }
@@ -56,7 +50,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             if (cmbChonLop.SelectedValue == null)
             {
-                // Xóa dữ liệu trong DataGridView nếu không có lớp nào được chọn
                 dgvThoiKhoaBieu.Rows.Clear();
                 return;
             }
@@ -105,8 +98,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             };
 
             DataTable dt = db.ExecuteQuery(query, parameters);
-
-            // Xóa dữ liệu cũ trong DataGridView
             dgvThoiKhoaBieu.Rows.Clear();
 
             // Tổ chức dữ liệu theo ngày và tiết học
@@ -132,20 +123,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 }
             }
 
-            // Xác định số dòng cần thiết
             int maxRowsNeeded = 0;
             foreach (var dayData in organizedData.Values)
             {
                 maxRowsNeeded = Math.Max(maxRowsNeeded, dayData.Count);
             }
 
-            // Thêm đủ số dòng cần thiết
             while (dgvThoiKhoaBieu.Rows.Count < maxRowsNeeded)
             {
                 dgvThoiKhoaBieu.Rows.Add();
             }
 
-            // Điền dữ liệu vào DataGridView
             for (int columnIndex = 0; columnIndex < dgvThoiKhoaBieu.Columns.Count; columnIndex++)
             {
                 DateTime currentDay = (DateTime)dgvThoiKhoaBieu.Columns[columnIndex].Tag;
@@ -169,19 +157,16 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 }
             }
 
-            // Xóa các dòng trống dư thừa
             while (dgvThoiKhoaBieu.Rows.Count > maxRowsNeeded && maxRowsNeeded > 0)
             {
                 dgvThoiKhoaBieu.Rows.RemoveAt(dgvThoiKhoaBieu.Rows.Count - 1);
             }
 
-            // Nếu không có dữ liệu, thêm một dòng trống để DataGridView không trống hoàn toàn
             if (dgvThoiKhoaBieu.Rows.Count == 0)
             {
                 dgvThoiKhoaBieu.Rows.Add();
             }
 
-            // Loại bỏ các ô trống cuối cùng
             dgvThoiKhoaBieu.AllowUserToAddRows = false;
             dgvThoiKhoaBieu.ClearSelection();
         }
@@ -201,16 +186,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
             int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
             string tenLop = cmbChonLop.Text;
-
-            // Xác định ngày từ ô được chọn (nếu có)
             DateTime selectedDate = dtpNgay.Value;
 
-            // Nếu có ô được chọn trong DataGridView
             if (dgvThoiKhoaBieu.SelectedCells.Count > 0)
             {
                 int columnIndex = dgvThoiKhoaBieu.SelectedCells[0].ColumnIndex;
 
-                // Lấy ngày từ tiêu đề cột
                 string headerText = dgvThoiKhoaBieu.Columns[columnIndex].HeaderText;
                 string[] headerParts = headerText.Split(new[] { "\r\n" }, StringSplitOptions.None);
 
@@ -224,7 +205,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     }
                 }
 
-                // Hoặc lấy từ Tag của cột nếu đã thiết lập (nếu bạn đã lưu ngày vào Tag)
+                // Hoặc lấy từ Tag của cột nếu đã thiết lập 
                 if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
                     dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
                 {
@@ -232,15 +213,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 }
             }
 
-            // Hiển thị form thêm lịch học với ngày được chọn
             frmQuanLyThoiKhoaBieu frm = new frmQuanLyThoiKhoaBieu(maLop, tenLop, selectedDate);
             frm.Text = "Thêm lịch học";
-
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    // Truy vấn để lấy thông tin thời khóa biểu vừa thêm
                     string queryLatestSchedule = @"
                     SELECT TOP 1 
                         Thu, 
@@ -270,18 +248,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         string tenGiaoVien = latestSchedule.Rows[0]["TenGiaoVien"].ToString();
                         string tenLopMoi = latestSchedule.Rows[0]["TenLop"].ToString();
 
-                        // Truy vấn để lấy MaNguoiDung của phòng nội vụ
                         string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
-                        // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
                         string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
 
-                        // Nội dung hành động
                         string hanhDong = $"Thêm thời khóa biểu của lớp {tenLopMoi} vào ngày {selectedDate:dd/MM/yyyy} với môn học {tenMon} của giáo viên {tenGiaoVien} tiết {tiet}";
 
-                        // Thêm vào bảng NhatKyHeThong
                         string insertNhatKy = $@"
                         INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
                         VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
@@ -293,8 +267,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 {
                     MessageBox.Show("Đã xảy ra lỗi khi ghi nhật ký: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                // Reload thời khóa biểu sau khi thêm
                 LoadThoiKhoaBieu();
             }
         }
@@ -332,7 +304,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return Convert.ToInt32(dt.Rows[0]["MaTKB"]);
                 }
 
-                return -1; // Không tìm thấy
+                return -1;
             }
             catch (Exception ex)
             {
@@ -355,7 +327,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 return;
             }
 
-            // Lấy thông tin từ ô được chọn
             DataGridViewCell selectedCell = dgvThoiKhoaBieu.SelectedCells[0];
             int columnIndex = selectedCell.ColumnIndex;
             int rowIndex = selectedCell.RowIndex;
@@ -366,7 +337,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 return;
             }
 
-            // Lấy thông tin ngày từ Tag của cột
             DateTime selectedDate;
             if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
                 dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
@@ -382,13 +352,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
             try
             {
-                // Phân tích dữ liệu từ ô được chọn
                 string[] cellData = selectedCell.Value.ToString().Split('\n');
                 string tiet = cellData[0].Replace("Tiết: ", "").Trim();
                 string mon = cellData.Length > 1 ? cellData[1].Replace("Môn: ", "").Trim() : "";
                 string giaoVien = cellData.Length > 2 ? cellData[2].Replace("GV: ", "").Trim() : "";
 
-                // Lấy MaTKB từ cơ sở dữ liệu
                 int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
                 int maTKB = GetMaTKBFromDatabase(maLop, selectedDate, tiet);
 
@@ -398,12 +366,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return;
                 }
 
-                // Lưu thông tin ban đầu để ghi nhật ký sau khi cập nhật
                 string tenLop = cmbChonLop.Text;
                 string monHocBanDau = mon;
                 string giaoVienBanDau = giaoVien;
 
-                // Query để lấy thêm thông tin ban đầu
                 string queryOldData = @"
                 SELECT m.MaMon, m.TenMon, g.MaGV, g.HoTen, t.Ngay, t.Thu, t.Tiet
                 FROM ThoiKhoaBieu t
@@ -435,14 +401,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     tietBanDau = dtOldData.Rows[0]["Tiet"].ToString();
                 }
 
-                // Hiển thị form sửa thời khóa biểu
                 frmQuanLyThoiKhoaBieu frm = new frmQuanLyThoiKhoaBieu(Convert.ToInt32(cmbChonLop.SelectedValue), cmbChonLop.Text, selectedDate)
                 {
                     StartPosition = FormStartPosition.CenterScreen,
                     Text = "Sửa thời khóa biểu"
                 };
 
-                // Cố gắng truyền thông tin vào form một cách an toàn
                 try
                 {
                     if (frm.Controls["cmbMonHoc"] != null)
@@ -454,10 +418,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     if (frm.Controls["txtTietHoc"] != null)
                         frm.Controls["txtTietHoc"].Text = tiet;
 
-                    // Truyền MaTKB để cập nhật thay vì tạo mới
                     frm.Tag = maTKB;
 
-                    // Đổi nút "Xác nhận" thành "Cập nhật"
                     if (frm.Controls["btnXacNhan"] != null)
                         frm.Controls["btnXacNhan"].Text = "Cập nhật";
                 }
@@ -468,7 +430,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    // Lấy thông tin mới sau khi cập nhật
                     string queryUpdatedData = @"
                     SELECT m.TenMon, g.HoTen, t.Ngay, t.Thu, t.Tiet
                     FROM ThoiKhoaBieu t
@@ -491,7 +452,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         string thuMoi = dtUpdatedData.Rows[0]["Thu"].ToString();
                         string tietMoi = dtUpdatedData.Rows[0]["Tiet"].ToString();
 
-                        // Xác định những thay đổi
                         List<string> changes = new List<string>();
 
                         if (monHocBanDau != monHocMoi)
@@ -508,19 +468,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                         string thayDoiText = string.Join(", ", changes);
 
-                        // Truy vấn để lấy MaNguoiDung của phòng nội vụ
                         string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
-                        // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
                         string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
 
-                        // Nội dung hành động
-                        // Nội dung hành động
                         string hanhDong = $"Sửa thời khóa biểu của lớp {tenLop} ngày {ngayMoi} môn học {monHocMoi} tiết {tietMoi} của giáo viên {giaoVienMoi}: {thayDoiText}";
 
-                        // Thêm vào bảng NhatKyHeThong với parameterized query
                         string insertNhatKy = "INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
                         Dictionary<string, object> parameters = new Dictionary<string, object>
                         {
@@ -531,8 +486,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                         db.ExecuteNonQuery(insertNhatKy, parameters);
                     }
-
-                    // Reload thời khóa biểu sau khi cập nhật
                     LoadThoiKhoaBieu();
                 }
             }
@@ -551,7 +504,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             try
             {
-                // Kiểm tra xem có lớp nào được chọn không
                 if (cmbChonLop.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn lớp trước khi xóa thời khóa biểu!", "Thông báo",
@@ -559,7 +511,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return;
                 }
 
-                // Kiểm tra xem có ô nào được chọn không
                 if (dgvThoiKhoaBieu.SelectedCells.Count == 0)
                 {
                     MessageBox.Show("Vui lòng chọn một buổi học trong thời khóa biểu để xóa!", "Thông báo",
@@ -567,11 +518,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return;
                 }
 
-                // Lấy thông tin từ ô được chọn
                 DataGridViewCell selectedCell = dgvThoiKhoaBieu.SelectedCells[0];
                 int columnIndex = selectedCell.ColumnIndex;
 
-                // Kiểm tra xem ô có dữ liệu không
                 if (selectedCell.Value == null || string.IsNullOrWhiteSpace(selectedCell.Value.ToString()))
                 {
                     MessageBox.Show("Ô được chọn không có dữ liệu để xóa!", "Thông báo",
@@ -579,10 +528,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return;
                 }
 
-                // Lấy thông tin ngày từ tiêu đề cột - SỬA LỖI Ở ĐÂY
                 DateTime selectedDate;
-
-                // Lấy ngày từ Tag của cột (cách ưu tiên)
                 if (dgvThoiKhoaBieu.Columns[columnIndex].Tag != null &&
                     dgvThoiKhoaBieu.Columns[columnIndex].Tag is DateTime)
                 {
@@ -590,19 +536,16 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 }
                 else
                 {
-                    // Sử dụng ngày hiện tại nếu không thể xác định
                     selectedDate = DateTime.Today;
                     MessageBox.Show("Không thể xác định ngày. Sử dụng ngày hiện tại thay thế.", "Cảnh báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                // Phân tích dữ liệu từ ô được chọn
                 string[] cellData = selectedCell.Value.ToString().Split('\n');
                 string tiet = cellData[0].Replace("Tiết: ", "").Trim();
                 string mon = cellData.Length > 1 ? cellData[1].Replace("Môn: ", "").Trim() : "";
                 string giaoVien = cellData.Length > 2 ? cellData[2].Replace("GV: ", "").Trim() : "";
 
-                // Lấy MaTKB từ cơ sở dữ liệu
                 int maLop = Convert.ToInt32(cmbChonLop.SelectedValue);
                 int maTKB = GetMaTKBFromDatabase(maLop, selectedDate, tiet);
 
@@ -613,17 +556,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     return;
                 }
 
-                // Hiển thị hộp thoại xác nhận xóa
                 DialogResult result = MessageBox.Show(
                     $"Bạn có chắc chắn muốn xóa buổi học này?\nMôn: {mon}\nGiáo viên: {giaoVien}\nTiết: {tiet}\nNgày: {selectedDate:dd/MM/yyyy}",
                     "Xác nhận xóa",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                // Nếu người dùng xác nhận xóa
                 if (result == DialogResult.Yes)
                 {
-                    // Thực hiện xóa dữ liệu
                     bool deleteSuccess = DeleteThoiKhoaBieu(maTKB);
 
                     if (deleteSuccess)
@@ -631,7 +571,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         MessageBox.Show("Đã xóa buổi học thành công!", "Thông báo",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Reload thời khóa biểu sau khi xóa
                         LoadThoiKhoaBieu();
                     }
                     else
@@ -640,7 +579,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                // Nếu người dùng chọn No - không làm gì
             }
             catch (Exception ex)
             {
@@ -649,12 +587,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             }
         }
 
-        // Thêm phương thức để xóa thời khóa biểu từ cơ sở dữ liệu
         private bool DeleteThoiKhoaBieu(int maTKB)
         {
             try
             {
-                // Truy vấn thông tin thời khóa biểu trước khi xóa
                 string queryInfo = @"
                 SELECT 
                     t.MaLop, 
@@ -676,7 +612,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                 DataTable infoTable = db.ExecuteQuery(queryInfo, infoParams);
 
-                // Thực hiện xóa dữ liệu
                 string query = "DELETE FROM ThoiKhoaBieu WHERE MaTKB = @MaTKB";
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -684,7 +619,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                 };
                 bool success = db.ExecuteNonQuery(query, parameters);
 
-                // Nếu xóa thành công và có thông tin, ghi nhật ký
                 if (success && infoTable != null && infoTable.Rows.Count > 0)
                 {
                     DataRow info = infoTable.Rows[0];
@@ -694,18 +628,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     string tenGiaoVien = info["TenGiaoVien"].ToString();
                     string tiet = info["Tiet"].ToString();
 
-                    // Truy vấn để lấy MaNguoiDung của phòng nội vụ
                     string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
                     int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
-                    // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
                     string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                     int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
 
-                    // Nội dung hành động
                     string hanhDong = $"Xóa thời khóa biểu của lớp {tenLop} ngày {ngay} môn học {tenMon} của giáo viên {tenGiaoVien} tiết {tiet}";
 
-                    // Thêm vào bảng NhatKyHeThong sử dụng parameterized query
                     string insertNhatKy = "INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
                     Dictionary<string, object> logParams = new Dictionary<string, object>
                     {
@@ -716,7 +646,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                     db.ExecuteNonQuery(insertNhatKy, logParams);
                 }
-
                 return success;
             }
             catch (Exception ex)

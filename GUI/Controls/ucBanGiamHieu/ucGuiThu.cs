@@ -13,12 +13,12 @@ namespace QuanLyTruongHoc.GUI.Controls
 {
     public partial class ucGuiThu : UserControl
     {
-        int newMaTB = 1;
         public ucGuiThu()
         {
             InitializeComponent();
         }
 
+        // Lấy mã nhật ký tiếp theo
         private int GetNextMaNK(DatabaseHelper db)
         {
             string query = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
@@ -26,6 +26,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             return result.Rows.Count > 0 ? Convert.ToInt32(result.Rows[0][0]) : 1;
         }
 
+        // Ghi nhật ký hệ thống
         private void GhiNhatKy(DatabaseHelper db, string hanhDong)
         {
             int maNK = GetNextMaNK(db);
@@ -116,7 +117,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 db = new DatabaseHelper();
                 db.OpenConnection();
-                newMaTB = GetNextMaTB(db);
 
                 if (cbTatCa.Checked)
                 {
@@ -148,13 +148,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                 }
             }
         }
-        private int GetNextMaTB(DatabaseHelper db)
-        {
-            string query = "SELECT ISNULL(MAX(MaTB), 0) + 1 FROM ThongBao";
-            DataTable result = db.ExecuteQuery(query);
-            return result.Rows.Count > 0 ? Convert.ToInt32(result.Rows[0][0]) : 1;
-        }
 
+        // Gửi thư đến tất cả người dùng
         private bool GuiThuTatCa(DatabaseHelper db, string tieuDe, string noiDung)
         {
             bool isSuccess = true;
@@ -166,8 +161,8 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 int maNguoiNhan = Convert.ToInt32(row["MaNguoiDung"]);
                 string insertQuery = $@"
-                INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, TieuDe, NoiDung, NgayGui)
-                VALUES ({newMaTB++}, 1, {maNguoiNhan}, N'{tieuDe}', N'{noiDung}', GETDATE());";
+                INSERT INTO ThongBao (MaNguoiGui, MaNguoiNhan, TieuDe, NoiDung, NgayGui)
+                VALUES (1, {maNguoiNhan}, N'{tieuDe}', N'{noiDung}', GETDATE());";
 
                 if (!db.ExecuteNonQuery(insertQuery))
                 {
@@ -179,10 +174,10 @@ namespace QuanLyTruongHoc.GUI.Controls
             return isSuccess;
         }
 
+        // Gửi thư theo lựa chọn
         private bool GuiThuTheoLuaChon(DatabaseHelper db, string tieuDe, string noiDung)
         {
             bool isSuccess = true;
-            List<string> danhSachNguoiNhan = new List<string>(); 
 
             if (cbGiaoVien.Checked)
             {
@@ -202,8 +197,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                 foreach (string lop in lopList)
                 {
                     string insertQuery = $@"
-                    INSERT INTO ThongBao (MaTB, MaNguoiGui, MaLop, TieuDe, NoiDung, NgayGui)
-                    SELECT {newMaTB++}, 1, MaLop, N'{tieuDe}', N'{noiDung}', GETDATE()
+                    INSERT INTO ThongBao (MaNguoiGui, MaLop, TieuDe, NoiDung, NgayGui)
+                    SELECT 1, MaLop, N'{tieuDe}', N'{noiDung}', GETDATE()
                     FROM LopHoc
                     WHERE TenLop = '{lop.Trim()}';";
 
@@ -226,11 +221,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                 string danhSachMaCaNhan = txtNhapMaCaNhan.Text.Trim();
                 List<string> nguoiNhanList = GuiThuCaNhan(db, danhSachMaCaNhan, tieuDe, noiDung);
 
-                if (nguoiNhanList.Count > 0)
-                {
-                    danhSachNguoiNhan.AddRange(nguoiNhanList); 
-                }
-                else
+                if (nguoiNhanList.Count == 0)
                 {
                     isSuccess = false;
                 }
@@ -239,17 +230,18 @@ namespace QuanLyTruongHoc.GUI.Controls
             return isSuccess;
         }
 
+        // Gửi thư theo vai trò
         private bool GuiThuTheoVaiTro(DatabaseHelper db, int maVaiTro, string tieuDe, string noiDung)
         {
             string query = $@"
-            INSERT INTO ThongBao (MaTB, MaNguoiGui, MaVaiTroNhan, TieuDe, NoiDung, NgayGui)
-            VALUES ({newMaTB++}, 1, {maVaiTro}, N'{tieuDe}', N'{noiDung}', GETDATE());";
+            INSERT INTO ThongBao (MaNguoiGui, MaVaiTroNhan, TieuDe, NoiDung, NgayGui)
+            VALUES (1, {maVaiTro}, N'{tieuDe}', N'{noiDung}', GETDATE());";
             return db.ExecuteNonQuery(query);
         }
 
+        // Gửi thư đến cá nhân
         private List<string> GuiThuCaNhan(DatabaseHelper db, string danhSachMaCaNhan, string tieuDe, string noiDung)
         {
-            // Tách danh sách mã dựa trên dấu phẩy
             string[] maCaNhanList = danhSachMaCaNhan.Split(',');
             List<string> danhSachNguoiNhan = new List<string>();
 
@@ -282,8 +274,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                     string vaiTro = result.Rows[0]["TenVaiTro"].ToString();
 
                     string insertQuery = $@"
-                    INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, TieuDe, NoiDung, NgayGui)
-                    VALUES ({newMaTB++}, 1, {maNguoiNhan}, N'{tieuDe}', N'{noiDung}', GETDATE());";
+                    INSERT INTO ThongBao (MaNguoiGui, MaNguoiNhan, TieuDe, NoiDung, NgayGui)
+                    VALUES (1, {maNguoiNhan}, N'{tieuDe}', N'{noiDung}', GETDATE());";
                     db.ExecuteNonQuery(insertQuery);
                     GhiNhatKy(db, $"Gửi thư cho cá nhân: {vaiTro} {tenNguoiNhan}");
 

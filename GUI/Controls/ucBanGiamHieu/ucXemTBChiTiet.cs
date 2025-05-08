@@ -12,6 +12,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
 {
     public partial class ucXemTBChiTiet : UserControl
     {
+        // Thiết lập chi tiết thông báo để hiển thị
         public void SetThongBaoChiTiet(string thoiGian, string nguoiNhan, string noiDung, string tieuDe)
         {
             lblThoiGianGuiThu.Text = thoiGian;
@@ -36,6 +37,11 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
         }
 
         private void pnlMain_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ucXemTBChiTiet_Load(object sender, EventArgs e)
         {
 
         }

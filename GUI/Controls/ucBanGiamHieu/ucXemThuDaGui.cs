@@ -18,6 +18,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             InitializeComponent();
             this.Load += ucXemThuDaGui_Load;
         }
+        // Tải dữ liệu thông báo đã gửi
         private void LoadData()
         {
             try
@@ -49,6 +50,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             }
         }
 
+        // Lấy thông tin người nhận từ cơ sở dữ liệu
         private string GetNguoiNhan(DatabaseHelper db, DataRow row)
         {
             if (row["MaNguoiNhan"] != DBNull.Value)
@@ -136,6 +138,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             dgvXemThu.ClearSelection();
         }
 
+        // Xóa các thông báo đã chọn
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
@@ -186,6 +189,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             dgvXemThu.ClearSelection();
         }
 
+        // Hiển thị chi tiết thông báo đã chọn
         private void btnXemChiTiet_Click(object sender, EventArgs e)
         {
             if (dgvXemThu.SelectedRows.Count > 0)
@@ -208,34 +212,25 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             }
         }
 
+        // Tìm kiếm thông báo theo từ khóa
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             try
             {
-                // Lấy từ khóa từ txtTimKiem
                 string keyword = txtTimKiem.Text.Trim();
 
                 if (string.IsNullOrEmpty(keyword))
                 {
-                    // Nếu không có từ khóa, tải lại toàn bộ dữ liệu
                     LoadData();
                     return;
                 }
-
-                // Tách từ khóa thành danh sách các từ
                 string[] keywords = keyword.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Lọc dữ liệu trong DataGridView
                 foreach (DataGridViewRow row in dgvXemThu.Rows)
                 {
                     if (row.IsNewRow) continue;
-
                     string nguoiNhan = row.Cells["NguoiNhan"].Value?.ToString() ?? "";
-
-                    // Kiểm tra nếu "Người nhận" chứa bất kỳ từ khóa nào
                     bool isMatch = keywords.Any(k => nguoiNhan.IndexOf(k, StringComparison.OrdinalIgnoreCase) >= 0);
-
-                    // Hiển thị hoặc ẩn dòng dựa trên kết quả tìm kiếm
                     row.Visible = isMatch;
                 }
             }

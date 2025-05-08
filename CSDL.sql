@@ -307,6 +307,21 @@ INSERT INTO DonXinNghi (MaDon, MaHS, NgayGui, NgayNghi, LyDo, MaGV, TrangThai) V
 (2, 43110333, '2025-04-13', '2025-04-14', N'Gia đình có việc', 101, N'Đã duyệt'),
 (3, 43110444, '2025-04-12', '2025-04-13', N'Nghỉ ốm', 100, N'Đã duyệt');
 
+-- Thêm dữ liệu mẫu vào bảng NguoiDung
+INSERT INTO NguoiDung (MaNguoiDung, TenDangNhap, MatKhau, MaVaiTro, NgayTao) VALUES
+(12, 'gv5', 'password123', 2, GETDATE()),
+(13, 'gv6', 'password123', 2, GETDATE()),
+(14, 'gv7', 'password123', 2, GETDATE()),
+(15, 'gv8', 'password123', 2, GETDATE()),
+(16, 'gv9', 'password123', 2, GETDATE());
+
+-- Thêm dữ liệu mẫu vào bảng GiaoVien
+INSERT INTO GiaoVien (MaGV, MaNguoiDung, HoTen, GioiTinh, SDT, Email, MaMon, ChuNhiem, NgaySinh, DiaChi) VALUES
+(104, 12, N'Nguyễn Văn Hòa', N'Nam', '0912345679', 'nguyenvanhoagv@gmail.com', 1, 0, '1985-01-15', N'Hà Nội'),
+(105, 13, N'Lê Thị Hạnh', N'Nữ', '0912345680', 'lethihanhtv@gmail.com', 2, 0, '1987-03-20', N'Hồ Chí Minh'),
+(106, 14, N'Phạm Văn Long', N'Nam', '0912345681', 'phamvanlong@gmail.com', 3, 0, '1990-07-10', N'Đà Nẵng'),
+(107, 15, N'Trần Thị Mai', N'Nữ', '0912345682', 'tranthimai@gmail.com', 4, 0, '1992-11-25', N'Hải Phòng'),
+(108, 16, N'Hoàng Văn Nam', N'Nam', '0912345683', 'hoangvannam@gmail.com', 5, 0, '1988-05-30', N'Cần Thơ');
 
 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('ThongBao') AND name = 'isActive')
 BEGIN

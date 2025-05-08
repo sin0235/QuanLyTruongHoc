@@ -58,6 +58,7 @@ namespace QuanLyTruongHoc
             this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
+            this.btnQuanLyLop = new Guna.UI2.WinForms.Guna2Button();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -181,6 +182,7 @@ namespace QuanLyTruongHoc
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
+            this.pnlMenu.Controls.Add(this.btnQuanLyLop);
             this.pnlMenu.Controls.Add(this.pnlSubSettings);
             this.pnlMenu.Controls.Add(this.btnSettings);
             this.pnlMenu.Controls.Add(this.btnQuanLyThoiKhoaBieu);
@@ -439,6 +441,31 @@ namespace QuanLyTruongHoc
             // 
             this.guna2Elipse2.BorderRadius = 18;
             // 
+            // btnQuanLyLop
+            // 
+            this.btnQuanLyLop.BackColor = System.Drawing.Color.Transparent;
+            this.btnQuanLyLop.BorderRadius = 10;
+            this.btnQuanLyLop.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyLop.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyLop.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnQuanLyLop.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnQuanLyLop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnQuanLyLop.FillColor = System.Drawing.Color.Transparent;
+            this.btnQuanLyLop.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanLyLop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.btnQuanLyLop.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnQuanLyLop.ImageOffset = new System.Drawing.Point(15, 0);
+            this.btnQuanLyLop.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnQuanLyLop.Location = new System.Drawing.Point(10, 110);
+            this.btnQuanLyLop.Name = "btnQuanLyLop";
+            this.btnQuanLyLop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnQuanLyLop.Size = new System.Drawing.Size(260, 55);
+            this.btnQuanLyLop.TabIndex = 11;
+            this.btnQuanLyLop.Text = "Quản lý lớp";
+            this.btnQuanLyLop.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnQuanLyLop.TextOffset = new System.Drawing.Point(15, 0);
+            this.btnQuanLyLop.Click += new System.EventHandler(this.btnQuanLyLop_Click);
+            // 
             // frmPhongNoiVu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -500,6 +527,7 @@ namespace QuanLyTruongHoc
         private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
         private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnChangePassword;
+        private Guna.UI2.WinForms.Guna2Button btnQuanLyLop;
     }
 }
 
