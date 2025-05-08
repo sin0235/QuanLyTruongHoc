@@ -110,7 +110,7 @@ CREATE TABLE KeHoachGiangDay (
 );
 
 CREATE TABLE ThongBao (
-    MaTB INT PRIMARY KEY,
+    MaTB INT IDENTITY(1,1) PRIMARY KEY,
     MaNguoiGui INT NOT NULL,
     MaNguoiNhan INT NULL,
     MaVaiTroNhan INT NULL,
@@ -125,6 +125,8 @@ CREATE TABLE ThongBao (
     FOREIGN KEY (MaLop) REFERENCES LopHoc(MaLop),
     FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon)
 );
+
+
 
 CREATE TABLE DonXinNghi (
     MaDon INT PRIMARY KEY,
@@ -284,9 +286,9 @@ INSERT INTO KeHoachGiangDay (MaKH, MaGV, MaMon, Tuan, MaLop, NoiDungGiangDay) VA
 
 -- Thêm dữ liệu mẫu vào bảng ThongBao
 INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui) VALUES
-(1, 1, NULL, 3, NULL, NULL, N'Thông báo nghỉ học', N'Thông báo nghỉ học ngày 17/4', GETDATE()),
-(2, 2, 4, NULL, NULL, 1, N'Nhắc nhở học tập', N'Nhắc nhở bạn Minh Khoa chuẩn bị bài môn Toán', GETDATE()),
-(3, 3, 5, NULL, NULL, 2, N'Nhắc nhở học tập', N'Nhắc nhở bạn Hồng Ngọc chuẩn bị bài môn Văn', GETDATE());
+(1, NULL, 3, NULL, NULL, N'Thông báo nghỉ học', N'Thông báo nghỉ học ngày 17/4', GETDATE()),
+(2, 4, NULL, NULL, 1, N'Nhắc nhở học tập', N'Nhắc nhở bạn Minh Khoa chuẩn bị bài môn Toán', GETDATE()),
+(3, 5, NULL, NULL, 2, N'Nhắc nhở học tập', N'Nhắc nhở bạn Hồng Ngọc chuẩn bị bài môn Văn', GETDATE());
 
 -- Thêm dữ liệu mẫu vào bảng DonXinNghi
 INSERT INTO DonXinNghi (MaDon, MaHS, NgayGui, NgayNghi, LyDo, MaGV, TrangThai) VALUES
@@ -294,22 +296,13 @@ INSERT INTO DonXinNghi (MaDon, MaHS, NgayGui, NgayNghi, LyDo, MaGV, TrangThai) V
 (2, 43110333, '2025-04-13', '2025-04-14', N'Gia đình có việc', 101, N'Đã duyệt'),
 (3, 43110444, '2025-04-12', '2025-04-13', N'Nghỉ ốm', 100, N'Đã duyệt');
 
--- Thêm dữ liệu mẫu vào bảng NhatKyHeThong
-INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian) VALUES
-(1, 1, N'Đăng nhập', GETDATE()),
-(2, 2, N'Nhập điểm môn Toán kiểm tra 15 phút học kỳ 1 cho học sinh Phạm Minh Khoa', GETDATE()),
-(3, 3, N'Nhập điểm môn Văn cuối kỳ học kỳ 1 cho học sinh Lê Hồng Ngọc', GETDATE());
+INSERT INTO ThongBao (MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui, isActive)
+VALUES
+(1, NULL, NULL, NULL, NULL, N'Thông báo nghỉ học', N'Thông báo nghỉ học ngày 17/04/2025', GETDATE(), 1),
+(2, 4, NULL, 1, 1, N'Nhắc nhở học tập', N'Nhắc nhở bạn Phạm Minh Khoa chuẩn bị bài môn Toán', GETDATE(), 1),
+(3, 5, NULL, 2, 2, N'Nhắc nhở học tập', N'Nhắc nhở bạn Lê Hồng Ngọc chuẩn bị bài môn Văn', GETDATE(), 1);
+   
 
--- Common notification for all teachers
-INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
-VALUES (4, 1, NULL, 2, NULL, NULL, N'Thông báo họp giáo viên', N'Tất cả giáo viên tham gia họp vào ngày 10/05/2025.', GETDATE());
-
--- Personal notification for a specific teacher (e.g., MaNguoiNhan = 2)
-INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
-VALUES (5, 1, 2, NULL, NULL, NULL, N'Nhắc nhở công việc', N'Giáo viên Nguyễn Văn A cần hoàn thành báo cáo tuần.', GETDATE());
-
-INSERT INTO ThongBao (MaTB, MaNguoiGui, MaNguoiNhan, MaVaiTroNhan, MaLop, MaMon, TieuDe, NoiDung, NgayGui)
-VALUES (6, 1, NULL, NULL, NULL, NULL, N'Thông báo chung', N'Thông báo dành cho tất cả mọi người.', GETDATE());
 
 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('ThongBao') AND name = 'isActive')
 BEGIN

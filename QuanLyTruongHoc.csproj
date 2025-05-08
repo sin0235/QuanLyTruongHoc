@@ -106,6 +106,12 @@
     <Compile Include="GUI\Controls\ucControlBar.Designer.cs">
       <DependentUpon>ucControlBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucGuiThongBao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucGuiThongBao.Designer.cs">
+      <DependentUpon>ucGuiThongBao.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyDiemSo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -348,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucControlBar.resx">
       <DependentUpon>ucControlBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucGuiThongBao.resx">
+      <DependentUpon>ucGuiThongBao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucDonXinNghiItem.resx">
       <DependentUpon>ucDonXinNghiItem.cs</DependentUpon>
