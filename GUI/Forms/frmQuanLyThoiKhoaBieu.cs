@@ -56,7 +56,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             cmbGiaoVien.DisplayMember = "HoTen";
             cmbGiaoVien.ValueMember = "MaGV";
 
-            // Nếu có thông tin giáo viên được chọn trước đó, đặt lại
             if (!string.IsNullOrEmpty(cmbGiaoVien.Tag?.ToString()))
             {
                 cmbGiaoVien.SelectedIndex = cmbGiaoVien.FindStringExact(cmbGiaoVien.Tag.ToString());
@@ -122,8 +121,6 @@ namespace QuanLyTruongHoc.GUI.Forms
                 int maMon = Convert.ToInt32(cmbMonHoc.SelectedValue);
                 int maGV = Convert.ToInt32(cmbGiaoVien.SelectedValue);
                 string tietHoc = txtTietHoc.Text.Trim();
-
-                // Lấy ngày từ DateTimePicker
                 DateTime ngay = dtpNgayHoc.Value.Date;
 
                 // Xác định thứ dựa trên ngày đã lấy
@@ -201,8 +198,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                     foreach (int tiet in tietHocList)
                     {
-                        // Kiểm tra nếu tiết này không thuộc về tiết cũ của bản ghi đang sửa
-                        // và có xung đột với các tiết khác
+                        // Kiểm tra nếu tiết này không thuộc về tiết cũ của bản ghi đang sửa và có xung đột với các tiết khác
                         if (existingTiets.Contains(tiet) && (rowMaTKB != maTKB || !isEditMode))
                         {
                             hasConflict = true;
@@ -298,8 +294,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             {
                 maMon = Convert.ToInt32(cmbMonHoc.SelectedValue);
             }
-
-            // Tải danh sách giáo viên dạy môn học này
             LoadGiaoVien(maMon);
         }
 
@@ -307,11 +301,7 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             dtpNgayHoc.Value = ngayHoc;
             LoadMonHoc();
-
-            // Gắn sự kiện SelectedIndexChanged cho cmbMonHoc
             cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
-
-            // Đặt giá trị mặc định cho môn học và giáo viên nếu có
             if (!string.IsNullOrEmpty(cmbMonHoc.Tag?.ToString()))
             {
                 cmbMonHoc.SelectedIndex = cmbMonHoc.FindStringExact(cmbMonHoc.Tag.ToString());

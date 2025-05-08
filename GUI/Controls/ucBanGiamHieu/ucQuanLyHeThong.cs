@@ -77,6 +77,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             if (this.Visible)
             {
+                // Căn giữa DataGridView khi UserControl hiển thị
                 dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
                 dgvQuanLyHeThong.ClearSelection();
             }
@@ -84,6 +85,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
         private void ucQuanLyHeThong_Load(object sender, EventArgs e)
         {
+            // Căn giữa DataGridView và thiết lập kiểu hiển thị tiêu đề cột
             dgvQuanLyHeThong.Left = (this.Width - dgvQuanLyHeThong.Width) / 2;
             dgvQuanLyHeThong.ClearSelection();
             dgvQuanLyHeThong.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
@@ -105,6 +107,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         private void DtpLoc_ValueChanged(object sender, EventArgs e)
         {
             if (originalData == null) return;
+            // Lọc dữ liệu theo ngày được chọn
             string selectedDate = dtpLoc.Value.ToString("yyyy-MM-dd");
             DataView dv = new DataView(originalData);
             dv.RowFilter = $"ThoiGian LIKE '{selectedDate}%'";
@@ -119,7 +122,8 @@ namespace QuanLyTruongHoc.GUI.Controls
             string keyword = txtTimKiem.Text.Trim();
             if (string.IsNullOrEmpty(keyword))
             {
-                dgvQuanLyHeThong.DataSource = originalData; // Hiển thị lại dữ liệu gốc nếu không có từ khóa
+                // Hiển thị lại dữ liệu gốc nếu không có từ khóa
+                dgvQuanLyHeThong.DataSource = originalData;
                 return;
             }
 

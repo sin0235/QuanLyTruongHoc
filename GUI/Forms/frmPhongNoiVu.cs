@@ -47,6 +47,8 @@ namespace QuanLyTruongHoc
             // Đăng ký sự kiện Resize
             this.Resize += new EventHandler(Form1_Resize);
 
+
+            // Hiển thị giao diện quản lý học sinh mặc định
             pnlContent.Controls.Clear();
             ucQuanLyHocSinh uc = new ucQuanLyHocSinh();
             uc.Dock = DockStyle.Fill;
@@ -162,19 +164,23 @@ namespace QuanLyTruongHoc
             isDragging = false;
         }
 
+        // Hiển thị giao diện quản lý thời khóa biểu
         private void btnQuanLyThoiKhoaBieu_Click(object sender, EventArgs e)
         {
             ShowUserControl(new ucQuanLyThoiKhoaBieu());
             btnQuanLyThoiKhoaBieu.FillColor = Color.FromArgb(214, 228, 255);
             btnQuanLyHocSinh.FillColor = Color.Transparent;
             lblPageTitle.Text = "Quản lý thời khóa biểu";
+            btnQuanLyLop.FillColor = Color.Transparent;
         }
 
+        // Hiển thị giao diện quản lý học sinh
         private void btnQuanLyHocSinh_Click(object sender, EventArgs e)
         {
             ShowUserControl(new ucQuanLyHocSinh());
             btnQuanLyHocSinh.FillColor = Color.FromArgb(214, 228, 255);
             btnQuanLyThoiKhoaBieu.FillColor = Color.Transparent;
+            btnQuanLyLop.FillColor = Color.Transparent;
             lblPageTitle.Text = "Quản lý học sinh";
         }
 
@@ -183,12 +189,15 @@ namespace QuanLyTruongHoc
 
         }
 
+        // Hiển thị UserControl trong panel
         public void ShowUserControl(UserControl uc)
         {
             pnlContent.Controls.Clear();
             pnlContent.Controls.Add(uc);
             uc.Dock = DockStyle.Fill;
         }
+
+        // Hiển thị UserControl với kích thước tùy chỉnh
         public void ShowUserControlCustomSize(UserControl uc, DockStyle dockStyle = DockStyle.None, int width = 0, int height = 0)
         {
             pnlContent.Controls.Clear();
@@ -252,19 +261,24 @@ namespace QuanLyTruongHoc
 
             if (result == DialogResult.Yes)
             {
-                // Tạo và hiển thị form đăng nhập
                 frmLogin loginForm = new frmLogin();
                 loginForm.Show();
-                // Đóng form hiện tại
-                this.Hide(); // Ẩn form hiện tại thay vì đóng để tránh đóng ứng dụng
-
-                // Đăng ký sự kiện FormClosed cho form đăng nhập
+                this.Hide(); 
                 loginForm.FormClosed += (s, args) =>
                 {
-                    // Nếu form đăng nhập đóng (không đăng nhập thành công), thoát ứng dụng
                     this.Close();
                 };
             }
+        }
+
+        // Hiển thị giao diện quản lý lớp
+        private void btnQuanLyLop_Click(object sender, EventArgs e)
+        {
+            ShowUserControl(new ucQuanLyLop());
+            btnQuanLyLop.FillColor = Color.FromArgb(214, 228, 255);
+            btnQuanLyHocSinh.FillColor = Color.Transparent;
+            btnQuanLyThoiKhoaBieu.FillColor = Color.Transparent;
+            lblPageTitle.Text = "Quản lý lớp";
         }
     }
 }

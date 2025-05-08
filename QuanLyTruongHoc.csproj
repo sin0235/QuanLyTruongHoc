@@ -62,6 +62,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -185,6 +186,12 @@
     </Compile>
     <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.Designer.cs">
       <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyLop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyLop.Designer.cs">
+      <DependentUpon>ucQuanLyLop.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.cs">
       <SubType>UserControl</SubType>
@@ -345,6 +352,12 @@
     <Compile Include="GUI\Forms\frmQuanLyHocSinh.Designer.cs">
       <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyLop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyLop.Designer.cs">
+      <DependentUpon>frmQuanLyLop.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -412,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyHocSinh.resx">
       <DependentUpon>ucQuanLyHocSinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyLop.resx">
+      <DependentUpon>ucQuanLyLop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucPhongNoiVu\ucQuanLyThoiKhoaBieu.resx">
       <DependentUpon>ucQuanLyThoiKhoaBieu.cs</DependentUpon>
@@ -490,6 +506,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyHocSinh.resx">
       <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmQuanLyLop.resx">
+      <DependentUpon>frmQuanLyLop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyThoiKhoaBieu.resx">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>

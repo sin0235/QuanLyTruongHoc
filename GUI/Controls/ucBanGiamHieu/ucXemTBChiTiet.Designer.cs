@@ -368,6 +368,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucXemTBChiTiet";
             this.Size = new System.Drawing.Size(2187, 1182);
+            this.Load += new System.EventHandler(this.ucXemTBChiTiet_Load);
             this.pnlFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.pnlHeader.ResumeLayout(false);

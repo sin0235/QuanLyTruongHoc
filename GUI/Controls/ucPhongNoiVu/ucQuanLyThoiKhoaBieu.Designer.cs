@@ -62,7 +62,7 @@
             this.panelHeader.Controls.Add(this.guna2HtmlLabel1);
             this.panelHeader.Controls.Add(this.cmbChonLop);
             this.panelHeader.Location = new System.Drawing.Point(69, 7);
-            this.panelHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(4);
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(1325, 68);
             this.panelHeader.TabIndex = 3;
@@ -74,7 +74,7 @@
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(915, 4);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(123, 33);
             this.guna2HtmlLabel2.TabIndex = 6;
@@ -87,7 +87,7 @@
             this.guna2Panel1.Controls.Add(this.btnXoa);
             this.guna2Panel1.Controls.Add(this.btnSua);
             this.guna2Panel1.Location = new System.Drawing.Point(307, 4);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(600, 59);
             this.guna2Panel1.TabIndex = 7;
@@ -103,7 +103,7 @@
             this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnLamMoi.ForeColor = System.Drawing.Color.White;
             this.btnLamMoi.Location = new System.Drawing.Point(448, 4);
-            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(4);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(144, 44);
             this.btnLamMoi.TabIndex = 7;
@@ -140,7 +140,7 @@
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnXoa.ForeColor = System.Drawing.Color.White;
             this.btnXoa.Location = new System.Drawing.Point(304, 4);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(117, 44);
             this.btnXoa.TabIndex = 6;
@@ -158,7 +158,7 @@
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnSua.ForeColor = System.Drawing.Color.White;
             this.btnSua.Location = new System.Drawing.Point(155, 4);
-            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(117, 44);
             this.btnSua.TabIndex = 5;
@@ -173,7 +173,7 @@
             this.dtpNgay.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgay.Format = System.Windows.Forms.DateTimePickerFormat.Long;
             this.dtpNgay.Location = new System.Drawing.Point(1055, 7);
-            this.dtpNgay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpNgay.Margin = new System.Windows.Forms.Padding(4);
             this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpNgay.Name = "dtpNgay";
@@ -188,7 +188,7 @@
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.RoyalBlue;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(4, 9);
-            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2HtmlLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(106, 33);
             this.guna2HtmlLabel1.TabIndex = 4;
@@ -206,7 +206,7 @@
             this.cmbChonLop.ForeColor = System.Drawing.Color.Black;
             this.cmbChonLop.ItemHeight = 30;
             this.cmbChonLop.Location = new System.Drawing.Point(124, 9);
-            this.cmbChonLop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbChonLop.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChonLop.Name = "cmbChonLop";
             this.cmbChonLop.Size = new System.Drawing.Size(159, 36);
             this.cmbChonLop.TabIndex = 3;
@@ -248,7 +248,7 @@
             this.dgvThoiKhoaBieu.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvThoiKhoaBieu.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvThoiKhoaBieu.Location = new System.Drawing.Point(69, 97);
-            this.dgvThoiKhoaBieu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvThoiKhoaBieu.Margin = new System.Windows.Forms.Padding(4);
             this.dgvThoiKhoaBieu.Name = "dgvThoiKhoaBieu";
             this.dgvThoiKhoaBieu.ReadOnly = true;
             this.dgvThoiKhoaBieu.RowHeadersVisible = false;
@@ -335,7 +335,7 @@
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.dgvThoiKhoaBieu);
             this.Controls.Add(this.panelHeader);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucQuanLyThoiKhoaBieu";
             this.Size = new System.Drawing.Size(1472, 966);
             this.Load += new System.EventHandler(this.ucQuanLyThoiKhoaBieu_Load);
