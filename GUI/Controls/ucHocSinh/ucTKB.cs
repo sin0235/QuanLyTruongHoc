@@ -16,7 +16,7 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucTKB : UserControl
     {
         private DatabaseHelper dbHelper;
-        private TKBDAL tkbDAL;
+        private TKBDAO tkbDAL;
         private int currentWeek = 0;
         private int maxWeek = 0;
         private int id;
@@ -392,7 +392,7 @@ namespace QuanLyTruongHoc.GUI.Controls
     {
         InitializeComponent();
         dbHelper = new DatabaseHelper();
-        tkbDAL = new TKBDAL();
+        tkbDAL = new TKBDAO();
         this.id = id;
         this.maHS = maHS;;
 

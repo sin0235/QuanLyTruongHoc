@@ -25,7 +25,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Control hiển thị chi tiết thông báo
         private ucTBChiTiet tbChiTiet;
         // Object để gọi các phương thức thao tác với CSDL
-        private ThongBaoDAL thongBaoDAL;
+        private ThongBaoDAO thongBaoDAL;
         // Thông tin người dùng hiện tại
         private int maNguoiDung;
         private int maVaiTro;
@@ -39,7 +39,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         public ucThongBao(int maHS, int ID)
         {
             InitializeComponent();
-            thongBaoDAL = new ThongBaoDAL();
+            thongBaoDAL = new ThongBaoDAO();
             maNguoiDung = maHS;
             id = ID;
         }
@@ -455,7 +455,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                     Task.Run(() =>
                     {
                         // Pass the current user's ID when updating the read status
-                        bool success = thongBaoDAL.UpdateReadStatus(maTB, maNguoiDung);
+                        bool success = thongBaoDAL.UpdateReadStatus(maTB, id);
                         if (!success)
                         {
                             Console.WriteLine($"Không thể cập nhật trạng thái đọc cho thông báo {maTB}");

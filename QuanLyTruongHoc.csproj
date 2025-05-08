@@ -75,13 +75,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\BaiKiemTraDAL.cs" />
+    <Compile Include="DAL\BaiKiemTraDAO.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
-    <Compile Include="DAL\DiemSoDAL.cs" />
-    <Compile Include="DAL\DonXinNghiDAL.cs" />
-    <Compile Include="DAL\HocSinhDAL.cs" />
-    <Compile Include="DAL\ThongBaoDAL.cs" />
-    <Compile Include="DAL\TKBDAL.cs" />
+    <Compile Include="DAL\DiemSoDAO.cs" />
+    <Compile Include="DAL\DonXinNghiDAO.cs" />
+    <Compile Include="DAL\HocSinhDAO.cs" />
+    <Compile Include="DAL\ThongBaoDAO.cs" />
+    <Compile Include="DAL\TKBDAO.cs" />
     <Compile Include="DTO\BaiKiemTraDTO.cs" />
     <Compile Include="DTO\DiemSoDTO.cs" />
     <Compile Include="DTO\DonXinNghiDTO.cs" />

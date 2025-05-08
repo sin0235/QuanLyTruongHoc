@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace QuanLyTruongHoc.DAL
 {
-    public class TKBDAL
+    public class TKBDAO
     {
         private DatabaseHelper dbHelper;
 
-        public TKBDAL()
+        public TKBDAO()
         {
             dbHelper = new DatabaseHelper();
         }

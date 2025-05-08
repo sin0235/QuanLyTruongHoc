@@ -15,13 +15,13 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
     public partial class ucQuanLyHocSinh : UserControl
     {
         private DatabaseHelper db;
-        private HocSinhDAL hocSinhDAL; // Sử dụng DAL cho các thao tác CRUD
+        private HocSinhDAO hocSinhDAL; // Sử dụng DAL cho các thao tác CRUD
 
         public ucQuanLyHocSinh()
         {
             InitializeComponent();
             db = new DatabaseHelper();
-            hocSinhDAL = new HocSinhDAL(); // Khởi tạo DAL
+            hocSinhDAL = new HocSinhDAO(); // Khởi tạo DAL
             LoadHocSinhData();
             LoadLop();
             this.Load += ucQuanLyHocSinh_Load;

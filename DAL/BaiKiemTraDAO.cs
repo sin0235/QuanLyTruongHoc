@@ -9,11 +9,11 @@ using QuanLyTruongHoc.DTO;
 
 namespace QuanLyTruongHoc.DAL
 {
-    public class BaiKiemTraDAL
+    public class BaiKiemTraDAO
     {
         private DatabaseHelper db;
         
-        public BaiKiemTraDAL()
+        public BaiKiemTraDAO()
         {
             db = new DatabaseHelper();
         }

@@ -699,7 +699,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 }
 
                 // Use the DAL to save the test
-                BaiKiemTraDAL baiKiemTraDAL = new BaiKiemTraDAL();
+                BaiKiemTraDAO baiKiemTraDAL = new BaiKiemTraDAO();
                 int maBaiKT = baiKiemTraDAL.CreateBaiKiemTra(baiKiemTraDTO);
 
                 return maBaiKT > 0;

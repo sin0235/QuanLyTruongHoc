@@ -15,7 +15,7 @@ namespace QuanLyTruongHoc.GUI.Controls
     public partial class ucXinNghi : UserControl
     {
         private DatabaseHelper dbHelper;
-        private DonXinNghiDAL donXinNghiDAL;
+        private DonXinNghiDAO donXinNghiDAL;
         private int currentStudentId = -1; // ID người dùng
         private int maHS = -1; // Mã học sinh trong database
         private string currentFilter = "all";
@@ -26,7 +26,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             InitializeComponent();
             dbHelper = new DatabaseHelper();
-            donXinNghiDAL = new DonXinNghiDAL();
+            donXinNghiDAL = new DonXinNghiDAO();
             currentStudentId = ID;
             maHS = M;
         }

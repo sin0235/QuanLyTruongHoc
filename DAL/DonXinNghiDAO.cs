@@ -11,14 +11,14 @@ namespace QuanLyTruongHoc.DAL
     /// <summary>
     /// Lớp xử lý thao tác dữ liệu đơn xin nghỉ với cơ sở dữ liệu
     /// </summary>
-    public class DonXinNghiDAL
+    public class DonXinNghiDAO
     {
         private readonly DatabaseHelper db;
 
         /// <summary>
         /// Khởi tạo đối tượng xử lý đơn xin nghỉ
         /// </summary>
-        public DonXinNghiDAL()
+        public DonXinNghiDAO()
         {
             db = new DatabaseHelper();
         }
