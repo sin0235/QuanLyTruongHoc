@@ -100,8 +100,8 @@ return dt;
                         {
                             if (param.Value is DateTime dateValue)
                             {
-                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.Date);
-                                sqlParam.Value = dateValue.Date;
+                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.DateTime);
+                                sqlParam.Value = dateValue; 
                                 cmd.Parameters.Add(sqlParam);
                             }
                             else
@@ -173,9 +173,9 @@ return dt;
                         {
                             if (param.Value is DateTime dateValue)
                             {
-                                // Xử lý đặc biệt cho tham số kiểu DateTime
-                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.Date);
-                                sqlParam.Value = dateValue.Date; // Chỉ lấy phần ngày
+                                // Sử dụng SqlDbType.DateTime2 để lưu cả ngày và giờ
+                                SqlParameter sqlParam = new SqlParameter(param.Key, SqlDbType.DateTime2);
+                                sqlParam.Value = dateValue; // Không lấy .Date nữa để giữ thông tin giờ
                                 cmd.Parameters.Add(sqlParam);
                             }
                             else
