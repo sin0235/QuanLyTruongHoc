@@ -465,3 +465,14 @@ CREATE TABLE BaiKiemTra_LopHoc (
     CONSTRAINT FK_BaiKiemTra_LopHoc_Lop FOREIGN KEY (MaLop) REFERENCES LopHoc(MaLop)
 )
 GO
+
+CREATE TABLE ThongBaoNguoiDoc (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    MaTB INT NOT NULL,                -- Notification ID reference
+    MaNguoiDung INT NOT NULL,         -- User ID who read the notification
+    ThoiGianDoc DATETIME NOT NULL DEFAULT GETDATE(),  -- When it was read
+    CONSTRAINT FK_TBND_ThongBao FOREIGN KEY (MaTB) REFERENCES ThongBao(MaTB),
+    CONSTRAINT FK_TBND_NguoiDung FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
+    CONSTRAINT UQ_TBND_ThongBao_NguoiDung UNIQUE (MaTB, MaNguoiDung)  -- Ensure one record per notification-user pair
+);
+
