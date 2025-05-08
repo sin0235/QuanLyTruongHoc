@@ -68,9 +68,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             // Bắt đầu hiệu ứng mở form
             animationTimer.Start();
 
-            // Khởi tạo dữ liệu giả định cho bài kiểm tra
-            InitializeTestData();
-
             // Tạo các nút câu hỏi trong sidebar
             CreateQuestionButtons();
 
@@ -79,67 +76,6 @@ namespace QuanLyTruongHoc.GUI.Forms
 
             // Bắt đầu đếm thời gian
             timer.Start();
-        }
-
-        private void InitializeTestData()
-        {
-            // Giả lập 10 câu hỏi (5 trắc nghiệm, 5 tự luận)
-            int totalQuestions = 10;
-            answeredQuestions = new List<bool>(new bool[totalQuestions]);
-            markedQuestions = new List<bool>(new bool[totalQuestions]);
-
-            //// Tạo câu hỏi trắc nghiệm
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    ucTNItem mcQuestion = new ucTNItem();
-            //    mcQuestion.Dock = DockStyle.Fill;
-            //    mcQuestion.LoadQuestion(
-            //        i + 1,                 // id
-            //        i + 1,                 // number
-            //        $"Câu hỏi trắc nghiệm mẫu số {i + 1}. Đây là một câu hỏi trắc nghiệm để minh họa giao diện?",
-            //        new string[] {         // options
-            //                $"Đáp án A cho câu hỏi {i + 1}",
-            //                $"Đáp án B cho câu hỏi {i + 1}",
-            //                $"Đáp án C cho câu hỏi {i + 1}",
-            //                $"Đáp án D cho câu hỏi {i + 1}"
-            //        },
-            //        0,                     // correctAnswer
-            //        null,                  // image
-            //        1,                     // points
-            //        false                  // showAnswers
-            //    );
-            //    questionItems.Add(mcQuestion);
-            //}
-
-            // Tạo câu hỏi tự luận
-            for (int i = 0; i < 5; i++)
-            {
-                ucTLItem essayQuestion = new ucTLItem();
-                essayQuestion.Dock = DockStyle.Fill;
-                essayQuestion.LoadQuestion(
-                    i + 6,                  // id
-                    i + 6,                  // number
-                    $"Câu hỏi tự luận mẫu số {i + 6}. Hãy giải thích chi tiết về vấn đề được nêu trong câu hỏi này?",
-                    "",                     // modelAnswer (không hiển thị)
-                    1000,                   // maxChars
-                    null,                   // image
-                    2,                      // points
-                    false                   // showAnswers
-                );
-                questionItems.Add(essayQuestion);
-            }
-
-            // Cập nhật thông tin bài kiểm tra
-            lblExamTitle.Text = "Kiểm tra 45 phút - Toán học";
-            lblExamSummary.Text = "Lớp 10A1 | 10 câu hỏi | 45 phút | 15 điểm";
-
-            // Cài đặt thời gian cho bài kiểm tra
-            remainingTime = TimeSpan.FromMinutes(45);
-            UpdateTimerDisplay();
-
-            // Cài đặt tiến trình
-            progressExam.Maximum = totalQuestions;
-            progressExam.Value = 0;
         }
 
         private void CreateQuestionButtons()

@@ -46,37 +46,29 @@ namespace QuanLyTruongHoc.GUI.Controls
             cmbSemester.SelectedIndexChanged += FilterChanged;
             btnSearch.Click += BtnSearch_Click;
             txtSearch.KeyPress += TxtSearch_KeyPress;
+            Label lblNoItems = new Label
+            {
+                Text = "Chức năng đang trong quá trình phát triển",
+                Font = new Font("Segoe UI", 14),
+                ForeColor = Color.Gray,
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            lblNoItems.Location = new Point(
+                (pnlTestContainer.Width - lblNoItems.Width) / 2,
+                (pnlTestContainer.Height - lblNoItems.Height) / 2
+            );
+            pnlTestContainer.Controls.Add(lblNoItems);
         }
 
         private void UcKiemTra_Load(object sender, EventArgs e)
         {
-            // Initialize sample data
-            InitializeSampleData();
 
             // Select the default tab
             SetActiveView(ViewMode.Tests);
         }
 
-        private void InitializeSampleData()
-        {
-            // Initialize sample test data
-            testList = new List<TestData>
-            {
-                new TestData(1, "Toán học", "Kiểm tra 15 phút Đại số", 15, DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), 1, 0, "Ôn tập chương 3 về phương trình bậc 2", false),
-                new TestData(2, "Vật lý", "Kiểm tra 45 phút Cơ học", 45, DateTime.Now.AddDays(-1), DateTime.Now.AddDays(5), 2, 1, "Ôn tập các định luật Newton", false),
-                new TestData(3, "Hóa học", "Kiểm tra 1 tiết Hóa vô cơ", 45, DateTime.Now, DateTime.Now.AddDays(3), 1, 0, "Ôn tập chương 5 về các phản ứng hóa học", false),
-                new TestData(4, "Sinh học", "Kiểm tra cuối kỳ", 90, DateTime.Now.AddDays(7), DateTime.Now.AddDays(10), 1, 0, "Ôn tập toàn bộ nội dung học kỳ", false)
-            };
-
-            // Initialize sample homework data
-            homeworkList = new List<TestData>
-            {
-                new TestData(5, "Ngữ văn", "Bài tập phân tích tác phẩm", 0, DateTime.Now.AddDays(-5), DateTime.Now.AddDays(2), 1, 0, "Phân tích tác phẩm 'Chiếc lược ngà'", true),
-                new TestData(6, "Tiếng Anh", "Bài tập về nhà Unit 5", 0, DateTime.Now.AddDays(-3), DateTime.Now.AddDays(1), 1, 0, "Làm các bài tập từ trang 45-47", true),
-                new TestData(7, "Địa lý", "Bài tập vẽ bản đồ", 0, DateTime.Now, DateTime.Now.AddDays(4), 1, 0, "Vẽ bản đồ Việt Nam và đánh dấu các vùng kinh tế", true)
-            };
-        }
-
+      
         private void BtnTests_Click(object sender, EventArgs e)
         {
             SetActiveView(ViewMode.Tests);
@@ -144,7 +136,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
 
             // Refresh the view
-            RefreshCurrentView();
+            //RefreshCurrentView();
         }
 
         private void RefreshCurrentView()
@@ -160,18 +152,18 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             switch (currentMode)
             {
-                case ViewMode.Tests:
-                    filteredItems = testList.Where(t => !t.IsHomework).ToList();
-                    break;
-                case ViewMode.Homework:
-                    filteredItems = homeworkList.Where(t => t.IsHomework).ToList();
-                    break;
-                case ViewMode.ComingSoon:
-                    // Get items that are coming soon (start date within 7 days from now)
-                    DateTime sevenDaysFromNow = DateTime.Now.AddDays(7);
-                    filteredItems = testList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList();
-                    filteredItems.AddRange(homeworkList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList());
-                    break;
+                //case ViewMode.Tests:
+                //    filteredItems = testList.Where(t => !t.IsHomework).ToList();
+                //    break;
+                //case ViewMode.Homework:
+                //    filteredItems = homeworkList.Where(t => t.IsHomework).ToList();
+                //    break;
+                //case ViewMode.ComingSoon:
+                //    // Get items that are coming soon (start date within 7 days from now)
+                //    DateTime sevenDaysFromNow = DateTime.Now.AddDays(7);
+                //    filteredItems = testList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList();
+                //    filteredItems.AddRange(homeworkList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList());
+                //    break;
             }
 
             // Apply search filter if provided
@@ -255,7 +247,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         }
     }
 
-    // Class to store test data
     public class TestData
     {
         public int TestId { get; set; }
