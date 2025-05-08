@@ -40,6 +40,7 @@ namespace QuanLyTruongHoc
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlLeft = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlMenu = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.guiThongBaoBtn = new Guna.UI2.WinForms.Guna2Button();
             this.pnlSubSettings = new Guna.UI2.WinForms.Guna2Panel();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnChangePassword = new Guna.UI2.WinForms.Guna2Button();
@@ -184,6 +185,7 @@ namespace QuanLyTruongHoc
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(145)))), ((int)(((byte)(215)))));
             this.pnlMenu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(140)))), ((int)(((byte)(210)))));
+            this.pnlMenu.Controls.Add(this.guiThongBaoBtn);
             this.pnlMenu.Controls.Add(this.pnlSubSettings);
             this.pnlMenu.Controls.Add(this.thongTinCaNhanBtn);
             this.pnlMenu.Controls.Add(this.quanLyLopBtn);
@@ -200,6 +202,18 @@ namespace QuanLyTruongHoc
             this.pnlMenu.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.pnlMenu.Size = new System.Drawing.Size(350, 870);
             this.pnlMenu.TabIndex = 1;
+            // 
+            // guiThongBaoBtn
+            // 
+            this.guiThongBaoBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
+            this.guiThongBaoBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guiThongBaoBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
+            this.guiThongBaoBtn.Location = new System.Drawing.Point(3, 390);
+            this.guiThongBaoBtn.Name = "guiThongBaoBtn";
+            this.guiThongBaoBtn.Size = new System.Drawing.Size(350, 72);
+            this.guiThongBaoBtn.TabIndex = 0;
+            this.guiThongBaoBtn.Text = "Gửi Thông Báo";
+            this.guiThongBaoBtn.Click += new System.EventHandler(this.guiThongBaoBtn_Click);
             // 
             // pnlSubSettings
             // 
@@ -281,7 +295,7 @@ namespace QuanLyTruongHoc
             this.quanLyLopBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quanLyLopBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(98)))));
             this.quanLyLopBtn.HoverState.FillColor = System.Drawing.Color.LightSkyBlue;
-            this.quanLyLopBtn.Location = new System.Drawing.Point(0, 390);
+            this.quanLyLopBtn.Location = new System.Drawing.Point(3, 468);
             this.quanLyLopBtn.Name = "quanLyLopBtn";
             this.quanLyLopBtn.Size = new System.Drawing.Size(350, 72);
             this.quanLyLopBtn.TabIndex = 12;
@@ -559,6 +573,7 @@ namespace QuanLyTruongHoc
         private Guna.UI2.WinForms.Guna2Panel pnlSubSettings;
         private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnChangePassword;
+        private Guna.UI2.WinForms.Guna2Button guiThongBaoBtn;
     }
 }
 

@@ -37,6 +37,8 @@ namespace QuanLyTruongHoc
             // Load and display the teacher's name
             LoadUserName(maNguoiDung);
 
+            getAvatar();
+
             // Check if the teacher is a homeroom teacher
             if (!IsHomeroomTeacher(maNguoiDung))
             {
@@ -368,9 +370,56 @@ namespace QuanLyTruongHoc
             }
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void guiThongBaoBtn_Click(object sender, EventArgs e)
         {
-            new GUI.Forms.frmTaoBaiKiemTra(maNguoiDung).ShowDialog();
+            int maGV = GetMaGiaoVien(maNguoiDung);
+            lblPageTitle.Text = "Gửi thông báo";
+            pnlContent.Controls.Clear();
+            ucGuiThongBao uc = new ucGuiThongBao(maNguoiDung, maGV);
+            uc.Dock = DockStyle.None;
+            pnlContent.Controls.Add(uc);
+            uc.BringToFront();
+
         }
+
+        private void getAvatar()
+        {
+            try
+            {
+                // Query to get gender from the NguoiDung table
+                string query = $@"
+                    SELECT gv.GioiTinh
+                    FROM GiaoVien gv
+                    WHERE gv.MaGV = {GetMaGiaoVien(maNguoiDung)}";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    // Retrieve the gender
+                    string gender = dt.Rows[0]["GioiTinh"].ToString();
+
+                    // Set the avatar based on gender
+                    if (gender == "Nam")
+                    {
+                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Male; // Replace with your male image resource
+                    }
+                    else
+                    {
+                        picUserAvatar.Image = Properties.Resources.defautAvatar_Teacher_Female; // Replace with your female image resource
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy thông tin giới tính.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy ảnh đại diện: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }
