@@ -397,9 +397,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                Console.WriteLine($"Điểm thường xuyên: {DiemThuongXuyen}, Value: {(int)(DiemThuongXuyen * 10)}");
-                Console.WriteLine($"Điểm giữa kỳ TB: {DiemGiuaKyTB}, Value: {(int)(DiemGiuaKyTB * 10)}");
-                Console.WriteLine($"Điểm cuối kỳ TB: {DiemCuoiKyTB}, Value: {(int)(DiemCuoiKyTB * 10)}");
 
                 // Đảm bảo các progress bar có Maximum = 100
                 if (prgAssignment.Maximum != 100) prgAssignment.Maximum = 100;

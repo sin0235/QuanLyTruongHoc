@@ -84,7 +84,7 @@ namespace QuanLyTruongHoc.DAL
                 string[] years = namHoc.Split(new char[] { '–', '-' }, StringSplitOptions.RemoveEmptyEntries);
                 if (years.Length != 2)
                 {
-                    Console.WriteLine($"Định dạng năm học không hợp lệ: {namHoc}");
+
                     return timePeriods;
                 }
 
@@ -124,8 +124,6 @@ namespace QuanLyTruongHoc.DAL
                     periodStart = periodStart.AddDays(7);
                     weekCount++;
                 }
-
-                Console.WriteLine($"Đã tạo thành công {timePeriods.Count} tuần cho năm học {namHoc}");
             }
             catch (Exception ex)
             {

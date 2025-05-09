@@ -70,8 +70,6 @@ namespace QuanLyTruongHoc.DAL
 
                 DataTable dt = db.ExecuteQuery(query, parameters);
 
-                Console.WriteLine($"Số hàng trả về: {dt.Rows.Count}");
-
                 if (dt.Rows.Count > 0)
                 {
                     ThongTinHSDTO student = new ThongTinHSDTO();
@@ -113,7 +111,6 @@ namespace QuanLyTruongHoc.DAL
                         student.DateOfBirth = DateTime.Now;
                     }
 
-                    Console.WriteLine($"Đã lấy thông tin học sinh: {student.FullName}");
                     return student;
                 }
                 else
