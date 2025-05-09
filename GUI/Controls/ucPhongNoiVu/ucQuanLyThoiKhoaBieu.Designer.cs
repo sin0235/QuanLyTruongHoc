@@ -67,7 +67,7 @@
             this.panelLopVaNgay.Controls.Add(this.cmbChonLop);
             this.panelLopVaNgay.Location = new System.Drawing.Point(22, 15);
             this.panelLopVaNgay.Name = "panelLopVaNgay";
-            this.panelLopVaNgay.Size = new System.Drawing.Size(600, 106);
+            this.panelLopVaNgay.Size = new System.Drawing.Size(600, 55);
             this.panelLopVaNgay.TabIndex = 3;
             // 
             // lblChonNgay
@@ -106,7 +106,7 @@
             this.dtpNgay.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpNgay.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpNgay.Name = "dtpNgay";
-            this.dtpNgay.Size = new System.Drawing.Size(200, 87);
+            this.dtpNgay.Size = new System.Drawing.Size(200, 36);
             this.dtpNgay.TabIndex = 5;
             this.dtpNgay.Value = new System.DateTime(2025, 5, 3, 19, 51, 58, 495);
             this.dtpNgay.ValueChanged += new System.EventHandler(this.DtpNgay_ValueChanged);
@@ -139,7 +139,7 @@
             this.panelButtons.Controls.Add(this.btnThem);
             this.panelButtons.Location = new System.Drawing.Point(1022, 15);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(600, 106);
+            this.panelButtons.Size = new System.Drawing.Size(600, 55);
             this.panelButtons.TabIndex = 7;
             // 
             // btnLamMoi
@@ -162,7 +162,7 @@
             this.btnLamMoi.Location = new System.Drawing.Point(455, 10);
             this.btnLamMoi.Margin = new System.Windows.Forms.Padding(10);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(135, 87);
+            this.btnLamMoi.Size = new System.Drawing.Size(135, 36);
             this.btnLamMoi.TabIndex = 7;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -188,7 +188,7 @@
             this.btnXoa.Location = new System.Drawing.Point(310, 10);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(10);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(125, 87);
+            this.btnXoa.Size = new System.Drawing.Size(125, 36);
             this.btnXoa.TabIndex = 6;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -214,7 +214,7 @@
             this.btnSua.Location = new System.Drawing.Point(165, 10);
             this.btnSua.Margin = new System.Windows.Forms.Padding(10);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(125, 87);
+            this.btnSua.Size = new System.Drawing.Size(125, 36);
             this.btnSua.TabIndex = 5;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -240,7 +240,7 @@
             this.btnThem.Location = new System.Drawing.Point(10, 10);
             this.btnThem.Margin = new System.Windows.Forms.Padding(2);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(135, 87);
+            this.btnThem.Size = new System.Drawing.Size(135, 36);
             this.btnThem.TabIndex = 4;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -252,7 +252,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Separator1.Location = new System.Drawing.Point(22, 80);
             this.guna2Separator1.Name = "guna2Separator1";
-            this.guna2Separator1.Size = new System.Drawing.Size(1600, 61);
+            this.guna2Separator1.Size = new System.Drawing.Size(1600, 10);
             this.guna2Separator1.TabIndex = 8;
             // 
             // panelDataGrid
@@ -268,7 +268,7 @@
             this.panelDataGrid.Location = new System.Drawing.Point(22, 130);
             this.panelDataGrid.Name = "panelDataGrid";
             this.panelDataGrid.Padding = new System.Windows.Forms.Padding(20);
-            this.panelDataGrid.Size = new System.Drawing.Size(1600, 801);
+            this.panelDataGrid.Size = new System.Drawing.Size(1600, 750);
             this.panelDataGrid.TabIndex = 9;
             // 
             // dgvThoiKhoaBieu
@@ -313,7 +313,7 @@
             this.dgvThoiKhoaBieu.RowHeadersWidth = 51;
             this.dgvThoiKhoaBieu.RowTemplate.Height = 40;
             this.dgvThoiKhoaBieu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvThoiKhoaBieu.Size = new System.Drawing.Size(1560, 761);
+            this.dgvThoiKhoaBieu.Size = new System.Drawing.Size(1560, 710);
             this.dgvThoiKhoaBieu.TabIndex = 8;
             this.dgvThoiKhoaBieu.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvThoiKhoaBieu.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -407,7 +407,8 @@
             // 
             // ucQuanLyThoiKhoaBieu
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblTuanHoc);
             this.Controls.Add(this.panelDataGrid);

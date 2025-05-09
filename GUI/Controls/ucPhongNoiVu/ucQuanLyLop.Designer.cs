@@ -41,13 +41,10 @@
             this.txtTimKiemLop = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnTimKiemLop = new Guna.UI2.WinForms.Guna2Button();
             this.btnLamMoiLop = new Guna.UI2.WinForms.Guna2Button();
-            this.panelHeader = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblHeader = new System.Windows.Forms.Label();
             this.panelActions = new Guna.UI2.WinForms.Guna2Panel();
             this.panelSearch = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLyLop)).BeginInit();
-            this.panelHeader.SuspendLayout();
             this.panelActions.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +85,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvQuanLyLop.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvQuanLyLop.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvQuanLyLop.Location = new System.Drawing.Point(20, 180);
+            this.dgvQuanLyLop.Location = new System.Drawing.Point(13, 130);
             this.dgvQuanLyLop.Margin = new System.Windows.Forms.Padding(2);
             this.dgvQuanLyLop.Name = "dgvQuanLyLop";
             this.dgvQuanLyLop.ReadOnly = true;
@@ -319,34 +316,13 @@
             this.btnLamMoiLop.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.btnLamMoiLop.Click += new System.EventHandler(this.btnLamMoiLop_Click);
             // 
-            // panelHeader
-            // 
-            this.panelHeader.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panelHeader.Controls.Add(this.lblHeader);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(1640, 60);
-            this.panelHeader.TabIndex = 10;
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.AutoSize = true;
-            this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeader.ForeColor = System.Drawing.Color.White;
-            this.lblHeader.Location = new System.Drawing.Point(15, 15);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(155, 30);
-            this.lblHeader.TabIndex = 0;
-            this.lblHeader.Text = "QUẢN LÝ LỚP";
-            // 
             // panelActions
             // 
             this.panelActions.Controls.Add(this.btnThemLop);
             this.panelActions.Controls.Add(this.btnSuaLop);
             this.panelActions.Controls.Add(this.btnXoaLop);
             this.panelActions.Controls.Add(this.btnLamMoiLop);
-            this.panelActions.Location = new System.Drawing.Point(20, 70);
+            this.panelActions.Location = new System.Drawing.Point(13, 20);
             this.panelActions.Name = "panelActions";
             this.panelActions.Size = new System.Drawing.Size(480, 65);
             this.panelActions.TabIndex = 11;
@@ -356,7 +332,7 @@
             this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.Controls.Add(this.txtTimKiemLop);
             this.panelSearch.Controls.Add(this.btnTimKiemLop);
-            this.panelSearch.Location = new System.Drawing.Point(1160, 70);
+            this.panelSearch.Location = new System.Drawing.Point(1153, 20);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(460, 65);
             this.panelSearch.TabIndex = 12;
@@ -365,7 +341,7 @@
             // 
             this.guna2Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2Separator1.Location = new System.Drawing.Point(20, 150);
+            this.guna2Separator1.Location = new System.Drawing.Point(13, 100);
             this.guna2Separator1.Name = "guna2Separator1";
             this.guna2Separator1.Size = new System.Drawing.Size(1600, 10);
             this.guna2Separator1.TabIndex = 13;
@@ -377,15 +353,12 @@
             this.Controls.Add(this.guna2Separator1);
             this.Controls.Add(this.panelSearch);
             this.Controls.Add(this.panelActions);
-            this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.dgvQuanLyLop);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ucQuanLyLop";
             this.Size = new System.Drawing.Size(1640, 960);
             this.Load += new System.EventHandler(this.ucQuanLyLop_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuanLyLop)).EndInit();
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
             this.panelActions.ResumeLayout(false);
             this.panelSearch.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -404,8 +377,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SiSo;
         private System.Windows.Forms.DataGridViewTextBoxColumn GVChuNhiem;
         private Guna.UI2.WinForms.Guna2Button btnLamMoiLop;
-        private Guna.UI2.WinForms.Guna2Panel panelHeader;
-        private System.Windows.Forms.Label lblHeader;
         private Guna.UI2.WinForms.Guna2Panel panelActions;
         private Guna.UI2.WinForms.Guna2Panel panelSearch;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator1;
