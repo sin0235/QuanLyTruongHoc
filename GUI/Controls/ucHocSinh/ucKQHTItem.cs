@@ -12,6 +12,8 @@ namespace QuanLyTruongHoc.GUI.Controls
 {
     public partial class ucKQHTItem : UserControl
     {
+        #region Layout và Hiển thị
+
         /// <summary>
         /// Điều chỉnh kích thước ucKQHTItem theo chiều rộng của container
         /// </summary>
@@ -53,8 +55,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         protected override void OnSizeChanged(EventArgs e)
         {
             base.OnSizeChanged(e);
-
-            // Cập nhật lại vị trí các thành phần nếu cần
             UpdateLayoutOnResize();
         }
 
@@ -128,16 +128,44 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             this.Margin = new Padding(0, top, 0, bottom);
         }
-        // Properties for subject data
-        private string _subjectName = "";
-        private float _assignmentScore = 0;
-        private List<float> _midtermScores = new List<float>();
-        private float _midtermAvgScore = 0;
-        private float _finalScore = 0;
-        private float _averageScore = 0;
-        private string _teacherComment = "";
 
-        // Public properties with getters and setters
+        #endregion
+
+        #region Thuộc tính và Dữ liệu
+
+        // Thông tin môn học
+        private string _subjectName = "";
+
+        // Điểm miệng
+        private List<float> _diemMiengList = new List<float>();
+        private float _diemMiengTB = 0;
+
+        // Điểm 15 phút
+        private List<float> _diem15PhutList = new List<float>();
+        private float _diem15PhutTB = 0;
+
+        // Điểm thường xuyên (trung bình của điểm miệng và 15 phút)
+        private float _diemThuongXuyen = 0;
+
+        // Điểm giữa kỳ
+        private List<float> _diemGiuaKyList = new List<float>();
+        private float _diemGiuaKyTB = 0;
+
+        // Điểm cuối kỳ
+        private List<float> _diemCuoiKyList = new List<float>();
+        private float _diemCuoiKyTB = 0;
+
+        // Điểm trung bình
+        private float _diemTrungBinh = 0;
+
+        // Nhận xét giáo viên
+        private string _nhanXet = "";
+
+        #endregion
+
+        #region Thuộc tính công khai
+
+        // Tên môn học
         public string SubjectName
         {
             get { return _subjectName; }
@@ -148,83 +176,311 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        // Cập nhật hàm setter cho các thuộc tính để đảm bảo Progress Bar hiển thị đúng
-        public float AssignmentScore
+        // Danh sách điểm miệng
+        public List<float> DiemMiengList
         {
-            get { return _assignmentScore; }
+            get { return _diemMiengList; }
             set
             {
-                _assignmentScore = value;
-                lblAssignmentScore.Text = value.ToString("0.0");
-
-                // Đảm bảo progress bar có Maximum = 100
-                if (prgAssignment.Maximum != 100) prgAssignment.Maximum = 100;
-
-                // Chuyển đổi điểm thành phần trăm (0-10 -> 0-100)
-                prgAssignment.Value = Math.Min(Math.Max((int)(value * 10), 0), 100);
-                UpdateAverageScore();
+                _diemMiengList = value ?? new List<float>();
+                TinhDiemMiengTB();
             }
         }
 
-        public List<float> MidtermScores
+        // Danh sách điểm 15 phút
+        public List<float> Diem15PhutList
         {
-            get { return _midtermScores; }
+            get { return _diem15PhutList; }
             set
             {
-                _midtermScores = value ?? new List<float>();
-                UpdateMidtermAverage();
+                _diem15PhutList = value ?? new List<float>();
+                TinhDiem15PhutTB();
             }
         }
 
-        public float MidtermAvgScore
+        // Điểm thường xuyên (trung bình của điểm miệng và 15 phút)
+        public float DiemThuongXuyen
         {
-            get { return _midtermAvgScore; }
+            get { return _diemThuongXuyen; }
             private set
             {
-                _midtermAvgScore = value;
+                _diemThuongXuyen = value;
+                lblAssignmentScore.Text = value.ToString("0.0");
+
+                // Cập nhật progress bar
+                if (prgAssignment.Maximum != 100) prgAssignment.Maximum = 100;
+                prgAssignment.Value = Math.Min(Math.Max((int)(value * 10), 0), 100);
+
+                // Cập nhật điểm trung bình
+                TinhDiemTrungBinh();
+            }
+        }
+
+        // Danh sách điểm giữa kỳ
+        public List<float> DiemGiuaKyList
+        {
+            get { return _diemGiuaKyList; }
+            set
+            {
+                _diemGiuaKyList = value ?? new List<float>();
+                TinhDiemGiuaKyTB();
+            }
+        }
+
+        // Điểm giữa kỳ trung bình
+        public float DiemGiuaKyTB
+        {
+            get { return _diemGiuaKyTB; }
+            private set
+            {
+                _diemGiuaKyTB = value;
                 lblMidtermExamScore.Text = value.ToString("0.0");
+
+                // Cập nhật progress bar
                 prgMidtermExam.Value = Math.Min(Math.Max((int)(value * 10), 0), 100);
-                UpdateAverageScore();
+
+                // Cập nhật điểm trung bình
+                TinhDiemTrungBinh();
             }
         }
 
-        public float FinalScore
+        // Danh sách điểm cuối kỳ
+        public List<float> DiemCuoiKyList
         {
-            get { return _finalScore; }
+            get { return _diemCuoiKyList; }
             set
             {
-                _finalScore = value;
+                _diemCuoiKyList = value ?? new List<float>();
+                TinhDiemCuoiKyTB();
+            }
+        }
+
+        // Điểm cuối kỳ trung bình
+        public float DiemCuoiKyTB
+        {
+            get { return _diemCuoiKyTB; }
+            private set
+            {
+                _diemCuoiKyTB = value;
                 lblFinalExamScore.Text = value.ToString("0.0");
+
+                // Cập nhật progress bar
                 prgFinalExam.Value = Math.Min(Math.Max((int)(value * 10), 0), 100);
-                UpdateAverageScore();
+
+                // Cập nhật điểm trung bình
+                TinhDiemTrungBinh();
             }
         }
 
-        public float AverageScore
+        // Điểm trung bình
+        public float DiemTrungBinh
         {
-            get { return _averageScore; }
+            get { return _diemTrungBinh; }
             set
             {
-                _averageScore = value;
+                _diemTrungBinh = value;
                 lblAvgScore.Text = value.ToString("0.0");
+
+                // Cập nhật progress bar vòng tròn
                 prgAverage.Value = Math.Min(Math.Max((int)(value * 10), 0), 100);
                 prgAverage.Text = value.ToString("0.0");
 
-                // Cập nhật màu sắc theo điểm
-                UpdateProgressBarColors();
+                // Cập nhật màu sắc dựa trên điểm
+                CapNhatMauDiem();
             }
         }
 
-        public string TeacherComment
+        // Nhận xét giáo viên
+        public string NhanXet
         {
-            get { return _teacherComment; }
+            get { return _nhanXet; }
             set
             {
-                _teacherComment = value;
+                _nhanXet = value;
                 txtTeacherComment.Text = value;
             }
         }
 
+        #endregion
+
+        #region Phương thức tính điểm
+
+        // Tính điểm trung bình của điểm miệng
+        private void TinhDiemMiengTB()
+        {
+            _diemMiengTB = TinhDiemTrungBinhDanhSach(_diemMiengList);
+            TinhDiemThuongXuyen();
+        }
+
+        // Tính điểm trung bình của điểm 15 phút
+        private void TinhDiem15PhutTB()
+        {
+            _diem15PhutTB = TinhDiemTrungBinhDanhSach(_diem15PhutList);
+            TinhDiemThuongXuyen();
+        }
+
+        // Tính điểm thường xuyên (trung bình của điểm miệng và 15 phút)
+        private void TinhDiemThuongXuyen()
+        {
+            if (_diemMiengList.Count > 0 || _diem15PhutList.Count > 0)
+            {
+                if (_diemMiengList.Count > 0 && _diem15PhutList.Count > 0)
+                {
+                    // Nếu có cả 2 loại điểm, tính trung bình cộng
+                    DiemThuongXuyen = (_diemMiengTB + _diem15PhutTB) / 2;
+                }
+                else if (_diemMiengList.Count > 0)
+                {
+                    // Nếu chỉ có điểm miệng
+                    DiemThuongXuyen = _diemMiengTB;
+                }
+                else
+                {
+                    // Nếu chỉ có điểm 15 phút
+                    DiemThuongXuyen = _diem15PhutTB;
+                }
+            }
+            else
+            {
+                DiemThuongXuyen = 0;
+            }
+        }
+
+        // Tính điểm trung bình của điểm giữa kỳ
+        private void TinhDiemGiuaKyTB()
+        {
+            DiemGiuaKyTB = TinhDiemTrungBinhDanhSach(_diemGiuaKyList);
+        }
+
+        // Tính điểm trung bình của điểm cuối kỳ
+        private void TinhDiemCuoiKyTB()
+        {
+            DiemCuoiKyTB = TinhDiemTrungBinhDanhSach(_diemCuoiKyList);
+        }
+
+        // Tính điểm trung bình chung theo tỷ trọng mới
+        private void TinhDiemTrungBinh()
+        {
+            // Theo yêu cầu mới: 30% điểm thường xuyên, 30% điểm giữa kỳ, 40% điểm cuối kỳ
+            float diemTB = (_diemThuongXuyen * 0.3f) + (_diemGiuaKyTB * 0.3f) + (_diemCuoiKyTB * 0.4f);
+            DiemTrungBinh = (float)Math.Round(diemTB, 1);
+        }
+
+        // Phương thức hỗ trợ tính điểm trung bình của một danh sách điểm
+        private float TinhDiemTrungBinhDanhSach(List<float> danhSachDiem)
+        {
+            if (danhSachDiem == null || danhSachDiem.Count == 0)
+                return 0;
+
+            float tong = 0;
+            foreach (float diem in danhSachDiem)
+            {
+                tong += diem;
+            }
+            return (float)Math.Round(tong / danhSachDiem.Count, 1);
+        }
+
+        #endregion
+
+        #region Hiển thị và màu sắc
+
+        // Cập nhật nhãn với tỷ trọng điểm mới
+        private void CapNhatNhanTyTrong()
+        {
+            lblAssignment.Text = "Điểm thường xuyên";
+            lblMidtermExam.Text = "Điểm giữa kỳ";
+            lblFinalExam.Text = "Điểm cuối kỳ";
+        }
+
+        // Cập nhật hiển thị progress bar
+        private void CapNhatProgressBar()
+        {
+            try
+            {
+                Console.WriteLine($"Điểm thường xuyên: {DiemThuongXuyen}, Value: {(int)(DiemThuongXuyen * 10)}");
+                Console.WriteLine($"Điểm giữa kỳ TB: {DiemGiuaKyTB}, Value: {(int)(DiemGiuaKyTB * 10)}");
+                Console.WriteLine($"Điểm cuối kỳ TB: {DiemCuoiKyTB}, Value: {(int)(DiemCuoiKyTB * 10)}");
+
+                // Đảm bảo các progress bar có Maximum = 100
+                if (prgAssignment.Maximum != 100) prgAssignment.Maximum = 100;
+                if (prgMidtermExam.Maximum != 100) prgMidtermExam.Maximum = 100;
+                if (prgFinalExam.Maximum != 100) prgFinalExam.Maximum = 100;
+                if (prgAverage.Maximum != 100) prgAverage.Maximum = 100;
+
+                // Cập nhật progress bar
+                prgAverage.Value = Math.Min(Math.Max((int)(DiemTrungBinh * 10), 0), 100);
+                prgAverage.Text = DiemTrungBinh.ToString("0.0");
+
+                prgAssignment.Value = Math.Min((int)(DiemThuongXuyen * 10), 100);
+                prgMidtermExam.Value = Math.Min((int)(DiemGiuaKyTB * 10), 100);
+                prgFinalExam.Value = Math.Min((int)(DiemCuoiKyTB * 10), 100);
+
+                // Cập nhật màu sắc
+                CapNhatMauDiem();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật progress bar: {ex.Message}");
+            }
+        }
+
+        // Cập nhật màu sắc dựa trên điểm số
+        private void CapNhatMauDiem()
+        {
+            // Đặt màu cho các progress bar dựa trên điểm số
+            prgAssignment.ProgressColor = LayMauTheoDiem(DiemThuongXuyen);
+            prgAssignment.ProgressColor2 = LayMauPhuTheoDiem(DiemThuongXuyen);
+            lblAssignmentScore.ForeColor = LayMauTheoDiem(DiemThuongXuyen);
+
+            prgMidtermExam.ProgressColor = LayMauTheoDiem(DiemGiuaKyTB);
+            prgMidtermExam.ProgressColor2 = LayMauPhuTheoDiem(DiemGiuaKyTB);
+            lblMidtermExamScore.ForeColor = LayMauTheoDiem(DiemGiuaKyTB);
+
+            prgFinalExam.ProgressColor = LayMauTheoDiem(DiemCuoiKyTB);
+            prgFinalExam.ProgressColor2 = LayMauPhuTheoDiem(DiemCuoiKyTB);
+            lblFinalExamScore.ForeColor = LayMauTheoDiem(DiemCuoiKyTB);
+
+            // Đặt màu cho điểm trung bình
+            prgAverage.ProgressColor = LayMauTheoDiem(DiemTrungBinh);
+            prgAverage.ProgressColor2 = LayMauPhuTheoDiem(DiemTrungBinh);
+            lblAvgScore.ForeColor = LayMauTheoDiem(DiemTrungBinh);
+        }
+
+        // Lấy màu dựa trên điểm số
+        private Color LayMauTheoDiem(float diem)
+        {
+            // Thang màu dựa trên điểm số
+            if (diem >= 8.5f)
+                return Color.FromArgb(0, 180, 60);  // Xanh lá đậm - điểm xuất sắc
+            else if (diem >= 7.0f)
+                return Color.FromArgb(90, 180, 100); // Xanh lá - điểm khá giỏi
+            else if (diem >= 5.0f)
+                return Color.FromArgb(240, 180, 0);  // Vàng cam - điểm trung bình
+            else if (diem >= 3.5f)
+                return Color.FromArgb(255, 140, 0);  // Cam - điểm yếu
+            else if (diem > 0)
+                return Color.FromArgb(220, 53, 69);  // Đỏ - điểm kém
+            else
+                return Color.FromArgb(180, 180, 180); // Xám - chưa có điểm
+        }
+
+        // Lấy màu phụ dựa trên màu chính
+        private Color LayMauPhuTheoDiem(float diem)
+        {
+            Color mauChinh = LayMauTheoDiem(diem);
+            return Color.FromArgb(
+                mauChinh.A,
+                Math.Min(mauChinh.R + 30, 255),
+                Math.Min(mauChinh.G + 30, 255),
+                Math.Min(mauChinh.B + 30, 255)
+            );
+        }
+
+        #endregion
+
+        #region Constructors & Initialization
+
+        // Constructor mặc định
         public ucKQHTItem()
         {
             InitializeComponent();
@@ -235,212 +491,209 @@ namespace QuanLyTruongHoc.GUI.Controls
             prgFinalExam.Maximum = 100;
             prgAverage.Maximum = 100;
 
-            // Đăng ký sự kiện Resize để cập nhật layout khi kích thước thay đổi
-            this.Resize += (sender, e) => UpdateLayoutOnResize();
+            // Cập nhật nhãn với tỷ trọng điểm mới
+            CapNhatNhanTyTrong();
 
-            // Đăng ký sự kiện cho nút chi tiết
+            // Đăng ký sự kiện
+            this.Resize += (sender, e) => UpdateLayoutOnResize();
             btnDetails.Click += BtnDetails_Click;
 
-            // Đặt giá trị mặc định cho các label
+            // Đặt giá trị mặc định
             lblAssignmentScore.Text = "0.0";
             lblMidtermExamScore.Text = "0.0";
             lblFinalExamScore.Text = "0.0";
             lblAvgScore.Text = "0.0";
 
-            // Cập nhật hiển thị progress bar với giá trị 0
-            UpdateProgressBarsDisplay();
+            // Cập nhật hiển thị
+            CapNhatProgressBar();
             FixProgressBars();
         }
 
-        // Constructor với danh sách điểm 15 phút
-        public ucKQHTItem(string subjectName, float assignmentScore, List<float> midtermScores, float finalScore, string comment = "")
+        // Constructor với danh sách điểm đầy đủ
+        public ucKQHTItem(string tenMon, List<float> diemMiengList, List<float> diem15PhutList,
+                          List<float> diemGiuaKyList, List<float> diemCuoiKyList, string nhanXet = "")
         {
             InitializeComponent();
 
-            SubjectName = subjectName;
-            AssignmentScore = assignmentScore;
-            MidtermScores = midtermScores ?? new List<float>();
-            FinalScore = finalScore;
-            TeacherComment = comment;
+            // Khởi tạo các thuộc tính
+            SubjectName = tenMon;
+            DiemMiengList = diemMiengList ?? new List<float>();
+            Diem15PhutList = diem15PhutList ?? new List<float>();
+            DiemGiuaKyList = diemGiuaKyList ?? new List<float>();
+            DiemCuoiKyList = diemCuoiKyList ?? new List<float>();
+            NhanXet = nhanXet;
 
-            // Hook event handlers
+            // Cập nhật nhãn với tỷ trọng điểm mới
+            CapNhatNhanTyTrong();
+
+            // Đăng ký sự kiện
             btnDetails.Click += BtnDetails_Click;
 
-            // Cập nhật hiển thị progress bar
-            UpdateProgressBarsDisplay();
+            // Cập nhật hiển thị
+            CapNhatProgressBar();
         }
 
-        // Constructor cũ cho tương thích ngược
-        public ucKQHTItem(string subjectName, float assignmentScore, float midtermScore, float finalScore, string comment = "")
+        // Constructor tương thích ngược với hệ thống cũ
+        public ucKQHTItem(string tenMon, float diemThuongXuyen, List<float> diemGiuaKyList,
+                          float diemCuoiKy, string nhanXet = "")
         {
             InitializeComponent();
 
-            SubjectName = subjectName;
-            AssignmentScore = assignmentScore;
-            MidtermScores = new List<float> { midtermScore };
-            FinalScore = finalScore;
-            TeacherComment = comment;
+            SubjectName = tenMon;
 
-            // Hook event handlers
+            // Gán giá trị trực tiếp cho điểm thường xuyên
+            _diemThuongXuyen = diemThuongXuyen;
+            lblAssignmentScore.Text = diemThuongXuyen.ToString("0.0");
+
+            // Xử lý điểm giữa kỳ
+            DiemGiuaKyList = diemGiuaKyList ?? new List<float>();
+
+            // Đối với điểm cuối kỳ, tạo một danh sách chỉ có 1 phần tử
+            DiemCuoiKyList = new List<float> { diemCuoiKy };
+
+            NhanXet = nhanXet;
+
+            // Cập nhật nhãn tỷ trọng
+            CapNhatNhanTyTrong();
+
+            // Đăng ký sự kiện
             btnDetails.Click += BtnDetails_Click;
 
-            // Cập nhật hiển thị progress bar
-            UpdateProgressBarsDisplay();
+            // Cập nhật hiển thị
+            TinhDiemTrungBinh();
+            CapNhatProgressBar();
         }
 
-        private void UpdateMidtermAverage()
+        // Constructor đơn giản nhất cho tương thích
+        public ucKQHTItem(string tenMon, float diemThuongXuyen, float diemGiuaKy,
+                          float diemCuoiKy, string nhanXet = "")
         {
-            if (_midtermScores == null || _midtermScores.Count == 0)
-            {
-                MidtermAvgScore = 0;
-                return;
-            }
+            InitializeComponent();
 
-            float total = 0;
-            foreach (float score in _midtermScores)
-            {
-                total += score;
-            }
-            MidtermAvgScore = (float)Math.Round(total / _midtermScores.Count, 1);
+            SubjectName = tenMon;
+
+            // Gán giá trị trực tiếp
+            _diemThuongXuyen = diemThuongXuyen;
+            lblAssignmentScore.Text = diemThuongXuyen.ToString("0.0");
+
+            // Tạo danh sách chỉ có 1 phần tử cho điểm giữa kỳ và cuối kỳ
+            DiemGiuaKyList = new List<float> { diemGiuaKy };
+            DiemCuoiKyList = new List<float> { diemCuoiKy };
+
+            NhanXet = nhanXet;
+
+            // Cập nhật nhãn tỷ trọng
+            CapNhatNhanTyTrong();
+
+            // Đăng ký sự kiện
+            btnDetails.Click += BtnDetails_Click;
+
+            // Cập nhật hiển thị
+            CapNhatProgressBar();
         }
 
-        private void UpdateAverageScore()
-        {
-            // Tính điểm trung bình: 20% điểm thường xuyên, 30% điểm 15 phút, 50% điểm cuối kỳ
-            float avg = (_assignmentScore * 0.2f) + (_midtermAvgScore * 0.3f) + (_finalScore * 0.5f);
-            AverageScore = (float)Math.Round(avg, 1);
-        }
+        #endregion
 
-        // Trong ucKQHTItem.cs, cần cập nhật phương thức UpdateProgressBarsDisplay()
+        #region Events & Actions
 
-        private void UpdateProgressBarsDisplay()
-        {
-            try
-            {
-                Console.WriteLine($"AssignmentScore: {AssignmentScore}, Value: {(int)(AssignmentScore * 10)}");
-                Console.WriteLine($"MidtermAvgScore: {MidtermAvgScore}, Value: {(int)(MidtermAvgScore * 10)}");
-                Console.WriteLine($"FinalScore: {FinalScore}, Value: {(int)(FinalScore * 10)}");
-
-                // Đảm bảo các progress bar có Maximum = 100
-                if (prgAssignment.Maximum != 100) prgAssignment.Maximum = 100;
-                if (prgMidtermExam.Maximum != 100) prgMidtermExam.Maximum = 100;
-                if (prgFinalExam.Maximum != 100) prgFinalExam.Maximum = 100;
-                if (prgAverage.Maximum != 100) prgAverage.Maximum = 100;
-
-                // Cập nhật progress bar cho điểm trung bình - thang điểm 10 tương ứng với 100%
-                prgAverage.Value = Math.Min(Math.Max((int)(AverageScore * 10), 0), 100);
-                prgAverage.Text = AverageScore.ToString("0.0");
-
-                // Cập nhật các progress bar khác dựa trên giá trị điểm tương ứng với thang điểm 10
-                prgAssignment.Value = Math.Min((int)(AssignmentScore * 10), 100);
-                prgMidtermExam.Value = Math.Min((int)(MidtermAvgScore * 10), 100);
-                prgFinalExam.Value = Math.Min((int)(FinalScore * 10), 100);
-
-                // Cập nhật màu sắc dựa trên điểm
-                UpdateProgressBarColors();
-            }
-            catch (Exception ex)
-            {
-                // Xử lý ngoại lệ nếu có
-                Console.WriteLine($"Lỗi khi cập nhật progress bar: {ex.Message}");
-            }
-        }
-
-        // Cập nhật phương thức UpdateProgressBarColors() để hiển thị màu sắc theo phần trăm điểm chính xác
-        private void UpdateProgressBarColors()
-        {
-            // Đặt màu cho các progress bar dựa trên điểm số chuẩn
-            prgAssignment.ProgressColor = GetColorForScore(AssignmentScore);
-            prgAssignment.ProgressColor2 = GetSecondaryColorForScore(AssignmentScore);
-            lblAssignmentScore.ForeColor = GetColorForScore(AssignmentScore);
-
-            prgMidtermExam.ProgressColor = GetColorForScore(MidtermAvgScore);
-            prgMidtermExam.ProgressColor2 = GetSecondaryColorForScore(MidtermAvgScore);
-            lblMidtermExamScore.ForeColor = GetColorForScore(MidtermAvgScore);
-
-            prgFinalExam.ProgressColor = GetColorForScore(FinalScore);
-            prgFinalExam.ProgressColor2 = GetSecondaryColorForScore(FinalScore);
-            lblFinalExamScore.ForeColor = GetColorForScore(FinalScore);
-
-            // Đặt màu cho điểm trung bình
-            prgAverage.ProgressColor = GetColorForScore(AverageScore);
-            prgAverage.ProgressColor2 = GetSecondaryColorForScore(AverageScore);
-            lblAvgScore.ForeColor = GetColorForScore(AverageScore);
-        }
-
-        // Điều chỉnh phương thức GetColorForScore() để có thang màu phù hợp với điểm số
-        private Color GetColorForScore(float score)
-        {
-            // Áp dụng thang màu dựa trên điểm số rõ ràng hơn
-            if (score >= 8.5f)
-                return Color.FromArgb(0, 180, 60);  // Xanh lá đậm - điểm xuất sắc
-            else if (score >= 7.0f)
-                return Color.FromArgb(90, 180, 100); // Xanh lá - điểm khá giỏi
-            else if (score >= 5.0f)
-                return Color.FromArgb(240, 180, 0);  // Vàng cam - điểm trung bình
-            else if (score >= 3.5f)
-                return Color.FromArgb(255, 140, 0);  // Cam - điểm yếu
-            else if (score > 0)
-                return Color.FromArgb(220, 53, 69);  // Đỏ - điểm kém
-            else
-                return Color.FromArgb(180, 180, 180); // Xám - chưa có điểm
-        }
-
-        private Color GetSecondaryColorForScore(float score)
-        {
-            Color primary = GetColorForScore(score);
-            return Color.FromArgb(
-                primary.A,
-                Math.Min(primary.R + 30, 255),
-                Math.Min(primary.G + 30, 255),
-                Math.Min(primary.B + 30, 255)
-            );
-        }
-
+        // Hiển thị chi tiết điểm khi nhấn nút chi tiết
         private void BtnDetails_Click(object sender, EventArgs e)
         {
-            // Kiểm tra nếu không có dữ liệu gì cả
-            if (AssignmentScore == 0 && MidtermScores.Count == 0 && FinalScore == 0)
+            // Kiểm tra nếu không có dữ liệu
+            if (_diemMiengList.Count == 0 && _diem15PhutList.Count == 0 &&
+                _diemGiuaKyList.Count == 0 && _diemCuoiKyList.Count == 0 &&
+                _diemThuongXuyen == 0)
             {
                 MessageBox.Show("Chưa có dữ liệu điểm số cho môn học này.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            StringBuilder scoreDetails = new StringBuilder();
-            scoreDetails.AppendLine($"Chi tiết điểm môn {SubjectName}:");
-            scoreDetails.AppendLine($"- Điểm thường xuyên: {AssignmentScore}");
+            StringBuilder chiTietDiem = new StringBuilder();
+            chiTietDiem.AppendLine($"Chi tiết điểm môn {SubjectName}:");
 
-            // Hiển thị chi tiết từng điểm 15 phút
-            scoreDetails.AppendLine($"- Điểm 15 phút:");
-            if (_midtermScores != null && _midtermScores.Count > 0)
+            // Chi tiết điểm miệng
+            chiTietDiem.AppendLine($"- Điểm miệng:");
+            if (_diemMiengList.Count > 0)
             {
-                for (int i = 0; i < _midtermScores.Count; i++)
+                for (int i = 0; i < _diemMiengList.Count; i++)
                 {
-                    scoreDetails.AppendLine($"  + Lần {i + 1}: {_midtermScores[i]}");
+                    chiTietDiem.AppendLine($"  + Lần {i + 1}: {_diemMiengList[i]}");
                 }
-                scoreDetails.AppendLine($"  => Trung bình: {MidtermAvgScore:0.0}");
+                chiTietDiem.AppendLine($"  => Trung bình: {_diemMiengTB:0.0}");
             }
             else
             {
-                scoreDetails.AppendLine("  (Chưa có điểm)");
+                chiTietDiem.AppendLine("  (Chưa có điểm)");
             }
 
-            scoreDetails.AppendLine($"- Điểm cuối kỳ: {FinalScore}");
-            scoreDetails.AppendLine($"- Điểm trung bình: {AverageScore}");
+            // Chi tiết điểm 15 phút
+            chiTietDiem.AppendLine($"- Điểm 15 phút:");
+            if (_diem15PhutList.Count > 0)
+            {
+                for (int i = 0; i < _diem15PhutList.Count; i++)
+                {
+                    chiTietDiem.AppendLine($"  + Lần {i + 1}: {_diem15PhutList[i]}");
+                }
+                chiTietDiem.AppendLine($"  => Trung bình: {_diem15PhutTB:0.0}");
+            }
+            else
+            {
+                chiTietDiem.AppendLine("  (Chưa có điểm)");
+            }
 
-            MessageBox.Show(scoreDetails.ToString(), "Chi tiết điểm số",
+            // Điểm thường xuyên
+            chiTietDiem.AppendLine($"- Điểm thường xuyên (30%): {_diemThuongXuyen:0.0}");
+
+            // Chi tiết điểm giữa kỳ
+            chiTietDiem.AppendLine($"- Điểm giữa kỳ (30%):");
+            if (_diemGiuaKyList.Count > 0)
+            {
+                for (int i = 0; i < _diemGiuaKyList.Count; i++)
+                {
+                    chiTietDiem.AppendLine($"  + Lần {i + 1}: {_diemGiuaKyList[i]}");
+                }
+                chiTietDiem.AppendLine($"  => Trung bình: {_diemGiuaKyTB:0.0}");
+            }
+            else
+            {
+                chiTietDiem.AppendLine("  (Chưa có điểm)");
+            }
+
+            // Chi tiết điểm cuối kỳ
+            chiTietDiem.AppendLine($"- Điểm cuối kỳ (40%):");
+            if (_diemCuoiKyList.Count > 0)
+            {
+                for (int i = 0; i < _diemCuoiKyList.Count; i++)
+                {
+                    chiTietDiem.AppendLine($"  + Lần {i + 1}: {_diemCuoiKyList[i]}");
+                }
+                chiTietDiem.AppendLine($"  => Trung bình: {_diemCuoiKyTB:0.0}");
+            }
+            else
+            {
+                chiTietDiem.AppendLine("  (Chưa có điểm)");
+            }
+
+            // Điểm trung bình
+            chiTietDiem.AppendLine($"- Điểm trung bình: {_diemTrungBinh:0.0}");
+
+            MessageBox.Show(chiTietDiem.ToString(), "Chi tiết điểm số",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        // Use this method to set a color theme for the subject
-        public void SetSubjectColor(Color primaryColor, Color secondaryColor)
+        #endregion
+
+        #region Utility Methods
+
+        // Đặt màu chủ đề cho môn học
+        public void SetSubjectColor(Color mauChinh, Color mauPhu)
         {
-            prgAverage.ProgressColor = primaryColor;
-            prgAverage.ProgressColor2 = secondaryColor;
+            prgAverage.ProgressColor = mauChinh;
+            prgAverage.ProgressColor2 = mauPhu;
         }
 
-        // Automatically set color based on subject name
+        // Tự động đặt màu dựa trên tên môn học
         public void AutoSetColor()
         {
             // Nếu tên môn học trống, sử dụng màu mặc định
@@ -450,76 +703,77 @@ namespace QuanLyTruongHoc.GUI.Controls
                 return;
             }
 
-            // Create a consistent color based on the subject name
-            Color primary = GetSubjectColor(SubjectName);
-            Color secondary = Color.FromArgb(primary.A,
-                                           Math.Min(primary.R + 30, 255),
-                                           Math.Min(primary.G + 30, 255),
-                                           Math.Min(primary.B + 30, 255));
+            // Tạo màu nhất quán dựa trên tên môn học
+            Color mauChinh = GetSubjectColor(SubjectName);
+            Color mauPhu = Color.FromArgb(mauChinh.A,
+                                       Math.Min(mauChinh.R + 30, 255),
+                                       Math.Min(mauChinh.G + 30, 255),
+                                       Math.Min(mauChinh.B + 30, 255));
 
-            SetSubjectColor(primary, secondary);
+            SetSubjectColor(mauChinh, mauPhu);
         }
 
-        private Color GetSubjectColor(string subject)
+        // Lấy màu phù hợp cho từng môn học
+        private Color GetSubjectColor(string tenMon)
         {
-            // Predefined colors for common subjects
-            subject = subject.ToLower();
+            // Màu được định nghĩa sẵn cho các môn học phổ biến
+            tenMon = tenMon.ToLower();
 
-            if (subject.Contains("toán"))
+            if (tenMon.Contains("toán"))
                 return Color.FromArgb(94, 148, 255);
 
-            if (subject.Contains("lý") || subject.Contains("physics"))
+            if (tenMon.Contains("lý") || tenMon.Contains("physics"))
                 return Color.FromArgb(240, 120, 80);
 
-            if (subject.Contains("hóa") || subject.Contains("chemistry"))
+            if (tenMon.Contains("hóa") || tenMon.Contains("chemistry"))
                 return Color.FromArgb(180, 90, 210);
 
-            if (subject.Contains("sinh") || subject.Contains("biology"))
+            if (tenMon.Contains("sinh") || tenMon.Contains("biology"))
                 return Color.FromArgb(90, 180, 100);
 
-            if (subject.Contains("văn") || subject.Contains("literature"))
+            if (tenMon.Contains("văn") || tenMon.Contains("literature"))
                 return Color.FromArgb(230, 150, 70);
 
-            if (subject.Contains("anh") || subject.Contains("english"))
+            if (tenMon.Contains("anh") || tenMon.Contains("english"))
                 return Color.FromArgb(60, 170, 210);
 
-            if (subject.Contains("sử") || subject.Contains("history"))
+            if (tenMon.Contains("sử") || tenMon.Contains("history"))
                 return Color.FromArgb(200, 110, 80);
 
-            if (subject.Contains("địa") || subject.Contains("geography"))
+            if (tenMon.Contains("địa") || tenMon.Contains("geography"))
                 return Color.FromArgb(80, 150, 120);
 
-            // Default color for other subjects - generate based on name hash
-            int hash = subject.GetHashCode();
+            // Màu mặc định cho các môn khác - tạo dựa trên mã băm tên
+            int maBam = tenMon.GetHashCode();
             return Color.FromArgb(
-                Math.Abs((hash) % 156) + 100,  // R component (100-255)
-                Math.Abs((hash >> 8) % 156) + 100,  // G component (100-255)
-                Math.Abs((hash >> 16) % 156) + 100  // B component (100-255)
+                Math.Abs((maBam) % 156) + 100,  // Thành phần R (100-255)
+                Math.Abs((maBam >> 8) % 156) + 100,  // Thành phần G (100-255)
+                Math.Abs((maBam >> 16) % 156) + 100  // Thành phần B (100-255)
             );
         }
 
-        /// <summary>
-        /// Đặt lại toàn bộ dữ liệu về giá trị mặc định
-        /// </summary>
+        // Đặt lại toàn bộ dữ liệu về giá trị mặc định
         public void Reset()
         {
-            // Đặt lại các giá trị về mặc định
+            // Đặt lại giá trị về mặc định
             SubjectName = "";
-            AssignmentScore = 0;
-            MidtermScores = new List<float>();
-            FinalScore = 0;
-            TeacherComment = "";
+            DiemMiengList = new List<float>();
+            Diem15PhutList = new List<float>();
+            DiemGiuaKyList = new List<float>();
+            DiemCuoiKyList = new List<float>();
+            NhanXet = "";
 
             // Cập nhật giao diện
-            UpdateProgressBarsDisplay();
+            CapNhatProgressBar();
         }
 
-        // Thêm phương thức để lấy kích thước lý tưởng của control
+        // Lấy kích thước lý tưởng của control
         public Size GetIdealSize()
         {
-            return new Size(this.Width, 344); // Giữ nguyên chiều cao, chiều rộng có thể thay đổi
+            return new Size(this.Width, 344); // Giữ nguyên chiều cao
         }
-        // Thêm phương thức này sau phương thức Reset()
+
+        // Sửa các progress bar
         public void FixProgressBars()
         {
             // Đảm bảo tất cả progress bar có Maximum = 100
@@ -529,10 +783,12 @@ namespace QuanLyTruongHoc.GUI.Controls
             prgAverage.Maximum = 100;
 
             // Cập nhật lại giá trị của các progress bar
-            prgAssignment.Value = Math.Min((int)(_assignmentScore * 10), 100);
-            prgMidtermExam.Value = Math.Min((int)(_midtermAvgScore * 10), 100);
-            prgFinalExam.Value = Math.Min((int)(_finalScore * 10), 100);
-            prgAverage.Value = Math.Min((int)(_averageScore * 10), 100);
+            prgAssignment.Value = Math.Min((int)(_diemThuongXuyen * 10), 100);
+            prgMidtermExam.Value = Math.Min((int)(_diemGiuaKyTB * 10), 100);
+            prgFinalExam.Value = Math.Min((int)(_diemCuoiKyTB * 10), 100);
+            prgAverage.Value = Math.Min((int)(_diemTrungBinh * 10), 100);
         }
+
+        #endregion
     }
 }

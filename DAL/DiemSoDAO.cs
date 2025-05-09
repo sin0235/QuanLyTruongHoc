@@ -80,13 +80,7 @@ namespace QuanLyTruongHoc.DAL
             return scores;
         }
 
-        /// <summary>
-        /// Nhóm điểm số theo môn học và tính điểm trung bình
-        /// </summary>
-        /// <param name="maHS">Mã học sinh</param>
-        /// <param name="hocKy">Học kỳ (1 hoặc 2), 0 cho cả năm</param>
-        /// <param name="namHoc">Năm học (ví dụ: "2024-2025")</param>
-        /// <returns>Danh sách điểm số theo môn học</returns>
+        // Inside GetStudentSubjectsScore method in DiemSoDAO.cs
         public List<MonHocScoreDTO> GetStudentSubjectsScore(int maHS, int hocKy, string namHoc = null)
         {
             List<DiemSoDTO> allScores = GetStudentScores(maHS, hocKy, namHoc);
@@ -104,17 +98,20 @@ namespace QuanLyTruongHoc.DAL
                     };
                 }
 
-                // Add score based on type
+                // Add score to the appropriate list based on type
                 switch (score.LoaiDiem)
                 {
                     case "Miệng":
-                        subjectScores[score.MaMon].DiemMieng = score.Diem;
+                        subjectScores[score.MaMon].DiemMiengList.Add(score.Diem);
                         break;
                     case "15 phút":
-                        subjectScores[score.MaMon].Diem15Phut = score.Diem;
+                        subjectScores[score.MaMon].Diem15PhutList.Add(score.Diem);
+                        break;
+                    case "Giữa kỳ":
+                        subjectScores[score.MaMon].DiemGiuaKyList.Add(score.Diem);
                         break;
                     case "Cuối kỳ":
-                        subjectScores[score.MaMon].DiemCuoiKy = score.Diem;
+                        subjectScores[score.MaMon].DiemCuoiKyList.Add(score.Diem);
                         break;
                 }
             }

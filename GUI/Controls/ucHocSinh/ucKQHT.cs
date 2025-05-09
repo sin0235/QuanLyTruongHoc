@@ -80,15 +80,15 @@ namespace QuanLyTruongHoc.GUI.Controls
             try
             {
                 string query = @"
-                    SELECT LH.NamHoc
-                    FROM HocSinh HS
-                    JOIN LopHoc LH ON HS.MaLop = LH.MaLop
-                    WHERE HS.MaHS = @MaHS";
+                        SELECT LH.NamHoc
+                        FROM HocSinh HS
+                        JOIN LopHoc LH ON HS.MaLop = LH.MaLop
+                        WHERE HS.MaHS = @MaHS";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@MaHS", id }
-                };
+                    {
+                        { "@MaHS", id }
+                    };
 
                 DataTable dtCurrentYear = dbHelper.ExecuteQuery(query, parameters);
                 string currentYear = null;
@@ -206,11 +206,13 @@ namespace QuanLyTruongHoc.GUI.Controls
 
                     foreach (MonHocScoreDTO subject in subjectScores)
                     {
+                        // Sử dụng constructor mới với các danh sách điểm
                         ucKQHTItem subjectItem = new ucKQHTItem(
                             subject.TenMon,
-                            subject.DiemMieng,
-                            subject.Diem15Phut,
-                            subject.DiemCuoiKy,
+                            subject.DiemMiengList,
+                            subject.Diem15PhutList,
+                            subject.DiemGiuaKyList,
+                            subject.DiemCuoiKyList,
                             subject.NhanXet
                         );
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace QuanLyTruongHoc.DTO
 {
@@ -39,9 +40,21 @@ namespace QuanLyTruongHoc.DTO
     {
         public int MaMon { get; set; }
         public string TenMon { get; set; }
+
+        // Lists to store multiple scores of each type
+        public List<float> DiemMiengList { get; set; } = new List<float>();
+        public List<float> Diem15PhutList { get; set; } = new List<float>();
+        public List<float> DiemGiuaKyList { get; set; } = new List<float>();
+        public List<float> DiemCuoiKyList { get; set; } = new List<float>();
+
+        // Average scores for each type
         public float DiemMieng { get; set; }
         public float Diem15Phut { get; set; }
+        public float DiemGiuaKy { get; set; }
         public float DiemCuoiKy { get; set; }
+
+        // Calculated scores
+        public float DiemThuongXuyen { get; set; }
         public float DiemTrungBinh { get; set; }
         public string NhanXet { get; set; }
 
@@ -49,16 +62,46 @@ namespace QuanLyTruongHoc.DTO
         {
             DiemMieng = 0;
             Diem15Phut = 0;
+            DiemGiuaKy = 0;
             DiemCuoiKy = 0;
             DiemTrungBinh = 0;
             NhanXet = "";
         }
 
-        // Calculate average score with custom weights
+        // Calculate the average for each type of score
+        public void CalculateTypeAverages()
+        {
+            DiemMieng = CalculateAverage(DiemMiengList);
+            Diem15Phut = CalculateAverage(Diem15PhutList);
+            DiemGiuaKy = CalculateAverage(DiemGiuaKyList);
+            DiemCuoiKy = CalculateAverage(DiemCuoiKyList);
+
+            // Calculate regular score as average of DiemMieng and Diem15Phut
+            DiemThuongXuyen = (DiemMieng + Diem15Phut) / 2;
+        }
+
+        // Helper method to calculate average of a list of scores
+        private float CalculateAverage(List<float> scores)
+        {
+            if (scores == null || scores.Count == 0)
+                return 0;
+
+            float sum = 0;
+            foreach (float score in scores)
+            {
+                sum += score;
+            }
+            return (float)Math.Round(sum / scores.Count, 1);
+        }
+
+        // Calculate average score with new weights
         public void CalculateAverage()
         {
-            // Weight: 20% DiemMieng, 30% Diem15Phut, 50% DiemCuoiKy
-            DiemTrungBinh = (DiemMieng * 0.2f) + (Diem15Phut * 0.3f) + (DiemCuoiKy * 0.5f);
+            // Calculate type averages first
+            CalculateTypeAverages();
+
+            // Weight: 30% DiemThuongXuyen, 30% DiemGiuaKy, 40% DiemCuoiKy
+            DiemTrungBinh = (DiemThuongXuyen * 0.3f) + (DiemGiuaKy * 0.3f) + (DiemCuoiKy * 0.4f);
             DiemTrungBinh = (float)Math.Round(DiemTrungBinh, 1);
         }
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucKQHT));
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
             this.panSemesterSelector = new Guna.UI2.WinForms.Guna2Panel();
             this.btnCaNam = new Guna.UI2.WinForms.Guna2Button();
@@ -56,12 +57,26 @@
             this.lblAcademicPerformance = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblSummaryTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.pnlSubjects = new Guna.UI2.WinForms.Guna2Panel();
+            this.flpSubject = new System.Windows.Forms.FlowLayoutPanel();
+            this.Toan = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Van = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Ly = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Hoa = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Dia = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Su = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.AnhVan = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.CN = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.GDCD = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Tin = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Sinh = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
             this.pnlFilter.SuspendLayout();
             this.panSemesterSelector.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.cardSummary.SuspendLayout();
             this.tlpSummary.SuspendLayout();
+            this.pnlSubjects.SuspendLayout();
+            this.flpSubject.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFilter
@@ -481,11 +496,208 @@
             // pnlSubjects
             // 
             this.pnlSubjects.AutoScroll = true;
+            this.pnlSubjects.Controls.Add(this.flpSubject);
             this.pnlSubjects.Location = new System.Drawing.Point(678, 20);
             this.pnlSubjects.Name = "pnlSubjects";
             this.pnlSubjects.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
             this.pnlSubjects.Size = new System.Drawing.Size(942, 842);
             this.pnlSubjects.TabIndex = 0;
+            // 
+            // flpSubject
+            // 
+            this.flpSubject.AutoScroll = true;
+            this.flpSubject.Controls.Add(this.Toan);
+            this.flpSubject.Controls.Add(this.Ly);
+            this.flpSubject.Controls.Add(this.Van);
+            this.flpSubject.Controls.Add(this.Hoa);
+            this.flpSubject.Controls.Add(this.Dia);
+            this.flpSubject.Controls.Add(this.Su);
+            this.flpSubject.Controls.Add(this.AnhVan);
+            this.flpSubject.Controls.Add(this.CN);
+            this.flpSubject.Controls.Add(this.GDCD);
+            this.flpSubject.Controls.Add(this.Tin);
+            this.flpSubject.Controls.Add(this.Sinh);
+            this.flpSubject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpSubject.Location = new System.Drawing.Point(20, 20);
+            this.flpSubject.Name = "flpSubject";
+            this.flpSubject.Size = new System.Drawing.Size(902, 822);
+            this.flpSubject.TabIndex = 0;
+            // 
+            // Toan
+            // 
+            this.Toan.BackColor = System.Drawing.Color.Transparent;
+            this.Toan.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Toan.Diem15PhutList")));
+            this.Toan.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Toan.DiemCuoiKyList")));
+            this.Toan.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Toan.DiemGiuaKyList")));
+            this.Toan.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Toan.DiemMiengList")));
+            this.Toan.DiemTrungBinh = 0F;
+            this.Toan.Location = new System.Drawing.Point(10, 10);
+            this.Toan.Margin = new System.Windows.Forms.Padding(10);
+            this.Toan.Name = "Toan";
+            this.Toan.NhanXet = "";
+            this.Toan.Size = new System.Drawing.Size(882, 316);
+            this.Toan.SubjectName = "";
+            this.Toan.TabIndex = 0;
+            // 
+            // Van
+            // 
+            this.Van.BackColor = System.Drawing.Color.Transparent;
+            this.Van.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.Diem15PhutList")));
+            this.Van.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemCuoiKyList")));
+            this.Van.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemGiuaKyList")));
+            this.Van.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemMiengList")));
+            this.Van.DiemTrungBinh = 0F;
+            this.Van.Location = new System.Drawing.Point(10, 682);
+            this.Van.Margin = new System.Windows.Forms.Padding(10);
+            this.Van.Name = "Van";
+            this.Van.NhanXet = "";
+            this.Van.Size = new System.Drawing.Size(882, 316);
+            this.Van.SubjectName = "";
+            this.Van.TabIndex = 2;
+            // 
+            // Ly
+            // 
+            this.Ly.BackColor = System.Drawing.Color.Transparent;
+            this.Ly.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.Diem15PhutList")));
+            this.Ly.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.DiemCuoiKyList")));
+            this.Ly.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.DiemGiuaKyList")));
+            this.Ly.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.DiemMiengList")));
+            this.Ly.DiemTrungBinh = 0F;
+            this.Ly.Location = new System.Drawing.Point(10, 346);
+            this.Ly.Margin = new System.Windows.Forms.Padding(10);
+            this.Ly.Name = "Ly";
+            this.Ly.NhanXet = "";
+            this.Ly.Size = new System.Drawing.Size(882, 316);
+            this.Ly.SubjectName = "";
+            this.Ly.TabIndex = 3;
+            // 
+            // Hoa
+            // 
+            this.Hoa.BackColor = System.Drawing.Color.Transparent;
+            this.Hoa.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.Diem15PhutList")));
+            this.Hoa.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.DiemCuoiKyList")));
+            this.Hoa.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.DiemGiuaKyList")));
+            this.Hoa.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.DiemMiengList")));
+            this.Hoa.DiemTrungBinh = 0F;
+            this.Hoa.Location = new System.Drawing.Point(10, 1018);
+            this.Hoa.Margin = new System.Windows.Forms.Padding(10);
+            this.Hoa.Name = "Hoa";
+            this.Hoa.NhanXet = "";
+            this.Hoa.Size = new System.Drawing.Size(882, 316);
+            this.Hoa.SubjectName = "";
+            this.Hoa.TabIndex = 4;
+            // 
+            // Dia
+            // 
+            this.Dia.BackColor = System.Drawing.Color.Transparent;
+            this.Dia.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.Diem15PhutList")));
+            this.Dia.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.DiemCuoiKyList")));
+            this.Dia.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.DiemGiuaKyList")));
+            this.Dia.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.DiemMiengList")));
+            this.Dia.DiemTrungBinh = 0F;
+            this.Dia.Location = new System.Drawing.Point(10, 1354);
+            this.Dia.Margin = new System.Windows.Forms.Padding(10);
+            this.Dia.Name = "Dia";
+            this.Dia.NhanXet = "";
+            this.Dia.Size = new System.Drawing.Size(882, 316);
+            this.Dia.SubjectName = "";
+            this.Dia.TabIndex = 5;
+            // 
+            // Su
+            // 
+            this.Su.BackColor = System.Drawing.Color.Transparent;
+            this.Su.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.Diem15PhutList")));
+            this.Su.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.DiemCuoiKyList")));
+            this.Su.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.DiemGiuaKyList")));
+            this.Su.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.DiemMiengList")));
+            this.Su.DiemTrungBinh = 0F;
+            this.Su.Location = new System.Drawing.Point(10, 1690);
+            this.Su.Margin = new System.Windows.Forms.Padding(10);
+            this.Su.Name = "Su";
+            this.Su.NhanXet = "";
+            this.Su.Size = new System.Drawing.Size(882, 316);
+            this.Su.SubjectName = "";
+            this.Su.TabIndex = 6;
+            // 
+            // AnhVan
+            // 
+            this.AnhVan.BackColor = System.Drawing.Color.Transparent;
+            this.AnhVan.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.Diem15PhutList")));
+            this.AnhVan.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.DiemCuoiKyList")));
+            this.AnhVan.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.DiemGiuaKyList")));
+            this.AnhVan.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.DiemMiengList")));
+            this.AnhVan.DiemTrungBinh = 0F;
+            this.AnhVan.Location = new System.Drawing.Point(10, 2026);
+            this.AnhVan.Margin = new System.Windows.Forms.Padding(10);
+            this.AnhVan.Name = "AnhVan";
+            this.AnhVan.NhanXet = "";
+            this.AnhVan.Size = new System.Drawing.Size(882, 316);
+            this.AnhVan.SubjectName = "";
+            this.AnhVan.TabIndex = 7;
+            // 
+            // CN
+            // 
+            this.CN.BackColor = System.Drawing.Color.Transparent;
+            this.CN.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.Diem15PhutList")));
+            this.CN.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.DiemCuoiKyList")));
+            this.CN.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.DiemGiuaKyList")));
+            this.CN.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.DiemMiengList")));
+            this.CN.DiemTrungBinh = 0F;
+            this.CN.Location = new System.Drawing.Point(10, 2362);
+            this.CN.Margin = new System.Windows.Forms.Padding(10);
+            this.CN.Name = "CN";
+            this.CN.NhanXet = "";
+            this.CN.Size = new System.Drawing.Size(882, 316);
+            this.CN.SubjectName = "";
+            this.CN.TabIndex = 8;
+            // 
+            // GDCD
+            // 
+            this.GDCD.BackColor = System.Drawing.Color.Transparent;
+            this.GDCD.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.Diem15PhutList")));
+            this.GDCD.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.DiemCuoiKyList")));
+            this.GDCD.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.DiemGiuaKyList")));
+            this.GDCD.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.DiemMiengList")));
+            this.GDCD.DiemTrungBinh = 0F;
+            this.GDCD.Location = new System.Drawing.Point(10, 2698);
+            this.GDCD.Margin = new System.Windows.Forms.Padding(10);
+            this.GDCD.Name = "GDCD";
+            this.GDCD.NhanXet = "";
+            this.GDCD.Size = new System.Drawing.Size(882, 316);
+            this.GDCD.SubjectName = "";
+            this.GDCD.TabIndex = 9;
+            // 
+            // Tin
+            // 
+            this.Tin.BackColor = System.Drawing.Color.Transparent;
+            this.Tin.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.Diem15PhutList")));
+            this.Tin.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.DiemCuoiKyList")));
+            this.Tin.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.DiemGiuaKyList")));
+            this.Tin.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.DiemMiengList")));
+            this.Tin.DiemTrungBinh = 0F;
+            this.Tin.Location = new System.Drawing.Point(10, 3034);
+            this.Tin.Margin = new System.Windows.Forms.Padding(10);
+            this.Tin.Name = "Tin";
+            this.Tin.NhanXet = "";
+            this.Tin.Size = new System.Drawing.Size(882, 316);
+            this.Tin.SubjectName = "";
+            this.Tin.TabIndex = 10;
+            // 
+            // Sinh
+            // 
+            this.Sinh.BackColor = System.Drawing.Color.Transparent;
+            this.Sinh.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.Diem15PhutList")));
+            this.Sinh.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.DiemCuoiKyList")));
+            this.Sinh.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.DiemGiuaKyList")));
+            this.Sinh.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.DiemMiengList")));
+            this.Sinh.DiemTrungBinh = 0F;
+            this.Sinh.Location = new System.Drawing.Point(10, 3370);
+            this.Sinh.Margin = new System.Windows.Forms.Padding(10);
+            this.Sinh.Name = "Sinh";
+            this.Sinh.NhanXet = "";
+            this.Sinh.Size = new System.Drawing.Size(882, 316);
+            this.Sinh.SubjectName = "";
+            this.Sinh.TabIndex = 11;
             // 
             // ucKQHT
             // 
@@ -505,6 +717,8 @@
             this.cardSummary.ResumeLayout(false);
             this.cardSummary.PerformLayout();
             this.tlpSummary.ResumeLayout(false);
+            this.pnlSubjects.ResumeLayout(false);
+            this.flpSubject.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -538,6 +752,17 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformanceValue;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblAcademicPerformance;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblSummaryTitle;
-
+        private System.Windows.Forms.FlowLayoutPanel flpSubject;
+        private ucKQHTItem Toan;
+        private ucKQHTItem Van;
+        private ucKQHTItem Ly;
+        private ucKQHTItem Hoa;
+        private ucKQHTItem Dia;
+        private ucKQHTItem Su;
+        private ucKQHTItem AnhVan;
+        private ucKQHTItem CN;
+        private ucKQHTItem GDCD;
+        private ucKQHTItem Tin;
+        private ucKQHTItem Sinh;
     }
 }
