@@ -336,8 +336,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Tìm control ucKQHTItem theo tên môn học
         private ucKQHTItem FindSubjectItemByName(string subjectName)
         {
-            // Log để debug
-            Console.WriteLine($"Tìm control cho môn: {subjectName}");
+
 
             // Ánh xạ tên môn học đến tên control trong designer
             Dictionary<string, string> subjectToControlMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -359,7 +358,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             string controlName = null;
             if (subjectToControlMap.TryGetValue(subjectName, out controlName))
             {
-                Console.WriteLine($"Tìm thấy ánh xạ: {subjectName} -> {controlName}");
                 Control[] controls = this.flpSubject.Controls.Find(controlName, true);
                 if (controls.Length > 0 && controls[0] is ucKQHTItem)
                     return (ucKQHTItem)controls[0];
@@ -373,13 +371,10 @@ namespace QuanLyTruongHoc.GUI.Controls
                     if (string.Equals(item.SubjectName, subjectName, StringComparison.OrdinalIgnoreCase) ||
                         string.IsNullOrEmpty(item.SubjectName))
                     {
-                        Console.WriteLine($"Tìm thấy control thông qua tên: {ctrl.Name}");
                         return item;
                     }
                 }
             }
-
-            Console.WriteLine($"Không tìm thấy control cho môn: {subjectName}");
             return null;
         }
 
@@ -403,16 +398,12 @@ namespace QuanLyTruongHoc.GUI.Controls
                             TenMon = row["TenMon"].ToString()
                         });
 
-                        // Ghi log để debug
-                        Console.WriteLine($"Đã tải môn học: ID={row["MaMon"]}, Tên={row["TenMon"]}");
-                    }
+                           }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi trong GetAllSubjects: {ex.Message}");
-
-                // Tạo danh sách môn học mặc định với ID chính xác như trong CSDL
+                Console.WriteLine($"Lỗi trong GetAllSubjects: {ex.Message}");                // Tạo danh sách môn học mặc định với ID chính xác như trong CSDL
                 subjects.Add(new MonHocDTO { MaMon = 1, TenMon = "Toán" });
                 subjects.Add(new MonHocDTO { MaMon = 2, TenMon = "Vật Lý" });
                 subjects.Add(new MonHocDTO { MaMon = 3, TenMon = "Hóa Học" });
