@@ -566,6 +566,8 @@
     <None Include="assets\images\class_icon.png" />
     <None Include="assets\images\cancel_icon.jpg" />
     <None Include="assets\images\send_icon.png" />
+    <None Include="assets\images\calendar.jpg" />
+    <None Include="assets\images\view.png" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />

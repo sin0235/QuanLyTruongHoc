@@ -18,6 +18,20 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
             InitializeComponent();
             this.Load += ucXemThuDaGui_Load;
         }
+
+        private void UpdateStatistics()
+        {
+            int visibleCount = 0;
+            foreach (DataGridViewRow row in dgvXemThu.Rows)
+            {
+                if (row.Visible)
+                {
+                    visibleCount++;
+                }
+            }
+
+            lblStatistics.Text = $"Tổng số: {visibleCount} thư";
+        }
         // Tải dữ liệu thông báo đã gửi
         private void LoadData()
         {
@@ -42,12 +56,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                     int maTB = Convert.ToInt32(row["MaTB"]);
 
                     dgvXemThu.Rows.Add(maTB, nguoiGui, nguoiNhan, tieuDe, noiDung, thoiGian);
+                    UpdateStatistics();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         // Lấy thông tin người nhận từ cơ sở dữ liệu
@@ -233,6 +249,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                     bool isMatch = keywords.Any(k => nguoiNhan.IndexOf(k, StringComparison.OrdinalIgnoreCase) >= 0);
                     row.Visible = isMatch;
                 }
+                UpdateStatistics();
             }
             catch (Exception ex)
             {

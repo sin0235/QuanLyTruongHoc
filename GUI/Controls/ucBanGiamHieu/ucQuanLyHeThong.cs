@@ -28,6 +28,18 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
 
         }
+
+        private void UpdateStatistics()
+        {
+            if (dgvQuanLyHeThong.DataSource is DataTable dt)
+            {
+                lblStatistic.Text = $"Tổng số: {dt.Rows.Count} hoạt động hệ thống";
+            }
+            else if (dgvQuanLyHeThong.DataSource is DataView dv)
+            {
+                lblStatistic.Text = $"Tổng số: {dv.Count} hoạt động hệ thống";
+            }
+        }
         private bool LoadData()
         {
             try
@@ -64,6 +76,15 @@ namespace QuanLyTruongHoc.GUI.Controls
                 else
                 {
                     return false;
+                }
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    originalData = dt;
+                    dgvQuanLyHeThong.AutoGenerateColumns = false;
+                    dgvQuanLyHeThong.DataSource = dt;
+                    dgvQuanLyHeThong.ClearSelection();
+                    UpdateStatistics(); // Add this line
+                    return true;
                 }
             }
             catch (Exception ex)
