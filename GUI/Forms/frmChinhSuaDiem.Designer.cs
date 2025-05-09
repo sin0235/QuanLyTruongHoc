@@ -38,6 +38,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.chinhSuaBtn = new Guna.UI2.WinForms.Guna2Button();
             this.dgvDiemChiTietHocSinh = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaDiem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoaiDiem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Diem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diemTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,11 +51,6 @@
             this.sttTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.loaiDiemCmb = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaDiem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LoaiDiem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Diem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiemChiTietHocSinh)).BeginInit();
             this.SuspendLayout();
@@ -76,7 +76,7 @@
             this.guna2GradientPanel1.Location = new System.Drawing.Point(0, 0);
             this.guna2GradientPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(700, 422);
+            this.guna2GradientPanel1.Size = new System.Drawing.Size(861, 489);
             this.guna2GradientPanel1.TabIndex = 1;
             // 
             // xoaBtn
@@ -89,7 +89,7 @@
             this.xoaBtn.FillColor = System.Drawing.Color.Red;
             this.xoaBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xoaBtn.ForeColor = System.Drawing.Color.White;
-            this.xoaBtn.Location = new System.Drawing.Point(369, 368);
+            this.xoaBtn.Location = new System.Drawing.Point(526, 434);
             this.xoaBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.xoaBtn.Name = "xoaBtn";
             this.xoaBtn.Size = new System.Drawing.Size(158, 43);
@@ -161,7 +161,7 @@
             this.chinhSuaBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chinhSuaBtn.ForeColor = System.Drawing.Color.White;
             this.chinhSuaBtn.HoverState.FillColor = System.Drawing.Color.Orange;
-            this.chinhSuaBtn.Location = new System.Drawing.Point(532, 368);
+            this.chinhSuaBtn.Location = new System.Drawing.Point(690, 434);
             this.chinhSuaBtn.Margin = new System.Windows.Forms.Padding(2);
             this.chinhSuaBtn.Name = "chinhSuaBtn";
             this.chinhSuaBtn.Size = new System.Drawing.Size(158, 43);
@@ -199,13 +199,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDiemChiTietHocSinh.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDiemChiTietHocSinh.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(220)))), ((int)(((byte)(242)))));
-            this.dgvDiemChiTietHocSinh.Location = new System.Drawing.Point(299, 13);
+            this.dgvDiemChiTietHocSinh.Location = new System.Drawing.Point(321, 22);
             this.dgvDiemChiTietHocSinh.Margin = new System.Windows.Forms.Padding(2);
             this.dgvDiemChiTietHocSinh.Name = "dgvDiemChiTietHocSinh";
             this.dgvDiemChiTietHocSinh.RowHeadersVisible = false;
             this.dgvDiemChiTietHocSinh.RowHeadersWidth = 51;
             this.dgvDiemChiTietHocSinh.RowTemplate.Height = 24;
-            this.dgvDiemChiTietHocSinh.Size = new System.Drawing.Size(390, 318);
+            this.dgvDiemChiTietHocSinh.Size = new System.Drawing.Size(527, 395);
             this.dgvDiemChiTietHocSinh.TabIndex = 13;
             this.dgvDiemChiTietHocSinh.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.FeterRiver;
             this.dgvDiemChiTietHocSinh.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(224)))), ((int)(((byte)(244)))));
@@ -230,6 +230,41 @@
             this.dgvDiemChiTietHocSinh.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvDiemChiTietHocSinh.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvDiemChiTietHocSinh.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDiemChiTietHocSinh_CellDoubleClick);
+            // 
+            // STT
+            // 
+            this.STT.DataPropertyName = "STT";
+            this.STT.HeaderText = "STT";
+            this.STT.MinimumWidth = 6;
+            this.STT.Name = "STT";
+            // 
+            // MaDiem
+            // 
+            this.MaDiem.DataPropertyName = "MaDiem";
+            this.MaDiem.HeaderText = "Mã Điểm";
+            this.MaDiem.Name = "MaDiem";
+            this.MaDiem.Visible = false;
+            // 
+            // LoaiDiem
+            // 
+            this.LoaiDiem.DataPropertyName = "LoaiDiem";
+            this.LoaiDiem.HeaderText = "Loại Điểm";
+            this.LoaiDiem.MinimumWidth = 6;
+            this.LoaiDiem.Name = "LoaiDiem";
+            // 
+            // Diem
+            // 
+            this.Diem.DataPropertyName = "Diem";
+            this.Diem.HeaderText = "Điểm";
+            this.Diem.MinimumWidth = 6;
+            this.Diem.Name = "Diem";
+            // 
+            // HocKy
+            // 
+            this.HocKy.DataPropertyName = "HocKy";
+            this.HocKy.HeaderText = "Học Kỳ";
+            this.HocKy.MinimumWidth = 6;
+            this.HocKy.Name = "HocKy";
             // 
             // diemTxt
             // 
@@ -355,53 +390,18 @@
             this.loaiDiemCmb.Items.AddRange(new object[] {
             "Miệng",
             "15 Phút",
-            "Giữa kì",
-            "Cuối kì"});
+            "Giữa kỳ",
+            "Cuối kỳ"});
             this.loaiDiemCmb.Location = new System.Drawing.Point(84, 167);
             this.loaiDiemCmb.Margin = new System.Windows.Forms.Padding(2);
             this.loaiDiemCmb.Name = "loaiDiemCmb";
             this.loaiDiemCmb.Size = new System.Drawing.Size(202, 36);
             this.loaiDiemCmb.TabIndex = 5;
             // 
-            // STT
-            // 
-            this.STT.DataPropertyName = "STT";
-            this.STT.HeaderText = "STT";
-            this.STT.MinimumWidth = 6;
-            this.STT.Name = "STT";
-            // 
-            // MaDiem
-            // 
-            this.MaDiem.DataPropertyName = "MaDiem";
-            this.MaDiem.HeaderText = "Mã Điểm";
-            this.MaDiem.Name = "MaDiem";
-            this.MaDiem.Visible = false;
-            // 
-            // LoaiDiem
-            // 
-            this.LoaiDiem.DataPropertyName = "LoaiDiem";
-            this.LoaiDiem.HeaderText = "Loại Điểm";
-            this.LoaiDiem.MinimumWidth = 6;
-            this.LoaiDiem.Name = "LoaiDiem";
-            // 
-            // Diem
-            // 
-            this.Diem.DataPropertyName = "Diem";
-            this.Diem.HeaderText = "Điểm";
-            this.Diem.MinimumWidth = 6;
-            this.Diem.Name = "Diem";
-            // 
-            // HocKy
-            // 
-            this.HocKy.DataPropertyName = "HocKy";
-            this.HocKy.HeaderText = "Học Kỳ";
-            this.HocKy.MinimumWidth = 6;
-            this.HocKy.Name = "HocKy";
-            // 
             // frmChinhSuaDiem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(700, 422);
+            this.ClientSize = new System.Drawing.Size(859, 488);
             this.Controls.Add(this.guna2GradientPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
