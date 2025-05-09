@@ -180,27 +180,3 @@ INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem) VALUES
 (206, 29, 5, 21, 1, N'15 phút', 7.0),
 (207, 29, 5, 21, 1, N'Giữa kỳ', 6.5),
 (208, 29, 5, 21, 1, N'Cuối kỳ', 7.0);
-
--- Thêm điểm môn cuối kỳ cho học sinh lớp 10A1 - Môn Toán (MaMon = 1)
-INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem) VALUES
-(209, 1, 1, 7, 1, N'Kiểm tra cuối kỳ', 7.5),
-(210, 2, 1, 7, 1, N'Kiểm tra cuối kỳ', 9.0),
-(211, 3, 1, 7, 1, N'Kiểm tra cuối kỳ', 6.5),
-(212, 4, 1, 7, 1, N'Kiểm tra cuối kỳ', 9.0),
-(213, 5, 1, 7, 1, N'Kiểm tra cuối kỳ', 7.0);
-
--- Thêm điểm môn cuối kỳ cho học sinh lớp 10A1 - Môn Ngữ văn (MaMon = 5)
-INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem) VALUES
-(214, 1, 5, 20, 1, N'Kiểm tra cuối kỳ', 7.5),
-(215, 2, 5, 20, 1, N'Kiểm tra cuối kỳ', 8.5),
-(216, 3, 5, 20, 1, N'Kiểm tra cuối kỳ', 6.5),
-(217, 4, 5, 20, 1, N'Kiểm tra cuối kỳ', 9.0),
-(218, 5, 5, 20, 1, N'Kiểm tra cuối kỳ', 7.5);
-
--- Thêm điểm môn cuối kỳ cho học sinh lớp 10A2 - Môn Toán (MaMon = 1)
-INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem) VALUES
-(219, 16, 1, 8, 1, N'Kiểm tra cuối kỳ', 8.0),
-(220, 17, 1, 8, 1, N'Kiểm tra cuối kỳ', 7.5),
-(221, 18, 1, 8, 1, N'Kiểm tra cuối kỳ', 9.0),
-(222, 19, 1, 8, 1, N'Kiểm tra cuối kỳ', 6.5),
-(223, 20, 1, 8, 1, N'Kiểm tra cuối kỳ', 8.5);

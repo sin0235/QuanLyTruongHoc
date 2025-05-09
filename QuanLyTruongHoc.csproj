@@ -555,7 +555,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\delete1.jpg" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\delete.jpg" />
     <None Include="assets\images\book.png" />
+    <None Include="assets\images\add.png" />
+    <None Include="assets\images\edit.jpg" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />
