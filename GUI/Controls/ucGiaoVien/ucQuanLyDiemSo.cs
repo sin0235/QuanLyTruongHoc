@@ -49,11 +49,21 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                         STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
                         STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
                         STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy,
-                        ROUND(AVG(DS.Diem), 2) AS DiemTB
+                        ROUND(
+                            (
+                                ISNULL(SUM(CASE WHEN DS.LoaiDiem IN (N'Miệng', N'15 phút') THEN DS.Diem END), 0) + 
+                                2 * ISNULL(AVG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN DS.Diem END), 0) + 
+                                3 * ISNULL(AVG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN DS.Diem END), 0)
+                            ) / 
+                            (
+                                NULLIF(COUNT(CASE WHEN DS.LoaiDiem IN (N'Miệng', N'15 phút') THEN 1 END), 0) + 5
+                            ), 2
+                        ) AS DiemTB
                     FROM HocSinh HS
                     LEFT JOIN DiemSo DS ON HS.MaHS = DS.MaHS AND DS.MaMon = {maMon} AND DS.HocKy = {hocKy}
                     WHERE HS.MaLop = {maLop}
                     GROUP BY HS.MaHS, HS.HoTen, DS.HocKy";
+
 
                 DataTable dtDiem = db.ExecuteQuery(queryDiem);
 

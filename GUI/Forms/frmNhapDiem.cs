@@ -29,20 +29,6 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             try
             {
-                // Load LoaiDiem từ bảng DiemSo
-                string queryLoaiDiem = "SELECT DISTINCT LoaiDiem FROM DiemSo";
-                DataTable dtLoaiDiem = db.ExecuteQuery(queryLoaiDiem);
-
-                if (dtLoaiDiem.Rows.Count > 0)
-                {
-                    loaiDiemCmb.DataSource = dtLoaiDiem;
-                    loaiDiemCmb.DisplayMember = "LoaiDiem";
-                    loaiDiemCmb.ValueMember = "LoaiDiem";
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy dữ liệu Loại Điểm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
 
                 // Load HocKy từ bảng DiemSo
                 string queryHocKy = "SELECT DISTINCT HocKy FROM DiemSo";
@@ -50,14 +36,18 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 if (dtHocKy.Rows.Count > 0)
                 {
-                    cmbHocKi.DataSource = dtHocKy;
-                    cmbHocKi.DisplayMember = "HocKy";
-                    cmbHocKi.ValueMember = "HocKy";
+                    foreach (DataRow row in dtHocKy.Rows)
+                    {
+                        string hocKy = "Kỳ " + row["HocKy"].ToString();
+                        if (!cmbHocKi.Items.Contains(hocKy))
+                        {
+                            cmbHocKi.Items.Add(hocKy);
+                        }
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy dữ liệu Học Kỳ.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+
+                // Đặt giá trị mặc định
+                cmbHocKi.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -65,33 +55,40 @@ namespace QuanLyTruongHoc.GUI.Forms
             }
         }
 
+
         private void LoadDiemHS(int maHS)
         {
             try
             {
-                if (cmbHocKi.SelectedValue == null)
+                // Kiểm tra nếu không có giá trị trong ComboBox
+                if (string.IsNullOrWhiteSpace(cmbHocKi.Text))
                 {
                     MessageBox.Show("Vui lòng chọn học kỳ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                int hocKy = int.Parse(cmbHocKi.SelectedValue.ToString());
+                // Chuyển đổi giá trị học kỳ từ "Kỳ 1", "Kỳ 2" thành số nguyên
+                string hocKyText = cmbHocKi.Text;
+                if (!hocKyText.StartsWith("Kỳ") || !int.TryParse(hocKyText.Replace("Kỳ ", ""), out int hocKy))
+                {
+                    MessageBox.Show("Học kỳ không hợp lệ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Truy vấn để lấy thông tin điểm chi tiết của học sinh
                 string query = $@"
-                    SELECT 
-                        ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem ASC) AS STT,
-                        DS.HocKy AS HocKy,
-                        M.TenMon AS TenMon,
-                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemMieng,
-                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
-                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
-                        STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy,
-                        ROUND(AVG(DS.Diem), 2) AS DiemTB
-                    FROM DiemSo DS
-                    INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
-                    WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon} AND DS.MaGV = {maGV} AND DS.HocKy = {hocKy}
-                    GROUP BY DS.HocKy, M.TenMon, DS.LoaiDiem";
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY DS.LoaiDiem ASC) AS STT,
+                DS.HocKy AS HocKy,
+                M.TenMon AS TenMon,
+                STRING_AGG(CASE WHEN DS.LoaiDiem = N'Miệng' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemMieng,
+                STRING_AGG(CASE WHEN DS.LoaiDiem = N'15 phút' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS Diem15Phut,
+                STRING_AGG(CASE WHEN DS.LoaiDiem = N'Giữa kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemGiuaKy,
+                STRING_AGG(CASE WHEN DS.LoaiDiem = N'Cuối kỳ' THEN CAST(DS.Diem AS NVARCHAR) END, ', ') AS DiemCuoiKy
+            FROM DiemSo DS
+            INNER JOIN MonHoc M ON DS.MaMon = M.MaMon
+            WHERE DS.MaHS = {maHS} AND DS.MaMon = {maMon} AND DS.MaGV = {maGV} AND DS.HocKy = {hocKy}
+            GROUP BY DS.HocKy, M.TenMon, DS.LoaiDiem";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -111,6 +108,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show($"Lỗi khi tải thông tin điểm: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
@@ -175,7 +173,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 // Kiểm tra các trường đầu vào
                 if (string.IsNullOrWhiteSpace(sttTxt.Text) || string.IsNullOrWhiteSpace(hoTenTxt.Text) ||
                     string.IsNullOrWhiteSpace(loaiDiemCmb.Text) || string.IsNullOrWhiteSpace(diemTxt.Text) ||
-                    cmbHocKi.SelectedValue == null)
+                    string.IsNullOrWhiteSpace(cmbHocKi.Text))
                 {
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -194,7 +192,13 @@ namespace QuanLyTruongHoc.GUI.Forms
                     return;
                 }
 
-                int hocKy = int.Parse(cmbHocKi.SelectedValue.ToString());
+                // Chuyển đổi giá trị học kỳ từ "Kỳ 1", "Kỳ 2" thành số nguyên
+                string hocKyText = cmbHocKi.Text;
+                if (!hocKyText.StartsWith("Kỳ") || !int.TryParse(hocKyText.Replace("Kỳ ", ""), out int hocKy))
+                {
+                    MessageBox.Show("Học kỳ không hợp lệ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Kiểm tra giá trị điểm hợp lệ
                 if (diem < 0 || diem > 10)
@@ -205,9 +209,9 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 // Lấy mã học sinh từ Họ Tên
                 string layMaHS = $@"
-                    SELECT MaHS
-                    FROM HocSinh
-                    WHERE HoTen = N'{hoTenTxt.Text}'";
+            SELECT MaHS
+            FROM HocSinh
+            WHERE HoTen = N'{hoTenTxt.Text}'";
 
                 object maHSObj = db.ExecuteScalar(layMaHS);
                 if (maHSObj == null)
@@ -223,8 +227,8 @@ namespace QuanLyTruongHoc.GUI.Forms
                 int maDiemMoi = Convert.ToInt32(db.ExecuteScalar(themMaxMaDiem));
 
                 string themDiem = $@"
-                    INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
-                    VALUES ({maDiemMoi}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
+            INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+            VALUES ({maDiemMoi}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
 
                 bool daThem = db.ExecuteNonQuery(themDiem);
 
@@ -245,6 +249,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
