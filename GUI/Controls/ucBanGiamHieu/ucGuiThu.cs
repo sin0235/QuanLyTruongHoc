@@ -55,6 +55,22 @@ namespace QuanLyTruongHoc.GUI.Controls
                 cbTatCa.Checked = false;
             }
         }
+
+
+        private void btnHuyBo_Click(object sender, EventArgs e)
+ {
+     txtTieuDe.Text = "";
+    txtNoiDung.Text = "";
+    txtNhapLop.Text = "";
+    txtNhapMaCaNhan.Text = "";
+     cbTatCa.Checked = false;
+     cbLopCuThe.Checked = false;
+    cbGiaoVien.Checked = false;
+    cbHocSinh.Checked = false;
+     cbPhongNoiVu.Checked = false;
+     cbCaNhan.Checked = false;
+ }
+ 
         private void cbPhongNoiVu_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPhongNoiVu.Checked)

@@ -561,6 +561,11 @@
     <None Include="assets\images\book.png" />
     <None Include="assets\images\add.png" />
     <None Include="assets\images\edit.jpg" />
+    <None Include="assets\images\user_icon.png" />
+    <None Include="assets\images\subject_icon.png" />
+    <None Include="assets\images\class_icon.png" />
+    <None Include="assets\images\cancel_icon.jpg" />
+    <None Include="assets\images\send_icon.png" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />
