@@ -151,7 +151,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             // Hiển thị thông tin liên hệ (có thể chỉnh sửa)
             txtAddress.Text = !string.IsNullOrEmpty(student.PermanentAddress) ? student.PermanentAddress : "-----";
-            txtPhone.Text = !string.IsNullOrEmpty(student.Phone) ? student.Phone : "-----";
+            txtPhone.Text = !string.IsNullOrEmpty(student.Mobile) ? student.Mobile : "-----";
             txtEmail.Text = !string.IsNullOrEmpty(student.Email) ? student.Email : "-----";
 
             // Hiển thị thông tin người liên hệ khẩn cấp
@@ -164,7 +164,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             txtDistrict.Text = !string.IsNullOrEmpty(student.District) ? student.District : "-----";
             txtWard.Text = !string.IsNullOrEmpty(student.Ward) ? student.Ward : "-----";
             txtAddress.Text = !string.IsNullOrEmpty(student.PermanentAddress) ? student.PermanentAddress : "-----";
-            txtPhone.Text = !string.IsNullOrEmpty(student.Phone) ? student.Phone : "-----";
+            txtPhone.Text = !string.IsNullOrEmpty(student.Mobile) ? student.Mobile : "-----";
             // Hiển thị ảnh đại diện nếu có
             picAvatar.Image = student.Avatar ?? Properties.Resources.defautAvatar;
 
@@ -219,7 +219,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 // Lưu lại giá trị cũ để khôi phục nếu cập nhật thất bại
                 string oldAddress = _currentStudent.PermanentAddress;
-                string oldPhone = _currentStudent.Phone;
+                string oldPhone = _currentStudent.Mobile;
                 string oldEmail = _currentStudent.Email;
                 string oldFatherName = _currentStudent.FatherName;
                 string oldFatherPhone = _currentStudent.FatherPhone;
@@ -228,7 +228,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
                 // Cập nhật dữ liệu thông tin liên lạc
                 _currentStudent.PermanentAddress = txtAddress.Text.Trim() == "-----" ? null : txtAddress.Text.Trim();
-                _currentStudent.Phone = txtPhone.Text.Trim() == "-----" ? null : txtPhone.Text.Trim();
+                _currentStudent.Mobile = txtPhone.Text.Trim() == "-----" ? null : txtPhone.Text.Trim();
                 _currentStudent.Email = txtEmail.Text.Trim() == "-----" ? null : txtEmail.Text.Trim();
 
                 // Cập nhật thông tin phụ huynh
@@ -276,7 +276,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                         {
                             // Khôi phục dữ liệu cũ nếu cập nhật thất bại
                             _currentStudent.PermanentAddress = oldAddress;
-                            _currentStudent.Phone = oldPhone;
+                            _currentStudent.Mobile = oldPhone;
                             _currentStudent.Email = oldEmail;
                             _currentStudent.FatherName = oldFatherName;
                             _currentStudent.FatherPhone = oldFatherPhone;
@@ -315,7 +315,7 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             // Khôi phục dữ liệu ban đầu
             txtAddress.Text = _currentStudent.PermanentAddress ?? "-----";
-            txtPhone.Text = _currentStudent.Phone ?? "-----";
+            txtPhone.Text = _currentStudent.Mobile ?? "-----";
             txtEmail.Text = _currentStudent.Email ?? "-----";
             txtHoTenCha.Text = _currentStudent.FatherName ?? "-----";
             txtSoDienThoaiCha.Text = _currentStudent.FatherPhone ?? "-----";

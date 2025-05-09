@@ -20,7 +20,6 @@ public class ThongTinHSDTO
     public string District { get; set; }
     public string Ward { get; set; }
     public string PermanentAddress { get; set; }
-    public string Phone { get; set; }
     public string Mobile { get; set; }
     public string Email { get; set; }
 
@@ -50,7 +49,6 @@ public class ThongTinHSDTO
         District = string.Empty;
         Ward = string.Empty;
         PermanentAddress = string.Empty;
-        Phone = string.Empty;
         Mobile = string.Empty;
         Email = string.Empty;
         ClassName = string.Empty;
