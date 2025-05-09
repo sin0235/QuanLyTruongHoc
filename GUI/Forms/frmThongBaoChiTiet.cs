@@ -46,6 +46,10 @@ namespace QuanLyTruongHoc.GUI.Forms
             lblNguoiGui.Text = nguoiguitb;
         }
 
+        private void btnDong_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

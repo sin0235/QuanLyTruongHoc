@@ -117,7 +117,81 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;lblFormTitle.Name" xml:space="preserve">
+    <value>lblFormTitle</value>
+  </data>
+  <data name="&gt;&gt;lblFormTitle.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2HtmlLabel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;lblFormTitle.Parent" xml:space="preserve">
+    <value>pnlTitleBar</value>
+  </data>
+  <data name="&gt;&gt;lblFormTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonClose.Name" xml:space="preserve">
+    <value>guna2CircleButtonClose</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonClose.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CircleButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonClose.Parent" xml:space="preserve">
+    <value>pnlTitleBar</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonClose.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMaximize.Name" xml:space="preserve">
+    <value>guna2CircleButtonMaximize</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMaximize.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CircleButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMaximize.Parent" xml:space="preserve">
+    <value>pnlTitleBar</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMaximize.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMinimize.Name" xml:space="preserve">
+    <value>guna2CircleButtonMinimize</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMinimize.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2CircleButton, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMinimize.Parent" xml:space="preserve">
+    <value>pnlTitleBar</value>
+  </data>
+  <data name="&gt;&gt;guna2CircleButtonMinimize.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pnlTitleBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pnlTitleBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pnlTitleBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>526, 50</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pnlTitleBar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pnlTitleBar.Name" xml:space="preserve">
+    <value>pnlTitleBar</value>
+  </data>
+  <data name="&gt;&gt;pnlTitleBar.Type" xml:space="preserve">
+    <value>Guna.UI2.WinForms.Guna2GradientPanel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
+  </data>
+  <data name="&gt;&gt;pnlTitleBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlTitleBar.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lblFormTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 16pt, style=Bold</value>
   </data>
@@ -127,7 +201,6 @@
   <data name="lblFormTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 32</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblFormTitle.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -146,7 +219,6 @@
   <data name="&gt;&gt;lblFormTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="guna2CircleButtonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -227,30 +299,6 @@
   </data>
   <data name="&gt;&gt;guna2CircleButtonMinimize.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="pnlTitleBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="pnlTitleBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="pnlTitleBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>526, 50</value>
-  </data>
-  <data name="pnlTitleBar.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;pnlTitleBar.Name" xml:space="preserve">
-    <value>pnlTitleBar</value>
-  </data>
-  <data name="&gt;&gt;pnlTitleBar.Type" xml:space="preserve">
-    <value>Guna.UI2.WinForms.Guna2GradientPanel, Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
-  </data>
-  <data name="&gt;&gt;pnlTitleBar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlTitleBar.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="lblCurrentPassword.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -367,7 +415,7 @@
     <value>0, 0</value>
   </data>
   <data name="passwordStrengthBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 38</value>
+    <value>499, 16</value>
   </data>
   <data name="passwordStrengthBar.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
