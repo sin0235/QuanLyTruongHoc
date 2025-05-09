@@ -71,7 +71,7 @@
             this.lblNoidung.BackColor = System.Drawing.Color.Transparent;
             this.lblNoidung.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNoidung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.lblNoidung.Location = new System.Drawing.Point(68, 120);
+            this.lblNoidung.Location = new System.Drawing.Point(68, 115);
             this.lblNoidung.Name = "lblNoidung";
             this.lblNoidung.Size = new System.Drawing.Size(181, 49);
             this.lblNoidung.TabIndex = 3;
@@ -82,7 +82,7 @@
             this.lblThoigian.BackColor = System.Drawing.Color.Transparent;
             this.lblThoigian.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.lblThoigian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(130)))));
-            this.lblThoigian.Location = new System.Drawing.Point(68, 89);
+            this.lblThoigian.Location = new System.Drawing.Point(68, 84);
             this.lblThoigian.Name = "lblThoigian";
             this.lblThoigian.Size = new System.Drawing.Size(109, 19);
             this.lblThoigian.TabIndex = 2;
@@ -94,7 +94,7 @@
             this.lblGiaoVien.BackColor = System.Drawing.Color.Transparent;
             this.lblGiaoVien.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.lblGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblGiaoVien.Location = new System.Drawing.Point(68, 60);
+            this.lblGiaoVien.Location = new System.Drawing.Point(68, 55);
             this.lblGiaoVien.Name = "lblGiaoVien";
             this.lblGiaoVien.Size = new System.Drawing.Size(125, 19);
             this.lblGiaoVien.TabIndex = 1;
@@ -118,9 +118,9 @@
             this.pnlColor.Controls.Add(this.lblTiet);
             this.pnlColor.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.pnlColor.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlColor.Location = new System.Drawing.Point(15, 15);
+            this.pnlColor.Location = new System.Drawing.Point(15, 19);
             this.pnlColor.Name = "pnlColor";
-            this.pnlColor.Size = new System.Drawing.Size(37, 38);
+            this.pnlColor.Size = new System.Drawing.Size(37, 149);
             this.pnlColor.TabIndex = 6;
             // 
             // lblTiet
@@ -128,7 +128,7 @@
             this.lblTiet.BackColor = System.Drawing.Color.Transparent;
             this.lblTiet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTiet.ForeColor = System.Drawing.Color.White;
-            this.lblTiet.Location = new System.Drawing.Point(4, 7);
+            this.lblTiet.Location = new System.Drawing.Point(7, 65);
             this.lblTiet.Name = "lblTiet";
             this.lblTiet.Size = new System.Drawing.Size(21, 23);
             this.lblTiet.TabIndex = 0;

@@ -21,8 +21,31 @@ namespace QuanLyTruongHoc.GUI.Controls
         private int maxWeek = 0;
         private int id;
         private int maHS;
-        private List<TuanHocDTO> weeks;
+        private List<KhoangThoiGianDTO> periods;
         private int maLop;
+
+        // Constructor với loading indicator
+        public ucTKB(int maHS, int id)
+        {
+            InitializeComponent();
+            dbHelper = new DatabaseHelper();
+            tkbDAL = new TKBDAO();
+            this.id = id;
+            this.maHS = maHS;
+
+            // Khởi tạo loading indicator
+            loadingIndicator = new Guna.UI2.WinForms.Guna2ProgressIndicator
+            {
+                AutoStart = false,
+                Size = new Size(60, 60),
+                Location = new Point((pnlContent.Width - 60) / 2, (pnlContent.Height - 60) / 2),
+                Anchor = AnchorStyles.None,
+                UseTransparentBackground = true,
+                Visible = false
+            };
+            pnlContent.Controls.Add(loadingIndicator);
+            loadingIndicator.BringToFront();
+        }
 
         private void ucTKB_Load(object sender, EventArgs e)
         {
@@ -32,7 +55,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 maLop = Convert.ToInt32(classInfo["MaLop"]);
                 LoadSchoolYears();
-                LoadCurrentSemester(); // Thêm dòng này để tự động chọn học kỳ hiện tại
                 InitializeTimetableLayout(); // Đảm bảo bảng được khởi tạo
             }
             else
@@ -46,152 +68,23 @@ namespace QuanLyTruongHoc.GUI.Controls
             }));
         }
 
-        // Load danh sách năm học vào combobox
-
-        // Load danh sách học kỳ theo năm học
-        private void LoadSemesters()
+        // Override OnResize để giữ loading indicator ở giữa
+        protected override void OnResize(EventArgs e)
         {
-            cboHocKy.Items.Clear();
-            cboHocKy.Items.Add("Học kỳ 1");
-            cboHocKy.Items.Add("Học kỳ 2");
-            cboHocKy.SelectedIndex = 0;
-        }
-
-        // Load danh sách tuần theo năm học và học kỳ
-        private void LoadWeeks()
-        {
-            if (cboNamHoc.SelectedIndex < 0 || cboHocKy.SelectedIndex < 0)
-                return;
-
-            string selectedYear = cboNamHoc.SelectedItem.ToString();
-            int selectedSemester = cboHocKy.SelectedIndex + 1; // 0 -> HK1, 1 -> HK2
-
-            weeks = tkbDAL.GetWeeks(selectedYear, selectedSemester);
-            maxWeek = weeks.Count;
-
-            cboTuan.Items.Clear();
-            foreach (var week in weeks)
+            base.OnResize(e);
+            if (loadingIndicator != null)
             {
-                cboTuan.Items.Add(week.ToString());
-            }
-
-            // Xác định tuần hiện tại
-            currentWeek = tkbDAL.GetCurrentWeekIndex(weeks);
-            if (cboTuan.Items.Count > 0)
-            {
-                cboTuan.SelectedIndex = currentWeek;
+                loadingIndicator.Location = new Point(
+                    (pnlContent.Width - loadingIndicator.Width) / 2,
+                    (pnlContent.Height - loadingIndicator.Height) / 2);
             }
         }
 
-
-        private Tuple<int, int> ParseTietInfo(string tiet)
-        {
-            // Phân tích chuỗi tiết học (ví dụ: "1-3")
-            try
-            {
-                string[] parts = tiet.Split('-');
-                if (parts.Length == 2)
-                {
-                    int start = int.Parse(parts[0]);
-                    int end = int.Parse(parts[1]);
-                    return new Tuple<int, int>(start, end);
-                }
-                else
-                {
-                    int singleTiet = int.Parse(tiet);
-                    return new Tuple<int, int>(singleTiet, singleTiet);
-                }
-            }
-            catch
-            {
-                return new Tuple<int, int>(1, 1); // Giá trị mặc định
-            }
-        }
-
-        private Panel CreateSubjectPanel(TKBDTO item)
-        {
-            // Tạo panel hiển thị thông tin môn học
-            Panel panel = new Panel();
-            panel.Dock = DockStyle.Fill;
-            panel.BackColor = GetSubjectColor(item.MaMon);
-            panel.Margin = new Padding(1);
-            panel.Padding = new Padding(2);
-
-            Label lblSubject = new Label();
-            lblSubject.Text = item.TenMon;
-            lblSubject.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            lblSubject.Dock = DockStyle.Top;
-            lblSubject.TextAlign = ContentAlignment.MiddleCenter;
-            lblSubject.Height = 25;
-
-            Label lblTeacher = new Label();
-            lblTeacher.Text = $"GV: {item.TenGiaoVien}";
-            lblTeacher.Font = new Font("Segoe UI", 8.25f);
-            lblTeacher.Dock = DockStyle.Bottom;
-            lblTeacher.TextAlign = ContentAlignment.MiddleCenter;
-            lblTeacher.Height = 20;
-
-            panel.Controls.Add(lblTeacher);
-            panel.Controls.Add(lblSubject);
-
-            // Tạo tooltip hiển thị thông tin chi tiết khi di chuột qua
-            ToolTip tooltip = new ToolTip();
-            tooltip.SetToolTip(panel, $"Môn: {item.TenMon}\nGiáo viên: {item.TenGiaoVien}\nTiết: {item.Tiet}");
-
-            return panel;
-        }
-
-        private Color GetSubjectColor(int maMon)
-        {
-            // Tạo màu ngẫu nhiên nhưng ổn định cho từng môn học
-            Random rnd = new Random(maMon);
-            return Color.FromArgb(rnd.Next(180, 240), rnd.Next(180, 240), rnd.Next(180, 240));
-        }
-
-        private void SetupColumnHeaders()
-        {
-            // Thiết lập tiêu đề cho các cột (các ngày trong tuần)
-            string[] dayNames = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ Nhật" };
-
-            for (int i = 0; i < Math.Min(dayNames.Length, tableLayoutPanel1.ColumnCount); i++)
-            {
-                Control header = tableLayoutPanel1.GetControlFromPosition(i, 0);
-                if (header != null && header is Label)
-                {
-                    ((Label)header).Text = dayNames[i];
-                }
-            }
-        }
-
-        private void SetCurrentWeek()
-        {
-            try
-            {
-                if (weeks != null && weeks.Count > 0)
-                {
-                    currentWeek = tkbDAL.GetCurrentWeekIndex(weeks);
-                    if (currentWeek >= 0 && currentWeek < cboTuan.Items.Count)
-                    {
-                        cboTuan.SelectedIndex = currentWeek;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi xác định tuần hiện tại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        #region Event Handlers
+        #region Các phương thức xử lý sự kiện
 
         private void cboNamHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadSemesters();
-        }
-
-        private void cboHocKy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadWeeks();
+            LoadTimePeriods();
         }
 
         private void cboTuan_SelectedIndexChanged(object sender, EventArgs e)
@@ -212,13 +105,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             else
             {
-                MessageBox.Show("Đây là tuần đầu tiên của học kỳ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đây là tuần đầu tiên của năm học", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnTuanHienTai_Click(object sender, EventArgs e)
         {
-            SetCurrentWeek();
+            SetCurrentPeriod();
         }
 
         private void btnTuanTiepTheo_Click(object sender, EventArgs e)
@@ -230,33 +123,214 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
             else
             {
-                MessageBox.Show("Đây là tuần cuối cùng của học kỳ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đây là tuần cuối cùng của năm học", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void TableLayoutPanel1_Resize(object sender, EventArgs e)
+        {
+            // Duyệt qua tất cả các panel tiêu đề và cập nhật vị trí căn giữa của labels
+            for (int col = 0; col < tableLayoutPanel1.ColumnCount; col++)
+            {
+                Control header = tableLayoutPanel1.GetControlFromPosition(col, 0);
+                if (header != null && header is Guna.UI2.WinForms.Guna2Panel headerPanel)
+                {
+                    foreach (Control ctrl in headerPanel.Controls)
+                    {
+                        if (ctrl is Guna.UI2.WinForms.Guna2HtmlLabel dayLabel)
+                        {
+                            // Đảm bảo label luôn căn giữa
+                            dayLabel.TextAlignment = ContentAlignment.MiddleCenter;
+                        }
+                    }
+                }
+            }
+
+            // Cập nhật kích thước cho các FlowLayoutPanel trong các ngày
+            for (int col = 0; col < tableLayoutPanel1.ColumnCount; col++)
+            {
+                Control dayPanel = tableLayoutPanel1.GetControlFromPosition(col, 1);
+                if (dayPanel != null && dayPanel is Guna.UI2.WinForms.Guna2Panel panel)
+                {
+                    foreach (Control ctrl in panel.Controls)
+                    {
+                        if (ctrl is FlowLayoutPanel flowPanel)
+                        {
+                            // Với các item trong FlowLayoutPanel, cập nhật chiều rộng của chúng
+                            foreach (Control item in flowPanel.Controls)
+                            {
+                                if (item is ucTKBItem tkbItem)
+                                {
+                                    tkbItem.Width = flowPanel.Width - 20; // Giữ lại khoảng trống bên lề
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         #endregion
 
+        #region Các phương thức xử lý dữ liệu
 
-        private string GetThoiGianTuTiet(int tiet)
+        private void LoadSchoolYears()
         {
-            switch (tiet)
+            try
             {
-                case 1: return "07:30 - 08:15";
-                case 2: return "08:20 - 09:05";
-                case 3: return "09:20 - 10:05";
-                case 4: return "10:10 - 10:55";
-                case 5: return "11:00 - 11:45";
-                // Nghỉ trưa
-                case 7: return "13:30 - 14:15";
-                case 8: return "14:20 - 15:05";
-                case 9: return "15:15 - 16:00";
-                case 10: return "16:05 - 16:50";
-                default: return $"Tiết {tiet}";
+                Cursor = Cursors.WaitCursor;
+
+                List<string> years = tkbDAL.GetSchoolYears();
+
+                cboNamHoc.Items.Clear();
+                foreach (string year in years)
+                {
+                    cboNamHoc.Items.Add(year);
+                }
+
+                // Lấy năm học hiện tại
+                string currentYear;
+                if (tkbDAL.SetupCurrentSchoolYear(out currentYear) && !string.IsNullOrEmpty(currentYear))
+                {
+                    int index = cboNamHoc.Items.IndexOf(currentYear);
+                    if (index >= 0)
+                    {
+                        cboNamHoc.SelectedIndex = index;
+                    }
+                    else if (cboNamHoc.Items.Count > 0)
+                    {
+                        cboNamHoc.SelectedIndex = 0;
+                    }
+                }
+                else if (cboNamHoc.Items.Count > 0)
+                {
+                    cboNamHoc.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải danh sách năm học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
-        private Guna.UI2.WinForms.Guna2ProgressIndicator loadingIndicator;
+        private void LoadTimePeriods()
+        {
+            try
+            {
+                if (cboNamHoc.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Vui lòng chọn năm học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                string selectedYear = cboNamHoc.SelectedItem.ToString();
+
+                // Gọi phương thức GetTimePeriods từ TKBDAO
+                periods = tkbDAL.GetTimePeriods(selectedYear);
+
+                if (periods == null || periods.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy dữ liệu thời gian cho năm học này!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboTuan.Items.Clear();
+                    return;
+                }
+
+                // Cập nhật maxWeek
+                maxWeek = periods.Count;
+
+                // Xóa các mục cũ và thêm khoảng thời gian mới vào combo box
+                cboTuan.Items.Clear();
+                foreach (var period in periods)
+                {
+                    cboTuan.Items.Add(period.ToString());
+                }
+
+                // Xác định khoảng thời gian hiện tại
+                currentWeek = tkbDAL.GetCurrentPeriodIndex(periods);
+                if (cboTuan.Items.Count > 0)
+                {
+                    cboTuan.SelectedIndex = currentWeek;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách thời gian: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetCurrentPeriod()
+        {
+            try
+            {
+                if (periods != null && periods.Count > 0)
+                {
+                    currentWeek = tkbDAL.GetCurrentPeriodIndex(periods);
+                    if (currentWeek >= 0 && currentWeek < cboTuan.Items.Count)
+                    {
+                        cboTuan.SelectedIndex = currentWeek;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xác định thời gian hiện tại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadTimetable()
+        {
+            if (periods == null || currentWeek < 0 || currentWeek >= periods.Count)
+                return;
+
+            // Hiển thị loading indicator
+            pnlNoData.Visible = false;
+            tableLayoutPanel1.Visible = false;
+            loadingIndicator.Visible = true;
+            loadingIndicator.Start();
+
+            // Sử dụng BeginInvoke để cho phép UI cập nhật trước khi xử lý
+            BeginInvoke(new Action(() =>
+            {
+                try
+                {
+                    KhoangThoiGianDTO selectedPeriod = periods[currentWeek];
+                    List<TKBDTO> timetable = tkbDAL.GetTimetable(maLop, selectedPeriod.NgayBatDau, selectedPeriod.NgayKetThuc);
+
+                    // Xóa dữ liệu thời khóa biểu cũ
+                    ClearTimetable();
+
+                    // Hiển thị thời khóa biểu mới
+                    DisplayTimetable(timetable);
+
+                    // Hiển thị UI phù hợp dựa trên dữ liệu
+                    tableLayoutPanel1.Visible = true;
+                    pnlNoData.Visible = timetable.Count == 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tải thời khóa biểu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    pnlNoData.Visible = true;
+                    tableLayoutPanel1.Visible = true;
+                }
+                finally
+                {
+                    // Ẩn loading indicator
+                    loadingIndicator.Stop();
+                    loadingIndicator.Visible = false;
+
+                    // Đảm bảo UI được làm mới
+                    Refresh();
+                }
+            }));
+        }
+
+        #endregion
+
+        #region Phương thức hiển thị thời khóa biểu
 
         private void InitializeTimetableLayout()
         {
@@ -264,23 +338,21 @@ namespace QuanLyTruongHoc.GUI.Controls
             tableLayoutPanel1.RowCount = 1; // Chỉ 1 hàng cho tiêu đề
             tableLayoutPanel1.ColumnCount = 6; // Tổng số cột (6 ngày từ thứ 2 đến thứ 7)
 
-            // Reset row styles collection
+            // Thiết lập lại row styles
             tableLayoutPanel1.RowStyles.Clear();
-            // Header row
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
 
-            // Reset column styles collection
+            // Thiết lập lại column styles
             tableLayoutPanel1.ColumnStyles.Clear();
-            // Day columns
             for (int i = 0; i < 6; i++)
             {
                 tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F / 6));
             }
 
-            // Define day names
+            // Tên các ngày trong tuần
             string[] dayNames = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" };
 
-            // Add day headers with labels stored for later reference
+            // Thêm các tiêu đề ngày
             for (int col = 0; col < dayNames.Length; col++)
             {
                 Guna.UI2.WinForms.Guna2Panel headerPanel = new Guna.UI2.WinForms.Guna2Panel
@@ -289,7 +361,7 @@ namespace QuanLyTruongHoc.GUI.Controls
                     FillColor = Color.FromArgb(100, 120, 230),
                     BorderRadius = 5,
                     Margin = new Padding(2),
-                    Tag = col, // Store column index for reference
+                    Tag = col, // Lưu trữ chỉ số cột để tham chiếu
                 };
 
                 Guna.UI2.WinForms.Guna2HtmlLabel dayLabel = new Guna.UI2.WinForms.Guna2HtmlLabel
@@ -343,162 +415,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             tableLayoutPanel1.Resize += TableLayoutPanel1_Resize;
         }
 
-        private void TableLayoutPanel1_Resize(object sender, EventArgs e)
-        {
-            // Duyệt qua tất cả các panel tiêu đề và cập nhật vị trí căn giữa của labels
-            for (int col = 0; col < tableLayoutPanel1.ColumnCount; col++)
-            {
-                Control header = tableLayoutPanel1.GetControlFromPosition(col, 0);
-                if (header != null && header is Guna.UI2.WinForms.Guna2Panel headerPanel)
-                {
-                    foreach (Control ctrl in headerPanel.Controls)
-                    {
-                        if (ctrl is Guna.UI2.WinForms.Guna2HtmlLabel dayLabel)
-                        {
-                            // Đảm bảo label luôn căn giữa
-                            dayLabel.TextAlignment = ContentAlignment.MiddleCenter;
-                        }
-                    }
-                }
-            }
-
-            // Cập nhật kích thước cho các FlowLayoutPanel trong các ngày
-            for (int col = 0; col < tableLayoutPanel1.ColumnCount; col++)
-            {
-                Control dayPanel = tableLayoutPanel1.GetControlFromPosition(col, 1);
-                if (dayPanel != null && dayPanel is Guna.UI2.WinForms.Guna2Panel panel)
-                {
-                    foreach (Control ctrl in panel.Controls)
-                    {
-                        if (ctrl is FlowLayoutPanel flowPanel)
-                        {
-                            // Với các item trong FlowLayoutPanel, cập nhật chiều rộng của chúng
-                            foreach (Control item in flowPanel.Controls)
-                            {
-                                if (item is ucTKBItem tkbItem)
-                                {
-                                    tkbItem.Width = flowPanel.Width - 20; // Giữ lại khoảng trống bên lề
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-        // Modify constructor to add loading indicator
-        public ucTKB(int maHS, int id)
-    {
-        InitializeComponent();
-        dbHelper = new DatabaseHelper();
-        tkbDAL = new TKBDAO();
-        this.id = id;
-        this.maHS = maHS;;
-
-        // Initialize loading indicator
-        loadingIndicator = new Guna.UI2.WinForms.Guna2ProgressIndicator
-        {
-            AutoStart = false,
-            Size = new Size(60, 60),
-            Location = new Point((pnlContent.Width - 60) / 2, (pnlContent.Height - 60) / 2),
-            Anchor = AnchorStyles.None,
-            UseTransparentBackground = true,
-            Visible = false
-        };
-        pnlContent.Controls.Add(loadingIndicator);
-        loadingIndicator.BringToFront();
-    }
-    
-    // Override OnResize to keep loading indicator centered
-    protected override void OnResize(EventArgs e)
-    {
-        base.OnResize(e);
-        if (loadingIndicator != null)
-        {
-            loadingIndicator.Location = new Point(
-                (pnlContent.Width - loadingIndicator.Width) / 2,
-                (pnlContent.Height - loadingIndicator.Height) / 2);
-        }
-    }
-    
-    // Improved timetable loading method to handle loading state
-    private void LoadTimetable()
-    {
-        if (weeks == null || currentWeek < 0 || currentWeek >= weeks.Count)
-            return;
-
-        // Show loading indicator
-        pnlNoData.Visible = false;
-        tableLayoutPanel1.Visible = false;
-        loadingIndicator.Visible = true;
-        loadingIndicator.Start();
-        
-        // Use BeginInvoke to allow UI to update before processing
-        BeginInvoke(new Action(() =>
-        {
-            try
-            {
-                TuanHocDTO selectedWeek = weeks[currentWeek];
-                List<TKBDTO> timetable = tkbDAL.GetTimetable(maLop, selectedWeek.NgayBatDau, selectedWeek.NgayKetThuc);
-
-                // Clear existing timetable data
-                ClearTimetable();
-                
-                // Display the timetable
-                DisplayTimetable(timetable);
-                
-                // Show appropriate UI based on data
-                tableLayoutPanel1.Visible = true;
-                pnlNoData.Visible = timetable.Count == 0;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải thời khóa biểu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                pnlNoData.Visible = true;
-                tableLayoutPanel1.Visible = true;
-            }
-            finally
-            {
-                // Hide loading indicator
-                loadingIndicator.Stop();
-                loadingIndicator.Visible = false;
-                
-                // Make sure UI is refreshed
-                Refresh();
-            }
-        }));
-    }
-    
-    // Load school years with proper error handling
-    private void LoadSchoolYears()
-    {
-        try
-        {
-            Cursor = Cursors.WaitCursor;
-            
-            List<string> years = tkbDAL.GetSchoolYears();
-
-            cboNamHoc.Items.Clear();
-            foreach (string year in years)
-            {
-                cboNamHoc.Items.Add(year);
-            }
-
-            if (cboNamHoc.Items.Count > 0)
-            {
-                cboNamHoc.SelectedIndex = 0;
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Lỗi khi tải danh sách năm học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            Cursor = Cursors.Default;
-        }
-    }
         private void DisplayTimetable(List<TKBDTO> timetable)
         {
             // Đảm bảo bảng được khởi tạo đúng
@@ -551,7 +467,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        // Phương thức để lấy FlowLayoutPanel cho mỗi ngày - Cập nhật phù hợp với chỉ số cột mới
+        // Phương thức để lấy FlowLayoutPanel cho mỗi ngày
         private FlowLayoutPanel GetDayFlowPanel(int columnIndex)
         {
             if (columnIndex < 0 || columnIndex >= tableLayoutPanel1.ColumnCount)
@@ -569,7 +485,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             return null;
         }
 
-        // Xóa dữ liệu cũ từ các panel ngày - Cập nhật phù hợp với số cột
+        // Xóa dữ liệu cũ từ các panel ngày
         private void ClearDayPanels()
         {
             for (int col = 0; col < tableLayoutPanel1.ColumnCount; col++)
@@ -582,55 +498,68 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        // Cập nhật lại phương thức ClearTimetable
+        // Phương thức xóa thời khóa biểu
         private void ClearTimetable()
         {
             ClearDayPanels();
         }
-        // Thêm phương thức mới trong ucTKB.cs
-        private void LoadCurrentSemester()
+
+        #endregion
+
+        #region Các phương thức phụ trợ
+
+        private Tuple<int, int> ParseTietInfo(string tiet)
         {
+            // Phân tích chuỗi tiết học (ví dụ: "1-3")
             try
             {
-                string currentSchoolYear;
-                int currentSemester;
-
-                // Lấy năm học và học kỳ hiện tại
-                if (tkbDAL.SetupCurrentSemester(out currentSchoolYear, out currentSemester))
+                string[] parts = tiet.Split('-');
+                if (parts.Length == 2)
                 {
-                    // Chọn năm học hiện tại trong combobox
-                    int yearIndex = cboNamHoc.Items.IndexOf(currentSchoolYear);
-                    if (yearIndex >= 0)
-                    {
-                        cboNamHoc.SelectedIndex = yearIndex;
-                    }
-
-                    // Chọn học kỳ hiện tại trong combobox
-                    if (currentSemester >= 1 && currentSemester <= cboHocKy.Items.Count)
-                    {
-                        cboHocKy.SelectedIndex = currentSemester - 1;
-                    }
-                    else
-                    {
-                        // Mặc định là học kỳ 1 nếu có lỗi
-                        cboHocKy.SelectedIndex = 0;
-                    }
+                    int start = int.Parse(parts[0]);
+                    int end = int.Parse(parts[1]);
+                    return new Tuple<int, int>(start, end);
                 }
                 else
                 {
-                    // Nếu không xác định được học kỳ hiện tại, chọn các giá trị mặc định
-                    if (cboNamHoc.Items.Count > 0)
-                        cboNamHoc.SelectedIndex = cboNamHoc.Items.Count - 1; // Năm học mới nhất
-
-                    if (cboHocKy.Items.Count > 0)
-                        cboHocKy.SelectedIndex = 0; // Học kỳ 1
+                    int singleTiet = int.Parse(tiet);
+                    return new Tuple<int, int>(singleTiet, singleTiet);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Lỗi khi tải học kỳ hiện tại: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new Tuple<int, int>(1, 1); // Giá trị mặc định
             }
         }
-    }
 
+        private string GetThoiGianTuTiet(int tiet)
+        {
+            switch (tiet)
+            {
+                case 1: return "07:30 - 08:15";
+                case 2: return "08:20 - 09:05";
+                case 3: return "09:20 - 10:05";
+                case 4: return "10:10 - 10:55";
+                case 5: return "11:00 - 11:45";
+                // Nghỉ trưa
+                case 7: return "13:30 - 14:15";
+                case 8: return "14:20 - 15:05";
+                case 9: return "15:15 - 16:00";
+                case 10: return "16:05 - 16:50";
+                default: return $"Tiết {tiet}";
+            }
+        }
+
+        private Color GetSubjectColor(int maMon)
+        {
+            // Tạo màu ngẫu nhiên nhưng ổn định cho từng môn học
+            Random rnd = new Random(maMon);
+            return Color.FromArgb(rnd.Next(180, 240), rnd.Next(180, 240), rnd.Next(180, 240));
+        }
+
+        #endregion
+
+        // Biến loading indicator
+        private Guna.UI2.WinForms.Guna2ProgressIndicator loadingIndicator;
+    }
 }

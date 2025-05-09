@@ -25,7 +25,6 @@ namespace QuanLyTruongHoc.DAL
             List<string> years = new List<string>();
             try
             {
-                // Query is fine as is - it selects distinct school years
                 string query = @"SELECT DISTINCT NamHoc FROM LopHoc ORDER BY NamHoc";
                 DataTable dt = dbHelper.ExecuteQuery(query);
 
@@ -48,17 +47,16 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Unchanged - this query already matches database structure well
                 string query = @"
-                            SELECT L.MaLop, L.TenLop, L.NamHoc 
-                            FROM HocSinh HS
-                            JOIN LopHoc L ON HS.MaLop = L.MaLop
-                            WHERE HS.MaHS = @MaHS";
+                                    SELECT L.MaLop, L.TenLop, L.NamHoc 
+                                    FROM HocSinh HS
+                                    JOIN LopHoc L ON HS.MaLop = L.MaLop
+                                    WHERE HS.MaHS = @MaHS";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                        {
-                            { "@MaHS", maHS }
-                        };
+                                {
+                                    { "@MaHS", maHS }
+                                };
 
                 DataTable dt = dbHelper.ExecuteQuery(query, parameters);
                 if (dt.Rows.Count > 0)
@@ -74,60 +72,69 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
-        /// Tạo danh sách các tuần trong học kỳ
+        /// Tạo danh sách các khoảng thời gian trong năm học
         /// </summary>
-        public List<TuanHocDTO> GetWeeks(string namHoc, int hocKy)
+        public List<KhoangThoiGianDTO> GetTimePeriods(string namHoc)
         {
-            List<TuanHocDTO> weeks = new List<TuanHocDTO>();
+            List<KhoangThoiGianDTO> timePeriods = new List<KhoangThoiGianDTO>();
 
             try
             {
-                // Parsing school year format like "2024–2025"
-                string[] years = namHoc.Split('–');
+                // Phân tích năm học (ví dụ: "2024–2025")
+                string[] years = namHoc.Split(new char[] { '–', '-' }, StringSplitOptions.RemoveEmptyEntries);
                 if (years.Length != 2)
                 {
-                    return weeks; // Return empty list if format is invalid
+                    Console.WriteLine($"Định dạng năm học không hợp lệ: {namHoc}");
+                    return timePeriods;
                 }
 
-                int startYear = int.Parse(years[0].Trim());
-                int endYear = int.Parse(years[1].Trim());
-                DateTime startDate;
-                int numberOfWeeks;
-
-                if (hocKy == 1)
+                int startYear, endYear;
+                if (!int.TryParse(years[0].Trim(), out startYear) || !int.TryParse(years[1].Trim(), out endYear))
                 {
-                    // First semester: September to December of start year
-                    startDate = new DateTime(startYear, 9, 1);
-                    numberOfWeeks = 18;
-                }
-                else // hocKy == 2
-                {
-                    // Second semester: January to May of end year
-                    startDate = new DateTime(endYear, 1, 10);
-                    numberOfWeeks = 19;
+                    Console.WriteLine($"Không thể chuyển đổi năm học thành số: {namHoc}");
+                    return timePeriods;
                 }
 
-                // Adjust to start on Monday
+                // Ngày bắt đầu: Tháng 9 của năm đầu tiên
+                DateTime startDate = new DateTime(startYear, 9, 1);
+
+                // Ngày kết thúc: Cuối tháng 5 của năm thứ hai
+                DateTime endDate = new DateTime(endYear, 5, 31);
+
+                // Điều chỉnh ngày bắt đầu để là thứ Hai
                 while (startDate.DayOfWeek != DayOfWeek.Monday)
                 {
                     startDate = startDate.AddDays(1);
                 }
 
-                // Generate weeks
-                for (int i = 0; i < numberOfWeeks; i++)
+                // Tạo danh sách các khoảng thời gian (mỗi tuần từ thứ Hai đến Chủ nhật)
+                DateTime periodStart = startDate;
+                int weekCount = 1;
+
+                while (periodStart <= endDate)
                 {
-                    DateTime weekStart = startDate.AddDays(i * 7);
-                    DateTime weekEnd = weekStart.AddDays(6); // Sunday
-                    weeks.Add(new TuanHocDTO(i + 1, weekStart, weekEnd));
+                    DateTime periodEnd = periodStart.AddDays(6); // Chủ Nhật
+                    string displayText = $"Tuần {weekCount}: {periodStart:dd/MM/yyyy} - {periodEnd:dd/MM/yyyy}";
+
+                    timePeriods.Add(new KhoangThoiGianDTO(
+                        periodStart,
+                        periodEnd,
+                        displayText));
+
+                    periodStart = periodStart.AddDays(7);
+                    weekCount++;
                 }
+
+                Console.WriteLine($"Đã tạo thành công {timePeriods.Count} tuần cho năm học {namHoc}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi tính toán các tuần học: {ex.Message}");
+                Console.WriteLine($"Lỗi khi tính toán các khoảng thời gian: {ex.Message}");
             }
 
-            return weeks;
+            return timePeriods;
         }
+
 
         /// <summary>
         /// Lấy thời khóa biểu của một lớp trong một khoảng thời gian
@@ -138,46 +145,44 @@ namespace QuanLyTruongHoc.DAL
 
             try
             {
-                // Improved query that matches the exact table structure
                 string query = @"
-                            SELECT 
-                                tkb.MaTKB, 
-                                tkb.MaLop, 
-                                tkb.MaMon, 
-                                tkb.MaGV, 
-                                tkb.Ngay, 
-                                tkb.Thu, 
-                                tkb.Tiet,
-                                mh.TenMon, 
-                                gv.HoTen AS TenGiaoVien, 
-                                lh.TenLop
-                            FROM 
-                                ThoiKhoaBieu tkb
-                            INNER JOIN 
-                                MonHoc mh ON tkb.MaMon = mh.MaMon
-                            INNER JOIN 
-                                GiaoVien gv ON tkb.MaGV = gv.MaGV
-                            INNER JOIN 
-                                LopHoc lh ON tkb.MaLop = lh.MaLop
-                            WHERE 
-                                tkb.MaLop = @MaLop 
-                                AND tkb.Ngay >= @StartDate 
-                                AND tkb.Ngay <= @EndDate
-                            ORDER BY 
-                                tkb.Thu, 
-                                -- More robust parsing of the period format (e.g., '1-3' or '5')
-                                CASE 
-                                    WHEN CHARINDEX('-', tkb.Tiet) > 0 
-                                    THEN CONVERT(INT, LEFT(tkb.Tiet, CHARINDEX('-', tkb.Tiet) - 1)) 
-                                    ELSE CONVERT(INT, tkb.Tiet) 
-                                END";
+                                    SELECT 
+                                        tkb.MaTKB, 
+                                        tkb.MaLop, 
+                                        tkb.MaMon, 
+                                        tkb.MaGV, 
+                                        tkb.Ngay, 
+                                        tkb.Thu, 
+                                        tkb.Tiet,
+                                        mh.TenMon, 
+                                        gv.HoTen AS TenGiaoVien, 
+                                        lh.TenLop
+                                    FROM 
+                                        ThoiKhoaBieu tkb
+                                    INNER JOIN 
+                                        MonHoc mh ON tkb.MaMon = mh.MaMon
+                                    INNER JOIN 
+                                        GiaoVien gv ON tkb.MaGV = gv.MaGV
+                                    INNER JOIN 
+                                        LopHoc lh ON tkb.MaLop = lh.MaLop
+                                    WHERE 
+                                        tkb.MaLop = @MaLop 
+                                        AND tkb.Ngay >= @StartDate 
+                                        AND tkb.Ngay <= @EndDate
+                                    ORDER BY 
+                                        tkb.Thu, 
+                                        CASE 
+                                            WHEN CHARINDEX('-', tkb.Tiet) > 0 
+                                            THEN CONVERT(INT, LEFT(tkb.Tiet, CHARINDEX('-', tkb.Tiet) - 1)) 
+                                            ELSE CONVERT(INT, tkb.Tiet) 
+                                        END";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "@MaLop", maLop },
-                        { "@StartDate", startDate.Date },  // Use Date to ignore time component
-                        { "@EndDate", endDate.Date }
-                    };
+                            {
+                                { "@MaLop", maLop },
+                                { "@StartDate", startDate.Date },
+                                { "@EndDate", endDate.Date }
+                            };
 
                 DataTable dt = dbHelper.ExecuteQuery(query, parameters);
 
@@ -192,7 +197,7 @@ namespace QuanLyTruongHoc.DAL
                         Ngay = Convert.ToDateTime(row["Ngay"]),
                         Thu = Convert.ToInt32(row["Thu"]),
                         Tiet = row["Tiet"].ToString(),
-                        TenMon = row["TenMon"].ToString(),
+                        TenMon = row["TenMon"].ToString() == "Giáo Dục Công Dân" ? "GDCD" : row["TenMon"].ToString(),
                         TenGiaoVien = row["TenGiaoVien"].ToString(),
                         TenLop = row["TenLop"].ToString()
                     };
@@ -208,30 +213,31 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
-        /// Xác định tuần hiện tại trong học kỳ
+        /// Xác định khoảng thời gian hiện tại trong danh sách
         /// </summary>
-        public int GetCurrentWeekIndex(List<TuanHocDTO> weeks)
+        public int GetCurrentPeriodIndex(List<KhoangThoiGianDTO> periods)
         {
-            if (weeks == null || weeks.Count == 0)
+            if (periods == null || periods.Count == 0)
                 return 0;
 
-            DateTime today = DateTime.Now.Date; // Use only the date part for comparison
+            DateTime today = DateTime.Now.Date;
 
-            for (int i = 0; i < weeks.Count; i++)
+            for (int i = 0; i < periods.Count; i++)
             {
-                if (today >= weeks[i].NgayBatDau.Date && today <= weeks[i].NgayKetThuc.Date)
+                if (today >= periods[i].NgayBatDau.Date && today <= periods[i].NgayKetThuc.Date)
                 {
                     return i;
                 }
             }
 
-            // If current date is before the first week, return the first week
-            if (today < weeks[0].NgayBatDau.Date)
+            // Nếu ngày hiện tại trước khoảng thời gian đầu tiên, trả về khoảng đầu tiên
+            if (today < periods[0].NgayBatDau.Date)
                 return 0;
 
-            // If current date is after the last week, return the last week
-            if (today > weeks[weeks.Count - 1].NgayKetThuc.Date)
-                return weeks.Count - 1;
+            // Nếu ngày hiện tại sau khoảng thời gian cuối cùng, trả về khoảng cuối cùng
+            if (today > periods[periods.Count - 1].NgayKetThuc.Date)
+                return periods.Count - 1;
+
             return 0;
         }
 
@@ -266,52 +272,16 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
-        /// Xác định học kỳ hiện tại dựa vào ngày hiện tại
-        /// </summary>
-        public int GetCurrentSemester()
-        {
-            try
-            {
-                DateTime today = DateTime.Now;
-
-                // Học kỳ 1: Từ tháng 9 đến tháng 12
-                if (today.Month >= 9 && today.Month <= 12)
-                {
-                    return 1;
-                }
-                // Học kỳ 2: Từ tháng 1 đến tháng 5/6
-                else if (today.Month >= 1 && today.Month <= 6)
-                {
-                    return 2;
-                }
-                // Mùa hè (tháng 6-8): mặc định trả về học kỳ 2 của năm học trước
-                else
-                {
-                    return 2;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi khi xác định học kỳ hiện tại: {ex.Message}");
-                return 1; // Mặc định trả về học kỳ 1
-            }
-        }
-
-        /// <summary>
-        /// Tự động thiết lập năm học và học kỳ hiện tại
+        /// Tự động thiết lập năm học hiện tại
         /// </summary>
         /// <param name="namHoc">Tham chiếu đến chuỗi năm học</param>
-        /// <param name="hocKy">Tham chiếu đến số học kỳ</param>
         /// <returns>True nếu thiết lập thành công</returns>
-        public bool SetupCurrentSemester(out string namHoc, out int hocKy)
+        public bool SetupCurrentSchoolYear(out string namHoc)
         {
             try
             {
                 // Xác định năm học hiện tại
                 namHoc = GetCurrentSchoolYear();
-
-                // Xác định học kỳ hiện tại
-                hocKy = GetCurrentSemester();
 
                 // Kiểm tra năm học có trong danh sách các năm học không
                 List<string> availableYears = GetSchoolYears();
@@ -325,7 +295,6 @@ namespace QuanLyTruongHoc.DAL
                     else
                     {
                         namHoc = string.Empty;
-                        hocKy = 1;
                         return false;
                     }
                 }
@@ -334,11 +303,40 @@ namespace QuanLyTruongHoc.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi thiết lập học kỳ hiện tại: {ex.Message}");
+                Console.WriteLine($"Lỗi khi thiết lập năm học hiện tại: {ex.Message}");
                 namHoc = string.Empty;
-                hocKy = 1;
                 return false;
             }
+        }
+        /// <summary>
+        /// Xác định tuần hiện tại trong danh sách các tuần học
+        /// </summary>
+        /// <param name="weeks">Danh sách các tuần học</param>
+        /// <returns>Chỉ số của tuần hiện tại</returns>
+        public int GetCurrentWeekIndex(List<TuanHocDTO> weeks)
+        {
+            if (weeks == null || weeks.Count == 0)
+                return 0;
+
+            DateTime today = DateTime.Now.Date;
+
+            for (int i = 0; i < weeks.Count; i++)
+            {
+                if (today >= weeks[i].NgayBatDau.Date && today <= weeks[i].NgayKetThuc.Date)
+                {
+                    return i;
+                }
+            }
+
+            // Nếu ngày hiện tại trước tuần đầu tiên, trả về tuần đầu tiên
+            if (today < weeks[0].NgayBatDau.Date)
+                return 0;
+
+            // Nếu ngày hiện tại sau tuần cuối cùng, trả về tuần cuối cùng
+            if (today > weeks[weeks.Count - 1].NgayKetThuc.Date)
+                return weeks.Count - 1;
+
+            return 0;
         }
     }
 }

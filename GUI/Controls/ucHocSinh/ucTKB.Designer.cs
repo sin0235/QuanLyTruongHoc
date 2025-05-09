@@ -37,8 +37,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTiepTheo = new Guna.UI2.WinForms.Guna2Button();
             this.lblTuan = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cboTuan = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.lblHocKy = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.cboHocKy = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblNamHoc = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.cboNamHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
@@ -62,8 +60,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.pnlFilters.Controls.Add(this.btnTuanTiepTheo);
             this.pnlFilters.Controls.Add(this.lblTuan);
             this.pnlFilters.Controls.Add(this.cboTuan);
-            this.pnlFilters.Controls.Add(this.lblHocKy);
-            this.pnlFilters.Controls.Add(this.cboHocKy);
             this.pnlFilters.Controls.Add(this.lblNamHoc);
             this.pnlFilters.Controls.Add(this.cboNamHoc);
             this.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top;
@@ -80,7 +76,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             // 
             this.btnTuanHienTai.Animated = true;
             this.btnTuanHienTai.AutoRoundedCorners = true;
-            this.btnTuanHienTai.BorderRadius = 19;
+            this.btnTuanHienTai.BorderRadius = 18;
             this.btnTuanHienTai.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanHienTai.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnTuanHienTai.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -89,9 +85,9 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanHienTai.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanHienTai.ForeColor = System.Drawing.Color.White;
             this.btnTuanHienTai.IndicateFocus = true;
-            this.btnTuanHienTai.Location = new System.Drawing.Point(1200, 9);
+            this.btnTuanHienTai.Location = new System.Drawing.Point(949, 12);
             this.btnTuanHienTai.Name = "btnTuanHienTai";
-            this.btnTuanHienTai.Size = new System.Drawing.Size(135, 41);
+            this.btnTuanHienTai.Size = new System.Drawing.Size(128, 38);
             this.btnTuanHienTai.TabIndex = 9;
             this.btnTuanHienTai.Text = "Hiện tại";
             this.btnTuanHienTai.Click += new System.EventHandler(this.btnTuanHienTai_Click);
@@ -111,7 +107,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTruoc.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanTruoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTruoc.IndicateFocus = true;
-            this.btnTuanTruoc.Location = new System.Drawing.Point(1039, 11);
+            this.btnTuanTruoc.Location = new System.Drawing.Point(780, 12);
             this.btnTuanTruoc.Name = "btnTuanTruoc";
             this.btnTuanTruoc.Size = new System.Drawing.Size(128, 36);
             this.btnTuanTruoc.TabIndex = 8;
@@ -133,7 +129,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.btnTuanTiepTheo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTuanTiepTheo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.btnTuanTiepTheo.IndicateFocus = true;
-            this.btnTuanTiepTheo.Location = new System.Drawing.Point(1377, 11);
+            this.btnTuanTiepTheo.Location = new System.Drawing.Point(1118, 12);
             this.btnTuanTiepTheo.Name = "btnTuanTiepTheo";
             this.btnTuanTiepTheo.Size = new System.Drawing.Size(128, 36);
             this.btnTuanTiepTheo.TabIndex = 7;
@@ -145,7 +141,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.lblTuan.BackColor = System.Drawing.Color.Transparent;
             this.lblTuan.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblTuan.Location = new System.Drawing.Point(570, 17);
+            this.lblTuan.Location = new System.Drawing.Point(344, 17);
             this.lblTuan.Name = "lblTuan";
             this.lblTuan.Size = new System.Drawing.Size(38, 23);
             this.lblTuan.TabIndex = 6;
@@ -164,42 +160,12 @@ namespace QuanLyTruongHoc.GUI.Controls
             this.cboTuan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboTuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.cboTuan.ItemHeight = 30;
-            this.cboTuan.Location = new System.Drawing.Point(624, 14);
+            this.cboTuan.Location = new System.Drawing.Point(398, 14);
             this.cboTuan.Name = "cboTuan";
             this.cboTuan.Size = new System.Drawing.Size(293, 36);
             this.cboTuan.TabIndex = 5;
             this.cboTuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.cboTuan.SelectedIndexChanged += new System.EventHandler(this.cboTuan_SelectedIndexChanged);
-            // 
-            // lblHocKy
-            // 
-            this.lblHocKy.BackColor = System.Drawing.Color.Transparent;
-            this.lblHocKy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lblHocKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblHocKy.Location = new System.Drawing.Point(310, 17);
-            this.lblHocKy.Name = "lblHocKy";
-            this.lblHocKy.Size = new System.Drawing.Size(53, 23);
-            this.lblHocKy.TabIndex = 4;
-            this.lblHocKy.Text = "Học kỳ";
-            // 
-            // cboHocKy
-            // 
-            this.cboHocKy.BackColor = System.Drawing.Color.Transparent;
-            this.cboHocKy.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(210)))), ((int)(((byte)(220)))));
-            this.cboHocKy.BorderRadius = 18;
-            this.cboHocKy.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboHocKy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboHocKy.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboHocKy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboHocKy.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboHocKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.cboHocKy.ItemHeight = 30;
-            this.cboHocKy.Location = new System.Drawing.Point(382, 12);
-            this.cboHocKy.Name = "cboHocKy";
-            this.cboHocKy.Size = new System.Drawing.Size(157, 36);
-            this.cboHocKy.TabIndex = 3;
-            this.cboHocKy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.cboHocKy.SelectedIndexChanged += new System.EventHandler(this.cboHocKy_SelectedIndexChanged);
             // 
             // lblNamHoc
             // 
@@ -255,15 +221,13 @@ namespace QuanLyTruongHoc.GUI.Controls
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 7;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 10);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -332,8 +296,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         private Guna.UI2.WinForms.Guna2Panel pnlFilters;
         private Guna.UI2.WinForms.Guna2ComboBox cboNamHoc;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblNamHoc;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblHocKy;
-        private Guna.UI2.WinForms.Guna2ComboBox cboHocKy;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTuan;
         private Guna.UI2.WinForms.Guna2ComboBox cboTuan;
         private Guna.UI2.WinForms.Guna2Button btnTuanTiepTheo;
@@ -345,8 +307,5 @@ namespace QuanLyTruongHoc.GUI.Controls
         private System.Windows.Forms.Label lblNoData;
         private System.Windows.Forms.PictureBox picNoData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        
-
-
     }
 }

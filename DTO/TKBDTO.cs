@@ -57,4 +57,27 @@ namespace QuanLyTruongHoc.DTO
             return $"Tuần {SoTuan} ({NgayBatDau:dd/MM/yyyy} - {NgayKetThuc:dd/MM/yyyy})";
         }
     }
+    // Thêm vào file DTO/TKBDTO.cs
+
+    /// <summary>
+    /// Lớp biểu diễn một khoảng thời gian (thay thế TuanHocDTO)
+    /// </summary>
+    public class KhoangThoiGianDTO
+    {
+        public DateTime NgayBatDau { get; set; }
+        public DateTime NgayKetThuc { get; set; }
+        public string DisplayText { get; set; }
+
+        public KhoangThoiGianDTO(DateTime ngayBatDau, DateTime ngayKetThuc, string displayText)
+        {
+            NgayBatDau = ngayBatDau;
+            NgayKetThuc = ngayKetThuc;
+            DisplayText = displayText;
+        }
+
+        public override string ToString()
+        {
+            return DisplayText;
+        }
+    }
 }
