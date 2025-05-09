@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmKiemTra));
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnDong = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -56,11 +57,11 @@
             this.panelUnanswered = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlMain = new Guna.UI2.WinForms.Guna2Panel();
             this.pnlNavigation = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnPrev = new Guna.UI2.WinForms.Guna2Button();
             this.chkMarkForReview = new Guna.UI2.WinForms.Guna2CheckBox();
             this.progressExam = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
             this.btnNext = new Guna.UI2.WinForms.Guna2Button();
-            this.btnPrev = new Guna.UI2.WinForms.Guna2Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pnlTitleBar.SuspendLayout();
@@ -83,9 +84,8 @@
             this.pnlTitleBar.Controls.Add(this.btnMinimum);
             this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
-            this.pnlTitleBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTitleBar.Name = "pnlTitleBar";
-            this.pnlTitleBar.Size = new System.Drawing.Size(2422, 62);
+            this.pnlTitleBar.Size = new System.Drawing.Size(1455, 50);
             this.pnlTitleBar.TabIndex = 1;
             // 
             // lblFormTitle
@@ -93,11 +93,10 @@
             this.lblFormTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblFormTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFormTitle.ForeColor = System.Drawing.Color.White;
-            this.lblFormTitle.Location = new System.Drawing.Point(16, 15);
-            this.lblFormTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblFormTitle.Location = new System.Drawing.Point(12, 12);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblFormTitle.Size = new System.Drawing.Size(107, 33);
+            this.lblFormTitle.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblFormTitle.Size = new System.Drawing.Size(87, 27);
             this.lblFormTitle.TabIndex = 4;
             this.lblFormTitle.Text = "Kiểm tra";
             // 
@@ -112,11 +111,10 @@
             this.btnDong.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
             this.btnDong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDong.ForeColor = System.Drawing.Color.White;
-            this.btnDong.Location = new System.Drawing.Point(2367, 18);
-            this.btnDong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDong.Location = new System.Drawing.Point(1414, 15);
             this.btnDong.Name = "btnDong";
             this.btnDong.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.btnDong.Size = new System.Drawing.Size(27, 25);
+            this.btnDong.Size = new System.Drawing.Size(20, 20);
             this.btnDong.TabIndex = 3;
             this.toolTip.SetToolTip(this.btnDong, "Đóng");
             this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
@@ -132,11 +130,10 @@
             this.btnResize.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(160)))));
             this.btnResize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnResize.ForeColor = System.Drawing.Color.White;
-            this.btnResize.Location = new System.Drawing.Point(2333, 18);
-            this.btnResize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnResize.Location = new System.Drawing.Point(1389, 15);
             this.btnResize.Name = "btnResize";
             this.btnResize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.btnResize.Size = new System.Drawing.Size(27, 25);
+            this.btnResize.Size = new System.Drawing.Size(20, 20);
             this.btnResize.TabIndex = 1;
             this.toolTip.SetToolTip(this.btnResize, "Phóng to");
             this.btnResize.Click += new System.EventHandler(this.btnResize_Click);
@@ -152,11 +149,10 @@
             this.btnMinimum.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(239)))), ((int)(((byte)(178)))));
             this.btnMinimum.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnMinimum.ForeColor = System.Drawing.Color.White;
-            this.btnMinimum.Location = new System.Drawing.Point(2298, 18);
-            this.btnMinimum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMinimum.Location = new System.Drawing.Point(1363, 15);
             this.btnMinimum.Name = "btnMinimum";
             this.btnMinimum.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.btnMinimum.Size = new System.Drawing.Size(27, 25);
+            this.btnMinimum.Size = new System.Drawing.Size(20, 20);
             this.btnMinimum.TabIndex = 2;
             this.toolTip.SetToolTip(this.btnMinimum, "Thu nhỏ");
             this.btnMinimum.Click += new System.EventHandler(this.btnMinimum_Click);
@@ -166,10 +162,9 @@
             this.pnlContainer.Controls.Add(this.pnlExamHeader);
             this.pnlContainer.Controls.Add(this.pnlContent);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer.Location = new System.Drawing.Point(0, 62);
-            this.pnlContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContainer.Location = new System.Drawing.Point(0, 50);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(2422, 1267);
+            this.pnlContainer.Size = new System.Drawing.Size(1455, 844);
             this.pnlContainer.TabIndex = 2;
             // 
             // pnlExamHeader
@@ -181,10 +176,9 @@
             this.pnlExamHeader.Controls.Add(this.pnlTimer);
             this.pnlExamHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExamHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlExamHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlExamHeader.Name = "pnlExamHeader";
-            this.pnlExamHeader.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.pnlExamHeader.Size = new System.Drawing.Size(2422, 131);
+            this.pnlExamHeader.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlExamHeader.Size = new System.Drawing.Size(1455, 105);
             this.pnlExamHeader.TabIndex = 0;
             // 
             // lblExamSummary
@@ -192,10 +186,9 @@
             this.lblExamSummary.BackColor = System.Drawing.Color.Transparent;
             this.lblExamSummary.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExamSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.lblExamSummary.Location = new System.Drawing.Point(20, 75);
-            this.lblExamSummary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblExamSummary.Location = new System.Drawing.Point(15, 61);
             this.lblExamSummary.Name = "lblExamSummary";
-            this.lblExamSummary.Size = new System.Drawing.Size(331, 27);
+            this.lblExamSummary.Size = new System.Drawing.Size(259, 21);
             this.lblExamSummary.TabIndex = 2;
             this.lblExamSummary.Text = "Lớp 10A1 | 20 câu hỏi | 30 phút | 10 điểm";
             // 
@@ -204,10 +197,9 @@
             this.lblExamTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblExamTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblExamTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.lblExamTitle.Location = new System.Drawing.Point(27, 18);
-            this.lblExamTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblExamTitle.Location = new System.Drawing.Point(20, 15);
             this.lblExamTitle.Name = "lblExamTitle";
-            this.lblExamTitle.Size = new System.Drawing.Size(302, 33);
+            this.lblExamTitle.Size = new System.Drawing.Size(251, 27);
             this.lblExamTitle.TabIndex = 1;
             this.lblExamTitle.Text = "Kiểm tra 15 phút - Toán học";
             // 
@@ -220,10 +212,9 @@
             this.pnlTimer.Controls.Add(this.lblTimerValue);
             this.pnlTimer.Controls.Add(this.imgTimer);
             this.pnlTimer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.pnlTimer.Location = new System.Drawing.Point(2129, 25);
-            this.pnlTimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTimer.Location = new System.Drawing.Point(1236, 20);
             this.pnlTimer.Name = "pnlTimer";
-            this.pnlTimer.Size = new System.Drawing.Size(267, 49);
+            this.pnlTimer.Size = new System.Drawing.Size(200, 40);
             this.pnlTimer.TabIndex = 0;
             // 
             // lblTimerValue
@@ -231,10 +222,9 @@
             this.lblTimerValue.BackColor = System.Drawing.Color.Transparent;
             this.lblTimerValue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimerValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTimerValue.Location = new System.Drawing.Point(67, 10);
-            this.lblTimerValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblTimerValue.Location = new System.Drawing.Point(50, 8);
             this.lblTimerValue.Name = "lblTimerValue";
-            this.lblTimerValue.Size = new System.Drawing.Size(85, 30);
+            this.lblTimerValue.Size = new System.Drawing.Size(65, 23);
             this.lblTimerValue.TabIndex = 1;
             this.lblTimerValue.Text = "00:30:00";
             // 
@@ -243,10 +233,9 @@
             this.imgTimer.BackColor = System.Drawing.Color.Transparent;
             this.imgTimer.Image = global::QuanLyTruongHoc.Properties.Resources.clock_icon;
             this.imgTimer.ImageRotate = 0F;
-            this.imgTimer.Location = new System.Drawing.Point(20, 10);
-            this.imgTimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.imgTimer.Location = new System.Drawing.Point(15, 8);
             this.imgTimer.Name = "imgTimer";
-            this.imgTimer.Size = new System.Drawing.Size(32, 30);
+            this.imgTimer.Size = new System.Drawing.Size(24, 24);
             this.imgTimer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgTimer.TabIndex = 0;
             this.imgTimer.TabStop = false;
@@ -259,10 +248,9 @@
             this.pnlContent.Controls.Add(this.pnlSidebar);
             this.pnlContent.Controls.Add(this.pnlMain);
             this.pnlContent.Controls.Add(this.pnlNavigation);
-            this.pnlContent.Location = new System.Drawing.Point(0, 98);
-            this.pnlContent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlContent.Location = new System.Drawing.Point(0, 80);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(2422, 1168);
+            this.pnlContent.Size = new System.Drawing.Size(1455, 764);
             this.pnlContent.TabIndex = 1;
             // 
             // pnlSidebar
@@ -275,10 +263,9 @@
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.FillColor = System.Drawing.Color.White;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Padding = new System.Windows.Forms.Padding(20, 18, 20, 18);
-            this.pnlSidebar.Size = new System.Drawing.Size(485, 1094);
+            this.pnlSidebar.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.pnlSidebar.Size = new System.Drawing.Size(364, 704);
             this.pnlSidebar.TabIndex = 3;
             // 
             // flowQuestionButtons
@@ -286,11 +273,10 @@
             this.flowQuestionButtons.AutoScroll = true;
             this.flowQuestionButtons.BackColor = System.Drawing.Color.White;
             this.flowQuestionButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowQuestionButtons.Location = new System.Drawing.Point(20, 143);
-            this.flowQuestionButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowQuestionButtons.Location = new System.Drawing.Point(15, 115);
             this.flowQuestionButtons.Name = "flowQuestionButtons";
-            this.flowQuestionButtons.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.flowQuestionButtons.Size = new System.Drawing.Size(445, 933);
+            this.flowQuestionButtons.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.flowQuestionButtons.Size = new System.Drawing.Size(334, 574);
             this.flowQuestionButtons.TabIndex = 2;
             // 
             // lblQuestionMap
@@ -298,10 +284,9 @@
             this.lblQuestionMap.BackColor = System.Drawing.Color.Transparent;
             this.lblQuestionMap.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblQuestionMap.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lblQuestionMap.Location = new System.Drawing.Point(20, 113);
-            this.lblQuestionMap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblQuestionMap.Location = new System.Drawing.Point(15, 92);
             this.lblQuestionMap.Name = "lblQuestionMap";
-            this.lblQuestionMap.Size = new System.Drawing.Size(128, 30);
+            this.lblQuestionMap.Size = new System.Drawing.Size(334, 23);
             this.lblQuestionMap.TabIndex = 0;
             this.lblQuestionMap.Text = "Sơ đồ câu hỏi";
             this.lblQuestionMap.Click += new System.EventHandler(this.lblQuestionMap_Click);
@@ -318,20 +303,18 @@
             this.panelLegend.Controls.Add(this.lblLegendUnanswered);
             this.panelLegend.Controls.Add(this.panelUnanswered);
             this.panelLegend.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLegend.Location = new System.Drawing.Point(20, 18);
-            this.panelLegend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelLegend.Location = new System.Drawing.Point(15, 15);
             this.panelLegend.Name = "panelLegend";
-            this.panelLegend.Size = new System.Drawing.Size(445, 95);
+            this.panelLegend.Size = new System.Drawing.Size(334, 77);
             this.panelLegend.TabIndex = 1;
             // 
             // lblLegendAnswered
             // 
             this.lblLegendAnswered.BackColor = System.Drawing.Color.Transparent;
             this.lblLegendAnswered.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLegendAnswered.Location = new System.Drawing.Point(243, 23);
-            this.lblLegendAnswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLegendAnswered.Location = new System.Drawing.Point(182, 19);
             this.lblLegendAnswered.Name = "lblLegendAnswered";
-            this.lblLegendAnswered.Size = new System.Drawing.Size(57, 25);
+            this.lblLegendAnswered.Size = new System.Drawing.Size(46, 21);
             this.lblLegendAnswered.TabIndex = 7;
             this.lblLegendAnswered.Text = "Đã làm";
             // 
@@ -342,20 +325,18 @@
             this.panelAnswered.BorderRadius = 8;
             this.panelAnswered.BorderThickness = 1;
             this.panelAnswered.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.panelAnswered.Location = new System.Drawing.Point(216, 22);
-            this.panelAnswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelAnswered.Location = new System.Drawing.Point(162, 18);
             this.panelAnswered.Name = "panelAnswered";
-            this.panelAnswered.Size = new System.Drawing.Size(21, 20);
+            this.panelAnswered.Size = new System.Drawing.Size(16, 16);
             this.panelAnswered.TabIndex = 6;
             // 
             // lblLegendMarked
             // 
             this.lblLegendMarked.BackColor = System.Drawing.Color.Transparent;
             this.lblLegendMarked.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLegendMarked.Location = new System.Drawing.Point(243, 58);
-            this.lblLegendMarked.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLegendMarked.Location = new System.Drawing.Point(182, 47);
             this.lblLegendMarked.Name = "lblLegendMarked";
-            this.lblLegendMarked.Size = new System.Drawing.Size(137, 25);
+            this.lblLegendMarked.Size = new System.Drawing.Size(109, 21);
             this.lblLegendMarked.TabIndex = 5;
             this.lblLegendMarked.Text = "Đánh dấu xem lại";
             // 
@@ -366,20 +347,18 @@
             this.panelMarked.BorderRadius = 8;
             this.panelMarked.BorderThickness = 1;
             this.panelMarked.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(248)))), ((int)(((byte)(230)))));
-            this.panelMarked.Location = new System.Drawing.Point(216, 57);
-            this.panelMarked.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMarked.Location = new System.Drawing.Point(162, 46);
             this.panelMarked.Name = "panelMarked";
-            this.panelMarked.Size = new System.Drawing.Size(21, 20);
+            this.panelMarked.Size = new System.Drawing.Size(16, 16);
             this.panelMarked.TabIndex = 4;
             // 
             // lblLegendCurrent
             // 
             this.lblLegendCurrent.BackColor = System.Drawing.Color.Transparent;
             this.lblLegendCurrent.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLegendCurrent.Location = new System.Drawing.Point(35, 58);
-            this.lblLegendCurrent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLegendCurrent.Location = new System.Drawing.Point(26, 47);
             this.lblLegendCurrent.Name = "lblLegendCurrent";
-            this.lblLegendCurrent.Size = new System.Drawing.Size(95, 25);
+            this.lblLegendCurrent.Size = new System.Drawing.Size(76, 21);
             this.lblLegendCurrent.TabIndex = 3;
             this.lblLegendCurrent.Text = "Câu hiện tại";
             // 
@@ -388,20 +367,18 @@
             this.panelCurrent.BackColor = System.Drawing.Color.Transparent;
             this.panelCurrent.BorderRadius = 8;
             this.panelCurrent.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
-            this.panelCurrent.Location = new System.Drawing.Point(8, 57);
-            this.panelCurrent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelCurrent.Location = new System.Drawing.Point(6, 46);
             this.panelCurrent.Name = "panelCurrent";
-            this.panelCurrent.Size = new System.Drawing.Size(21, 20);
+            this.panelCurrent.Size = new System.Drawing.Size(16, 16);
             this.panelCurrent.TabIndex = 2;
             // 
             // lblLegendUnanswered
             // 
             this.lblLegendUnanswered.BackColor = System.Drawing.Color.Transparent;
             this.lblLegendUnanswered.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLegendUnanswered.Location = new System.Drawing.Point(35, 23);
-            this.lblLegendUnanswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblLegendUnanswered.Location = new System.Drawing.Point(26, 19);
             this.lblLegendUnanswered.Name = "lblLegendUnanswered";
-            this.lblLegendUnanswered.Size = new System.Drawing.Size(92, 25);
+            this.lblLegendUnanswered.Size = new System.Drawing.Size(74, 21);
             this.lblLegendUnanswered.TabIndex = 1;
             this.lblLegendUnanswered.Text = "Chưa trả lời";
             // 
@@ -412,10 +389,9 @@
             this.panelUnanswered.BorderRadius = 8;
             this.panelUnanswered.BorderThickness = 1;
             this.panelUnanswered.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.panelUnanswered.Location = new System.Drawing.Point(8, 22);
-            this.panelUnanswered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelUnanswered.Location = new System.Drawing.Point(6, 18);
             this.panelUnanswered.Name = "panelUnanswered";
-            this.panelUnanswered.Size = new System.Drawing.Size(21, 20);
+            this.panelUnanswered.Size = new System.Drawing.Size(16, 16);
             this.panelUnanswered.TabIndex = 0;
             // 
             // pnlMain
@@ -426,11 +402,10 @@
             this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
             this.pnlMain.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.pnlMain.BorderRadius = 15;
-            this.pnlMain.Location = new System.Drawing.Point(387, 12);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMain.Location = new System.Drawing.Point(290, 10);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.pnlMain.Size = new System.Drawing.Size(2022, 1070);
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlMain.Size = new System.Drawing.Size(1155, 684);
             this.pnlMain.TabIndex = 3;
             // 
             // pnlNavigation
@@ -444,12 +419,27 @@
             this.pnlNavigation.Controls.Add(this.btnNext);
             this.pnlNavigation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlNavigation.FillColor = System.Drawing.Color.White;
-            this.pnlNavigation.Location = new System.Drawing.Point(0, 1094);
-            this.pnlNavigation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavigation.Location = new System.Drawing.Point(0, 704);
             this.pnlNavigation.Name = "pnlNavigation";
-            this.pnlNavigation.Padding = new System.Windows.Forms.Padding(27, 25, 27, 25);
-            this.pnlNavigation.Size = new System.Drawing.Size(2422, 74);
+            this.pnlNavigation.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlNavigation.Size = new System.Drawing.Size(1455, 60);
             this.pnlNavigation.TabIndex = 2;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.BorderRadius = 18;
+            this.btnPrev.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPrev.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPrev.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPrev.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPrev.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnPrev.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrev.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnPrev.Location = new System.Drawing.Point(160, 12);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(120, 36);
+            this.btnPrev.TabIndex = 0;
+            this.btnPrev.Text = "Câu trước";
             // 
             // chkMarkForReview
             // 
@@ -459,10 +449,9 @@
             this.chkMarkForReview.CheckedState.BorderThickness = 0;
             this.chkMarkForReview.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
             this.chkMarkForReview.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMarkForReview.Location = new System.Drawing.Point(645, 24);
-            this.chkMarkForReview.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkMarkForReview.Location = new System.Drawing.Point(484, 20);
             this.chkMarkForReview.Name = "chkMarkForReview";
-            this.chkMarkForReview.Size = new System.Drawing.Size(218, 32);
+            this.chkMarkForReview.Size = new System.Drawing.Size(177, 25);
             this.chkMarkForReview.TabIndex = 4;
             this.chkMarkForReview.Text = "Đánh dấu xem lại sau";
             this.chkMarkForReview.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -475,12 +464,11 @@
             this.progressExam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.progressExam.BorderRadius = 4;
             this.progressExam.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.progressExam.Location = new System.Drawing.Point(898, 32);
-            this.progressExam.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressExam.Location = new System.Drawing.Point(674, 26);
             this.progressExam.Name = "progressExam";
             this.progressExam.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
             this.progressExam.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.progressExam.Size = new System.Drawing.Size(1329, 12);
+            this.progressExam.Size = new System.Drawing.Size(636, 10);
             this.progressExam.TabIndex = 3;
             this.progressExam.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.progressExam.Value = 30;
@@ -496,10 +484,9 @@
             this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(180)))), ((int)(((byte)(50)))));
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(2235, 15);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSubmit.Location = new System.Drawing.Point(1315, 12);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(160, 44);
+            this.btnSubmit.Size = new System.Drawing.Size(120, 36);
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Nộp bài";
             // 
@@ -513,41 +500,23 @@
             this.btnNext.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
             this.btnNext.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.ForeColor = System.Drawing.Color.White;
-            this.btnNext.Location = new System.Drawing.Point(414, 15);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNext.Location = new System.Drawing.Point(310, 12);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(160, 44);
+            this.btnNext.Size = new System.Drawing.Size(120, 36);
             this.btnNext.TabIndex = 1;
             this.btnNext.Text = "Câu tiếp theo";
             // 
-            // btnPrev
-            // 
-            this.btnPrev.BorderRadius = 18;
-            this.btnPrev.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnPrev.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnPrev.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnPrev.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnPrev.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.btnPrev.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrev.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnPrev.Location = new System.Drawing.Point(214, 15);
-            this.btnPrev.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(160, 44);
-            this.btnPrev.TabIndex = 0;
-            this.btnPrev.Text = "Câu trước";
-            // 
             // frmKiemTra
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.ClientSize = new System.Drawing.Size(2422, 1329);
+            this.ClientSize = new System.Drawing.Size(1455, 894);
             this.ControlBox = false;
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.pnlTitleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmKiemTra";
             this.Text = "Kiểm tra";
             this.pnlTitleBar.ResumeLayout(false);

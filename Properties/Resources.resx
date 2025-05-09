@@ -157,9 +157,6 @@
   <data name="defautAvatar_Boy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\defautAvatar_Boy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="subject_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\images\subject_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="send_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\send_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,7 +169,13 @@
   <data name="defautAvatar_Boy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\defautAvatar_Boy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\edit.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="edit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\edit.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="eye_closed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -199,9 +202,6 @@
   <data name="key_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\key_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="defautAvatar_Teacher_Female" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\images\defautAvatar_Teacher_Female.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bell" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bell.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -220,6 +220,9 @@
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="confirm_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\confirm_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -232,13 +235,13 @@
   <data name="cancel_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\images\cancel_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\images\remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="defautAvatar_Teacher_Female" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\defautAvatar_Teacher_Female.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="edit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\images\edit.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="subject_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\subject_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="view" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\images\view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="back_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\images\back_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -31,9 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChinhSuaDiem));
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.xoaBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.btnTimKiem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.cmbHocKi = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.chinhSuaBtn = new Guna.UI2.WinForms.Guna2Button();
@@ -51,6 +51,7 @@
             this.sttTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.loaiDiemCmb = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.btnTimKiem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiemChiTietHocSinh)).BeginInit();
             this.SuspendLayout();
@@ -96,26 +97,6 @@
             this.xoaBtn.TabIndex = 18;
             this.xoaBtn.Text = "Xóa";
             this.xoaBtn.Click += new System.EventHandler(this.xoaBtn_Click);
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.BackColor = System.Drawing.Color.Transparent;
-            this.btnTimKiem.BackgroundImage = global::QuanLyTruongHoc.Properties.Resources.search;
-            this.btnTimKiem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTimKiem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTimKiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTimKiem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTimKiem.FillColor = System.Drawing.Color.Transparent;
-            this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnTimKiem.ForeColor = System.Drawing.Color.White;
-            this.btnTimKiem.Location = new System.Drawing.Point(190, 22);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.btnTimKiem.Size = new System.Drawing.Size(32, 32);
-            this.btnTimKiem.TabIndex = 17;
-            this.btnTimKiem.Text = "...";
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // cmbHocKi
             // 
@@ -398,12 +379,33 @@
             this.loaiDiemCmb.Size = new System.Drawing.Size(202, 36);
             this.loaiDiemCmb.TabIndex = 5;
             // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.BackColor = System.Drawing.Color.Transparent;
+            this.btnTimKiem.BackgroundImage = global::QuanLyTruongHoc.Properties.Resources.search;
+            this.btnTimKiem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTimKiem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTimKiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTimKiem.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTimKiem.FillColor = System.Drawing.Color.Transparent;
+            this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnTimKiem.ForeColor = System.Drawing.Color.White;
+            this.btnTimKiem.Location = new System.Drawing.Point(190, 22);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.btnTimKiem.Size = new System.Drawing.Size(32, 32);
+            this.btnTimKiem.TabIndex = 17;
+            this.btnTimKiem.Text = "...";
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
+            // 
             // frmChinhSuaDiem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(859, 488);
             this.Controls.Add(this.guna2GradientPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmChinhSuaDiem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

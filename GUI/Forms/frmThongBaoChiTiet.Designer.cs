@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmThongBaoChiTiet));
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.lblNguoiGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.ndThongBaoTxt = new Guna.UI2.WinForms.Guna2TextBox();
-            this.lblThoiGianGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTieuDe = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblThoiGianGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.ndThongBaoTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.lblNguoiGui = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -55,28 +56,38 @@
             this.guna2GradientPanel1.Size = new System.Drawing.Size(999, 573);
             this.guna2GradientPanel1.TabIndex = 0;
             // 
-            // guna2CirclePictureBox1
+            // lblTieuDe
             // 
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(46, 201);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(143, 134);
-            this.guna2CirclePictureBox1.TabIndex = 3;
-            this.guna2CirclePictureBox1.TabStop = false;
+            this.lblTieuDe.BackColor = System.Drawing.Color.Transparent;
+            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lblTieuDe.Location = new System.Drawing.Point(20, 18);
+            this.lblTieuDe.Name = "lblTieuDe";
+            this.lblTieuDe.Size = new System.Drawing.Size(81, 32);
+            this.lblTieuDe.TabIndex = 8;
+            this.lblTieuDe.Text = "Tiêu Đề";
             // 
-            // lblNguoiGui
+            // guna2HtmlLabel3
             // 
-            this.lblNguoiGui.BackColor = System.Drawing.Color.Transparent;
-            this.lblNguoiGui.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNguoiGui.ForeColor = System.Drawing.Color.Coral;
-            this.lblNguoiGui.Location = new System.Drawing.Point(20, 341);
-            this.lblNguoiGui.Name = "lblNguoiGui";
-            this.lblNguoiGui.Size = new System.Drawing.Size(192, 39);
-            this.lblNguoiGui.TabIndex = 4;
-            this.lblNguoiGui.Text = "Ban Giám Hiệu";
+            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.Coral;
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(215, 83);
+            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(101, 32);
+            this.guna2HtmlLabel3.TabIndex = 7;
+            this.guna2HtmlLabel3.Text = "Nội Dung";
+            // 
+            // lblThoiGianGui
+            // 
+            this.lblThoiGianGui.BackColor = System.Drawing.Color.Transparent;
+            this.lblThoiGianGui.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThoiGianGui.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lblThoiGianGui.Location = new System.Drawing.Point(658, 83);
+            this.lblThoiGianGui.Name = "lblThoiGianGui";
+            this.lblThoiGianGui.Size = new System.Drawing.Size(100, 32);
+            this.lblThoiGianGui.TabIndex = 6;
+            this.lblThoiGianGui.Text = "Thời gian";
             // 
             // ndThongBaoTxt
             // 
@@ -100,44 +111,35 @@
             this.ndThongBaoTxt.TabIndex = 5;
             this.ndThongBaoTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // lblThoiGianGui
+            // lblNguoiGui
             // 
-            this.lblThoiGianGui.BackColor = System.Drawing.Color.Transparent;
-            this.lblThoiGianGui.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoiGianGui.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lblThoiGianGui.Location = new System.Drawing.Point(658, 83);
-            this.lblThoiGianGui.Name = "lblThoiGianGui";
-            this.lblThoiGianGui.Size = new System.Drawing.Size(123, 39);
-            this.lblThoiGianGui.TabIndex = 6;
-            this.lblThoiGianGui.Text = "Thời gian";
+            this.lblNguoiGui.BackColor = System.Drawing.Color.Transparent;
+            this.lblNguoiGui.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNguoiGui.ForeColor = System.Drawing.Color.Coral;
+            this.lblNguoiGui.Location = new System.Drawing.Point(20, 341);
+            this.lblNguoiGui.Name = "lblNguoiGui";
+            this.lblNguoiGui.Size = new System.Drawing.Size(156, 32);
+            this.lblNguoiGui.TabIndex = 4;
+            this.lblNguoiGui.Text = "Ban Giám Hiệu";
             // 
-            // guna2HtmlLabel3
+            // guna2CirclePictureBox1
             // 
-            this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.Coral;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(215, 83);
-            this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(125, 39);
-            this.guna2HtmlLabel3.TabIndex = 7;
-            this.guna2HtmlLabel3.Text = "Nội Dung";
-            // 
-            // lblTieuDe
-            // 
-            this.lblTieuDe.BackColor = System.Drawing.Color.Transparent;
-            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTieuDe.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lblTieuDe.Location = new System.Drawing.Point(20, 18);
-            this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(100, 39);
-            this.lblTieuDe.TabIndex = 8;
-            this.lblTieuDe.Text = "Tiêu Đề";
+            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox1.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
+            this.guna2CirclePictureBox1.ImageRotate = 0F;
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(46, 201);
+            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(143, 134);
+            this.guna2CirclePictureBox1.TabIndex = 3;
+            this.guna2CirclePictureBox1.TabStop = false;
             // 
             // frmThongBaoChiTiet
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1004, 574);
             this.Controls.Add(this.guna2GradientPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmThongBaoChiTiet";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi Tiết";

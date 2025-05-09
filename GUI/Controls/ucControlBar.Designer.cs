@@ -31,7 +31,6 @@
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.guna2CircleButtonMaximize = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2CircleButtonMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnlTitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -39,9 +38,11 @@
             // pnlTitleBar
             // 
             this.pnlTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(165)))), ((int)(((byte)(230)))));
+            this.pnlTitleBar.BorderColor = System.Drawing.Color.DimGray;
+            this.pnlTitleBar.BorderRadius = 5;
+            this.pnlTitleBar.BorderThickness = 1;
             this.pnlTitleBar.Controls.Add(this.lblFormTitle);
             this.pnlTitleBar.Controls.Add(this.guna2CircleButtonClose);
-            this.pnlTitleBar.Controls.Add(this.guna2CircleButtonMaximize);
             this.pnlTitleBar.Controls.Add(this.guna2CircleButtonMinimize);
             this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
@@ -77,23 +78,6 @@
             this.guna2CircleButtonClose.Size = new System.Drawing.Size(18, 18);
             this.guna2CircleButtonClose.TabIndex = 3;
             // 
-            // guna2CircleButtonMaximize
-            // 
-            this.guna2CircleButtonMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2CircleButtonMaximize.BorderThickness = 1;
-            this.guna2CircleButtonMaximize.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButtonMaximize.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButtonMaximize.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButtonMaximize.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButtonMaximize.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(221)))), ((int)(((byte)(160)))));
-            this.guna2CircleButtonMaximize.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButtonMaximize.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButtonMaximize.Location = new System.Drawing.Point(1853, 10);
-            this.guna2CircleButtonMaximize.Name = "guna2CircleButtonMaximize";
-            this.guna2CircleButtonMaximize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButtonMaximize.Size = new System.Drawing.Size(18, 18);
-            this.guna2CircleButtonMaximize.TabIndex = 1;
-            // 
             // guna2CircleButtonMinimize
             // 
             this.guna2CircleButtonMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -105,11 +89,12 @@
             this.guna2CircleButtonMinimize.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(239)))), ((int)(((byte)(178)))));
             this.guna2CircleButtonMinimize.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2CircleButtonMinimize.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButtonMinimize.Location = new System.Drawing.Point(1827, 10);
+            this.guna2CircleButtonMinimize.Location = new System.Drawing.Point(1855, 10);
             this.guna2CircleButtonMinimize.Name = "guna2CircleButtonMinimize";
             this.guna2CircleButtonMinimize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButtonMinimize.Size = new System.Drawing.Size(18, 18);
             this.guna2CircleButtonMinimize.TabIndex = 2;
+            this.guna2CircleButtonMinimize.Text = "b";
             // 
             // ucControlBar
             // 
@@ -129,7 +114,6 @@
         private Guna.UI2.WinForms.Guna2Panel pnlTitleBar;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblFormTitle;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonClose;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonMaximize;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonMinimize;
     }
 }

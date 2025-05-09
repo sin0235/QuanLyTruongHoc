@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChiTietDonXinNghi));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.pnlHeader = new Guna.UI2.WinForms.Guna2GradientPanel();
@@ -64,6 +65,8 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
+            this.pnlHeader.BorderColor = System.Drawing.Color.Black;
+            this.pnlHeader.BorderThickness = 1;
             this.pnlHeader.Controls.Add(this.lblTieuDe);
             this.pnlHeader.Controls.Add(this.lblFormTitle);
             this.pnlHeader.Controls.Add(this.guna2CircleButtonClose);
@@ -189,7 +192,9 @@
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
+            this.pnlContent.BorderColor = System.Drawing.Color.Black;
             this.pnlContent.BorderRadius = 5;
+            this.pnlContent.BorderThickness = 1;
             this.pnlContent.Controls.Add(this.lblNoiDungTitle);
             this.pnlContent.Controls.Add(this.txtNoiDung);
             this.pnlContent.Controls.Add(this.lblPhanHoiTitle);
@@ -228,6 +233,7 @@
             this.txtNoiDung.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNoiDung.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtNoiDung.Location = new System.Drawing.Point(20, 45);
+            this.txtNoiDung.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtNoiDung.Multiline = true;
             this.txtNoiDung.Name = "txtNoiDung";
             this.txtNoiDung.PlaceholderText = "";
@@ -261,6 +267,7 @@
             this.txtPhanHoi.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPhanHoi.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtPhanHoi.Location = new System.Drawing.Point(20, 200);
+            this.txtPhanHoi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPhanHoi.Multiline = true;
             this.txtPhanHoi.Name = "txtPhanHoi";
             this.txtPhanHoi.PlaceholderText = "";
@@ -305,6 +312,8 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.BorderColor = System.Drawing.Color.Black;
+            this.pnlBottom.BorderThickness = 1;
             this.pnlBottom.Controls.Add(this.btnDong);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
@@ -342,6 +351,7 @@
             this.Controls.Add(this.pnlBottom);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmChiTietDonXinNghi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chi tiết đơn xin nghỉ";

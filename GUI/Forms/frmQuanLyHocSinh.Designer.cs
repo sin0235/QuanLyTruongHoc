@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyHocSinh));
             this.lblHoTen = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblNgaySinh = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblGioiTinh = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -882,6 +883,7 @@
             this.Controls.Add(this.btnXacNhan);
             this.Controls.Add(this.btnHuy);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmQuanLyHocSinh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

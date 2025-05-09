@@ -41,12 +41,10 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             // Thiết lập màu sắc ban đầu
             guna2CircleButtonClose.FillColor = closeButtonColor;
-            guna2CircleButtonMaximize.FillColor = maximizeButtonColor;
             guna2CircleButtonMinimize.FillColor = minimizeButtonColor;
 
             // Đăng ký sự kiện cho các nút
             guna2CircleButtonClose.Click += Guna2CircleButtonClose_Click;
-            guna2CircleButtonMaximize.Click += Guna2CircleButtonMaximize_Click;
             guna2CircleButtonMinimize.Click += Guna2CircleButtonMinimize_Click;
 
             // Đăng ký sự kiện kéo thả để di chuyển form
@@ -57,8 +55,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             // Thêm hiệu ứng hover cho các nút
             guna2CircleButtonClose.MouseEnter += Guna2CircleButtonClose_MouseEnter;
             guna2CircleButtonClose.MouseLeave += Guna2CircleButtonClose_MouseLeave;
-            guna2CircleButtonMaximize.MouseEnter += Guna2CircleButtonMaximize_MouseEnter;
-            guna2CircleButtonMaximize.MouseLeave += Guna2CircleButtonMaximize_MouseLeave;
             guna2CircleButtonMinimize.MouseEnter += Guna2CircleButtonMinimize_MouseEnter;
             guna2CircleButtonMinimize.MouseLeave += Guna2CircleButtonMinimize_MouseLeave;
         }
@@ -121,15 +117,6 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
         }
 
-        private void Guna2CircleButtonMaximize_MouseEnter(object sender, EventArgs e)
-        {
-            guna2CircleButtonMaximize.FillColor = LightenColor(maximizeButtonColor, 0.2f);
-        }
-
-        private void Guna2CircleButtonMaximize_MouseLeave(object sender, EventArgs e)
-        {
-            guna2CircleButtonMaximize.FillColor = maximizeButtonColor;
-        }
         #endregion
 
         #region Xử lý sự kiện cho nút thu nhỏ
@@ -195,7 +182,6 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             // Đảm bảo các nút nằm đúng vị trí khi form thay đổi kích thước
             guna2CircleButtonMinimize.Location = new Point(pnlTitleBar.Width - 90, 10);
-            guna2CircleButtonMaximize.Location = new Point(pnlTitleBar.Width - 60, 10);
             guna2CircleButtonClose.Location = new Point(pnlTitleBar.Width - 30, 10);
         }
 

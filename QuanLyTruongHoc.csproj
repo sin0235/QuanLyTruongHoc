@@ -568,6 +568,7 @@
     <None Include="assets\images\send_icon.png" />
     <None Include="assets\images\calendar.jpg" />
     <None Include="assets\images\view.png" />
+    <None Include="assets\images\back_icon.png" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />

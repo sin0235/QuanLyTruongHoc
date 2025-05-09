@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyThoiKhoaBieu));
             this.btnXacNhan = new Guna.UI2.WinForms.Guna2Button();
-            this.picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.cmbMonHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -38,6 +38,8 @@
             this.dtpNgayHoc = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtTietHoc = new Guna.UI2.WinForms.Guna2TextBox();
+            this.picAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.ucControlBar1 = new QuanLyTruongHoc.GUI.Controls.ucControlBar();
             ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,28 +53,13 @@
             this.btnXacNhan.FillColor = System.Drawing.Color.RoyalBlue;
             this.btnXacNhan.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXacNhan.ForeColor = System.Drawing.Color.White;
-            this.btnXacNhan.Location = new System.Drawing.Point(295, 409);
+            this.btnXacNhan.Location = new System.Drawing.Point(272, 478);
             this.btnXacNhan.Margin = new System.Windows.Forms.Padding(2);
             this.btnXacNhan.Name = "btnXacNhan";
             this.btnXacNhan.Size = new System.Drawing.Size(147, 51);
             this.btnXacNhan.TabIndex = 7;
             this.btnXacNhan.Text = "Xác nhận";
             this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
-            // 
-            // picAvatar
-            // 
-            this.picAvatar.BackColor = System.Drawing.Color.Transparent;
-            this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.picAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
-            this.picAvatar.ImageRotate = 0F;
-            this.picAvatar.Location = new System.Drawing.Point(325, 11);
-            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
-            this.picAvatar.Name = "picAvatar";
-            this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAvatar.Size = new System.Drawing.Size(96, 88);
-            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAvatar.TabIndex = 8;
-            this.picAvatar.TabStop = false;
             // 
             // cmbMonHoc
             // 
@@ -84,7 +71,7 @@
             this.cmbMonHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbMonHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cmbMonHoc.ItemHeight = 30;
-            this.cmbMonHoc.Location = new System.Drawing.Point(305, 126);
+            this.cmbMonHoc.Location = new System.Drawing.Point(282, 195);
             this.cmbMonHoc.Name = "cmbMonHoc";
             this.cmbMonHoc.Size = new System.Drawing.Size(200, 36);
             this.cmbMonHoc.TabIndex = 9;
@@ -95,7 +82,7 @@
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(136, 126);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(113, 195);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(131, 27);
             this.guna2HtmlLabel1.TabIndex = 10;
@@ -106,7 +93,7 @@
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(136, 192);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(113, 261);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(135, 27);
             this.guna2HtmlLabel2.TabIndex = 11;
@@ -122,7 +109,7 @@
             this.cmbGiaoVien.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbGiaoVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cmbGiaoVien.ItemHeight = 30;
-            this.cmbGiaoVien.Location = new System.Drawing.Point(305, 192);
+            this.cmbGiaoVien.Location = new System.Drawing.Point(282, 261);
             this.cmbGiaoVien.Name = "cmbGiaoVien";
             this.cmbGiaoVien.Size = new System.Drawing.Size(200, 36);
             this.cmbGiaoVien.TabIndex = 12;
@@ -132,7 +119,7 @@
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(136, 263);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(113, 332);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(135, 27);
             this.guna2HtmlLabel3.TabIndex = 13;
@@ -145,7 +132,7 @@
             this.dtpNgayHoc.FillColor = System.Drawing.Color.AliceBlue;
             this.dtpNgayHoc.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtpNgayHoc.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgayHoc.Location = new System.Drawing.Point(305, 263);
+            this.dtpNgayHoc.Location = new System.Drawing.Point(282, 332);
             this.dtpNgayHoc.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.dtpNgayHoc.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.dtpNgayHoc.Name = "dtpNgayHoc";
@@ -158,7 +145,7 @@
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(136, 329);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(113, 398);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(124, 27);
             this.guna2HtmlLabel4.TabIndex = 15;
@@ -175,19 +162,46 @@
             this.txtTietHoc.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTietHoc.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTietHoc.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTietHoc.Location = new System.Drawing.Point(305, 329);
+            this.txtTietHoc.Location = new System.Drawing.Point(282, 398);
             this.txtTietHoc.Name = "txtTietHoc";
             this.txtTietHoc.PlaceholderText = "";
             this.txtTietHoc.SelectedText = "";
             this.txtTietHoc.Size = new System.Drawing.Size(200, 36);
             this.txtTietHoc.TabIndex = 16;
             // 
+            // picAvatar
+            // 
+            this.picAvatar.BackColor = System.Drawing.Color.Transparent;
+            this.picAvatar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.picAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Teacher_Male;
+            this.picAvatar.ImageRotate = 0F;
+            this.picAvatar.Location = new System.Drawing.Point(302, 80);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picAvatar.Size = new System.Drawing.Size(96, 88);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAvatar.TabIndex = 8;
+            this.picAvatar.TabStop = false;
+            // 
+            // ucControlBar1
+            // 
+            this.ucControlBar1.BackColor = System.Drawing.Color.Transparent;
+            this.ucControlBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucControlBar1.Location = new System.Drawing.Point(0, 0);
+            this.ucControlBar1.Name = "ucControlBar1";
+            this.ucControlBar1.Size = new System.Drawing.Size(720, 40);
+            this.ucControlBar1.TabIndex = 17;
+            this.ucControlBar1.TitleText = "Content";
+            // 
             // frmQuanLyThoiKhoaBieu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(720, 501);
+            this.ClientSize = new System.Drawing.Size(720, 558);
+            this.ControlBox = false;
+            this.Controls.Add(this.ucControlBar1);
             this.Controls.Add(this.txtTietHoc);
             this.Controls.Add(this.guna2HtmlLabel4);
             this.Controls.Add(this.dtpNgayHoc);
@@ -198,6 +212,8 @@
             this.Controls.Add(this.cmbMonHoc);
             this.Controls.Add(this.picAvatar);
             this.Controls.Add(this.btnXacNhan);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmQuanLyThoiKhoaBieu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý thời khóa biểu";
@@ -220,5 +236,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayHoc;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2TextBox txtTietHoc;
+        private Controls.ucControlBar ucControlBar1;
     }
 }

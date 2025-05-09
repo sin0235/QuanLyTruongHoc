@@ -30,18 +30,18 @@
             this.guna2CircleButtonMaximize = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2CircleButtonMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
             this.lblCurrentPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtCurrentPassword = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtNewPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblNewPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblConfirmPassword = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnChangePassword = new Guna.UI2.WinForms.Guna2GradientButton();
             this.pnlContainer = new Guna.UI2.WinForms.Guna2Panel();
             this.passwordStrengthBar = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.lblPasswordHint = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnShowCurrentPassword = new Guna.UI2.WinForms.Guna2Button();
             this.btnShowConfirmPassword = new Guna.UI2.WinForms.Guna2Button();
             this.btnShowNewPassword = new Guna.UI2.WinForms.Guna2Button();
-            this.lblPasswordHint = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.txtCurrentPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtNewPassword = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtConfirmPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.iconCurrentPassword = new Guna.UI2.WinForms.Guna2PictureBox();
             this.iconNewPassword = new Guna.UI2.WinForms.Guna2PictureBox();
             this.iconConfirmPassword = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -54,6 +54,8 @@
             // 
             // pnlTitleBar
             // 
+            this.pnlTitleBar.BorderColor = System.Drawing.Color.DimGray;
+            this.pnlTitleBar.BorderThickness = 1;
             this.pnlTitleBar.Controls.Add(this.lblFormTitle);
             this.pnlTitleBar.Controls.Add(this.guna2CircleButtonClose);
             this.pnlTitleBar.Controls.Add(this.guna2CircleButtonMaximize);
@@ -123,102 +125,12 @@
             this.lblCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblCurrentPassword.Name = "lblCurrentPassword";
             // 
-            // txtCurrentPassword
-            // 
-            this.txtCurrentPassword.Animated = true;
-            this.txtCurrentPassword.BackColor = System.Drawing.Color.Transparent;
-            this.txtCurrentPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
-            this.txtCurrentPassword.BorderRadius = 8;
-            this.txtCurrentPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCurrentPassword.DefaultText = "";
-            this.txtCurrentPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtCurrentPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtCurrentPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCurrentPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtCurrentPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            resources.ApplyResources(this.txtCurrentPassword, "txtCurrentPassword");
-            this.txtCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtCurrentPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtCurrentPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.lock_icon;
-            this.txtCurrentPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.txtCurrentPassword.IconLeftSize = new System.Drawing.Size(25, 25);
-            this.txtCurrentPassword.Name = "txtCurrentPassword";
-            this.txtCurrentPassword.PasswordChar = '●';
-            this.txtCurrentPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtCurrentPassword.PlaceholderText = "Nhập mật khẩu hiện tại";
-            this.txtCurrentPassword.SelectedText = "";
-            this.txtCurrentPassword.ShadowDecoration.BorderRadius = 8;
-            this.txtCurrentPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.txtCurrentPassword.ShadowDecoration.Depth = 3;
-            this.txtCurrentPassword.ShadowDecoration.Enabled = true;
-            this.txtCurrentPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
-            // 
-            // txtNewPassword
-            // 
-            this.txtNewPassword.Animated = true;
-            this.txtNewPassword.BackColor = System.Drawing.Color.Transparent;
-            this.txtNewPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
-            this.txtNewPassword.BorderRadius = 8;
-            this.txtNewPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtNewPassword.DefaultText = "";
-            this.txtNewPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtNewPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtNewPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtNewPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtNewPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            resources.ApplyResources(this.txtNewPassword, "txtNewPassword");
-            this.txtNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtNewPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNewPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.key_icon;
-            this.txtNewPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.txtNewPassword.IconLeftSize = new System.Drawing.Size(25, 25);
-            this.txtNewPassword.Name = "txtNewPassword";
-            this.txtNewPassword.PasswordChar = '●';
-            this.txtNewPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtNewPassword.PlaceholderText = "Nhập mật khẩu mới";
-            this.txtNewPassword.SelectedText = "";
-            this.txtNewPassword.ShadowDecoration.BorderRadius = 8;
-            this.txtNewPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.txtNewPassword.ShadowDecoration.Depth = 3;
-            this.txtNewPassword.ShadowDecoration.Enabled = true;
-            this.txtNewPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
-            // 
             // lblNewPassword
             // 
             this.lblNewPassword.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.lblNewPassword, "lblNewPassword");
             this.lblNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblNewPassword.Name = "lblNewPassword";
-            // 
-            // txtConfirmPassword
-            // 
-            this.txtConfirmPassword.Animated = true;
-            this.txtConfirmPassword.BackColor = System.Drawing.Color.Transparent;
-            this.txtConfirmPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
-            this.txtConfirmPassword.BorderRadius = 8;
-            this.txtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtConfirmPassword.DefaultText = "";
-            this.txtConfirmPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtConfirmPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtConfirmPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtConfirmPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtConfirmPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            resources.ApplyResources(this.txtConfirmPassword, "txtConfirmPassword");
-            this.txtConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtConfirmPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.confirm_icon;
-            this.txtConfirmPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
-            this.txtConfirmPassword.IconLeftSize = new System.Drawing.Size(25, 25);
-            this.txtConfirmPassword.Name = "txtConfirmPassword";
-            this.txtConfirmPassword.PasswordChar = '●';
-            this.txtConfirmPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtConfirmPassword.PlaceholderText = "Nhập lại mật khẩu mới";
-            this.txtConfirmPassword.SelectedText = "";
-            this.txtConfirmPassword.ShadowDecoration.BorderRadius = 8;
-            this.txtConfirmPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
-            this.txtConfirmPassword.ShadowDecoration.Depth = 3;
-            this.txtConfirmPassword.ShadowDecoration.Enabled = true;
-            this.txtConfirmPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
             // 
             // lblConfirmPassword
             // 
@@ -284,6 +196,14 @@
             this.passwordStrengthBar.ProgressColor2 = System.Drawing.Color.Red;
             this.passwordStrengthBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
+            // lblPasswordHint
+            // 
+            resources.ApplyResources(this.lblPasswordHint, "lblPasswordHint");
+            this.lblPasswordHint.BackColor = System.Drawing.Color.Transparent;
+            this.lblPasswordHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblPasswordHint.Name = "lblPasswordHint";
+            this.lblPasswordHint.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // btnShowCurrentPassword
             // 
             this.btnShowCurrentPassword.BackColor = System.Drawing.Color.Transparent;
@@ -340,13 +260,95 @@
             this.btnShowNewPassword.ImageSize = new System.Drawing.Size(25, 25);
             this.btnShowNewPassword.Name = "btnShowNewPassword";
             // 
-            // lblPasswordHint
+            // txtCurrentPassword
             // 
-            resources.ApplyResources(this.lblPasswordHint, "lblPasswordHint");
-            this.lblPasswordHint.BackColor = System.Drawing.Color.Transparent;
-            this.lblPasswordHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblPasswordHint.Name = "lblPasswordHint";
-            this.lblPasswordHint.TextAlignment = System.Drawing.ContentAlignment.TopCenter;
+            this.txtCurrentPassword.Animated = true;
+            this.txtCurrentPassword.BackColor = System.Drawing.Color.Transparent;
+            this.txtCurrentPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.txtCurrentPassword.BorderRadius = 8;
+            this.txtCurrentPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCurrentPassword.DefaultText = "";
+            this.txtCurrentPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtCurrentPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtCurrentPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCurrentPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtCurrentPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.txtCurrentPassword, "txtCurrentPassword");
+            this.txtCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtCurrentPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtCurrentPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.lock_icon;
+            this.txtCurrentPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.txtCurrentPassword.IconLeftSize = new System.Drawing.Size(25, 25);
+            this.txtCurrentPassword.Name = "txtCurrentPassword";
+            this.txtCurrentPassword.PasswordChar = '●';
+            this.txtCurrentPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
+            this.txtCurrentPassword.PlaceholderText = "Nhập mật khẩu hiện tại";
+            this.txtCurrentPassword.SelectedText = "";
+            this.txtCurrentPassword.ShadowDecoration.BorderRadius = 8;
+            this.txtCurrentPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
+            this.txtCurrentPassword.ShadowDecoration.Depth = 3;
+            this.txtCurrentPassword.ShadowDecoration.Enabled = true;
+            this.txtCurrentPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Animated = true;
+            this.txtNewPassword.BackColor = System.Drawing.Color.Transparent;
+            this.txtNewPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.txtNewPassword.BorderRadius = 8;
+            this.txtNewPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtNewPassword.DefaultText = "";
+            this.txtNewPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtNewPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtNewPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtNewPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtNewPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.txtNewPassword, "txtNewPassword");
+            this.txtNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtNewPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtNewPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.key_icon;
+            this.txtNewPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.txtNewPassword.IconLeftSize = new System.Drawing.Size(25, 25);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.PasswordChar = '●';
+            this.txtNewPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
+            this.txtNewPassword.PlaceholderText = "Nhập mật khẩu mới";
+            this.txtNewPassword.SelectedText = "";
+            this.txtNewPassword.ShadowDecoration.BorderRadius = 8;
+            this.txtNewPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
+            this.txtNewPassword.ShadowDecoration.Depth = 3;
+            this.txtNewPassword.ShadowDecoration.Enabled = true;
+            this.txtNewPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
+            // 
+            // txtConfirmPassword
+            // 
+            this.txtConfirmPassword.Animated = true;
+            this.txtConfirmPassword.BackColor = System.Drawing.Color.Transparent;
+            this.txtConfirmPassword.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.txtConfirmPassword.BorderRadius = 8;
+            this.txtConfirmPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtConfirmPassword.DefaultText = "";
+            this.txtConfirmPassword.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtConfirmPassword.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtConfirmPassword.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtConfirmPassword.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtConfirmPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            resources.ApplyResources(this.txtConfirmPassword, "txtConfirmPassword");
+            this.txtConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtConfirmPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtConfirmPassword.IconLeft = global::QuanLyTruongHoc.Properties.Resources.confirm_icon;
+            this.txtConfirmPassword.IconLeftOffset = new System.Drawing.Point(5, 0);
+            this.txtConfirmPassword.IconLeftSize = new System.Drawing.Size(25, 25);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.PasswordChar = '●';
+            this.txtConfirmPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
+            this.txtConfirmPassword.PlaceholderText = "Nhập lại mật khẩu mới";
+            this.txtConfirmPassword.SelectedText = "";
+            this.txtConfirmPassword.ShadowDecoration.BorderRadius = 8;
+            this.txtConfirmPassword.ShadowDecoration.Color = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(222)))), ((int)(((byte)(222)))));
+            this.txtConfirmPassword.ShadowDecoration.Depth = 3;
+            this.txtConfirmPassword.ShadowDecoration.Enabled = true;
+            this.txtConfirmPassword.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(2, 2, 4, 4);
             // 
             // iconCurrentPassword
             // 

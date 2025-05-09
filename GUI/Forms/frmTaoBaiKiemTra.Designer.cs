@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucControlBar1 = new QuanLyTruongHoc.GUI.Controls.ucControlBar();
             this.panelMain = new Guna.UI2.WinForms.Guna2Panel();
             this.tabControlMain = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabThongTinChung = new System.Windows.Forms.TabPage();
@@ -80,6 +79,7 @@
             this.btnSaveDraft = new Guna.UI2.WinForms.Guna2Button();
             this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
             this.btnPublish = new Guna.UI2.WinForms.Guna2Button();
+            this.ucControlBar1 = new QuanLyTruongHoc.GUI.Controls.ucControlBar();
             this.panelMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabThongTinChung.SuspendLayout();
@@ -95,18 +95,11 @@
             this.panelActions.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucControlBar1
-            // 
-            this.ucControlBar1.BackColor = System.Drawing.Color.Transparent;
-            this.ucControlBar1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucControlBar1.Location = new System.Drawing.Point(0, 0);
-            this.ucControlBar1.Name = "ucControlBar1";
-            this.ucControlBar1.Size = new System.Drawing.Size(1100, 40);
-            this.ucControlBar1.TabIndex = 0;
-            // 
             // panelMain
             // 
+            this.panelMain.BorderColor = System.Drawing.Color.Black;
             this.panelMain.BorderRadius = 15;
+            this.panelMain.BorderThickness = 1;
             this.panelMain.Controls.Add(this.tabControlMain);
             this.panelMain.Controls.Add(this.panelActions);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -231,7 +224,7 @@
             this.lblEndDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblEndDate.Location = new System.Drawing.Point(553, 272);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(93, 17);
+            this.lblEndDate.Size = new System.Drawing.Size(99, 17);
             this.lblEndDate.TabIndex = 17;
             this.lblEndDate.Text = "Thời gian kết thúc";
             // 
@@ -241,7 +234,7 @@
             this.lblStartDate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblStartDate.Location = new System.Drawing.Point(340, 272);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(91, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(96, 17);
             this.lblStartDate.TabIndex = 16;
             this.lblStartDate.Text = "Thời gian bắt đầu";
             // 
@@ -251,7 +244,7 @@
             this.lblTestPeriod.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblTestPeriod.Location = new System.Drawing.Point(324, 245);
             this.lblTestPeriod.Name = "lblTestPeriod";
-            this.lblTestPeriod.Size = new System.Drawing.Size(191, 22);
+            this.lblTestPeriod.Size = new System.Drawing.Size(199, 22);
             this.lblTestPeriod.TabIndex = 15;
             this.lblTestPeriod.Text = "2. Thời gian mở cho học sinh";
             // 
@@ -263,24 +256,23 @@
             this.numAttemptsAllowed.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numAttemptsAllowed.Location = new System.Drawing.Point(553, 194);
             this.numAttemptsAllowed.Maximum = new decimal(new int[] {
-                        10,
-                        0,
-                        0,
-                        0});
+            10,
+            0,
+            0,
+            0});
             this.numAttemptsAllowed.Minimum = new decimal(new int[] {
-                        1,
-                        0,
-                        0,
-                        0});
+            1,
+            0,
+            0,
+            0});
             this.numAttemptsAllowed.Name = "numAttemptsAllowed";
             this.numAttemptsAllowed.Size = new System.Drawing.Size(100, 25);
             this.numAttemptsAllowed.TabIndex = 14;
-            this.numAttemptsAllowed.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.numAttemptsAllowed.Value = new decimal(new int[] {
-                        1,
-                        0,
-                        0,
-                        0});
+            1,
+            0,
+            0,
+            0});
             // 
             // lblAttemptsAllowed
             // 
@@ -288,7 +280,7 @@
             this.lblAttemptsAllowed.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblAttemptsAllowed.Location = new System.Drawing.Point(553, 171);
             this.lblAttemptsAllowed.Name = "lblAttemptsAllowed";
-            this.lblAttemptsAllowed.Size = new System.Drawing.Size(97, 17);
+            this.lblAttemptsAllowed.Size = new System.Drawing.Size(91, 17);
             this.lblAttemptsAllowed.TabIndex = 13;
             this.lblAttemptsAllowed.Text = "Số lần làm tối đa";
             // 
@@ -300,19 +292,18 @@
             this.numDuration.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numDuration.Location = new System.Drawing.Point(340, 194);
             this.numDuration.Maximum = new decimal(new int[] {
-                        180,
-                        0,
-                        0,
-                        0});
+            180,
+            0,
+            0,
+            0});
             this.numDuration.Name = "numDuration";
             this.numDuration.Size = new System.Drawing.Size(100, 25);
             this.numDuration.TabIndex = 12;
-            this.numDuration.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.numDuration.Value = new decimal(new int[] {
-                        45,
-                        0,
-                        0,
-                        0});
+            45,
+            0,
+            0,
+            0});
             // 
             // lblDuration
             // 
@@ -320,7 +311,7 @@
             this.lblDuration.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblDuration.Location = new System.Drawing.Point(340, 171);
             this.lblDuration.Name = "lblDuration";
-            this.lblDuration.Size = new System.Drawing.Size(126, 17);
+            this.lblDuration.Size = new System.Drawing.Size(131, 17);
             this.lblDuration.TabIndex = 11;
             this.lblDuration.Text = "Thời gian làm bài (phút)";
             // 
@@ -336,10 +327,10 @@
             this.cboTestType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboTestType.ItemHeight = 30;
             this.cboTestType.Items.AddRange(new object[] {
-                        "Kiểm tra 15 phút",
-                        "Kiểm tra 1 tiết",
-                        "Kiểm tra học kỳ",
-                        "Bài tập về nhà"});
+            "Kiểm tra 15 phút",
+            "Kiểm tra 1 tiết",
+            "Kiểm tra học kỳ",
+            "Bài tập về nhà"});
             this.cboTestType.Location = new System.Drawing.Point(553, 120);
             this.cboTestType.Name = "cboTestType";
             this.cboTestType.Size = new System.Drawing.Size(200, 36);
@@ -351,7 +342,7 @@
             this.lblTestType.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblTestType.Location = new System.Drawing.Point(553, 97);
             this.lblTestType.Name = "lblTestType";
-            this.lblTestType.Size = new System.Drawing.Size(76, 17);
+            this.lblTestType.Size = new System.Drawing.Size(71, 17);
             this.lblTestType.TabIndex = 9;
             this.lblTestType.Text = "Loại kiểm tra";
             // 
@@ -370,7 +361,6 @@
             this.txtDescription.Location = new System.Drawing.Point(340, 367);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.PasswordChar = '\0';
             this.txtDescription.PlaceholderText = "Hướng dẫn làm bài, mô tả...";
             this.txtDescription.SelectedText = "";
             this.txtDescription.Size = new System.Drawing.Size(413, 100);
@@ -382,7 +372,7 @@
             this.lblDescription.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblDescription.Location = new System.Drawing.Point(340, 343);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(114, 17);
+            this.lblDescription.Size = new System.Drawing.Size(141, 17);
             this.lblDescription.TabIndex = 8;
             this.lblDescription.Text = "Mô tả/Hướng dẫn làm bài";
             // 
@@ -434,7 +424,7 @@
             this.lblSubject.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblSubject.Location = new System.Drawing.Point(340, 97);
             this.lblSubject.Name = "lblSubject";
-            this.lblSubject.Size = new System.Drawing.Size(59, 17);
+            this.lblSubject.Size = new System.Drawing.Size(51, 17);
             this.lblSubject.TabIndex = 4;
             this.lblSubject.Text = "Môn học";
             // 
@@ -452,7 +442,6 @@
             this.txtTestName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTestName.Location = new System.Drawing.Point(340, 46);
             this.txtTestName.Name = "txtTestName";
-            this.txtTestName.PasswordChar = '\0';
             this.txtTestName.PlaceholderText = "Nhập tên bài kiểm tra";
             this.txtTestName.SelectedText = "";
             this.txtTestName.Size = new System.Drawing.Size(200, 36);
@@ -464,7 +453,7 @@
             this.lblTestName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblTestName.Location = new System.Drawing.Point(340, 23);
             this.lblTestName.Name = "lblTestName";
-            this.lblTestName.Size = new System.Drawing.Size(84, 17);
+            this.lblTestName.Size = new System.Drawing.Size(88, 17);
             this.lblTestName.TabIndex = 2;
             this.lblTestName.Text = "Tên bài kiểm tra";
             // 
@@ -474,7 +463,7 @@
             this.lblGeneralInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblGeneralInfo.Location = new System.Drawing.Point(324, 0);
             this.lblGeneralInfo.Name = "lblGeneralInfo";
-            this.lblGeneralInfo.Size = new System.Drawing.Size(129, 22);
+            this.lblGeneralInfo.Size = new System.Drawing.Size(130, 22);
             this.lblGeneralInfo.TabIndex = 1;
             this.lblGeneralInfo.Text = "1. Thông tin chung";
             // 
@@ -495,8 +484,8 @@
             // 
             // panelQuestions
             // 
-            this.panelQuestions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelQuestions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestions.AutoScroll = true;
             this.panelQuestions.BorderColor = System.Drawing.Color.LightGray;
@@ -516,7 +505,7 @@
             this.lblNoQuestions.ForeColor = System.Drawing.Color.Gray;
             this.lblNoQuestions.Location = new System.Drawing.Point(395, 180);
             this.lblNoQuestions.Name = "lblNoQuestions";
-            this.lblNoQuestions.Size = new System.Drawing.Size(250, 22);
+            this.lblNoQuestions.Size = new System.Drawing.Size(255, 22);
             this.lblNoQuestions.TabIndex = 0;
             this.lblNoQuestions.Text = "Chưa có câu hỏi nào trong bài kiểm tra";
             // 
@@ -572,7 +561,7 @@
             this.lblQuestionManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblQuestionManagement.Location = new System.Drawing.Point(20, 20);
             this.lblQuestionManagement.Name = "lblQuestionManagement";
-            this.lblQuestionManagement.Size = new System.Drawing.Size(120, 22);
+            this.lblQuestionManagement.Size = new System.Drawing.Size(110, 22);
             this.lblQuestionManagement.TabIndex = 0;
             this.lblQuestionManagement.Text = "Quản lý câu hỏi";
             // 
@@ -589,8 +578,8 @@
             // 
             // panelGrading
             // 
-            this.panelGrading.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelGrading.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelGrading.BorderColor = System.Drawing.Color.LightGray;
             this.panelGrading.BorderRadius = 5;
@@ -616,7 +605,7 @@
             this.chkRandomizeQuestions.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkRandomizeQuestions.Location = new System.Drawing.Point(334, 89);
             this.chkRandomizeQuestions.Name = "chkRandomizeQuestions";
-            this.chkRandomizeQuestions.Size = new System.Drawing.Size(178, 19);
+            this.chkRandomizeQuestions.Size = new System.Drawing.Size(187, 19);
             this.chkRandomizeQuestions.TabIndex = 5;
             this.chkRandomizeQuestions.Text = "Đảo thứ tự câu hỏi ngẫu nhiên";
             this.chkRandomizeQuestions.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -636,7 +625,7 @@
             this.chkShowResultImmediately.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkShowResultImmediately.Location = new System.Drawing.Point(334, 63);
             this.chkShowResultImmediately.Name = "chkShowResultImmediately";
-            this.chkShowResultImmediately.Size = new System.Drawing.Size(153, 19);
+            this.chkShowResultImmediately.Size = new System.Drawing.Size(178, 19);
             this.chkShowResultImmediately.TabIndex = 4;
             this.chkShowResultImmediately.Text = "Hiển thị kết quả ngay lập tức";
             this.chkShowResultImmediately.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -646,7 +635,7 @@
             // 
             // txtGradingNotes
             // 
-            this.txtGradingNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtGradingNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtGradingNotes.BorderRadius = 5;
             this.txtGradingNotes.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -661,7 +650,6 @@
             this.txtGradingNotes.Location = new System.Drawing.Point(334, 135);
             this.txtGradingNotes.Multiline = true;
             this.txtGradingNotes.Name = "txtGradingNotes";
-            this.txtGradingNotes.PasswordChar = '\0';
             this.txtGradingNotes.PlaceholderText = "Nhập ghi chú về cách chấm điểm, tiêu chí...";
             this.txtGradingNotes.SelectedText = "";
             this.txtGradingNotes.Size = new System.Drawing.Size(658, 100);
@@ -673,7 +661,7 @@
             this.lblGradingNotes.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblGradingNotes.Location = new System.Drawing.Point(334, 115);
             this.lblGradingNotes.Name = "lblGradingNotes";
-            this.lblGradingNotes.Size = new System.Drawing.Size(142, 17);
+            this.lblGradingNotes.Size = new System.Drawing.Size(150, 17);
             this.lblGradingNotes.TabIndex = 2;
             this.lblGradingNotes.Text = "Ghi chú về cách chấm điểm";
             // 
@@ -685,25 +673,24 @@
             this.numPassingScore.DecimalPlaces = 1;
             this.numPassingScore.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numPassingScore.Increment = new decimal(new int[] {
-                        5,
-                        0,
-                        0,
-                        65536});
+            5,
+            0,
+            0,
+            65536});
             this.numPassingScore.Location = new System.Drawing.Point(334, 27);
             this.numPassingScore.Maximum = new decimal(new int[] {
-                        10,
-                        0,
-                        0,
-                        0});
+            10,
+            0,
+            0,
+            0});
             this.numPassingScore.Name = "numPassingScore";
             this.numPassingScore.Size = new System.Drawing.Size(100, 25);
             this.numPassingScore.TabIndex = 1;
-            this.numPassingScore.UpDownButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.numPassingScore.Value = new decimal(new int[] {
-                        5,
-                        0,
-                        0,
-                        0});
+            5,
+            0,
+            0,
+            0});
             // 
             // lblPassingScore
             // 
@@ -711,7 +698,7 @@
             this.lblPassingScore.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblPassingScore.Location = new System.Drawing.Point(334, 3);
             this.lblPassingScore.Name = "lblPassingScore";
-            this.lblPassingScore.Size = new System.Drawing.Size(94, 17);
+            this.lblPassingScore.Size = new System.Drawing.Size(95, 17);
             this.lblPassingScore.TabIndex = 0;
             this.lblPassingScore.Text = "Điểm đạt yêu cầu";
             // 
@@ -721,7 +708,7 @@
             this.lblGradingOptions.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblGradingOptions.Location = new System.Drawing.Point(20, 20);
             this.lblGradingOptions.Name = "lblGradingOptions";
-            this.lblGradingOptions.Size = new System.Drawing.Size(134, 22);
+            this.lblGradingOptions.Size = new System.Drawing.Size(121, 22);
             this.lblGradingOptions.TabIndex = 0;
             this.lblGradingOptions.Text = "Cấu hình điểm số";
             // 
@@ -738,8 +725,8 @@
             // 
             // panelPreview
             // 
-            this.panelPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelPreview.BorderColor = System.Drawing.Color.LightGray;
             this.panelPreview.BorderRadius = 5;
@@ -775,7 +762,7 @@
             this.lblPreviewInstruction.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblPreviewInstruction.Location = new System.Drawing.Point(344, 100);
             this.lblPreviewInstruction.Name = "lblPreviewInstruction";
-            this.lblPreviewInstruction.Size = new System.Drawing.Size(370, 17);
+            this.lblPreviewInstruction.Size = new System.Drawing.Size(418, 17);
             this.lblPreviewInstruction.TabIndex = 3;
             this.lblPreviewInstruction.Text = "Nhấn nút \"Xem trước bài kiểm tra\" để kiểm tra trước khi đăng bài cho học sinh";
             // 
@@ -789,7 +776,7 @@
             this.chkPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkPassword.Location = new System.Drawing.Point(344, 173);
             this.chkPassword.Name = "chkPassword";
-            this.chkPassword.Size = new System.Drawing.Size(156, 19);
+            this.chkPassword.Size = new System.Drawing.Size(178, 19);
             this.chkPassword.TabIndex = 1;
             this.chkPassword.Text = "Yêu cầu mật khẩu để làm bài";
             this.chkPassword.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -824,7 +811,7 @@
             this.lblPreviewTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
             this.lblPreviewTitle.Location = new System.Drawing.Point(20, 20);
             this.lblPreviewTitle.Name = "lblPreviewTitle";
-            this.lblPreviewTitle.Size = new System.Drawing.Size(171, 22);
+            this.lblPreviewTitle.Size = new System.Drawing.Size(181, 22);
             this.lblPreviewTitle.TabIndex = 0;
             this.lblPreviewTitle.Text = "Xem trước và cài đặt thêm";
             // 
@@ -891,6 +878,16 @@
             this.btnPublish.TabIndex = 2;
             this.btnPublish.Text = "Đăng bài kiểm tra";
             // 
+            // ucControlBar1
+            // 
+            this.ucControlBar1.BackColor = System.Drawing.Color.Transparent;
+            this.ucControlBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucControlBar1.Location = new System.Drawing.Point(0, 0);
+            this.ucControlBar1.Name = "ucControlBar1";
+            this.ucControlBar1.Size = new System.Drawing.Size(1100, 40);
+            this.ucControlBar1.TabIndex = 0;
+            this.ucControlBar1.TitleText = "Content";
+            // 
             // frmTaoBaiKiemTra
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -912,6 +909,7 @@
             this.tabCauHoi.ResumeLayout(false);
             this.tabCauHoi.PerformLayout();
             this.panelQuestions.ResumeLayout(false);
+            this.panelQuestions.PerformLayout();
             this.tabCauHinhDiem.ResumeLayout(false);
             this.tabCauHinhDiem.PerformLayout();
             this.panelGrading.ResumeLayout(false);

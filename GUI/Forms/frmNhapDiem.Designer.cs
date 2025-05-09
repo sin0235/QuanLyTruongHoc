@@ -31,12 +31,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNhapDiem));
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
             this.cmbHocKi = new Guna.UI2.WinForms.Guna2ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnTimKiem = new Guna.UI2.WinForms.Guna2CircleButton();
             this.dgvDiemChiTietHocSinh = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemMieng = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Diem15Phut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemGiuaKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiemCuoiKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addBtn = new Guna.UI2.WinForms.Guna2Button();
             this.diemTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,13 +54,6 @@
             this.hoTenTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.sttTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HocKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiemMieng = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Diem15Phut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiemGiuaKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiemCuoiKy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiemChiTietHocSinh)).BeginInit();
             this.SuspendLayout();
@@ -215,6 +216,55 @@
             this.dgvDiemChiTietHocSinh.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvDiemChiTietHocSinh.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             // 
+            // STT
+            // 
+            this.STT.DataPropertyName = "STT";
+            this.STT.HeaderText = "STT";
+            this.STT.MinimumWidth = 6;
+            this.STT.Name = "STT";
+            this.STT.Visible = false;
+            // 
+            // HocKy
+            // 
+            this.HocKy.DataPropertyName = "HocKy";
+            this.HocKy.HeaderText = "Học kỳ";
+            this.HocKy.Name = "HocKy";
+            // 
+            // TenMon
+            // 
+            this.TenMon.DataPropertyName = "TenMon";
+            this.TenMon.HeaderText = "Môn";
+            this.TenMon.MinimumWidth = 6;
+            this.TenMon.Name = "TenMon";
+            // 
+            // DiemMieng
+            // 
+            this.DiemMieng.DataPropertyName = "DiemMieng";
+            this.DiemMieng.HeaderText = "Điểm Miệng";
+            this.DiemMieng.MinimumWidth = 6;
+            this.DiemMieng.Name = "DiemMieng";
+            // 
+            // Diem15Phut
+            // 
+            this.Diem15Phut.DataPropertyName = "Diem15Phut";
+            this.Diem15Phut.HeaderText = "Điểm 15 Phút";
+            this.Diem15Phut.MinimumWidth = 6;
+            this.Diem15Phut.Name = "Diem15Phut";
+            // 
+            // DiemGiuaKy
+            // 
+            this.DiemGiuaKy.DataPropertyName = "DiemGiuaKy";
+            this.DiemGiuaKy.HeaderText = "Điểm Giữa Kỳ";
+            this.DiemGiuaKy.MinimumWidth = 6;
+            this.DiemGiuaKy.Name = "DiemGiuaKy";
+            // 
+            // DiemCuoiKy
+            // 
+            this.DiemCuoiKy.DataPropertyName = "DiemCuoiKy";
+            this.DiemCuoiKy.HeaderText = "Điểm Cuối Kỳ";
+            this.DiemCuoiKy.MinimumWidth = 6;
+            this.DiemCuoiKy.Name = "DiemCuoiKy";
+            // 
             // addBtn
             // 
             this.addBtn.BackColor = System.Drawing.Color.Transparent;
@@ -367,61 +417,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "STT";
             // 
-            // STT
-            // 
-            this.STT.DataPropertyName = "STT";
-            this.STT.HeaderText = "STT";
-            this.STT.MinimumWidth = 6;
-            this.STT.Name = "STT";
-            this.STT.Visible = false;
-            // 
-            // HocKy
-            // 
-            this.HocKy.DataPropertyName = "HocKy";
-            this.HocKy.HeaderText = "Học kỳ";
-            this.HocKy.Name = "HocKy";
-            // 
-            // TenMon
-            // 
-            this.TenMon.DataPropertyName = "TenMon";
-            this.TenMon.HeaderText = "Môn";
-            this.TenMon.MinimumWidth = 6;
-            this.TenMon.Name = "TenMon";
-            // 
-            // DiemMieng
-            // 
-            this.DiemMieng.DataPropertyName = "DiemMieng";
-            this.DiemMieng.HeaderText = "Điểm Miệng";
-            this.DiemMieng.MinimumWidth = 6;
-            this.DiemMieng.Name = "DiemMieng";
-            // 
-            // Diem15Phut
-            // 
-            this.Diem15Phut.DataPropertyName = "Diem15Phut";
-            this.Diem15Phut.HeaderText = "Điểm 15 Phút";
-            this.Diem15Phut.MinimumWidth = 6;
-            this.Diem15Phut.Name = "Diem15Phut";
-            // 
-            // DiemGiuaKy
-            // 
-            this.DiemGiuaKy.DataPropertyName = "DiemGiuaKy";
-            this.DiemGiuaKy.HeaderText = "Điểm Giữa Kỳ";
-            this.DiemGiuaKy.MinimumWidth = 6;
-            this.DiemGiuaKy.Name = "DiemGiuaKy";
-            // 
-            // DiemCuoiKy
-            // 
-            this.DiemCuoiKy.DataPropertyName = "DiemCuoiKy";
-            this.DiemCuoiKy.HeaderText = "Điểm Cuối Kỳ";
-            this.DiemCuoiKy.MinimumWidth = 6;
-            this.DiemCuoiKy.Name = "DiemCuoiKy";
-            // 
             // frmNhapDiem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1078, 621);
             this.Controls.Add(this.guna2GradientPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmNhapDiem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

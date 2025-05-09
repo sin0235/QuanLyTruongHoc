@@ -31,6 +31,7 @@ namespace QuanLyTruongHoc
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGV));
             this.pnlTitleBar = new Guna.UI2.WinForms.Guna2Panel();
             this.lblFormTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -53,24 +54,24 @@ namespace QuanLyTruongHoc
             this.btnSetting = new Guna.UI2.WinForms.Guna2Button();
             this.pnlLogo = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblSchoolName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2ShadowForm1 = new Guna.UI2.WinForms.Guna2ShadowForm(this.components);
             this.pnlTop = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.lblPageTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblUserName = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pnlMainScreen = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
+            this.picUserAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.picLogo = new Guna.UI2.WinForms.Guna2PictureBox();
             this.pnlTitleBar.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlSubSettings.SuspendLayout();
             this.pnlLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
             this.pnlMainScreen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitleBar
@@ -422,18 +423,6 @@ namespace QuanLyTruongHoc
             this.lblSchoolName.Text = "TRƯỜNG THPT ABC";
             this.lblSchoolName.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // picLogo
-            // 
-            this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar;
-            this.picLogo.ImageRotate = 0F;
-            this.picLogo.Location = new System.Drawing.Point(90, 15);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(100, 90);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
-            // 
             // guna2Elipse2
             // 
             this.guna2Elipse2.BorderRadius = 18;
@@ -477,19 +466,6 @@ namespace QuanLyTruongHoc
             this.lblUserName.TabIndex = 1;
             this.lblUserName.Text = "Nguyễn Văn A";
             // 
-            // picUserAvatar
-            // 
-            this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
-            this.picUserAvatar.ImageRotate = 0F;
-            this.picUserAvatar.Location = new System.Drawing.Point(1503, 22);
-            this.picUserAvatar.Name = "picUserAvatar";
-            this.picUserAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picUserAvatar.Size = new System.Drawing.Size(40, 40);
-            this.picUserAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUserAvatar.TabIndex = 0;
-            this.picUserAvatar.TabStop = false;
-            // 
             // pnlMainScreen
             // 
             this.pnlMainScreen.Controls.Add(this.pnlContent);
@@ -509,6 +485,31 @@ namespace QuanLyTruongHoc
             this.pnlContent.TabIndex = 0;
             this.pnlContent.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlContent_Paint);
             // 
+            // picUserAvatar
+            // 
+            this.picUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picUserAvatar.BackColor = System.Drawing.Color.Transparent;
+            this.picUserAvatar.ImageRotate = 0F;
+            this.picUserAvatar.Location = new System.Drawing.Point(1503, 22);
+            this.picUserAvatar.Name = "picUserAvatar";
+            this.picUserAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picUserAvatar.Size = new System.Drawing.Size(40, 40);
+            this.picUserAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picUserAvatar.TabIndex = 0;
+            this.picUserAvatar.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar;
+            this.picLogo.ImageRotate = 0F;
+            this.picLogo.Location = new System.Drawing.Point(90, 15);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(100, 90);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
+            // 
             // frmGV
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -521,6 +522,7 @@ namespace QuanLyTruongHoc
             this.Controls.Add(this.pnlTitleBar);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmGV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -533,11 +535,11 @@ namespace QuanLyTruongHoc
             this.pnlSubSettings.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             this.pnlLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
             this.pnlMainScreen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picUserAvatar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
