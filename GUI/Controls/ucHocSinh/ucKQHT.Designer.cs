@@ -59,8 +59,8 @@
             this.pnlSubjects = new Guna.UI2.WinForms.Guna2Panel();
             this.flpSubject = new System.Windows.Forms.FlowLayoutPanel();
             this.Toan = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
-            this.Van = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
             this.Ly = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
+            this.Van = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
             this.Hoa = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
             this.Dia = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
             this.Su = new QuanLyTruongHoc.GUI.Controls.ucKQHTItem();
@@ -535,25 +535,9 @@
             this.Toan.Margin = new System.Windows.Forms.Padding(10);
             this.Toan.Name = "Toan";
             this.Toan.NhanXet = "";
-            this.Toan.Size = new System.Drawing.Size(882, 316);
+            this.Toan.Size = new System.Drawing.Size(850, 316);
             this.Toan.SubjectName = "";
             this.Toan.TabIndex = 0;
-            // 
-            // Van
-            // 
-            this.Van.BackColor = System.Drawing.Color.Transparent;
-            this.Van.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.Diem15PhutList")));
-            this.Van.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemCuoiKyList")));
-            this.Van.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemGiuaKyList")));
-            this.Van.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemMiengList")));
-            this.Van.DiemTrungBinh = 0F;
-            this.Van.Location = new System.Drawing.Point(10, 682);
-            this.Van.Margin = new System.Windows.Forms.Padding(10);
-            this.Van.Name = "Van";
-            this.Van.NhanXet = "";
-            this.Van.Size = new System.Drawing.Size(882, 316);
-            this.Van.SubjectName = "";
-            this.Van.TabIndex = 2;
             // 
             // Ly
             // 
@@ -567,9 +551,25 @@
             this.Ly.Margin = new System.Windows.Forms.Padding(10);
             this.Ly.Name = "Ly";
             this.Ly.NhanXet = "";
-            this.Ly.Size = new System.Drawing.Size(882, 316);
+            this.Ly.Size = new System.Drawing.Size(850, 316);
             this.Ly.SubjectName = "";
             this.Ly.TabIndex = 3;
+            // 
+            // Van
+            // 
+            this.Van.BackColor = System.Drawing.Color.Transparent;
+            this.Van.Diem15PhutList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.Diem15PhutList")));
+            this.Van.DiemCuoiKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemCuoiKyList")));
+            this.Van.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemGiuaKyList")));
+            this.Van.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemMiengList")));
+            this.Van.DiemTrungBinh = 0F;
+            this.Van.Location = new System.Drawing.Point(10, 682);
+            this.Van.Margin = new System.Windows.Forms.Padding(10);
+            this.Van.Name = "Van";
+            this.Van.NhanXet = "";
+            this.Van.Size = new System.Drawing.Size(850, 316);
+            this.Van.SubjectName = "";
+            this.Van.TabIndex = 2;
             // 
             // Hoa
             // 
@@ -583,7 +583,7 @@
             this.Hoa.Margin = new System.Windows.Forms.Padding(10);
             this.Hoa.Name = "Hoa";
             this.Hoa.NhanXet = "";
-            this.Hoa.Size = new System.Drawing.Size(882, 316);
+            this.Hoa.Size = new System.Drawing.Size(850, 316);
             this.Hoa.SubjectName = "";
             this.Hoa.TabIndex = 4;
             // 
@@ -599,7 +599,7 @@
             this.Dia.Margin = new System.Windows.Forms.Padding(10);
             this.Dia.Name = "Dia";
             this.Dia.NhanXet = "";
-            this.Dia.Size = new System.Drawing.Size(882, 316);
+            this.Dia.Size = new System.Drawing.Size(850, 316);
             this.Dia.SubjectName = "";
             this.Dia.TabIndex = 5;
             // 
@@ -615,7 +615,7 @@
             this.Su.Margin = new System.Windows.Forms.Padding(10);
             this.Su.Name = "Su";
             this.Su.NhanXet = "";
-            this.Su.Size = new System.Drawing.Size(882, 316);
+            this.Su.Size = new System.Drawing.Size(850, 316);
             this.Su.SubjectName = "";
             this.Su.TabIndex = 6;
             // 
@@ -631,7 +631,7 @@
             this.AnhVan.Margin = new System.Windows.Forms.Padding(10);
             this.AnhVan.Name = "AnhVan";
             this.AnhVan.NhanXet = "";
-            this.AnhVan.Size = new System.Drawing.Size(882, 316);
+            this.AnhVan.Size = new System.Drawing.Size(850, 316);
             this.AnhVan.SubjectName = "";
             this.AnhVan.TabIndex = 7;
             // 
@@ -647,7 +647,7 @@
             this.CN.Margin = new System.Windows.Forms.Padding(10);
             this.CN.Name = "CN";
             this.CN.NhanXet = "";
-            this.CN.Size = new System.Drawing.Size(882, 316);
+            this.CN.Size = new System.Drawing.Size(850, 316);
             this.CN.SubjectName = "";
             this.CN.TabIndex = 8;
             // 
@@ -663,7 +663,7 @@
             this.GDCD.Margin = new System.Windows.Forms.Padding(10);
             this.GDCD.Name = "GDCD";
             this.GDCD.NhanXet = "";
-            this.GDCD.Size = new System.Drawing.Size(882, 316);
+            this.GDCD.Size = new System.Drawing.Size(850, 316);
             this.GDCD.SubjectName = "";
             this.GDCD.TabIndex = 9;
             // 
@@ -679,7 +679,7 @@
             this.Tin.Margin = new System.Windows.Forms.Padding(10);
             this.Tin.Name = "Tin";
             this.Tin.NhanXet = "";
-            this.Tin.Size = new System.Drawing.Size(882, 316);
+            this.Tin.Size = new System.Drawing.Size(850, 316);
             this.Tin.SubjectName = "";
             this.Tin.TabIndex = 10;
             // 
@@ -695,7 +695,7 @@
             this.Sinh.Margin = new System.Windows.Forms.Padding(10);
             this.Sinh.Name = "Sinh";
             this.Sinh.NhanXet = "";
-            this.Sinh.Size = new System.Drawing.Size(882, 316);
+            this.Sinh.Size = new System.Drawing.Size(850, 316);
             this.Sinh.SubjectName = "";
             this.Sinh.TabIndex = 11;
             // 

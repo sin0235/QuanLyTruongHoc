@@ -171,59 +171,135 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                pnlSubjects.Controls.Clear();
-                pnlSubjects.AutoScroll = true;
-
+                // Lấy điểm số của học sinh cho các môn học
                 List<MonHocScoreDTO> subjectScores = diemSoDAL.GetStudentSubjectsScore(
                     id, currentSemester, currentSchoolYear);
 
-                if (subjectScores == null || subjectScores.Count == 0)
+                // Làm sạch dữ liệu mặc định của các ucKQHTItem có sẵn trong thiết kế
+                ResetExistingSubjectItems();
+
+                // Lấy danh sách tất cả các môn học từ cơ sở dữ liệu
+                List<MonHocDTO> allSubjects = GetAllSubjects();
+
+                // Nếu không có môn học hoặc điểm số nào
+                if ((allSubjects == null || allSubjects.Count == 0) && (subjectScores == null || subjectScores.Count == 0))
                 {
+                    flpSubject.Visible = false;
+
                     Label lblNoData = new Label
                     {
-                        Text = "Không có dữ liệu điểm cho học kỳ này.",
+                        Text = "Không có dữ liệu môn học cho học kỳ này.",
                         Font = new Font("Segoe UI", 12, FontStyle.Regular),
                         ForeColor = Color.FromArgb(100, 100, 100),
                         AutoSize = true,
                         TextAlign = ContentAlignment.MiddleCenter,
-                        Dock = DockStyle.Top,
-                        Padding = new Padding(0, 50, 0, 0)
+                        Dock = DockStyle.Fill,
+                        Padding = new Padding(0, 80, 0, 0)
                     };
+
                     pnlSubjects.Controls.Add(lblNoData);
                     lblNoData.BringToFront();
                 }
                 else
                 {
-                    FlowLayoutPanel flowPanel = new FlowLayoutPanel
+                    flpSubject.Visible = true;
+
+                    // Tạo từ điển để dễ dàng tìm kiếm môn học đã có điểm
+                    Dictionary<int, MonHocScoreDTO> scoresBySubjectId = new Dictionary<int, MonHocScoreDTO>();
+                    if (subjectScores != null)
                     {
-                        Dock = DockStyle.Fill,
-                        FlowDirection = FlowDirection.TopDown,
-                        WrapContents = false,
-                        AutoScroll = true,
-                        Padding = new Padding(15, 10, 15, 10)
-                    };
-                    pnlSubjects.Controls.Add(flowPanel);
-
-                    foreach (MonHocScoreDTO subject in subjectScores)
-                    {
-                        // Sử dụng constructor mới với các danh sách điểm
-                        ucKQHTItem subjectItem = new ucKQHTItem(
-                            subject.TenMon,
-                            subject.DiemMiengList,
-                            subject.Diem15PhutList,
-                            subject.DiemGiuaKyList,
-                            subject.DiemCuoiKyList,
-                            subject.NhanXet
-                        );
-
-                        subjectItem.AdjustToContainerWidth(flowPanel.ClientSize.Width);
-                        subjectItem.AutoSetColor();
-                        subjectItem.Margin = new Padding(0, 0, 0, 10);
-
-                        flowPanel.Controls.Add(subjectItem);
+                        foreach (var score in subjectScores)
+                        {
+                            scoresBySubjectId[score.MaMon] = score;
+                        }
                     }
 
-                    flowPanel.PerformLayout();
+                    // Lưu trữ ucKQHTItem đã được tìm thấy để tránh hiển thị trùng lặp
+                    List<string> processedSubjects = new List<string>();
+
+                    // Hiển thị tất cả các môn học, có điểm hoặc không có điểm
+                    foreach (var subject in allSubjects)
+                    {
+                        // Tìm control ucKQHTItem tương ứng với tên môn học
+                        ucKQHTItem subjectItem = FindSubjectItemByName(subject.TenMon);
+
+                        if (subjectItem == null)
+                        {
+                            // Nếu không tìm thấy control, tạo mới
+                            if (scoresBySubjectId.ContainsKey(subject.MaMon))
+                            {
+                                var score = scoresBySubjectId[subject.MaMon];
+                                subjectItem = new ucKQHTItem(
+                                    score.TenMon,
+                                    score.DiemMiengList,
+                                    score.Diem15PhutList,
+                                    score.DiemGiuaKyList,
+                                    score.DiemCuoiKyList,
+                                    score.NhanXet
+                                );
+                            }
+                            else
+                            {
+                                subjectItem = new ucKQHTItem(
+                                    subject.TenMon,
+                                    new List<float>(),
+                                    new List<float>(),
+                                    new List<float>(),
+                                    new List<float>(),
+                                    "Chưa có điểm"
+                                );
+                            }
+
+                            subjectItem.AdjustToContainerWidth(flpSubject.ClientSize.Width);
+                            subjectItem.AutoSetColor();
+                            subjectItem.Margin = new Padding(10);
+                            flpSubject.Controls.Add(subjectItem);
+                        }
+                        else
+                        {
+                            // Nếu tìm thấy control, cập nhật dữ liệu
+                            if (scoresBySubjectId.ContainsKey(subject.MaMon))
+                            {
+                                var score = scoresBySubjectId[subject.MaMon];
+                                subjectItem.SubjectName = score.TenMon;
+                                subjectItem.DiemMiengList = score.DiemMiengList;
+                                subjectItem.Diem15PhutList = score.Diem15PhutList;
+                                subjectItem.DiemGiuaKyList = score.DiemGiuaKyList;
+                                subjectItem.DiemCuoiKyList = score.DiemCuoiKyList;
+                                subjectItem.NhanXet = score.NhanXet;
+                            }
+                            else
+                            {
+                                subjectItem.SubjectName = subject.TenMon;
+                                subjectItem.DiemMiengList = new List<float>();
+                                subjectItem.Diem15PhutList = new List<float>();
+                                subjectItem.DiemGiuaKyList = new List<float>();
+                                subjectItem.DiemCuoiKyList = new List<float>();
+                                subjectItem.NhanXet = "Chưa có điểm";
+                            }
+
+                            subjectItem.AutoSetColor();
+                            subjectItem.AdjustToContainerWidth(flpSubject.ClientSize.Width);
+                        }
+
+                        processedSubjects.Add(subject.TenMon.ToLower());
+                    }
+
+                    // Ẩn các ucKQHTItem không có trong danh sách môn học
+                    foreach (Control ctrl in flpSubject.Controls)
+                    {
+                        if (ctrl is ucKQHTItem item)
+                        {
+                            if (!processedSubjects.Contains(item.SubjectName.ToLower()) && !string.IsNullOrEmpty(item.SubjectName))
+                            {
+                                item.Visible = false;
+                            }
+                            else
+                            {
+                                item.Visible = true;
+                            }
+                        }
+                    }
                 }
 
                 LoadSummaryData();
@@ -237,6 +313,121 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 this.Cursor = Cursors.Default;
             }
+        }
+
+        // Làm sạch dữ liệu mặc định của các ucKQHTItem có sẵn
+        private void ResetExistingSubjectItems()
+        {
+            foreach (Control ctrl in flpSubject.Controls)
+            {
+                if (ctrl is ucKQHTItem item)
+                {
+                    item.SubjectName = "";
+                    item.DiemMiengList = new List<float>();
+                    item.Diem15PhutList = new List<float>();
+                    item.DiemGiuaKyList = new List<float>();
+                    item.DiemCuoiKyList = new List<float>();
+                    item.NhanXet = "";
+                    item.Visible = false;
+                }
+            }
+        }
+
+        // Tìm control ucKQHTItem theo tên môn học
+        private ucKQHTItem FindSubjectItemByName(string subjectName)
+        {
+            // Log để debug
+            Console.WriteLine($"Tìm control cho môn: {subjectName}");
+
+            // Ánh xạ tên môn học đến tên control trong designer
+            Dictionary<string, string> subjectToControlMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "Toán", "Toan" },
+                { "Vật lý", "Ly" },
+                { "Ngữ văn", "Van" },
+                { "Hóa học", "Hoa" },
+                { "Địa lý", "Dia" },
+                { "Lịch sử", "Su" },
+                { "Tiếng Anh", "AnhVan" },
+                { "Công nghệ", "CN" },
+                { "Giáo dục công dân", "GDCD" },
+                { "Tin học", "Tin" },
+                { "Sinh học", "Sinh" }
+            };
+
+            // Trước tiên kiểm tra xem có ánh xạ nào cho tên môn học này không
+            string controlName = null;
+            if (subjectToControlMap.TryGetValue(subjectName, out controlName))
+            {
+                Console.WriteLine($"Tìm thấy ánh xạ: {subjectName} -> {controlName}");
+                Control[] controls = this.flpSubject.Controls.Find(controlName, true);
+                if (controls.Length > 0 && controls[0] is ucKQHTItem)
+                    return (ucKQHTItem)controls[0];
+            }
+
+            // Nếu không có ánh xạ, tìm kiếm trong tất cả các control
+            foreach (Control ctrl in flpSubject.Controls)
+            {
+                if (ctrl is ucKQHTItem item)
+                {
+                    if (string.Equals(item.SubjectName, subjectName, StringComparison.OrdinalIgnoreCase) ||
+                        string.IsNullOrEmpty(item.SubjectName))
+                    {
+                        Console.WriteLine($"Tìm thấy control thông qua tên: {ctrl.Name}");
+                        return item;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Không tìm thấy control cho môn: {subjectName}");
+            return null;
+        }
+
+        // Phương thức để lấy tất cả các môn học từ cơ sở dữ liệu
+        private List<MonHocDTO> GetAllSubjects()
+        {
+            List<MonHocDTO> subjects = new List<MonHocDTO>();
+
+            try
+            {
+                string query = "SELECT MaMon, TenMon FROM MonHoc ORDER BY MaMon";
+                DataTable dt = dbHelper.ExecuteQuery(query);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        subjects.Add(new MonHocDTO
+                        {
+                            MaMon = Convert.ToInt32(row["MaMon"]),
+                            TenMon = row["TenMon"].ToString()
+                        });
+
+                        // Ghi log để debug
+                        Console.WriteLine($"Đã tải môn học: ID={row["MaMon"]}, Tên={row["TenMon"]}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi trong GetAllSubjects: {ex.Message}");
+
+                // Tạo danh sách môn học mặc định với ID chính xác như trong CSDL
+                subjects.Add(new MonHocDTO { MaMon = 1, TenMon = "Toán" });
+                subjects.Add(new MonHocDTO { MaMon = 2, TenMon = "Vật Lý" });
+                subjects.Add(new MonHocDTO { MaMon = 3, TenMon = "Hóa Học" });
+                subjects.Add(new MonHocDTO { MaMon = 4, TenMon = "Sinh Học" });
+                subjects.Add(new MonHocDTO { MaMon = 5, TenMon = "Ngữ Văn" });
+                subjects.Add(new MonHocDTO { MaMon = 6, TenMon = "Lịch Sử" });
+                subjects.Add(new MonHocDTO { MaMon = 7, TenMon = "Địa Lý" });
+                subjects.Add(new MonHocDTO { MaMon = 8, TenMon = "Tiếng Anh" });
+                subjects.Add(new MonHocDTO { MaMon = 9, TenMon = "Giáo Dục Công Dân" });
+                subjects.Add(new MonHocDTO { MaMon = 10, TenMon = "Thể Dục" });
+                subjects.Add(new MonHocDTO { MaMon = 11, TenMon = "Tin Học" });
+                subjects.Add(new MonHocDTO { MaMon = 12, TenMon = "Công Nghệ" });
+            }
+
+            return subjects;
         }
 
         private void LoadSummaryData()
@@ -362,5 +553,12 @@ namespace QuanLyTruongHoc.GUI.Controls
                 }
             }
         }
+    }
+
+    // Lớp DTO để lưu trữ thông tin môn học cơ bản
+    public class MonHocDTO
+    {
+        public int MaMon { get; set; }
+        public string TenMon { get; set; }
     }
 }
