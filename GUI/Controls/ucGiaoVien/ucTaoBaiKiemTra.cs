@@ -710,8 +710,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                         {
                             NoiDung = questionData.QuestionContent,
                             DiemSo = questionData.Score,
-                            CoHinhAnh = false, // Image functionality removed
-                            DuongDanHinhAnh = String.Empty, // Use empty string instead of null
+
                             DapAnDung = questionData.CorrectAnswer
                         };
 
@@ -741,8 +740,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                         {
                             NoiDung = questionData.QuestionContent,
                             DiemSo = questionData.Score,
-                            CoHinhAnh = false, // Image functionality removed
-                            DuongDanHinhAnh = String.Empty, // Use empty string instead of null
+                            
                             HuongDanTraLoi = questionData.AnswerGuide,
                             CoGioiHanTu = questionData.HasWordLimit,
                             GioiHanTu = questionData.WordLimit

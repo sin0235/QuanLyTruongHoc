@@ -16,6 +16,8 @@ namespace QuanLyTruongHoc.DAL
         public BaiKiemTraDAO()
         {
             db = new DatabaseHelper();
+            // Đảm bảo các bảng cần thiết tồn tại
+            EnsureTablesExist();
         }
         
         /// <summary>
@@ -147,62 +149,138 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Chuẩn bị dữ liệu hình ảnh nếu cần
-                byte[] imageData = null;
-                if (question.CoHinhAnh && !string.IsNullOrWhiteSpace(question.DuongDanHinhAnh))
+                Console.WriteLine($"Thêm câu hỏi trắc nghiệm: {question.NoiDung}");
+                
+                // Kiểm tra loại câu hỏi
+                string normalizedType = ValidateQuestionType(question.LoaiCauHoi);
+                if (normalizedType == null || normalizedType != "TN")
                 {
-                    // Đọc dữ liệu nhị phân từ đường dẫn hình ảnh
-                    imageData = File.ReadAllBytes(question.DuongDanHinhAnh);
-                    question.HinhAnh = imageData;
+                    Console.WriteLine($"Loại câu hỏi không hợp lệ: {question.LoaiCauHoi}");
+                    question.LoaiCauHoi = "TN"; // Chuẩn hóa loại câu hỏi
                 }
 
-                // Truy vấn thêm câu hỏi
+                // Lấy thông tin môn học và giáo viên từ bài kiểm tra nếu chưa được cung cấp
+                if (question.MaMH <= 0 || question.MaGV <= 0)
+                {
+                    BaiKiemTraDTO baiKiemTra = GetBaiKiemTraById(question.MaBaiKT);
+                    if (baiKiemTra != null)
+                    {
+                        if (question.MaMH <= 0)
+                            question.MaMH = baiKiemTra.MaMH;
+                        if (question.MaGV <= 0)
+                            question.MaGV = baiKiemTra.MaGV;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Không tìm thấy thông tin bài kiểm tra");
+                        return -1;
+                    }
+                }
+
+                // Kiểm tra danh sách lựa chọn
+                if (question.DanhSachLuaChon.Count < 2)
+                {
+                    Console.WriteLine("Câu hỏi trắc nghiệm phải có ít nhất 2 lựa chọn");
+                    return -1;
+                }
+
+                // Tìm đáp án A, B, C, D
+                string dapAnA = "", dapAnB = "", dapAnC = "", dapAnD = "";
+                foreach (var luaChon in question.DanhSachLuaChon)
+                {
+                    switch (luaChon.NhanDang.ToUpper())
+                    {
+                        case "A":
+                            dapAnA = luaChon.NoiDung;
+                            break;
+                        case "B":
+                            dapAnB = luaChon.NoiDung;
+                            break;
+                        case "C":
+                            dapAnC = luaChon.NoiDung;
+                            break;
+                        case "D":
+                            dapAnD = luaChon.NoiDung;
+                            break;
+                    }
+                }
+
+                // Kiểm tra đáp án A, B phải có dữ liệu
+                if (string.IsNullOrEmpty(dapAnA) || string.IsNullOrEmpty(dapAnB))
+                {
+                    Console.WriteLine("Đáp án A và B là bắt buộc");
+                    return -1;
+                }
+
+                // Truy vấn thêm câu hỏi trắc nghiệm
                 string insertQuestionQuery = @"
-                    INSERT INTO CauHoi (
-                        MaBaiKT, LoaiCauHoi, NoiDung, DiemSo, CoHinhAnh, HinhAnh, ThuTu
+                    INSERT INTO CauHoiTracNghiem (
+                        NoiDung, DapAnA, DapAnB, DapAnC, DapAnD, 
+                        DapAnDung, Diem, DoKho, NgayTao, MaMon, MaGV
                     )
                     VALUES (
-                        @MaBaiKT, @LoaiCauHoi, @NoiDung, @DiemSo, @CoHinhAnh, @HinhAnh, @ThuTu
+                        @NoiDung, @DapAnA, @DapAnB, @DapAnC, @DapAnD, 
+                        @DapAnDung, @Diem, @DoKho, GETDATE(), @MaMon, @MaGV
                     );
                     SELECT SCOPE_IDENTITY();";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@MaBaiKT", question.MaBaiKT },
-                    { "@LoaiCauHoi", question.LoaiCauHoi },
                     { "@NoiDung", question.NoiDung },
-                    { "@DiemSo", question.DiemSo },
-                    { "@CoHinhAnh", question.CoHinhAnh ? 1 : 0 },
-                    { "@HinhAnh", question.CoHinhAnh ? (object)imageData : DBNull.Value },
-                    { "@ThuTu", question.ThuTu }
+                    { "@DapAnA", dapAnA },
+                    { "@DapAnB", dapAnB },
+                    { "@DapAnC", string.IsNullOrEmpty(dapAnC) ? DBNull.Value : (object)dapAnC },
+                    { "@DapAnD", string.IsNullOrEmpty(dapAnD) ? DBNull.Value : (object)dapAnD },
+                    { "@DapAnDung", question.DapAnDung.ToUpper() },
+                    { "@Diem", question.DiemSo },
+                    { "@DoKho", 3 }, // Mức độ khó mặc định là 3 (trung bình)
+                    { "@MaMon", question.MaMH },
+                    { "@MaGV", question.MaGV }
                 };
 
-                int maCauHoi = db.ExecuteInsertAndGetId(insertQuestionQuery, parameters);
+                int maCauHoiTN = db.ExecuteInsertAndGetId(insertQuestionQuery, parameters);
 
-                if (maCauHoi <= 0)
+                if (maCauHoiTN <= 0)
                 {
+                    Console.WriteLine("Thêm câu hỏi trắc nghiệm thất bại");
                     return -1; // Thêm câu hỏi thất bại
                 }
 
-                question.MaCauHoi = maCauHoi;
+                // Liên kết câu hỏi với bài kiểm tra
+                string insertLinkQuery = @"
+                    INSERT INTO BaiKiemTra_CauHoi (
+                        MaBaiKT, MaCauHoiTN, MaCauHoiTL, ThuTu
+                    )
+                    VALUES (
+                        @MaBaiKT, @MaCauHoiTN, NULL, @ThuTu
+                    );";
 
-                // Thêm các lựa chọn
-                if (question.DanhSachLuaChon.Count > 0)
+                Dictionary<string, object> linkParameters = new Dictionary<string, object>
                 {
-                    foreach (var luaChon in question.DanhSachLuaChon)
-                    {
-                        luaChon.MaCauHoi = maCauHoi;
-                        luaChon.LaDapAnDung = (luaChon.NhanDang == question.DapAnDung);
+                    { "@MaBaiKT", question.MaBaiKT },
+                    { "@MaCauHoiTN", maCauHoiTN },
+                    { "@ThuTu", question.ThuTu }
+                };
 
-                        AddMultipleChoiceOption(luaChon);
-                    }
+                bool linkSuccess = db.ExecuteNonQuery(insertLinkQuery, linkParameters);
+
+                if (!linkSuccess)
+                {
+                    // Nếu liên kết thất bại, xóa câu hỏi đã thêm
+                    string deleteQuery = $"DELETE FROM CauHoiTracNghiem WHERE MaCauHoiTN = {maCauHoiTN}";
+                    db.ExecuteNonQuery(deleteQuery);
+                    Console.WriteLine("Liên kết câu hỏi với bài kiểm tra thất bại");
+                    return -1;
                 }
 
-                return maCauHoi;
+                question.MaCauHoi = maCauHoiTN; // Cập nhật ID câu hỏi
+                Console.WriteLine($"Đã thêm câu hỏi trắc nghiệm ID: {maCauHoiTN}");
+                return maCauHoiTN;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error adding multiple-choice question: {ex.Message}");
+                Console.WriteLine($"Lỗi khi thêm câu hỏi trắc nghiệm: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return -1;
             }
         }
@@ -216,114 +294,100 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Prepare image data if needed
-                byte[] imageData = null;
-                if (question.CoHinhAnh && !string.IsNullOrWhiteSpace(question.DuongDanHinhAnh))
+                Console.WriteLine($"Thêm câu hỏi tự luận: {question.NoiDung}");
+                
+                // Kiểm tra loại câu hỏi
+                string normalizedType = ValidateQuestionType(question.LoaiCauHoi);
+                if (normalizedType == null || normalizedType != "TL")
                 {
-                    imageData = File.ReadAllBytes(question.DuongDanHinhAnh);
-                    question.HinhAnh = imageData;
+                    Console.WriteLine($"Loại câu hỏi không hợp lệ: {question.LoaiCauHoi}");
+                    question.LoaiCauHoi = "TL"; // Chuẩn hóa loại câu hỏi
                 }
                 
-                // Insert the question
+                // Lấy thông tin môn học và giáo viên từ bài kiểm tra nếu chưa được cung cấp
+                if (question.MaMH <= 0 || question.MaGV <= 0)
+                {
+                    BaiKiemTraDTO baiKiemTra = GetBaiKiemTraById(question.MaBaiKT);
+                    if (baiKiemTra != null)
+                    {
+                        if (question.MaMH <= 0)
+                            question.MaMH = baiKiemTra.MaMH;
+                        if (question.MaGV <= 0)
+                            question.MaGV = baiKiemTra.MaGV;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Không tìm thấy thông tin bài kiểm tra");
+                        return -1;
+                    }
+                }
+                
+                // Đảm bảo các bảng tồn tại trước khi thêm câu hỏi
+                EnsureTablesExist();
+                
+                // Truy vấn thêm câu hỏi tự luận
                 string insertQuestionQuery = @"
-                    INSERT INTO CauHoi (
-                        MaBaiKT, LoaiCauHoi, NoiDung, DiemSo, CoHinhAnh, HinhAnh, ThuTu
+                    INSERT INTO CauHoiTuLuan (
+                        NoiDung, DapAn, Diem, DoKho, NgayTao, MaMon, MaGV
                     )
                     VALUES (
-                        @MaBaiKT, @LoaiCauHoi, @NoiDung, @DiemSo, @CoHinhAnh, @HinhAnh, @ThuTu
+                        @NoiDung, @DapAn, @Diem, @DoKho, GETDATE(), @MaMon, @MaGV
                     );
                     SELECT SCOPE_IDENTITY();";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@MaBaiKT", question.MaBaiKT },
-                    { "@LoaiCauHoi", question.LoaiCauHoi },
                     { "@NoiDung", question.NoiDung },
-                    { "@DiemSo", question.DiemSo },
-                    { "@CoHinhAnh", question.CoHinhAnh ? 1 : 0 },
-                    { "@HinhAnh", question.CoHinhAnh ? (object)imageData : DBNull.Value },
+                    { "@DapAn", string.IsNullOrEmpty(question.HuongDanTraLoi) ? DBNull.Value : (object)question.HuongDanTraLoi },
+                    { "@Diem", question.DiemSo },
+                    { "@DoKho", 3 }, // Mức độ khó mặc định là 3 (trung bình)
+                    { "@MaMon", question.MaMH },
+                    { "@MaGV", question.MaGV }
+                };
+                
+                int maCauHoiTL = db.ExecuteInsertAndGetId(insertQuestionQuery, parameters);
+                
+                if (maCauHoiTL <= 0)
+                {
+                    Console.WriteLine("Thêm câu hỏi tự luận thất bại");
+                    return -1; // Thêm câu hỏi thất bại
+                }
+                
+                // Liên kết câu hỏi với bài kiểm tra
+                string insertLinkQuery = @"
+                    INSERT INTO BaiKiemTra_CauHoi (
+                        MaBaiKT, MaCauHoiTN, MaCauHoiTL, ThuTu
+                    )
+                    VALUES (
+                        @MaBaiKT, NULL, @MaCauHoiTL, @ThuTu
+                    );";
+                
+                Dictionary<string, object> linkParameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", question.MaBaiKT },
+                    { "@MaCauHoiTL", maCauHoiTL },
                     { "@ThuTu", question.ThuTu }
                 };
                 
-                int maCauHoi = db.ExecuteInsertAndGetId(insertQuestionQuery, parameters);
+                bool linkSuccess = db.ExecuteNonQuery(insertLinkQuery, linkParameters);
                 
-                if (maCauHoi <= 0)
+                if (!linkSuccess)
                 {
-                    return -1; // Failed to insert question
-                }
-                
-                question.MaCauHoi = maCauHoi;
-                
-                // Add essay-specific information
-                string insertEssayQuery = @"
-                    INSERT INTO CauHoiTuLuan (
-                        MaCauHoi, HuongDanTraLoi, CoGioiHanTu, GioiHanTu
-                    )
-                    VALUES (
-                        @MaCauHoi, @HuongDanTraLoi, @CoGioiHanTu, @GioiHanTu
-                    );";
-                
-                Dictionary<string, object> essayParameters = new Dictionary<string, object>
-                {
-                    { "@MaCauHoi", maCauHoi },
-                    { "@HuongDanTraLoi", string.IsNullOrEmpty(question.HuongDanTraLoi) ? DBNull.Value : (object)question.HuongDanTraLoi },
-                    { "@CoGioiHanTu", question.CoGioiHanTu ? 1 : 0 },
-                    { "@GioiHanTu", question.GioiHanTu }
-                };
-                
-                bool success = db.ExecuteNonQuery(insertEssayQuery, essayParameters);
-                
-                if (!success)
-                {
-                    // Try to delete the main question if essay info insert fails
-                    string deleteQuery = $"DELETE FROM CauHoi WHERE MaCauHoi = {maCauHoi}";
+                    // Nếu liên kết thất bại, xóa câu hỏi đã thêm
+                    string deleteQuery = $"DELETE FROM CauHoiTuLuan WHERE MaCauHoiTL = {maCauHoiTL}";
                     db.ExecuteNonQuery(deleteQuery);
+                    Console.WriteLine("Liên kết câu hỏi với bài kiểm tra thất bại");
                     return -1;
                 }
                 
-                return maCauHoi;
+                question.MaCauHoi = maCauHoiTL; // Cập nhật ID câu hỏi
+                Console.WriteLine($"Đã thêm câu hỏi tự luận ID: {maCauHoiTL}");
+                return maCauHoiTL;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error adding essay question: {ex.Message}");
-                return -1;
-            }
-        }
-        
-        /// <summary>
-        /// Add a multiple-choice option to the database
-        /// </summary>
-        /// <param name="option">The multiple-choice option data</param>
-        /// <returns>ID of the created option or -1 if failed</returns>
-        public int AddMultipleChoiceOption(LuaChonDTO option)
-        {
-            try
-            {
-                string insertOptionQuery = @"
-                    INSERT INTO LuaChon (
-                        MaCauHoi, NoiDung, NhanDang, LaDapAnDung
-                    )
-                    VALUES (
-                        @MaCauHoi, @NoiDung, @NhanDang, @LaDapAnDung
-                    );
-                    SELECT SCOPE_IDENTITY();";
-                
-                Dictionary<string, object> parameters = new Dictionary<string, object>
-                {
-                    { "@MaCauHoi", option.MaCauHoi },
-                    { "@NoiDung", option.NoiDung },
-                    { "@NhanDang", option.NhanDang },
-                    { "@LaDapAnDung", option.LaDapAnDung ? 1 : 0 }
-                };
-                
-                int maLuaChon = db.ExecuteInsertAndGetId(insertOptionQuery, parameters);
-                option.MaLuaChon = maLuaChon;
-                
-                return maLuaChon;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error adding multiple-choice option: {ex.Message}");
+                Console.WriteLine($"Lỗi khi thêm câu hỏi tự luận: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return -1;
             }
         }
@@ -431,8 +495,11 @@ namespace QuanLyTruongHoc.DAL
             
             try
             {
+                Console.WriteLine($"Bắt đầu lấy danh sách câu hỏi cho bài kiểm tra ID: {maBaiKT}");
+                
+                // Lấy danh sách liên kết câu hỏi với bài kiểm tra
                 string query = @"
-                    SELECT * FROM CauHoi
+                    SELECT * FROM BaiKiemTra_CauHoi
                     WHERE MaBaiKT = @MaBaiKT
                     ORDER BY ThuTu";
                 
@@ -443,97 +510,79 @@ namespace QuanLyTruongHoc.DAL
                 
                 DataTable dt = db.ExecuteQuery(query, parameters);
                 
+                Console.WriteLine($"Kết quả truy vấn liên kết: {(dt == null ? "NULL" : dt.Rows.Count + " dòng")}");
+                
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        int maCauHoi = Convert.ToInt32(row["MaCauHoi"]);
-                        string loaiCauHoi = row["LoaiCauHoi"].ToString();
+                        int thuTu = Convert.ToInt32(row["ThuTu"]);
                         
-                        if (loaiCauHoi == "MultipleChoice")
+                        // Kiểm tra loại câu hỏi (trắc nghiệm hoặc tự luận)
+                        if (row["MaCauHoiTN"] != DBNull.Value)
                         {
-                            CauHoiTracNghiemDTO question = new CauHoiTracNghiemDTO
-                            {
-                                MaCauHoi = maCauHoi,
-                                MaBaiKT = maBaiKT,
-                                LoaiCauHoi = loaiCauHoi,
-                                NoiDung = row["NoiDung"].ToString(),
-                                DiemSo = Convert.ToDouble(row["DiemSo"]),
-                                CoHinhAnh = Convert.ToBoolean(row["CoHinhAnh"]),
-                                ThuTu = Convert.ToInt32(row["ThuTu"])
-                            };
+                            // Xử lý câu hỏi trắc nghiệm
+                            int maCauHoiTN = Convert.ToInt32(row["MaCauHoiTN"]);
+                            CauHoiTracNghiemDTO question = GetMultipleChoiceQuestion(maCauHoiTN);
                             
-                            // Get image if available
-                            if (question.CoHinhAnh && row["HinhAnh"] != DBNull.Value)
+                            if (question != null)
                             {
-                                question.HinhAnh = (byte[])row["HinhAnh"];
+                                question.MaBaiKT = maBaiKT;
+                                question.ThuTu = thuTu;
+                                questions.Add(question);
                             }
-                            
-                            // Load options
-                            question.DanhSachLuaChon = GetOptionsForQuestion(maCauHoi);
-                            
-                            // Determine the correct answer
-                            foreach (var option in question.DanhSachLuaChon)
-                            {
-                                if (option.LaDapAnDung)
-                                {
-                                    question.DapAnDung = option.NhanDang;
-                                    break;
-                                }
-                            }
-                            
-                            questions.Add(question);
                         }
-                        else if (loaiCauHoi == "Essay")
+                        else if (row["MaCauHoiTL"] != DBNull.Value)
                         {
-                            CauHoiTuLuanDTO question = new CauHoiTuLuanDTO
-                            {
-                                MaCauHoi = maCauHoi,
-                                MaBaiKT = maBaiKT,
-                                LoaiCauHoi = loaiCauHoi,
-                                NoiDung = row["NoiDung"].ToString(),
-                                DiemSo = Convert.ToDouble(row["DiemSo"]),
-                                CoHinhAnh = Convert.ToBoolean(row["CoHinhAnh"]),
-                                ThuTu = Convert.ToInt32(row["ThuTu"])
-                            };
+                            // Xử lý câu hỏi tự luận
+                            int maCauHoiTL = Convert.ToInt32(row["MaCauHoiTL"]);
+                            CauHoiTuLuanDTO question = GetEssayQuestion(maCauHoiTL);
                             
-                            // Get image if available
-                            if (question.CoHinhAnh && row["HinhAnh"] != DBNull.Value)
+                            if (question != null)
                             {
-                                question.HinhAnh = (byte[])row["HinhAnh"];
+                                question.MaBaiKT = maBaiKT;
+                                question.ThuTu = thuTu;
+                                questions.Add(question);
                             }
-                            
-                            // Get essay-specific information
-                            LoadEssayQuestionDetails(question);
-                            
-                            questions.Add(question);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Không có thông tin câu hỏi cho thứ tự {thuTu}");
                         }
                     }
                 }
+                else
+                {
+                    Console.WriteLine($"Không có câu hỏi nào cho bài kiểm tra ID: {maBaiKT}");
+                }
+                
+                Console.WriteLine($"Kết thúc lấy danh sách câu hỏi. Tổng số: {questions.Count}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving questions: {ex.Message}");
+                Console.WriteLine($"Lỗi khi lấy danh sách câu hỏi: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
             }
             
             return questions;
         }
         
         /// <summary>
-        /// Load additional details for an essay question
+        /// Lấy thông tin câu hỏi trắc nghiệm từ cơ sở dữ liệu
         /// </summary>
-        /// <param name="question">The essay question to load details for</param>
-        private void LoadEssayQuestionDetails(CauHoiTuLuanDTO question)
+        /// <param name="maCauHoiTN">ID câu hỏi trắc nghiệm</param>
+        /// <returns>Đối tượng câu hỏi trắc nghiệm hoặc null nếu không tìm thấy</returns>
+        private CauHoiTracNghiemDTO GetMultipleChoiceQuestion(int maCauHoiTN)
         {
             try
             {
                 string query = @"
-                    SELECT * FROM CauHoiTuLuan
-                    WHERE MaCauHoi = @MaCauHoi";
+                    SELECT * FROM CauHoiTracNghiem
+                    WHERE MaCauHoiTN = @MaCauHoiTN";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@MaCauHoi", question.MaCauHoi }
+                    { "@MaCauHoiTN", maCauHoiTN }
                 };
                 
                 DataTable dt = db.ExecuteQuery(query, parameters);
@@ -542,63 +591,122 @@ namespace QuanLyTruongHoc.DAL
                 {
                     DataRow row = dt.Rows[0];
                     
-                    question.HuongDanTraLoi = row["HuongDanTraLoi"] != DBNull.Value ? row["HuongDanTraLoi"].ToString() : null;
-                    question.CoGioiHanTu = Convert.ToBoolean(row["CoGioiHanTu"]);
-                    question.GioiHanTu = Convert.ToInt32(row["GioiHanTu"]);
+                    CauHoiTracNghiemDTO question = new CauHoiTracNghiemDTO
+                    {
+                        MaCauHoi = maCauHoiTN,
+                        LoaiCauHoi = "TN",
+                        NoiDung = row["NoiDung"].ToString(),
+                        DiemSo = Convert.ToDouble(row["Diem"]),
+                        DapAnDung = row["DapAnDung"].ToString()
+                    };
+                    
+                    // Tạo danh sách lựa chọn từ dữ liệu trong bảng
+                    List<LuaChonDTO> options = new List<LuaChonDTO>();
+                    
+                    if (row["DapAnA"] != DBNull.Value)
+                    {
+                        options.Add(new LuaChonDTO 
+                        { 
+                            MaCauHoi = maCauHoiTN,
+                            NhanDang = "A",
+                            NoiDung = row["DapAnA"].ToString(),
+                            LaDapAnDung = row["DapAnDung"].ToString() == "A"
+                        });
+                    }
+                    
+                    if (row["DapAnB"] != DBNull.Value)
+                    {
+                        options.Add(new LuaChonDTO 
+                        { 
+                            MaCauHoi = maCauHoiTN,
+                            NhanDang = "B",
+                            NoiDung = row["DapAnB"].ToString(),
+                            LaDapAnDung = row["DapAnDung"].ToString() == "B"
+                        });
+                    }
+                    
+                    if (row["DapAnC"] != DBNull.Value)
+                    {
+                        options.Add(new LuaChonDTO 
+                        { 
+                            MaCauHoi = maCauHoiTN,
+                            NhanDang = "C",
+                            NoiDung = row["DapAnC"].ToString(),
+                            LaDapAnDung = row["DapAnDung"].ToString() == "C"
+                        });
+                    }
+                    
+                    if (row["DapAnD"] != DBNull.Value)
+                    {
+                        options.Add(new LuaChonDTO 
+                        { 
+                            MaCauHoi = maCauHoiTN,
+                            NhanDang = "D",
+                            NoiDung = row["DapAnD"].ToString(),
+                            LaDapAnDung = row["DapAnDung"].ToString() == "D"
+                        });
+                    }
+                    
+                    question.DanhSachLuaChon = options;
+                    
+                    return question;
                 }
+                
+                return null;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading essay question details: {ex.Message}");
+                Console.WriteLine($"Lỗi khi lấy câu hỏi trắc nghiệm: {ex.Message}");
+                return null;
             }
         }
         
         /// <summary>
-        /// Get all options for a multiple-choice question
+        /// Lấy thông tin câu hỏi tự luận từ cơ sở dữ liệu
         /// </summary>
-        /// <param name="maCauHoi">ID of the question</param>
-        /// <returns>List of options</returns>
-        public List<LuaChonDTO> GetOptionsForQuestion(int maCauHoi)
+        /// <param name="maCauHoiTL">ID câu hỏi tự luận</param>
+        /// <returns>Đối tượng câu hỏi tự luận hoặc null nếu không tìm thấy</returns>
+        private CauHoiTuLuanDTO GetEssayQuestion(int maCauHoiTL)
         {
-            List<LuaChonDTO> options = new List<LuaChonDTO>();
-            
             try
             {
                 string query = @"
-                    SELECT * FROM LuaChon
-                    WHERE MaCauHoi = @MaCauHoi
-                    ORDER BY NhanDang";
+                    SELECT * FROM CauHoiTuLuan
+                    WHERE MaCauHoiTL = @MaCauHoiTL";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
-                    { "@MaCauHoi", maCauHoi }
+                    { "@MaCauHoiTL", maCauHoiTL }
                 };
                 
                 DataTable dt = db.ExecuteQuery(query, parameters);
                 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    foreach (DataRow row in dt.Rows)
+                    DataRow row = dt.Rows[0];
+                    
+                    CauHoiTuLuanDTO question = new CauHoiTuLuanDTO
                     {
-                        LuaChonDTO option = new LuaChonDTO
-                        {
-                            MaLuaChon = Convert.ToInt32(row["MaLuaChon"]),
-                            MaCauHoi = maCauHoi,
-                            NoiDung = row["NoiDung"].ToString(),
-                            NhanDang = row["NhanDang"].ToString(),
-                            LaDapAnDung = Convert.ToBoolean(row["LaDapAnDung"])
-                        };
-                        
-                        options.Add(option);
-                    }
+                        MaCauHoi = maCauHoiTL,
+                        LoaiCauHoi = "TL",
+                        NoiDung = row["NoiDung"].ToString(),
+                        DiemSo = Convert.ToDouble(row["Diem"]),
+                        HuongDanTraLoi = row["DapAn"] != DBNull.Value ? row["DapAn"].ToString() : null,
+                        // Sử dụng cấu trúc cũ để giữ tương thích với code hiện tại
+                        CoGioiHanTu = false,
+                        GioiHanTu = 500
+                    };
+                    
+                    return question;
                 }
+                
+                return null;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error retrieving options: {ex.Message}");
+                Console.WriteLine($"Lỗi khi lấy câu hỏi tự luận: {ex.Message}");
+                return null;
             }
-            
-            return options;
         }
         
         /// <summary>
@@ -733,36 +841,70 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Get all questions to delete options and essay details first
-                List<CauHoiDTO> questions = GetQuestionsByTestId(maBaiKT);
+                Console.WriteLine($"Bắt đầu xóa bài kiểm tra ID: {maBaiKT}");
                 
-                // Use a transaction to ensure all are deleted
+                // Lấy thông tin về các câu hỏi được liên kết với bài kiểm tra
+                string getQuestionsQuery = @"
+                    SELECT MaCauHoiTN, MaCauHoiTL FROM BaiKiemTra_CauHoi
+                    WHERE MaBaiKT = @MaBaiKT";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT }
+                };
+                
+                DataTable dt = db.ExecuteQuery(getQuestionsQuery, parameters);
+                
+                // Chuẩn bị câu lệnh xóa
                 List<string> deleteCommands = new List<string>();
                 
-                // Delete options for multiple-choice questions
-                foreach (var question in questions)
+                // Xóa liên kết giữa bài kiểm tra và câu hỏi
+                deleteCommands.Add($"DELETE FROM BaiKiemTra_CauHoi WHERE MaBaiKT = {maBaiKT}");
+                
+                // Xóa tất cả câu hỏi
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    if (question is CauHoiTracNghiemDTO)
+                    foreach (DataRow row in dt.Rows)
                     {
-                        deleteCommands.Add($"DELETE FROM LuaChon WHERE MaCauHoi = {question.MaCauHoi}");
-                    }
-                    else if (question is CauHoiTuLuanDTO)
-                    {
-                        deleteCommands.Add($"DELETE FROM CauHoiTuLuan WHERE MaCauHoi = {question.MaCauHoi}");
+                        if (row["MaCauHoiTN"] != DBNull.Value)
+                        {
+                            int maCauHoiTN = Convert.ToInt32(row["MaCauHoiTN"]);
+                            deleteCommands.Add($"DELETE FROM CauHoiTracNghiem WHERE MaCauHoiTN = {maCauHoiTN}");
+                        }
+                        else if (row["MaCauHoiTL"] != DBNull.Value)
+                        {
+                            int maCauHoiTL = Convert.ToInt32(row["MaCauHoiTL"]);
+                            deleteCommands.Add($"DELETE FROM CauHoiTuLuan WHERE MaCauHoiTL = {maCauHoiTL}");
+                        }
                     }
                 }
                 
-                // Delete all questions
-                deleteCommands.Add($"DELETE FROM CauHoi WHERE MaBaiKT = {maBaiKT}");
+                // Xóa liên kết giữa bài kiểm tra và lớp học
+                deleteCommands.Add($"DELETE FROM BaiKiemTra_LopHoc WHERE MaBaiKT = {maBaiKT}");
                 
-                // Delete the test itself
+                // Xóa bài làm của học sinh nếu có
+                deleteCommands.Add($"DELETE FROM BaiLam WHERE MaBaiKT = {maBaiKT}");
+                
+                // Cuối cùng xóa bài kiểm tra
                 deleteCommands.Add($"DELETE FROM BaiKiemTra WHERE MaBaiKT = {maBaiKT}");
                 
-                return db.ExecuteTransaction(deleteCommands);
+                bool success = db.ExecuteTransaction(deleteCommands);
+                
+                if (success)
+                {
+                    Console.WriteLine($"Đã xóa thành công bài kiểm tra ID: {maBaiKT}");
+                }
+                else
+                {
+                    Console.WriteLine($"Xóa bài kiểm tra ID: {maBaiKT} thất bại");
+                }
+                
+                return success;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting test: {ex.Message}");
+                Console.WriteLine($"Lỗi khi xóa bài kiểm tra: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return false;
             }
         }
@@ -774,59 +916,78 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Check and create CauHoi table if it doesn't exist
-                string checkCauHoiTable = @"
-                    IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CauHoi')
+                Console.WriteLine("Kiểm tra cấu trúc cơ sở dữ liệu...");
+                
+                // Kiểm tra bảng BaiKiemTra_CauHoi
+                string checkBaiKiemTraCauHoiTable = @"
+                    IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'BaiKiemTra_CauHoi')
                     BEGIN
-                        CREATE TABLE CauHoi (
-                            MaCauHoi INT IDENTITY(1,1) PRIMARY KEY,
+                        CREATE TABLE BaiKiemTra_CauHoi (
                             MaBaiKT INT NOT NULL,
-                            LoaiCauHoi NVARCHAR(20) NOT NULL,
-                            NoiDung NVARCHAR(MAX) NOT NULL,
-                            DiemSo FLOAT NOT NULL,
-                            CoHinhAnh BIT DEFAULT 0,
-                            HinhAnh VARBINARY(MAX) NULL,
+                            MaCauHoiTL INT NULL,
+                            MaCauHoiTN INT NULL,
                             ThuTu INT NOT NULL,
-                            FOREIGN KEY (MaBaiKT) REFERENCES BaiKiemTra(MaBaiKT)
+                            CONSTRAINT PK_BaiKiemTra_CauHoi PRIMARY KEY (MaBaiKT, ThuTu),
+                            CONSTRAINT FK_BaiKiemTra_CauHoi_BaiKT FOREIGN KEY (MaBaiKT) REFERENCES BaiKiemTra(MaBaiKT),
+                            CONSTRAINT FK_BaiKiemTra_CauHoi_TL FOREIGN KEY (MaCauHoiTL) REFERENCES CauHoiTuLuan(MaCauHoiTL),
+                            CONSTRAINT FK_BaiKiemTra_CauHoi_TN FOREIGN KEY (MaCauHoiTN) REFERENCES CauHoiTracNghiem(MaCauHoiTN),
+                            CONSTRAINT CK_Either_TL_or_TN CHECK (
+                                (MaCauHoiTL IS NULL AND MaCauHoiTN IS NOT NULL) OR
+                                (MaCauHoiTL IS NOT NULL AND MaCauHoiTN IS NULL)
+                            )
                         )
                     END";
                 
-                db.ExecuteNonQuery(checkCauHoiTable);
+                db.ExecuteNonQuery(checkBaiKiemTraCauHoiTable);
                 
-                // Check and create LuaChon table if it doesn't exist
-                string checkLuaChonTable = @"
-                    IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'LuaChon')
-                    BEGIN
-                        CREATE TABLE LuaChon (
-                            MaLuaChon INT IDENTITY(1,1) PRIMARY KEY,
-                            MaCauHoi INT NOT NULL,
-                            NoiDung NVARCHAR(500) NOT NULL,
-                            NhanDang CHAR(1) NOT NULL,
-                            LaDapAnDung BIT NOT NULL,
-                            FOREIGN KEY (MaCauHoi) REFERENCES CauHoi(MaCauHoi)
-                        )
-                    END";
-                
-                db.ExecuteNonQuery(checkLuaChonTable);
-                
-                // Check and create CauHoiTuLuan table if it doesn't exist
+                // Kiểm tra bảng CauHoiTuLuan
                 string checkCauHoiTuLuanTable = @"
                     IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CauHoiTuLuan')
                     BEGIN
                         CREATE TABLE CauHoiTuLuan (
-                            MaCauHoi INT PRIMARY KEY,
-                            HuongDanTraLoi NVARCHAR(MAX) NULL,
-                            CoGioiHanTu BIT DEFAULT 0,
-                            GioiHanTu INT DEFAULT 500,
-                            FOREIGN KEY (MaCauHoi) REFERENCES CauHoi(MaCauHoi)
+                            MaCauHoiTL INT IDENTITY(1,1) PRIMARY KEY,
+                            NoiDung NVARCHAR(MAX) NOT NULL,
+                            DapAn NVARCHAR(MAX) NULL,
+                            Diem FLOAT NOT NULL,
+                            DoKho INT NOT NULL,
+                            NgayTao DATETIME DEFAULT GETDATE(),
+                            MaMon INT NOT NULL,
+                            MaGV INT NOT NULL,
+                            CONSTRAINT FK_CauHoiTL_MonHoc FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon),
+                            CONSTRAINT FK_CauHoiTL_GiaoVien FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV)
                         )
                     END";
                 
                 db.ExecuteNonQuery(checkCauHoiTuLuanTable);
+                
+                // Kiểm tra bảng CauHoiTracNghiem
+                string checkCauHoiTracNghiemTable = @"
+                    IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'CauHoiTracNghiem')
+                    BEGIN
+                        CREATE TABLE CauHoiTracNghiem (
+                            MaCauHoiTN INT IDENTITY(1,1) PRIMARY KEY,
+                            NoiDung NVARCHAR(MAX) NOT NULL,
+                            DapAnA NVARCHAR(500) NOT NULL,
+                            DapAnB NVARCHAR(500) NOT NULL,
+                            DapAnC NVARCHAR(500) NULL,
+                            DapAnD NVARCHAR(500) NULL,
+                            DapAnDung CHAR(1) NOT NULL,
+                            Diem FLOAT NOT NULL,
+                            DoKho INT NOT NULL,
+                            NgayTao DATETIME DEFAULT GETDATE(),
+                            MaMon INT NOT NULL,
+                            MaGV INT NOT NULL,
+                            CONSTRAINT FK_CauHoiTN_MonHoc FOREIGN KEY (MaMon) REFERENCES MonHoc(MaMon),
+                            CONSTRAINT FK_CauHoiTN_GiaoVien FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV),
+                            CONSTRAINT CK_DapAnDung CHECK (DapAnDung IN ('A', 'B', 'C', 'D'))
+                        )
+                    END";
+                
+                db.ExecuteNonQuery(checkCauHoiTracNghiemTable);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error ensuring tables exist: {ex.Message}");
+                Console.WriteLine($"Lỗi khi kiểm tra cấu trúc cơ sở dữ liệu: {ex.Message}");
             }
         }
         /// <summary>
@@ -1341,6 +1502,36 @@ namespace QuanLyTruongHoc.DAL
                 Console.WriteLine($"Lỗi khi tải tất cả bài kiểm tra cho học sinh: {ex.Message}");
                 return new List<BaiKiemTraDTO>();
             }
+        }
+
+        /// <summary>
+        /// Validates and normalizes the question type for consistency
+        /// </summary>
+        /// <param name="loaiCauHoi">The question type string</param>
+        /// <returns>Normalized question type "TN" or "TL" or null if invalid</returns>
+        private string ValidateQuestionType(string loaiCauHoi)
+        {
+            if (string.IsNullOrWhiteSpace(loaiCauHoi))
+                return null;
+                
+            // Trim and normalize type string
+            string normalizedType = loaiCauHoi.Trim();
+            
+            // Check for valid question types, using case-insensitive comparison
+            if (string.Equals(normalizedType, "MultipleChoice", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(normalizedType, "TracNghiem", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(normalizedType, "TN", StringComparison.OrdinalIgnoreCase))
+            {
+                return "TN"; // Chuẩn hóa thành tag "TN" cho trắc nghiệm
+            }
+            else if (string.Equals(normalizedType, "Essay", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(normalizedType, "TuLuan", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(normalizedType, "TL", StringComparison.OrdinalIgnoreCase))
+            {
+                return "TL"; // Chuẩn hóa thành tag "TL" cho tự luận
+            }
+            
+            return null; // Invalid type
         }
     }
 }

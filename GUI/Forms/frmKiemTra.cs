@@ -247,23 +247,14 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                         try
                         {
-                            // Convert byte array to image if exists
-                            Image questionImage = null;
-                            if (mcQuestion.CoHinhAnh && mcQuestion.HinhAnh != null && mcQuestion.HinhAnh.Length > 0)
-                            {
-                                using (MemoryStream ms = new MemoryStream(mcQuestion.HinhAnh))
-                                {
-                                    questionImage = Image.FromStream(ms);
-                                }
-                            }
+
+                      
 
                             // Initialize the options list if null
                             if (mcQuestion.DanhSachLuaChon == null)
                             {
                                 Console.WriteLine($"Danh sách lựa chọn null cho câu hỏi {mcQuestion.MaCauHoi}");
                                 mcQuestion.DanhSachLuaChon = new List<LuaChonDTO>();
-                                // Try loading the options
-                                mcQuestion.DanhSachLuaChon = baiKiemTraDAO.GetOptionsForQuestion(mcQuestion.MaCauHoi);
                             }
 
                             // Get options and correct answers
@@ -282,9 +273,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                                 mcQuestion.NoiDung,
                                 options,
                                 correctOptions,
-                                isMultipleAnswer,
-                                questionImage,
-                                (int)mcQuestion.DiemSo
+                                isMultipleAnswer
                             );
 
                             // Set the size and dock style
@@ -309,15 +298,8 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                         try
                         {
-                            // Convert byte array to image if exists
-                            Image questionImage = null;
-                            if (essayQuestion.CoHinhAnh && essayQuestion.HinhAnh != null && essayQuestion.HinhAnh.Length > 0)
-                            {
-                                using (MemoryStream ms = new MemoryStream(essayQuestion.HinhAnh))
-                                {
-                                    questionImage = Image.FromStream(ms);
-                                }
-                            }
+
+                           
 
                             // Load the question data
                             tlItem.LoadQuestion(
@@ -325,9 +307,8 @@ namespace QuanLyTruongHoc.GUI.Forms
                                 questionNumber,
                                 essayQuestion.NoiDung,
                                 essayQuestion.HuongDanTraLoi ?? "",
-                                essayQuestion.CoGioiHanTu ? essayQuestion.GioiHanTu : 10000,
-                                questionImage,
-                                (int)essayQuestion.DiemSo
+                                essayQuestion.CoGioiHanTu ? essayQuestion.GioiHanTu : 10000
+
                             );
 
                             // Set the size and dock style

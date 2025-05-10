@@ -59,13 +59,12 @@ namespace QuanLyTruongHoc.DTO
     {
         public int MaCauHoi { get; set; }
         public int MaBaiKT { get; set; }
-        public string LoaiCauHoi { get; set; } // "MultipleChoice" or "Essay"
+        public string LoaiCauHoi { get; set; } // "TN" or "TL"
         public string NoiDung { get; set; }
         public double DiemSo { get; set; }
-        public bool CoHinhAnh { get; set; }
-        public byte[] HinhAnh { get; set; }
-        public string DuongDanHinhAnh { get; set; } // Temporary path for UI only
         public int ThuTu { get; set; }
+        public int MaMH { get; set; } // Mã môn học
+        public int MaGV { get; set; } // Mã giáo viên
     }
     
     /// <summary>
@@ -78,7 +77,9 @@ namespace QuanLyTruongHoc.DTO
         
         public CauHoiTracNghiemDTO()
         {
-            LoaiCauHoi = "MultipleChoice";
+            LoaiCauHoi = "TN";
+            MaMH = 0; // Sẽ được thiết lập từ bài kiểm tra
+            MaGV = 0; // Sẽ được thiết lập từ bài kiểm tra
         }
     }
     
@@ -93,8 +94,10 @@ namespace QuanLyTruongHoc.DTO
         
         public CauHoiTuLuanDTO()
         {
-            LoaiCauHoi = "Essay";
+            LoaiCauHoi = "TL";
             GioiHanTu = 500; // default word limit
+            MaMH = 0; // Sẽ được thiết lập từ bài kiểm tra
+            MaGV = 0; // Sẽ được thiết lập từ bài kiểm tra
         }
     }
     
