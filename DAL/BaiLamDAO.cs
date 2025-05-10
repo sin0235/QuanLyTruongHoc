@@ -17,6 +17,113 @@ namespace QuanLyTruongHoc.DAL
         }
 
         /// <summary>
+        /// Checks if the student is allowed to take a test based on attempt limits
+        /// </summary>
+        /// <param name="maBaiKT">Test ID</param>
+        /// <param name="maHS">Student ID</param>
+        /// <returns>Tuple with (isAllowed, errorMessage, remainingAttempts)</returns>
+        public Tuple<bool, string, int> KiemTraLuotLamBai(int maBaiKT, int maHS)
+        {
+            try
+            {
+                string query = @"
+                    DECLARE @KetQua BIT;
+                    DECLARE @ThongBao NVARCHAR(500);
+                    DECLARE @SoLuotConLai INT;
+                    
+                    EXEC sp_KiemTraLuotLamBaiHopLe @MaBaiKT, @MaHS, @KetQua OUTPUT, @ThongBao OUTPUT;
+                    SET @SoLuotConLai = dbo.fn_SoLuotLamBaiConLai(@MaBaiKT, @MaHS);
+                    
+                    SELECT @KetQua AS KetQua, @ThongBao AS ThongBao, @SoLuotConLai AS SoLuotConLai;";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT },
+                    { "@MaHS", maHS }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+                
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    bool isAllowed = Convert.ToBoolean(row["KetQua"]);
+                    string errorMessage = row["ThongBao"].ToString();
+                    int remainingAttempts = Convert.ToInt32(row["SoLuotConLai"]);
+                    
+                    return new Tuple<bool, string, int>(isAllowed, errorMessage, remainingAttempts);
+                }
+                
+                return new Tuple<bool, string, int>(false, "Lỗi kiểm tra lượt làm bài", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking test attempt: {ex.Message}");
+                return new Tuple<bool, string, int>(false, $"Lỗi: {ex.Message}", 0);
+            }
+        }
+        
+        /// <summary>
+        /// Get the number of attempts already used by a student for a test
+        /// </summary>
+        /// <param name="maBaiKT">Test ID</param>
+        /// <param name="maHS">Student ID</param>
+        /// <returns>Number of attempts used</returns>
+        public int GetAttemptsUsed(int maBaiKT, int maHS)
+        {
+            try
+            {
+                string query = @"
+                    SELECT COUNT(*) 
+                    FROM BaiLam
+                    WHERE MaBaiKT = @MaBaiKT AND MaHS = @MaHS";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT },
+                    { "@MaHS", maHS }
+                };
+                
+                object result = db.ExecuteScalar(query, parameters);
+                return Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting attempts used: {ex.Message}");
+                return 0;
+            }
+        }
+        
+        /// <summary>
+        /// Get maximum allowed attempts for a test
+        /// </summary>
+        /// <param name="maBaiKT">Test ID</param>
+        /// <returns>Maximum allowed attempts</returns>
+        public int GetMaxAttempts(int maBaiKT)
+        {
+            try
+            {
+                string query = @"
+                    SELECT SoLanLamToiDa
+                    FROM BaiKiemTra
+                    WHERE MaBaiKT = @MaBaiKT";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT }
+                };
+                
+                object result = db.ExecuteScalar(query, parameters);
+                return Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting max attempts: {ex.Message}");
+                return 1; // Default to 1 attempt if error
+            }
+        }
+
+        /// <summary>
         /// Get all submissions for a specific test
         /// </summary>
         /// <param name="maBaiKT">Test ID</param>

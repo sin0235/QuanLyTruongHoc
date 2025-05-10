@@ -30,7 +30,7 @@ namespace QuanLyTruongHoc.DTO
         public string GhiChuChamDiem { get; set; }
         public bool CoMatKhau { get; set; }
         public string MatKhau { get; set; }
-        public string TrangThai { get; set; } // "Draft" or "Published"
+        public string TrangThai { get; set; } // "Chưa công bố" hoặc "Đã công bố"
         public DateTime NgayTao { get; set; }
         public List<CauHoiDTO> DanhSachCauHoi { get; set; } = new List<CauHoiDTO>();
         // Các thuộc tính cần thêm vào BaiKiemTraDTO

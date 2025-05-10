@@ -343,7 +343,8 @@ namespace QuanLyTruongHoc.DAL
                         mh.TenMon AS TenMonHoc, 
                         lh.TenLop AS TenLop,
                         bkl.MaLop,
-                        bkl.NgayKiemTra
+                        bkl.NgayKiemTra AS ThoiGianBatDau,
+                        bk.ThoiGianKetThuc
                     FROM 
                         BaiKiemTra bk
                     LEFT JOIN 
@@ -386,7 +387,8 @@ namespace QuanLyTruongHoc.DAL
                         TrangThai = row["TrangThai"].ToString(),
                         NgayTao = Convert.ToDateTime(row["NgayTao"]),
                         HocKy = Convert.ToInt32(row["HocKy"]),
-                        NamHoc = row["NamHoc"].ToString()
+                        NamHoc = row["NamHoc"].ToString(),
+                        ThoiGianKetThuc = row["ThoiGianKetThuc"] != DBNull.Value ? Convert.ToDateTime(row["ThoiGianKetThuc"]) : DateTime.MinValue
                     };
                     
                     // Handle class information if available in the join
@@ -396,10 +398,10 @@ namespace QuanLyTruongHoc.DAL
                         baiKiemTra.TenLop = row["TenLop"].ToString();
                         
                         // Get test schedule from BaiKiemTra_LopHoc
-                        if (row["NgayKiemTra"] != DBNull.Value)
+                        if (row["ThoiGianBatDau"] != DBNull.Value)
                         {
-                            baiKiemTra.ThoiGianBatDau = Convert.ToDateTime(row["NgayKiemTra"]);
-                            baiKiemTra.ThoiGianKetThuc = baiKiemTra.ThoiGianBatDau.AddMinutes(baiKiemTra.ThoiGianLamBai);
+                            baiKiemTra.ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]);
+                            // ThoiGianKetThuc được lấy trực tiếp từ cơ sở dữ liệu trong constructor
                         }
                     }
                     
@@ -953,7 +955,7 @@ namespace QuanLyTruongHoc.DAL
                         mh.TenMon AS TenMonHoc,
                         lh.TenLop,
                         bkl.NgayKiemTra AS ThoiGianBatDau,
-                        DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra) AS ThoiGianKetThuc
+                        bk.ThoiGianKetThuc
                     FROM 
                         BaiKiemTra bk
                     INNER JOIN 
@@ -1097,7 +1099,8 @@ namespace QuanLyTruongHoc.DAL
                         bk.*, 
                         mh.TenMon AS TenMonHoc, 
                         lh.TenLop AS TenLop,
-                        bkl.NgayKiemTra
+                        bkl.NgayKiemTra AS ThoiGianBatDau,
+                        bk.ThoiGianKetThuc AS ThoiGianKetThuc
                     FROM 
                         BaiKiemTra bk
                     INNER JOIN 
@@ -1137,8 +1140,8 @@ namespace QuanLyTruongHoc.DAL
                         ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
                         SoLanLamToiDa = Convert.ToInt32(row["SoLanLamToiDa"]),
                         DiemDatYeuCau = Convert.ToDouble(row["DiemDatYeuCau"]),
-                        ThoiGianBatDau = Convert.ToDateTime(row["NgayKiemTra"]),
-                        ThoiGianKetThuc = Convert.ToDateTime(row["NgayKiemTra"]).AddMinutes(Convert.ToInt32(row["ThoiGianLamBai"])),
+                        ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]),
+                        ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]),
                         HienThiKetQuaNgay = Convert.ToBoolean(row["HienThiKetQuaNgay"]),
                         XaoTronCauHoi = Convert.ToBoolean(row["XaoTronCauHoi"]),
                         GhiChuChamDiem = row["GhiChuChamDiem"] != DBNull.Value ? row["GhiChuChamDiem"].ToString() : null,
@@ -1209,7 +1212,7 @@ namespace QuanLyTruongHoc.DAL
                         mh.TenMon AS TenMonHoc,
                         lh.TenLop,
                         bkl.NgayKiemTra AS ThoiGianBatDau,
-                        DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra) AS ThoiGianKetThuc,
+                        bk.ThoiGianKetThuc,
                         (SELECT COUNT(*) FROM BaiLam bl WHERE bl.MaBaiKT = bk.MaBaiKT AND bl.MaHS = @MaHS AND bl.DaNop = 1) AS SoLanLamBai
                     FROM 
                         BaiKiemTra bk
@@ -1222,7 +1225,7 @@ namespace QuanLyTruongHoc.DAL
                     WHERE 
                         bkl.MaLop = @MaLop
                         AND (bk.TrangThai = N'Published' OR bk.TrangThai = N'Đã công bố')
-                        AND GETDATE() BETWEEN bkl.NgayKiemTra AND DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra)";
+                        AND GETDATE() BETWEEN bkl.NgayKiemTra AND bk.ThoiGianKetThuc";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {

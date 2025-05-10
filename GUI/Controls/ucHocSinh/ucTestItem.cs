@@ -73,7 +73,23 @@ namespace QuanLyTruongHoc.GUI.Controls
             guna2HtmlLabel3.Text = $"Thời gian làm bài: {Duration} phút";
             guna2HtmlLabel4.Text = $"Bắt đầu: {StartTime:dd/MM/yyyy HH:mm}";
             guna2HtmlLabel5.Text = $"Kết thúc: {EndTime:dd/MM/yyyy HH:mm}";
-            guna2HtmlLabel6.Text = $"Lần thử: {AttemptsUsed}/{AttemptsAllowed}";
+            
+            // Calculate remaining attempts
+            int remainingAttempts = AttemptsAllowed - AttemptsUsed;
+            string attemptsText = remainingAttempts > 0 
+                ? $"Còn lại {remainingAttempts}/{AttemptsAllowed} lần làm bài" 
+                : "Đã hết lượt làm bài";
+            
+            guna2HtmlLabel6.Text = attemptsText;
+            
+            // Add color coding for remaining attempts
+            if (remainingAttempts == 0)
+                guna2HtmlLabel6.ForeColor = Color.Red;
+            else if (remainingAttempts == 1)
+                guna2HtmlLabel6.ForeColor = Color.Orange;
+            else
+                guna2HtmlLabel6.ForeColor = Color.Green;
+                
             guna2TextBox1.Text = Notes ?? "";
 
             // Change button text based on whether it's a test or homework

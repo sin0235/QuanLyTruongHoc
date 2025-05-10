@@ -341,6 +341,22 @@ namespace QuanLyTruongHoc.GUI.Controls
             ucTestItem item = sender as ucTestItem;
             if (item != null)
             {
+                // Check if the student is allowed to take the test
+                Tuple<bool, string, int> checkResult = baiLamDAO.KiemTraLuotLamBai(item.TestId, maHS);
+                bool isAllowed = checkResult.Item1;
+                string errorMessage = checkResult.Item2;
+                int remainingAttempts = checkResult.Item3;
+
+                if (!isAllowed)
+                {
+                    MessageBox.Show(errorMessage, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // Update the attempts display in the UI without actually incrementing the count
+                    // (since the database will prevent this)
+                    LoadTestsAndHomework();
+                    return;
+                }
+
                 // Open the test form
                 using (frmKiemTra testForm = new frmKiemTra(item.TestId, maHS))
                 {
