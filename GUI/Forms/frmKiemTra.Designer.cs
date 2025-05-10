@@ -160,7 +160,6 @@
             // pnlContainer
             // 
             this.pnlContainer.Controls.Add(this.pnlExamHeader);
-            this.pnlContainer.Controls.Add(this.pnlContent);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(0, 50);
             this.pnlContainer.Name = "pnlContainer";
@@ -172,13 +171,14 @@
             this.pnlExamHeader.AutoSize = true;
             this.pnlExamHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.pnlExamHeader.Controls.Add(this.lblExamSummary);
+            this.pnlExamHeader.Controls.Add(this.pnlContent);
             this.pnlExamHeader.Controls.Add(this.lblExamTitle);
             this.pnlExamHeader.Controls.Add(this.pnlTimer);
             this.pnlExamHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlExamHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlExamHeader.Name = "pnlExamHeader";
-            this.pnlExamHeader.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
-            this.pnlExamHeader.Size = new System.Drawing.Size(1455, 105);
+            this.pnlExamHeader.Padding = new System.Windows.Forms.Padding(20);
+            this.pnlExamHeader.Size = new System.Drawing.Size(1455, 787);
             this.pnlExamHeader.TabIndex = 0;
             // 
             // lblExamSummary
@@ -248,9 +248,9 @@
             this.pnlContent.Controls.Add(this.pnlSidebar);
             this.pnlContent.Controls.Add(this.pnlMain);
             this.pnlContent.Controls.Add(this.pnlNavigation);
-            this.pnlContent.Location = new System.Drawing.Point(0, 80);
+            this.pnlContent.Location = new System.Drawing.Point(15, 88);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1455, 764);
+            this.pnlContent.Size = new System.Drawing.Size(1455, 1446);
             this.pnlContent.TabIndex = 1;
             // 
             // pnlSidebar
@@ -264,8 +264,8 @@
             this.pnlSidebar.FillColor = System.Drawing.Color.White;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
-            this.pnlSidebar.Size = new System.Drawing.Size(364, 704);
+            this.pnlSidebar.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlSidebar.Size = new System.Drawing.Size(364, 1386);
             this.pnlSidebar.TabIndex = 3;
             // 
             // flowQuestionButtons
@@ -275,8 +275,8 @@
             this.flowQuestionButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowQuestionButtons.Location = new System.Drawing.Point(15, 115);
             this.flowQuestionButtons.Name = "flowQuestionButtons";
-            this.flowQuestionButtons.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.flowQuestionButtons.Size = new System.Drawing.Size(334, 574);
+            this.flowQuestionButtons.Padding = new System.Windows.Forms.Padding(5);
+            this.flowQuestionButtons.Size = new System.Drawing.Size(334, 1256);
             this.flowQuestionButtons.TabIndex = 2;
             // 
             // lblQuestionMap
@@ -396,15 +396,12 @@
             // 
             // pnlMain
             // 
-            this.pnlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
             this.pnlMain.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.pnlMain.BorderRadius = 15;
-            this.pnlMain.Location = new System.Drawing.Point(290, 10);
+            this.pnlMain.Location = new System.Drawing.Point(370, 3);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(20);
             this.pnlMain.Size = new System.Drawing.Size(1155, 684);
             this.pnlMain.TabIndex = 3;
             // 
@@ -419,9 +416,9 @@
             this.pnlNavigation.Controls.Add(this.btnNext);
             this.pnlNavigation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlNavigation.FillColor = System.Drawing.Color.White;
-            this.pnlNavigation.Location = new System.Drawing.Point(0, 704);
+            this.pnlNavigation.Location = new System.Drawing.Point(0, 1386);
             this.pnlNavigation.Name = "pnlNavigation";
-            this.pnlNavigation.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.pnlNavigation.Padding = new System.Windows.Forms.Padding(20);
             this.pnlNavigation.Size = new System.Drawing.Size(1455, 60);
             this.pnlNavigation.TabIndex = 2;
             // 
@@ -518,7 +515,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmKiemTra";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kiểm tra";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlTitleBar.ResumeLayout(false);
             this.pnlTitleBar.PerformLayout();
             this.pnlContainer.ResumeLayout(false);

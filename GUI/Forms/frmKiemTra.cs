@@ -1,10 +1,13 @@
 ﻿using Guna.UI2.WinForms;
+using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.DTO;
 using QuanLyTruongHoc.GUI.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +27,40 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         private Timer animationTimer;
         private double opacity = 0;
+        private int tID;
+        private int maHS;
 
-        public frmKiemTra()
+        // DAO objects
+        private BaiKiemTraDAO baiKiemTraDAO;
+        private BaiKiemTraDTO currentBaiKT;
+
+        // Event handlers for question interaction
+        private void Question_AnswerSelected(object sender, AnswerSelectedEventArgs e)
+        {
+            // Mark the question as answered
+            if (currentQuestionIndex >= 0 && currentQuestionIndex < answeredQuestions.Count)
+            {
+                MarkQuestionAsAnswered(currentQuestionIndex);
+            }
+        }
+
+        private void Question_AnswerChanged(object sender, EssayAnswerChangedEventArgs e)
+        {
+            // Mark the question as answered if there's text
+            if (!string.IsNullOrWhiteSpace(e.Answer) && currentQuestionIndex >= 0 && currentQuestionIndex < answeredQuestions.Count)
+            {
+                MarkQuestionAsAnswered(currentQuestionIndex);
+            }
+        }
+
+        public frmKiemTra(int testId, int studentId)
         {
             InitializeComponent();
+            tID = testId;
+            maHS = studentId;
+
+            // Initialize DAOs
+            baiKiemTraDAO = new BaiKiemTraDAO();
 
             // Thiết lập hiệu ứng mở form
             this.Opacity = 0;
@@ -65,6 +98,27 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         private void FrmKiemTra_Load(object sender, EventArgs e)
         {
+            // Load test details
+            LoadTestData();
+
+            // Load questions
+            LoadQuestions();
+
+            // Initialize tracking arrays
+            answeredQuestions = new List<bool>(questionItems.Count);
+            markedQuestions = new List<bool>(questionItems.Count);
+
+            // Initialize all questions as unanswered and unmarked
+            for (int i = 0; i < questionItems.Count; i++)
+            {
+                answeredQuestions.Add(false);
+                markedQuestions.Add(false);
+            }
+
+            // Set progress bar maximum
+            progressExam.Maximum = questionItems.Count;
+            progressExam.Value = 0;
+
             // Bắt đầu hiệu ứng mở form
             animationTimer.Start();
 
@@ -76,6 +130,233 @@ namespace QuanLyTruongHoc.GUI.Forms
 
             // Bắt đầu đếm thời gian
             timer.Start();
+        }
+
+        private void LoadTestData()
+        {
+            try
+            {
+                // Get test details using the student-specific method
+                currentBaiKT = baiKiemTraDAO.GetBaiKiemTraForStudent(tID, maHS);
+
+                if (currentBaiKT != null)
+                {
+                    // Update form title
+                    lblExamTitle.Text = currentBaiKT.TenBaiKT;
+
+                    // Create a safe summary that handles null values
+                    string className = string.IsNullOrEmpty(currentBaiKT.TenLop) ? "[Lớp học]" : currentBaiKT.TenLop;
+                    int questionCount = 0;
+                    double totalPoints = 0;
+
+                    if (currentBaiKT.DanhSachCauHoi != null)
+                    {
+                        questionCount = currentBaiKT.DanhSachCauHoi.Count;
+                        totalPoints = currentBaiKT.DanhSachCauHoi.Sum(q => q.DiemSo);
+                    }
+
+                    // Update summary with safe values
+                    string summary = $"{className} | {questionCount} câu hỏi | " +
+                                    $"{currentBaiKT.ThoiGianLamBai} phút | {totalPoints} điểm";
+                    lblExamSummary.Text = summary;
+
+                    // Set timer
+                    remainingTime = TimeSpan.FromMinutes(currentBaiKT.ThoiGianLamBai);
+                    UpdateTimerDisplay();
+                }
+                else
+                {
+                    string errorMsg = "Không thể tải thông tin bài kiểm tra. Kiểm tra các nguyên nhân sau:\n" +
+                                    "- Bài kiểm tra không tồn tại\n" +
+                                    "- Bài kiểm tra không được gán cho lớp của bạn\n" +
+                                    "- Bài kiểm tra chưa được công bố";
+                    
+                    MessageBox.Show(errorMsg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi tải dữ liệu bài kiểm tra: {ex.Message}\n\nChi tiết: {ex.StackTrace}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+        private void LoadQuestions()
+        {
+            try
+            {
+                // Clear existing question list
+                questionItems.Clear();
+
+                // Check if we have a valid test ID
+                if (tID <= 0)
+                {
+                    MessageBox.Show("Mã bài kiểm tra không hợp lệ!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Ensure we have test data
+                if (currentBaiKT == null)
+                {
+                    // Try to load the test data first if not already loaded
+                    currentBaiKT = baiKiemTraDAO.GetBaiKiemTraById(tID);
+
+                    if (currentBaiKT == null)
+                    {
+                        MessageBox.Show("Không thể tải thông tin bài kiểm tra!", "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Ensure we have question data
+                if (currentBaiKT.DanhSachCauHoi == null || currentBaiKT.DanhSachCauHoi.Count == 0)
+                {
+                    // Explicitly load questions if they weren't loaded with the test
+                    currentBaiKT.DanhSachCauHoi = baiKiemTraDAO.GetQuestionsByTestId(tID);
+
+                    if (currentBaiKT.DanhSachCauHoi == null || currentBaiKT.DanhSachCauHoi.Count == 0)
+                    {
+                        MessageBox.Show("Bài kiểm tra không có câu hỏi nào!", "Thông báo",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+
+                // Get the question list
+                List<CauHoiDTO> questions = currentBaiKT.DanhSachCauHoi;
+
+                // Option to randomize questions if the test requires it
+                if (currentBaiKT.XaoTronCauHoi)
+                {
+                    Random rng = new Random();
+                    questions = questions.OrderBy(q => rng.Next()).ToList();
+                }
+
+                int questionNumber = 1;
+
+                foreach (var question in questions)
+                {
+                    if (question is CauHoiTracNghiemDTO)
+                    {
+                        var mcQuestion = question as CauHoiTracNghiemDTO;
+                        ucTNItem tnItem = new ucTNItem();
+
+                        try
+                        {
+                            // Convert byte array to image if exists
+                            Image questionImage = null;
+                            if (mcQuestion.CoHinhAnh && mcQuestion.HinhAnh != null && mcQuestion.HinhAnh.Length > 0)
+                            {
+                                using (MemoryStream ms = new MemoryStream(mcQuestion.HinhAnh))
+                                {
+                                    questionImage = Image.FromStream(ms);
+                                }
+                            }
+
+                            // Initialize the options list if null
+                            if (mcQuestion.DanhSachLuaChon == null)
+                            {
+                                Console.WriteLine($"Danh sách lựa chọn null cho câu hỏi {mcQuestion.MaCauHoi}");
+                                mcQuestion.DanhSachLuaChon = new List<LuaChonDTO>();
+                                // Try loading the options
+                                mcQuestion.DanhSachLuaChon = baiKiemTraDAO.GetOptionsForQuestion(mcQuestion.MaCauHoi);
+                            }
+
+                            // Get options and correct answers
+                            List<string> options = mcQuestion.DanhSachLuaChon.Select(o => o.NoiDung).ToList();
+                            List<int> correctOptions = mcQuestion.DanhSachLuaChon
+                                .Where(o => o.LaDapAnDung)
+                                .Select(o => mcQuestion.DanhSachLuaChon.IndexOf(o))
+                                .ToList();
+
+                            bool isMultipleAnswer = correctOptions.Count > 1;
+
+                            // Load the question data
+                            tnItem.LoadQuestion(
+                                mcQuestion.MaCauHoi,
+                                questionNumber,
+                                mcQuestion.NoiDung,
+                                options,
+                                correctOptions,
+                                isMultipleAnswer,
+                                questionImage,
+                                (int)mcQuestion.DiemSo
+                            );
+
+                            // Set the size and dock style
+                            tnItem.Dock = DockStyle.Fill;
+
+                            // Register for answer selection events
+                            tnItem.AnswerSelected += Question_AnswerSelected;
+
+                            // Add to question list
+                            questionItems.Add(tnItem);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Lỗi khi tạo câu hỏi trắc nghiệm #{questionNumber}: {ex.Message}");
+                            continue;
+                        }
+                    }
+                    else if (question is CauHoiTuLuanDTO)
+                    {
+                        var essayQuestion = question as CauHoiTuLuanDTO;
+                        ucTLItem tlItem = new ucTLItem();
+
+                        try
+                        {
+                            // Convert byte array to image if exists
+                            Image questionImage = null;
+                            if (essayQuestion.CoHinhAnh && essayQuestion.HinhAnh != null && essayQuestion.HinhAnh.Length > 0)
+                            {
+                                using (MemoryStream ms = new MemoryStream(essayQuestion.HinhAnh))
+                                {
+                                    questionImage = Image.FromStream(ms);
+                                }
+                            }
+
+                            // Load the question data
+                            tlItem.LoadQuestion(
+                                essayQuestion.MaCauHoi,
+                                questionNumber,
+                                essayQuestion.NoiDung,
+                                essayQuestion.HuongDanTraLoi ?? "",
+                                essayQuestion.CoGioiHanTu ? essayQuestion.GioiHanTu : 10000,
+                                questionImage,
+                                (int)essayQuestion.DiemSo
+                            );
+
+                            // Set the size and dock style
+                            tlItem.Dock = DockStyle.Fill;
+
+                            // Register for answer changed events
+                            tlItem.AnswerChanged += Question_AnswerChanged;
+
+                            // Add to question list
+                            questionItems.Add(tlItem);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Lỗi khi tạo câu hỏi tự luận #{questionNumber}: {ex.Message}");
+                            continue;
+                        }
+                    }
+
+                    questionNumber++;
+                }
+
+                Console.WriteLine($"Đã tải {questionItems.Count} câu hỏi thành công");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi tải câu hỏi: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Chi tiết lỗi: {ex.StackTrace}");
+            }
         }
 
         private void CreateQuestionButtons()

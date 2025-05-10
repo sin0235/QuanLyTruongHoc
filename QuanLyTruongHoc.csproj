@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\BaiKiemTraDAO.cs" />
+    <Compile Include="DAL\BaiLamDAO.cs" />
     <Compile Include="DAL\DatabaseHelper.cs" />
     <Compile Include="DAL\DiemSoDAO.cs" />
     <Compile Include="DAL\DonXinNghiDAO.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="DAL\ThongBaoDAO.cs" />
     <Compile Include="DAL\TKBDAO.cs" />
     <Compile Include="DTO\BaiKiemTraDTO.cs" />
+    <Compile Include="DTO\BaiLamDTO.cs" />
     <Compile Include="DTO\DiemSoDTO.cs" />
     <Compile Include="DTO\DonXinNghiDTO.cs" />
     <Compile Include="DTO\ThongBaoDTO.cs" />
@@ -131,6 +133,12 @@
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucQuanLyLop_GVCN.Designer.cs">
       <DependentUpon>ucQuanLyLop_GVCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTaoBaiKiemTra.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ucGiaoVien\ucTaoBaiKiemTra.Designer.cs">
+      <DependentUpon>ucTaoBaiKiemTra.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Controls\ucGiaoVien\ucThoiKhoaBieu.cs">
       <SubType>UserControl</SubType>
@@ -345,6 +353,12 @@
     <Compile Include="GUI\Forms\frmChiTietDonXinNghi.Designer.cs">
       <DependentUpon>frmChiTietDonXinNghi.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Forms\frmQuanLyEx.Designer.cs">
+      <DependentUpon>frmQuanLyEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Forms\frmQuanLyHocSinh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,12 +376,6 @@
     </Compile>
     <Compile Include="GUI\Forms\frmQuanLyThoiKhoaBieu.Designer.cs">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\Forms\frmTaoBaiKiemTra.Designer.cs">
-      <DependentUpon>frmTaoBaiKiemTra.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Forms\frmThongBaoChiTiet.cs">
       <SubType>Form</SubType>
@@ -388,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucGuiThongBao.resx">
       <DependentUpon>ucGuiThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucTaoBaiKiemTra.resx">
+      <DependentUpon>ucTaoBaiKiemTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucGiaoVien\ucTL.resx">
       <DependentUpon>ucTL.cs</DependentUpon>
@@ -503,6 +514,9 @@
     <EmbeddedResource Include="GUI\Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Forms\frmQuanLyEx.resx">
+      <DependentUpon>frmQuanLyEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyHocSinh.resx">
       <DependentUpon>frmQuanLyHocSinh.cs</DependentUpon>
     </EmbeddedResource>
@@ -511,9 +525,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmQuanLyThoiKhoaBieu.resx">
       <DependentUpon>frmQuanLyThoiKhoaBieu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\frmTaoBaiKiemTra.resx">
-      <DependentUpon>frmTaoBaiKiemTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Forms\frmThongBaoChiTiet.resx">
       <DependentUpon>frmThongBaoChiTiet.cs</DependentUpon>
@@ -569,6 +580,8 @@
     <None Include="assets\images\calendar.jpg" />
     <None Include="assets\images\view.png" />
     <None Include="assets\images\back_icon.png" />
+    <None Include="assets\images\exam.png" />
+    <None Include="assets\images\exam_results.png" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />

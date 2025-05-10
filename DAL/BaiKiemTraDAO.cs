@@ -27,75 +27,101 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Check if the required tables exist, if not create them
-                EnsureTablesExist();
-                
-                // Insert the test and get its ID
+                // 1. Tạo bài kiểm tra với các thuộc tính mới
                 string insertTestQuery = @"
-    INSERT INTO BaiKiemTra (
-        MaGV, TenBaiKT, MoTa, ThoiGianLamBai, 
-        ThoiGianBatDau, ThoiGianKetThuc, DiemDatYeuCau, SoLanLamToiDa, 
-        MaLop, MaMon, LoaiBaiKiemTra, HienThiKetQuaNgay, XaoTronCauHoi, 
-        GhiChuChamDiem, CoMatKhau, MatKhau, TrangThai, NgayTao, HocKy, NamHoc
-    )
-    VALUES (
-        @MaGV, @TenBaiKT, @MoTa, @ThoiGianLamBai, 
-        @ThoiGianBatDau, @ThoiGianKetThuc, @DiemDatYeuCau, @SoLanLamToiDa, 
-        @MaLop, @MaMH, @LoaiBaiKiemTra, @HienThiKetQuaNgay, @XaoTronCauHoi, 
-        @GhiChuChamDiem, @CoMatKhau, @MatKhau, @TrangThai, GETDATE(), @HocKy, @NamHoc
-    );
-    SELECT SCOPE_IDENTITY();";
-                
-Dictionary<string, object> parameters = new Dictionary<string, object>
-{
-    { "@MaGV", baiKiemTra.MaGV },
-    { "@TenBaiKT", baiKiemTra.TenBaiKT },
-    { "@MoTa", string.IsNullOrEmpty(baiKiemTra.MoTa) ? DBNull.Value : (object)baiKiemTra.MoTa },
-    { "@ThoiGianLamBai", baiKiemTra.ThoiGianLamBai },
-    { "@ThoiGianBatDau", baiKiemTra.ThoiGianBatDau },
-    { "@ThoiGianKetThuc", baiKiemTra.ThoiGianKetThuc },
-    { "@DiemDatYeuCau", baiKiemTra.DiemDatYeuCau },
-    { "@SoLanLamToiDa", baiKiemTra.SoLanLamToiDa },
-    { "@MaLop", baiKiemTra.MaLop },
-    { "@MaMH", baiKiemTra.MaMH > 0 ? baiKiemTra.MaMH : throw new InvalidOperationException("MaMH không được phép là 0 hoặc null") },
-    { "@LoaiBaiKiemTra", baiKiemTra.LoaiBaiKT },
-    { "@HienThiKetQuaNgay", baiKiemTra.HienThiKetQuaNgay ? 1 : 0 },
-    { "@XaoTronCauHoi", baiKiemTra.XaoTronCauHoi ? 1 : 0 },
-    { "@GhiChuChamDiem", string.IsNullOrEmpty(baiKiemTra.GhiChuChamDiem) ? DBNull.Value : (object)baiKiemTra.GhiChuChamDiem },
-    { "@CoMatKhau", baiKiemTra.CoMatKhau ? 1 : 0 },
-    { "@MatKhau", baiKiemTra.CoMatKhau ? (object)baiKiemTra.MatKhau : DBNull.Value },
-    { "@TrangThai", baiKiemTra.TrangThai },
-     { "@HocKy", baiKiemTra.HocKy },
-    { "@NamHoc", baiKiemTra.NamHoc }
-};
-                
+                INSERT INTO BaiKiemTra (
+                    MaGV, TenBaiKT, MoTa, ThoiGianLamBai, 
+                    MaMon, TrangThai, NgayTao, HocKy, NamHoc,
+                    ThoiGianBatDau, ThoiGianKetThuc, DiemDatYeuCau, 
+                    SoLanLamToiDa, LoaiBaiKiemTra, HienThiKetQuaNgay, 
+                    XaoTronCauHoi, GhiChuChamDiem, CoMatKhau, MatKhau
+                )
+                VALUES (
+                    @MaGV, @TenBaiKT, @MoTa, @ThoiGianLamBai, 
+                    @MaMH, @TrangThai, GETDATE(), @HocKy, @NamHoc,
+                    @ThoiGianBatDau, @ThoiGianKetThuc, @DiemDatYeuCau, 
+                    @SoLanLamToiDa, @LoaiBaiKiemTra, @HienThiKetQuaNgay, 
+                    @XaoTronCauHoi, @GhiChuChamDiem, @CoMatKhau, @MatKhau
+                );
+                SELECT SCOPE_IDENTITY();";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaGV", baiKiemTra.MaGV },
+                    { "@TenBaiKT", baiKiemTra.TenBaiKT },
+                    { "@MoTa", string.IsNullOrEmpty(baiKiemTra.MoTa) ? DBNull.Value : (object)baiKiemTra.MoTa },
+                    { "@ThoiGianLamBai", baiKiemTra.ThoiGianLamBai },
+                    { "@MaMH", baiKiemTra.MaMH },
+                    { "@TrangThai", baiKiemTra.TrangThai },
+                    { "@HocKy", baiKiemTra.HocKy },
+                    { "@NamHoc", baiKiemTra.NamHoc },
+                    { "@ThoiGianBatDau", baiKiemTra.ThoiGianBatDau },
+                    { "@ThoiGianKetThuc", baiKiemTra.ThoiGianKetThuc },
+                    { "@DiemDatYeuCau", baiKiemTra.DiemDatYeuCau },
+                    { "@SoLanLamToiDa", baiKiemTra.SoLanLamToiDa },
+                    { "@LoaiBaiKiemTra", string.IsNullOrEmpty(baiKiemTra.LoaiBaiKT) ? DBNull.Value : (object)baiKiemTra.LoaiBaiKT },
+                    { "@HienThiKetQuaNgay", baiKiemTra.HienThiKetQuaNgay },
+                    { "@XaoTronCauHoi", baiKiemTra.XaoTronCauHoi },
+                    { "@GhiChuChamDiem", string.IsNullOrEmpty(baiKiemTra.GhiChuChamDiem) ? DBNull.Value : (object)baiKiemTra.GhiChuChamDiem },
+                    { "@CoMatKhau", baiKiemTra.CoMatKhau },
+                    { "@MatKhau", string.IsNullOrEmpty(baiKiemTra.MatKhau) ? DBNull.Value : (object)baiKiemTra.MatKhau }
+                };
+
                 int maBaiKT = db.ExecuteInsertAndGetId(insertTestQuery, parameters);
-                
-                if (maBaiKT <= 0)
+
+                // 2. Liên kết bài kiểm tra với lớp học
+                if (maBaiKT > 0)
                 {
-                    return -1; // Failed to insert test
-                }
-                
-                // Now add all the questions
-                if (baiKiemTra.DanhSachCauHoi.Count > 0)
-                {
-                    int thuTu = 1;
-                    foreach (var cauHoi in baiKiemTra.DanhSachCauHoi)
+                    DateTime ngayKiemTra = baiKiemTra.ThoiGianBatDau != DateTime.MinValue ?
+                        baiKiemTra.ThoiGianBatDau : DateTime.Now;
+
+                    string insertClassTestQuery = @"
+                    INSERT INTO BaiKiemTra_LopHoc (
+                        MaBaiKT, MaLop, NgayKiemTra, TrangThai
+                    )
+                    VALUES (
+                        @MaBaiKT, @MaLop, @NgayKiemTra, @TrangThaiLop
+                    )";
+
+                    Dictionary<string, object> classParams = new Dictionary<string, object>
                     {
-                        cauHoi.MaBaiKT = maBaiKT;
-                        cauHoi.ThuTu = thuTu++;
-                        
-                        if (cauHoi is CauHoiTracNghiemDTO)
+                        { "@MaBaiKT", maBaiKT },
+                        { "@MaLop", baiKiemTra.MaLop },
+                        { "@NgayKiemTra", ngayKiemTra },
+                        { "@TrangThaiLop", "Đã công bố" }
+                    };
+
+                    bool success = db.ExecuteNonQuery(insertClassTestQuery, classParams);
+
+                    if (!success)
+                    {
+                        // Xóa bài kiểm tra nếu không thể liên kết với lớp học
+                        string deleteQuery = $"DELETE FROM BaiKiemTra WHERE MaBaiKT = {maBaiKT}";
+                        db.ExecuteNonQuery(deleteQuery);
+                        return -1;
+                    }
+
+                    // Thêm các câu hỏi
+                    if (baiKiemTra.DanhSachCauHoi.Count > 0)
+                    {
+                        int thuTu = 1;
+                        foreach (var cauHoi in baiKiemTra.DanhSachCauHoi)
                         {
-                            AddMultipleChoiceQuestion(cauHoi as CauHoiTracNghiemDTO);
-                        }
-                        else if (cauHoi is CauHoiTuLuanDTO)
-                        {
-                            AddEssayQuestion(cauHoi as CauHoiTuLuanDTO);
+                            cauHoi.MaBaiKT = maBaiKT;
+                            cauHoi.ThuTu = thuTu++;
+
+                            if (cauHoi is CauHoiTracNghiemDTO)
+                            {
+                                AddMultipleChoiceQuestion(cauHoi as CauHoiTracNghiemDTO);
+                            }
+                            else if (cauHoi is CauHoiTuLuanDTO)
+                            {
+                                AddEssayQuestion(cauHoi as CauHoiTuLuanDTO);
+                            }
                         }
                     }
                 }
-                
+
                 return maBaiKT;
             }
             catch (Exception ex)
@@ -114,15 +140,16 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
         {
             try
             {
-                // Prepare image data if needed
+                // Chuẩn bị dữ liệu hình ảnh nếu cần
                 byte[] imageData = null;
                 if (question.CoHinhAnh && !string.IsNullOrWhiteSpace(question.DuongDanHinhAnh))
                 {
+                    // Đọc dữ liệu nhị phân từ đường dẫn hình ảnh
                     imageData = File.ReadAllBytes(question.DuongDanHinhAnh);
                     question.HinhAnh = imageData;
                 }
-                
-                // Insert the question
+
+                // Truy vấn thêm câu hỏi
                 string insertQuestionQuery = @"
                     INSERT INTO CauHoi (
                         MaBaiKT, LoaiCauHoi, NoiDung, DiemSo, CoHinhAnh, HinhAnh, ThuTu
@@ -131,7 +158,7 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
                         @MaBaiKT, @LoaiCauHoi, @NoiDung, @DiemSo, @CoHinhAnh, @HinhAnh, @ThuTu
                     );
                     SELECT SCOPE_IDENTITY();";
-                
+
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
                     { "@MaBaiKT", question.MaBaiKT },
@@ -142,28 +169,28 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
                     { "@HinhAnh", question.CoHinhAnh ? (object)imageData : DBNull.Value },
                     { "@ThuTu", question.ThuTu }
                 };
-                
+
                 int maCauHoi = db.ExecuteInsertAndGetId(insertQuestionQuery, parameters);
-                
+
                 if (maCauHoi <= 0)
                 {
-                    return -1; // Failed to insert question
+                    return -1; // Thêm câu hỏi thất bại
                 }
-                
+
                 question.MaCauHoi = maCauHoi;
-                
-                // Now add all the options
+
+                // Thêm các lựa chọn
                 if (question.DanhSachLuaChon.Count > 0)
                 {
                     foreach (var luaChon in question.DanhSachLuaChon)
                     {
                         luaChon.MaCauHoi = maCauHoi;
                         luaChon.LaDapAnDung = (luaChon.NhanDang == question.DapAnDung);
-                        
+
                         AddMultipleChoiceOption(luaChon);
                     }
                 }
-                
+
                 return maCauHoi;
             }
             catch (Exception ex)
@@ -307,13 +334,17 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
                     SELECT 
                         bk.*, 
                         mh.TenMon AS TenMonHoc, 
-                        lh.TenLop AS TenLop 
+                        lh.TenLop AS TenLop,
+                        bkl.MaLop,
+                        bkl.NgayKiemTra
                     FROM 
                         BaiKiemTra bk
                     LEFT JOIN 
-                        MonHoc mh ON bk.MaMH = mh.MaMon
+                        MonHoc mh ON bk.MaMon = mh.MaMon
                     LEFT JOIN 
-                        LopHoc lh ON bk.MaLop = lh.MaLop
+                        BaiKiemTra_LopHoc bkl ON bk.MaBaiKT = bkl.MaBaiKT
+                    LEFT JOIN 
+                        LopHoc lh ON bkl.MaLop = lh.MaLop
                     WHERE 
                         bk.MaBaiKT = @MaBaiKT";
                 
@@ -334,24 +365,36 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
                         TenBaiKT = row["TenBaiKT"].ToString(),
                         MoTa = row["MoTa"] != DBNull.Value ? row["MoTa"].ToString() : null,
                         MaGV = Convert.ToInt32(row["MaGV"]),
-                        MaMH = Convert.ToInt32(row["MaMH"]),
+                        MaMH = Convert.ToInt32(row["MaMon"]),
                         TenMonHoc = row["TenMonHoc"] != DBNull.Value ? row["TenMonHoc"].ToString() : "",
-                        MaLop = Convert.ToInt32(row["MaLop"]),
-                        TenLop = row["TenLop"] != DBNull.Value ? row["TenLop"].ToString() : "",
                         LoaiBaiKT = row["LoaiBaiKiemTra"].ToString(),
                         ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
                         SoLanLamToiDa = Convert.ToInt32(row["SoLanLamToiDa"]),
                         DiemDatYeuCau = Convert.ToDouble(row["DiemDatYeuCau"]),
-                        ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]),
-                        ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]),
                         HienThiKetQuaNgay = Convert.ToBoolean(row["HienThiKetQuaNgay"]),
                         XaoTronCauHoi = Convert.ToBoolean(row["XaoTronCauHoi"]),
                         GhiChuChamDiem = row["GhiChuChamDiem"] != DBNull.Value ? row["GhiChuChamDiem"].ToString() : null,
                         CoMatKhau = Convert.ToBoolean(row["CoMatKhau"]),
                         MatKhau = row["MatKhau"] != DBNull.Value ? row["MatKhau"].ToString() : null,
                         TrangThai = row["TrangThai"].ToString(),
-                        NgayTao = Convert.ToDateTime(row["NgayTao"])
+                        NgayTao = Convert.ToDateTime(row["NgayTao"]),
+                        HocKy = Convert.ToInt32(row["HocKy"]),
+                        NamHoc = row["NamHoc"].ToString()
                     };
+                    
+                    // Handle class information if available in the join
+                    if (row["MaLop"] != DBNull.Value)
+                    {
+                        baiKiemTra.MaLop = Convert.ToInt32(row["MaLop"]);
+                        baiKiemTra.TenLop = row["TenLop"].ToString();
+                        
+                        // Get test schedule from BaiKiemTra_LopHoc
+                        if (row["NgayKiemTra"] != DBNull.Value)
+                        {
+                            baiKiemTra.ThoiGianBatDau = Convert.ToDateTime(row["NgayKiemTra"]);
+                            baiKiemTra.ThoiGianKetThuc = baiKiemTra.ThoiGianBatDau.AddMinutes(baiKiemTra.ThoiGianLamBai);
+                        }
+                    }
                     
                     // Load questions
                     baiKiemTra.DanhSachCauHoi = GetQuestionsByTestId(maBaiKT);
@@ -557,33 +600,31 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
         public List<BaiKiemTraDTO> GetTestsByTeacher(int maGV)
         {
             List<BaiKiemTraDTO> tests = new List<BaiKiemTraDTO>();
-            
+
             try
             {
+                // Sửa câu truy vấn để không sử dụng bảng BaiKiemTra_CauHoi không tồn tại
                 string query = @"
                     SELECT 
                         bk.*, 
-                        mh.TenMon AS TenMonHoc, 
-                        lh.TenLop AS TenLop,
+                        mh.TenMon AS TenMonHoc,
                         (SELECT COUNT(*) FROM CauHoi WHERE MaBaiKT = bk.MaBaiKT) AS SoCauHoi
                     FROM 
                         BaiKiemTra bk
                     LEFT JOIN 
-                        MonHoc mh ON bk.MaMH = mh.MaMon
-                    LEFT JOIN 
-                        LopHoc lh ON bk.MaLop = lh.MaLop
+                        MonHoc mh ON bk.MaMon = mh.MaMon
                     WHERE 
                         bk.MaGV = @MaGV
                     ORDER BY 
                         bk.NgayTao DESC";
-                
+
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
                     { "@MaGV", maGV }
                 };
-                
+
                 DataTable dt = db.ExecuteQuery(query, parameters);
-                
+
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     foreach (DataRow row in dt.Rows)
@@ -594,35 +635,47 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
                             TenBaiKT = row["TenBaiKT"].ToString(),
                             MoTa = row["MoTa"] != DBNull.Value ? row["MoTa"].ToString() : null,
                             MaGV = maGV,
-                            MaMH = Convert.ToInt32(row["MaMH"]),
+                            MaMH = Convert.ToInt32(row["MaMon"]),
                             TenMonHoc = row["TenMonHoc"] != DBNull.Value ? row["TenMonHoc"].ToString() : "",
-                            MaLop = Convert.ToInt32(row["MaLop"]),
-                            TenLop = row["TenLop"] != DBNull.Value ? row["TenLop"].ToString() : "",
-                            LoaiBaiKT = row["LoaiBaiKiemTra"].ToString(),
+                            LoaiBaiKT = row["LoaiBaiKiemTra"] != DBNull.Value ? row["LoaiBaiKiemTra"].ToString() : "",
                             ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
-                            SoLanLamToiDa = Convert.ToInt32(row["SoLanLamToiDa"]),
-                            DiemDatYeuCau = Convert.ToDouble(row["DiemDatYeuCau"]),
-                            ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]),
-                            ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]),
-                            HienThiKetQuaNgay = Convert.ToBoolean(row["HienThiKetQuaNgay"]),
-                            XaoTronCauHoi = Convert.ToBoolean(row["XaoTronCauHoi"]),
-                            GhiChuChamDiem = row["GhiChuChamDiem"] != DBNull.Value ? row["GhiChuChamDiem"].ToString() : null,
-                            CoMatKhau = Convert.ToBoolean(row["CoMatKhau"]),
-                            MatKhau = row["MatKhau"] != DBNull.Value ? row["MatKhau"].ToString() : null,
+                            NgayTao = Convert.ToDateTime(row["NgayTao"]),
                             TrangThai = row["TrangThai"].ToString(),
-                            NgayTao = Convert.ToDateTime(row["NgayTao"])
+                            HocKy = row["HocKy"] != DBNull.Value ? Convert.ToInt32(row["HocKy"]) : 0,
+                            NamHoc = row["NamHoc"] != DBNull.Value ? row["NamHoc"].ToString() : ""
                         };
-                        
+
+                        // Thêm các trường tùy chọn nếu tồn tại trong schema
+                        if (dt.Columns.Contains("SoLanLamToiDa"))
+                            test.SoLanLamToiDa = Convert.ToInt32(row["SoLanLamToiDa"]);
+                        if (dt.Columns.Contains("DiemDatYeuCau"))
+                            test.DiemDatYeuCau = Convert.ToDouble(row["DiemDatYeuCau"]);
+                        if (dt.Columns.Contains("ThoiGianBatDau"))
+                            test.ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]);
+                        if (dt.Columns.Contains("ThoiGianKetThuc"))
+                            test.ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]);
+                        if (dt.Columns.Contains("HienThiKetQuaNgay"))
+                            test.HienThiKetQuaNgay = Convert.ToBoolean(row["HienThiKetQuaNgay"]);
+                        if (dt.Columns.Contains("XaoTronCauHoi"))
+                            test.XaoTronCauHoi = Convert.ToBoolean(row["XaoTronCauHoi"]);
+                        if (dt.Columns.Contains("GhiChuChamDiem"))
+                            test.GhiChuChamDiem = row["GhiChuChamDiem"] != DBNull.Value ? row["GhiChuChamDiem"].ToString() : null;
+                        if (dt.Columns.Contains("CoMatKhau"))
+                            test.CoMatKhau = Convert.ToBoolean(row["CoMatKhau"]);
+                        if (dt.Columns.Contains("MatKhau"))
+                            test.MatKhau = row["MatKhau"] != DBNull.Value ? row["MatKhau"].ToString() : null;
+
                         tests.Add(test);
                     }
                 }
+
+                return tests;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error retrieving tests for teacher: {ex.Message}");
+                return tests;
             }
-            
-            return tests;
         }
         
         /// <summary>
@@ -758,6 +811,517 @@ Dictionary<string, object> parameters = new Dictionary<string, object>
             catch (Exception ex)
             {
                 Console.WriteLine($"Error ensuring tables exist: {ex.Message}");
+            }
+        }
+        /// <summary>
+        /// Lấy danh sách các lớp học được gán cho một bài kiểm tra
+        /// </summary>
+        /// <param name="maBaiKT">Mã bài kiểm tra</param>
+        /// <returns>Danh sách các lớp học</returns>
+        public List<dynamic> GetClassesForTest(int maBaiKT)
+        {
+            List<dynamic> classes = new List<dynamic>();
+
+            try
+            {
+                string query = @"
+                    SELECT bkl.*, lh.TenLop
+                    FROM BaiKiemTra_LopHoc bkl
+                    JOIN LopHoc lh ON bkl.MaLop = lh.MaLop
+                    WHERE bkl.MaBaiKT = @MaBaiKT";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var classInfo = new
+                        {
+                            MaLop = Convert.ToInt32(row["MaLop"]),
+                            TenLop = row["TenLop"].ToString(),
+                            NgayKiemTra = Convert.ToDateTime(row["NgayKiemTra"]),
+                            TrangThai = row["TrangThai"].ToString()
+                        };
+
+                        classes.Add(classInfo);
+                    }
+                }
+
+                return classes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting classes for test: {ex.Message}");
+                return classes;
+            }
+        }
+        /// <summary>
+        /// Get all submissions for a specific student
+        /// </summary>
+        /// <param name="maHS">Student ID</param>
+        /// <returns>List of submissions</returns>
+        public List<BaiLamDTO> GetSubmissionsByStudent(int maHS)
+        {
+            List<BaiLamDTO> submissions = new List<BaiLamDTO>();
+
+            try
+            {
+                string query = @"
+                    SELECT bl.*, bk.TenBaiKT
+                    FROM BaiLam bl
+                    INNER JOIN BaiKiemTra bk ON bl.MaBaiKT = bk.MaBaiKT
+                    WHERE bl.MaHS = @MaHS
+                    ORDER BY bl.NgayLam DESC";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        BaiLamDTO submission = new BaiLamDTO
+                        {
+                            MaBaiLam = Convert.ToInt32(row["MaBaiLam"]),
+                            MaBaiKT = Convert.ToInt32(row["MaBaiKT"]),
+                            TenBaiKT = row["TenBaiKT"].ToString(),
+                            MaHS = maHS,
+                            NgayLam = Convert.ToDateTime(row["NgayLam"]),
+                            ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
+                            DiemSo = row["DiemSo"] != DBNull.Value ? Convert.ToDouble(row["DiemSo"]) : (double?)null,
+                            DaNop = Convert.ToBoolean(row["DaNop"])
+                        };
+
+                        submissions.Add(submission);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving submissions for student: {ex.Message}");
+            }
+
+            return submissions;
+        }
+        /// <summary>
+        /// Get all tests assigned to a specific class
+        /// </summary>
+        /// <param name="maLop">Class ID</param>
+        /// <param name="namHoc">School year (optional)</param>
+        /// <param name="hocKy">Semester (optional)</param>
+        /// <returns>List of tests</returns>
+        public List<BaiKiemTraDTO> GetTestsForClass(int maLop, string namHoc = null, int? hocKy = null)
+        {
+            List<BaiKiemTraDTO> tests = new List<BaiKiemTraDTO>();
+
+            try
+            {
+                Dictionary<string, object> parameters = new Dictionary<string, object>();
+
+                // Base query - Explicitly name all columns to avoid field name confusion
+                string query = @"
+                    SELECT 
+                        bk.MaBaiKT, bk.TenBaiKT, bk.MoTa, bk.MaGV, bk.MaMon AS MaMH,
+                        bk.ThoiGianLamBai, bk.TrangThai, bk.NgayTao, bk.HocKy, bk.NamHoc,
+                        bk.SoLanLamToiDa, bk.DiemDatYeuCau, bk.HienThiKetQuaNgay,
+                        bk.XaoTronCauHoi, bk.GhiChuChamDiem, bk.CoMatKhau, bk.MatKhau,
+                        bk.LoaiBaiKiemTra AS LoaiBaiKT, 
+                        mh.TenMon AS TenMonHoc,
+                        lh.TenLop,
+                        bkl.NgayKiemTra AS ThoiGianBatDau,
+                        DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra) AS ThoiGianKetThuc
+                    FROM 
+                        BaiKiemTra bk
+                    INNER JOIN 
+                        BaiKiemTra_LopHoc bkl ON bk.MaBaiKT = bkl.MaBaiKT
+                    INNER JOIN
+                        MonHoc mh ON bk.MaMon = mh.MaMon
+                    INNER JOIN
+                        LopHoc lh ON bkl.MaLop = lh.MaLop
+                    WHERE 
+                        bkl.MaLop = @MaLop";
+
+                parameters.Add("@MaLop", maLop);
+
+                // Add optional filters
+                if (!string.IsNullOrEmpty(namHoc))
+                {
+                    query += " AND bk.NamHoc = @NamHoc";
+                    parameters.Add("@NamHoc", namHoc);
+                }
+
+                if (hocKy.HasValue)
+                {
+                    query += " AND bk.HocKy = @HocKy";
+                    parameters.Add("@HocKy", hocKy.Value);
+                }
+
+                // Only get published tests
+                query += " AND (bk.TrangThai = N'Published' or bk.TrangThai = N'Đã công bố')";
+
+                // Order by test date
+                query += " ORDER BY bkl.NgayKiemTra DESC";
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        BaiKiemTraDTO test = new BaiKiemTraDTO
+                        {
+                            MaBaiKT = Convert.ToInt32(row["MaBaiKT"]),
+                            TenBaiKT = row["TenBaiKT"].ToString(),
+                            MoTa = row["MoTa"] != DBNull.Value ? row["MoTa"].ToString() : null,
+                            MaGV = Convert.ToInt32(row["MaGV"]),
+                            MaMH = Convert.ToInt32(row["MaMH"]),
+                            TenMonHoc = row["TenMonHoc"].ToString(),
+                            MaLop = maLop,
+                            TenLop = row["TenLop"].ToString(),
+                            LoaiBaiKT = row["LoaiBaiKT"] != DBNull.Value ? row["LoaiBaiKT"].ToString() : "Bài kiểm tra",
+                            ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
+                            ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]),
+                            ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]),
+                            NgayTao = Convert.ToDateTime(row["NgayTao"]),
+                            TrangThai = row["TrangThai"].ToString(),
+                            HocKy = Convert.ToInt32(row["HocKy"]),
+                            NamHoc = row["NamHoc"].ToString()
+                        };
+
+                        // Set other properties with null checks
+                        test.SoLanLamToiDa = row["SoLanLamToiDa"] != DBNull.Value ? Convert.ToInt32(row["SoLanLamToiDa"]) : 1;
+                        test.DiemDatYeuCau = row["DiemDatYeuCau"] != DBNull.Value ? Convert.ToDouble(row["DiemDatYeuCau"]) : 5.0;
+                        test.HienThiKetQuaNgay = row["HienThiKetQuaNgay"] != DBNull.Value ? Convert.ToBoolean(row["HienThiKetQuaNgay"]) : false;
+                        test.XaoTronCauHoi = row["XaoTronCauHoi"] != DBNull.Value ? Convert.ToBoolean(row["XaoTronCauHoi"]) : false;
+                        test.CoMatKhau = row["CoMatKhau"] != DBNull.Value ? Convert.ToBoolean(row["CoMatKhau"]) : false;
+
+                        tests.Add(test);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tải danh sách bài kiểm tra cho lớp: {ex.Message}");
+            }
+
+            return tests;
+        }
+
+        /// <summary>
+        /// Get all distinct school years from the database
+        /// </summary>
+        /// <returns>List of school years</returns>
+        public List<string> GetDistinctSchoolYears()
+        {
+            List<string> years = new List<string>();
+
+            try
+            {
+                string query = "SELECT DISTINCT NamHoc FROM BaiKiemTra ORDER BY NamHoc DESC";
+
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        years.Add(row["NamHoc"].ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving school years: {ex.Message}");
+            }
+
+            return years;
+        }
+
+        /// <summary>
+        /// Get a test with class filter for a specific student
+        /// </summary>
+        /// <param name="maBaiKT">Test ID</param>
+        /// <param name="maHS">Student ID</param>
+        /// <returns>The test data or null if not found or not accessible to the student</returns>
+        public BaiKiemTraDTO GetBaiKiemTraForStudent(int maBaiKT, int maHS)
+        {
+            try
+            {
+                // First, get the student's class
+                string getClassQuery = @"
+                    SELECT MaLop 
+                    FROM HocSinh 
+                    WHERE MaHS = @MaHS";
+                
+                Dictionary<string, object> studentParams = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+                
+                DataTable studentDt = db.ExecuteQuery(getClassQuery, studentParams);
+                
+                if (studentDt == null || studentDt.Rows.Count == 0)
+                {
+                    return null; // Student not found
+                }
+                
+                int maLop = Convert.ToInt32(studentDt.Rows[0]["MaLop"]);
+                
+                // Then get the test but only if it's assigned to the student's class
+                string query = @"
+                    SELECT 
+                        bk.*, 
+                        mh.TenMon AS TenMonHoc, 
+                        lh.TenLop AS TenLop,
+                        bkl.NgayKiemTra
+                    FROM 
+                        BaiKiemTra bk
+                    INNER JOIN 
+                        BaiKiemTra_LopHoc bkl ON bk.MaBaiKT = bkl.MaBaiKT
+                    INNER JOIN 
+                        LopHoc lh ON bkl.MaLop = lh.MaLop
+                    INNER JOIN 
+                        MonHoc mh ON bk.MaMon = mh.MaMon
+                    WHERE 
+                        bk.MaBaiKT = @MaBaiKT AND
+                        bkl.MaLop = @MaLop";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiKT", maBaiKT },
+                    { "@MaLop", maLop }
+                };
+                
+                DataTable dt = db.ExecuteQuery(query, parameters);
+                
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    
+                    BaiKiemTraDTO baiKiemTra = new BaiKiemTraDTO
+                    {
+                        MaBaiKT = maBaiKT,
+                        TenBaiKT = row["TenBaiKT"].ToString(),
+                        MoTa = row["MoTa"] != DBNull.Value ? row["MoTa"].ToString() : null,
+                        MaGV = Convert.ToInt32(row["MaGV"]),
+                        MaMH = Convert.ToInt32(row["MaMon"]),
+                        TenMonHoc = row["TenMonHoc"].ToString(),
+                        MaLop = maLop,
+                        TenLop = row["TenLop"].ToString(),
+                        LoaiBaiKT = row["LoaiBaiKiemTra"].ToString(),
+                        ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
+                        SoLanLamToiDa = Convert.ToInt32(row["SoLanLamToiDa"]),
+                        DiemDatYeuCau = Convert.ToDouble(row["DiemDatYeuCau"]),
+                        ThoiGianBatDau = Convert.ToDateTime(row["NgayKiemTra"]),
+                        ThoiGianKetThuc = Convert.ToDateTime(row["NgayKiemTra"]).AddMinutes(Convert.ToInt32(row["ThoiGianLamBai"])),
+                        HienThiKetQuaNgay = Convert.ToBoolean(row["HienThiKetQuaNgay"]),
+                        XaoTronCauHoi = Convert.ToBoolean(row["XaoTronCauHoi"]),
+                        GhiChuChamDiem = row["GhiChuChamDiem"] != DBNull.Value ? row["GhiChuChamDiem"].ToString() : null,
+                        CoMatKhau = Convert.ToBoolean(row["CoMatKhau"]),
+                        MatKhau = row["MatKhau"] != DBNull.Value ? row["MatKhau"].ToString() : null,
+                        TrangThai = row["TrangThai"].ToString(),
+                        NgayTao = Convert.ToDateTime(row["NgayTao"]),
+                        HocKy = Convert.ToInt32(row["HocKy"]),
+                        NamHoc = row["NamHoc"].ToString()
+                    };
+                    
+                    // Load questions
+                    baiKiemTra.DanhSachCauHoi = GetQuestionsByTestId(maBaiKT);
+                    
+                    return baiKiemTra;
+                }
+                
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving test for student: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get a list of available tests for a specific student based on their class
+        /// </summary>
+        /// <param name="maHS">Student ID</param>
+        /// <param name="namHoc">School year (optional)</param>
+        /// <param name="hocKy">Semester (optional)</param>
+        /// <returns>List of available tests</returns>
+        public List<BaiKiemTraDTO> GetAvailableTestsForStudent(int maHS, string namHoc = null, int? hocKy = null)
+        {
+            List<BaiKiemTraDTO> tests = new List<BaiKiemTraDTO>();
+
+            try
+            {
+                // First, get the student's class
+                string getClassQuery = @"
+                    SELECT MaLop 
+                    FROM HocSinh 
+                    WHERE MaHS = @MaHS";
+                
+                Dictionary<string, object> studentParams = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+                
+                DataTable studentDt = db.ExecuteQuery(getClassQuery, studentParams);
+                
+                if (studentDt == null || studentDt.Rows.Count == 0)
+                {
+                    return tests; // Empty list if student not found
+                }
+                
+                int maLop = Convert.ToInt32(studentDt.Rows[0]["MaLop"]);
+
+                // Base query to get available tests for the student's class
+                string query = @"
+                    SELECT 
+                        bk.MaBaiKT, bk.TenBaiKT, bk.MoTa, bk.MaGV, bk.MaMon AS MaMH,
+                        bk.ThoiGianLamBai, bk.TrangThai, bk.NgayTao, bk.HocKy, bk.NamHoc,
+                        bk.SoLanLamToiDa, bk.DiemDatYeuCau, bk.HienThiKetQuaNgay,
+                        bk.XaoTronCauHoi, bk.GhiChuChamDiem, bk.CoMatKhau, bk.MatKhau,
+                        bk.LoaiBaiKiemTra AS LoaiBaiKT, 
+                        mh.TenMon AS TenMonHoc,
+                        lh.TenLop,
+                        bkl.NgayKiemTra AS ThoiGianBatDau,
+                        DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra) AS ThoiGianKetThuc,
+                        (SELECT COUNT(*) FROM BaiLam bl WHERE bl.MaBaiKT = bk.MaBaiKT AND bl.MaHS = @MaHS AND bl.DaNop = 1) AS SoLanLamBai
+                    FROM 
+                        BaiKiemTra bk
+                    INNER JOIN 
+                        BaiKiemTra_LopHoc bkl ON bk.MaBaiKT = bkl.MaBaiKT
+                    INNER JOIN
+                        MonHoc mh ON bk.MaMon = mh.MaMon
+                    INNER JOIN
+                        LopHoc lh ON bkl.MaLop = lh.MaLop
+                    WHERE 
+                        bkl.MaLop = @MaLop
+                        AND bk.TrangThai = N'Đã công bố'
+                        AND GETDATE() BETWEEN bkl.NgayKiemTra AND DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra)";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaLop", maLop },
+                    { "@MaHS", maHS }
+                };
+
+                // Add optional filters
+                if (!string.IsNullOrEmpty(namHoc))
+                {
+                    query += " AND bk.NamHoc = @NamHoc";
+                    parameters.Add("@NamHoc", namHoc);
+                }
+
+                if (hocKy.HasValue)
+                {
+                    query += " AND bk.HocKy = @HocKy";
+                    parameters.Add("@HocKy", hocKy.Value);
+                }
+
+                // Order by test date
+                query += " ORDER BY bkl.NgayKiemTra ASC";
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        int soLanLamBai = Convert.ToInt32(row["SoLanLamBai"]);
+                        int soLanLamToiDa = row["SoLanLamToiDa"] != DBNull.Value ? Convert.ToInt32(row["SoLanLamToiDa"]) : 1;
+
+                        // Skip tests that student has already taken the maximum number of times
+                        if (soLanLamBai >= soLanLamToiDa)
+                        {
+                            continue;
+                        }
+
+                        BaiKiemTraDTO test = new BaiKiemTraDTO
+                        {
+                            MaBaiKT = Convert.ToInt32(row["MaBaiKT"]),
+                            TenBaiKT = row["TenBaiKT"].ToString(),
+                            MoTa = row["MoTa"] != DBNull.Value ? row["MoTa"].ToString() : null,
+                            MaGV = Convert.ToInt32(row["MaGV"]),
+                            MaMH = Convert.ToInt32(row["MaMH"]),
+                            TenMonHoc = row["TenMonHoc"].ToString(),
+                            MaLop = maLop,
+                            TenLop = row["TenLop"].ToString(),
+                            LoaiBaiKT = row["LoaiBaiKT"] != DBNull.Value ? row["LoaiBaiKT"].ToString() : "Bài kiểm tra",
+                            ThoiGianLamBai = Convert.ToInt32(row["ThoiGianLamBai"]),
+                            ThoiGianBatDau = Convert.ToDateTime(row["ThoiGianBatDau"]),
+                            ThoiGianKetThuc = Convert.ToDateTime(row["ThoiGianKetThuc"]),
+                            NgayTao = Convert.ToDateTime(row["NgayTao"]),
+                            TrangThai = row["TrangThai"].ToString(),
+                            HocKy = Convert.ToInt32(row["HocKy"]),
+                            NamHoc = row["NamHoc"].ToString(),
+                            SoLanLamToiDa = soLanLamToiDa,
+                            DiemDatYeuCau = row["DiemDatYeuCau"] != DBNull.Value ? Convert.ToDouble(row["DiemDatYeuCau"]) : 5.0,
+                            HienThiKetQuaNgay = row["HienThiKetQuaNgay"] != DBNull.Value ? Convert.ToBoolean(row["HienThiKetQuaNgay"]) : false,
+                            XaoTronCauHoi = row["XaoTronCauHoi"] != DBNull.Value ? Convert.ToBoolean(row["XaoTronCauHoi"]) : false,
+                            CoMatKhau = row["CoMatKhau"] != DBNull.Value ? Convert.ToBoolean(row["CoMatKhau"]) : false,
+                            MatKhau = row["MatKhau"] != DBNull.Value ? row["MatKhau"].ToString() : null
+                        };
+
+                        tests.Add(test);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tải danh sách bài kiểm tra cho học sinh: {ex.Message}");
+            }
+
+            return tests;
+        }
+        
+        /// <summary>
+        /// Get a list of all tests (both available and completed) for a student
+        /// </summary>
+        /// <param name="maHS">Student ID</param>
+        /// <param name="namHoc">School year (optional)</param>
+        /// <param name="hocKy">Semester (optional)</param>
+        /// <returns>List of all relevant tests</returns>
+        public List<BaiKiemTraDTO> GetAllTestsForStudent(int maHS, string namHoc = null, int? hocKy = null)
+        {
+            try 
+            {
+                // First, get the student's class
+                string getClassQuery = @"
+                    SELECT MaLop 
+                    FROM HocSinh 
+                    WHERE MaHS = @MaHS";
+                
+                Dictionary<string, object> studentParams = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+                
+                DataTable studentDt = db.ExecuteQuery(getClassQuery, studentParams);
+                
+                if (studentDt == null || studentDt.Rows.Count == 0)
+                {
+                    return new List<BaiKiemTraDTO>(); 
+                }
+                
+                int maLop = Convert.ToInt32(studentDt.Rows[0]["MaLop"]);
+                
+                // Get all tests for this class
+                return GetTestsForClass(maLop, namHoc, hocKy);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tải tất cả bài kiểm tra cho học sinh: {ex.Message}");
+                return new List<BaiKiemTraDTO>();
             }
         }
     }

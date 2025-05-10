@@ -299,15 +299,4 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         #endregion
     }
 
-    // Class to hold question data
-    public class QuestionData
-    {
-        public int QuestionNumber { get; set; }
-        public string QuestionContent { get; set; }
-        public List<string> Options { get; set; }
-        public string CorrectAnswer { get; set; }
-        public double Score { get; set; }
-        public bool HasImage { get; set; }
-        public string ImagePath { get; set; }
-    }
 }

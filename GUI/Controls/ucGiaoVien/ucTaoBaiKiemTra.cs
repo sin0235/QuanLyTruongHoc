@@ -1,41 +1,145 @@
-﻿using System;
+﻿using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuanLyTruongHoc.DAL;
-using QuanLyTruongHoc.DTO;
-using QuanLyTruongHoc.GUI.Controls.ucGiaoVien;
 
-namespace QuanLyTruongHoc.GUI.Forms
+namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 {
-    public partial class frmTaoBaiKiemTra : Form
+    public partial class ucTaoBaiKiemTra : UserControl
     {
+
+        // Định nghĩa các sự kiện cho UserControl
+        public event EventHandler TestCreated; // Khi tạo bài kiểm tra thành công
+        public event EventHandler TestSavedAsDraft; // Khi lưu nháp thành công
+        public event EventHandler TestCanceled; // Khi hủy tạo bài kiểm tra
+
+        // Phương thức kích hoạt các sự kiện
+        protected virtual void OnTestCreated()
+        {
+            TestCreated?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnTestSavedAsDraft()
+        {
+            TestSavedAsDraft?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnTestCanceled()
+        {
+            TestCanceled?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void BtnPublish_Click(object sender, EventArgs e)
+        {
+            if (ValidateTest())
+            {
+                try
+                {
+                    // Get the test data
+                    TestData testData = CreateTestData();
+                    testData.Status = "Published";
+
+                    // Save test to database
+                    bool success = SaveTestToDatabase(testData);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Bài kiểm tra đã được đăng thành công!",
+                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Kích hoạt sự kiện thành công
+                        OnTestCreated();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không thể lưu bài kiểm tra. Vui lòng thử lại.",
+                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi đăng bài kiểm tra: {ex.Message}",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void BtnSaveDraft_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get the test data
+                TestData testData = CreateTestData();
+                testData.Status = "Draft";
+
+                // Save test to database
+                bool success = SaveTestToDatabase(testData);
+
+                if (success)
+                {
+                    MessageBox.Show("Bài kiểm tra đã được lưu nháp thành công!",
+                        "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Kích hoạt sự kiện lưu nháp
+                    OnTestSavedAsDraft();
+                }
+                else
+                {
+                    MessageBox.Show("Không thể lưu bài kiểm tra. Vui lòng thử lại.",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lưu nháp: {ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            if (questionCount > 0 || !string.IsNullOrWhiteSpace(txtTestName.Text))
+            {
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn hủy bỏ bài kiểm tra này?",
+                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Kích hoạt sự kiện hủy
+                    OnTestCanceled();
+                }
+            }
+            else
+            {
+                // Kích hoạt sự kiện hủy
+                OnTestCanceled();
+            }
+        }
         private int teacherId;
         private List<object> questionList = new List<object>(); // Can contain both ucTN and ucTL
         private int questionCount = 0;
 
         // Constructor that accepts a teacher ID
-        public frmTaoBaiKiemTra(int teacherId)
+        public ucTaoBaiKiemTra(int teacherId)
         {
             InitializeComponent();
             this.teacherId = teacherId;
         }
 
         // Default constructor
-        public frmTaoBaiKiemTra()
+        public ucTaoBaiKiemTra()
         {
             InitializeComponent();
             // Assume we have a static property to store logged-in teacher ID
             this.teacherId = AppSettings.LoggedInTeacherId;
         }
 
-        private void frmTaoBaiKiemTra_Load(object sender, EventArgs e)
+        private void ucTaoBaiKiemTra_Load(object sender, EventArgs e)
         {
             // Initialize form controls
             LoadSubjects();
@@ -46,9 +150,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             if (cboTestType.Items.Count > 0)
                 cboTestType.SelectedIndex = 0;
 
-            // Set form title
-            ucControlBar1.TitleText = "Tạo bài kiểm tra";
-
             // Initialize the lblNoQuestions visibility
             lblNoQuestions.Visible = true;
         }
@@ -57,7 +158,7 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             try
             {
-                
+
                 string query = $@"
                     SELECT DISTINCT m.MaMon AS MaMH, m.TenMon AS TenMonHoc 
                     FROM MonHoc m 
@@ -94,15 +195,31 @@ namespace QuanLyTruongHoc.GUI.Forms
         {
             try
             {
-                // Modified query to get classes without relying on PhanCong table
+                // Lấy mã giáo viên từ teacherId (mã người dùng)
+                int maGV = GetMaGV(teacherId);
+
+                if (maGV <= 0)
+                {
+                    MessageBox.Show("Không tìm thấy thông tin giáo viên. Vui lòng đăng nhập lại.",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Truy vấn tất cả các lớp được phân công
                 string query = $@"
                     SELECT DISTINCT lh.MaLop, lh.TenLop 
                     FROM LopHoc lh 
                     INNER JOIN ThoiKhoaBieu tkb ON lh.MaLop = tkb.MaLop
-                    INNER JOIN GiaoVien g ON tkb.MaGV = g.MaGV
-                    WHERE g.MaNguoiDung = {teacherId}";
+                    WHERE tkb.MaGV = {maGV}";
 
                 DataTable dt = new DatabaseHelper().ExecuteQuery(query);
+
+                // Log thông tin để debug
+                Console.WriteLine($"Tìm thấy {dt.Rows.Count} lớp học cho giáo viên có MaGV = {maGV}");
+                foreach (DataRow row in dt.Rows)
+                {
+                    Console.WriteLine($"MaLop: {row["MaLop"]}, TenLop: {row["TenLop"]}");
+                }
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
@@ -112,9 +229,28 @@ namespace QuanLyTruongHoc.GUI.Forms
                 }
                 else
                 {
-                    // If no classes found, add some default values for testing
-                    cboClass.Items.Clear();
-                    cboClass.Items.AddRange(new object[] { "10A1", "10A2", "11A1", "11A2", "12A1", "12A2" });
+                    // Nếu không có lớp học phân công trong ThoiKhoaBieu, thử lấy lớp chủ nhiệm
+                    query = $@"
+                        SELECT DISTINCT lh.MaLop, lh.TenLop 
+                        FROM LopHoc lh 
+                        WHERE lh.MaGVChuNhiem = {maGV}";
+
+                    dt = new DatabaseHelper().ExecuteQuery(query);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        cboClass.DataSource = dt;
+                        cboClass.DisplayMember = "TenLop";
+                        cboClass.ValueMember = "MaLop";
+                    }
+                    else
+                    {
+                        // Nếu vẫn không có lớp nào, thêm giá trị mẫu
+                        cboClass.Items.Clear();
+                        cboClass.Items.AddRange(new object[] { "10A1", "10A2", "11A1", "11A2", "12A1", "12A2" });
+                        MessageBox.Show("Không tìm thấy lớp được phân công dạy cho giáo viên này.",
+                            "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)
@@ -122,7 +258,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show($"Lỗi khi tải danh sách lớp: {ex.Message}", "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                // Add default values in case of error
+                // Thêm giá trị mặc định trong trường hợp lỗi
                 cboClass.Items.Clear();
                 cboClass.Items.AddRange(new object[] { "10A1", "10A2", "11A1", "11A2", "12A1", "12A2" });
             }
@@ -137,7 +273,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             btnPreviewTest.Click += BtnPreviewTest_Click;
             btnPublish.Click += BtnPublish_Click;
             btnSaveDraft.Click += BtnSaveDraft_Click;
-            btnCancel.Click += BtnCancel_Click;
             tabControlMain.SelectedIndexChanged += TabControlMain_SelectedIndexChanged;
             chkPassword.CheckedChanged += ChkPassword_CheckedChanged;
         }
@@ -369,90 +504,9 @@ namespace QuanLyTruongHoc.GUI.Forms
         }
 
 
-        private void BtnPublish_Click(object sender, EventArgs e)
-        {
-            if (ValidateTest())
-            {
-                try
-                {
-                    // Get the test data
-                    TestData testData = CreateTestData();
-                    testData.Status = "Published";
-
-                    // Save test to database
-                    bool success = SaveTestToDatabase(testData);
-
-                    if (success)
-                    {
-                        MessageBox.Show("Bài kiểm tra đã được đăng thành công!",
-                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không thể lưu bài kiểm tra. Vui lòng thử lại.",
-                            "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Lỗi khi đăng bài kiểm tra: {ex.Message}",
-                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void BtnSaveDraft_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Get the test data
-                TestData testData = CreateTestData();
-                testData.Status = "Draft";
-
-                // Save test to database
-                bool success = SaveTestToDatabase(testData);
-
-                if (success)
-                {
-                    MessageBox.Show("Bài kiểm tra đã được lưu nháp thành công!",
-                        "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Không thể lưu bài kiểm tra. Vui lòng thử lại.",
-                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi lưu nháp: {ex.Message}",
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            if (questionCount > 0 || !string.IsNullOrWhiteSpace(txtTestName.Text))
-            {
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn hủy bỏ bài kiểm tra này?",
-                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    this.DialogResult = DialogResult.Cancel;
-                    this.Close();
-                }
-            }
-            else
-            {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            }
-        }
+      
+  
+       
         private bool ValidateTest()
         {
             // Validate general information
@@ -727,6 +781,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 return -1;
             }
         }
+
     }
 
     // Classes to hold data
@@ -780,3 +835,4 @@ namespace QuanLyTruongHoc.GUI.Forms
         public static int LoggedInTeacherId { get; set; }
     }
 }
+

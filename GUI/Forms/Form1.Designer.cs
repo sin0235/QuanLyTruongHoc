@@ -469,7 +469,7 @@
             // picLogo
             // 
             this.picLogo.BackColor = System.Drawing.Color.Transparent;
-            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.back_icon;
+            this.picLogo.Image = global::QuanLyTruongHoc.Properties.Resources.exam_results;
             this.picLogo.ImageRotate = 0F;
             this.picLogo.Location = new System.Drawing.Point(90, 15);
             this.picLogo.Name = "picLogo";

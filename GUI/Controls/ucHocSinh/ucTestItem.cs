@@ -128,19 +128,11 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                // Notify listeners that the test has started
+                // Chỉ thông báo cho người nghe (ucKiemTra) rằng bài thi đã được bắt đầu
+                // ucKiemTra sẽ xử lý việc tạo form với TestId và maHS
                 TestStarted?.Invoke(this, EventArgs.Empty);
 
-                // Open the test form with the appropriate information
-                var testForm = new Forms.frmKiemTra();
-
-                // Set form properties if needed (you might need to add these properties to frmKiemTra)
-                testForm.Text = $"{(IsHomework ? "Bài tập" : "Bài kiểm tra")}: {TestName}";
-
-                // Show the form
-                testForm.ShowDialog();
-
-                // Increment attempts used after test completion
+                // Tăng số lần thử sau khi hoàn thành bài kiểm tra
                 AttemptsUsed++;
                 UpdateDisplay();
             }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QuanLyTruongHoc.DAL;
+using QuanLyTruongHoc.DTO;
+using QuanLyTruongHoc.GUI.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,13 +33,32 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Current view mode
         private ViewMode currentMode = ViewMode.Tests;
 
-        // Sample data for testing
-        private List<TestData> testList;
-        private List<TestData> homeworkList;
+        // DAOs for database access
+        private BaiKiemTraDAO baiKiemTraDAO;
+        private BaiLamDAO baiLamDAO;
 
-        public ucKiemTra()
+        // Student ID
+        private int maHS;
+        private int maLop;
+
+        // Data lists
+        private List<TestData> testList = new List<TestData>();
+        private List<TestData> homeworkList = new List<TestData>();
+
+        public ucKiemTra(int maHS)
         {
             InitializeComponent();
+
+            // Initialize DAOs
+            baiKiemTraDAO = new BaiKiemTraDAO();
+            baiLamDAO = new BaiLamDAO();
+
+            // Set student ID
+            this.maHS = maHS;
+
+            // Get student's class
+            HocSinhDAO hsDAO = new HocSinhDAO();
+            this.maLop = hsDAO.GetMaLopByMaHS(maHS);
 
             Load += UcKiemTra_Load;
             btnTests.Click += BtnTests_Click;
@@ -46,29 +68,122 @@ namespace QuanLyTruongHoc.GUI.Controls
             cmbSemester.SelectedIndexChanged += FilterChanged;
             btnSearch.Click += BtnSearch_Click;
             txtSearch.KeyPress += TxtSearch_KeyPress;
-            Label lblNoItems = new Label
-            {
-                Text = "Chức năng đang trong quá trình phát triển",
-                Font = new Font("Segoe UI", 14),
-                ForeColor = Color.Gray,
-                AutoSize = true,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-            lblNoItems.Location = new Point(
-                (pnlTestContainer.Width - lblNoItems.Width) / 2,
-                (pnlTestContainer.Height - lblNoItems.Height) / 2
-            );
-            pnlTestContainer.Controls.Add(lblNoItems);
         }
 
         private void UcKiemTra_Load(object sender, EventArgs e)
         {
+            // Load available school years
+            LoadSchoolYears();
+
+            // Load available semesters
+            LoadSemesters();
+
+            // Load tests and homework
+            LoadTestsAndHomework();
 
             // Select the default tab
             SetActiveView(ViewMode.Tests);
         }
 
-      
+        private void LoadSchoolYears()
+        {
+            try
+            {
+                // Get distinct school years from the database
+                List<string> schoolYears = baiKiemTraDAO.GetDistinctSchoolYears();
+
+                // Add to combo box
+                cmbSchoolYear.Items.Clear();
+                cmbSchoolYear.Items.Add("Tất cả năm học");
+                foreach (string year in schoolYears)
+                {
+                    cmbSchoolYear.Items.Add(year);
+                }
+
+                // Select "All" by default
+                if (cmbSchoolYear.Items.Count > 0)
+                    cmbSchoolYear.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách năm học: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadSemesters()
+        {
+            try
+            {
+                // Add semesters to combo box
+                cmbSemester.Items.Clear();
+                cmbSemester.Items.Add("Tất cả học kỳ");
+                cmbSemester.Items.Add("Học kỳ 1");
+                cmbSemester.Items.Add("Học kỳ 2");
+
+                // Select "All" by default
+                if (cmbSemester.Items.Count > 0)
+                    cmbSemester.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách học kỳ: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadTestsAndHomework()
+        {
+            try
+            {
+                // Clear existing lists
+                testList.Clear();
+                homeworkList.Clear();
+
+                // Get filter values
+                string schoolYear = cmbSchoolYear.SelectedIndex > 0 ? cmbSchoolYear.SelectedItem.ToString() : null;
+                int? semester = cmbSemester.SelectedIndex > 0 ? cmbSemester.SelectedIndex : (int?)null;
+
+                // Get all tests assigned to student's class 
+                List<BaiKiemTraDTO> tests = baiKiemTraDAO.GetAllTestsForStudent(maHS, schoolYear, semester);
+
+                // Get student's submissions
+                List<BaiLamDTO> submissions = baiLamDAO.GetSubmissionsByStudent(maHS);
+
+                // Convert to TestData objects
+                foreach (BaiKiemTraDTO test in tests)
+                {
+                    // Get number of attempts used
+                    int attemptsUsed = submissions.Count(s => s.MaBaiKT == test.MaBaiKT);
+
+                    // Create test data
+                    TestData testData = new TestData(
+                        test.MaBaiKT,
+                        test.TenMonHoc,
+                        test.TenBaiKT,
+                        test.ThoiGianLamBai,
+                        test.ThoiGianBatDau,
+                        test.ThoiGianKetThuc,
+                        test.SoLanLamToiDa,
+                        attemptsUsed,
+                        test.MoTa ?? string.Empty,
+                        test.LoaiBaiKT == "Bài tập về nhà"
+                    );
+
+                    // Add to appropriate list
+                    if (testData.IsHomework)
+                        homeworkList.Add(testData);
+                    else
+                        testList.Add(testData);
+                }
+
+                // Refresh the current view
+                RefreshCurrentView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách bài kiểm tra: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void BtnTests_Click(object sender, EventArgs e)
         {
             SetActiveView(ViewMode.Tests);
@@ -86,8 +201,8 @@ namespace QuanLyTruongHoc.GUI.Controls
 
         private void FilterChanged(object sender, EventArgs e)
         {
-            // Refresh the current view when filters change
-            RefreshCurrentView();
+            // Reload tests and homework with the new filters
+            LoadTestsAndHomework();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -136,7 +251,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             }
 
             // Refresh the view
-            //RefreshCurrentView();
+            RefreshCurrentView();
         }
 
         private void RefreshCurrentView()
@@ -152,18 +267,18 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             switch (currentMode)
             {
-                //case ViewMode.Tests:
-                //    filteredItems = testList.Where(t => !t.IsHomework).ToList();
-                //    break;
-                //case ViewMode.Homework:
-                //    filteredItems = homeworkList.Where(t => t.IsHomework).ToList();
-                //    break;
-                //case ViewMode.ComingSoon:
-                //    // Get items that are coming soon (start date within 7 days from now)
-                //    DateTime sevenDaysFromNow = DateTime.Now.AddDays(7);
-                //    filteredItems = testList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList();
-                //    filteredItems.AddRange(homeworkList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList());
-                //    break;
+                case ViewMode.Tests:
+                    filteredItems = testList.Where(t => !t.IsHomework).ToList();
+                    break;
+                case ViewMode.Homework:
+                    filteredItems = homeworkList.Where(t => t.IsHomework).ToList();
+                    break;
+                case ViewMode.ComingSoon:
+                    // Get items that are coming soon (start date within 7 days from now)
+                    DateTime sevenDaysFromNow = DateTime.Now.AddDays(7);
+                    filteredItems = testList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList();
+                    filteredItems.AddRange(homeworkList.Where(t => t.StartTime > DateTime.Now && t.StartTime <= sevenDaysFromNow).ToList());
+                    break;
             }
 
             // Apply search filter if provided
@@ -226,24 +341,20 @@ namespace QuanLyTruongHoc.GUI.Controls
             ucTestItem item = sender as ucTestItem;
             if (item != null)
             {
-                // Update the item in the data source
-                var test = testList.FirstOrDefault(t => t.TestId == item.TestId);
-                if (test != null)
+                // Open the test form
+                using (frmKiemTra testForm = new frmKiemTra(item.TestId, maHS))
                 {
-                    test.AttemptsUsed++;
-                }
+                    testForm.ShowDialog();
 
-                var homework = homeworkList.FirstOrDefault(t => t.TestId == item.TestId);
-                if (homework != null)
-                {
-                    homework.AttemptsUsed++;
+                    // Reload data after test completion
+                    LoadTestsAndHomework();
                 }
             }
         }
 
         private void btnSearch_Click_1(object sender, EventArgs e)
         {
-
+            RefreshCurrentView();
         }
     }
 

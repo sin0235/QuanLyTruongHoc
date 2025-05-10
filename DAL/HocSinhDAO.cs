@@ -1051,5 +1051,35 @@ namespace QuanLyTruongHoc.DAL
 
             return proposedId;
         }
+        /// <summary>
+        /// Get class ID for a specific student
+        /// </summary>
+        /// <param name="maHS">Student ID</param>
+        /// <returns>Class ID or 0 if not found</returns>
+        public int GetMaLopByMaHS(int maHS)
+        {
+            try
+            {
+                string query = "SELECT MaLop FROM HocSinh WHERE MaHS = @MaHS";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaHS", maHS }
+                };
+
+                object result = db.ExecuteScalar(query, parameters);
+
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving class for student: {ex.Message}");
+            }
+
+            return 0;
+        }
     }
 }

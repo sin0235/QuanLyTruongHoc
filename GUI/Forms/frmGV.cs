@@ -8,6 +8,7 @@ using Guna.UI2.WinForms;
 using QuanLyTruongHoc.DAL;
 using QuanLyTruongHoc.GUI.Controls;
 using QuanLyTruongHoc.GUI.Controls.ucGiaoVien;
+using QuanLyTruongHoc.GUI.Forms;
 
 namespace QuanLyTruongHoc
 {
@@ -23,6 +24,10 @@ namespace QuanLyTruongHoc
         private int maNguoiDung;
         private string hoTen;
         private readonly DatabaseHelper db;
+        private int maGV;
+
+        // Biến theo dõi trạng thái menu con
+        private bool isSubMenuVisible = false;
 
         public frmGV(int maNguoiDung)
         {
@@ -30,6 +35,7 @@ namespace QuanLyTruongHoc
 
             this.maNguoiDung = maNguoiDung;
             db = new DatabaseHelper();
+            maGV = GetMaGiaoVien(maNguoiDung);
 
             //Hiển thị tên người dùng
             LoadTenNguoiDung(maNguoiDung);
@@ -43,6 +49,9 @@ namespace QuanLyTruongHoc
                 quanLyLopBtn.Visible = false; // Ẩn "Quản lý lớp"
             }
 
+            // Ẩn ban đầu các nút con của menu Kiểm tra
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
 
             // Ensure buttons are within the Guna2Panel
             guna2CircleButtonClose.Parent = pnlTitleBar;
@@ -62,32 +71,32 @@ namespace QuanLyTruongHoc
             // Update button positions when the form is initialized
             UpdateButtonPositions();
 
-
             // Register Resize event
             this.Resize += new EventHandler(Form1_Resize);
 
             LoadThongBao();
             lblPageTitle.Text = "Thông báo";
-
         }
+
         private bool KiemTraGVCN(int maNguoiDung)
         {
             string query = $@"
-                SELECT MaLop
-                FROM LopHoc
-                WHERE MaGVChuNhiem = (SELECT MaGV FROM GiaoVien WHERE MaNguoiDung = {maNguoiDung})";
+                    SELECT MaLop
+                    FROM LopHoc
+                    WHERE MaGVChuNhiem = (SELECT MaGV FROM GiaoVien WHERE MaNguoiDung = {maNguoiDung})";
 
             object result = db.ExecuteScalar(query);
             return result != null && result != DBNull.Value;
         }
+
         private void LoadTenNguoiDung(int maNguoiDung)
         {
             try
             {
                 string query = $@"
-                    SELECT GiaoVien.HoTen
-                    FROM GiaoVien
-                    WHERE GiaoVien.MaNguoiDung = {maNguoiDung}";
+                        SELECT GiaoVien.HoTen
+                        FROM GiaoVien
+                        WHERE GiaoVien.MaNguoiDung = {maNguoiDung}";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -111,7 +120,11 @@ namespace QuanLyTruongHoc
         {
             lblPageTitle.Text = "Thông báo";
             LoadThongBao();
+
+            // Ẩn menu con nếu đang hiển thị
+            HideSubMenu();
         }
+
         private void LoadThongBao()
         {
             pnlContent.Controls.Clear();
@@ -131,6 +144,10 @@ namespace QuanLyTruongHoc
             uc.BringToFront();
             uc.LoadThongTinCaNhan(maNguoiDung);
 
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
         private void lichDayBtn_Click(object sender, EventArgs e)
@@ -142,6 +159,10 @@ namespace QuanLyTruongHoc
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
             uc.LoadLichDay(maNguoiDung);
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
 
@@ -153,6 +174,11 @@ namespace QuanLyTruongHoc
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
+
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
         private void quanLyDiemSoBtn_Click(object sender, EventArgs e)
@@ -163,6 +189,10 @@ namespace QuanLyTruongHoc
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
         private void quanLyLopBtn_Click(object sender, EventArgs e)
@@ -174,7 +204,14 @@ namespace QuanLyTruongHoc
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
+
+
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
+
         private void guiThongBaoBtn_Click(object sender, EventArgs e)
         {
             int maGV = GetMaGiaoVien(maNguoiDung);
@@ -184,20 +221,64 @@ namespace QuanLyTruongHoc
             uc.Dock = DockStyle.None;
             pnlContent.Controls.Add(uc);
             uc.BringToFront();
-
+            // Thêm mã mới để ẩn các nút con
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
         private int GetMaGiaoVien(int maNguoiDung)
         {
             string query = $@"
-            SELECT MaGV
-            FROM GiaoVien
-            WHERE MaNguoiDung = {maNguoiDung}";
+                SELECT MaGV
+                FROM GiaoVien
+                WHERE MaNguoiDung = {maNguoiDung}";
             object result = db.ExecuteScalar(query);
             return Convert.ToInt32(result);
+        }
+
+        private void BtnEx_Click(object sender, EventArgs e)
+        {
+            // Đảo ngược trạng thái hiển thị của các nút con
+            btnTaoEx.Visible = !btnTaoEx.Visible;
+            btnQuanLyEx.Visible = !btnQuanLyEx.Visible;
+
+            // Thay đổi màu nền của nút chính khi được chọn
+            btnEx.FillColor = btnTaoEx.Visible ?
+                Color.FromArgb(157, 192, 239) :
+                Color.FromArgb(157, 192, 239);
+
+            // Ẩn các nút con khác nếu có
+            if (pnlSubSettings.Visible)
+            {
+                pnlSubSettings.Visible = false;
+                btnSetting.FillColor = Color.Transparent;
+            }
 
         }
-        
+
+        private void AdjustSubMenuButtonsPosition()
+        {
+            // Điều chỉnh vị trí của các nút con dựa trên vị trí của nút chính
+            if (btnEx != null && btnTaoEx != null && btnQuanLyEx != null)
+            {
+                int yOffset = 5; // Khoảng cách giữa các nút
+
+                btnTaoEx.Location = new Point(btnEx.Location.X + 20, btnEx.Location.Y + btnEx.Height + yOffset);
+                btnQuanLyEx.Location = new Point(btnEx.Location.X + 20, btnTaoEx.Location.Y + btnTaoEx.Height + yOffset);
+            }
+        }
+
+        private void HideSubMenu()
+        {
+            if (isSubMenuVisible)
+            {
+                isSubMenuVisible = false;
+                btnTaoEx.Visible = false;
+                btnQuanLyEx.Visible = false;
+                btnEx.FillColor = Color.Transparent;
+            }
+        }
 
         private void LoadAnhDaiDien()
         {
@@ -205,9 +286,9 @@ namespace QuanLyTruongHoc
             {
                 // Query to get gender from the NguoiDung table
                 string query = $@"
-                    SELECT gv.GioiTinh
-                    FROM GiaoVien gv
-                    WHERE gv.MaGV = {GetMaGiaoVien(maNguoiDung)}";
+                        SELECT gv.GioiTinh
+                        FROM GiaoVien gv
+                        WHERE gv.MaGV = {GetMaGiaoVien(maNguoiDung)}";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -236,7 +317,6 @@ namespace QuanLyTruongHoc
                 MessageBox.Show($"Lỗi khi lấy ảnh đại diện: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnSetting_Click(object sender, EventArgs e)
         {
             pnlSubSettings.Visible = !pnlSubSettings.Visible;
@@ -249,6 +329,11 @@ namespace QuanLyTruongHoc
 
             // Đảm bảo panel hiển thị trên cùng
             pnlSubSettings.BringToFront();
+
+            // Ẩn các nút con khác
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+            btnEx.FillColor = Color.FromArgb(157, 192, 239);
         }
 
         private void btnChangePassword_Click(object sender, EventArgs e)
@@ -291,13 +376,19 @@ namespace QuanLyTruongHoc
             }
         }
 
-        
+
         // Hàm cập nhật vị trí nút
         private void UpdateButtonPositions()
         {
             guna2CircleButtonMinimize.Location = new Point(pnlTitleBar.Width - 90, 5);
             guna2CircleButtonMaximize.Location = new Point(pnlTitleBar.Width - 60, 5);
             guna2CircleButtonClose.Location = new Point(pnlTitleBar.Width - 30, 5);
+
+            // Cập nhật vị trí của các nút con nếu đang hiển thị
+            if (isSubMenuVisible)
+            {
+                AdjustSubMenuButtonsPosition();
+            }
         }
 
         // Sự kiện Resize
@@ -412,5 +503,68 @@ namespace QuanLyTruongHoc
 
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            // Ẩn các nút con khi khởi động form
+            btnTaoEx.Visible = false;
+            btnQuanLyEx.Visible = false;
+
+            // Đăng ký sự kiện click cho nút Ex
+            btnEx.Click += BtnEx_Click;
+        }
+
+        private void btnTaoEx_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Tạo bài kiểm tra";
+            pnlContent.Controls.Clear();
+
+            // Tạo mới ucTaoBaiKiemTra
+            ucTaoBaiKiemTra ucTaoEx = new ucTaoBaiKiemTra(maGV);
+
+            // Đăng ký các sự kiện
+            ucTaoEx.TestCreated += (s, args) =>
+            {
+                // Quay lại màn hình trước đó hoặc làm mới giao diện nếu cần
+                LoadThongBao(); // Ví dụ: quay lại màn hình thông báo
+                lblPageTitle.Text = "Thông báo";
+            };
+
+            ucTaoEx.TestSavedAsDraft += (s, args) =>
+            {
+                // Quay lại màn hình trước đó hoặc làm mới giao diện nếu cần
+                LoadThongBao(); // Ví dụ: quay lại màn hình thông báo
+                lblPageTitle.Text = "Thông báo";
+            };
+
+            ucTaoEx.TestCanceled += (s, args) =>
+            {
+                // Quay lại màn hình trước đó
+                LoadThongBao(); // Ví dụ: quay lại màn hình thông báo
+                lblPageTitle.Text = "Thông báo";
+            };
+
+            ucTaoEx.Dock = DockStyle.Fill;
+            pnlContent.Controls.Add(ucTaoEx);
+            ucTaoEx.BringToFront();
+
+            // Ẩn menu con sau khi chọn
+            HideSubMenu();
+        }
+
+        private void btnQuanLyEx_Click(object sender, EventArgs e)
+        {
+            lblPageTitle.Text = "Quản lý bài kiểm tra";
+
+            // Hiển thị form quản lý bài kiểm tra trong tab mới
+            using (frmQuanLyEx quanLyExForm = new frmQuanLyEx(maGV))
+            {
+                quanLyExForm.ShowDialog();
+            }
+
+            // Ẩn menu con sau khi chọn
+            HideSubMenu();
+        }
     }
 }
