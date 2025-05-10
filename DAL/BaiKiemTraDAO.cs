@@ -27,6 +27,13 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
+                // Standardize the status to Vietnamese
+                string standardizedStatus = baiKiemTra.TrangThai;
+                if (baiKiemTra.TrangThai == "Published")
+                    standardizedStatus = "Đã công bố";
+                else if (baiKiemTra.TrangThai == "Draft")
+                    standardizedStatus = "Chưa công bố";
+
                 // 1. Tạo bài kiểm tra với các thuộc tính mới
                 string insertTestQuery = @"
                 INSERT INTO BaiKiemTra (
@@ -52,7 +59,7 @@ namespace QuanLyTruongHoc.DAL
                     { "@MoTa", string.IsNullOrEmpty(baiKiemTra.MoTa) ? DBNull.Value : (object)baiKiemTra.MoTa },
                     { "@ThoiGianLamBai", baiKiemTra.ThoiGianLamBai },
                     { "@MaMH", baiKiemTra.MaMH },
-                    { "@TrangThai", baiKiemTra.TrangThai },
+                    { "@TrangThai", standardizedStatus },
                     { "@HocKy", baiKiemTra.HocKy },
                     { "@NamHoc", baiKiemTra.NamHoc },
                     { "@ThoiGianBatDau", baiKiemTra.ThoiGianBatDau },
@@ -688,6 +695,13 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
+                // Standardize to Vietnamese status
+                string standardizedStatus = trangThai;
+                if (trangThai == "Published")
+                    standardizedStatus = "Đã công bố";
+                else if (trangThai == "Draft")
+                    standardizedStatus = "Chưa công bố";
+
                 string query = @"
                     UPDATE BaiKiemTra
                     SET TrangThai = @TrangThai
@@ -696,7 +710,7 @@ namespace QuanLyTruongHoc.DAL
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
                     { "@MaBaiKT", maBaiKT },
-                    { "@TrangThai", trangThai }
+                    { "@TrangThai", standardizedStatus }
                 };
                 
                 return db.ExecuteNonQuery(query, parameters);
@@ -966,8 +980,8 @@ namespace QuanLyTruongHoc.DAL
                     parameters.Add("@HocKy", hocKy.Value);
                 }
 
-                // Only get published tests
-                query += " AND (bk.TrangThai = N'Published' or bk.TrangThai = N'Đã công bố')";
+                // Only get published tests (support both English and Vietnamese status)
+                query += " AND (bk.TrangThai = N'Published' OR bk.TrangThai = N'Đã công bố')";
 
                 // Order by test date
                 query += " ORDER BY bkl.NgayKiemTra DESC";
@@ -1094,7 +1108,8 @@ namespace QuanLyTruongHoc.DAL
                         MonHoc mh ON bk.MaMon = mh.MaMon
                     WHERE 
                         bk.MaBaiKT = @MaBaiKT AND
-                        bkl.MaLop = @MaLop";
+                        bkl.MaLop = @MaLop AND
+                        (bk.TrangThai = N'Published' OR bk.TrangThai = N'Đã công bố')";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -1206,7 +1221,7 @@ namespace QuanLyTruongHoc.DAL
                         LopHoc lh ON bkl.MaLop = lh.MaLop
                     WHERE 
                         bkl.MaLop = @MaLop
-                        AND bk.TrangThai = N'Đã công bố'
+                        AND (bk.TrangThai = N'Published' OR bk.TrangThai = N'Đã công bố')
                         AND GETDATE() BETWEEN bkl.NgayKiemTra AND DATEADD(MINUTE, bk.ThoiGianLamBai, bkl.NgayKiemTra)";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>

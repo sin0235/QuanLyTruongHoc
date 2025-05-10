@@ -40,7 +40,7 @@ namespace QuanLyTruongHoc.DTO
         public BaiKiemTraDTO()
         {
             NgayTao = DateTime.Now;
-            TrangThai = "Draft";
+            TrangThai = "Chưa công bố";
             HienThiKetQuaNgay = true;
             XaoTronCauHoi = false;
             SoLanLamToiDa = 1;
