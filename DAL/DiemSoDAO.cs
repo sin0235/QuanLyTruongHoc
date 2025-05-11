@@ -316,6 +316,15 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
+                // Generate a new MaDiem if it's not provided
+                if (score.MaDiem <= 0)
+                {
+                    // Get the next available ID
+                    string getMaxIdQuery = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
+                    object result = db.ExecuteScalar(getMaxIdQuery);
+                    score.MaDiem = Convert.ToInt32(result);
+                }
+
                 string query = @"
                             INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
                             VALUES (@MaDiem, @MaHS, @MaMon, @MaGV, @HocKy, @LoaiDiem, @Diem)";

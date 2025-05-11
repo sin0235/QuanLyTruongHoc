@@ -298,6 +298,7 @@ namespace QuanLyTruongHoc.GUI.Forms
             List<BaiLamDTO> danhSachBaiLam = baiLamDAO.GetSubmissionsByTestId(currentMaBaiKT);
 
             int successCount = 0;
+            int savedToDiemSo = 0;
             foreach (var baiLam in danhSachBaiLam)
             {
                 // Ensure we're calling the method with the correct parameter
@@ -306,10 +307,20 @@ namespace QuanLyTruongHoc.GUI.Forms
                     // Also calculate the total score
                     baiLamDAO.CalculateTotalScore(baiLam.MaBaiLam);
                     successCount++;
+
+                    // If the submission only has multiple choice questions or all essay questions are graded
+                    if (baiLamDAO.AreAllEssayQuestionsGraded(baiLam.MaBaiLam))
+                    {
+                        // Save to DiemSo table
+                        if (baiLamDAO.SaveTestScoreToDiemSo(baiLam.MaBaiLam))
+                        {
+                            savedToDiemSo++;
+                        }
+                    }
                 }
             }
 
-            ShowMessage($"Đã chấm tự động {successCount}/{danhSachBaiLam.Count} bài!", "Thông báo", MessageBoxIcon.Information);
+            ShowMessage($"Đã chấm tự động {successCount}/{danhSachBaiLam.Count} bài và cập nhật {savedToDiemSo} bài vào bảng điểm số!", "Thông báo", MessageBoxIcon.Information);
 
             // Refresh the display
             if (currentMaBaiKT > 0)
@@ -342,12 +353,20 @@ namespace QuanLyTruongHoc.GUI.Forms
             {
                 // Hiển thị hiệu ứng loading
                 Cursor = Cursors.WaitCursor;
-                
+
                 // Chấm tự động các câu trắc nghiệm
                 baiLamDAO.AutoGradeMultipleChoice(currentMaBaiLam);
-                
+
                 // Cập nhật tổng điểm
                 baiLamDAO.CalculateTotalScore(currentMaBaiLam);
+
+                // Check if all questions are already graded (e.g., only multiple choice)
+                if (baiLamDAO.AreAllEssayQuestionsGraded(currentMaBaiLam))
+                {
+                    // Save to DiemSo table
+                    baiLamDAO.SaveTestScoreToDiemSo(currentMaBaiLam);
+                    ShowMessage("Điểm đã được tự động lưu vào bảng điểm số!", "Thông báo", MessageBoxIcon.Information);
+                }
 
                 // Chuyển sang tab chấm bài
                 tabChiTiet.SelectedTab = tabChamBai;
@@ -406,7 +425,32 @@ namespace QuanLyTruongHoc.GUI.Forms
                     // Cập nhật tổng điểm
                     double totalScore = baiLamDAO.CalculateTotalScore(currentBaiLam.MaBaiLam);
 
-                    ShowMessage("Đã lưu điểm thành công!", "Thông báo", MessageBoxIcon.Information);
+                    // Check if all essay questions are graded
+                    bool allGraded = baiLamDAO.AreAllEssayQuestionsGraded(currentBaiLam.MaBaiLam);
+
+                    // If all questions are graded, save to DiemSo table
+                    if (allGraded)
+                    {
+                        try
+                        {
+                            if (baiLamDAO.SaveTestScoreToDiemSo(currentBaiLam.MaBaiLam))
+                            {
+                                ShowMessage("Đã lưu điểm và cập nhật vào bảng điểm số của học sinh!", "Thông báo", MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                ShowMessage("Đã lưu điểm nhưng không thể cập nhật vào bảng điểm số!", "Cảnh báo", MessageBoxIcon.Warning);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ShowMessage($"Đã lưu điểm nhưng gặp lỗi khi cập nhật vào bảng điểm số: {ex.Message}", "Lỗi", MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        ShowMessage("Đã lưu điểm thành công! Điểm sẽ được cập nhật vào bảng điểm số khi tất cả câu hỏi được chấm.", "Thông báo", MessageBoxIcon.Information);
+                    }
                 }
                 else
                 {

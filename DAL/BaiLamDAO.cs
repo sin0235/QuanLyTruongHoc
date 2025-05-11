@@ -811,5 +811,70 @@ namespace QuanLyTruongHoc.DAL
 
             return submissions;
         }
+        /// <summary>
+        /// Updates the DiemSo table with the score from a completed test
+        /// </summary>
+        /// <param name="maBaiLam">Submission ID</param>
+        /// <returns>True if successful, false otherwise</returns>
+        public bool SaveTestScoreToDiemSo(int maBaiLam)
+        {
+            try
+            {
+                // First, get the necessary information about the submission and test
+                string query = @"
+                    SELECT 
+                        bl.MaBaiLam, 
+                        bl.MaHS, 
+                        bl.DiemSo, 
+                        bk.MaMon, 
+                        bk.MaGV, 
+                        DATEPART(MONTH, bl.NgayLam) as ThangLam
+                    FROM 
+                        BaiLam bl
+                    INNER JOIN 
+                        BaiKiemTra bk ON bl.MaBaiKT = bk.MaBaiKT
+                    WHERE 
+                        bl.MaBaiLam = @MaBaiLam 
+                        AND bl.DiemSo IS NOT NULL";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaBaiLam", maBaiLam }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    return false; // No submission found or score is null
+                }
+
+                DataRow row = dt.Rows[0];
+
+                // Determine the semester based on the month
+                int month = Convert.ToInt32(row["ThangLam"]);
+                int hocKy = (month >= 9 && month <= 12) || (month == 1) ? 1 : 2;
+
+                // Create a DiemSo entry
+                DiemSoDAO diemSoDao = new DiemSoDAO();
+                DiemSoDTO diemSo = new DiemSoDTO
+                {
+                    MaHS = Convert.ToInt32(row["MaHS"]),
+                    MaMon = Convert.ToInt32(row["MaMon"]),  // Ensure this column name matches the database
+                    MaGV = Convert.ToInt32(row["MaGV"]),
+                    HocKy = hocKy,
+                    LoaiDiem = "Cuối kỳ", // Or another appropriate type
+                    Diem = (float)Convert.ToDouble(row["DiemSo"])
+                };
+
+                // Save to DiemSo table
+                return diemSoDao.AddScore(diemSo);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving test score to DiemSo: {ex.Message}");
+                return false;
+            }
+        }
     }
 }
