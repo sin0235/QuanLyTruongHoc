@@ -32,7 +32,9 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         // DAO objects
         private BaiKiemTraDAO baiKiemTraDAO;
+        private BaiLamDAO baiLamDAO;
         private BaiKiemTraDTO currentBaiKT;
+        private DateTime startTime; // Thời gian bắt đầu làm bài
 
         // Event handlers for question interaction
         private void Question_AnswerSelected(object sender, AnswerSelectedEventArgs e)
@@ -61,6 +63,7 @@ namespace QuanLyTruongHoc.GUI.Forms
 
             // Initialize DAOs
             baiKiemTraDAO = new BaiKiemTraDAO();
+            baiLamDAO = new BaiLamDAO();
 
             // Thiết lập hiệu ứng mở form
             this.Opacity = 0;
@@ -79,6 +82,9 @@ namespace QuanLyTruongHoc.GUI.Forms
             chkMarkForReview.CheckedChanged += ChkMarkForReview_CheckedChanged;
             timer.Interval = 1000; // 1 giây
             timer.Tick += Timer_Tick;
+            
+            // Ghi lại thời gian bắt đầu làm bài
+            startTime = DateTime.Now;
         }
 
         private void AnimationTimer_Tick(object sender, EventArgs e)
@@ -527,9 +533,109 @@ namespace QuanLyTruongHoc.GUI.Forms
                 // Dừng đồng hồ
                 timer.Stop();
 
-                // Code xử lý nộp bài tại đây
-                MessageBox.Show("Bài làm của bạn đã được nộp thành công!",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    // Tính thời gian làm bài (phút)
+                    int thoiGianLamBai = (int)(DateTime.Now - startTime).TotalMinutes;
+                    if (thoiGianLamBai < 1) thoiGianLamBai = 1; // Tối thiểu 1 phút
+
+                    // 1. Tạo bản ghi BaiLam mới
+                    string insertBaiLamQuery = @"
+                        INSERT INTO BaiLam (MaBaiKT, MaHS, NgayLam, ThoiGianLamBai, DaNop)
+                        VALUES (@MaBaiKT, @MaHS, GETDATE(), @ThoiGianLamBai, 1);
+                        SELECT SCOPE_IDENTITY();";
+
+                    Dictionary<string, object> parameters = new Dictionary<string, object>
+                    {
+                        { "@MaBaiKT", tID },
+                        { "@MaHS", maHS },
+                        { "@ThoiGianLamBai", thoiGianLamBai }
+                    };
+
+                    // Thực hiện truy vấn và lấy ID của bài làm mới
+                    DatabaseHelper db = new DatabaseHelper();
+                    object result1 = db.ExecuteScalar(insertBaiLamQuery, parameters);
+                    
+                    if (result1 == null)
+                    {
+                        throw new Exception("Không thể tạo bài làm mới");
+                    }
+
+                    int maBaiLam = Convert.ToInt32(result1);
+
+                    // 2. Lưu các câu trả lời trắc nghiệm
+                    foreach (UserControl questionItem in questionItems)
+                    {
+                        if (questionItem is ucTNItem tnItem)
+                        {
+                            List<int> selectedOptions = tnItem.GetSelectedOptions();
+                            string cauTraLoi = null;
+
+                            if (selectedOptions != null && selectedOptions.Count > 0)
+                            {
+                                int optionIndex = selectedOptions[0];
+                                if (optionIndex >= 0 && optionIndex < 4) // Kiểm tra phạm vi hợp lệ
+                                {
+                                    cauTraLoi = new[] { "A", "B", "C", "D" }[optionIndex];
+                                }
+                            }
+
+                            if (!string.IsNullOrEmpty(cauTraLoi))
+                            {
+                                string insertTNQuery = @"
+                                    INSERT INTO BaiLam_TracNghiem (MaBaiLam, MaCauHoiTN, CauTraLoi)
+                                    VALUES (@MaBaiLam, @MaCauHoiTN, @CauTraLoi);";
+
+                                Dictionary<string, object> tnParameters = new Dictionary<string, object>
+                                {
+                                    { "@MaBaiLam", maBaiLam },
+                                    { "@MaCauHoiTN", tnItem.QuestionId },
+                                    { "@CauTraLoi", string.IsNullOrEmpty(cauTraLoi) ? DBNull.Value : (object)cauTraLoi }
+                                };
+
+                                db.ExecuteNonQuery(insertTNQuery, tnParameters);
+                            }
+                        }
+                        else if (questionItem is ucTLItem tlItem)
+                        {
+                            string cauTraLoi = tlItem.GetAnswer();
+                            
+                            if (!string.IsNullOrEmpty(cauTraLoi))
+                            {
+                                string insertTLQuery = @"
+                                    INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi)
+                                    VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi);";
+
+                                Dictionary<string, object> tlParameters = new Dictionary<string, object>
+                                {
+                                    { "@MaBaiLam", maBaiLam },
+                                    { "@MaCauHoiTL", tlItem.QuestionId },
+                                    { "@CauTraLoi", string.IsNullOrEmpty(cauTraLoi) ? DBNull.Value : (object)cauTraLoi }
+                                };
+
+                                db.ExecuteNonQuery(insertTLQuery, tlParameters);
+                            }
+                        }
+                    }
+
+                    // 3. Tự động chấm điểm các câu hỏi trắc nghiệm
+                    if (maBaiLam > 0)
+                    {
+                        baiLamDAO.AutoGradeMultipleChoice(maBaiLam);
+                        
+                        // Tính tổng điểm và cập nhật vào bảng BaiLam
+                        baiLamDAO.CalculateTotalScore(maBaiLam);
+                    }
+
+                    MessageBox.Show("Bài làm của bạn đã được nộp thành công!",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi nộp bài: {ex.Message}",
+                        "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine($"Chi tiết lỗi: {ex.StackTrace}");
+                }
 
                 // Đóng form
                 this.Close();

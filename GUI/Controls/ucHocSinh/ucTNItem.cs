@@ -260,6 +260,24 @@ namespace QuanLyTruongHoc.GUI.Controls
             ShowAnswers = true;
             UpdateUI();
         }
+        
+        // Get the currently selected options
+        public List<int> GetSelectedOptions()
+        {
+            if (AllowMultipleAnswers)
+            {
+                // For multiple-answer questions, return all checked boxes
+                return checkBoxes
+                    .Where(cb => cb.Checked)
+                    .Select(cb => (int)cb.Tag)
+                    .ToList();
+            }
+            else
+            {
+                // For single-answer questions, return the selected option or empty list
+                return SelectedOption >= 0 ? new List<int> { SelectedOption } : new List<int>();
+            }
+        }
     }
 
     // Event arguments for answer selection
