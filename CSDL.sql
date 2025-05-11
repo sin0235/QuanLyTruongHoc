@@ -326,3 +326,10 @@ ALTER TABLE BaiKiemTra ADD
     GhiChuChamDiem NVARCHAR(500) NULL,
     CoMatKhau BIT NOT NULL DEFAULT 0,
     MatKhau NVARCHAR(100) NULL;
+
+
+-- Add ThuTu column to BaiLam_TracNghiem table
+ALTER TABLE BaiLam_TracNghiem ADD ThuTu INT NULL;
+
+-- Add ThuTu column to BaiLam_TuLuan table  
+ALTER TABLE BaiLam_TuLuan ADD ThuTu INT NULL;

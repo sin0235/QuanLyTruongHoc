@@ -300,10 +300,10 @@ namespace QuanLyTruongHoc.GUI.Forms
             int successCount = 0;
             foreach (var baiLam in danhSachBaiLam)
             {
-                // Tự động chấm các câu trắc nghiệm
+                // Ensure we're calling the method with the correct parameter
                 if (baiLamDAO.AutoGradeMultipleChoice(baiLam.MaBaiLam))
                 {
-                    // Cập nhật tổng điểm
+                    // Also calculate the total score
                     baiLamDAO.CalculateTotalScore(baiLam.MaBaiLam);
                     successCount++;
                 }
@@ -311,10 +311,15 @@ namespace QuanLyTruongHoc.GUI.Forms
 
             ShowMessage($"Đã chấm tự động {successCount}/{danhSachBaiLam.Count} bài!", "Thông báo", MessageBoxIcon.Information);
 
-            // Tải lại thống kê
+            // Refresh the display
             if (currentMaBaiKT > 0)
             {
                 LoadThongKe(currentMaBaiKT);
+                // Also refresh the submissions list if it's currently visible
+                if (tabPanels.SelectedTab == tabBaiLam)
+                {
+                    LoadDanhSachBaiLam(currentMaBaiKT);
+                }
             }
         }
 
@@ -333,11 +338,31 @@ namespace QuanLyTruongHoc.GUI.Forms
                 return;
             }
 
-            // Chuyển sang tab chấm bài
-            tabChiTiet.SelectedTab = tabChamBai;
+            try
+            {
+                // Hiển thị hiệu ứng loading
+                Cursor = Cursors.WaitCursor;
+                
+                // Chấm tự động các câu trắc nghiệm
+                baiLamDAO.AutoGradeMultipleChoice(currentMaBaiLam);
+                
+                // Cập nhật tổng điểm
+                baiLamDAO.CalculateTotalScore(currentMaBaiLam);
 
-            // Tải thông tin bài làm
-            LoadBaiLam(currentMaBaiLam);
+                // Chuyển sang tab chấm bài
+                tabChiTiet.SelectedTab = tabChamBai;
+
+                // Tải thông tin bài làm
+                LoadBaiLam(currentMaBaiLam);
+            }
+            catch (Exception ex)
+            {
+                ShowMessage($"Lỗi khi chấm điểm: {ex.Message}", "Lỗi", MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         private void BtnLuu_Click(object sender, EventArgs e)

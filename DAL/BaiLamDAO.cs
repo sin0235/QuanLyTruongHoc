@@ -247,11 +247,11 @@ namespace QuanLyTruongHoc.DAL
             try
             {
                 string query = @"
-                    SELECT tn.*, ch.NoiDung, ch.Diem, ch.ThuTu
+                    SELECT tn.*, ch.NoiDung, ch.Diem, tn.ThuTu
                     FROM BaiLam_TracNghiem tn
                     INNER JOIN CauHoiTracNghiem ch ON tn.MaCauHoiTN = ch.MaCauHoiTN
                     WHERE tn.MaBaiLam = @MaBaiLam
-                    ORDER BY ch.ThuTu";
+                    ORDER BY tn.ThuTu";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -427,7 +427,7 @@ namespace QuanLyTruongHoc.DAL
                     INNER JOIN CauHoiTuLuan ch ON tl.MaCauHoiTL = ch.MaCauHoiTL
                     INNER JOIN CauHoiTuLuan ctl ON tl.MaCauHoiTL = ctl.MaCauHoiTL
                     WHERE tl.MaBaiLam = @MaBaiLam
-                    ORDER BY ch.DoKho"; // Sắp xếp theo độ khó thay vì thứ tự
+                    ORDER BY tl.ThuTu";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -438,7 +438,6 @@ namespace QuanLyTruongHoc.DAL
 
                 if (dt != null && dt.Rows.Count > 0)
                 {
-                    int thuTu = 1; // Tạo thứ tự mới nếu không có
                     foreach (DataRow row in dt.Rows)
                     {
                         BaiLamTuLuanDTO answer = new BaiLamTuLuanDTO
@@ -451,7 +450,7 @@ namespace QuanLyTruongHoc.DAL
                             DiemToiDa = Convert.ToDouble(row["DiemSo"]),
                             NhanXet = row["NhanXet"] != DBNull.Value ? row["NhanXet"].ToString() : null,
                             HuongDanTraLoi = row["HuongDanTraLoi"] != DBNull.Value ? row["HuongDanTraLoi"].ToString() : null,
-                            ThuTu = thuTu++  // Tạo thứ tự tăng dần
+                            ThuTu = row["ThuTu"] != DBNull.Value ? Convert.ToInt32(row["ThuTu"]) : 0
                         };
 
                         answers.Add(answer);
@@ -466,7 +465,7 @@ namespace QuanLyTruongHoc.DAL
                 return answers;
             }
         }
-        
+
         /// <summary>
         /// Update grades for multiple choice questions and calculate total score
         /// </summary>
@@ -476,45 +475,70 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Get all multiple choice answers
-                List<BaiLamTracNghiemDTO> mcAnswers = GetMultipleChoiceAnswers(maBaiLam);
-                
-                // Update each answer with the appropriate score
-                foreach (var answer in mcAnswers)
+                // Step 1: Get all multiple choice answers for this submission
+                string getAnswersQuery = @"
+            SELECT 
+                bl_tn.MaCauHoiTN, bl_tn.CauTraLoi, 
+                tn.DapAnDung, tn.Diem
+            FROM 
+                BaiLam_TracNghiem bl_tn
+            INNER JOIN 
+                CauHoiTracNghiem tn ON bl_tn.MaCauHoiTN = tn.MaCauHoiTN
+            WHERE 
+                bl_tn.MaBaiLam = @MaBaiLam";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+        {
+            { "@MaBaiLam", maBaiLam }
+        };
+
+                DataTable dt = db.ExecuteQuery(getAnswersQuery, parameters);
+
+                // If no answers found, return success (nothing to grade)
+                if (dt == null || dt.Rows.Count == 0)
                 {
-                    // If the answer matches the correct answer, give full points
-                    // Otherwise, give 0 points
-                    double score = 0;
-                    if (answer.CauTraLoi == answer.DapAnDung)
-                    {
-                        score = answer.DiemToiDa;
-                    }
-                    
-                    // Update the score in the database
-                    string updateQuery = @"
-                        UPDATE BaiLam_TracNghiem
-                        SET Diem = @Diem
-                        WHERE MaBaiLam = @MaBaiLam AND MaCauHoiTN = @MaCauHoiTN";
-                    
-                    Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "@MaBaiLam", maBaiLam },
-                        { "@MaCauHoiTN", answer.MaCauHoiTN },
-                        { "@Diem", score }
-                    };
-                    
-                    db.ExecuteNonQuery(updateQuery, parameters);
+                    return true;
                 }
-                
+
+                // Step 2: Grade each answer and update the score
+                foreach (DataRow row in dt.Rows)
+                {
+                    int maCauHoiTN = Convert.ToInt32(row["MaCauHoiTN"]);
+                    string cauTraLoi = row["CauTraLoi"] != DBNull.Value ? row["CauTraLoi"].ToString() : null;
+                    string dapAnDung = row["DapAnDung"].ToString();
+                    double diemToiDa = Convert.ToDouble(row["Diem"]);
+
+                    // Calculate score: correct answer = full points, incorrect = 0
+                    double diem = (cauTraLoi == dapAnDung) ? diemToiDa : 0;
+
+                    // Update the score in the database
+                    string updateScoreQuery = @"
+                UPDATE BaiLam_TracNghiem
+                SET Diem = @Diem
+                WHERE MaBaiLam = @MaBaiLam AND MaCauHoiTN = @MaCauHoiTN";
+
+                    Dictionary<string, object> updateParams = new Dictionary<string, object>
+            {
+                { "@MaBaiLam", maBaiLam },
+                { "@MaCauHoiTN", maCauHoiTN },
+                { "@Diem", diem }
+            };
+
+                    db.ExecuteNonQuery(updateScoreQuery, updateParams);
+                }
+
+                // Step 3: Update total score in BaiLam table
+                CalculateTotalScore(maBaiLam);
+
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error auto-grading multiple choice: {ex.Message}");
+                Console.WriteLine($"Error grading multiple choice questions: {ex.Message}");
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Update grades for an essay question
         /// </summary>
@@ -548,7 +572,7 @@ namespace QuanLyTruongHoc.DAL
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Calculate total score and update the submission
         /// </summary>
@@ -558,51 +582,50 @@ namespace QuanLyTruongHoc.DAL
         {
             try
             {
-                // Get the total score from multiple choice questions
-                string mcQuery = @"
-                    SELECT COALESCE(SUM(Diem), 0) 
-                    FROM BaiLam_TracNghiem
-                    WHERE MaBaiLam = @MaBaiLam";
-                
+                // Step 1: Calculate sum of multiple choice scores
+                string mcScoreQuery = @"
+            SELECT COALESCE(SUM(Diem), 0) AS TotalMCScore
+            FROM BaiLam_TracNghiem
+            WHERE MaBaiLam = @MaBaiLam";
+
                 Dictionary<string, object> mcParams = new Dictionary<string, object>
-                {
-                    { "@MaBaiLam", maBaiLam }
-                };
-                
-                object mcResult = db.ExecuteScalar(mcQuery, mcParams);
-                double mcScore = mcResult != null ? Convert.ToDouble(mcResult) : 0;
-                
-                // Get the total score from essay questions
-                string essayQuery = @"
-                    SELECT COALESCE(SUM(Diem), 0) 
-                    FROM BaiLam_TuLuan
-                    WHERE MaBaiLam = @MaBaiLam AND Diem IS NOT NULL";
-                
+        {
+            { "@MaBaiLam", maBaiLam }
+        };
+
+                object mcResult = db.ExecuteScalar(mcScoreQuery, mcParams);
+                double mcScore = (mcResult != null && mcResult != DBNull.Value) ? Convert.ToDouble(mcResult) : 0;
+
+                // Step 2: Calculate sum of essay scores
+                string essayScoreQuery = @"
+            SELECT COALESCE(SUM(Diem), 0) AS TotalEssayScore
+            FROM BaiLam_TuLuan
+            WHERE MaBaiLam = @MaBaiLam";
+
                 Dictionary<string, object> essayParams = new Dictionary<string, object>
-                {
-                    { "@MaBaiLam", maBaiLam }
-                };
-                
-                object essayResult = db.ExecuteScalar(essayQuery, essayParams);
-                double essayScore = essayResult != null ? Convert.ToDouble(essayResult) : 0;
-                
-                // Calculate total score
+        {
+            { "@MaBaiLam", maBaiLam }
+        };
+
+                object essayResult = db.ExecuteScalar(essayScoreQuery, essayParams);
+                double essayScore = (essayResult != null && essayResult != DBNull.Value) ? Convert.ToDouble(essayResult) : 0;
+
+                // Step 3: Update total score
                 double totalScore = mcScore + essayScore;
-                
-                // Update the submission with the total score
-                string updateQuery = @"
-                    UPDATE BaiLam
-                    SET DiemSo = @DiemSo
-                    WHERE MaBaiLam = @MaBaiLam";
-                
+
+                string updateTotalQuery = @"
+            UPDATE BaiLam
+            SET DiemSo = @DiemSo
+            WHERE MaBaiLam = @MaBaiLam";
+
                 Dictionary<string, object> updateParams = new Dictionary<string, object>
-                {
-                    { "@MaBaiLam", maBaiLam },
-                    { "@DiemSo", totalScore }
-                };
-                
-                db.ExecuteNonQuery(updateQuery, updateParams);
-                
+        {
+            { "@MaBaiLam", maBaiLam },
+            { "@DiemSo", totalScore }
+        };
+
+                db.ExecuteNonQuery(updateTotalQuery, updateParams);
+
                 return totalScore;
             }
             catch (Exception ex)
@@ -611,7 +634,6 @@ namespace QuanLyTruongHoc.DAL
                 return 0;
             }
         }
-        
         /// <summary>
         /// Check if all essay questions have been graded
         /// </summary>

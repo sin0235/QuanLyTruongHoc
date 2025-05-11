@@ -618,41 +618,21 @@ namespace QuanLyTruongHoc.GUI.Forms
                         else if (questionItem is ucTLItem tlItem)
                         {
                             string cauTraLoi = tlItem.GetAnswer();
-                            string filePath = tlItem.AttachedFilePath;
+                            // Loại bỏ hoặc bỏ qua việc lấy filePath
+                            // string filePath = tlItem.AttachedFilePath;
 
                             if (!string.IsNullOrEmpty(cauTraLoi))
                             {
-                                // Kiểm tra xem bảng BaiLam_TuLuan có cột FilePath không
-                                string insertTLQuery;
-                                Dictionary<string, object> tlParameters;
-
-                                if (!string.IsNullOrEmpty(filePath))
-                                {
-                                    insertTLQuery = @"
-                                INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi, FilePath)
-                                VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi, @FilePath);";
-
-                                    tlParameters = new Dictionary<string, object>
-                            {
-                                { "@MaBaiLam", maBaiLam },
-                                { "@MaCauHoiTL", tlItem.QuestionId },
-                                { "@CauTraLoi", cauTraLoi },
-                                { "@FilePath", filePath }
-                            };
-                                }
-                                else
-                                {
-                                    insertTLQuery = @"
+                                string insertTLQuery = @"
                                 INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi)
                                 VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi);";
 
-                                    tlParameters = new Dictionary<string, object>
+                                Dictionary<string, object> tlParameters = new Dictionary<string, object>
                             {
                                 { "@MaBaiLam", maBaiLam },
                                 { "@MaCauHoiTL", tlItem.QuestionId },
                                 { "@CauTraLoi", cauTraLoi }
                             };
-                                }
 
                                 db.ExecuteNonQuery(insertTLQuery, tlParameters);
                             }
