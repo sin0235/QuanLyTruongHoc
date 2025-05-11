@@ -539,29 +539,45 @@ namespace QuanLyTruongHoc.GUI.Forms
                     int thoiGianLamBai = (int)(DateTime.Now - startTime).TotalMinutes;
                     if (thoiGianLamBai < 1) thoiGianLamBai = 1; // Tối thiểu 1 phút
 
-                    // 1. Tạo bản ghi BaiLam mới
+                    DatabaseHelper db = new DatabaseHelper();
+                    int maBaiLam;
+
+                    // Phương pháp 1: Sử dụng ExecuteInsertAndGetId thay vì ExecuteScalar
                     string insertBaiLamQuery = @"
-                        INSERT INTO BaiLam (MaBaiKT, MaHS, NgayLam, ThoiGianLamBai, DaNop)
-                        VALUES (@MaBaiKT, @MaHS, GETDATE(), @ThoiGianLamBai, 1);
-                        SELECT SCOPE_IDENTITY();";
+                INSERT INTO BaiLam (MaBaiKT, MaHS, NgayLam, ThoiGianLamBai, DaNop)
+                VALUES (@MaBaiKT, @MaHS, GETDATE(), @ThoiGianLamBai, 1);
+                SELECT SCOPE_IDENTITY();";
 
                     Dictionary<string, object> parameters = new Dictionary<string, object>
-                    {
-                        { "@MaBaiKT", tID },
-                        { "@MaHS", maHS },
-                        { "@ThoiGianLamBai", thoiGianLamBai }
-                    };
+            {
+                { "@MaBaiKT", tID },
+                { "@MaHS", maHS },
+                { "@ThoiGianLamBai", thoiGianLamBai }
+            };
 
-                    // Thực hiện truy vấn và lấy ID của bài làm mới
-                    DatabaseHelper db = new DatabaseHelper();
-                    object result1 = db.ExecuteScalar(insertBaiLamQuery, parameters);
-                    
-                    if (result1 == null)
+                    maBaiLam = db.ExecuteInsertAndGetId(insertBaiLamQuery, parameters);
+
+                    // Kiểm tra nếu không lấy được ID
+                    if (maBaiLam <= 0)
                     {
-                        throw new Exception("Không thể tạo bài làm mới");
+                        // Phương pháp 2: Tìm bài làm vừa tạo dựa vào thông tin học sinh và bài kiểm tra
+                        string findQuery = @"
+                    SELECT TOP 1 MaBaiLam 
+                    FROM BaiLam 
+                    WHERE MaBaiKT = @MaBaiKT AND MaHS = @MaHS 
+                    ORDER BY NgayLam DESC";
+
+                        object rs = db.ExecuteScalar(findQuery, parameters);
+
+                        if (rs != null && rs != DBNull.Value)
+                        {
+                            maBaiLam = Convert.ToInt32(rs);
+                        }
+                        else
+                        {
+                            throw new Exception("Không thể tạo hoặc tìm bài làm mới");
+                        }
                     }
-
-                    int maBaiLam = Convert.ToInt32(result1);
 
                     // 2. Lưu các câu trả lời trắc nghiệm
                     foreach (UserControl questionItem in questionItems)
@@ -574,24 +590,27 @@ namespace QuanLyTruongHoc.GUI.Forms
                             if (selectedOptions != null && selectedOptions.Count > 0)
                             {
                                 int optionIndex = selectedOptions[0];
-                                if (optionIndex >= 0 && optionIndex < 4) // Kiểm tra phạm vi hợp lệ
+                                // Mở rộng hỗ trợ nhiều lựa chọn
+                                string[] optionLabels = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+                                if (optionIndex >= 0 && optionIndex < optionLabels.Length)
                                 {
-                                    cauTraLoi = new[] { "A", "B", "C", "D" }[optionIndex];
+                                    cauTraLoi = optionLabels[optionIndex];
                                 }
                             }
 
                             if (!string.IsNullOrEmpty(cauTraLoi))
                             {
                                 string insertTNQuery = @"
-                                    INSERT INTO BaiLam_TracNghiem (MaBaiLam, MaCauHoiTN, CauTraLoi)
-                                    VALUES (@MaBaiLam, @MaCauHoiTN, @CauTraLoi);";
+                            INSERT INTO BaiLam_TracNghiem (MaBaiLam, MaCauHoiTN, CauTraLoi)
+                            VALUES (@MaBaiLam, @MaCauHoiTN, @CauTraLoi);";
 
                                 Dictionary<string, object> tnParameters = new Dictionary<string, object>
-                                {
-                                    { "@MaBaiLam", maBaiLam },
-                                    { "@MaCauHoiTN", tnItem.QuestionId },
-                                    { "@CauTraLoi", string.IsNullOrEmpty(cauTraLoi) ? DBNull.Value : (object)cauTraLoi }
-                                };
+                        {
+                            { "@MaBaiLam", maBaiLam },
+                            { "@MaCauHoiTN", tnItem.QuestionId },
+                            { "@CauTraLoi", cauTraLoi } // Đã kiểm tra null ở trên
+                        };
 
                                 db.ExecuteNonQuery(insertTNQuery, tnParameters);
                             }
@@ -599,19 +618,41 @@ namespace QuanLyTruongHoc.GUI.Forms
                         else if (questionItem is ucTLItem tlItem)
                         {
                             string cauTraLoi = tlItem.GetAnswer();
-                            
+                            string filePath = tlItem.AttachedFilePath;
+
                             if (!string.IsNullOrEmpty(cauTraLoi))
                             {
-                                string insertTLQuery = @"
-                                    INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi)
-                                    VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi);";
+                                // Kiểm tra xem bảng BaiLam_TuLuan có cột FilePath không
+                                string insertTLQuery;
+                                Dictionary<string, object> tlParameters;
 
-                                Dictionary<string, object> tlParameters = new Dictionary<string, object>
+                                if (!string.IsNullOrEmpty(filePath))
                                 {
-                                    { "@MaBaiLam", maBaiLam },
-                                    { "@MaCauHoiTL", tlItem.QuestionId },
-                                    { "@CauTraLoi", string.IsNullOrEmpty(cauTraLoi) ? DBNull.Value : (object)cauTraLoi }
-                                };
+                                    insertTLQuery = @"
+                                INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi, FilePath)
+                                VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi, @FilePath);";
+
+                                    tlParameters = new Dictionary<string, object>
+                            {
+                                { "@MaBaiLam", maBaiLam },
+                                { "@MaCauHoiTL", tlItem.QuestionId },
+                                { "@CauTraLoi", cauTraLoi },
+                                { "@FilePath", filePath }
+                            };
+                                }
+                                else
+                                {
+                                    insertTLQuery = @"
+                                INSERT INTO BaiLam_TuLuan (MaBaiLam, MaCauHoiTL, CauTraLoi)
+                                VALUES (@MaBaiLam, @MaCauHoiTL, @CauTraLoi);";
+
+                                    tlParameters = new Dictionary<string, object>
+                            {
+                                { "@MaBaiLam", maBaiLam },
+                                { "@MaCauHoiTL", tlItem.QuestionId },
+                                { "@CauTraLoi", cauTraLoi }
+                            };
+                                }
 
                                 db.ExecuteNonQuery(insertTLQuery, tlParameters);
                             }
@@ -622,7 +663,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                     if (maBaiLam > 0)
                     {
                         baiLamDAO.AutoGradeMultipleChoice(maBaiLam);
-                        
+
                         // Tính tổng điểm và cập nhật vào bảng BaiLam
                         baiLamDAO.CalculateTotalScore(maBaiLam);
                     }
@@ -642,7 +683,6 @@ namespace QuanLyTruongHoc.GUI.Forms
             }
         }
 
-        // Các sự kiện khác có thể thêm vào sau
 
         #endregion
 

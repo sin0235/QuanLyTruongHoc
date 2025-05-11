@@ -250,7 +250,13 @@ return dt;
                         }
                     }
 
-                    result = cmd.ExecuteScalar();
+                    object queryResult = cmd.ExecuteScalar();
+
+                    // Kiểm tra nếu kết quả là DBNull thì trả về null
+                    if (queryResult != DBNull.Value)
+                    {
+                        result = queryResult;
+                    }
                 }
             }
             catch (Exception ex)
