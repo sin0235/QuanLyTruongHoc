@@ -150,6 +150,33 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         string deleteTBQuery = $"DELETE FROM ThongBao WHERE MaLop = {maLop}";
                         db.ExecuteNonQuery(deleteTBQuery);
 
+                        // Xóa thông tin bài kiểm tra của lớp
+                        string deleteBaiKiemTraLopHocQuery = $"DELETE FROM BaiKiemTra_LopHoc WHERE MaLop = {maLop}";
+                        db.ExecuteNonQuery(deleteBaiKiemTraLopHocQuery);
+
+                        // Xử lý xóa các bài làm kiểm tra của học sinh trong lớp
+                        string getBaiLamQuery = $"SELECT MaBaiLam FROM BaiLam WHERE MaHS IN (SELECT MaHS FROM HocSinh WHERE MaLop = {maLop})";
+                        DataTable dtBaiLam = db.ExecuteQuery(getBaiLamQuery);
+                        if (dtBaiLam != null && dtBaiLam.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in dtBaiLam.Rows)
+                            {
+                                int maBaiLam = Convert.ToInt32(row["MaBaiLam"]);
+
+                                // Xóa các câu trả lời trắc nghiệm
+                                string deleteTNQuery = $"DELETE FROM BaiLam_TracNghiem WHERE MaBaiLam = {maBaiLam}";
+                                db.ExecuteNonQuery(deleteTNQuery);
+
+                                // Xóa các câu trả lời tự luận
+                                string deleteTLQuery = $"DELETE FROM BaiLam_TuLuan WHERE MaBaiLam = {maBaiLam}";
+                                db.ExecuteNonQuery(deleteTLQuery);
+                            }
+
+                            // Sau khi xóa tất cả các câu trả lời, xóa bài làm
+                            string deleteBaiLamQuery = $"DELETE FROM BaiLam WHERE MaHS IN (SELECT MaHS FROM HocSinh WHERE MaLop = {maLop})";
+                            db.ExecuteNonQuery(deleteBaiLamQuery);
+                        }
+
                         string deleteDiemQuery = $"DELETE FROM DiemSo WHERE MaHS IN (SELECT MaHS FROM HocSinh WHERE MaLop = {maLop})";
                         db.ExecuteNonQuery(deleteDiemQuery);
 
@@ -158,6 +185,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                         string deletePhuHuynhQuery = $"DELETE FROM PhuHuynh WHERE MaHS IN (SELECT MaHS FROM HocSinh WHERE MaLop = {maLop})";
                         db.ExecuteNonQuery(deletePhuHuynhQuery);
+
+                        // Xóa thông báo người đọc liên quan đến người dùng học sinh
+                        string deleteThongBaoNguoiDocQuery = $"DELETE FROM ThongBaoNguoiDoc WHERE MaNguoiDung IN (SELECT MaNguoiDung FROM HocSinh WHERE MaLop = {maLop})";
+                        db.ExecuteNonQuery(deleteThongBaoNguoiDocQuery);
 
                         string deleteHocSinhQuery = $"DELETE FROM HocSinh WHERE MaLop = {maLop}";
                         db.ExecuteNonQuery(deleteHocSinhQuery);

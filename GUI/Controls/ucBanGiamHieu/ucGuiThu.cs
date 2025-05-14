@@ -322,5 +322,10 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             return danhSachNguoiNhan;
         }
+
+        private void txtNhapLop_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
