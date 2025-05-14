@@ -104,6 +104,7 @@
             this.txtEssayAnswer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtEssayAnswer.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(110)))), ((int)(((byte)(220)))));
             this.txtEssayAnswer.Location = new System.Drawing.Point(3, 3);
+            this.txtEssayAnswer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEssayAnswer.Multiline = true;
             this.txtEssayAnswer.Name = "txtEssayAnswer";
             this.txtEssayAnswer.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));

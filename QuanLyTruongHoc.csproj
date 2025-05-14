@@ -447,6 +447,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTLItem.resx">
       <DependentUpon>ucTLItem.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ucHocSinh\ucTNItem.resx">
       <DependentUpon>ucTNItem.cs</DependentUpon>

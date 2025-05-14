@@ -299,19 +299,21 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         private void frmQuanLyThoiKhoaBieu_Load(object sender, EventArgs e)
         {
+            lblLopHoc.Text = $"Lớp: {tenLop}";
             dtpNgayHoc.Value = ngayHoc;
             LoadMonHoc();
+            
+            // Đăng ký sự kiện
             cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
-            if (!string.IsNullOrEmpty(cmbMonHoc.Tag?.ToString()))
-            {
-                cmbMonHoc.SelectedIndex = cmbMonHoc.FindStringExact(cmbMonHoc.Tag.ToString());
-            }
 
-            if (!string.IsNullOrEmpty(cmbGiaoVien.Tag?.ToString()))
+            // Đặt môn học mặc định là môn đầu tiên nếu có dữ liệu
+            if (cmbMonHoc.Items.Count > 0)
             {
-                cmbGiaoVien.SelectedIndex = cmbGiaoVien.FindStringExact(cmbGiaoVien.Tag.ToString());
+                cmbMonHoc.SelectedIndex = 0;
+                // LoadGiaoVien sẽ được gọi tự động thông qua sự kiện SelectedIndexChanged
             }
-
+            
+            // Khôi phục các giá trị nếu đang trong chế độ sửa
             if (!string.IsNullOrEmpty(txtTietHoc.Text))
             {
                 txtTietHoc.Text = txtTietHoc.Text;

@@ -317,64 +317,106 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            try
+            if (dgvHocSinh.SelectedRows.Count == 0)
             {
-                if (dgvHocSinh.SelectedRows.Count == 0)
+                MessageBox.Show("Vui lòng chọn học sinh cần xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int maHS = Convert.ToInt32(dgvHocSinh.SelectedRows[0].Cells["MaHS"].Value);
+            int maNguoiDung = Convert.ToInt32(dgvHocSinh.SelectedRows[0].Cells["MaNguoiDung"].Value);
+            string hoTen = dgvHocSinh.SelectedRows[0].Cells["HoTen"].Value.ToString();
+
+            // Check if the TenLop column exists in the DataGridView
+            string tenLop = "Không xác định";
+            if (dgvHocSinh.Columns.Contains("TenLop") && dgvHocSinh.SelectedRows[0].Cells["TenLop"].Value != null)
+            {
+                tenLop = dgvHocSinh.SelectedRows[0].Cells["TenLop"].Value.ToString();
+            }
+            else
+            {
+                // If TenLop doesn't exist in the current view, fetch it from the database
+                int maLop = hocSinhDAL.GetMaLopByMaHS(maHS);
+                string queryGetTenLop = "SELECT TenLop FROM LopHoc WHERE MaLop = @MaLop";
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+        {
+            { "@MaLop", maLop }
+        };
+                object rs = db.ExecuteScalar(queryGetTenLop, parameters);
+                if (rs != null && rs != DBNull.Value)
                 {
-                    MessageBox.Show("Vui lòng chọn một học sinh để xóa!", "Thông báo",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    tenLop = rs.ToString();
                 }
+            }
 
-                // Lấy thông tin từ dòng được chọn
-                DataGridViewRow selectedRow = dgvHocSinh.SelectedRows[0];
-                int maHS = Convert.ToInt32(selectedRow.Cells["MaHS"].Value);
-                int maNguoiDung = Convert.ToInt32(selectedRow.Cells["MaNguoiDung"].Value);
-                string hoTen = selectedRow.Cells["HoTen"].Value.ToString();
+            DialogResult result = MessageBox.Show($"Bạn có chắc chắn muốn xóa học sinh {hoTen} khỏi hệ thống không?",
+                "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                // Lấy tên lớp từ cột MaLop
-                string tenLop = selectedRow.Cells["MaLop"].Value?.ToString() ?? "Không xác định";
-
-                // Hiển thị hộp thoại xác nhận
-                DialogResult result = MessageBox.Show(
-                    $"Bạn có chắc chắn muốn xóa học sinh {hoTen}?\n\nLưu ý: Tất cả thông tin liên quan đến học sinh này cũng sẽ bị xóa.",
-                    "Xác nhận xóa",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes)
+            {
+                try
                 {
-                    // Mở kết nối đến CSDL
-                    db.OpenConnection();
-
-                    // Tạo danh sách các lệnh xóa, theo thứ tự từ các bảng con đến bảng chính
+                    // Danh sách các lệnh xóa sẽ được thực hiện theo thứ tự
                     List<string> deleteCommands = new List<string>();
 
-                    // Phần quan trọng: Kiểm tra và xóa dữ liệu tham chiếu trước
+                    // Kiểm tra các ràng buộc trước khi xóa
+                    string checkQuery = @"
+                        SELECT
+                            (SELECT COUNT(*) FROM PhuHuynh WHERE MaHS = @MaHS) AS HasPhuHuynh,
+                            (SELECT COUNT(*) FROM DiemSo WHERE MaHS = @MaHS) AS HasDiemSo,
+                            (SELECT COUNT(*) FROM DiemDanh WHERE MaHS = @MaHS) AS HasDiemDanh,
+                            (SELECT COUNT(*) FROM DonXinNghi WHERE MaHS = @MaHS) AS HasDonXinNghi,
+                            (SELECT COUNT(*) FROM ThongBao WHERE MaNguoiGui = @MaNguoiDung 
+                                OR MaNguoiNhan = @MaNguoiDung) AS HasThongBao,
+                            (SELECT COUNT(*) FROM NhatKyHeThong WHERE MaNguoiDung = @MaNguoiDung) AS HasNhatKyHeThong,
+                            (SELECT COUNT(*) FROM BaiLam WHERE MaHS = @MaHS) AS HasBaiLam";
 
-                    // 1. Kiểm tra xem có bảng cần xóa không
-                    string checkTablesQuery = @"
-                        SELECT 
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'ThongBao') THEN 1 ELSE 0 END AS HasThongBao,
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'NhatKyHeThong') THEN 1 ELSE 0 END AS HasNhatKyHeThong,
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PhuHuynh') THEN 1 ELSE 0 END AS HasPhuHuynh,
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DiemSo') THEN 1 ELSE 0 END AS HasDiemSo,
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DiemDanh') THEN 1 ELSE 0 END AS HasDiemDanh,
-                            CASE WHEN EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DonXinNghi') THEN 1 ELSE 0 END AS HasDonXinNghi";
-
-                    DataTable tablesResult = db.ExecuteQuery(checkTablesQuery);
-
-                    // Xóa các dữ liệu trong bảng tham chiếu trước
-                    if (tablesResult != null && tablesResult.Rows.Count > 0)
+                    Dictionary<string, object> parameters = new Dictionary<string, object>
                     {
-                        DataRow row = tablesResult.Rows[0];
+                        { "@MaHS", maHS },
+                        { "@MaNguoiDung", maNguoiDung }
+                    };
 
-                        // Xóa thông báo liên quan đến học sinh (nếu có)
+                    DataTable dt = db.ExecuteQuery(checkQuery, parameters);
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        DataRow row = dt.Rows[0];
+
+                        // 1. Xóa các dữ liệu liên kết với học sinh và người dùng theo thứ tự hợp lý
+                        // Kiểm tra kỹ từng ràng buộc
+
+                        // Kiểm tra và xóa dữ liệu BaiLam liên quan
+                        if (Convert.ToBoolean(row["HasBaiLam"]))
+                        {
+                            // Lấy danh sách MaBaiLam của học sinh
+                            string getBaiLamQuery = $"SELECT MaBaiLam FROM BaiLam WHERE MaHS = {maHS}";
+                            DataTable dtBaiLam = db.ExecuteQuery(getBaiLamQuery);
+                            
+                            if (dtBaiLam != null && dtBaiLam.Rows.Count > 0)
+                            {
+                                foreach (DataRow baiLamRow in dtBaiLam.Rows)
+                                {
+                                    int maBaiLam = Convert.ToInt32(baiLamRow["MaBaiLam"]);
+                                    
+                                    // Xóa dữ liệu trong BaiLam_TracNghiem
+                                    deleteCommands.Add($"DELETE FROM BaiLam_TracNghiem WHERE MaBaiLam = {maBaiLam}");
+                                    
+                                    // Xóa dữ liệu trong BaiLam_TuLuan
+                                    deleteCommands.Add($"DELETE FROM BaiLam_TuLuan WHERE MaBaiLam = {maBaiLam}");
+                                }
+                            }
+                            
+                            // Sau khi đã xóa các bảng con, xóa bảng BaiLam
+                            deleteCommands.Add($"DELETE FROM BaiLam WHERE MaHS = {maHS}");
+                        }
+
+                        // Kiểm tra và xóa các thông báo liên quan
                         if (Convert.ToBoolean(row["HasThongBao"]))
                         {
-                            // Xóa các thông báo mà học sinh là người nhận
-                            deleteCommands.Add($"DELETE FROM ThongBao WHERE MaNguoiNhan = {maNguoiDung}");
-
+                            // Xóa thông báo người đọc trước
+                            deleteCommands.Add($"DELETE FROM ThongBaoNguoiDoc WHERE MaNguoiDung = {maNguoiDung}");
+                            
                             // Xóa các thông báo mà học sinh là người gửi
                             deleteCommands.Add($"DELETE FROM ThongBao WHERE MaNguoiGui = {maNguoiDung}");
                         }
@@ -514,11 +556,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đã xảy ra lỗi khi xóa học sinh: " + ex.Message,
-                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi khi xóa học sinh: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -623,20 +664,46 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
         {
             try
             {
-                // Truy vấn để lấy MaNguoiDung của phòng nội vụ
-                string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
-                int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
+                // Truy vấn để lấy MaNguoiDung của người dùng hiện tại
+                string queryPhongNoiVu = "SELECT TOP 1 MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                object result = db.ExecuteScalar(queryPhongNoiVu);
+                
+                // Kiểm tra kết quả trả về
+                if (result == null || result == DBNull.Value)
+                {
+                    // Không tìm thấy người dùng phòng nội vụ, dùng mặc định là 1 hoặc tạo log với ID khác
+                    Console.WriteLine("Không tìm thấy người dùng phòng nội vụ");
+                    return; // Có thể xử lý khác, như tạo người dùng mới hoặc dùng ID mặc định
+                }
+                
+                int maNguoiDungPhongNoiVu = Convert.ToInt32(result);
 
                 // Truy vấn để lấy MaNK lớn nhất trong bảng NhatKyHeThong
                 string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
-                int maNK = Convert.ToInt32(db.ExecuteScalar(queryMaxMaNK));
+                result = db.ExecuteScalar(queryMaxMaNK);
+                
+                // Kiểm tra kết quả trả về
+                if (result == null || result == DBNull.Value)
+                {
+                    Console.WriteLine("Lỗi khi lấy mã nhật ký mới");
+                    return;
+                }
+                
+                int maNK = Convert.ToInt32(result);
 
-                // Thêm vào bảng NhatKyHeThong
-                string insertNhatKy = $@"
+                // Thêm vào bảng NhatKyHeThong sử dụng tham số để tránh SQL Injection
+                string insertNhatKy = @"
                     INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                    VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
+                    VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaNK", maNK },
+                    { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                    { "@HanhDong", hanhDong }
+                };
 
-                db.ExecuteNonQuery(insertNhatKy);
+                db.ExecuteNonQuery(insertNhatKy, parameters);
             }
             catch (Exception ex)
             {

@@ -75,6 +75,12 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 lopCmb.DataSource = dt;
                 lopCmb.DisplayMember = "TenLop";
                 lopCmb.ValueMember = "MaLop";
+                
+                // Chọn lớp đầu tiên trong danh sách
+                if (lopCmb.Items.Count > 0)
+                {
+                    lopCmb.SelectedIndex = 0;
+                }
             }
             catch (Exception ex)
             {

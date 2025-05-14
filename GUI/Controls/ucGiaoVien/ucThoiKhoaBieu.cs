@@ -25,6 +25,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             DateTime vietnamNow = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.UtcNow, "SE Asia Standard Time");
             ngayChonDTP.Value = vietnamNow;
             this.maNguoiDung = maNguoiDung;
+            
+            // Load dữ liệu thời khóa biểu ngay khi khởi tạo
+            this.Load += (s, e) => LoadLichDay(maNguoiDung);
         }
 
         public void LoadLichDay(int maNguoiDung)

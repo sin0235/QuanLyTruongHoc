@@ -934,6 +934,36 @@ namespace QuanLyTruongHoc.DAL
                     deleteQueries.Add("DELETE FROM DonXinNghi WHERE MaHS = " + maHS);
                 }
 
+                // Kiểm tra và xóa các bài làm liên quan đến BaiLam_TracNghiệm và BaiLam_TuLuan trước
+                string getBaiLamQuery = "SELECT MaBaiLam FROM BaiLam WHERE MaHS = " + maHS;
+                DataTable dtBaiLam = db.ExecuteQuery(getBaiLamQuery);
+                if (dtBaiLam != null && dtBaiLam.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dtBaiLam.Rows)
+                    {
+                        int maBaiLam = Convert.ToInt32(row["MaBaiLam"]);
+                        
+                        // Xóa các câu trả lời trắc nghiệm
+                        string checkTNQuery = $"SELECT COUNT(*) FROM BaiLam_TracNghiem WHERE MaBaiLam = {maBaiLam}";
+                        int tnExists = Convert.ToInt32(db.ExecuteScalar(checkTNQuery));
+                        if (tnExists > 0)
+                        {
+                            deleteQueries.Add($"DELETE FROM BaiLam_TracNghiem WHERE MaBaiLam = {maBaiLam}");
+                        }
+                        
+                        // Xóa các câu trả lời tự luận
+                        string checkTLQuery = $"SELECT COUNT(*) FROM BaiLam_TuLuan WHERE MaBaiLam = {maBaiLam}";
+                        int tlExists = Convert.ToInt32(db.ExecuteScalar(checkTLQuery));
+                        if (tlExists > 0)
+                        {
+                            deleteQueries.Add($"DELETE FROM BaiLam_TuLuan WHERE MaBaiLam = {maBaiLam}");
+                        }
+                    }
+                    
+                    // Sau khi xóa các câu trả lời, xóa bài làm
+                    deleteQueries.Add("DELETE FROM BaiLam WHERE MaHS = " + maHS);
+                }
+
                 // Xóa học sinh
                 deleteQueries.Add("DELETE FROM HocSinh WHERE MaHS = " + maHS);
 

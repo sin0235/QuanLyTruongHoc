@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyTruongHoc.DTO;
+using System.Drawing;
 
 namespace QuanLyTruongHoc.DAL
 {
@@ -18,9 +19,9 @@ namespace QuanLyTruongHoc.DAL
         private DataSet ds;
 
         //Phúc toàn
-        //private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;Persist Security Info=True;User ID=sa;Password=SIN235.sql.login; MultipleActiveResultSets=True;";
+        private string strCnn = "Data Source=LAPTOP-CC2MRJ2T\\SQLEXPRESS;Initial Catalog=QuanLyTruongHoc;Persist Security Info=True;User ID=sa;Password=SIN235.sql.login";
         //Tuấn
-        private string strCnn = "Data Source=localhost;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=123";
+        //private string strCnn = "Data Source=localhost;Initial Catalog=QuanLyTruongHoc;User ID=sa;Password=123";
         //Nhân
         //string strCnn = "Data Source=JOHNNYBUIII; Database=QuanLyTruongHoc; " + "user id=sa;password=1;MultipleActiveResultSets=True;";
         public SqlConnection GetConnection()

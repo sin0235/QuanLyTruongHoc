@@ -25,12 +25,17 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             cmbChonLop.DataSource = dt;
             cmbChonLop.DisplayMember = "TenLop";
             cmbChonLop.ValueMember = "MaLop";
+            
+            // Đặt lớp đầu tiên là lớp mặc định nếu có dữ liệu
+            if (dt.Rows.Count > 0)
+            {
+                cmbChonLop.SelectedIndex = 0;
+            }
         }
 
         private void ucQuanLyThoiKhoaBieu_Load(object sender, EventArgs e)
         {
             LoadDanhSachLop();
-            cmbChonLop.SelectedIndex = -1;
             dtpNgay.Value = DateTime.Today;
             dgvThoiKhoaBieu.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             dgvThoiKhoaBieu.ClearSelection();
@@ -273,9 +278,10 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            cmbChonLop.SelectedIndex = -1;
+            // Thay vì đặt cmbChonLop.SelectedIndex = -1, load lại danh sách lớp và chọn lớp đầu tiên
+            LoadDanhSachLop();
             dtpNgay.Value = DateTime.Today;
-            dgvThoiKhoaBieu.Rows.Clear();
+            LoadThoiKhoaBieu();
             MessageBox.Show("Đã làm mới cửa sổ thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
