@@ -478,8 +478,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                 hs.HoTen AS HoTenDiemSo,
                 STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
                 STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
-                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
-                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKy,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKy,
                 ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
             FROM HocSinh hs
             INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
@@ -525,7 +525,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
                 if (dt.Rows.Count > 0)
                 {
-                    // Thêm một lựa chọn "Tất cả môn" ở đầu danh sách
                     DataRow allSubjectsRow = dt.NewRow();
                     allSubjectsRow["MaMon"] = 0;
                     allSubjectsRow["TenMon"] = "Tất cả môn";
@@ -535,7 +534,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     monCmb.ValueMember = "MaMon";
                     monCmb.DataSource = dt;
 
-                    // Đăng ký sự kiện khi thay đổi lựa chọn
                     monCmb.SelectedIndexChanged += monCmb_SelectedIndexChanged;
                 }
             }
@@ -550,7 +548,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             if (monCmb.SelectedValue != null)
             {
                 int maMon = Convert.ToInt32(monCmb.SelectedValue);
-                // Nếu chọn "Tất cả môn" (maMon = 0), truyền null để hiển thị tất cả
+                // Nếu chọn "Tất cả môn", truyền null để hiển thị tất cả
                 LoadDiemHS(maMon == 0 ? (int?)null : maMon);
             }
         }
