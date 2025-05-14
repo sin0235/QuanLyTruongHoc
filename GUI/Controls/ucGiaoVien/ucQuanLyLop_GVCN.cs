@@ -462,25 +462,37 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
         /// <summary>
         /// Xem điểm số của học sinh
         /// </summary>
-
-        private void LoadDiemHS()
+        private void LoadDiemHS(int? maMon = null)
         {
             try
             {
+                // Load danh sách môn học nếu combobox chưa có dữ liệu
+                if (monCmb.Items.Count == 0)
+                {
+                    LoadMonHoc();
+                }
+
                 string query = $@"
-                    SELECT 
-                        ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
-                        hs.HoTen AS HoTenDiemSo,
-                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
-                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
-                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
-                        STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
-                        ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
-                    FROM DiemSo ds
-                    INNER JOIN HocSinh hs ON ds.MaHS = hs.MaHS
-                    INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
-                    WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
-                    GROUP BY hs.HoTen";
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY hs.HoTen) AS STTDiemSo,
+                hs.HoTen AS HoTenDiemSo,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Miệng' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemMieng,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'15 phút' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS Diem15Phut,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Giữa kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemGiuaKi,
+                STRING_AGG(CASE WHEN ds.LoaiDiem = N'Cuối kỳ' THEN CAST(ds.Diem AS NVARCHAR) ELSE NULL END, ', ') AS DiemCuoiKi,
+                ISNULL(ROUND(AVG(ds.Diem), 2), 0) AS DiemTrungBinh
+            FROM HocSinh hs
+            INNER JOIN LopHoc lh ON hs.MaLop = lh.MaLop
+            LEFT JOIN DiemSo ds ON hs.MaHS = ds.MaHS";
+
+                // Thêm điều kiện lọc theo môn học nếu được chọn
+                if (maMon.HasValue && maMon.Value > 0)
+                {
+                    query += $" AND ds.MaMon = {maMon.Value}";
+                }
+
+                query += $@" WHERE lh.MaGVChuNhiem = {maGVChuNhiem}
+            GROUP BY hs.HoTen";
 
                 DataTable dt = db.ExecuteQuery(query);
 
@@ -498,6 +510,48 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải danh sách điểm số: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Tải danh sách môn học cho combobox
+        /// </summary>
+        private void LoadMonHoc()
+        {
+            try
+            {
+                string query = "SELECT MaMon, TenMon FROM MonHoc ORDER BY MaMon";
+                DataTable dt = db.ExecuteQuery(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    // Thêm một lựa chọn "Tất cả môn" ở đầu danh sách
+                    DataRow allSubjectsRow = dt.NewRow();
+                    allSubjectsRow["MaMon"] = 0;
+                    allSubjectsRow["TenMon"] = "Tất cả môn";
+                    dt.Rows.InsertAt(allSubjectsRow, 0);
+
+                    monCmb.DisplayMember = "TenMon";
+                    monCmb.ValueMember = "MaMon";
+                    monCmb.DataSource = dt;
+
+                    // Đăng ký sự kiện khi thay đổi lựa chọn
+                    monCmb.SelectedIndexChanged += monCmb_SelectedIndexChanged;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải danh sách môn học: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void monCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (monCmb.SelectedValue != null)
+            {
+                int maMon = Convert.ToInt32(monCmb.SelectedValue);
+                // Nếu chọn "Tất cả môn" (maMon = 0), truyền null để hiển thị tất cả
+                LoadDiemHS(maMon == 0 ? (int?)null : maMon);
             }
         }
 
