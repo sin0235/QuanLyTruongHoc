@@ -28,6 +28,7 @@ namespace QuanLyTruongHoc
 
         private string hoTen;
         private int maHS;
+        private string gioiTinh;
         public int ID
         {
             get { return maNguoiDung; }
@@ -41,6 +42,7 @@ namespace QuanLyTruongHoc
 
             InitializeComponent();
             lblUserName.Text = hoTen;
+            SetDefaultAvatar();
 
 
             // Đảm bảo các nút nằm trong Guna2Panel
@@ -321,17 +323,39 @@ namespace QuanLyTruongHoc
         {
             // Tạo một đối tượng ThongTinHSDTO mới
             DatabaseHelper db = new DatabaseHelper();
-            string query = $@"SELECT MaHS, HoTen FROM HocSinh WHERE MaNguoiDung = {this.maNguoiDung}";
+            string query = $@"SELECT MaHS, HoTen, GioiTinh FROM HocSinh WHERE MaNguoiDung = {this.maNguoiDung}";
             DataTable dt = db.ExecuteQuery(query);
             if (dt.Rows.Count > 0)
             {
                 maHS = Convert.ToInt32(dt.Rows[0]["MaHS"]);
                 hoTen = dt.Rows[0]["HoTen"].ToString();
+                gioiTinh = dt.Rows[0]["GioiTinh"].ToString();
             }
             else
             {
                 MessageBox.Show("Không tìm thấy thông tin học sinh.");
                 return;
+            }
+        }
+        
+        /// <summary>
+        /// Hiển thị avatar mặc định dựa trên giới tính
+        /// </summary>
+        private void SetDefaultAvatar()
+        {
+            try
+            {
+                if(gioiTinh == "Nữ")
+                {
+                    this.picUserAvatar.Image = global::QuanLyTruongHoc.Properties.Resources.defautAvatar_Girl;
+
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải ảnh avatar: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

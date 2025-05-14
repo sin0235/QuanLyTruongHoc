@@ -583,6 +583,8 @@
     <None Include="assets\images\back_icon.png" />
     <None Include="assets\images\exam.png" />
     <None Include="assets\images\exam_results.png" />
+    <None Include="assets\images\defautAvatar_Girl.png" />
+    <None Include="assets\images\school_avt.png" />
     <Content Include="CSDL.sql" />
     <None Include="Resources\notification-bell.png" />
     <None Include="Resources\bell.png" />
