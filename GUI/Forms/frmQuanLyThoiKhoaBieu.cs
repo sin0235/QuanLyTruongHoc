@@ -299,7 +299,6 @@ namespace QuanLyTruongHoc.GUI.Forms
 
         private void frmQuanLyThoiKhoaBieu_Load(object sender, EventArgs e)
         {
-            lblLopHoc.Text = $"Lớp: {tenLop}";
             dtpNgayHoc.Value = ngayHoc;
             LoadMonHoc();
             

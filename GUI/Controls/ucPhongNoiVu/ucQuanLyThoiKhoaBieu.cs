@@ -253,7 +253,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         string tenGiaoVien = latestSchedule.Rows[0]["TenGiaoVien"].ToString();
                         string tenLopMoi = latestSchedule.Rows[0]["TenLop"].ToString();
 
-                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
                         string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
@@ -261,11 +261,18 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                         string hanhDong = $"Thêm thời khóa biểu của lớp {tenLopMoi} vào ngày {selectedDate:dd/MM/yyyy} với môn học {tenMon} của giáo viên {tenGiaoVien} tiết {tiet}";
 
-                        string insertNhatKy = $@"
+                        string insertNhatKy = @"
                         INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                        VALUES ({maNK}, {maNguoiDungPhongNoiVu}, N'{hanhDong}', GETDATE())";
+                        VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                        
+                        Dictionary<string, object> pr = new Dictionary<string, object>
+                        {
+                            { "@MaNK", maNK },
+                            { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                            { "@HanhDong", hanhDong }
+                        };
 
-                        db.ExecuteNonQuery(insertNhatKy);
+                        db.ExecuteNonQuery(insertNhatKy, pr);
                     }
                 }
                 catch (Exception ex)
@@ -474,7 +481,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                         string thayDoiText = string.Join(", ", changes);
 
-                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
                         string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
@@ -634,7 +641,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     string tenGiaoVien = info["TenGiaoVien"].ToString();
                     string tiet = info["Tiet"].ToString();
 
-                    string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                    string queryPhongNoiVu = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                     int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(queryPhongNoiVu));
 
                     string queryMaxMaNK = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";

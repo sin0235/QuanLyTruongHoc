@@ -240,7 +240,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                                 CASE 
                                     WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                                     WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                                    ELSE N'Ban giám hi' 
+                                    WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                                    ELSE N'Không xác định' 
                                 END AS NguoiGui,
                                 (SELECT TenLop FROM LopHoc WHERE MaLop = TB.MaLop) AS NguoiNhan,
                                 CASE 
@@ -278,7 +279,8 @@ namespace QuanLyTruongHoc.GUI.Controls
                             CASE 
                                 WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                                 WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                                ELSE N'Hệ thống' 
+                                WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                                ELSE N'Không xác định' 
                             END AS NguoiGui,
                             N'Tất cả' AS NguoiNhan,
                             CASE 

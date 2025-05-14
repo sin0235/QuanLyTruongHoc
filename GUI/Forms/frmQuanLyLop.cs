@@ -231,7 +231,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
 
-                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery));
 
                         string hanhDong = $"Sửa thông tin lớp {tenLop} của giáo viên {tenGVChuNhiemCu} chủ nhiệm thành giáo viên {tenGVChuNhiemMoi} chủ nhiệm";
@@ -321,7 +321,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
 
-                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery));
 
                         string tenGiaoVien = cbGiaoVienChuNhiem.Text;

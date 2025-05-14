@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 namespace QuanLyTruongHoc.DAL
 {
     public class ThongBaoDAO
-{
-    private DatabaseHelper dbHelper;
-
-    public ThongBaoDAO()
     {
-        dbHelper = new DatabaseHelper();
-    }
+        private DatabaseHelper dbHelper;
 
-    /// <summary>
-    /// Lấy tất cả thông báo mà người dùng có thể xem (cá nhân, vai trò, lớp học)
-    /// </summary>
-    public List<ThongBaoDTO> GetThongBaoForUser(int maNguoiDung, int maVaiTro, int? maLop)
-    {
-        try
+        public ThongBaoDAO()
         {
+            dbHelper = new DatabaseHelper();
+        }
+
+        /// <summary>
+        /// Lấy tất cả thông báo mà người dùng có thể xem (cá nhân, vai trò, lớp học)
+        /// </summary>
+        public List<ThongBaoDTO> GetThongBaoForUser(int maNguoiDung, int maVaiTro, int? maLop)
+        {
+            try
+            {
                 // Câu truy vấn SQL để lấy thông báo cho người dùng
                 string query = @"
                 SELECT 
@@ -32,7 +32,9 @@ namespace QuanLyTruongHoc.DAL
                     CASE 
                         WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                         WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                        ELSE N'Hệ thống' 
+                        WHEN ND.MaVaiTro = 1 THEN 
+                            (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                        ELSE N'Không xác định' 
                     END AS NguoiGui,
                     CASE
                         WHEN TB.MaNguoiNhan IS NOT NULL THEN N'Cá nhân'
@@ -56,47 +58,49 @@ namespace QuanLyTruongHoc.DAL
                 ORDER BY TB.NgayGui DESC";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-            {
-                { "@MaNguoiDung", maNguoiDung },
-                { "@MaVaiTro", maVaiTro },
-                { "@MaLopHasValue", maLop.HasValue ? 1 : 0 }
-            };
+                {
+                    { "@MaNguoiDung", maNguoiDung },
+                    { "@MaVaiTro", maVaiTro },
+                    { "@MaLopHasValue", maLop.HasValue ? 1 : 0 }
+                };
 
-            // Thêm tham số MaLop
-            if (maLop.HasValue)
-            {
-                parameters.Add("@MaLop", maLop.Value);
+                // Thêm tham số MaLop
+                if (maLop.HasValue)
+                {
+                    parameters.Add("@MaLop", maLop.Value);
+                }
+                else
+                {
+                    parameters.Add("@MaLop", DBNull.Value);
+                }
+
+                DataTable dt = dbHelper.ExecuteQuery(query, parameters);
+                return ConvertDataTableToList(dt);
             }
-            else
+            catch (Exception ex)
             {
-                parameters.Add("@MaLop", DBNull.Value);
+                Console.WriteLine("Lỗi khi lấy thông báo cho người dùng: " + ex.Message);
+                // Ghi log chi tiết lỗi
+                throw new Exception("Không thể tải dữ liệu thông báo: " + ex.Message);
             }
-
-            DataTable dt = dbHelper.ExecuteQuery(query, parameters);
-            return ConvertDataTableToList(dt);
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Lỗi khi lấy thông báo cho người dùng: " + ex.Message);
-            // Ghi log chi tiết lỗi
-            throw new Exception("Không thể tải dữ liệu thông báo: " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Lấy thông báo cá nhân cho người dùng
-    /// </summary>
-    public List<ThongBaoDTO> GetPersonalNotifications(int ID)
-    {
-        try
+        /// <summary>
+        /// Lấy thông báo cá nhân cho người dùng
+        /// </summary>
+        public List<ThongBaoDTO> GetPersonalNotifications(int ID)
         {
+            try
+            {
                 string query = @"
                 SELECT 
                     TB.MaTB, TB.TieuDe, TB.NoiDung, TB.NgayGui, 
                     CASE 
                         WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                         WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                        ELSE N'Hệ thống' 
+                        WHEN ND.MaVaiTro = 1 THEN 
+                            (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                        ELSE N'Không xác định' 
                     END AS NguoiGui,
                     N'Cá nhân' AS NguoiNhan,
                     CASE 
@@ -111,23 +115,23 @@ namespace QuanLyTruongHoc.DAL
                 ORDER BY TB.NgayGui DESC";
 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaNguoiDung", ID }
+                };
+
+                DataTable dt = dbHelper.ExecuteQuery(query, parameters);
+                return ConvertDataTableToList(dt);
+            }
+            catch (Exception ex)
             {
-                { "@MaNguoiDung", ID }
-            };
-
-            DataTable dt = dbHelper.ExecuteQuery(query, parameters);
-            return ConvertDataTableToList(dt);
+                Console.WriteLine("Lỗi khi lấy thông báo cá nhân: " + ex.Message);
+                throw new Exception("Không thể tải thông báo cá nhân: " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Lỗi khi lấy thông báo cá nhân: " + ex.Message);
-            throw new Exception("Không thể tải thông báo cá nhân: " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Lấy thông báo của vai trò cho người dùng
-    /// </summary>
+        /// <summary>
+        /// Lấy thông báo của vai trò cho người dùng
+        /// </summary>
         public List<ThongBaoDTO> GetRoleNotifications(int maVaiTro, int maNguoiDung)
         {
             try
@@ -138,7 +142,9 @@ namespace QuanLyTruongHoc.DAL
                         CASE 
                             WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                             WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                            ELSE N'Ban giám hiệu' 
+                            WHEN ND.MaVaiTro = 1 THEN 
+                                (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                            ELSE N'Không xác định' 
                         END AS NguoiGui,
                         N'Vai trò' AS NguoiNhan,
                         CASE 
@@ -170,20 +176,22 @@ namespace QuanLyTruongHoc.DAL
             }
         }
 
-    /// <summary>
-    /// Lấy thông tin chi tiết của một thông báo theo mã thông báo
-    /// </summary>
-    public ThongBaoDTO GetThongBaoById(int maTB)
-    {
-        try
+        /// <summary>
+        /// Lấy thông tin chi tiết của một thông báo theo mã thông báo
+        /// </summary>
+        public ThongBaoDTO GetThongBaoById(int maTB)
         {
+            try
+            {
                 string query = $@"
                 SELECT 
                     TB.MaTB, TB.TieuDe, TB.NoiDung, TB.NgayGui, TB.MaNguoiNhan,
                     CASE 
                         WHEN GV.HoTen IS NOT NULL THEN GV.HoTen 
                         WHEN HS.HoTen IS NOT NULL THEN HS.HoTen
-                        ELSE N'Hệ thống' 
+                        WHEN ND.MaVaiTro = 1 THEN 
+                            (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = TB.MaNguoiGui)
+                        ELSE N'Không xác định' 
                     END AS NguoiGui,
                     CASE
                         WHEN TB.MaNguoiNhan IS NOT NULL THEN N'Cá nhân'
@@ -200,34 +208,34 @@ namespace QuanLyTruongHoc.DAL
                 LEFT JOIN GiaoVien GV ON ND.MaNguoiDung = GV.MaNguoiDung
                 LEFT JOIN HocSinh HS ON ND.MaNguoiDung = HS.MaNguoiDung
                 WHERE TB.MaTB = {maTB}";
-            DataTable dt = dbHelper.ExecuteQuery(query);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                return new ThongBaoDTO
+                DataTable dt = dbHelper.ExecuteQuery(query);
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    MaTB = Convert.ToInt32(dt.Rows[0]["MaTB"]),
-                    TieuDe = dt.Rows[0]["TieuDe"].ToString(),
-                    NoiDung = dt.Rows[0]["NoiDung"].ToString(),
-                    Ngay = Convert.ToDateTime(dt.Rows[0]["NgayGui"]),
-                    NguoiGui = dt.Rows[0]["NguoiGui"].ToString(),
-                    NguoiNhan = dt.Rows[0]["NguoiNhan"].ToString(),
-                    DaDoc = Convert.ToBoolean(dt.Rows[0]["DaDoc"]),
-                    maNguoiNhan = dt.Rows[0]["MaNguoiNhan"] == DBNull.Value ? -1 : Convert.ToInt32(dt.Rows[0]["MaNguoiNhan"])
+                    return new ThongBaoDTO
+                    {
+                        MaTB = Convert.ToInt32(dt.Rows[0]["MaTB"]),
+                        TieuDe = dt.Rows[0]["TieuDe"].ToString(),
+                        NoiDung = dt.Rows[0]["NoiDung"].ToString(),
+                        Ngay = Convert.ToDateTime(dt.Rows[0]["NgayGui"]),
+                        NguoiGui = dt.Rows[0]["NguoiGui"].ToString(),
+                        NguoiNhan = dt.Rows[0]["NguoiNhan"].ToString(),
+                        DaDoc = Convert.ToBoolean(dt.Rows[0]["DaDoc"]),
+                        maNguoiNhan = dt.Rows[0]["MaNguoiNhan"] == DBNull.Value ? -1 : Convert.ToInt32(dt.Rows[0]["MaNguoiNhan"])
 
-                };
+                    };
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy thông báo theo ID: " + ex.Message);
+                throw new Exception("Không thể tải chi tiết thông báo: " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Lỗi khi lấy thông báo theo ID: " + ex.Message);
-            throw new Exception("Không thể tải chi tiết thông báo: " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Cập nhật trạng thái đã đọc của thông báo
-    /// </summary>
+        /// <summary>
+        /// Cập nhật trạng thái đã đọc của thông báo
+        /// </summary>
         public bool UpdateReadStatus(int maTB, int maNguoiDung)
         {
             try
@@ -284,46 +292,45 @@ namespace QuanLyTruongHoc.DAL
             }
         }
 
-    /// <summary>
-    /// Lấy danh sách file đính kèm cho một thông báo
-    /// </summary>
-    public List<ucTBChiTiet.AttachmentInfo> GetAttachments(int maTB)
-    {
-        // Trả về danh sách rỗng nếu chưa có chức năng đính kèm
-        return new List<ucTBChiTiet.AttachmentInfo>();
-    }
-
-    // Helper method để chuyển DataTable sang List<ThongBaoDTO>
-    private List<ThongBaoDTO> ConvertDataTableToList(DataTable dt)
-    {
-        List<ThongBaoDTO> thongBaoList = new List<ThongBaoDTO>();
-
-        if (dt != null && dt.Rows.Count > 0)
+        /// <summary>
+        /// Lấy danh sách file đính kèm cho một thông báo
+        /// </summary>
+        public List<ucTBChiTiet.AttachmentInfo> GetAttachments(int maTB)
         {
-            foreach (DataRow row in dt.Rows)
-            {
-                try
-                {
-                    thongBaoList.Add(new ThongBaoDTO
-                    {
-                        MaTB = Convert.ToInt32(row["MaTB"]),
-                        TieuDe = row["TieuDe"].ToString(),
-                        NoiDung = row["NoiDung"].ToString(),
-                        Ngay = Convert.ToDateTime(row["NgayGui"]),
-                        NguoiGui = row["NguoiGui"].ToString(),
-                        NguoiNhan = row["NguoiNhan"].ToString(),
-                        DaDoc = Convert.ToBoolean(row["DaDoc"])
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Lỗi khi xử lý thông báo: {ex.Message}");
-                }
-            }
+            // Trả về danh sách rỗng nếu chưa có chức năng đính kèm
+            return new List<ucTBChiTiet.AttachmentInfo>();
         }
 
-        return thongBaoList;
-    }
-}
+        // Helper method để chuyển DataTable sang List<ThongBaoDTO>
+        private List<ThongBaoDTO> ConvertDataTableToList(DataTable dt)
+        {
+            List<ThongBaoDTO> thongBaoList = new List<ThongBaoDTO>();
 
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    try
+                    {
+                        thongBaoList.Add(new ThongBaoDTO
+                        {
+                            MaTB = Convert.ToInt32(row["MaTB"]),
+                            TieuDe = row["TieuDe"].ToString(),
+                            NoiDung = row["NoiDung"].ToString(),
+                            Ngay = Convert.ToDateTime(row["NgayGui"]),
+                            NguoiGui = row["NguoiGui"].ToString(),
+                            NguoiNhan = row["NguoiNhan"].ToString(),
+                            DaDoc = Convert.ToBoolean(row["DaDoc"])
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Lỗi khi xử lý thông báo: {ex.Message}");
+                    }
+                }
+            }
+
+            return thongBaoList;
+        }
+    }
 }

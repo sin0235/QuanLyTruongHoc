@@ -36,14 +36,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     ThongBao.NgayGui, 
                     CASE 
                         WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                        ELSE N'Ban Giám Hiệu'
+                        WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = ThongBao.MaNguoiGui)
+                        ELSE N'Không xác định'
                     END AS NguoiGui
                 FROM 
                     ThongBao
                 LEFT JOIN 
-                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                    NguoiDung ND ON ThongBao.MaNguoiGui = ND.MaNguoiDung
                 LEFT JOIN 
-                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                    GiaoVien ON ND.MaNguoiDung = GiaoVien.MaNguoiDung
                 WHERE 
                     ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
                 ORDER BY 
@@ -63,14 +64,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     ThongBao.NgayGui, 
                     CASE 
                         WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                        ELSE N'Ban Giám Hiệu'
+                        WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = ThongBao.MaNguoiGui)
+                        ELSE N'Không xác định'
                     END AS NguoiGui
                 FROM 
                     ThongBao
                 LEFT JOIN 
-                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                    NguoiDung ND ON ThongBao.MaNguoiGui = ND.MaNguoiDung
                 LEFT JOIN 
-                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                    GiaoVien ON ND.MaNguoiDung = GiaoVien.MaNguoiDung
                 WHERE 
                     ThongBao.MaNguoiNhan = {maNguoiDung}
                 ORDER BY 
@@ -97,14 +99,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     ThongBao.NgayGui, 
                     CASE 
                         WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                        ELSE N'Ban Giám Hiệu'
+                        WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = ThongBao.MaNguoiGui)
+                        ELSE N'Không xác định'
                     END AS NguoiGui
                 FROM 
                     ThongBao
                 LEFT JOIN 
-                    NguoiDung ON ThongBao.MaNguoiGui = NguoiDung.MaNguoiDung
+                    NguoiDung ND ON ThongBao.MaNguoiGui = ND.MaNguoiDung
                 LEFT JOIN 
-                    GiaoVien ON NguoiDung.MaNguoiDung = GiaoVien.MaNguoiDung
+                    GiaoVien ON ND.MaNguoiDung = GiaoVien.MaNguoiDung
                 WHERE 
                     (ThongBao.TieuDe LIKE @Keyword OR ThongBao.NoiDung LIKE @Keyword)
                 ORDER BY 

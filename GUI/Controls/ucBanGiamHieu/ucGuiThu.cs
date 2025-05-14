@@ -29,11 +29,28 @@ namespace QuanLyTruongHoc.GUI.Controls
         // Ghi nhật ký hệ thống
         private void GhiNhatKy(DatabaseHelper db, string hanhDong)
         {
-            int maNK = GetNextMaNK(db);
-            string query = $@"
-            INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-            VALUES ({maNK}, 1, N'{hanhDong}', GETDATE())";
-            db.ExecuteNonQuery(query);
+            try
+            {
+                int maNK = GetNextMaNK(db);
+                // Sử dụng tham số để tránh SQL Injection
+                string query = @"
+                INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaNK", maNK },
+                    { "@MaNguoiDung", 1 }, // Giả sử là người dùng với MaNguoiDung = 1 (Ban giám hiệu)
+                    { "@HanhDong", hanhDong }
+                };
+                
+                db.ExecuteNonQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi ghi nhật ký: {ex.Message}");
+                // Không hiển thị lỗi cho người dùng vì đây là chức năng phụ
+            }
         }
 
         private void cbLopCụThe_CheckedChanged(object sender, EventArgs e)

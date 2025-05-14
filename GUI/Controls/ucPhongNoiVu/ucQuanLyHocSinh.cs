@@ -665,7 +665,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             try
             {
                 // Truy vấn để lấy MaNguoiDung của người dùng hiện tại
-                string queryPhongNoiVu = "SELECT TOP 1 MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                string queryPhongNoiVu = "SELECT TOP 1 MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                 object result = db.ExecuteScalar(queryPhongNoiVu);
                 
                 // Kiểm tra kết quả trả về

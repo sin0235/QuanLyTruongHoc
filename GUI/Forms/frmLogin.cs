@@ -40,13 +40,19 @@ namespace QuanLyTruongHoc
 
             try
             {
-                string query = $@"
+                string query = @"
                 SELECT NguoiDung.MaNguoiDung, NguoiDung.MaVaiTro, VaiTro.TenVaiTro
                 FROM NguoiDung
                 INNER JOIN VaiTro ON NguoiDung.MaVaiTro = VaiTro.MaVaiTro
-                WHERE NguoiDung.TenDangNhap = '{username}' AND NguoiDung.MatKhau = '{password}'";
+                WHERE NguoiDung.TenDangNhap = @Username AND NguoiDung.MatKhau = @Password";
 
-                DataTable dt = db.ExecuteQuery(query);
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@Username", username },
+                    { "@Password", password }
+                };
+
+                DataTable dt = db.ExecuteQuery(query, parameters);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -55,11 +61,19 @@ namespace QuanLyTruongHoc
                     string tenVaiTro = dt.Rows[0]["TenVaiTro"].ToString();
                     int newMaNK = GetNextMaNK();
 
-                    // Ghi nhật ký đăng nhập
-                    string insertLogQuery = $@"
+                    // Ghi nhật ký đăng nhập sử dụng tham số
+                    string insertLogQuery = @"
                     INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                    VALUES ({newMaNK}, {maNguoiDung}, N'Đăng nhập', GETDATE())";
-                    db.ExecuteNonQuery(insertLogQuery);
+                    VALUES (@MaNK, @MaNguoiDung, @HanhDong, GETDATE())";
+                    
+                    Dictionary<string, object> logParameters = new Dictionary<string, object>
+                    {
+                        { "@MaNK", newMaNK },
+                        { "@MaNguoiDung", maNguoiDung },
+                        { "@HanhDong", "Đăng nhập" }
+                    };
+                    
+                    db.ExecuteNonQuery(insertLogQuery, logParameters);
 
                     // Tạo hiệu ứng mờ dần cho form hiện tại
                     System.Windows.Forms.Timer fadeTimer = new System.Windows.Forms.Timer

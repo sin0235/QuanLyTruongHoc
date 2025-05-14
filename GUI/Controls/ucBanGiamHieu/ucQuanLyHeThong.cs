@@ -47,10 +47,11 @@ namespace QuanLyTruongHoc.GUI.Controls
                 string query = @"
                 SELECT NK.MaNguoiDung, 
                 CASE 
-                    WHEN ND.MaVaiTro = 1 THEN N'Ban giám hiệu'
+                    WHEN ND.MaVaiTro = 1 THEN 
+                        (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = NK.MaNguoiDung)
                     WHEN ND.MaVaiTro = 2 THEN GV.HoTen
-                    WHEN ND.MaVaiTro = 3 THEN HS.HoTen
-                    WHEN ND.MaVaiTro = 4 THEN N'Nhân viên phòng nội vụ'
+                    WHEN ND.MaVaiTro = 3 THEN GV.HoTen
+                    WHEN ND.MaVaiTro = 4 THEN HS.HoTen
                     ELSE N'Không xác định'
                 END AS NguoiHanhDong,
                 VT.TenVaiTro AS VaiTro, -- Lấy tên vai trò từ bảng VaiTro
@@ -71,20 +72,14 @@ namespace QuanLyTruongHoc.GUI.Controls
                     dgvQuanLyHeThong.AutoGenerateColumns = false;
                     dgvQuanLyHeThong.DataSource = dt;
                     dgvQuanLyHeThong.ClearSelection();
+                    UpdateStatistics(); // Cập nhật thống kê
                     return true;
                 }
                 else
                 {
+                    // Không có dữ liệu hoặc bảng trống
+                    lblStatistic.Text = "Tổng số: 0 hoạt động hệ thống";
                     return false;
-                }
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    originalData = dt;
-                    dgvQuanLyHeThong.AutoGenerateColumns = false;
-                    dgvQuanLyHeThong.DataSource = dt;
-                    dgvQuanLyHeThong.ClearSelection();
-                    UpdateStatistics(); // Add this line
-                    return true;
                 }
             }
             catch (Exception ex)
@@ -133,6 +128,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             DataView dv = new DataView(originalData);
             dv.RowFilter = $"ThoiGian LIKE '{selectedDate}%'";
             dgvQuanLyHeThong.DataSource = dv;
+            UpdateStatistics(); // Cập nhật thống kê sau khi lọc
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
@@ -145,6 +141,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             {
                 // Hiển thị lại dữ liệu gốc nếu không có từ khóa
                 dgvQuanLyHeThong.DataSource = originalData;
+                UpdateStatistics(); // Cập nhật thống kê
                 return;
             }
 
@@ -153,6 +150,7 @@ namespace QuanLyTruongHoc.GUI.Controls
             dv.RowFilter = $"NguoiHanhDong LIKE '%{keyword}%'";
             dgvQuanLyHeThong.DataSource = dv;
             dgvQuanLyHeThong.ClearSelection();
+            UpdateStatistics(); // Cập nhật thống kê sau khi lọc
         }
     }
 }

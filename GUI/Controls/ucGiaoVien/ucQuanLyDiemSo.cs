@@ -24,6 +24,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             db = new DatabaseHelper();
             MaNguoiDung = maNguoiDung;
             MaGiaoVien = maGiaoVien;
+            
+            // Thêm sự kiện Load để đảm bảo form được khởi tạo hoàn tất trước khi load dữ liệu
+            this.Load += (s, e) => lamMoiBtn_Click(this, EventArgs.Empty);
         }
         private void LoadDiem()
         {

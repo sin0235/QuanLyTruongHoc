@@ -189,7 +189,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
 
-                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 4";
+                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery));
 
                         string hanhDong = $"Xóa lớp {tenLop} của giáo viên {tenGVChuNhiem} chủ nhiệm ra khỏi hệ thống";
