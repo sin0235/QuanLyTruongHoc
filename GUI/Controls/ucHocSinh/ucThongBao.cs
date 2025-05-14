@@ -184,15 +184,15 @@ namespace QuanLyTruongHoc.GUI.Controls
         {
             try
             {
-                // Thiết lập mã vai trò (3 là mã vai trò của học sinh)
-                maVaiTro = 3;
+                // Thiết lập mã vai trò (4 là mã vai trò của học sinh)
+                maVaiTro = 4;
 
                 // Truy vấn để lấy mã lớp của học sinh từ CSDL
                 string queryMaLop = "SELECT MaLop FROM HocSinh WHERE MaNguoiDung = @MaNguoiDung";
                 Dictionary<string, object> parameters = new Dictionary<string, object>
-                            {
-                                { "@MaNguoiDung", maNguoiDung }
-                            };
+                {
+                    { "@MaNguoiDung", maNguoiDung }
+                };
 
                 DatabaseHelper dbHelper = new DatabaseHelper();
                 DataTable dt = dbHelper.ExecuteQuery(queryMaLop, parameters);
