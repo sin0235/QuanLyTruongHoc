@@ -213,16 +213,6 @@ namespace QuanLyTruongHoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap defautAvatar_Girl {
-            get {
-                object obj = ResourceManager.GetObject("defautAvatar_Girl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap defautAvatar_Teacher_Female {
             get {
                 object obj = ResourceManager.GetObject("defautAvatar_Teacher_Female", resourceCulture);
@@ -436,16 +426,6 @@ namespace QuanLyTruongHoc.Properties {
         internal static System.Drawing.Bitmap school {
             get {
                 object obj = ResourceManager.GetObject("school", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap school_avt {
-            get {
-                object obj = ResourceManager.GetObject("school_avt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
