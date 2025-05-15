@@ -166,6 +166,90 @@ namespace QuanLyTruongHoc.GUI.Forms
             }
         }
 
+        //private void addBtn_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Kiểm tra các trường đầu vào
+        //        if (string.IsNullOrWhiteSpace(sttTxt.Text) || string.IsNullOrWhiteSpace(hoTenTxt.Text) ||
+        //            string.IsNullOrWhiteSpace(loaiDiemCmb.Text) || string.IsNullOrWhiteSpace(diemTxt.Text) ||
+        //            string.IsNullOrWhiteSpace(cmbHocKi.Text))
+        //        {
+        //            MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        if (!int.TryParse(sttTxt.Text, out int stt))
+        //        {
+        //            MessageBox.Show("STT phải là số nguyên.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        string loaiDiem = loaiDiemCmb.Text;
+        //        if (!float.TryParse(diemTxt.Text, out float diem))
+        //        {
+        //            MessageBox.Show("Điểm phải là số thực.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        // Chuyển đổi giá trị học kỳ từ "Kỳ 1", "Kỳ 2" thành số nguyên
+        //        string hocKyText = cmbHocKi.Text;
+        //        if (!hocKyText.StartsWith("Kỳ") || !int.TryParse(hocKyText.Replace("Kỳ ", ""), out int hocKy))
+        //        {
+        //            MessageBox.Show("Học kỳ không hợp lệ.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        // Kiểm tra giá trị điểm hợp lệ
+        //        if (diem < 0 || diem > 10)
+        //        {
+        //            MessageBox.Show("Điểm phải nằm trong khoảng từ 0 đến 10.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return;
+        //        }
+
+        //        // Lấy mã học sinh từ Họ Tên
+        //        string layMaHS = $@"
+        //    SELECT MaHS
+        //    FROM HocSinh
+        //    WHERE HoTen = N'{hoTenTxt.Text}'";
+
+        //        object maHSObj = db.ExecuteScalar(layMaHS);
+        //        if (maHSObj == null)
+        //        {
+        //            MessageBox.Show("Không tìm thấy học sinh với STT đã nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            return;
+        //        }
+
+        //        int maHS = Convert.ToInt32(maHSObj);
+
+        //        // Thêm điểm mới
+        //        string themMaxMaDiem = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
+        //        int maDiemMoi = Convert.ToInt32(db.ExecuteScalar(themMaxMaDiem));
+
+        //        string themDiem = $@"
+        //    INSERT INTO DiemSo (MaDiem, MaHS, MaMon, MaGV, HocKy, LoaiDiem, Diem)
+        //    VALUES ({maDiemMoi}, {maHS}, {maMon}, {maGV}, {hocKy}, N'{loaiDiem}', {diem})";
+
+        //        bool daThem = db.ExecuteNonQuery(themDiem);
+
+        //        if (daThem)
+        //        {
+        //            MessageBox.Show("Thêm điểm thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Thêm điểm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+
+        //        // Tải lại danh sách điểm chi tiết của học sinh
+        //        LoadDiemHS(maHS);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             try
@@ -222,6 +306,38 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                 int maHS = Convert.ToInt32(maHSObj);
 
+                // Giới hạn số lượng điểm cho từng loại
+                int maxSoLuong = 0;
+                switch (loaiDiem)
+                {
+                    case "Miệng":
+                        maxSoLuong = 4;
+                        break;
+                    case "15 phút":
+                        maxSoLuong = 3;
+                        break;
+                    case "Giữa kỳ":
+                        maxSoLuong = 1;
+                        break;
+                    case "Cuối kỳ":
+                        maxSoLuong = 1;
+                        break;
+                    default:
+                        maxSoLuong = 0;
+                        break;
+                }
+
+                string countQuery = $@"
+            SELECT COUNT(*) FROM DiemSo
+            WHERE MaHS = {maHS} AND MaMon = {maMon} AND MaGV = {maGV} AND HocKy = {hocKy} AND LoaiDiem = N'{loaiDiem}'";
+                int soLuongHienTai = Convert.ToInt32(db.ExecuteScalar(countQuery));
+
+                if (soLuongHienTai >= maxSoLuong)
+                {
+                    MessageBox.Show($"Đã đạt số lượng điểm tối đa cho loại điểm \"{loaiDiem}\" (tối đa {maxSoLuong}).", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Thêm điểm mới
                 string themMaxMaDiem = "SELECT ISNULL(MAX(MaDiem), 0) + 1 FROM DiemSo";
                 int maDiemMoi = Convert.ToInt32(db.ExecuteScalar(themMaxMaDiem));
@@ -249,6 +365,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                 MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void exitBtn_Click(object sender, EventArgs e)

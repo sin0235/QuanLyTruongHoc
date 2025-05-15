@@ -35,6 +35,11 @@
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtNoiDung = new Guna.UI2.WinForms.Guna2TextBox();
             this.dgvKeHoach = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoiDungGIangDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnThem = new Guna.UI2.WinForms.Guna2Button();
             this.btnChinhSua = new Guna.UI2.WinForms.Guna2Button();
             this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
@@ -48,11 +53,6 @@
             this.cbLopHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbMonHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tuan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoiDungGIangDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKeHoach)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2GradientPanel1.SuspendLayout();
@@ -65,7 +65,7 @@
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(16, 3);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(107, 34);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(130, 43);
             this.guna2HtmlLabel4.TabIndex = 6;
             this.guna2HtmlLabel4.Text = "Kế hoạch";
             // 
@@ -86,10 +86,11 @@
             this.txtNoiDung.Location = new System.Drawing.Point(16, 50);
             this.txtNoiDung.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNoiDung.Name = "txtNoiDung";
-            this.txtNoiDung.PlaceholderText = "";
+            this.txtNoiDung.PlaceholderText = "Kế hoạch tuần này";
             this.txtNoiDung.SelectedText = "";
             this.txtNoiDung.Size = new System.Drawing.Size(831, 147);
             this.txtNoiDung.TabIndex = 7;
+            this.txtNoiDung.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dgvKeHoach
             // 
@@ -151,6 +152,41 @@
             this.dgvKeHoach.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(186)))), ((int)(((byte)(231)))));
             this.dgvKeHoach.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvKeHoach.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKeHoach_CellDoubleClick);
+            // 
+            // MaKH
+            // 
+            this.MaKH.DataPropertyName = "MaKH";
+            this.MaKH.HeaderText = "Mã KH";
+            this.MaKH.MinimumWidth = 6;
+            this.MaKH.Name = "MaKH";
+            // 
+            // TenMon
+            // 
+            this.TenMon.DataPropertyName = "TenMon";
+            this.TenMon.HeaderText = "Môn";
+            this.TenMon.MinimumWidth = 6;
+            this.TenMon.Name = "TenMon";
+            // 
+            // TenLop
+            // 
+            this.TenLop.DataPropertyName = "TenLop";
+            this.TenLop.HeaderText = "Lớp";
+            this.TenLop.MinimumWidth = 6;
+            this.TenLop.Name = "TenLop";
+            // 
+            // Tuan
+            // 
+            this.Tuan.DataPropertyName = "Tuan";
+            this.Tuan.HeaderText = "Tuần";
+            this.Tuan.MinimumWidth = 6;
+            this.Tuan.Name = "Tuan";
+            // 
+            // NoiDungGIangDay
+            // 
+            this.NoiDungGIangDay.DataPropertyName = "NoiDungGIangDay";
+            this.NoiDungGIangDay.HeaderText = "Kế hoạch";
+            this.NoiDungGIangDay.MinimumWidth = 6;
+            this.NoiDungGIangDay.Name = "NoiDungGIangDay";
             // 
             // btnThem
             // 
@@ -216,7 +252,7 @@
             this.guna2HtmlLabel5.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(20, 244);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(200, 34);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(248, 43);
             this.guna2HtmlLabel5.TabIndex = 12;
             this.guna2HtmlLabel5.Text = "BẢNG KẾ HOẠCH";
             // 
@@ -266,7 +302,7 @@
             this.htmlLabel.ForeColor = System.Drawing.Color.SteelBlue;
             this.htmlLabel.Location = new System.Drawing.Point(24, 127);
             this.htmlLabel.Name = "htmlLabel";
-            this.htmlLabel.Size = new System.Drawing.Size(54, 32);
+            this.htmlLabel.Size = new System.Drawing.Size(66, 39);
             this.htmlLabel.TabIndex = 9;
             this.htmlLabel.Text = "Tuần";
             // 
@@ -277,7 +313,7 @@
             this.guna2HtmlLabel3.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(24, 73);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(50, 32);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(62, 39);
             this.guna2HtmlLabel3.TabIndex = 7;
             this.guna2HtmlLabel3.Text = "Môn";
             // 
@@ -288,7 +324,7 @@
             this.guna2HtmlLabel6.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel6.Location = new System.Drawing.Point(24, 19);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
-            this.guna2HtmlLabel6.Size = new System.Drawing.Size(42, 32);
+            this.guna2HtmlLabel6.Size = new System.Drawing.Size(51, 39);
             this.guna2HtmlLabel6.TabIndex = 6;
             this.guna2HtmlLabel6.Text = "Lớp";
             // 
@@ -341,41 +377,6 @@
             this.guna2GradientPanel1.Name = "guna2GradientPanel1";
             this.guna2GradientPanel1.Size = new System.Drawing.Size(1089, 205);
             this.guna2GradientPanel1.TabIndex = 17;
-            // 
-            // MaKH
-            // 
-            this.MaKH.DataPropertyName = "MaKH";
-            this.MaKH.HeaderText = "Mã KH";
-            this.MaKH.MinimumWidth = 6;
-            this.MaKH.Name = "MaKH";
-            // 
-            // TenMon
-            // 
-            this.TenMon.DataPropertyName = "TenMon";
-            this.TenMon.HeaderText = "Môn";
-            this.TenMon.MinimumWidth = 6;
-            this.TenMon.Name = "TenMon";
-            // 
-            // TenLop
-            // 
-            this.TenLop.DataPropertyName = "TenLop";
-            this.TenLop.HeaderText = "Lớp";
-            this.TenLop.MinimumWidth = 6;
-            this.TenLop.Name = "TenLop";
-            // 
-            // Tuan
-            // 
-            this.Tuan.DataPropertyName = "Tuan";
-            this.Tuan.HeaderText = "Tuần";
-            this.Tuan.MinimumWidth = 6;
-            this.Tuan.Name = "Tuan";
-            // 
-            // NoiDungGIangDay
-            // 
-            this.NoiDungGIangDay.DataPropertyName = "NoiDungGIangDay";
-            this.NoiDungGIangDay.HeaderText = "Kế hoạch";
-            this.NoiDungGIangDay.MinimumWidth = 6;
-            this.NoiDungGIangDay.Name = "NoiDungGIangDay";
             // 
             // ucQuanLyKeHoachGiangDay
             // 

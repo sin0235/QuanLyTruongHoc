@@ -31,6 +31,7 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             // Lấy danh sách thông báo chung từ cơ sở dữ liệu
             string query = @"
                 SELECT 
+                    ThongBao.MaNguoiGui,
                     ThongBao.TieuDe, 
                     ThongBao.NoiDung, 
                     ThongBao.NgayGui, 
@@ -47,34 +48,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
                     GiaoVien ON ND.MaNguoiDung = GiaoVien.MaNguoiDung
                 WHERE 
                     ThongBao.MaNguoiNhan IS NULL AND (ThongBao.MaVaiTroNhan IS NULL OR ThongBao.MaVaiTroNhan = 2)
-                ORDER BY 
-                    ThongBao.NgayGui DESC";
-            DataTable dt = db.ExecuteQuery(query);
-            thongBaoDgv.DataSource = dt;
-        }
-
-        // Hiển thị thông báo cá nhân
-        private void LoadThongBaoCaNhan()
-        {
-            // Lấy danh sách thông báo cá nhân từ cơ sở dữ liệu
-            string query = $@"
-                SELECT 
-                    ThongBao.TieuDe, 
-                    ThongBao.NoiDung, 
-                    ThongBao.NgayGui, 
-                    CASE 
-                        WHEN GiaoVien.HoTen IS NOT NULL THEN GiaoVien.HoTen
-                        WHEN ND.MaVaiTro = 1 THEN (SELECT HoTen FROM GiaoVien WHERE MaNguoiDung = ThongBao.MaNguoiGui)
-                        ELSE N'Không xác định'
-                    END AS NguoiGui
-                FROM 
-                    ThongBao
-                LEFT JOIN 
-                    NguoiDung ND ON ThongBao.MaNguoiGui = ND.MaNguoiDung
-                LEFT JOIN 
-                    GiaoVien ON ND.MaNguoiDung = GiaoVien.MaNguoiDung
-                WHERE 
-                    ThongBao.MaNguoiNhan = {maNguoiDung}
                 ORDER BY 
                     ThongBao.NgayGui DESC";
             DataTable dt = db.ExecuteQuery(query);
@@ -127,11 +100,6 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             LoadThongBaoChung();
         }
 
-        private void thongBaoCaNhanBtn_Click(object sender, EventArgs e)
-        {
-            LoadThongBaoCaNhan();
-        }
-
         private void timKiemTBBtn_Click(object sender, EventArgs e)
         {
             TimKiemThongBao();
@@ -139,18 +107,8 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
 
         private void lamMoiTBBtn_Click(object sender, EventArgs e)
         {
-            if (thongBaoCaNhanBtn.Focused)
-            {
-                LoadThongBaoCaNhan();
-            }
-            else if (thongBaoChungBtn.Focused)
-            {
-                LoadThongBaoChung();
-            }
-            else
-            {
-                LoadThongBaoChung();
-            }
+            LoadThongBaoChung();
+
         }
 
         private void thongBaoDgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -158,13 +116,13 @@ namespace QuanLyTruongHoc.GUI.Controls.ucGiaoVien
             if (e.RowIndex >= 0)
             {
                 // Lấy thông tin từ dòng được chọn
+                int maNguoiGui = Convert.ToInt32(thongBaoDgv.Rows[e.RowIndex].Cells["MaNguoiGui"].Value);
                 string tieuDe = thongBaoDgv.Rows[e.RowIndex].Cells["TieuDe"].Value.ToString();
                 string noiDung = thongBaoDgv.Rows[e.RowIndex].Cells["NoiDung"].Value.ToString();
                 string ngayGui = thongBaoDgv.Rows[e.RowIndex].Cells["NgayGui"].Value.ToString();
                 string nguoiGui = thongBaoDgv.Rows[e.RowIndex].Cells["NguoiGui"].Value.ToString();
-
                 // Tạo và hiển thị Form chi tiết
-                var frmChiTiet = new frmThongBaoChiTiet(tieuDe, noiDung, ngayGui, nguoiGui);
+                var frmChiTiet = new frmThongBaoChiTiet(tieuDe, noiDung, ngayGui, nguoiGui, maNguoiGui);
                 frmChiTiet.ShowDialog();
             }
         }

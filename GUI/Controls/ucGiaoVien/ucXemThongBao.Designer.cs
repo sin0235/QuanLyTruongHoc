@@ -32,19 +32,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.thongBaoDgv = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.TieuDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgayGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.lamMoiTBBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.thongBaoCaNhanBtn = new Guna.UI2.WinForms.Guna2Button();
             this.thongBaoChungBtn = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CustomGradientPanel2 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             this.timKiemTBBtn = new Guna.UI2.WinForms.Guna2Button();
             this.timKiemTBTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button8 = new Guna.UI2.WinForms.Guna2Button();
+            this.MaNguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TieuDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NoiDung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.thongBaoDgv)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.guna2CustomGradientPanel2.SuspendLayout();
@@ -69,6 +69,7 @@
             this.thongBaoDgv.ColumnHeadersHeight = 36;
             this.thongBaoDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.thongBaoDgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaNguoiGui,
             this.TieuDe,
             this.NoiDung,
             this.NgayGui,
@@ -115,44 +116,11 @@
             this.thongBaoDgv.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.thongBaoDgv.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.thongBaoDgv_CellDoubleClick);
             // 
-            // TieuDe
-            // 
-            this.TieuDe.DataPropertyName = "TieuDe";
-            this.TieuDe.HeaderText = "Tiêu đề";
-            this.TieuDe.MinimumWidth = 6;
-            this.TieuDe.Name = "TieuDe";
-            this.TieuDe.ReadOnly = true;
-            // 
-            // NoiDung
-            // 
-            this.NoiDung.DataPropertyName = "NoiDung";
-            this.NoiDung.HeaderText = "Nội Dung";
-            this.NoiDung.MinimumWidth = 6;
-            this.NoiDung.Name = "NoiDung";
-            this.NoiDung.ReadOnly = true;
-            // 
-            // NgayGui
-            // 
-            this.NgayGui.DataPropertyName = "NgayGui";
-            this.NgayGui.HeaderText = "Ngày Gửi";
-            this.NgayGui.MinimumWidth = 6;
-            this.NgayGui.Name = "NgayGui";
-            this.NgayGui.ReadOnly = true;
-            // 
-            // NguoiGui
-            // 
-            this.NguoiGui.DataPropertyName = "NguoiGui";
-            this.NguoiGui.HeaderText = "Người Gửi";
-            this.NguoiGui.MinimumWidth = 6;
-            this.NguoiGui.Name = "NguoiGui";
-            this.NguoiGui.ReadOnly = true;
-            // 
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CustomGradientPanel1.BorderRadius = 10;
             this.guna2CustomGradientPanel1.Controls.Add(this.lamMoiTBBtn);
-            this.guna2CustomGradientPanel1.Controls.Add(this.thongBaoCaNhanBtn);
             this.guna2CustomGradientPanel1.Controls.Add(this.thongBaoChungBtn);
             this.guna2CustomGradientPanel1.Controls.Add(this.guna2Button1);
             this.guna2CustomGradientPanel1.FillColor3 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
@@ -180,25 +148,6 @@
             this.lamMoiTBBtn.TabIndex = 10;
             this.lamMoiTBBtn.Text = "Làm Mới";
             this.lamMoiTBBtn.Click += new System.EventHandler(this.lamMoiTBBtn_Click);
-            // 
-            // thongBaoCaNhanBtn
-            // 
-            this.thongBaoCaNhanBtn.BackColor = System.Drawing.Color.Transparent;
-            this.thongBaoCaNhanBtn.BorderRadius = 10;
-            this.thongBaoCaNhanBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.thongBaoCaNhanBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.thongBaoCaNhanBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.thongBaoCaNhanBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.thongBaoCaNhanBtn.FillColor = System.Drawing.Color.SteelBlue;
-            this.thongBaoCaNhanBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.thongBaoCaNhanBtn.ForeColor = System.Drawing.Color.White;
-            this.thongBaoCaNhanBtn.HoverState.FillColor = System.Drawing.Color.LightSteelBlue;
-            this.thongBaoCaNhanBtn.Location = new System.Drawing.Point(322, 23);
-            this.thongBaoCaNhanBtn.Name = "thongBaoCaNhanBtn";
-            this.thongBaoCaNhanBtn.Size = new System.Drawing.Size(257, 45);
-            this.thongBaoCaNhanBtn.TabIndex = 9;
-            this.thongBaoCaNhanBtn.Text = "Thông Báo Cá Nhân";
-            this.thongBaoCaNhanBtn.Click += new System.EventHandler(this.thongBaoCaNhanBtn_Click);
             // 
             // thongBaoChungBtn
             // 
@@ -306,6 +255,47 @@
             this.guna2Button8.TabIndex = 1;
             this.guna2Button8.Text = "Đổi ảnh đại diện";
             // 
+            // MaNguoiGui
+            // 
+            this.MaNguoiGui.DataPropertyName = "MaNguoiGui";
+            this.MaNguoiGui.HeaderText = "Mã Người Gửi";
+            this.MaNguoiGui.MinimumWidth = 6;
+            this.MaNguoiGui.Name = "MaNguoiGui";
+            this.MaNguoiGui.ReadOnly = true;
+            this.MaNguoiGui.Visible = false;
+            // 
+            // TieuDe
+            // 
+            this.TieuDe.DataPropertyName = "TieuDe";
+            this.TieuDe.HeaderText = "Tiêu đề";
+            this.TieuDe.MinimumWidth = 6;
+            this.TieuDe.Name = "TieuDe";
+            this.TieuDe.ReadOnly = true;
+            // 
+            // NoiDung
+            // 
+            this.NoiDung.DataPropertyName = "NoiDung";
+            this.NoiDung.HeaderText = "Nội Dung";
+            this.NoiDung.MinimumWidth = 6;
+            this.NoiDung.Name = "NoiDung";
+            this.NoiDung.ReadOnly = true;
+            // 
+            // NgayGui
+            // 
+            this.NgayGui.DataPropertyName = "NgayGui";
+            this.NgayGui.HeaderText = "Ngày Gửi";
+            this.NgayGui.MinimumWidth = 6;
+            this.NgayGui.Name = "NgayGui";
+            this.NgayGui.ReadOnly = true;
+            // 
+            // NguoiGui
+            // 
+            this.NguoiGui.DataPropertyName = "NguoiGui";
+            this.NguoiGui.HeaderText = "Người Gửi";
+            this.NguoiGui.MinimumWidth = 6;
+            this.NguoiGui.Name = "NguoiGui";
+            this.NguoiGui.ReadOnly = true;
+            // 
             // ucXemThongBao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -327,12 +317,12 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button thongBaoChungBtn;
-        private Guna.UI2.WinForms.Guna2Button thongBaoCaNhanBtn;
         private Guna.UI2.WinForms.Guna2Button lamMoiTBBtn;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button8;
         private Guna.UI2.WinForms.Guna2TextBox timKiemTBTxt;
         private Guna.UI2.WinForms.Guna2Button timKiemTBBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaNguoiGui;
         private System.Windows.Forms.DataGridViewTextBoxColumn TieuDe;
         private System.Windows.Forms.DataGridViewTextBoxColumn NoiDung;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgayGui;

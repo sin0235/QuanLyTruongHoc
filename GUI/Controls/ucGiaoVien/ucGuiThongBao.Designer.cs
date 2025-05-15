@@ -93,7 +93,7 @@
             this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(24, 76);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(58, 32);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(71, 39);
             this.guna2HtmlLabel2.TabIndex = 7;
             this.guna2HtmlLabel2.Text = "Ngày";
             // 
@@ -104,7 +104,7 @@
             this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.SteelBlue;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(24, 19);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(42, 32);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(51, 39);
             this.guna2HtmlLabel1.TabIndex = 6;
             this.guna2HtmlLabel1.Text = "Lớp";
             // 
@@ -250,7 +250,7 @@
             this.lblThongBao.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblThongBao.Location = new System.Drawing.Point(3, 3);
             this.lblThongBao.Name = "lblThongBao";
-            this.lblThongBao.Size = new System.Drawing.Size(114, 32);
+            this.lblThongBao.Size = new System.Drawing.Size(141, 39);
             this.lblThongBao.TabIndex = 6;
             this.lblThongBao.Text = "Thông báo";
             // 
@@ -288,6 +288,7 @@
             this.dgvGuiThongBao.Name = "dgvGuiThongBao";
             this.dgvGuiThongBao.ReadOnly = true;
             this.dgvGuiThongBao.RowHeadersVisible = false;
+            this.dgvGuiThongBao.RowHeadersWidth = 51;
             this.dgvGuiThongBao.RowTemplate.Height = 24;
             this.dgvGuiThongBao.Size = new System.Drawing.Size(1517, 603);
             this.dgvGuiThongBao.TabIndex = 24;
@@ -320,6 +321,7 @@
             // 
             this.MaTB.DataPropertyName = "MaTB";
             this.MaTB.HeaderText = "Mã TB";
+            this.MaTB.MinimumWidth = 6;
             this.MaTB.Name = "MaTB";
             this.MaTB.ReadOnly = true;
             this.MaTB.Visible = false;
@@ -328,6 +330,7 @@
             // 
             this.TieuDe.DataPropertyName = "TieuDe";
             this.TieuDe.HeaderText = "Tiêu Đề";
+            this.TieuDe.MinimumWidth = 6;
             this.TieuDe.Name = "TieuDe";
             this.TieuDe.ReadOnly = true;
             // 
@@ -335,6 +338,7 @@
             // 
             this.NoiDung.DataPropertyName = "NoiDung";
             this.NoiDung.HeaderText = "Nội Dung";
+            this.NoiDung.MinimumWidth = 6;
             this.NoiDung.Name = "NoiDung";
             this.NoiDung.ReadOnly = true;
             // 
@@ -342,6 +346,7 @@
             // 
             this.NgayGui.DataPropertyName = "NgayGui";
             this.NgayGui.HeaderText = "Ngày Gửi";
+            this.NgayGui.MinimumWidth = 6;
             this.NgayGui.Name = "NgayGui";
             this.NgayGui.ReadOnly = true;
             // 
@@ -349,6 +354,7 @@
             // 
             this.TenLop.DataPropertyName = "TenLop";
             this.TenLop.HeaderText = "Tên Lớp";
+            this.TenLop.MinimumWidth = 6;
             this.TenLop.Name = "TenLop";
             this.TenLop.ReadOnly = true;
             // 

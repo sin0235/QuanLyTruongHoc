@@ -102,7 +102,7 @@
             this.panSemesterSelector.Controls.Add(this.btnHK1);
             this.panSemesterSelector.Location = new System.Drawing.Point(1243, 15);
             this.panSemesterSelector.Name = "panSemesterSelector";
-            this.panSemesterSelector.Size = new System.Drawing.Size(358, 46);
+            this.panSemesterSelector.Size = new System.Drawing.Size(358, 47);
             this.panSemesterSelector.TabIndex = 8;
             // 
             // btnCaNam
@@ -120,7 +120,7 @@
             this.btnCaNam.IndicateFocus = true;
             this.btnCaNam.Location = new System.Drawing.Point(204, 5);
             this.btnCaNam.Name = "btnCaNam";
-            this.btnCaNam.Size = new System.Drawing.Size(87, 33);
+            this.btnCaNam.Size = new System.Drawing.Size(102, 39);
             this.btnCaNam.TabIndex = 2;
             this.btnCaNam.Text = "Cả năm";
             // 
@@ -139,7 +139,7 @@
             this.btnHK2.IndicateFocus = true;
             this.btnHK2.Location = new System.Drawing.Point(102, 5);
             this.btnHK2.Name = "btnHK2";
-            this.btnHK2.Size = new System.Drawing.Size(96, 33);
+            this.btnHK2.Size = new System.Drawing.Size(113, 39);
             this.btnHK2.TabIndex = 1;
             this.btnHK2.Text = "Học kỳ 2";
             // 
@@ -157,7 +157,7 @@
             this.btnHK1.IndicateFocus = true;
             this.btnHK1.Location = new System.Drawing.Point(3, 3);
             this.btnHK1.Name = "btnHK1";
-            this.btnHK1.Size = new System.Drawing.Size(93, 33);
+            this.btnHK1.Size = new System.Drawing.Size(110, 39);
             this.btnHK1.TabIndex = 0;
             this.btnHK1.Text = "Học kỳ 1";
             // 
@@ -168,7 +168,7 @@
             this.lblNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblNamHoc.Location = new System.Drawing.Point(28, 30);
             this.lblNamHoc.Name = "lblNamHoc";
-            this.lblNamHoc.Size = new System.Drawing.Size(68, 23);
+            this.lblNamHoc.Size = new System.Drawing.Size(85, 30);
             this.lblNamHoc.TabIndex = 4;
             this.lblNamHoc.Text = "Năm học";
             // 
@@ -270,7 +270,7 @@
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpSummary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpSummary.Size = new System.Drawing.Size(592, 641);
+            this.tlpSummary.Size = new System.Drawing.Size(593, 641);
             this.tlpSummary.TabIndex = 1;
             // 
             // txtTeacherComment
@@ -298,7 +298,7 @@
             this.txtTeacherComment.PlaceholderText = "";
             this.txtTeacherComment.ReadOnly = true;
             this.txtTeacherComment.SelectedText = "";
-            this.txtTeacherComment.Size = new System.Drawing.Size(336, 331);
+            this.txtTeacherComment.Size = new System.Drawing.Size(337, 331);
             this.txtTeacherComment.TabIndex = 13;
             // 
             // lblTeacherComment
@@ -323,7 +323,7 @@
             this.lblAbsentValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAbsentValue.Location = new System.Drawing.Point(253, 253);
             this.lblAbsentValue.Name = "lblAbsentValue";
-            this.lblAbsentValue.Size = new System.Drawing.Size(336, 44);
+            this.lblAbsentValue.Size = new System.Drawing.Size(337, 44);
             this.lblAbsentValue.TabIndex = 11;
             this.lblAbsentValue.Text = "2 buổi (có phép)";
             this.lblAbsentValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -351,7 +351,7 @@
             this.lblRankValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(120)))), ((int)(((byte)(180)))));
             this.lblRankValue.Location = new System.Drawing.Point(253, 203);
             this.lblRankValue.Name = "lblRankValue";
-            this.lblRankValue.Size = new System.Drawing.Size(336, 44);
+            this.lblRankValue.Size = new System.Drawing.Size(337, 44);
             this.lblRankValue.TabIndex = 9;
             this.lblRankValue.Text = "5 / 40";
             this.lblRankValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -379,7 +379,7 @@
             this.lblAwardsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(180)))), ((int)(((byte)(0)))));
             this.lblAwardsValue.Location = new System.Drawing.Point(253, 153);
             this.lblAwardsValue.Name = "lblAwardsValue";
-            this.lblAwardsValue.Size = new System.Drawing.Size(336, 44);
+            this.lblAwardsValue.Size = new System.Drawing.Size(337, 44);
             this.lblAwardsValue.TabIndex = 7;
             this.lblAwardsValue.Text = "Học sinh Giỏi";
             this.lblAwardsValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -407,7 +407,7 @@
             this.lblGPAValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.lblGPAValue.Location = new System.Drawing.Point(253, 103);
             this.lblGPAValue.Name = "lblGPAValue";
-            this.lblGPAValue.Size = new System.Drawing.Size(336, 44);
+            this.lblGPAValue.Size = new System.Drawing.Size(337, 44);
             this.lblGPAValue.TabIndex = 5;
             this.lblGPAValue.Text = "8.5";
             this.lblGPAValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -435,7 +435,7 @@
             this.lblConductValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblConductValue.Location = new System.Drawing.Point(253, 53);
             this.lblConductValue.Name = "lblConductValue";
-            this.lblConductValue.Size = new System.Drawing.Size(336, 44);
+            this.lblConductValue.Size = new System.Drawing.Size(337, 44);
             this.lblConductValue.TabIndex = 3;
             this.lblConductValue.Text = "Tốt";
             this.lblConductValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -463,7 +463,7 @@
             this.lblAcademicPerformanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.lblAcademicPerformanceValue.Location = new System.Drawing.Point(253, 3);
             this.lblAcademicPerformanceValue.Name = "lblAcademicPerformanceValue";
-            this.lblAcademicPerformanceValue.Size = new System.Drawing.Size(336, 44);
+            this.lblAcademicPerformanceValue.Size = new System.Drawing.Size(337, 44);
             this.lblAcademicPerformanceValue.TabIndex = 1;
             this.lblAcademicPerformanceValue.Text = "Giỏi";
             this.lblAcademicPerformanceValue.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -487,9 +487,9 @@
             this.lblSummaryTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblSummaryTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold);
             this.lblSummaryTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(80)))), ((int)(((byte)(150)))));
-            this.lblSummaryTitle.Location = new System.Drawing.Point(23, 12);
+            this.lblSummaryTitle.Location = new System.Drawing.Point(29, 15);
             this.lblSummaryTitle.Name = "lblSummaryTitle";
-            this.lblSummaryTitle.Size = new System.Drawing.Size(152, 27);
+            this.lblSummaryTitle.Size = new System.Drawing.Size(184, 33);
             this.lblSummaryTitle.TabIndex = 0;
             this.lblSummaryTitle.Text = "Tổng kết học kỳ 1";
             // 
@@ -535,7 +535,7 @@
             this.Toan.Margin = new System.Windows.Forms.Padding(10);
             this.Toan.Name = "Toan";
             this.Toan.NhanXet = "";
-            this.Toan.Size = new System.Drawing.Size(850, 316);
+            this.Toan.Size = new System.Drawing.Size(544, 202);
             this.Toan.SubjectName = "";
             this.Toan.TabIndex = 0;
             // 
@@ -547,11 +547,11 @@
             this.Ly.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.DiemGiuaKyList")));
             this.Ly.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Ly.DiemMiengList")));
             this.Ly.DiemTrungBinh = 0F;
-            this.Ly.Location = new System.Drawing.Point(10, 346);
+            this.Ly.Location = new System.Drawing.Point(10, 232);
             this.Ly.Margin = new System.Windows.Forms.Padding(10);
             this.Ly.Name = "Ly";
             this.Ly.NhanXet = "";
-            this.Ly.Size = new System.Drawing.Size(850, 316);
+            this.Ly.Size = new System.Drawing.Size(544, 202);
             this.Ly.SubjectName = "";
             this.Ly.TabIndex = 3;
             // 
@@ -563,11 +563,11 @@
             this.Van.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemGiuaKyList")));
             this.Van.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Van.DiemMiengList")));
             this.Van.DiemTrungBinh = 0F;
-            this.Van.Location = new System.Drawing.Point(10, 682);
+            this.Van.Location = new System.Drawing.Point(10, 454);
             this.Van.Margin = new System.Windows.Forms.Padding(10);
             this.Van.Name = "Van";
             this.Van.NhanXet = "";
-            this.Van.Size = new System.Drawing.Size(850, 316);
+            this.Van.Size = new System.Drawing.Size(544, 202);
             this.Van.SubjectName = "";
             this.Van.TabIndex = 2;
             // 
@@ -579,11 +579,11 @@
             this.Hoa.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.DiemGiuaKyList")));
             this.Hoa.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Hoa.DiemMiengList")));
             this.Hoa.DiemTrungBinh = 0F;
-            this.Hoa.Location = new System.Drawing.Point(10, 1018);
+            this.Hoa.Location = new System.Drawing.Point(10, 676);
             this.Hoa.Margin = new System.Windows.Forms.Padding(10);
             this.Hoa.Name = "Hoa";
             this.Hoa.NhanXet = "";
-            this.Hoa.Size = new System.Drawing.Size(850, 316);
+            this.Hoa.Size = new System.Drawing.Size(544, 202);
             this.Hoa.SubjectName = "";
             this.Hoa.TabIndex = 4;
             // 
@@ -595,11 +595,11 @@
             this.Dia.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.DiemGiuaKyList")));
             this.Dia.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Dia.DiemMiengList")));
             this.Dia.DiemTrungBinh = 0F;
-            this.Dia.Location = new System.Drawing.Point(10, 1354);
+            this.Dia.Location = new System.Drawing.Point(10, 898);
             this.Dia.Margin = new System.Windows.Forms.Padding(10);
             this.Dia.Name = "Dia";
             this.Dia.NhanXet = "";
-            this.Dia.Size = new System.Drawing.Size(850, 316);
+            this.Dia.Size = new System.Drawing.Size(544, 202);
             this.Dia.SubjectName = "";
             this.Dia.TabIndex = 5;
             // 
@@ -611,11 +611,11 @@
             this.Su.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.DiemGiuaKyList")));
             this.Su.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Su.DiemMiengList")));
             this.Su.DiemTrungBinh = 0F;
-            this.Su.Location = new System.Drawing.Point(10, 1690);
+            this.Su.Location = new System.Drawing.Point(10, 1120);
             this.Su.Margin = new System.Windows.Forms.Padding(10);
             this.Su.Name = "Su";
             this.Su.NhanXet = "";
-            this.Su.Size = new System.Drawing.Size(850, 316);
+            this.Su.Size = new System.Drawing.Size(544, 202);
             this.Su.SubjectName = "";
             this.Su.TabIndex = 6;
             // 
@@ -627,11 +627,11 @@
             this.AnhVan.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.DiemGiuaKyList")));
             this.AnhVan.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("AnhVan.DiemMiengList")));
             this.AnhVan.DiemTrungBinh = 0F;
-            this.AnhVan.Location = new System.Drawing.Point(10, 2026);
+            this.AnhVan.Location = new System.Drawing.Point(10, 1342);
             this.AnhVan.Margin = new System.Windows.Forms.Padding(10);
             this.AnhVan.Name = "AnhVan";
             this.AnhVan.NhanXet = "";
-            this.AnhVan.Size = new System.Drawing.Size(850, 316);
+            this.AnhVan.Size = new System.Drawing.Size(544, 202);
             this.AnhVan.SubjectName = "";
             this.AnhVan.TabIndex = 7;
             // 
@@ -643,11 +643,11 @@
             this.CN.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.DiemGiuaKyList")));
             this.CN.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("CN.DiemMiengList")));
             this.CN.DiemTrungBinh = 0F;
-            this.CN.Location = new System.Drawing.Point(10, 2362);
+            this.CN.Location = new System.Drawing.Point(10, 1564);
             this.CN.Margin = new System.Windows.Forms.Padding(10);
             this.CN.Name = "CN";
             this.CN.NhanXet = "";
-            this.CN.Size = new System.Drawing.Size(850, 316);
+            this.CN.Size = new System.Drawing.Size(544, 202);
             this.CN.SubjectName = "";
             this.CN.TabIndex = 8;
             // 
@@ -659,11 +659,11 @@
             this.GDCD.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.DiemGiuaKyList")));
             this.GDCD.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("GDCD.DiemMiengList")));
             this.GDCD.DiemTrungBinh = 0F;
-            this.GDCD.Location = new System.Drawing.Point(10, 2698);
+            this.GDCD.Location = new System.Drawing.Point(10, 1786);
             this.GDCD.Margin = new System.Windows.Forms.Padding(10);
             this.GDCD.Name = "GDCD";
             this.GDCD.NhanXet = "";
-            this.GDCD.Size = new System.Drawing.Size(850, 316);
+            this.GDCD.Size = new System.Drawing.Size(544, 202);
             this.GDCD.SubjectName = "";
             this.GDCD.TabIndex = 9;
             // 
@@ -675,11 +675,11 @@
             this.Tin.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.DiemGiuaKyList")));
             this.Tin.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Tin.DiemMiengList")));
             this.Tin.DiemTrungBinh = 0F;
-            this.Tin.Location = new System.Drawing.Point(10, 3034);
+            this.Tin.Location = new System.Drawing.Point(10, 2008);
             this.Tin.Margin = new System.Windows.Forms.Padding(10);
             this.Tin.Name = "Tin";
             this.Tin.NhanXet = "";
-            this.Tin.Size = new System.Drawing.Size(850, 316);
+            this.Tin.Size = new System.Drawing.Size(544, 202);
             this.Tin.SubjectName = "";
             this.Tin.TabIndex = 10;
             // 
@@ -691,11 +691,11 @@
             this.Sinh.DiemGiuaKyList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.DiemGiuaKyList")));
             this.Sinh.DiemMiengList = ((System.Collections.Generic.List<float>)(resources.GetObject("Sinh.DiemMiengList")));
             this.Sinh.DiemTrungBinh = 0F;
-            this.Sinh.Location = new System.Drawing.Point(10, 3370);
+            this.Sinh.Location = new System.Drawing.Point(10, 2230);
             this.Sinh.Margin = new System.Windows.Forms.Padding(10);
             this.Sinh.Name = "Sinh";
             this.Sinh.NhanXet = "";
-            this.Sinh.Size = new System.Drawing.Size(850, 316);
+            this.Sinh.Size = new System.Drawing.Size(544, 202);
             this.Sinh.SubjectName = "";
             this.Sinh.TabIndex = 11;
             // 
