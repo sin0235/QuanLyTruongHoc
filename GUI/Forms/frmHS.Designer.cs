@@ -718,6 +718,8 @@ namespace QuanLyTruongHoc
         private GUI.Controls.ucKQHT ucKQHT1;
         private GUI.Controls.ucXinNghi ucXinNghi1;
         private GUI.Controls.ucKiemTra ucKiemTra1;
+
+
     }
 }
 

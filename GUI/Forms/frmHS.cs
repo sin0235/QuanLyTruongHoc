@@ -20,20 +20,20 @@ namespace QuanLyTruongHoc
         private Color maximizeButtonColor = Color.FromArgb(255, 189, 68); // #FFBD44
         private Color minimizeButtonColor = Color.FromArgb(0, 202, 78); // #00CA4E
         private Color highlightColor = Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(192)))), ((int)(((byte)(239)))));
-        
+
 
 
         private int maNguoiDung;
 
 
         private string hoTen;
-        private int maHS;
+        private int maHS = -1;
+
+
         public int ID
         {
             get { return maNguoiDung; }
         }
-
-
         public frmHS(int ID)
         {
             maNguoiDung = ID;
