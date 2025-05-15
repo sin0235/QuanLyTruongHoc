@@ -27,6 +27,28 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
             this.Load += ucQuanLyHocSinh_Load;
         }
 
+        private void UpdateStatistics()
+        {
+            // Kiểm tra số lượng dòng trong DataGridView sau khi đã áp dụng bộ lọc
+            int studentCount = dgvHocSinh.Rows.Count;
+            
+            // Hiển thị tổng số học sinh trên lblStatistics
+            lblStatistics.Text = $"Tổng số: {studentCount} học sinh";
+            
+            // Nếu đang lọc theo lớp, hiển thị thêm thông tin lớp
+            if (cbLop.SelectedIndex > 0) // Không phải "Tất cả lớp"
+            {
+                string tenLop = cbLop.Text;
+                lblStatistics.Text = $"Lớp {tenLop}: {studentCount} học sinh";
+            }
+            
+            // Nếu đang tìm kiếm
+            if (!string.IsNullOrWhiteSpace(txtTimKiem.Text) && txtTimKiem.Text != "Nhập họ và tên để tìm kiếm")
+            {
+                lblStatistics.Text = $"Kết quả tìm kiếm: {studentCount} học sinh";
+            }
+        }
+
         private void LoadHocSinhData()
         {
             try
@@ -57,6 +79,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                 // Tự động điều chỉnh kích thước cột
                 dgvHocSinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                
+                // Cập nhật thống kê
+                UpdateStatistics();
             }
             catch (Exception ex)
             {
@@ -135,6 +160,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                 // Tự động điều chỉnh kích thước cột
                 dgvHocSinh.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                
+                // Cập nhật thống kê
+                UpdateStatistics();
             }
             catch (Exception ex)
             {
@@ -643,6 +671,9 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
                     dgvHocSinh.DataSource = dataTable;
                     dgvHocSinh.ClearSelection();
+                    
+                    // Cập nhật thống kê
+                    UpdateStatistics();
 
                     MessageBox.Show($"Tìm thấy {searchResults.Count} học sinh phù hợp với từ khóa tìm kiếm!",
                         "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -305,17 +305,74 @@ namespace QuanLyTruongHoc.GUI.Forms
             // Đăng ký sự kiện
             cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
 
-            // Đặt môn học mặc định là môn đầu tiên nếu có dữ liệu
-            if (cmbMonHoc.Items.Count > 0)
-            {
-                cmbMonHoc.SelectedIndex = 0;
-                // LoadGiaoVien sẽ được gọi tự động thông qua sự kiện SelectedIndexChanged
-            }
+            // Kiểm tra nếu đang sửa (tag chứa mã TKB)
+            bool isEditMode = this.Tag != null && this.Tag is int && (int)this.Tag > 0;
             
-            // Khôi phục các giá trị nếu đang trong chế độ sửa
-            if (!string.IsNullOrEmpty(txtTietHoc.Text))
+            if (isEditMode)
             {
-                txtTietHoc.Text = txtTietHoc.Text;
+                int maTKB = (int)this.Tag;
+                
+                // Truy vấn thông tin thời khóa biểu cần sửa
+                string query = @"
+                SELECT t.MaMon, t.MaGV, t.Tiet, m.TenMon, g.HoTen
+                FROM ThoiKhoaBieu t
+                INNER JOIN MonHoc m ON t.MaMon = m.MaMon
+                INNER JOIN GiaoVien g ON t.MaGV = g.MaGV
+                WHERE t.MaTKB = @MaTKB";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@MaTKB", maTKB }
+                };
+                
+                DataTable dt = db.ExecuteQuery(query, parameters);
+                
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    int maMon = Convert.ToInt32(row["MaMon"]);
+                    string tenMon = row["TenMon"].ToString();
+                    
+                    // Đặt giá trị mặc định cho ComboBox môn học
+                    for (int i = 0; i < cmbMonHoc.Items.Count; i++)
+                    {
+                        DataRowView drv = (DataRowView)cmbMonHoc.Items[i];
+                        if (Convert.ToInt32(drv["MaMon"]) == maMon)
+                        {
+                            cmbMonHoc.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                    
+                    // Load danh sách giáo viên theo môn
+                    LoadGiaoVien(maMon);
+                    
+                    // Đặt giá trị mặc định cho ComboBox giáo viên
+                    int maGV = Convert.ToInt32(row["MaGV"]);
+                    string tenGV = row["HoTen"].ToString();
+                    
+                    for (int i = 0; i < cmbGiaoVien.Items.Count; i++)
+                    {
+                        DataRowView drv = (DataRowView)cmbGiaoVien.Items[i];
+                        if (Convert.ToInt32(drv["MaGV"]) == maGV)
+                        {
+                            cmbGiaoVien.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                    
+                    // Đặt giá trị tiết học
+                    txtTietHoc.Text = row["Tiet"].ToString();
+                }
+            }
+            else
+            {
+                // Đặt môn học mặc định là môn đầu tiên nếu có dữ liệu
+                if (cmbMonHoc.Items.Count > 0)
+                {
+                    cmbMonHoc.SelectedIndex = 0;
+                    // LoadGiaoVien sẽ được gọi tự động thông qua sự kiện SelectedIndexChanged
+                }
             }
         }
     }

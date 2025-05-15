@@ -513,6 +513,27 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
 
         }
 
+        private void dgvThoiKhoaBieu_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    DataGridViewCell selectedCell = dgvThoiKhoaBieu.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    if (selectedCell.Value != null && !string.IsNullOrWhiteSpace(selectedCell.Value.ToString()))
+                    {
+                        // Đánh dấu rằng cell đã được chọn (có thể làm nổi bật nó)
+                        dgvThoiKhoaBieu.ClearSelection();
+                        selectedCell.Selected = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chọn ô: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
