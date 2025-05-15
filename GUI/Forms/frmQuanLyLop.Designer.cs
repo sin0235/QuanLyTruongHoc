@@ -233,6 +233,7 @@
             this.ucControlBar1.Size = new System.Drawing.Size(600, 40);
             this.ucControlBar1.TabIndex = 19;
             this.ucControlBar1.TitleText = "Quản lý lớp";
+            this.ucControlBar1.Load += new System.EventHandler(this.ucControlBar1_Load);
             // 
             // frmQuanLyLop
             // 

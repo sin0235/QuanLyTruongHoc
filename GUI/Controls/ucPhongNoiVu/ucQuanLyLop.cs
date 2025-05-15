@@ -158,25 +158,70 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                     }
                 }
 
+                // Lấy danh sách MaTB liên quan đến lớp và học sinh
+                List<int> maTBList = new List<int>();
+                string getTBFromLopQuery = $"SELECT MaTB FROM ThongBao WHERE MaLop = {maLop}";
+                DataTable dtTBLop = db.ExecuteQuery(getTBFromLopQuery);
+                foreach (DataRow row in dtTBLop.Rows)
+                {
+                    maTBList.Add(Convert.ToInt32(row["MaTB"]));
+                }
+
+                if (maNguoiDungList.Count > 0)
+                {
+                    string getTBFromNguoiDungQuery = $"SELECT MaTB FROM ThongBao WHERE MaNguoiGui IN ({string.Join(",", maNguoiDungList)}) OR MaNguoiNhan IN ({string.Join(",", maNguoiDungList)})";
+                    DataTable dtTBNguoiDung = db.ExecuteQuery(getTBFromNguoiDungQuery);
+                    foreach (DataRow row in dtTBNguoiDung.Rows)
+                    {
+                        int maTB = Convert.ToInt32(row["MaTB"]);
+                        if (!maTBList.Contains(maTB))
+                        {
+                            maTBList.Add(maTB);
+                        }
+                    }
+                }
+
                 using (var transaction = new TransactionScope())
                 {
                     try
                     {
-                        // 1. Xóa các bảng phụ thuộc vào BaiLam
+                        // 1. Xóa các thông tin liên quan đến ThongBaoNguoiDoc trước
+                        // 1.1. Xóa ThongBaoNguoiDoc liên quan đến MaTB (từ lớp)
+                        if (maTBList.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"DELETE FROM ThongBaoNguoiDoc WHERE MaTB IN ({string.Join(",", maTBList)})");
+                        }
+
+                        // 1.2. Xóa ThongBaoNguoiDoc liên quan đến MaNguoiDung (từ học sinh)
+                        if (maNguoiDungList.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"DELETE FROM ThongBaoNguoiDoc WHERE MaNguoiDung IN ({string.Join(",", maNguoiDungList)})");
+                        }
+
+                        // 2. Xóa các bảng phụ thuộc vào BaiLam
                         if (maBaiLamList.Count > 0)
                         {
                             db.ExecuteNonQuery($"DELETE FROM BaiLam_TracNghiem WHERE MaBaiLam IN ({string.Join(",", maBaiLamList)})");
                             db.ExecuteNonQuery($"DELETE FROM BaiLam_TuLuan WHERE MaBaiLam IN ({string.Join(",", maBaiLamList)})");
-                        }
-
-                        // 2. Xóa BaiLam
-                        if (maHSList.Count > 0)
                             db.ExecuteNonQuery($"DELETE FROM BaiLam WHERE MaHS IN ({string.Join(",", maHSList)})");
+                        }
+                        string checkTableQuery = @"
+                        IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'HinhAnhHocSinh')
+                        SELECT 1 AS TableExists
+                        ELSE
+                        SELECT 0 AS TableExists";
+                        DataTable tableCheckResult = db.ExecuteQuery(checkTableQuery);
+
+                        bool hinhAnhHocSinhExists = tableCheckResult.Rows.Count > 0 &&
+                            Convert.ToBoolean(tableCheckResult.Rows[0]["TableExists"]);
 
                         // 3. Xóa các bảng liên quan đến MaHS
                         if (maHSList.Count > 0)
                         {
-                            db.ExecuteNonQuery($"DELETE FROM HinhAnhHocSinh WHERE MaHS IN ({string.Join(",", maHSList)})");
+                            if (hinhAnhHocSinhExists)
+                            {
+                                db.ExecuteNonQuery($"DELETE FROM HinhAnhHocSinh WHERE MaHS IN ({string.Join(",", maHSList)})");
+                            }
                             db.ExecuteNonQuery($"DELETE FROM DiemDanh WHERE MaHS IN ({string.Join(",", maHSList)})");
                             db.ExecuteNonQuery($"DELETE FROM DiemSo WHERE MaHS IN ({string.Join(",", maHSList)})");
                             db.ExecuteNonQuery($"DELETE FROM DonXinNghi WHERE MaHS IN ({string.Join(",", maHSList)})");
@@ -184,35 +229,33 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         }
 
                         // 4. Xóa các bảng liên quan đến MaLop
-                        DataTable dtMaTB = db.ExecuteQuery($"SELECT MaTB FROM ThongBao WHERE MaLop = {maLop}");
-                        List<int> maTBList = new List<int>();
-                        foreach (DataRow row in dtMaTB.Rows)
-                        {
-                            maTBList.Add(Convert.ToInt32(row["MaTB"]));
-                        }
-                        if (maTBList.Count > 0)
-                        {
-                            db.ExecuteNonQuery($"DELETE FROM ThongBaoNguoiDoc WHERE MaTB IN ({string.Join(",", maTBList)})");
-                        }
                         db.ExecuteNonQuery($"DELETE FROM ThoiKhoaBieu WHERE MaLop = {maLop}");
                         db.ExecuteNonQuery($"DELETE FROM KeHoachGiangDay WHERE MaLop = {maLop}");
-                        db.ExecuteNonQuery($"DELETE FROM ThongBao WHERE MaLop = {maLop}");
                         db.ExecuteNonQuery($"DELETE FROM BaiKiemTra_LopHoc WHERE MaLop = {maLop}");
 
-                        // 5. Xóa HocSinh
+                        // 5. Xóa ThongBao sau khi đã xóa ThongBaoNguoiDoc
+                        if (maTBList.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"DELETE FROM ThongBao WHERE MaTB IN ({string.Join(",", maTBList)})");
+                        }
+
+                        // 6. Xóa ThongBao liên quan đến lớp
+                        db.ExecuteNonQuery($"DELETE FROM ThongBao WHERE MaLop = {maLop}");
+
+                        // 7. Xóa HocSinh trong lớp
                         db.ExecuteNonQuery($"DELETE FROM HocSinh WHERE MaLop = {maLop}");
 
-                        // 6. Xóa NhatKyHeThong của học sinh
+                        // 8. Xóa dữ liệu NhatKyHeThong liên quan đến học sinh
                         if (maNguoiDungList.Count > 0)
                         {
                             db.ExecuteNonQuery($"DELETE FROM NhatKyHeThong WHERE MaNguoiDung IN ({string.Join(",", maNguoiDungList)})");
                         }
 
-                        // 7. Xóa NguoiDung của học sinh
+                        // 9. Xóa NguoiDung của học sinh
                         foreach (int maNguoiDung in maNguoiDungList)
                             db.ExecuteNonQuery($"DELETE FROM NguoiDung WHERE MaNguoiDung = {maNguoiDung}");
 
-                        // 8. Nếu giáo viên này không còn chủ nhiệm lớp nào khác thì cập nhật lại trạng thái
+                        // 10. Nếu giáo viên này không còn chủ nhiệm lớp nào khác thì cập nhật lại trạng thái
                         string checkOtherClassQuery = $"SELECT COUNT(*) FROM LopHoc WHERE MaGVChuNhiem = {maGVChuNhiem} AND MaLop <> {maLop}";
                         int otherClassCount = Convert.ToInt32(db.ExecuteScalar(checkOtherClassQuery));
                         if (otherClassCount == 0)
@@ -220,14 +263,14 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                             db.ExecuteNonQuery($"UPDATE GiaoVien SET ChuNhiem = 0 WHERE MaGV = {maGVChuNhiem}");
                         }
 
-                        // 9. Xóa LopHoc
+                        // 11. Xóa LopHoc
                         bool deleteResult = db.ExecuteNonQuery($"DELETE FROM LopHoc WHERE MaLop = {maLop}");
                         if (!deleteResult)
                         {
                             throw new Exception("Không thể xóa lớp học. Vui lòng thử lại!");
                         }
 
-                        // 10. Nhật ký hệ thống
+                        // 12. Nhật ký hệ thống
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
                         string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
