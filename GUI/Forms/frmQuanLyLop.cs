@@ -198,12 +198,12 @@ namespace QuanLyTruongHoc.GUI.Forms
                     int maGVChuNhiemMoi = (int)cbGiaoVienChuNhiem.SelectedValue;
                     string tenGVChuNhiemMoi = cbGiaoVienChuNhiem.Text;
 
-                    // Lấy thông tin của lớp học cần cập nhật từ MaLop thay vì TenLop
+                    // Lấy thông tin của lớp học cần cập nhật từ MaLop
                     string checkClassQuery = "SELECT MaLop, TenLop FROM LopHoc WHERE TenLop = @TenLop";
                     Dictionary<string, object> checkParams = new Dictionary<string, object>
-            {
-                { "@TenLop", tenLop.Trim() }
-            };
+                    {
+                        { "@TenLop", tenLop.Trim() }
+                    };
 
                     DataTable allMatchingClasses = db.ExecuteQuery(checkClassQuery, checkParams);
                     if (allMatchingClasses == null || allMatchingClasses.Rows.Count == 0)
@@ -216,10 +216,10 @@ namespace QuanLyTruongHoc.GUI.Forms
                     // Lấy thông tin chính xác của lớp học
                     string getLopInfoQuery = "SELECT MaLop, MaGVChuNhiem FROM LopHoc WHERE TenLop = @TenLop AND NamHoc = @NamHoc";
                     Dictionary<string, object> lopParams = new Dictionary<string, object>
-            {
-                { "@TenLop", tenLop.Trim() },
-                { "@NamHoc", namHocHienTai }
-            };
+                    {
+                        { "@TenLop", tenLop.Trim() },
+                        { "@NamHoc", namHocHienTai }
+                    };
 
                     DataTable lopInfo = db.ExecuteQuery(getLopInfoQuery, lopParams);
                     int maLop = 0;
@@ -232,7 +232,6 @@ namespace QuanLyTruongHoc.GUI.Forms
                     }
                     else
                     {
-                        // Nếu không tìm thấy với NamHoc, thử tìm mà không cần NamHoc
                         string directQuery = $"SELECT MaLop, MaGVChuNhiem, NamHoc FROM LopHoc WHERE TenLop = '{tenLop.Trim()}'";
                         DataTable directResult = db.ExecuteQuery(directQuery);
 
@@ -261,11 +260,11 @@ namespace QuanLyTruongHoc.GUI.Forms
                     // Kiểm tra xem giáo viên mới có đang chủ nhiệm lớp khác không
                     string checkGVMoiQuery = "SELECT COUNT(*) FROM LopHoc WHERE MaGVChuNhiem = @MaGV AND MaLop <> @MaLop AND NamHoc = @NamHoc";
                     Dictionary<string, object> checkGVMoiParams = new Dictionary<string, object>
-            {
-                { "@MaGV", maGVChuNhiemMoi },
-                { "@MaLop", maLop },
-                { "@NamHoc", namHocHienTai }
-            };
+                    {
+                        { "@MaGV", maGVChuNhiemMoi },
+                        { "@MaLop", maLop },
+                        { "@NamHoc", namHocHienTai }
+                    };
                     int otherClassCountGVMoi = Convert.ToInt32(db.ExecuteScalar(checkGVMoiQuery, checkGVMoiParams));
 
                     if (otherClassCountGVMoi > 0)
@@ -281,17 +280,17 @@ namespace QuanLyTruongHoc.GUI.Forms
                         }
                     }
 
-                    // Cập nhật trạng thái của giáo viên chủ nhiệm cũ (nếu có)
+                    // Cập nhật trạng thái của giáo viên chủ nhiệm cũ
                     if (maGVChuNhiemCu > 0)
                     {
                         // Kiểm tra xem giáo viên cũ có còn chủ nhiệm lớp nào khác không
                         string checkOtherClassQuery = "SELECT COUNT(*) FROM LopHoc WHERE MaGVChuNhiem = @MaGV AND MaLop <> @MaLop AND NamHoc = @NamHoc";
                         Dictionary<string, object> checkParams2 = new Dictionary<string, object>
-                {
-                    { "@MaGV", maGVChuNhiemCu },
-                    { "@MaLop", maLop },
-                    { "@NamHoc", namHocHienTai }
-                };
+                        {
+                            { "@MaGV", maGVChuNhiemCu },
+                            { "@MaLop", maLop },
+                            { "@NamHoc", namHocHienTai }
+                        };
                         int otherClassCount = Convert.ToInt32(db.ExecuteScalar(checkOtherClassQuery, checkParams2));
 
                         if (otherClassCount == 0)
@@ -309,18 +308,18 @@ namespace QuanLyTruongHoc.GUI.Forms
                     // Cập nhật trạng thái của giáo viên chủ nhiệm mới
                     string updateNewGVQuery = "UPDATE GiaoVien SET ChuNhiem = 1 WHERE MaGV = @MaGV";
                     Dictionary<string, object> updateNewParams = new Dictionary<string, object>
-            {
-                { "@MaGV", maGVChuNhiemMoi }
-            };
+                    {
+                        { "@MaGV", maGVChuNhiemMoi }
+                    };
                     db.ExecuteNonQuery(updateNewGVQuery, updateNewParams);
 
-                    // Cập nhật thông tin lớp học - chỉ sử dụng MaLop làm điều kiện, không dùng NamHoc
+                    // Cập nhật thông tin lớp học
                     string updateLopQuery = "UPDATE LopHoc SET MaGVChuNhiem = @MaGVMoi WHERE MaLop = @MaLop";
                     Dictionary<string, object> updateLopParams = new Dictionary<string, object>
-            {
-                { "@MaGVMoi", maGVChuNhiemMoi },
-                { "@MaLop", maLop }
-            };
+                    {
+                        { "@MaGVMoi", maGVChuNhiemMoi },
+                        { "@MaLop", maLop }
+                    };
                     bool updateResult = db.ExecuteNonQuery(updateLopQuery, updateLopParams);
 
                     if (updateResult)
@@ -331,25 +330,25 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                         string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = @MaVaiTro";
                         Dictionary<string, object> vaiTroParams = new Dictionary<string, object>
-                {
-                    { "@MaVaiTro", 2 }
-                };
+                        {
+                            { "@MaVaiTro", 2 }
+                        };
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery, vaiTroParams));
 
                         string hanhDong = $"Sửa thông tin lớp {tenLop} của giáo viên {tenGVChuNhiemCu} chủ nhiệm thành giáo viên {tenGVChuNhiemMoi} chủ nhiệm";
 
                         string insertNhatKyQuery = @"
-                INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)
-                ";
+                        INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                        VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)
+                        ";
 
                         Dictionary<string, object> nhatKyParams = new Dictionary<string, object>
-                {
-                    { "@MaNK", maNK },
-                    { "@MaNguoiDung", maNguoiDungPhongNoiVu },
-                    { "@HanhDong", hanhDong },
-                    { "@ThoiGian", DateTime.Now }
-                };
+                        {
+                            { "@MaNK", maNK },
+                            { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                            { "@HanhDong", hanhDong },
+                            { "@ThoiGian", DateTime.Now }
+                        };
 
                         db.ExecuteNonQuery(insertNhatKyQuery, nhatKyParams);
 
@@ -362,7 +361,7 @@ namespace QuanLyTruongHoc.GUI.Forms
                             "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else  // Chế độ thêm mới lớp học
+                else  
                 {
                     if (string.IsNullOrWhiteSpace(txtLop.Text))
                     {
@@ -373,10 +372,10 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                     string checkQuery = "SELECT COUNT(*) FROM LopHoc WHERE TenLop = @TenLop AND NamHoc = @NamHoc";
                     Dictionary<string, object> checkParams = new Dictionary<string, object>
-            {
-                { "@TenLop", txtLop.Text.Trim() },
-                { "@NamHoc", namHocHienTai }
-            };
+                    {
+                        { "@TenLop", txtLop.Text.Trim() },
+                        { "@NamHoc", namHocHienTai }
+                    };
 
                     int count = Convert.ToInt32(db.ExecuteScalar(checkQuery, checkParams));
 
@@ -393,19 +392,18 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                     int maGV = (int)cbGiaoVienChuNhiem.SelectedValue;
 
-                    // Thêm lớp học mới
                     string insertQuery = @"
-            INSERT INTO LopHoc (MaLop, TenLop, MaGVChuNhiem, NamHoc)
-            VALUES (@MaLop, @TenLop, @MaGVChuNhiem, @NamHoc)
-            ";
+                    INSERT INTO LopHoc (MaLop, TenLop, MaGVChuNhiem, NamHoc)
+                    VALUES (@MaLop, @TenLop, @MaGVChuNhiem, @NamHoc)
+                    ";
 
                     Dictionary<string, object> insertParams = new Dictionary<string, object>
-            {
-                { "@MaLop", maLopMoi },
-                { "@TenLop", txtLop.Text.Trim() },
-                { "@MaGVChuNhiem", maGV },
-                { "@NamHoc", namHocHienTai }
-            };
+                    {
+                        { "@MaLop", maLopMoi },
+                        { "@TenLop", txtLop.Text.Trim() },
+                        { "@MaGVChuNhiem", maGV },
+                        { "@NamHoc", namHocHienTai }
+                    };
 
                     bool insertResult = db.ExecuteNonQuery(insertQuery, insertParams);
 
@@ -414,9 +412,9 @@ namespace QuanLyTruongHoc.GUI.Forms
                         // Cập nhật trạng thái chủ nhiệm của giáo viên
                         string updateQuery = "UPDATE GiaoVien SET ChuNhiem = 1 WHERE MaGV = @MaGV";
                         Dictionary<string, object> updateParams = new Dictionary<string, object>
-                {
-                    { "@MaGV", maGV }
-                };
+                        {
+                            { "@MaGV", maGV }
+                        };
 
                         db.ExecuteNonQuery(updateQuery, updateParams);
 
@@ -426,26 +424,26 @@ namespace QuanLyTruongHoc.GUI.Forms
 
                         string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = @MaVaiTro";
                         Dictionary<string, object> vaiTroParams = new Dictionary<string, object>
-                {
-                    { "@MaVaiTro", 2 }
-                };
+                        {
+                            { "@MaVaiTro", 2 }
+                        };
                         int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery, vaiTroParams));
 
                         string tenGiaoVien = cbGiaoVienChuNhiem.Text;
                         string hanhDong = $"Thêm lớp {txtLop.Text.Trim()} với sự phân công cho giáo viên {tenGiaoVien} chủ nhiệm";
 
                         string insertNhatKyQuery = @"
-                INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
-                VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)
-                ";
+                        INSERT INTO NhatKyHeThong (MaNK, MaNguoiDung, HanhDong, ThoiGian)
+                        VALUES (@MaNK, @MaNguoiDung, @HanhDong, @ThoiGian)
+                        ";
 
                         Dictionary<string, object> nhatKyParams = new Dictionary<string, object>
-                {
-                    { "@MaNK", maNK },
-                    { "@MaNguoiDung", maNguoiDungPhongNoiVu },
-                    { "@HanhDong", hanhDong },
-                    { "@ThoiGian", DateTime.Now }
-                };
+                        {
+                            { "@MaNK", maNK },
+                            { "@MaNguoiDung", maNguoiDungPhongNoiVu },
+                            { "@HanhDong", hanhDong },
+                            { "@ThoiGian", DateTime.Now }
+                        };
 
                         db.ExecuteNonQuery(insertNhatKyQuery, nhatKyParams);
                         this.DialogResult = DialogResult.OK;
