@@ -214,13 +214,13 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             if (cbGiaoVien.Checked)
             {
-                isSuccess = GuiThuTheoVaiTro(db, 2, tieuDe, noiDung) && isSuccess;
+                isSuccess = GuiThuTheoVaiTro(db, 3, tieuDe, noiDung) && isSuccess;
                 GhiNhatKy(db, "Gửi thư cho giáo viên");
             }
 
             if (cbHocSinh.Checked)
             {
-                isSuccess = GuiThuTheoVaiTro(db, 3, tieuDe, noiDung) && isSuccess;
+                isSuccess = GuiThuTheoVaiTro(db, 4, tieuDe, noiDung) && isSuccess;
                 GhiNhatKy(db, "Gửi thư cho học sinh");
             }
 
@@ -245,7 +245,7 @@ namespace QuanLyTruongHoc.GUI.Controls
 
             if (cbPhongNoiVu.Checked)
             {
-                isSuccess = GuiThuTheoVaiTro(db, 4, tieuDe, noiDung) && isSuccess;
+                isSuccess = GuiThuTheoVaiTro(db, 2, tieuDe, noiDung) && isSuccess;
                 GhiNhatKy(db, "Gửi thư cho phòng nội vụ");
             }
 
