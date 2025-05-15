@@ -704,7 +704,7 @@ namespace QuanLyTruongHoc.DAL
                 // Thêm người dùng mới
                 string queryInsertNguoiDung = @"
                 INSERT INTO NguoiDung (MaNguoiDung, TenDangNhap, MatKhau, MaVaiTro, NgayTao)
-                VALUES (@MaNguoiDung, @TenDangNhap, @MatKhau, 3, GETDATE())";
+                VALUES (@MaNguoiDung, @TenDangNhap, @MatKhau, 4, GETDATE())";
 
                 Dictionary<string, object> userParams = new Dictionary<string, object>
                 {
