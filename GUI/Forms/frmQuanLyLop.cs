@@ -74,8 +74,13 @@ namespace QuanLyTruongHoc.GUI.Forms
             try
             {
                 // Truy vấn để lấy mã giáo viên chủ nhiệm hiện tại của lớp
-                string getMaGVCuQuery = $"SELECT MaGVChuNhiem FROM LopHoc WHERE TenLop = N'{tenLop}' AND NamHoc = '{namHocHienTai}'";
-                object result = db.ExecuteScalar(getMaGVCuQuery);
+                string getMaGVCuQuery = "SELECT MaGVChuNhiem FROM LopHoc WHERE TenLop = @TenLop AND NamHoc = @NamHoc";
+                Dictionary<string, object> maGVParams = new Dictionary<string, object>
+                {
+                    { "@TenLop", tenLop },
+                    { "@NamHoc", namHocHienTai }
+                };
+                object result = db.ExecuteScalar(getMaGVCuQuery, maGVParams);
                 int maGVChuNhiemCu = 0;
 
                 if (result != null && result != DBNull.Value)
@@ -87,12 +92,11 @@ namespace QuanLyTruongHoc.GUI.Forms
                 string query = @"
                 SELECT gv.MaGV, gv.HoTen
                 FROM GiaoVien gv
-                WHERE (gv.ChuNhiem = 0 AND gv.MaGV NOT IN (
-                        SELECT DISTINCT MaGVChuNhiem 
-                        FROM LopHoc 
-                        WHERE NamHoc = @NamHoc
-                    )
-                ) OR gv.MaGV = @MaGVCu
+                WHERE gv.MaGV NOT IN (
+                    SELECT DISTINCT MaGVChuNhiem 
+                    FROM LopHoc 
+                    WHERE NamHoc = @NamHoc AND MaGVChuNhiem <> @MaGVCu
+                )
                 ORDER BY gv.HoTen
                 ";
 
@@ -185,8 +189,13 @@ namespace QuanLyTruongHoc.GUI.Forms
                     string tenGVChuNhiemMoi = cbGiaoVienChuNhiem.Text;
 
                     // Lấy mã của giáo viên chủ nhiệm cũ
-                    string getMaGVChuNhiemCuQuery = $"SELECT MaGVChuNhiem FROM LopHoc WHERE TenLop = N'{tenLop}' AND NamHoc = '{namHocHienTai}'";
-                    object result = db.ExecuteScalar(getMaGVChuNhiemCuQuery);
+                    string getMaGVChuNhiemCuQuery = "SELECT MaGVChuNhiem FROM LopHoc WHERE TenLop = @TenLop AND NamHoc = @NamHoc";
+                    Dictionary<string, object> maGVParams = new Dictionary<string, object>
+                    {
+                        { "@TenLop", tenLop },
+                        { "@NamHoc", namHocHienTai }
+                    };
+                    object result = db.ExecuteScalar(getMaGVChuNhiemCuQuery, maGVParams);
                     int maGVChuNhiemCu = 0;
 
                     if (result != null && result != DBNull.Value)
@@ -206,24 +215,44 @@ namespace QuanLyTruongHoc.GUI.Forms
                     if (maGVChuNhiemCu > 0)
                     {
                         // Kiểm tra xem giáo viên cũ có còn chủ nhiệm lớp nào khác không
-                        string checkOtherClassQuery = $"SELECT COUNT(*) FROM LopHoc WHERE MaGVChuNhiem = {maGVChuNhiemCu} AND TenLop <> N'{tenLop}'";
-                        int otherClassCount = Convert.ToInt32(db.ExecuteScalar(checkOtherClassQuery));
+                        string checkOtherClassQuery = "SELECT COUNT(*) FROM LopHoc WHERE MaGVChuNhiem = @MaGV AND TenLop <> @TenLop AND NamHoc = @NamHoc";
+                        Dictionary<string, object> checkParams = new Dictionary<string, object>
+                        {
+                            { "@MaGV", maGVChuNhiemCu },
+                            { "@TenLop", tenLop },
+                            { "@NamHoc", namHocHienTai }
+                        };
+                        int otherClassCount = Convert.ToInt32(db.ExecuteScalar(checkOtherClassQuery, checkParams));
 
                         if (otherClassCount == 0)
                         {
                             // Nếu không còn chủ nhiệm lớp nào khác, cập nhật trạng thái ChuNhiem = 0
-                            string updateOldGVQuery = $"UPDATE GiaoVien SET ChuNhiem = 0 WHERE MaGV = {maGVChuNhiemCu}";
-                            db.ExecuteNonQuery(updateOldGVQuery);
+                            string updateOldGVQuery = "UPDATE GiaoVien SET ChuNhiem = 0 WHERE MaGV = @MaGV";
+                            Dictionary<string, object> updateOldParams = new Dictionary<string, object>
+                            {
+                                { "@MaGV", maGVChuNhiemCu }
+                            };
+                            db.ExecuteNonQuery(updateOldGVQuery, updateOldParams);
                         }
                     }
 
                     // Cập nhật trạng thái của giáo viên chủ nhiệm mới
-                    string updateNewGVQuery = $"UPDATE GiaoVien SET ChuNhiem = 1 WHERE MaGV = {maGVChuNhiemMoi}";
-                    db.ExecuteNonQuery(updateNewGVQuery);
+                    string updateNewGVQuery = "UPDATE GiaoVien SET ChuNhiem = 1 WHERE MaGV = @MaGV";
+                    Dictionary<string, object> updateNewParams = new Dictionary<string, object>
+                    {
+                        { "@MaGV", maGVChuNhiemMoi }
+                    };
+                    db.ExecuteNonQuery(updateNewGVQuery, updateNewParams);
 
                     // Cập nhật thông tin lớp học
-                    string updateLopQuery = $"UPDATE LopHoc SET MaGVChuNhiem = {maGVChuNhiemMoi} WHERE TenLop = N'{tenLop}' AND NamHoc = '{namHocHienTai}'";
-                    bool updateResult = db.ExecuteNonQuery(updateLopQuery);
+                    string updateLopQuery = "UPDATE LopHoc SET MaGVChuNhiem = @MaGVMoi WHERE TenLop = @TenLop AND NamHoc = @NamHoc";
+                    Dictionary<string, object> updateLopParams = new Dictionary<string, object>
+                    {
+                        { "@MaGVMoi", maGVChuNhiemMoi },
+                        { "@TenLop", tenLop },
+                        { "@NamHoc", namHocHienTai }
+                    };
+                    bool updateResult = db.ExecuteNonQuery(updateLopQuery, updateLopParams);
 
                     if (updateResult)
                     {
@@ -231,8 +260,12 @@ namespace QuanLyTruongHoc.GUI.Forms
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
 
-                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
-                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery));
+                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = @MaVaiTro";
+                        Dictionary<string, object> vaiTroParams = new Dictionary<string, object>
+                        {
+                            { "@MaVaiTro", 2 }
+                        };
+                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery, vaiTroParams));
 
                         string hanhDong = $"Sửa thông tin lớp {tenLop} của giáo viên {tenGVChuNhiemCu} chủ nhiệm thành giáo viên {tenGVChuNhiemMoi} chủ nhiệm";
 
@@ -321,8 +354,12 @@ namespace QuanLyTruongHoc.GUI.Forms
                         string getMaxMaNKQuery = "SELECT ISNULL(MAX(MaNK), 0) + 1 FROM NhatKyHeThong";
                         int maNK = Convert.ToInt32(db.ExecuteScalar(getMaxMaNKQuery));
 
-                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = 2";
-                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery));
+                        string getMaNguoiDungPhongNoiVuQuery = "SELECT MaNguoiDung FROM NguoiDung WHERE MaVaiTro = @MaVaiTro";
+                        Dictionary<string, object> vaiTroParams = new Dictionary<string, object>
+                        {
+                            { "@MaVaiTro", 2 }
+                        };
+                        int maNguoiDungPhongNoiVu = Convert.ToInt32(db.ExecuteScalar(getMaNguoiDungPhongNoiVuQuery, vaiTroParams));
 
                         string tenGiaoVien = cbGiaoVienChuNhiem.Text;
                         string hanhDong = $"Thêm lớp {txtLop.Text.Trim()} với sự phân công cho giáo viên {tenGiaoVien} chủ nhiệm";
