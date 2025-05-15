@@ -171,8 +171,15 @@ namespace QuanLyTruongHoc.GUI.Controls.ucBanGiamHieu
                             if (selectedRow.Cells["MaTB"].Value != null)
                             {
                                 int maTB = Convert.ToInt32(selectedRow.Cells["MaTB"].Value);
+
+                                // Xóa các bản ghi liên quan trong ThongBaoNguoiDoc trước
+                                string deleteNguoiDoc = $"DELETE FROM ThongBaoNguoiDoc WHERE MaTB = {maTB}";
+                                db.ExecuteNonQuery(deleteNguoiDoc);
+
+                                // Sau đó xóa ThongBao
                                 string deleteQuery = $"DELETE FROM ThongBao WHERE MaTB = {maTB}";
                                 db.ExecuteNonQuery(deleteQuery);
+
                                 dgvXemThu.Rows.Remove(selectedRow);
                             }
                         }

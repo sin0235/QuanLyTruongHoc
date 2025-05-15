@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvXemThu = new Guna.UI2.WinForms.Guna2DataGridView();
             this.MaTB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NguoiGui = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,17 +61,17 @@
             // dgvXemThu
             // 
             this.dgvXemThu.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvXemThu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.dgvXemThu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvXemThu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvXemThu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvXemThu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvXemThu.ColumnHeadersHeight = 40;
             this.dgvXemThu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvXemThu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -81,14 +81,14 @@
             this.TieuDe,
             this.NoiDung,
             this.ThoiGian});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(242)))), ((int)(((byte)(253)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvXemThu.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(242)))), ((int)(((byte)(253)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvXemThu.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvXemThu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvXemThu.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvXemThu.Location = new System.Drawing.Point(15, 15);
@@ -201,7 +201,7 @@
             this.panelActions.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelActions.Location = new System.Drawing.Point(0, 0);
             this.panelActions.Name = "panelActions";
-            this.panelActions.Size = new System.Drawing.Size(450, 70);
+            this.panelActions.Size = new System.Drawing.Size(564, 70);
             this.panelActions.TabIndex = 0;
             // 
             // btnLamMoi
@@ -221,7 +221,7 @@
             this.btnLamMoi.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnLamMoi.Image = global::QuanLyTruongHoc.Properties.Resources.refresh;
             this.btnLamMoi.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnLamMoi.Location = new System.Drawing.Point(10, 15);
+            this.btnLamMoi.Location = new System.Drawing.Point(128, 15);
             this.btnLamMoi.Margin = new System.Windows.Forms.Padding(10);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(130, 40);
@@ -247,7 +247,7 @@
             this.btnXemChiTiet.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnXemChiTiet.Image = global::QuanLyTruongHoc.Properties.Resources.view;
             this.btnXemChiTiet.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnXemChiTiet.Location = new System.Drawing.Point(160, 15);
+            this.btnXemChiTiet.Location = new System.Drawing.Point(278, 15);
             this.btnXemChiTiet.Margin = new System.Windows.Forms.Padding(10);
             this.btnXemChiTiet.Name = "btnXemChiTiet";
             this.btnXemChiTiet.Size = new System.Drawing.Size(140, 40);
@@ -273,7 +273,7 @@
             this.btnXoa.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnXoa.Image = global::QuanLyTruongHoc.Properties.Resources.delete;
             this.btnXoa.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnXoa.Location = new System.Drawing.Point(310, 15);
+            this.btnXoa.Location = new System.Drawing.Point(428, 15);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(10);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(120, 40);
@@ -287,7 +287,7 @@
             this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.Controls.Add(this.txtTimKiem);
             this.panelSearch.Controls.Add(this.btnTimKiem);
-            this.panelSearch.Location = new System.Drawing.Point(700, 0);
+            this.panelSearch.Location = new System.Drawing.Point(570, 0);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(518, 70);
             this.panelSearch.TabIndex = 1;
