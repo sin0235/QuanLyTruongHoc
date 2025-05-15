@@ -184,6 +184,16 @@ namespace QuanLyTruongHoc.GUI.Controls.ucPhongNoiVu
                         }
 
                         // 4. Xóa các bảng liên quan đến MaLop
+                        DataTable dtMaTB = db.ExecuteQuery($"SELECT MaTB FROM ThongBao WHERE MaLop = {maLop}");
+                        List<int> maTBList = new List<int>();
+                        foreach (DataRow row in dtMaTB.Rows)
+                        {
+                            maTBList.Add(Convert.ToInt32(row["MaTB"]));
+                        }
+                        if (maTBList.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"DELETE FROM ThongBaoNguoiDoc WHERE MaTB IN ({string.Join(",", maTBList)})");
+                        }
                         db.ExecuteNonQuery($"DELETE FROM ThoiKhoaBieu WHERE MaLop = {maLop}");
                         db.ExecuteNonQuery($"DELETE FROM KeHoachGiangDay WHERE MaLop = {maLop}");
                         db.ExecuteNonQuery($"DELETE FROM ThongBao WHERE MaLop = {maLop}");
